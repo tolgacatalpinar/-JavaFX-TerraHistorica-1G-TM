@@ -1,0 +1,18 @@
+
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.shape.Polygon?>
+<?import java.lang.Double?>
+<?import java.net.URL?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane fx:controller="Controller.Main"
+            xmlns:fx="http://javafx.com/fxml" stylesheets="@../TerrainCss/images.css">
+
+
+</BorderPane>

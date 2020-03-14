@@ -1,0 +1,6 @@
+
+
+#brownTerrain{
+    /*-fx-background-image: url("/Terrains/brownTerrain.png");*/
+    -fx-fill: url("/Terrains/brownTerrain.png");
+}
