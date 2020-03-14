@@ -1,4 +1,4 @@
-package Controller;
+package View;
 
 import Model.OffsetPane;
 import Model.Terrain;
@@ -15,11 +15,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class MapView extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-       Parent root = FXMLLoader.load(getClass().getResource("/Controller/sample.fxml"));
+       Parent root = FXMLLoader.load(getClass().getResource("/View/sample.fxml"));
 
 
        OffsetPane op = new OffsetPane();
