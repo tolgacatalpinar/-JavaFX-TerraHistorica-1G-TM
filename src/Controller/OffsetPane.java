@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.TerrainSubclasses.Empty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Bounds;
@@ -123,8 +124,12 @@ public class OffsetPane extends Pane {
 
    public void add(Terrain o)
    {
-      o.setTerrainId(nextId);
+      //if( !(o instanceof Empty))
+      //{
+         o.setTerrainId(nextId);
+         nextId++;
+      //}
       getChildren().add(o);
-      nextId++;
+
    }
 }
