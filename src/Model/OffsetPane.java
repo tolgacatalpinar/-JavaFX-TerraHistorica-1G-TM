@@ -1,6 +1,6 @@
-package Controller;
+package Model;
 
-import Controller.TerrainSubclasses.Empty;
+import Model.Terrain;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Bounds;

@@ -1,6 +1,6 @@
-package Controller.TerrainSubclasses;
+package Model.TerrainSubclasses;
 
-import Controller.Terrain;
+import Model.Terrain;
 
 public class Empty extends Terrain {
 

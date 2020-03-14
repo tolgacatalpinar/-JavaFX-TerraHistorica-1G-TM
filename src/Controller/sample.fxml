@@ -12,7 +12,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.BorderPane?>
 <BorderPane fx:controller="Controller.Main"
-            xmlns:fx="http://javafx.com/fxml" stylesheets="@../TerrainCss/style.css">
+            xmlns:fx="http://javafx.com/fxml" stylesheets="@../Styles/style.css">
 
 
 </BorderPane>

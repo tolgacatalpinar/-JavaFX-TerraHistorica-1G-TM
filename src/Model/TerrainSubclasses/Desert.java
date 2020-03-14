@@ -1,8 +1,7 @@
-package Controller.TerrainSubclasses;
+package Model.TerrainSubclasses;
 
-import Controller.Terrain;
+import Model.Terrain;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 
 public class Desert extends Terrain {
 

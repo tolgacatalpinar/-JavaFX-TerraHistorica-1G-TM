@@ -1,14 +1,14 @@
-package Controller.TerrainSubclasses;
+package Model.TerrainSubclasses;
 
-import Controller.Terrain;
+import Model.Terrain;
 import javafx.scene.image.ImageView;
 
-public class Forest extends Terrain {
+public class Wasteland extends Terrain {
 
-   public Forest()
+   public Wasteland()
    {
       int size = 50;
-      ImageView imView = new ImageView("greenTerrain.png");
+      ImageView imView = new ImageView("redTerrain.png");
       imView.setFitHeight(size);
       imView.setFitWidth(Math.sqrt(0.75) * size);
       setGraphic(imView);

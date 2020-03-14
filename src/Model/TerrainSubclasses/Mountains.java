@@ -1,6 +1,6 @@
-package Controller.TerrainSubclasses;
+package Model.TerrainSubclasses;
 
-import Controller.Terrain;
+import Model.Terrain;
 import javafx.scene.image.ImageView;
 
 public class Mountains extends Terrain {
