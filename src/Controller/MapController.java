@@ -1,4 +1,4 @@
-package View;
+package Controller;
 
 import Model.OffsetPane;
 import Model.Terrain;
@@ -15,7 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class MapView extends Application {
+public class MapController extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -87,8 +87,8 @@ public class MapView extends Application {
        terrainsLayout.setCenter(op);
 
        ((BorderPane)root).setCenter( terrainsLayout);
-       primaryStage.setScene(new Scene(root, 300, 275));
-
+       primaryStage.setScene(new Scene(root, 1550, 800));
+      primaryStage.setMaximized(true);
         primaryStage.show();
 
     }
