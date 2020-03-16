@@ -1,4 +1,4 @@
-package Model;
+package Model.CardsAndTiles;
 
 public class ScoringTile {
     int cardCount;

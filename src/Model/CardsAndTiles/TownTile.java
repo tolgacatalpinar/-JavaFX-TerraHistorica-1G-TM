@@ -1,4 +1,4 @@
-package Model;
+package Model.CardsAndTiles;
 
 public class TownTile {
     int powerBonus;
