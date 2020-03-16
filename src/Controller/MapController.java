@@ -23,7 +23,7 @@ public class MapController extends Application {
         OffsetPane op = new OffsetPane();
         Parent root = FXMLLoader.load(getClass().getResource("/View/GameView.fxml"));
         for(int i = 0; i< 9; i++ ) {
-            for (int j = 0; j< 13; j++) {
+            for (int j = 0; j< 13; j++){
                 TerrainButton button = new TerrainButton(map.spaces[i][j].imageLoc);
                 button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
