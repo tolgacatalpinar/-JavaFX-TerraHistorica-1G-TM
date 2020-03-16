@@ -2,7 +2,7 @@ package Model.FactionSubclasses;
 
 import Model.Faction;
 
-public class HelenOfTroy extends Faction {
+public class HelenOfTroy extends Faction { // auren
  
   public HelenOfTroy
   {
