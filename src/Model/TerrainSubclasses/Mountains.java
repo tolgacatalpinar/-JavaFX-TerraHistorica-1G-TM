@@ -7,10 +7,6 @@ public class Mountains extends Terrain {
 
    public Mountains()
    {
-      int size = 50;
-      ImageView imView = new ImageView("whiteTerrain.png");
-      imView.setFitHeight(size);
-      imView.setFitWidth(Math.sqrt(0.75) * size);
-      setGraphic(imView);
+      imageLoc ="whiteTerrain.png";
    }
 }

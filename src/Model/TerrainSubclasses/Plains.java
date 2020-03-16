@@ -7,10 +7,6 @@ public class Plains extends Terrain {
 
    public Plains()
    {
-      int size = 50;
-      ImageView imView = new ImageView("brownTerrain.png");
-      imView.setFitHeight(size);
-      imView.setFitWidth(Math.sqrt(0.75) * size);
-      setGraphic(imView);
+      imageLoc = "brownTerrain.png";
    }
 }
