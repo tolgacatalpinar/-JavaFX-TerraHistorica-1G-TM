@@ -1,4 +1,4 @@
-package Model.FactionSubclasses;
+package Model;
 
 import Controller.GameHandler;
 import Model.Faction;
