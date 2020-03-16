@@ -5,13 +5,13 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polygon;
 
-public class MapButton extends Button {
+public class TerrainButton extends Button {
     private int terrainId;
     private int row;
     private int col;
     double[] points = new double[12];
 
-    public MapButton(String location){
+    public TerrainButton(String location){
         int size = 50;
         ImageView imView = new ImageView(location);
         setGraphic(imView);

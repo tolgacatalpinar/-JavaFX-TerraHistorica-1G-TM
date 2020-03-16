@@ -1,10 +1,8 @@
 package Controller;
 
 import Model.Map;
-import View.MapButton;
+import View.TerrainButton;
 import View.OffsetPane;
-import Model.Terrain;
-import Model.TerrainSubclasses.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +11,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -28,7 +25,7 @@ public class MapController extends Application {
         for(int i = 0; i< 12; i++ ) {
             for (int j = 0; j< 8; j++) {
                 int size = 50;
-                MapButton button = new MapButton(map.spaces[j][i].imageLoc);
+                TerrainButton button = new TerrainButton(map.spaces[j][i].imageLoc);
                 button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent e) {

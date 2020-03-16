@@ -1,6 +1,5 @@
 package View;
 
-import Model.Terrain;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Bounds;
@@ -122,7 +121,7 @@ public class OffsetPane extends Pane {
       return this.vPositionFunction;
    }
 
-   public void add(MapButton o)
+   public void add(TerrainButton o)
    {
       //if( !(o instanceof Empty))
       //{
