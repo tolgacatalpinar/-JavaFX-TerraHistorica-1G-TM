@@ -17,7 +17,7 @@ public class GameHandler {
     public void buildTradingPost( Player player)
     {
         player.buildTradingPost();
-        if(isDariusTheGreat( player))
+        if(player.getFaction() instanceof DariusTheGreat )
         {
             nomadAbility( player);
         }
@@ -25,7 +25,7 @@ public class GameHandler {
 
     public void chooseScoringTile( Player player)
     {
-        if( isVladTheImpaler( player))
+        if( player.getFaction() instanceof VladTheImpaler)
             selectScoringTile(player, 2);
         else
             selectScoringTile(player, 1);
@@ -40,21 +40,6 @@ public class GameHandler {
         ScoringTile.displayScoringTileChoice();
     }
 
-
-
-
-    public boolean isDariusTheGreat( Player player)
-    {
-        if( player.getFaction() instanceof DariusTheGreat)
-            return true;
-        return false;
-    }
-    public boolean isVladTheImpaler( Player player)
-    {
-        if( player.getFaction() instanceof VladTheImpaler)
-            return true;
-        return false;
-    }
     public void nomadAbility( Player player)
     {
         // TO DO
