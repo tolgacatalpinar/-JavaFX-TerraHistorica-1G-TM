@@ -2,22 +2,20 @@ package Model;
 
 public class Player {
 
-    FactionBoard factionBoard;
     Faction faction;
-
 
     public void buildTradingPost()
     {
-        factionBoard.addWorker(2);
-        factionBoard.addCoinIncome(1);
+        faction.addWorker(2);
+        faction.addCoinIncome(1);
     }
 
-    public FactionBoard getFactionBoard() {
-        return factionBoard;
+    public Faction getFactionBoard() {
+        return faction;
     }
 
-    public void setFactionBoard(FactionBoard factionBoard) {
-        this.factionBoard = factionBoard;
+    public void setFactionBoard(Faction factionBoard) {
+        this.faction = factionBoard;
     }
 
     public Faction getFaction() {
