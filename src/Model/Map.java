@@ -38,11 +38,11 @@ public class Map{
 
     public boolean isDirectAdjacent(Space space1, Space space2) {
 
-
+       return true;
     }
 
     public boolean isIndirectAdjacent(Space space1, Space space2) {
-
+       return false;
     }
 
     public void upgradeBuilding(Space space) {
@@ -50,11 +50,11 @@ public class Map{
     }
 
     public boolean canBuildBridge( Space space1, Space space2 ) {
-
+       return false;
     }
 
     public boolean isTown(Space newBuilt) {
-
+       return false;
     }
 
     public void transformTerrain(Space space) {
@@ -62,7 +62,7 @@ public class Map{
     }
 
     public ArrayList<Integer> adjacentPlayer(Space space) {
-
+      return null;
     }
 
 

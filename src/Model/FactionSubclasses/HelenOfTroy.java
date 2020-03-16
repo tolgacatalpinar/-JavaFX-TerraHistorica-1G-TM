@@ -4,7 +4,7 @@ import Model.Faction;
 
 public class HelenOfTroy extends Faction { // auren
  
-  public HelenOfTroy
+  public HelenOfTroy()
   {
         INITIAL_WORKER = 3;
         INITIAL_GOLD = 15;

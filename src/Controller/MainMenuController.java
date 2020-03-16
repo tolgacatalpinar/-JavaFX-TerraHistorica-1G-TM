@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.application.Application;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -76,20 +75,20 @@ public class MainMenuController   implements Initializable {
 
 
     }
-    public static void openWebpage(String urlString) {
-        try {
-            Desktop.getDesktop().browse(new URL(urlString).toURI());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void openWebpage(String urlString) {
+//        try {
+//            Desktop.getDesktop().browse(new URL(urlString).toURI());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-    @FXML
-    public void helpLinkButtonClicked( MouseEvent event) {
-
-        openWebpage("http://www.feuerland-spiele.de/dateien/Terra_Mystica_EN_1.0_.pdf");
-
-    }
+//    @FXML
+//    public void helpLinkButtonClicked( MouseEvent event) {
+//
+//        openWebpage("http://www.feuerland-spiele.de/dateien/Terra_Mystica_EN_1.0_.pdf");
+//
+//    }
 
 
     @FXML
