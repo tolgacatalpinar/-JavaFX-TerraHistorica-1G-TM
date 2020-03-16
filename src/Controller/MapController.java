@@ -25,10 +25,9 @@ public class MapController extends Application {
         Map map = new Map();
         OffsetPane op = new OffsetPane();
         Parent root = FXMLLoader.load(getClass().getResource("/View/GameView.fxml"));
-        for(int i = 0; i< 12; i++ ) {
-            for (int j = 0; j< 8; j++) {
-                int size = 50;
-                MapButton button = new MapButton(map.spaces[j][i].imageLoc);
+        for(int i = 0; i< 9; i++ ) {
+            for (int j = 0; j< 13; j++) {
+                MapButton button = new MapButton(map.spaces[i][j].imageLoc);
                 button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent e) {
