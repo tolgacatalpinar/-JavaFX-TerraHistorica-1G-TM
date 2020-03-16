@@ -11,7 +11,7 @@ public class Gilgamesh extends Faction {
         INITIAL_BUDISM = 1; // fire
         INITIAL_ISLAM = 0;  //water
         INITIAL_JUDAISM = 0;  //earth     
-        INITIAL_CHRISTIANITY= =1; //air
+        INITIAL_CHRISTIANITY = 1; //air
         INITIAL_VICTORY_POINT = 25;
         INITIAL_DWELLING_NUMBER = 2;
         DWELLING_GOLD_COST = 2;
