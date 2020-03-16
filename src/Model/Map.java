@@ -2,6 +2,8 @@ package Model;
 
 import Model.TerrainSubclasses.*;
 
+import java.util.ArrayList;
+
 public class Map{
     public Space[][] spaces;
     public Map(){
@@ -28,4 +30,41 @@ public class Map{
             spaces[i/13][i%13] = space;
         }
     }
+
+    public void buildDwelling(int row, int column) {
+
+
+    }
+
+    public boolean isDirectAdjacent(Space space1, Space space2) {
+
+
+    }
+
+    public boolean isIndirectAdjacent(Space space1, Space space2) {
+
+    }
+
+    public void upgradeBuilding(Space space) {
+
+    }
+
+    public boolean canBuildBridge( Space space1, Space space2 ) {
+
+    }
+
+    public boolean isTown(Space newBuilt) {
+
+    }
+
+    public void transformTerrain(Space space) {
+
+    }
+
+    public ArrayList<Integer> adjacentPlayer(Space space) {
+
+    }
+
+
+
 }
