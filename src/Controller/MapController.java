@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.OffsetPane;
+import View.OffsetPane;
 import Model.Terrain;
 import Model.TerrainSubclasses.*;
 import javafx.application.Application;
@@ -19,7 +19,7 @@ public class MapController extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-       Parent root = FXMLLoader.load(getClass().getResource("/View/sample.fxml"));
+       Parent root = FXMLLoader.load(getClass().getResource("/View/GameView.fxml"));
 
 
        OffsetPane op = new OffsetPane();
@@ -68,6 +68,7 @@ public class MapController extends Application {
        Button topButton = new Button("TOP");
        topButton.setPrefSize(2000, 100);
        ((BorderPane)root).setTop( topButton);
+
 
        Button botButton = new Button( "Bottom");
        botButton.setPrefSize(2000, 150);

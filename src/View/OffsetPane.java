@@ -1,4 +1,4 @@
-package Model;
+package View;
 
 import Model.Terrain;
 import javafx.beans.property.ObjectProperty;
