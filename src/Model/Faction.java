@@ -8,7 +8,7 @@ public class Faction {
     public int INITIAL_POWER = 0;
     public int INITIAL_ISLAM = 0;
     public int INITIAL_CHRISTIANITY = 0;
-    public int INITIAL_JEWISH = 0;
+    public int INITIAL_JUDAISM = 0;
     public int INITIAL_BUDISM = 0;
     public int INITIAL_SHIPPING = 0;
     public int INITIAL_PRIEST = 0;
