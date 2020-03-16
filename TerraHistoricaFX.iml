@@ -9,8 +9,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="JavaFX-11" level="application" />
-    <orderEntry type="library" name="javafx-swt" level="application" />
+    <orderEntry type="library" exported="" name="JavaFX-11" level="application" />
+    <orderEntry type="library" exported="" name="javafx-swt" level="application" />
     <orderEntry type="module-library">
       <library>
         <CLASSES />

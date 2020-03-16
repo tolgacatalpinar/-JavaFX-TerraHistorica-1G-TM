@@ -1,19 +1,21 @@
 package Model;
 public class Religion {
 
-    final int MAX_LENGTH = 11;
-    int orderOfCult_3;      //Holds id of player who took this area
-    int orderOfCult_2_1;    //Holds id of player who took this area
-    int orderOfCult_2_2;    //Holds id of player who took this area
-    int orderOfCult_2_3;    //Holds id of player who took this are
-    int[] playerPositions;
-    int[] powerAwardPositions; //placed /wrt the higher value of track number
+    private final int MAX_LENGTH = 11;
+    private int orderOfCult_3;      //Holds id of player who took this area
+    private int orderOfCult_2_1;    //Holds id of player who took this area
+    private int orderOfCult_2_2;    //Holds id of player who took this area
+    private int orderOfCult_2_3;    //Holds id of player who took this are
+    private  boolean keyPlaced;
+    private int[] playerPositions;
+    private int[] powerAwardPositions; //placed /wrt the higher value of track number
 
     public Religion(int playerCount, int[] initial_religion_points){
         orderOfCult_3 = -1;
         orderOfCult_2_1 = -1;
         orderOfCult_2_2 = -1;
         orderOfCult_2_3 = -1;
+        keyPlaced = false;
         playerPositions = new int[playerCount];
         setupReligion(playerCount,initial_religion_points);
     }
@@ -51,11 +53,17 @@ public class Religion {
             return -1; // these -1's can represent error messages or throw exceptions
         }
         if (endPos >= MAX_LENGTH){
+            if(keyPlaced){
+                System.out.println("Since someone used key, you can't reach end"); // Can be replaced with an GUI message
+                awardSearchLength -= 1;
+                endPos = MAX_LENGTH-1;
+            }
             if (!key){
                 System.out.println("Since there is no key end pos is stuck on 9"); // Can be replaced with an GUI message
                 awardSearchLength -= 1;
-                endPos = 10;
-            }
+                endPos = MAX_LENGTH-1;
+            }else
+                keyPlaced = true;
         }
         for (int i = 0; i< awardSearchLength; i++ ){
             if (currentPos < i && endPos >= i){
