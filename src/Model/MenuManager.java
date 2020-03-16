@@ -6,7 +6,7 @@ import Model.Faction;
 import java.io.File;
 import java.util.ArrayList;
 
-public class MainMenu {
+public class MenuManager {
     GameHandler gameHandler;
     int numberOfPlayer;
 
