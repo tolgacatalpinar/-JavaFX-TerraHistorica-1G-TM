@@ -9,16 +9,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="JavaFX-11" level="application" />
-    <orderEntry type="library" exported="" name="javafx-swt" level="application" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES />
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/src/Styles" />
-        </SOURCES>
-      </library>
-    </orderEntry>
+    <orderEntry type="library" name="javafx-sdk-11.0" level="project" />
+    <orderEntry type="library" name="javafx-swt" level="project" />
   </component>
 </module>

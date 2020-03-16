@@ -122,7 +122,7 @@ public class OffsetPane extends Pane {
       return this.vPositionFunction;
    }
 
-   public void add(Terrain o)
+   public void add(MapButton o)
    {
       //if( !(o instanceof Empty))
       //{

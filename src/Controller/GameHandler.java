@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.*;
+import Model.FactionSubclasses.DariusTheGreat;
+import Model.FactionSubclasses.VladTheImpaler;
 import View.*;
 
 public class GameHandler {
@@ -15,7 +17,7 @@ public class GameHandler {
     public void buildTradingPost( Player player)
     {
         player.buildTradingPost();
-        if(isNomad( player))
+        if(isDariusTheGreat( player))
         {
             nomadAbility( player);
         }
@@ -23,7 +25,7 @@ public class GameHandler {
 
     public void chooseScoringTile( Player player)
     {
-        if( isChaosMagician( player))
+        if( isVladTheImpaler( player))
             selectScoringTile(player, 2);
         else
             selectScoringTile(player, 1);
@@ -41,15 +43,15 @@ public class GameHandler {
 
 
 
-    public boolean isNomad( Player player)
+    public boolean isDariusTheGreat( Player player)
     {
-        if( player.getFaction() instanceof Nomad)
+        if( player.getFaction() instanceof DariusTheGreat)
             return true;
         return false;
     }
-    public boolean isChaosMagician( Player player)
+    public boolean isVladTheImpaler( Player player)
     {
-        if( player.getFaction() instanceof ChaosMagician)
+        if( player.getFaction() instanceof VladTheImpaler)
             return true;
         return false;
     }
