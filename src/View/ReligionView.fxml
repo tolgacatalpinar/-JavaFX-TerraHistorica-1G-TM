@@ -6,14 +6,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReligionController" >
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReligionController" stylesheets="@../CSS/styles.css" >
    <children>
       <SplitPane dividerPositions="0.25, 0.5, 0.75" layoutX="81.0" orientation="VERTICAL" prefHeight="768.0" prefWidth="1366.0">
         <items>
-          <AnchorPane id="islam_track" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane id="islam_track" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" stylesheets="@../CSS/styles.css">
                <children>
                   <ImageView id="islamTrack" fitHeight="105.0" fitWidth="517.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" />
+
                </children></AnchorPane>
+
           <AnchorPane id="christianity" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <ImageView id="chir_image" fitHeight="105.0" fitWidth="517.0" pickOnBounds="true" preserveRatio="true" />

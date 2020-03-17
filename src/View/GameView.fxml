@@ -7,7 +7,7 @@
    <center>
       <Pane fx:id="mapPane" prefHeight="396.0" prefWidth="432.0" BorderPane.alignment="CENTER">
          <children>
-            <Button id="blackHexagon" layoutX="264.0" layoutY="267.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+            <Button fx:id="test" id="blackHexagon" layoutX="264.0" layoutY="267.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
             <Button id="riverHexagon" layoutX="263.0" layoutY="170.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
             <Button id="blueHexagon" layoutX="458.0" layoutY="77.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
             <Button id="brownHexagon" layoutX="263.0" layoutY="77.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />

@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.Map;
+
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -24,6 +24,8 @@ public class MapController extends Application implements Initializable {
    @FXML
    Pane mapPane;
    @FXML
+   Button test;
+   @FXML
    BorderPane mapBorderPane;
 
     @Override
@@ -31,10 +33,7 @@ public class MapController extends Application implements Initializable {
         //Map map = new Map();
         //OffsetPane op = new OffsetPane();
         Parent root = FXMLLoader.load(getClass().getResource("/View/GameView.fxml"));
-       if( mapPane == null)
-          System.out.println("Null");
-       else
-          System.out.println("Is not null");
+
         for(int i = 0; i < 20; i ++)
         {
            //System.out.println("Element: " + mapPane.getChildren().get(i).getId());
@@ -91,7 +90,7 @@ public class MapController extends Application implements Initializable {
         //((BorderPane)root).setCenter( terrainsLayout);
         primaryStage.setScene(new Scene(root, 1550, 800));
         primaryStage.setMaximized(true);
-        primaryStage.show();
+        //primaryStage.show();
 
     }
 
@@ -104,5 +103,11 @@ public class MapController extends Application implements Initializable {
    @Override
    public void initialize(URL url, ResourceBundle resourceBundle) {
 
+      for(int i = 0; i < 113; i ++)
+      {
+         System.out.println("Element " + i + ": " + mapPane.getChildren().get(i).getId());
+      }
+      System.out.println("Button is: " + test.getId());
+      //System.out.println(test..toString());
    }
 }
