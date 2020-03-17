@@ -30,18 +30,76 @@ public class Map{
             spaces[i/13][i%13] = space;
         }
     }
+    
+    public int getRow(Space space1){
+        boolean found = false;
+        for(int i = 0; i < 117 || !found ; i++) {
+            int row = i / 13;
+            int column = i % 13;
+            
+            if (spaces[row][column].equals(space1)){
+                found = true;
+            }   
+        }
+        return row;
+    }
+    
+     public int getColumn(Space space1){
+        boolean found = false;
+        for(int i = 0; i < 117 || !found ; i++) {
+            int row = i / 13;
+            int column = i % 13;
+            
+            if (spaces[row][column].equals(space1)){
+                found = true;
+            }   
+        }
+        return column;
+    }
+        
 
-    public void buildDwelling(int row, int column) {
-
-
+    public int[] buildDwelling(Space space1) {
+        int[] location;
+        if ( space1 instanceOf river){ /// burası sakat değiştireceğim  
+            location = new int[2];
+            int row = getRow(space1);
+            int column = getColumn(space1);
+            location[0] = row;
+            location[1] = column;
+        }
+        return location;
     }
 
     public boolean isDirectAdjacent(Space space1, Space space2) {
-
-       return true;
+       // We did not control if one of the spaces is river, because even one of them is river this info cn be useful.
+       int row1 = getRow(space1);
+       int row2 = getRow(space2); 
+       int col1 = getColumn(space1);
+       int col2 = getColumn(space2);   
+       if (row1 % 2 == 0){
+           if ( ((row2 == row1 + 1) || (row2 == row - 1)) && ((col2 ==  col1 - 1) || (col2 == col1))){
+            return true;
+           }
+       }
+        
+       if (row1 % 2 == 1){
+            if ( ((row2 == row1 + 1) || (row2 == row - 1)) && ((col2 ==  col1 + 1) || (col2 == col1))){
+            return true;
+            }
+       }
+        
+       if((row1 = row2) && ((col1 = col2 + 1) || (col1 = col2 - 1))){
+           return true;
+       }
+           
+       return false;
     }
 
     public boolean isIndirectAdjacent(Space space1, Space space2) {
+       int row1 = getRow(space1);
+       int row2 = getRow(space2); 
+       int col1 = getColumn(space1);
+       int col2 = getColumn(space2); 
        return false;
     }
 
