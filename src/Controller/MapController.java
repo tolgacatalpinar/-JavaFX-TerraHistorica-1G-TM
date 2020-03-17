@@ -4,6 +4,7 @@ import Model.Map;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -12,15 +13,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class MapController extends Application {
+   @FXML
+   private Pane pane;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Map map = new Map();
         //OffsetPane op = new OffsetPane();
         Parent root = FXMLLoader.load(getClass().getResource("/View/GameView.fxml"));
+        for(int i = 0; i < 20; i ++)
+        {
+           System.out.println(pane.getChildren().get(i).getId());
+        }
+
 //        for(int i = 0; i< 12; i++ ) {
 //            for (int j = 0; j< 8; j++) {
 //                int size = 50;
