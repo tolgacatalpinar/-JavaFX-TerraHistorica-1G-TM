@@ -2,6 +2,6 @@ package Model;
 
 public class River extends Space{
     public River(){
-        imageLoc = "river.jpeg";
+        imageLoc = "Images/river.jpeg";
     }
 }

@@ -1,3 +1,32 @@
-#hexagon {
-    -fx-shape:"M 250 150 L 150 300 L 250 450 L 400 450 L 500 300 L 400 150 L 250 150 ";
+#blackHexagon {
+    -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
+    -fx-background-image: url("../Images/blackTerrain.png");
+}
+#blueHexagon {
+    -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
+    -fx-background-image: url("../Images/blueTerrain.png");
+}
+#brownHexagon {
+    -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
+    -fx-background-image: url("../Images/brownTerrain.png");
+}
+#greenHexagon {
+    -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
+    -fx-background-image: url("../Images/greenTerrain.png");
+}
+#redHexagon {
+    -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
+    -fx-background-image: url("../Images/redTerrain.png");
+}
+#whiteHexagon {
+    -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
+    -fx-background-image: url("../Images/whiteTerrain.png");
+}
+#yellowHexagon {
+    -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
+    -fx-background-image: url("../Images/yellowTerrain.png");
+}
+#riverHexagon {
+    -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
+    -fx-background-image: url("../Images/river.jpeg");
 }
