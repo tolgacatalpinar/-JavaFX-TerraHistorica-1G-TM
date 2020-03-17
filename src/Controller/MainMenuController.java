@@ -49,7 +49,7 @@ public class MainMenuController   implements Initializable {
 
 
         stage = (Stage) creditsButton.getScene().getWindow();
-        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/sample/settingsMenu.fxml"));
+        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/SettingsMenuView.fxml"));
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -66,7 +66,7 @@ public class MainMenuController   implements Initializable {
 
 
         stage = (Stage) creditsButton.getScene().getWindow();
-        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/sample/helpMenu.fxml"));
+        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/HelpMenuView.fxml"));
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -98,7 +98,7 @@ public class MainMenuController   implements Initializable {
 
 
         stage = (Stage) creditsButton.getScene().getWindow();
-        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/sample/creditsMenu.fxml"));
+        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/CreditsMenuView.fxml"));
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
