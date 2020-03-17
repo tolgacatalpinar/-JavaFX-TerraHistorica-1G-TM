@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox id="vbox" prefHeight="1080" prefWidth="1920" stylesheets="@../CSS/HelpMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+    <Pane prefHeight="2000.0" prefWidth="200.0">
+        <children>
+
+
+            <Button id="createGameButton" fx:id="createGameButton" layoutY="393.0" mnemonicParsing="false" onMouseClicked="#createGameButtonClicked" prefHeight="100.0" prefWidth="514.0" text="Create Game" textFill="WHITE">
+                <font>
+                    <Font name="Book Antiqua" size="55.0" />
+                </font>
+            </Button>
+
+            <Button id="loadGameButton" fx:id="loadGameButton" layoutX="6.0" layoutY="486.0" mnemonicParsing="false" onMouseClicked="#loadGameButtonClicked" prefHeight="100.0" prefWidth="514.0" text="Load Game" textFill="WHITE">
+                <font>
+                    <Font name="Book Antiqua" size="55.0" />
+                </font>
+            </Button>
+
+            <Button id="settingsButton" fx:id="settingsButton" layoutX="6.0" layoutY="594.0" mnemonicParsing="false" onMouseClicked="#settingsButtonClicked" prefHeight="100.0" prefWidth="514.0" text="Settings" textFill="WHITE">
+                <font>
+                    <Font name="Book Antiqua" size="55.0" />
+                </font>
+            </Button>
+
+            <Button id="helpButton" fx:id="helpButton" layoutX="6.0" layoutY="702.0" mnemonicParsing="false" onMouseClicked="#helpButtonClicked" prefHeight="100.0" prefWidth="514.0" text="Help" textFill="WHITE">
+                <font>
+                    <Font name="Book Antiqua" size="55.0" />
+                </font>
+            </Button>
+
+            <Button id="creditsButton" fx:id="creditsButton" layoutY="810.0" mnemonicParsing="false" onMouseClicked="#creditsButtonClicked" prefHeight="100.0" prefWidth="514.0" text="Credits" textFill="WHITE">
+                <font>
+                    <Font name="Book Antiqua" size="55.0" />
+                </font>
+            </Button>
+
+            <Button id="exitButton" fx:id="exitButton" layoutY="918.0" mnemonicParsing="false" onMouseClicked="#exitButtonClicked" prefHeight="100.0" prefWidth="514.0" text="Exit" textFill="WHITE">
+                <font>
+                    <Font name="Book Antiqua" size="55.0" />
+                </font>
+            </Button>
+
+
+
+
+        </children></Pane>
+
+</VBox>
