@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
@@ -16,18 +17,27 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class MapController extends Application {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class MapController extends Application implements Initializable {
    @FXML
-   private Pane pane;
+   Pane mapPane;
+   @FXML
+   BorderPane mapBorderPane;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Map map = new Map();
         //OffsetPane op = new OffsetPane();
         Parent root = FXMLLoader.load(getClass().getResource("/View/GameView.fxml"));
+       if( mapPane == null)
+          System.out.println("Null");
+       else
+          System.out.println("Is not null");
         for(int i = 0; i < 20; i ++)
         {
-           System.out.println(pane.getChildren().get(i).getId());
+           //System.out.println("Element: " + mapPane.getChildren().get(i).getId());
         }
 
 //        for(int i = 0; i< 12; i++ ) {
@@ -90,4 +100,9 @@ public class MapController extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+   @Override
+   public void initialize(URL url, ResourceBundle resourceBundle) {
+
+   }
 }

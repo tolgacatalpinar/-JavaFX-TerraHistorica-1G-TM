@@ -3,9 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../Styles/style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MapController">
+<BorderPane fx:id="mapBorderPane" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../Styles/style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MapController">
    <center>
-      <Pane prefHeight="396.0" prefWidth="432.0" BorderPane.alignment="CENTER">
+      <Pane fx:id="mapPane" prefHeight="396.0" prefWidth="432.0" BorderPane.alignment="CENTER">
          <children>
             <Button id="blackHexagon" layoutX="264.0" layoutY="267.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
             <Button id="riverHexagon" layoutX="263.0" layoutY="170.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
