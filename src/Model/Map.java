@@ -33,8 +33,8 @@ public class Map{
 
    public int getRow(Space space1){
        boolean found = false;
-       int column;
-       int row;
+       int column = -1;
+       int row = -1;
        for(int i = 0; i < 117 || !found ; i++) {
            row = i / 13;
            column = i % 13;
@@ -48,8 +48,8 @@ public class Map{
 
     public int getColumn(Space space1){
        boolean found = false;
-       int column;
-       int row;
+       int column = -1;
+       int row = -1;
        for(int i = 0; i < 117 || !found ; i++) {
            row = i / 13;
            column = i % 13;
@@ -63,8 +63,8 @@ public class Map{
 
 
    public int[] buildDwelling(Space space1) {
-       int[] location;
-       if ( space1 instanceof river){ 
+       int[] location = null; /// burada belki hata olabilir
+       if ( space1 instanceof River){ 
            location = new int[2];
            int row = getRow(space1);
            int column = getColumn(space1);
@@ -75,7 +75,7 @@ public class Map{
    }
 
    public boolean isDirectAdjacent(Space space1, Space space2) {
-      // We did not control if one of the spaces is river, because even one of them is river this info cn be useful.
+      // We did not control if one of the spaces is river, because even one of them is river this info can be useful.
       int row1 = getRow(space1);
       int row2 = getRow(space2);
       int col1 = getColumn(space1);
