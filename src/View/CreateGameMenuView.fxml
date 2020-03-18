@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox id="vbox" prefHeight="720" prefWidth="1280" stylesheets="@../CSS/HelpMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+<VBox id="vbox" prefHeight="720" prefWidth="1280" stylesheets="@../CSS/HelpMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CreateGameMenuController">
     <Pane prefHeight="2000.0" prefWidth="200.0">
         <children>
 
@@ -44,29 +46,53 @@
                     <Font name="Book Antiqua" size="29.0" />
                 </font>
             </Button>
+            <ChoiceBox fx:id="playerCount" layoutX="720.0" layoutY="199.0" onAction="#playerCountIsSelected" prefHeight="33.0" prefWidth="38.0" value="2">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="2" />
+                        <String fx:value="3" />
+                        <String fx:value="4" />
+                        <String fx:value="5" />
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
+            <TextField fx:id="player1" alignment="CENTER" layoutX="720.0" layoutY="264.0" prefHeight="45.0" prefWidth="228.0" text="Player 1 Name" visible="true">
+                <font>
+                    <Font size="20.0" />
+                </font>
+            </TextField>
+            <TextField fx:id="player2" alignment="CENTER" layoutX="720.0" layoutY="328.0" prefHeight="45.0" prefWidth="228.0" text="Player 2 Name" visible="true">
+                <font>
+                    <Font size="20.0" />
+                </font>
+            </TextField>
+            <TextField fx:id="player3" alignment="CENTER" layoutX="720.0" layoutY="390.0" prefHeight="45.0" prefWidth="228.0" text="Player 3 Name" visible="false">
+                <font>
+                    <Font size="20.0" />
+                </font>
+            </TextField>
+            <TextField fx:id="player4" alignment="CENTER" layoutX="720.0" layoutY="451.0" prefHeight="45.0" prefWidth="228.0" text="Player 4 Name" visible="false">
+                <font>
+                    <Font size="20.0" />
+                </font>
+            </TextField>
+            <TextField fx:id="player5" alignment="CENTER" layoutX="720.0" layoutY="513.0" prefHeight="45.0" prefWidth="228.0" text="Player 5 Name" visible="false">
+                <font>
+                    <Font size="20.0" />
+                </font>
+            </TextField>
 
-            <Button id="gameVolume" fx:id="gameVolume" layoutX="439.0" layoutY="167.0" mnemonicParsing="false" onMouseClicked="#exitButtonClicked" prefHeight="100.0" prefWidth="312.0" text="Game Volume:" textFill="WHITE">
+            <Button id="helpLink" fx:id="helpLink" layoutX="384.0" layoutY="185.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="354.0" text="Choose Player Count:" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="29.0" />
                 </font>
             </Button>
 
-            <Button id="musicVolume" fx:id="musicVolume" layoutX="475.0" layoutY="307.0" mnemonicParsing="false" onMouseClicked="#exitButtonClicked" prefHeight="100.0" prefWidth="240.0" text="Music Volume:" textFill="WHITE">
+            <Button id="playGame" fx:id="playGame" layoutX="657.0" layoutY="587.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="354.0" text="Play" textFill="WHITE">
                 <font>
-                    <Font name="Book Antiqua" size="29.0" />
+                    <Font name="Book Antiqua" size="45.0" />
                 </font>
             </Button>
-
-            <Button id="muteMusic" fx:id="muteMusic" layoutX="472.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#exitButtonClicked" prefHeight="100.0" prefWidth="246.0" text="Mute Music:" textFill="WHITE">
-                <font>
-                    <Font name="Book Antiqua" size="29.0" />
-                </font>
-            </Button>
-
-
-            <Slider layoutX="718.0" layoutY="191.0" prefHeight="59.0" prefWidth="246.0" />
-            <Slider layoutX="715.0" layoutY="328.0" prefHeight="64.0" prefWidth="252.0" />
-            <CheckBox layoutX="718.0" layoutY="462.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="159.0" />
 
 
         </children></Pane>

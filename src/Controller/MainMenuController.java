@@ -31,8 +31,17 @@ public class MainMenuController   implements Initializable {
 
 
     @FXML
-    public void createGameButtonClicked( MouseEvent event) {
+    public void createGameButtonClicked( MouseEvent event) throws IOException {
+        Stage stage;
 
+
+        stage = (Stage) creditsButton.getScene().getWindow();
+        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/CreateGameMenuView.fxml"));
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setScene(scene);
+        stage.show();
 
     }
 
