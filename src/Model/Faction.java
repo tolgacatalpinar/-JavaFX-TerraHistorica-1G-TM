@@ -78,7 +78,7 @@ public class Faction {
     private int priestIncome;
     private int coinIncome;
 
-    public void setInitialResources(int worker, int )
+    public void setInitialResources(int worker, int priest, int gold){}
 
     public void addCoinIncome(int value)
     {
