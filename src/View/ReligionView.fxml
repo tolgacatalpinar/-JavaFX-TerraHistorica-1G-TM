@@ -8,19 +8,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="769.0" prefWidth="1371.0" stylesheets="@../CSS/styles.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReligionController">
+<Pane id="backplan" prefHeight="720" prefWidth="1287.0" stylesheets="@../CSS/styles.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReligionController">
 
       <ChoiceBox fx:id="choiceBox" layoutX="61.0" layoutY="139.0" prefHeight="29.0" prefWidth="177.0" value="Islam">
          <items>
             <FXCollections fx:factory="observableArrayList">
-               <String fx:value= "Islam" />
+               <String fx:value="Islam" />
                <String fx:value="Christianity" />
                <String fx:value="Judaism" />
                <String fx:value="Buddhism" />
             </FXCollections>
          </items>
       </ChoiceBox>
-      <AnchorPane fx:id="board" layoutX="344.0" prefHeight="769.0" prefWidth="1027.0" />
+      <AnchorPane fx:id="board" layoutX="345.0" prefHeight="720" prefWidth="945.0" />
       <Label layoutX="64.0" layoutY="105.0" prefHeight="29.0" prefWidth="177.0" text="Select Religion" />
       <Button fx:id="priestButton" layoutX="91.0" layoutY="405.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="134.0" text="Place Priest" />
       <Button fx:id="orderButton" layoutX="91.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="134.0" text="Add To Order" />

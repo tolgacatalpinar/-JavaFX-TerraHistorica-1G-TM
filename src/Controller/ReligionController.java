@@ -64,7 +64,6 @@ public class ReligionController extends Application {
                 Religion choosen_religion = religions[religion_index];
                 System.out.println("Gained power is " + choosen_religion.placePriest(currentPlayer,playerKeyStatus));
                 System.out.println("Priest placed on " + choiceBox.getSelectionModel().getSelectedItem());
-
             }
         });
         orderButton = (Button) root.getChildrenUnmodifiable().get(4);
@@ -84,8 +83,8 @@ public class ReligionController extends Application {
         //        System.out.println(choose_rel.getItems().get((Integer) newValue));
         //    }
         //});
-        primaryStage.setScene(new Scene(root, 1920, 1080));
-        primaryStage.setMaximized(true);
+        primaryStage.setScene(new Scene(root, 1280, 720));
+        primaryStage.setMaximized(false);
         primaryStage.show();
 
     }
