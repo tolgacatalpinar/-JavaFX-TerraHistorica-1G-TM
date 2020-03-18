@@ -3,16 +3,16 @@ package Model;
 public class Faction {
 
     public int INITIAL_DWELLING_NUMBER = 2;
-    public int INITIAL_VICTORY_POINT = 0;
-    public int INITIAL_WORKER  = 0;
+    public int INITIAL_VICTORY_POINT;
+    public int INITIAL_WORKER  = 3;
     public int INITIAL_POWER = 0;
     public int INITIAL_ISLAM = 0;
     public int INITIAL_CHRISTIANITY = 0;
     public int INITIAL_JUDAISM = 0;
-    public int INITIAL_BUDISM = 0;
+    public int INITIAL_HINDUISM = 0;
     public int INITIAL_SHIPPING = 0;
     public int INITIAL_PRIEST = 0;
-    public int INITIAL_GOLD = 0;
+    public int INITIAL_GOLD = 15;
     public int INITIAL_SPADE = 0;
     public final int MAX_DWELLING = 8;
     public int SPADE_PRIEST_COST = 0;
@@ -37,14 +37,14 @@ public class Faction {
     public int TEMPLE_WORKER_COST = 0;
     public int TEMPLE_GOLD_COST = 0;
     public int TEMPLE_PRIEST_INCOME = 0;
-    public int DWELLING_WORKER_COST = 0;
-    public int DWELLING_GOLD_COST = 0;
+    public int DWELLING_WORKER_COST = 1;
+    public int DWELLING_GOLD_COST = 2;
     public int DWELLING_WORKER_INCOME = 0;
     public int rangeOfSkipTile = 0;
     public int additionalWorkerOnTunneling = 0;
     public int remainingSkipRiverChanceOnTown = 0;
     public int startingDwellings = 0;
-    public int favorTilesAfterBuildingTemple = 0;
+    public int favorTilesAfterBuildingTemple = 1;
     public boolean canPlayDoubleTurn;
     public int spadeNeededToTerraformPlains;
     public int spadeNeededToTerraformSwamp;
@@ -78,11 +78,6 @@ public class Faction {
     private int priestIncome;
     private int coinIncome;
 
-    public void setInitialResources(Player player){
-
-       // player.set
-        
-    }
 
     public void addCoinIncome(int value)
     {

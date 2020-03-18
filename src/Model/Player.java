@@ -8,17 +8,23 @@ public class Player {
     private int playerId;
     private int levelOnePower;
     private int levelTwoPower;
+    private int levelThreePower;
     private int workerNum;
     private int priestNum;
     private int goldNum;
     private int victoryPointNum;
+    private int islamProgress;
+    private int christianityProgress;
+    private int hinduismProgress;
+    private int judaismProgress;
     private int powerIncome;
     private int workerIncome;
     private int priestIncome;
+    private int startingDwellingNum;
     private int keyNum;
     private int bridgeNum;
     private int dwellingNum;
-    private int tradingPostNum;
+    private int tradingHouseNum;
     private int templeNum;
     private int sanctuaryNum;
     private int strongholdNum;
@@ -27,6 +33,15 @@ public class Player {
     private int shipLevel;
     private int religionTrackInventory;
     private int goldIncome;
+    private int perBuildingIncome;
+    private int cultBonusIncome;
+    private boolean havingDwellingBonus;
+    private boolean havingTradeHouse;
+    private boolean havingSanctuary;
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
 
 
@@ -34,11 +49,26 @@ public class Player {
         this.nickName = nickName;
         this.playerId = playerId;
         specialActionToken = new SpecialActionToken();
+
     }
 
     public void setFaction(Faction faction) {
         this.faction = faction;
-        faction.setInitialResources(this);
+        workerNum = this.getFaction().INITIAL_WORKER;
+        goldNum = this.getFaction().INITIAL_GOLD;
+        priestNum = this.getFaction().INITIAL_PRIEST;
+        //Initial power which level?
+        levelOnePower = this.getFaction().INITIAL_POWER;
+        startingDwellingNum = this.getFaction().INITIAL_DWELLING_NUMBER;
+        hinduismProgress = this.getFaction().INITIAL_HINDUISM;
+        islamProgress = this.getFaction().INITIAL_ISLAM;
+        christianityProgress = this.getFaction().INITIAL_CHRISTIANITY;
+        judaismProgress = this.getFaction().INITIAL_JUDAISM;
+        dwellingNum = 0;
+        tradingHouseNum = 0;
+        templeNum = 0;
+        sanctuaryNum = 0;
+        strongholdNum = 0;
     }
 
     public Faction getFaction() {
@@ -46,33 +76,98 @@ public class Player {
     }
 
 
-
     public void buildBridge() {
 
     }
 
     public void buildDwelling() {
+        if (dwellingNum < this.faction.MAX_DWELLING ) {
+            workerNum -= faction.DWELLING_WORKER_COST;
+            workerIncome = faction.DWELLING_WORKER_INCOME;
+        }
+        else {
+            System.out.println("Max dwelling reached");
+        }
+    }
 
+    public void townFound() {
+        keyNum++;
+        //TODO
     }
 
     public void upgradeToSanctuary() {
 
+        templeNum--;
+        workerNum -= faction.SANCTUARY_WORKER_COST;
+        goldNum -= faction.SANCTUARY_GOLD_COST;
+        priestIncome = faction.SANCTUARY_PRIEST_INCOME;
     }
 
-    public void upgradeToTemple() {
+    public int upgradeToTemple() {
+        tradingHouseNum--;
+        workerNum -= faction.TEMPLE_WORKER_COST;
+        goldNum -= faction.TEMPLE_GOLD_COST;
+        priestIncome = faction.TEMPLE_PRIEST_INCOME;
+        return faction.favorTilesAfterBuildingTemple;
+
 
     }
 
-    public void upgradeToTradingPost() {
-        faction.addWorker(2);
-        faction.addCoinIncome(1);
+    public void upgradeToTradingHouse(boolean isThereAdjacentOpponent) {
+        dwellingNum--;
+
+        if(isThereAdjacentOpponent) {
+            workerNum -= faction.TRADING_POST_WORKER_COST;
+            goldNum  -= faction.TRADING_POST_GOLD_COST-3;
+        }
+        else {
+            workerNum -= faction.TRADING_POST_WORKER_COST;
+            goldNum  -= faction.TRADING_POST_GOLD_COST;
+        }
+
+    }
+
+    public void upgradeToStronghold() {
+        tradingHouseNum--;
+        workerNum -= faction.STRONGHOLD_WORKER_COST;
+        goldNum -= faction.STRONGHOLD_GOLD_COST;
+        powerIncome = faction.STRONGHOLD_POWER_INCOME;
     }
 
     public void progressInReligion(Religion religion) {
 
     }
 
+    public void sendPriest(Religion religion) {
+        priestNum--;
+    }
+
     public void exchangeResource(String exchanges) {
+
+        if(exchanges == "power for priest") {
+
+        }
+        if(exchanges == "power for worker") {
+
+        }
+        if(exchanges == "power for coin") {
+
+        }
+        if(exchanges == "priest to worker") {
+
+        }
+        if(exchanges == "worker to coin") {
+
+        }
+        if(exchanges == "") {
+
+        }
+        if(exchanges == "") {
+
+        }
+        if(exchanges == "") {
+
+        }
 
     }
 
@@ -92,11 +187,6 @@ public class Player {
     }
 
 
-
-
-
-
-
     public int getLevelOnePower() {
         return levelOnePower;
     }
@@ -111,6 +201,14 @@ public class Player {
 
     public void setLevelTwoPower(int levelTwoPower) {
         this.levelTwoPower = levelTwoPower;
+    }
+
+    public int getLevelThreePower() {
+        return levelThreePower;
+    }
+
+    public void setLevelThreePower(int levelThreePower) {
+        this.levelThreePower = levelThreePower;
     }
 
     public int getWorkerNum() {
@@ -194,11 +292,11 @@ public class Player {
     }
 
     public int getTradingPostNum() {
-        return tradingPostNum;
+        return tradingHouseNum;
     }
 
-    public void setTradingPostNum(int tradingPostNum) {
-        this.tradingPostNum = tradingPostNum;
+    public void setTradingPostNum(int tradingHouseNum) {
+        this.tradingHouseNum = tradingHouseNum;
     }
 
     public int getTempleNum() {
@@ -282,7 +380,45 @@ public class Player {
     public int getPlayerId() {
         return playerId;
     }
+    public int getPerBuildingIncome() {
+        return perBuildingIncome;
+    }
 
+    public void setPerBuildingIncome(int perBuildingIncome) {
+        this.perBuildingIncome = perBuildingIncome;
+    }
+
+    public int getCultBonusIncome() {
+        return cultBonusIncome;
+    }
+
+    public void setCultBonusIncome(int cultBonusIncome) {
+        this.cultBonusIncome = cultBonusIncome;
+    }
+
+    public boolean isHavingDwellingBonus() {
+        return havingDwellingBonus;
+    }
+
+    public void setHavingDwellingBonus(boolean havingDwellingBonus) {
+        this.havingDwellingBonus = havingDwellingBonus;
+    }
+
+    public boolean isHavingTradeHouse() {
+        return havingTradeHouse;
+    }
+
+    public void setHavingTradeHouse(boolean havingTradeHouse) {
+        this.havingTradeHouse = havingTradeHouse;
+    }
+
+    public boolean isHavingSanctuary() {
+        return havingSanctuary;
+    }
+
+    public void setHavingSanctuary(boolean havingSanctuary) {
+        this.havingSanctuary = havingSanctuary;
+    }
 
 
 
