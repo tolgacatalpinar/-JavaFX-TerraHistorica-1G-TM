@@ -11,8 +11,8 @@ public class Player {
     private int workerNum;
     private int priestNum;
     private int goldNum;
-    private int powerIncome;
     private int victoryPointNum;
+    private int powerIncome;
     private int workerIncome;
     private int priestIncome;
     private int keyNum;
@@ -26,7 +26,7 @@ public class Player {
     private int spadeLevel;
     private int shipLevel;
     private int religionTrackInventory;
-
+    private int goldIncome;
 
 
 
@@ -38,7 +38,7 @@ public class Player {
 
     public void setFaction(Faction faction) {
         this.faction = faction;
-        faction.setInitialResources(workerNum, priestNum, goldNum);
+        faction.setInitialResources(this);
     }
 
     public Faction getFaction() {
@@ -256,6 +256,18 @@ public class Player {
 
     public String getNickName() {
         return nickName;
+    }
+
+    public void setShipLevel(int shipLevel) {
+        this.shipLevel = shipLevel;
+    }
+
+    public int getGoldIncome() {
+        return goldIncome;
+    }
+
+    public void setGoldIncome(int goldIncome) {
+        this.goldIncome = goldIncome;
     }
 
     public SpecialActionToken getSpecialActionToken() {
