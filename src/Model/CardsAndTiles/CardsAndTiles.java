@@ -47,15 +47,15 @@ public class CardsAndTiles {
      */
     public static void createBonusCard(ArrayList<BonusCard> bonusCards){
         bonusCards = new ArrayList<>();
-        bonusCards.add(new BonusCard(0,0,0,0,0,0,0,0,1,false,false,false,false,false));
-        bonusCards.add(new BonusCard(0,0,0,3,0,0,1,0,0,false,false,false,false,false));
-        bonusCards.add(new BonusCard(0,0,6,0,0,0,0,0,0,false,false,false,false,false));
-        bonusCards.add(new BonusCard(0,0,0,3,1,0,0,0,0,false,false,false,false,false));
-        bonusCards.add(new BonusCard(0,0,2,0,0,0,0,0,0,true,false,false,false,false));
-        bonusCards.add(new BonusCard(0,0,4,0,0,0,0,1,0,false,true,false,false,false));
-        bonusCards.add(new BonusCard(0,0,2,0,0,1,0,0,0,false,false,true,false,false));
-        bonusCards.add(new BonusCard(0,0,0,0,0,2,1,0,0,false,false,false,true,false));
-        bonusCards.add(new BonusCard(0,0,0,0,0,4,2,0,0,false,false,false,false,true));
+        bonusCards.add(new BonusCard(0,false,0,0,0,0,0,0,1,false,false,false,false,false));
+        bonusCards.add(new BonusCard(0,false,0,3,0,0,1,0,0,false,false,false,false,false));
+        bonusCards.add(new BonusCard(0,false,6,0,0,0,0,0,0,false,false,false,false,false));
+        bonusCards.add(new BonusCard(0,false,0,3,1,0,0,0,0,false,false,false,false,false));
+        bonusCards.add(new BonusCard(0,false,2,0,0,0,0,0,0,true,false,false,false,false));
+        bonusCards.add(new BonusCard(0,false,4,0,0,0,0,1,0,false,true,false,false,false));
+        bonusCards.add(new BonusCard(0,false,2,0,0,1,0,0,0,false,false,true,false,false));
+        bonusCards.add(new BonusCard(0,false,0,0,0,2,1,0,0,false,false,false,true,false));
+        bonusCards.add(new BonusCard(0,false,0,0,0,4,2,0,0,false,false,false,false,true));
 
     }
 
