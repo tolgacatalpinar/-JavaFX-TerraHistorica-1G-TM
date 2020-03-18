@@ -2,6 +2,7 @@ package Model.CardsAndTiles;
 
 public class FavorTile {
     int[] playerIds;
+    int numberOfPlayer;
     int islamBonus; //water
     int christianityBonus; //Air
     int hinduismBonus; //Fire
@@ -21,7 +22,7 @@ public class FavorTile {
     boolean isPassingBonusForTradingHouse;
 
     /**
-     *
+     * @param numberOfPlayer shows how many player can take this tile.
      * @param islamBonus number of islam bonus.
      * @param christianityBonus number of christ bonus.
      * @param hinduismBonus number of hinduism bonus.
@@ -38,10 +39,11 @@ public class FavorTile {
      * @param isPassingBonusForTradingHouse determines tile has passing bonus for trading house each round bonus or not.
      * Rule : From now on, when passing (see Action #8, page 14), get 2/3/3/4 Victory points for 1/2/3/4 of your Trading houses on the Game board.
      */
-    public FavorTile(int islamBonus, int christianityBonus, int hinduismBonus, int jewBonus, int neededCombinedPowerTown, int powerBonus, int workerBonus, int goldBonus, int victoryPoint, boolean isSpecialCult, boolean isTownBonus, boolean isTradingHouse, boolean isDwellingBonus, boolean isPassingBonusForTradingHouse) {
+    public FavorTile(int numberOfPlayer,int islamBonus, int christianityBonus, int hinduismBonus, int jewBonus, int neededCombinedPowerTown, int powerBonus, int workerBonus, int goldBonus, int victoryPoint, boolean isSpecialCult, boolean isTownBonus, boolean isTradingHouse, boolean isDwellingBonus, boolean isPassingBonusForTradingHouse) {
         if(isPassingBonusForTradingHouse){
             roundedVictoryBonus = new int [] {1,2,3,4};
         }
+        this.numberOfPlayer = numberOfPlayer;
         this.islamBonus = islamBonus;
         this.christianityBonus = christianityBonus;
         this.hinduismBonus = hinduismBonus;
