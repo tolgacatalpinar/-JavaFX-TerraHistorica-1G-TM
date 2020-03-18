@@ -1,25 +1,26 @@
 package Model.CardsAndTiles;
 
 public class BonusCard {
-    int notTakenBonus;
-    int playerOccupied;
-    int goldBonus;
-    int powerBonus;
-    int shippingRange;
-    int perBuildingBonus;
-    int workerBonus;
-    int cultBonus;
-    int priestBonus;
-    boolean spacialSpade;
-    boolean specialCult;
-    boolean isDwelling;
-    boolean isTradeHouse;
-    boolean isSanctuary;
+    private int notTakenBonus;
+    private int playerId;
+    private int goldBonus;
+    private int powerBonus;
+    private int shippingRange;
+    private int perBuildingBonus;
+    private int workerBonus;
+    private int cultBonus;
+    private int priestBonus;
+    private boolean spacialSpade;
+    private boolean specialCult;
+    private boolean isDwelling;
+    private boolean isTradeHouse;
+    private boolean isSanctuary;
+    private boolean playerOcupied;
 
     /**
      *
      * @param notTakenBonus If card ware not taken previous game, it has more probability than other.
-     * @param playerOccupied Which player take it.
+     * @param playerOccupied determines card is taken or not.
      * @param goldBonus Gold bonus income
      * @param powerBonus power bonus income
      * @param shippingRange extra shipping range bonus
@@ -33,9 +34,9 @@ public class BonusCard {
      * @param isTradeHouse determine there is trading house bonus or not.
      * @param isSanctuary determine there is sanctuary or stronghold bonus or not.
      */
-    public BonusCard(int notTakenBonus, int playerOccupied, int goldBonus, int powerBonus, int shippingRange, int perBuildingBonus, int workerBonus, int cultBonus, int priestBonus, boolean spacialSpade, boolean specialCult, boolean isDwelling, boolean isTradeHouse, boolean isSanctuary) {
+    public BonusCard(int notTakenBonus, boolean playerOccupied,int goldBonus, int powerBonus, int shippingRange, int perBuildingBonus, int workerBonus, int cultBonus, int priestBonus, boolean spacialSpade, boolean specialCult, boolean isDwelling, boolean isTradeHouse, boolean isSanctuary) {
         this.notTakenBonus = notTakenBonus;
-        this.playerOccupied = playerOccupied;
+        this.playerOcupied = playerOccupied;
         this.goldBonus = goldBonus;
         this.powerBonus = powerBonus;
         this.shippingRange = shippingRange;
@@ -48,5 +49,78 @@ public class BonusCard {
         this.isDwelling = isDwelling;
         this.isTradeHouse = isTradeHouse;
         this.isSanctuary = isSanctuary;
+        playerId = -1;
+    }
+
+    public int getNotTakenBonus() {
+        return notTakenBonus;
+    }
+
+    public int getPlayerId() {
+        return playerId;
+    }
+
+    public int getGoldBonus() {
+        return goldBonus;
+    }
+
+    public int getPowerBonus() {
+        return powerBonus;
+    }
+
+    public int getShippingRange() {
+        return shippingRange;
+    }
+
+    public int getPerBuildingBonus() {
+        return perBuildingBonus;
+    }
+
+    public int getWorkerBonus() {
+        return workerBonus;
+    }
+
+    public int getCultBonus() {
+        return cultBonus;
+    }
+
+    public int getPriestBonus() {
+        return priestBonus;
+    }
+
+    public boolean isSpacialSpade() {
+        return spacialSpade;
+    }
+
+    public boolean isSpecialCult() {
+        return specialCult;
+    }
+
+    public boolean isDwelling() {
+        return isDwelling;
+    }
+
+    public boolean isTradeHouse() {
+        return isTradeHouse;
+    }
+
+    public boolean isSanctuary() {
+        return isSanctuary;
+    }
+
+    public boolean isPlayerOcupied() {
+        return playerOcupied;
+    }
+
+    public void setNotTakenBonus(int notTakenBonus) {
+        this.notTakenBonus = notTakenBonus;
+    }
+
+    public void setPlayerId(int playerId) {
+        this.playerId = playerId;
+    }
+
+    public void setPlayerOcupied(boolean playerOcupied) {
+        this.playerOcupied = playerOcupied;
     }
 }

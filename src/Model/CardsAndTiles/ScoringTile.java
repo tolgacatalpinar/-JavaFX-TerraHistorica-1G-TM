@@ -1,28 +1,32 @@
 package Model.CardsAndTiles;
 
+import Model.Player;
+
+import java.util.ArrayList;
+
 public class ScoringTile {
 
-    int cardCount;
-    int id;
-    int requiredIslam; //water
-    int requiredBudism; //fire
-    int requiredChrist; //Air
-    int requiredJudaism; //earth
-    int priestBonus;
-    int powerBonus;
-    int workerBonus;
-    int victoryBonus;
-    int spadeBonus;
-    int goldBonus;
-    boolean isDwellingBonus;
-    boolean isTradingHouseBonus;
-    boolean isStrongHoldBonus;
-    boolean isRequiredIslam;
-    boolean isRequiredBudism;
-    boolean isRequiredChrist;
-    boolean isRequiredJudaism;
-    boolean isRequiredSpade;
-    boolean isRequiredTown;
+    //Every player can take this tile there is no current number of player.
+    private ArrayList<Integer> playerId;
+    private int requiredIslam; //water
+    private int requiredBudism; //fire
+    private int requiredChrist; //Air
+    private int requiredJudaism; //earth
+    private int priestBonus;
+    private int powerBonus;
+    private int workerBonus;
+    private int victoryBonus;
+    private int spadeBonus;
+    private int goldBonus;
+    private boolean isDwellingBonus;
+    private boolean isTradingHouseBonus;
+    private boolean isStrongHoldBonus;
+    private boolean isRequiredIslam;
+    private boolean isRequiredBudism;
+    private boolean isRequiredChrist;
+    private boolean isRequiredJudaism;
+    private boolean isRequiredSpade;
+    private boolean isRequiredTown;
 
     /**
      *
@@ -66,6 +70,90 @@ public class ScoringTile {
         this.isRequiredJudaism = isRequiredJudaism;
         this.isRequiredSpade = isRequiredSpade;
         this.isRequiredTown = isRequiredTown;
+        playerId = new ArrayList<>();
     }
 
+    public ArrayList<Integer> getPlayerId() {
+        return playerId;
+    }
+
+    public int getRequiredIslam() {
+        return requiredIslam;
+    }
+
+    public int getRequiredBudism() {
+        return requiredBudism;
+    }
+
+    public int getRequiredChrist() {
+        return requiredChrist;
+    }
+
+    public int getRequiredJudaism() {
+        return requiredJudaism;
+    }
+
+    public int getPriestBonus() {
+        return priestBonus;
+    }
+
+    public int getPowerBonus() {
+        return powerBonus;
+    }
+
+    public int getWorkerBonus() {
+        return workerBonus;
+    }
+
+    public int getVictoryBonus() {
+        return victoryBonus;
+    }
+
+    public int getSpadeBonus() {
+        return spadeBonus;
+    }
+
+    public int getGoldBonus() {
+        return goldBonus;
+    }
+
+    public boolean isDwellingBonus() {
+        return isDwellingBonus;
+    }
+
+    public boolean isTradingHouseBonus() {
+        return isTradingHouseBonus;
+    }
+
+    public boolean isStrongHoldBonus() {
+        return isStrongHoldBonus;
+    }
+
+    public boolean isRequiredIslam() {
+        return isRequiredIslam;
+    }
+
+    public boolean isRequiredBudism() {
+        return isRequiredBudism;
+    }
+
+    public boolean isRequiredChrist() {
+        return isRequiredChrist;
+    }
+
+    public boolean isRequiredJudaism() {
+        return isRequiredJudaism;
+    }
+
+    public boolean isRequiredSpade() {
+        return isRequiredSpade;
+    }
+
+    public boolean isRequiredTown() {
+        return isRequiredTown;
+    }
+
+    public void setPlayerId(ArrayList<Integer> playerId) {
+        this.playerId = playerId;
+    }
 }
