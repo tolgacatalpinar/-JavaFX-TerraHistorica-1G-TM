@@ -4,6 +4,7 @@ public class Player {
 
     String nickName;
     Faction faction;
+    SpecialActionToken specialActionToken;
     private int playerId;
     private int levelOnePower;
     private int levelTwoPower;
@@ -25,6 +26,76 @@ public class Player {
     private int spadeLevel;
     private int shipLevel;
     private int religionTrackInventory;
+
+
+
+
+    public Player(String nickName, int playerId) {
+        this.nickName = nickName;
+        this.playerId = playerId;
+        specialActionToken = new SpecialActionToken();
+    }
+
+    public void setFaction(Faction faction) {
+        this.faction = faction;
+        faction.setInitialResources(workerNum, priestNum, goldNum);
+    }
+
+    public Faction getFaction() {
+        return faction;
+    }
+
+
+
+    public void buildBridge() {
+
+    }
+
+    public void buildDwelling() {
+
+    }
+
+    public void upgradeToSanctuary() {
+
+    }
+
+    public void upgradeToTemple() {
+
+    }
+
+    public void upgradeToTradingPost() {
+        faction.addWorker(2);
+        faction.addCoinIncome(1);
+    }
+
+    public void progressInReligion(Religion religion) {
+
+    }
+
+    public void exchangeResource(String exchanges) {
+
+    }
+
+
+
+
+    public void terraform(Space space) {
+
+    }
+
+    public void upgradeSpadeLevel() {
+
+    }
+
+    public void upgradeShippingLevel() {
+
+    }
+
+
+
+
+
+
 
     public int getLevelOnePower() {
         return levelOnePower;
@@ -174,9 +245,6 @@ public class Player {
         return shipLevel;
     }
 
-    public void setShipLevel(int shipLevel) {
-        this.shipLevel = shipLevel;
-    }
 
     public int getReligionTrackInventory() {
         return religionTrackInventory;
@@ -190,75 +258,20 @@ public class Player {
         return nickName;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public SpecialActionToken getSpecialActionToken() {
+        return specialActionToken;
     }
+
+    public void setSpecialActionToken(SpecialActionToken specialActionToken) {
+        this.specialActionToken = specialActionToken;
+    }
+
 
     public int getPlayerId() {
         return playerId;
     }
 
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
-    }
-
-    public Player(String nickName, int playerId) {
-        this.nickName = nickName;
-        this.playerId = playerId;
-    }
-
-    public void buildBridge() {
-
-    }
-
-    public void buildDwelling() {
-
-    }
-
-    public void upgradeToSanctuary() {
-
-    }
-
-    public void upgradeToTemple() {
-
-    }
-
-    public void upgradeToTradingPost() {
-        faction.addWorker(2);
-        faction.addCoinIncome(1);
-    }
-
-    public void progressInReligion(Religion religion) {
-
-    }
-
-    public void exchangeResource(String exchanges) {
-
-    }
 
 
 
-
-    public void terraform(Space space) {
-
-    }
-
-    public void upgradeSpadeLevel() {
-
-    }
-
-    public void upgradeShippingLevel() {
-
-    }
-
-
-
-    public Faction getFaction() {
-        return faction;
-    }
-
-    public void setFaction(Faction faction) {
-        this.faction = faction;
-        faction.setInitialResources(workerNum, priestNum, goldNum);////
-    }
 }
