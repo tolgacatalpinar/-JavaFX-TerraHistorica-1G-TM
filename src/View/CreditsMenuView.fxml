@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox id="vbox" prefHeight="720" prefWidth="1280" stylesheets="@../CSS/HelpMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CreateGameMenuController">
+<VBox id="vbox" prefHeight="720" prefWidth="1280" stylesheets="@../CSS/CreditsMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
     <Pane prefHeight="2000.0" prefWidth="200.0">
         <children>
 
@@ -44,53 +42,6 @@
             <Button id="exitButton" fx:id="exitButton" layoutX="16.0" layoutY="622.0" mnemonicParsing="false" onMouseClicked="#exitButtonClicked" prefHeight="73.0" prefWidth="312.0" text="Exit" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="29.0" />
-                </font>
-            </Button>
-            <ChoiceBox fx:id="playerCount" layoutX="720.0" layoutY="199.0" onAction="#playerCountIsSelected" prefHeight="33.0" prefWidth="38.0" value="2">
-                <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="2" />
-                        <String fx:value="3" />
-                        <String fx:value="4" />
-                        <String fx:value="5" />
-                    </FXCollections>
-                </items>
-            </ChoiceBox>
-            <TextField fx:id="player1" alignment="CENTER" layoutX="720.0" layoutY="264.0" prefHeight="45.0" prefWidth="228.0" text="Player 1 Name" visible="true">
-                <font>
-                    <Font size="20.0" />
-                </font>
-            </TextField>
-            <TextField fx:id="player2" alignment="CENTER" layoutX="720.0" layoutY="328.0" prefHeight="45.0" prefWidth="228.0" text="Player 2 Name" visible="true">
-                <font>
-                    <Font size="20.0" />
-                </font>
-            </TextField>
-            <TextField fx:id="player3" alignment="CENTER" layoutX="720.0" layoutY="390.0" prefHeight="45.0" prefWidth="228.0" text="Player 3 Name" visible="false">
-                <font>
-                    <Font size="20.0" />
-                </font>
-            </TextField>
-            <TextField fx:id="player4" alignment="CENTER" layoutX="720.0" layoutY="451.0" prefHeight="45.0" prefWidth="228.0" text="Player 4 Name" visible="false">
-                <font>
-                    <Font size="20.0" />
-                </font>
-            </TextField>
-            <TextField fx:id="player5" alignment="CENTER" layoutX="720.0" layoutY="513.0" prefHeight="45.0" prefWidth="228.0" text="Player 5 Name" visible="false">
-                <font>
-                    <Font size="20.0" />
-                </font>
-            </TextField>
-
-            <Button id="helpLink" fx:id="helpLink" layoutX="384.0" layoutY="185.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="354.0" text="Choose Player Count:" textFill="WHITE">
-                <font>
-                    <Font name="Book Antiqua" size="29.0" />
-                </font>
-            </Button>
-
-            <Button id="playGame" fx:id="playGame" layoutX="657.0" layoutY="587.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="354.0" text="Play" textFill="WHITE">
-                <font>
-                    <Font name="Book Antiqua" size="45.0" />
                 </font>
             </Button>
 
