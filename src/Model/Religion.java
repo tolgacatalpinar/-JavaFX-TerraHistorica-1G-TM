@@ -33,7 +33,6 @@ public class Religion {
         for(int i = 0; i< playerCount; i++){
             updateReligion(initial_religion_points[i], i, false);
         }
-
     }
     /**
      * Updates the place of given player and returns

@@ -33,3 +33,15 @@
 #islam_track{
     -fx-background-image: url("../Images/air.png");
 }
+#christ_track{
+    -fx-background-image: url("../Images/fire.png");
+}
+#jew_track{
+    -fx-background-image: url("../Images/earth.png");
+}
+#budism_track{
+    -fx-background-image: url("../Images/water.png");
+}
+#board{
+    -fx-background-image: url("../Images/board.jpg");
+}
