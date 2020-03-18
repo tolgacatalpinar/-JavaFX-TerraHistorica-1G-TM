@@ -78,6 +78,8 @@ public class Faction {
     private int priestIncome;
     private int coinIncome;
 
+    public void setInitialResources(int worker, int )
+
     public void addCoinIncome(int value)
     {
         coinIncome += value;
