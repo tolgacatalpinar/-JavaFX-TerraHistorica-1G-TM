@@ -26,10 +26,10 @@ public class Religion {
         for (int i = 0; i < playerPositions.length ; i++){
             powerAwardPositions[i] = 0;
         }
-        powerAwardPositions[4] = 1;
-        powerAwardPositions[6] = 2;
-        powerAwardPositions[8] = 2;
-        powerAwardPositions[11] = 3;
+        powerAwardPositions[3] = 1;
+        powerAwardPositions[5] = 2;
+        powerAwardPositions[7] = 2;
+        powerAwardPositions[10] = 3;
         for(int i = 0; i< playerCount; i++){
             updateReligion(initial_religion_points[i], i, false);
         }
@@ -72,11 +72,17 @@ public class Religion {
         playerPositions[player_id] = endPos;
         return powerAward;
     }
-    public boolean isOccupied(int index){
-        for(int i = 0; i< playerPositions.length; i++){
-            if(playerPositions[i] == index){
-                return true;
-            }
+    public boolean isOccupied(int index) {
+
+        switch (index) {
+            case 0:
+                return (orderOfCult_3 != -1);
+            case 1:
+                return (orderOfCult_2_1 != -1);
+            case 2:
+                return (orderOfCult_2_2 != -1);
+            case 3:
+                return (orderOfCult_2_3 != -1);
         }
         return false;
     }
