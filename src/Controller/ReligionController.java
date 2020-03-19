@@ -144,18 +144,18 @@ public class ReligionController extends Application {
            //religions[religion_index].addOrderOfReligion(0, true);
            nextSpace = religions[religion_index].getPlayerPositions()[0];
            gridPane.add(pane, nextSpace, religion_index);
-           Pane orderPane = new Pane();
-           orderPane.setBackground(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
+
            int j = 0;
            for(int i = 0; i< 4; i++){
+                    Pane orderPane = new Pane();
+                    orderPane.setBackground(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
+
                    if (religions[religion_index].isOccupied(i)){
-                       if (i >=2){
-                           j =1;
-                       }
-                       GridPane orderGridPane = (GridPane)gridPane.getChildren().get(12*religion_index);
-                       orderGridPane.setBackground(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
-                       orderGridPane.add(orderPane,i%2,j);
+                       GridPane orderGridPane = (GridPane)gridPane.getChildren().get(religion_index);
+                       //orderGridPane.setBackground(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
+                       orderGridPane.add(orderPane,i/2,i%2);
                    }
+
            }
        }
    }
