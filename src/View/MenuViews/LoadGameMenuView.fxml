@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox id="vbox" prefHeight="720" prefWidth="1280" stylesheets="@../CSS/HelpMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+<VBox id="vbox" prefHeight="720" prefWidth="1280" stylesheets="@../../CSS/HelpMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
     <Pane prefHeight="2000.0" prefWidth="200.0">
         <children>
 
@@ -45,28 +45,7 @@
                 </font>
             </Button>
 
-            <Button id="gameVolume" fx:id="gameVolume" layoutX="439.0" layoutY="167.0" mnemonicParsing="false" onMouseClicked="#exitButtonClicked" prefHeight="100.0" prefWidth="312.0" text="Game Volume:" textFill="WHITE">
-                <font>
-                    <Font name="Book Antiqua" size="29.0" />
-                </font>
-            </Button>
 
-            <Button id="musicVolume" fx:id="musicVolume" layoutX="475.0" layoutY="307.0" mnemonicParsing="false" onMouseClicked="#exitButtonClicked" prefHeight="100.0" prefWidth="240.0" text="Music Volume:" textFill="WHITE">
-                <font>
-                    <Font name="Book Antiqua" size="29.0" />
-                </font>
-            </Button>
-
-            <Button id="muteMusic" fx:id="muteMusic" layoutX="472.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#exitButtonClicked" prefHeight="100.0" prefWidth="246.0" text="Mute Music:" textFill="WHITE">
-                <font>
-                    <Font name="Book Antiqua" size="29.0" />
-                </font>
-            </Button>
-
-
-            <Slider layoutX="718.0" layoutY="191.0" prefHeight="59.0" prefWidth="246.0" />
-            <Slider layoutX="715.0" layoutY="328.0" prefHeight="64.0" prefWidth="252.0" />
-            <CheckBox layoutX="718.0" layoutY="462.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="159.0" />
 
 
         </children></Pane>

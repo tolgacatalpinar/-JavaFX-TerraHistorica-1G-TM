@@ -1,23 +1,18 @@
 package Controller;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.application.Application;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.application.Platform;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import static java.util.Objects.requireNonNull;
@@ -36,7 +31,7 @@ public class MainMenuController   implements Initializable {
 
 
         stage = (Stage) creditsButton.getScene().getWindow();
-        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/CreateGameMenuView.fxml"));
+        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/MenuViews/CreateGameMenuView.fxml"));
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -52,7 +47,7 @@ public class MainMenuController   implements Initializable {
 
 
         stage = (Stage) creditsButton.getScene().getWindow();
-        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/LoadGameMenuView.fxml"));
+        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/MenuViews/LoadGameMenuView.fxml"));
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -69,7 +64,7 @@ public class MainMenuController   implements Initializable {
 
 
         stage = (Stage) creditsButton.getScene().getWindow();
-        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/SettingsMenuView.fxml"));
+        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/MenuViews/SettingsMenuView.fxml"));
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -86,7 +81,7 @@ public class MainMenuController   implements Initializable {
 
 
         stage = (Stage) creditsButton.getScene().getWindow();
-        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/HelpMenuView.fxml"));
+        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/MenuViews/HelpMenuView.fxml"));
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -118,7 +113,7 @@ public class MainMenuController   implements Initializable {
 
 
         stage = (Stage) creditsButton.getScene().getWindow();
-        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/CreditsMenuView.fxml"));
+        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/MenuViews/CreditsMenuView.fxml"));
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
