@@ -3,22 +3,30 @@ package Model.CardsAndTiles;
 import java.util.ArrayList;
 
 public class CardsAndTiles {
-    ArrayList<TownTile> townTiles;
-    ArrayList<BonusCard> bonusCards;
-    ArrayList<FavorTile> favorTiles;
-    ArrayList<ScoringTile> scoringTiles;
-
-    public CardsAndTiles(ArrayList<TownTile> townTiles, ArrayList<BonusCard> bonusCards, ArrayList<FavorTile> favorTiles, ArrayList<ScoringTile> scoringTiles) {
+    public ArrayList<TownTile> townTiles;
+    public ArrayList<BonusCard> bonusCards;
+    public ArrayList<FavorTile> favorTiles;
+    public ArrayList<ScoringTile> scoringTiles;
+    public ArrayList<BonusCard> selectedBonusCard;
+    public CardsAndTiles(int playerNumber) {
         createTownTile(townTiles);
         createBonusCard(bonusCards);
         createFavorTile(favorTiles);
         createScoringTile(scoringTiles);
+        selectedBonusCard = selectedBonusCard(bonusCards,playerNumber);
+    }
 
-        this.townTiles = townTiles;
-        this.bonusCards = bonusCards;
-        this.favorTiles = favorTiles;
-        this.scoringTiles = scoringTiles;
-
+    private ArrayList<BonusCard> selectedBonusCard(ArrayList<BonusCard> bonusCards,int playerNumber) {
+        ArrayList<BonusCard> selectedBonusCard;
+        selectedBonusCard = new ArrayList<>();
+        int max = playerNumber + 3;
+        int min = 0;
+        int range = max - min + 1;
+        for(int i = 0; i < max;++i){
+            int rand = (int)(Math.random() * range) + min;
+            selectedBonusCard.add(bonusCards.get(rand));
+        }
+        return selectedBonusCard;
     }
 
     /**
@@ -118,7 +126,16 @@ public class CardsAndTiles {
         scoringTiles.add(new ScoringTile(4,0,0,4,0,0,0,5,0,0,
                 false,false,false,false, false,false,true,false,true));
 
-        //Todo
     }
 
+    public int findPlayerCard(int playerId){
+        int playerCardId = -1;
+        for(int i = 0; i < selectedBonusCard.size();++i){
+            if(playerId == selectedBonusCard.get(i).getPlayerId()){
+                playerCardId =i;
+                return playerCardId;
+            }
+        }
+        return playerCardId;
+    }
 }
