@@ -102,4 +102,8 @@ public class Religion {
         return -1; // Error value which indicates there is no empty place
         //// these -1's can represent error messages or throw exceptions
     }
+    public int[] getPlayerPositions()
+    {
+       return playerPositions;
+    }
 }
