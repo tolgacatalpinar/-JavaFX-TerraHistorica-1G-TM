@@ -4,10 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox id="vbox" prefHeight="720" prefWidth="1280" stylesheets="@../CSS/HelpMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+<VBox id="vbox" prefHeight="720" prefWidth="1280" stylesheets="@../../CSS/MainMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
     <Pane prefHeight="2000.0" prefWidth="200.0">
         <children>
-
 
             <Button id="createGameButton" fx:id="createGameButton" layoutX="16.0" layoutY="265.0" mnemonicParsing="false" onMouseClicked="#createGameButtonClicked" prefHeight="73.0" prefWidth="312.0" text="Create Game" textFill="WHITE">
                 <font>
@@ -44,8 +43,6 @@
                     <Font name="Book Antiqua" size="29.0" />
                 </font>
             </Button>
-
-
 
 
         </children></Pane>

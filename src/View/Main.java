@@ -9,11 +9,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 
-
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("MainMenuView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("MenuViews/MainMenuView.fxml"));
         primaryStage.setTitle("Terra Historica");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.setResizable(false);

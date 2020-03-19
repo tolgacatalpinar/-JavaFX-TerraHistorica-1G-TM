@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox id="vbox" prefHeight="720" prefWidth="1280" stylesheets="@../CSS/HelpMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+<VBox id="vbox" prefHeight="720" prefWidth="1280" stylesheets="@../../CSS/CreditsMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
     <Pane prefHeight="2000.0" prefWidth="200.0">
         <children>
 
@@ -42,12 +42,6 @@
             <Button id="exitButton" fx:id="exitButton" layoutX="16.0" layoutY="622.0" mnemonicParsing="false" onMouseClicked="#exitButtonClicked" prefHeight="73.0" prefWidth="312.0" text="Exit" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="29.0" />
-                </font>
-            </Button>
-
-            <Button id="helpLink" fx:id="helpLink" layoutX="350.0" layoutY="243.0" mnemonicParsing="false" prefHeight="234.0" prefWidth="907.0" text="Link to the Online Manual" textFill="WHITE">
-                <font>
-                    <Font name="Book Antiqua" size="55.0" />
                 </font>
             </Button>
 
