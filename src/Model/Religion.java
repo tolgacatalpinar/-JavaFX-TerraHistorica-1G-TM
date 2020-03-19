@@ -72,6 +72,14 @@ public class Religion {
         playerPositions[player_id] = endPos;
         return powerAward;
     }
+    public boolean isOccupied(int index){
+        for(int i = 0; i< playerPositions.length; i++){
+            if(playerPositions[i] == index){
+                return true;
+            }
+        }
+        return false;
+    }
     public int placePriest(int player_id,boolean key) {
         return updateReligion(1, player_id, key);
     }

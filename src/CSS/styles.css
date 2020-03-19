@@ -45,3 +45,6 @@
 #board{
     -fx-background-image: url("../Images/religion_board.jpg");
 }
+#islam_token_order{
+    -fx-background-image: url("../Images/islam_token_order.jpg");
+}

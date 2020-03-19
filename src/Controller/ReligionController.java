@@ -9,10 +9,12 @@ import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,8 +24,8 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -37,7 +39,9 @@ public class ReligionController extends Application {
     private Button priestButton;
     @FXML
     private Button orderButton;
-    private int[] array = {1,0,1};
+    @FXML
+    private GridPane gridPane;
+    private int[] array = {0,0,0};
     private int currentPlayer = 1;
     private boolean playerKeyStatus = false;
     private Islam islam_track = new Islam(3,array);
@@ -48,8 +52,10 @@ public class ReligionController extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/View/ReligionView.fxml"));
+        gridPane = (GridPane) root.getChildrenUnmodifiable().get(0);
+        update(gridPane);
         //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
-        choiceBox = (ChoiceBox<String>) root.getChildrenUnmodifiable().get(0);
+        choiceBox = (ChoiceBox<String>) root.getChildrenUnmodifiable().get(1);
         //choiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
         //    @Override
         //    public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -64,6 +70,7 @@ public class ReligionController extends Application {
                 Religion choosen_religion = religions[religion_index];
                 System.out.println("Gained power is " + choosen_religion.placePriest(currentPlayer,playerKeyStatus));
                 System.out.println("Priest placed on " + choiceBox.getSelectionModel().getSelectedItem());
+                update(gridPane);
             }
         });
         orderButton = (Button) root.getChildrenUnmodifiable().get(4);
@@ -74,6 +81,7 @@ public class ReligionController extends Application {
                 Religion choosen_religion = religions[religion_index];
                 System.out.println("Gained power is " + choosen_religion.addOrderOfReligion(currentPlayer,playerKeyStatus));
                 System.out.println("Order acquired " + choiceBox.getSelectionModel().getSelectedItem());
+                update(gridPane);
             }
         });
         //priestButton.setVisible(false);
@@ -87,7 +95,43 @@ public class ReligionController extends Application {
         primaryStage.setMaximized(false);
         primaryStage.show();
 
+
     }
+
+    /**
+     * According to religion track's data paint the locations occupied
+     * @param gridPane the gridpane that stays at right
+     */
+    private void update(GridPane gridPane){
+        //System.out.println(gridPane.getId());
+        System.out.println(gridPane.getRowCount());
+        System.out.println(gridPane.getColumnCount());
+        for(int i = 0; i<gridPane.getRowCount(); i++){
+            for(int j = 1; j < gridPane.getColumnCount(); j++) {
+                if (religions[i].isOccupied(j-1)) {
+                    System.out.println("i is " + i + " j is "+ j);
+                    Pane temp =(Pane) paintNodeByRowColumnIndex(i,j,gridPane);
+                    System.out.println(temp == null);
+                    temp.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
+                    gridPane.add(temp,i,j);
+                }
+            }
+        }
+    }
+    private javafx.scene.Node paintNodeByRowColumnIndex(final int row, final int column, GridPane gridPane) {
+        ObservableList<Node> children = gridPane.getChildren();
+        for (Node node : children) {
+            System.out.println(node.toString());
+            if(gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
+                System.out.println(node.toString());
+                System.out.println("True");
+                return node;
+            }
+        }
+        return null;
+    }
+
+
 
     public static void main(String[] args) {
         launch(args);

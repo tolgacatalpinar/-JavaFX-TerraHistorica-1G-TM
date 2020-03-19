@@ -5,10 +5,65 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 
 <Pane id="backplan" prefHeight="720" prefWidth="1287.0" stylesheets="@../CSS/styles.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReligionController">
+   <GridPane id="main_grid" layoutX="285.0" layoutY="1.0" prefHeight="720.0" prefWidth="1001.0">
+     <columnConstraints>
+
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+     </columnConstraints>
+       <children>
+           <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="0" />
+           <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+           <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+           <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+       </children>
+     <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+     </rowConstraints>
+      <children>
+         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="10" GridPane.rowIndex="1" />
+          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="11" GridPane.rowIndex="1" />
+         <Pane layoutX="93.0" layoutY="190.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+         <Pane layoutX="176.0" layoutY="190.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+         <Pane layoutX="259.0" layoutY="190.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+         <Pane layoutX="342.0" layoutY="190.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+         <Pane layoutX="425.0" layoutY="190.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+         <Pane layoutX="508.0" layoutY="190.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+         <Pane layoutX="591.0" layoutY="190.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+         <Pane layoutX="675.0" layoutY="190.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+         <Pane layoutX="759.0" layoutY="190.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+         <Pane layoutX="843.0" layoutY="190.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+         <Pane layoutX="927.0" layoutY="190.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+      </children>
+   </GridPane>
 
       <ChoiceBox fx:id="choiceBox" layoutX="61.0" layoutY="139.0" prefHeight="29.0" prefWidth="177.0" value="Islam">
          <items>
@@ -20,19 +75,8 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-      <AnchorPane fx:id="board" layoutX="345.0" prefHeight="720" prefWidth="945.0" />
       <Label layoutX="64.0" layoutY="105.0" prefHeight="29.0" prefWidth="177.0" text="Select Religion" />
       <Button fx:id="priestButton" layoutX="91.0" layoutY="405.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="134.0" text="Place Priest" />
       <Button fx:id="orderButton" layoutX="91.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="134.0" text="Add To Order" />
-
-      <!--
-   <VBox alignment="CENTER_LEFT" layoutX="67.0" prefHeight="769.0" prefWidth="1299.0">
-    <children>
-       <AnchorPane id= "islam_track" prefHeight="200.0" prefWidth="200.0" />
-       <AnchorPane id= "christ_track" prefHeight="200.0" prefWidth="200.0" />
-       <AnchorPane id = "jew_track" prefHeight="200.0" prefWidth="200.0" />
-       <AnchorPane id = "budism_track" prefHeight="200.0" prefWidth="200.0" />
-
-    </children></VBox>
-    -->
+    
 </Pane>
