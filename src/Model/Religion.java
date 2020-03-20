@@ -112,4 +112,20 @@ public class Religion {
     {
        return playerPositions;
     }
+
+    public int getOrderOfCult_3() {
+        return orderOfCult_3;
+    }
+
+    public int getOrderOfCult_2_1() {
+        return orderOfCult_2_1;
+    }
+
+    public int getOrderOfCult_2_2() {
+        return orderOfCult_2_2;
+    }
+
+    public int getOrderOfCult_2_3() {
+        return orderOfCult_2_3;
+    }
 }
