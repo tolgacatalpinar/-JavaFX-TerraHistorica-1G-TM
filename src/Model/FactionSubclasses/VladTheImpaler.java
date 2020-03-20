@@ -8,7 +8,6 @@ public class VladTheImpaler extends Faction { // chaos magician
         INITIAL_WORKER = 4;
         INITIAL_GOLD = 15;
         INITIAL_HINDUISM = 2; //fire
-        INITIAL_VICTORY_POINT = 19;
         INITIAL_DWELLING_NUMBER = 1;
         DWELLING_GOLD_COST = 2;
         DWELLING_WORKER_COST = 1;

@@ -21,7 +21,7 @@ public class Player {
     private int workerIncome;
     private int priestIncome;
     private int startingDwellingNum;
-    private int keyNum;
+    private boolean key;
     private int bridgeNum;
     private int dwellingNum;
     private int tradingHouseNum;
@@ -39,11 +39,6 @@ public class Player {
     private boolean havingTradeHouse;
     private boolean havingSanctuary;
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-
 
     public Player(String nickName, int playerId) {
         this.nickName = nickName;
@@ -52,13 +47,13 @@ public class Player {
 
     }
 
-    public void setFaction(Faction faction) {
+    public void chooseFaction(Faction faction) {
         this.faction = faction;
         workerNum = this.getFaction().INITIAL_WORKER;
         goldNum = this.getFaction().INITIAL_GOLD;
         priestNum = this.getFaction().INITIAL_PRIEST;
         //Initial power which level?
-        levelOnePower = this.getFaction().INITIAL_POWER;
+        //addPowerToBowl(this.getFaction().INITIAL_POWER);
         startingDwellingNum = this.getFaction().INITIAL_DWELLING_NUMBER;
         hinduismProgress = this.getFaction().INITIAL_HINDUISM;
         islamProgress = this.getFaction().INITIAL_ISLAM;
@@ -69,6 +64,7 @@ public class Player {
         templeNum = 0;
         sanctuaryNum = 0;
         strongholdNum = 0;
+        key = false;
     }
 
     public Faction getFaction() {
@@ -80,8 +76,17 @@ public class Player {
 
     }
 
+    /**
+     * later
+     * @param count
+     */
+    public void addPowerToBowl(int count) {
+
+    }
+
     public void buildDwelling() {
         if (dwellingNum < this.faction.MAX_DWELLING ) {
+            dwellingNum++;
             workerNum -= faction.DWELLING_WORKER_COST;
             workerIncome = faction.DWELLING_WORKER_INCOME;
         }
@@ -91,13 +96,14 @@ public class Player {
     }
 
     public void townFound() {
-        keyNum++;
+        key = true;
         //TODO
     }
 
     public void upgradeToSanctuary() {
 
         templeNum--;
+        sanctuaryNum++;
         workerNum -= faction.SANCTUARY_WORKER_COST;
         goldNum -= faction.SANCTUARY_GOLD_COST;
         priestIncome = faction.SANCTUARY_PRIEST_INCOME;
@@ -105,6 +111,7 @@ public class Player {
 
     public int upgradeToTemple() {
         tradingHouseNum--;
+        templeNum++;
         workerNum -= faction.TEMPLE_WORKER_COST;
         goldNum -= faction.TEMPLE_GOLD_COST;
         priestIncome = faction.TEMPLE_PRIEST_INCOME;
@@ -115,6 +122,7 @@ public class Player {
 
     public void upgradeToTradingHouse(boolean isThereAdjacentOpponent) {
         dwellingNum--;
+        tradingHouseNum++;
 
         if(isThereAdjacentOpponent) {
             workerNum -= faction.TRADING_POST_WORKER_COST;
@@ -129,16 +137,18 @@ public class Player {
 
     public void upgradeToStronghold() {
         tradingHouseNum--;
+        strongholdNum++;
         workerNum -= faction.STRONGHOLD_WORKER_COST;
         goldNum -= faction.STRONGHOLD_GOLD_COST;
         powerIncome = faction.STRONGHOLD_POWER_INCOME;
     }
 
     public void progressInReligion(Religion religion) {
-
+        addPowerToBowl(religion.addOrderOfReligion(playerId,key));
     }
 
     public void sendPriest(Religion religion) {
+        addPowerToBowl(religion.placePriest(playerId,key));
         priestNum--;
     }
 
@@ -173,7 +183,10 @@ public class Player {
 
 
 
+public void addVictoryPoints(int count) {
+        victoryPointNum += count;
 
+}
     public void terraform(Space space) {
 
     }
@@ -265,14 +278,6 @@ public class Player {
 
     public void setPriestIncome(int priestIncome) {
         this.priestIncome = priestIncome;
-    }
-
-    public int getKeyNum() {
-        return keyNum;
-    }
-
-    public void setKeyNum(int keyNum) {
-        this.keyNum = keyNum;
     }
 
     public int getBridgeNum() {

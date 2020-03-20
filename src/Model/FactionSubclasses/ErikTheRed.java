@@ -10,7 +10,6 @@ public class ErikTheRed extends Faction {
         INITIAL_WORKER = 8;
         INITIAL_GOLD = 20;
         INITIAL_PRIEST = 0;
-        INITIAL_POWER = 0;
         INITIAL_HINDUISM = 1; // fire
         INITIAL_ISLAM = 1;  //water
         INITIAL_JUDAISM = 1;  //earth     

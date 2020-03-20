@@ -9,7 +9,6 @@ public class AliesterCrowley extends Faction {
         INITIAL_WORKER = 1;
         INITIAL_GOLD = 15;
         INITIAL_PRIEST = 1;
-        INITIAL_POWER = 0;
         INITIAL_ISLAM = 1;  //water
         INITIAL_JUDAISM = 1;  //earth     
         INITIAL_VICTORY_POINT = 15;
