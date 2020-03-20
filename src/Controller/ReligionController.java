@@ -34,15 +34,13 @@ public class ReligionController extends Application {
    @FXML
    private ChoiceBox<String> choiceBox;
    @FXML
-   private AnchorPane board;
-   @FXML
    private Button priestButton;
    @FXML
    private Button orderButton;
    @FXML
    private GridPane gridPane;
    private int[] array = {0, 0, 0};
-   private int currentPlayer = 1;
+   private int currentPlayer = 0;
    private boolean playerKeyStatus = false;
    private Islam islam_track = new Islam(3, array);
    private Hinduism hindu_track = new Hinduism(3, array);
@@ -87,15 +85,14 @@ public class ReligionController extends Application {
             update(gridPane, religion_index, true);
          }
       });
-      //priestButton.setVisible(false);
       //choose_rel.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
       //    @Override
       //    public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
       //        System.out.println(choose_rel.getItems().get((Integer) newValue));
       //    }
       //});
-      primaryStage.setScene(new Scene(root, 1280, 720));
-      primaryStage.setMaximized(false);
+      primaryStage.setScene(new Scene(root, 1920, 1080));
+      primaryStage.setMaximized(true);
       primaryStage.show();
 
 
@@ -107,86 +104,61 @@ public class ReligionController extends Application {
     * @param gridPane the gridpane that stays at right
     */
    private void update(GridPane gridPane, int religion_index, boolean isOrder) {
-      //System.out.println(gridPane.getId());
-      System.out.println(gridPane.getRowCount());
-      System.out.println(gridPane.getColumnCount());
-      int limit = 10;
-      Pane pane = new Pane();
+       //System.out.println(gridPane.getId());
+       System.out.println(gridPane.getRowCount());
+       System.out.println(gridPane.getColumnCount());
+       int limit = 11;
+       Pane pane = new Pane();
+       int nextSpace = 0;
+       // TO MOVE PRIEST
+       if (!isOrder) {
+           nextSpace = religions[religion_index].getPlayerPositions()[0];
+           System.out.println("Next space to move priest is: " + nextSpace);
 
-      int nextSpace = 0;
-      // TO MOVE PRIEST
-      if (!isOrder) {
-         while (religions[religion_index].getPlayerPositions()[0] != nextSpace) {
-            nextSpace++;
-            if (nextSpace > limit)
-               break;
-         }
-         nextSpace++;
-         System.out.println("Next space to move priest is: " + nextSpace);
+           if (nextSpace != limit) {
+               //System.out.println("Religion count: " + religions[religion_index].);
+               pane.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+               switch (religion_index) {
+                   case 0:
+                       pane.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+                       break;
+                   case 1:
+                       pane.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+                       break;
+                   case 2:
+                       pane.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+                       break;
+                   case 3:
+                       pane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+                       break;
+               }
+               gridPane.add(pane, nextSpace, religion_index);
+               //religions[religion_index].placePriest(0, false);
+           }
 
-         if (nextSpace != limit) {
-            //System.out.println("Religion count: " + religions[religion_index].);
-            pane.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-            switch (religion_index) {
-               case 0:
-                  pane.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-                  break;
-               case 1:
-                  pane.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
-                  break;
-               case 2:
-                  pane.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
-                  break;
-               case 3:
-                  pane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-                  break;
-            }
-            gridPane.add(pane, nextSpace, religion_index);
-            religions[religion_index].placePriest(0, false);
-         }
-
-      }
-      else {
-         pane.setBackground(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
-         religions[religion_index].addOrderOfReligion(0, true);
-         gridPane.add(pane, nextSpace, religion_index);
-//         if (!religions[religion_index].isOccupied(0)) {
-//            pane.setBackground(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
-//            religions[religion_index].addOrderOfReligion(0, true);
-//            gridPane.add(pane, nextSpace, religion_index);
-//         }
-//         else
-//            System.out.println("Order is full!");
-      }
-//        for(int i = 0; i<gridPane.getRowCount(); i++){
-//            for(int j = 1; j < gridPane.getColumnCount(); j++) {
-//                if (religions[i].isOccupied(j-1)) {
-//                    System.out.println("i is " + i + " j is "+ j);
-//                    //Pane temp =(Pane) paintNodeByRowColumnIndex(i,j,gridPane);
-//                   Pane temp = new Pane();
-//                   System.out.println(temp == null);
-//                    temp.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-//                    gridPane.add(temp,i,j);
-//                }
-//            }
-//        }
+       } else {
+           for (int i = 0; i < 3; i++){
+               System.out.println(religions[religion_index].getPlayerPositions()[i]);
+           }
+           pane.setBackground(new Background(new BackgroundFill(Color.INDIGO, CornerRadii.EMPTY, Insets.EMPTY)));
+           //religions[religion_index].addOrderOfReligion(0, true);
+           nextSpace = religions[religion_index].getPlayerPositions()[0];
+           gridPane.add(pane, nextSpace, religion_index);
+           Pane orderPane = new Pane();
+           orderPane.setBackground(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
+           int j = 0;
+           for(int i = 0; i< 4; i++){
+                   if (religions[religion_index].isOccupied(i)){
+                       if (i >=2){
+                           j =1;
+                       }
+                       GridPane orderGridPane = (GridPane)gridPane.getChildren().get(12*religion_index);
+                       orderGridPane.setBackground(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
+                       orderGridPane.add(orderPane,i%2,j);
+                   }
+           }
+       }
    }
-
-//   private javafx.scene.Node paintNodeByRowColumnIndex(final int row, final int column, GridPane gridPane) {
-//      ObservableList<Node> children = gridPane.getChildren();
-//      for (Node node : children) {
-//         System.out.println("GridPane is: " + gridPane.toString() + " and Node: " + node.toString());
-//
-//         if (gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
-//            System.out.println(node.toString());
-//            System.out.println("True");
-//            return node;
-//         }
-//      }
-//      return null;
-//   }
-
-
    public static void main(String[] args) {
       launch(args);
    }
