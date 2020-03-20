@@ -5,6 +5,23 @@ public class Religion {
     private int orderOfCult_3;      //Holds id of player who took this area
     private int orderOfCult_2_1;    //Holds id of player who took this area
     private int orderOfCult_2_2;    //Holds id of player who took this area
+
+    public int getOrderOfCult_3() {
+        return orderOfCult_3;
+    }
+
+    public int getOrderOfCult_2_1() {
+        return orderOfCult_2_1;
+    }
+
+    public int getOrderOfCult_2_2() {
+        return orderOfCult_2_2;
+    }
+
+    public int getOrderOfCult_2_3() {
+        return orderOfCult_2_3;
+    }
+
     private int orderOfCult_2_3;    //Holds id of player who took this are
     private  boolean keyPlaced;
     private int[] playerPositions;
