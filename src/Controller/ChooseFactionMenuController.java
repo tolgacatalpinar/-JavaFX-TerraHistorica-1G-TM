@@ -14,7 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.awt.*;
+import java.io.IOException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
