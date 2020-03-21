@@ -45,13 +45,12 @@ public class ChooseFactionMenuController extends CreateGameMenuController implem
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        /*
 
-        Image imProfile = new Image(getClass().getResourceAsStream("/sample/MainMenuBackground.png"));
+        Image imProfile = new Image(getClass().getResourceAsStream("/Images/ChooseFactionImages/wasteland.png"));
         wastelandFaction.setImage(imProfile);
 
 
-         */
+
 
 
     }
