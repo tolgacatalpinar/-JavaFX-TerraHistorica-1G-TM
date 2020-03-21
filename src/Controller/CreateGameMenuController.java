@@ -2,9 +2,17 @@ package Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class CreateGameMenuController extends MainMenuController implements Initializable {
 
@@ -13,6 +21,24 @@ public class CreateGameMenuController extends MainMenuController implements Init
 
     @FXML
     ChoiceBox<String> playerCount;
+
+    @FXML
+    Button playButton;
+
+    @FXML
+    public void playButtonClicked( MouseEvent event) throws IOException {
+        Stage stage;
+
+
+        stage = (Stage) creditsButton.getScene().getWindow();
+        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/MenuViews/ChooseFactionMenuView.fxml"));
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setScene(scene);
+        stage.show();
+
+    }
 
     @FXML
     public void playerCountIsSelected(ActionEvent event){
@@ -39,5 +65,9 @@ public class CreateGameMenuController extends MainMenuController implements Init
         }
 
     }
+
+
+
+
 
 }

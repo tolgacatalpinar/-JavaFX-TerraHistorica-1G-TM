@@ -1,0 +1,7 @@
+#vbox {
+    -fx-background-image: url('../Images/MenuImages/ChooseFactionMenuBackground.png');
+}
+
+.button {
+    -fx-background-color: transparent;
+}
