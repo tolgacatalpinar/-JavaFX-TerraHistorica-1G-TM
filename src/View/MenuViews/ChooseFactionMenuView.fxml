@@ -22,85 +22,101 @@
 
             <ImageView fx:id="plainsFaction" fitHeight="341.0" fitWidth="109.877777778" layoutX="1117.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" />
 
-            <Button id="chooseGilgamesh" fx:id="chooseGilgamesh" alignment="TOP_CENTER" layoutX="27.0" layoutY="134.0" mnemonicParsing="false" onMouseEntered="#onGilgamesh" onMouseExited="#offGilgamesh" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Gilgamesh" textFill="WHITE">
+
+
+            <ImageView fx:id="wastelandFactionSelected" fitHeight="341.0" fitWidth="110.0" layoutX="53.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+
+            <ImageView fx:id="forestFactionSelected" fitHeight="341.0" fitWidth="109.877777778" layoutX="230.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+
+            <ImageView fx:id="lakesFactionSelected" fitHeight="341.0" fitWidth="109.877777778" layoutX="403.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+
+            <ImageView fx:id="desertFactionSelected" fitHeight="341.0" fitWidth="109.877777778" layoutX="580.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+
+            <ImageView fx:id="mountainsFactionSelected" fitHeight="341.0" fitWidth="109.877777778" layoutX="756.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+
+            <ImageView fx:id="swampFactionSelected" fitHeight="341.0" fitWidth="109.877777778" layoutX="933.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+
+            <ImageView fx:id="plainsFactionSelected" fitHeight="341.0" fitWidth="109.877777778" layoutX="1117.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+
+            <Button id="chooseGilgamesh" fx:id="chooseGilgamesh" alignment="TOP_CENTER" layoutX="27.0" layoutY="134.0" mnemonicParsing="false" onMouseEntered="#onGilgamesh" onMouseExited="#offGilgamesh" onMouseClicked="#vladTheImpalerSelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Gilgamesh" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="15.0" />
                 </font>
             </Button>
 
-            <Button id="chooseVladTheImpaler" fx:id="chooseVladTheImpaler" alignment="BOTTOM_CENTER" layoutX="27.0" layoutY="360.0" mnemonicParsing="false" onMouseEntered="#onVladTheImpaler" onMouseExited="#offVladTheImpaler" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Vlad The Impaler" textFill="WHITE">
+            <Button id="chooseVladTheImpaler" fx:id="chooseVladTheImpaler" alignment="BOTTOM_CENTER" layoutX="27.0" layoutY="360.0" mnemonicParsing="false" onMouseEntered="#onVladTheImpaler" onMouseExited="#offVladTheImpaler" onMouseClicked="#gilgameshSelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Vlad The Impaler" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="15.0" />
                 </font>
             </Button>
 
-            <Button id="chooseMorganLeFay" fx:id="chooseMorganLeFay" alignment="TOP_CENTER" layoutX="204.0" layoutY="134.0" mnemonicParsing="false" onMouseEntered="#onMorganLeFay" onMouseExited="#offMorganLeFay" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Morgan Le Fay" textFill="WHITE">
+            <Button id="chooseMorganLeFay" fx:id="chooseMorganLeFay" alignment="TOP_CENTER" layoutX="204.0" layoutY="134.0" mnemonicParsing="false" onMouseEntered="#onMorganLeFay" onMouseExited="#offMorganLeFay" onMouseClicked="#morganLeFaySelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Morgan Le Fay" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="15.0" />
                 </font>
             </Button>
 
-            <Button id="chooseHelenOfTroy" fx:id="chooseHelenOfTroy" alignment="BOTTOM_CENTER" layoutX="204.0" layoutY="360.0" mnemonicParsing="false" onMouseEntered="#onHelenOfTroy" onMouseExited="#offHelenOfTroy" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Helen Of Troy" textFill="WHITE">
+            <Button id="chooseHelenOfTroy" fx:id="chooseHelenOfTroy" alignment="BOTTOM_CENTER" layoutX="204.0" layoutY="360.0" mnemonicParsing="false" onMouseEntered="#onHelenOfTroy" onMouseExited="#offHelenOfTroy" onMouseClicked="#helenOfTroySelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Helen Of Troy" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="15.0" />
                 </font>
             </Button>
 
-            <Button id="chooseErikTheRed" fx:id="chooseErikTheRed" alignment="TOP_CENTER" layoutX="381.0" layoutY="134.0" mnemonicParsing="false" onMouseEntered="#onErikTheRed" onMouseExited="#offErikTheRed" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Erik The Red" textFill="WHITE">
+            <Button id="chooseErikTheRed" fx:id="chooseErikTheRed" alignment="TOP_CENTER" layoutX="381.0" layoutY="134.0" mnemonicParsing="false" onMouseEntered="#onErikTheRed" onMouseExited="#offErikTheRed" onMouseClicked="#erikTheRedSelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Erik The Red" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="15.0" />
                 </font>
             </Button>
 
-            <Button id="chooseAmerigoVespucci" fx:id="chooseAmerigoVespucci" alignment="BOTTOM_CENTER" layoutX="381.0" layoutY="360.0" mnemonicParsing="false" onMouseEntered="#onAmerigoVespucci" onMouseExited="#offAmerigoVespucci" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Amerigo Vespucci" textFill="WHITE">
+            <Button id="chooseAmerigoVespucci" fx:id="chooseAmerigoVespucci" alignment="BOTTOM_CENTER" layoutX="381.0" layoutY="360.0" mnemonicParsing="false" onMouseEntered="#onAmerigoVespucci" onMouseExited="#offAmerigoVespucci" onMouseClicked="#amerigoVespucciSelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Amerigo Vespucci" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="15.0" />
                 </font>
             </Button>
 
-            <Button id="chooseDariusTheGreat" fx:id="chooseDariusTheGreat" alignment="TOP_CENTER" layoutX="556.0" layoutY="134.0" mnemonicParsing="false" onMouseEntered="#onDariusTheGreat" onMouseExited="#offDariusTheGreat" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Darius The Great" textFill="WHITE">
+            <Button id="chooseDariusTheGreat" fx:id="chooseDariusTheGreat" alignment="TOP_CENTER" layoutX="556.0" layoutY="134.0" mnemonicParsing="false" onMouseEntered="#onDariusTheGreat" onMouseExited="#offDariusTheGreat" onMouseClicked="#dariusTheGreatSelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Darius The Great" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="15.0" />
                 </font>
             </Button>
 
-            <Button id="chooseRamessesII" fx:id="chooseRamessesII" alignment="BOTTOM_CENTER" layoutX="556.0" layoutY="360.0" mnemonicParsing="false" onMouseEntered="#onRamessesII" onMouseExited="#offRamessesII" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Ramesses II" textFill="WHITE">
+            <Button id="chooseRamessesII" fx:id="chooseRamessesII" alignment="BOTTOM_CENTER" layoutX="556.0" layoutY="360.0" mnemonicParsing="false" onMouseEntered="#onRamessesII" onMouseExited="#offRamessesII" onMouseClicked="#ramessesIISelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Ramesses II" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="15.0" />
                 </font>
             </Button>
 
-            <Button id="chooseLeonardoDaVinci" fx:id="chooseLeonardoDaVinci" alignment="TOP_CENTER" layoutX="733.0" layoutY="134.0" mnemonicParsing="false" onMouseEntered="#onLeonardoDaVinci" onMouseExited="#offLeonardoDaVinci" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Leonardo Da Vinci" textFill="WHITE">
+            <Button id="chooseLeonardoDaVinci" fx:id="chooseLeonardoDaVinci" alignment="TOP_CENTER" layoutX="733.0" layoutY="134.0" mnemonicParsing="false" onMouseEntered="#onLeonardoDaVinci" onMouseExited="#offLeonardoDaVinci" onMouseClicked="#leonardoDaVinciSelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Leonardo Da Vinci" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="15.0" />
                 </font>
             </Button>
 
-            <Button id="chooseStPatrick" fx:id="chooseStPatrick" alignment="BOTTOM_CENTER" layoutX="733.0" layoutY="360.0" mnemonicParsing="false" onMouseEntered="#onStPatrick" onMouseExited="#offStPatrick" opacity="0" prefHeight="226.0" prefWidth="161.0" text="St. Patrick" textFill="WHITE">
+            <Button id="chooseStPatrick" fx:id="chooseStPatrick" alignment="BOTTOM_CENTER" layoutX="733.0" layoutY="360.0" mnemonicParsing="false" onMouseEntered="#onStPatrick" onMouseExited="#offStPatrick" onMouseClicked="#stPatrickSelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="St. Patrick" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="15.0" />
                 </font>
             </Button>
 
-            <Button id="chooseMarieCurie" fx:id="chooseMarieCurie" alignment="TOP_CENTER" layoutX="905.0" layoutY="134.0" mnemonicParsing="false" onMouseEntered="#onMarieCurie" onMouseExited="#offMarieCurie" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Marie Curie" textFill="WHITE">
+            <Button id="chooseMarieCurie" fx:id="chooseMarieCurie" alignment="TOP_CENTER" layoutX="905.0" layoutY="134.0" mnemonicParsing="false" onMouseEntered="#onMarieCurie" onMouseExited="#offMarieCurie" onMouseClicked="#marieCurieSelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Marie Curie" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="15.0" />
                 </font>
             </Button>
 
-            <Button id="chooseAleisterCrowley" fx:id="chooseAleisterCrowley" alignment="BOTTOM_CENTER" layoutX="905.0" layoutY="360.0" mnemonicParsing="false" onMouseEntered="#onAleisterCrowley" onMouseExited="#offAleisterCrowley" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Aleister Crowley" textFill="WHITE">
+            <Button id="chooseAleisterCrowley" fx:id="chooseAleisterCrowley" alignment="BOTTOM_CENTER" layoutX="905.0" layoutY="360.0" mnemonicParsing="false" onMouseEntered="#onAleisterCrowley" onMouseExited="#offAleisterCrowley" onMouseClicked="#aleisterCrowleySelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Aleister Crowley" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="15.0" />
                 </font>
             </Button>
 
-            <Button id="chooseBuddha" fx:id="chooseBuddha" alignment="TOP_CENTER" layoutX="1082.0" layoutY="134.0" mnemonicParsing="false" onMouseEntered="#onBuddha" onMouseExited="#offBuddha" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Buddha" textFill="WHITE">
+            <Button id="chooseBuddha" fx:id="chooseBuddha" alignment="TOP_CENTER" layoutX="1082.0" layoutY="134.0" mnemonicParsing="false" onMouseEntered="#onBuddha" onMouseExited="#offBuddha" onMouseClicked="#buddhaSelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Buddha" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="15.0" />
                 </font>
             </Button>
 
-            <Button id="chooseHusseinTheTeaMaker" fx:id="chooseHusseinTheTeaMaker" alignment="BOTTOM_CENTER" layoutX="1075.0" layoutY="360.0" mnemonicParsing="false" onMouseEntered="#onHusseinTheTeaMaker" onMouseExited="#offHusseinTheTeaMaker" opacity="0" prefHeight="226.0" prefWidth="198.0" text="Hussein The Tea Maker" textFill="WHITE">
+            <Button id="chooseHusseinTheTeaMaker" fx:id="chooseHusseinTheTeaMaker" alignment="BOTTOM_CENTER" layoutX="1075.0" layoutY="360.0" mnemonicParsing="false" onMouseEntered="#onHusseinTheTeaMaker" onMouseExited="#offHusseinTheTeaMaker" onMouseClicked="#husseinTheTeaMakerSelected" opacity="0" prefHeight="226.0" prefWidth="198.0" text="Hussein The Tea Maker" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="15.0" />
                 </font>
@@ -110,7 +126,7 @@
 
 
 
-            <Button id="helpLink" fx:id="helpLink" layoutX="410.0" layoutY="39.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="419.0" text="Choose Faction for " textFill="WHITE">
+            <Button id="playerQueue" fx:id="playerQueue" layoutX="410.0" layoutY="39.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="419.0"  textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="29.0" />
                 </font>

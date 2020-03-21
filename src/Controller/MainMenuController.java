@@ -22,7 +22,7 @@ public class MainMenuController   implements Initializable {
     @FXML
     Button createGameButton, loadGameButton, settingsButton, helpButton, creditsButton, exitButton, helpLink;
 
-
+    public int playerNumber;
 
 
     @FXML

@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 public class ChooseFactionMenuController extends CreateGameMenuController implements Initializable {
 
     @FXML
-    Button backButton;
+    Button backButton, playerQueue;
 
     @FXML
     ImageView wastelandFaction, forestFaction, lakesFaction, desertFaction, mountainsFaction, swampFaction, plainsFaction;
@@ -35,6 +35,10 @@ public class ChooseFactionMenuController extends CreateGameMenuController implem
            chooseLeonardoDaVinci, chooseStPatrick, chooseMarieCurie, chooseAleisterCrowley, chooseBuddha, chooseHusseinTheTeaMaker;
 
     Image imProfile;
+
+    public int numbersOfPlayer = 0;
+
+
 
     @FXML
     public void backButtonClicked( MouseEvent event) throws IOException {
@@ -49,6 +53,104 @@ public class ChooseFactionMenuController extends CreateGameMenuController implem
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    @FXML
+    public void vladTheImpalerSelected( MouseEvent event) throws IOException {
+        wastelandFactionSelected.setVisible(true);
+        chooseVladTheImpaler.setVisible(false);
+        chooseGilgamesh.setVisible(false);
+    }
+
+    @FXML
+    public void gilgameshSelected( MouseEvent event) throws IOException {
+        wastelandFactionSelected.setVisible(true);
+        chooseVladTheImpaler.setVisible(false);
+        chooseGilgamesh.setVisible(false);
+    }
+
+    @FXML
+    public void morganLeFaySelected( MouseEvent event) throws IOException {
+        forestFactionSelected.setVisible(true);
+        chooseMorganLeFay.setVisible(false);
+        chooseHelenOfTroy.setVisible(false);
+    }
+
+    @FXML
+    public void helenOfTroySelected( MouseEvent event) throws IOException {
+        forestFactionSelected.setVisible(true);
+        chooseMorganLeFay.setVisible(false);
+        chooseHelenOfTroy.setVisible(false);
+    }
+
+    @FXML
+    public void erikTheRedSelected( MouseEvent event) throws IOException {
+        lakesFactionSelected.setVisible(true);
+        chooseErikTheRed.setVisible(false);
+        chooseAmerigoVespucci.setVisible(false);
+    }
+
+    @FXML
+    public void amerigoVespucciSelected( MouseEvent event) throws IOException {
+        lakesFactionSelected.setVisible(true);
+        chooseErikTheRed.setVisible(false);
+        chooseAmerigoVespucci.setVisible(false);
+    }
+
+    @FXML
+    public void dariusTheGreatSelected( MouseEvent event) throws IOException {
+        desertFactionSelected.setVisible(true);
+        chooseDariusTheGreat.setVisible(false);
+        chooseRamessesII.setVisible(false);
+    }
+
+    @FXML
+    public void ramessesIISelected( MouseEvent event) throws IOException {
+        desertFactionSelected.setVisible(true);
+        chooseDariusTheGreat.setVisible(false);
+        chooseRamessesII.setVisible(false);
+    }
+
+    @FXML
+    public void leonardoDaVinciSelected( MouseEvent event) throws IOException {
+        mountainsFactionSelected.setVisible(true);
+        chooseLeonardoDaVinci.setVisible(false);
+        chooseStPatrick.setVisible(false);
+    }
+
+    @FXML
+    public void stPatrickSelected( MouseEvent event) throws IOException {
+        mountainsFactionSelected.setVisible(true);
+        chooseLeonardoDaVinci.setVisible(false);
+        chooseStPatrick.setVisible(false);
+    }
+
+    @FXML
+    public void marieCurieSelected( MouseEvent event) throws IOException {
+        swampFactionSelected.setVisible(true);
+        chooseMarieCurie.setVisible(false);
+        chooseAleisterCrowley.setVisible(false);
+    }
+
+    @FXML
+    public void aleisterCrowleySelected( MouseEvent event) throws IOException {
+        swampFactionSelected.setVisible(true);
+        chooseMarieCurie.setVisible(false);
+        chooseAleisterCrowley.setVisible(false);
+    }
+
+    @FXML
+    public void buddhaSelected( MouseEvent event) throws IOException {
+        plainsFactionSelected.setVisible(true);
+        chooseBuddha.setVisible(false);
+        chooseHusseinTheTeaMaker.setVisible(false);
+    }
+
+    @FXML
+    public void husseinTheTeaMakerSelected( MouseEvent event) throws IOException {
+        plainsFactionSelected.setVisible(true);
+        chooseBuddha.setVisible(false);
+        chooseHusseinTheTeaMaker.setVisible(false);
     }
 
     @FXML
@@ -198,6 +300,8 @@ public class ChooseFactionMenuController extends CreateGameMenuController implem
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
+
         imProfile = new Image(getClass().getResourceAsStream("/Images/ChooseFactionImages/wasteland.png"));
         wastelandFaction.setImage(imProfile);
 
@@ -218,6 +322,31 @@ public class ChooseFactionMenuController extends CreateGameMenuController implem
 
         imProfile = new Image(getClass().getResourceAsStream("/Images/ChooseFactionImages/plains.png"));
         plainsFaction.setImage(imProfile);
+
+        //Selected views
+
+        imProfile = new Image(getClass().getResourceAsStream("/Images/ChooseFactionImages/wastelandSelected.png"));
+        wastelandFactionSelected.setImage(imProfile);
+
+        imProfile = new Image(getClass().getResourceAsStream("/Images/ChooseFactionImages/forestSelected.png"));
+        forestFactionSelected.setImage(imProfile);
+
+        imProfile = new Image(getClass().getResourceAsStream("/Images/ChooseFactionImages/lakesSelected.png"));
+        lakesFactionSelected.setImage(imProfile);
+
+        imProfile = new Image(getClass().getResourceAsStream("/Images/ChooseFactionImages/desertSelected.png"));
+        desertFactionSelected.setImage(imProfile);
+
+        imProfile = new Image(getClass().getResourceAsStream("/Images/ChooseFactionImages/mountainsSelected.png"));
+        mountainsFactionSelected.setImage(imProfile);
+
+        imProfile = new Image(getClass().getResourceAsStream("/Images/ChooseFactionImages/swampSelected.png"));
+        swampFactionSelected.setImage(imProfile);
+
+        imProfile = new Image(getClass().getResourceAsStream("/Images/ChooseFactionImages/plainsSelected.png"));
+        plainsFactionSelected.setImage(imProfile);
+
+
 
 
     }
