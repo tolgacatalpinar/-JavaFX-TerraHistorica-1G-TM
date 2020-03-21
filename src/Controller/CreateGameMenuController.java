@@ -13,6 +13,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class CreateGameMenuController extends MainMenuController implements Initializable {
 
@@ -25,6 +27,10 @@ public class CreateGameMenuController extends MainMenuController implements Init
     @FXML
     Button playButton;
 
+    String playerNumber;
+
+
+
     @FXML
     public void playButtonClicked( MouseEvent event) throws IOException {
         Stage stage;
@@ -36,12 +42,20 @@ public class CreateGameMenuController extends MainMenuController implements Init
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setScene(scene);
+
         stage.show();
 
     }
 
+
+
+
+
     @FXML
     public void playerCountIsSelected(ActionEvent event){
+
+        playerNumber = playerCount.getSelectionModel().getSelectedItem();
+
 
         if(playerCount.getSelectionModel().getSelectedItem().equals("2")){
             player3.setVisible(false);
@@ -63,6 +77,15 @@ public class CreateGameMenuController extends MainMenuController implements Init
             player4.setVisible(true);
             player5.setVisible(true);
         }
+
+
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
 
     }
 
