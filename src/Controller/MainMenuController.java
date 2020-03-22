@@ -22,7 +22,7 @@ public class MainMenuController   implements Initializable {
     @FXML
     Button createGameButton, loadGameButton, settingsButton, helpButton, creditsButton, exitButton, helpLink;
 
-    public int playerNumber;
+
 
 
     @FXML
@@ -31,10 +31,10 @@ public class MainMenuController   implements Initializable {
 
 
         stage = (Stage) creditsButton.getScene().getWindow();
-        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/MenuViews/CreateGameMenuView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MenuViews/CreateGameMenuView.fxml"));
+        Parent root = loader.load();
 
         Scene scene = new Scene(root);
-        stage.setScene(scene);
         stage.setScene(scene);
         stage.show();
 

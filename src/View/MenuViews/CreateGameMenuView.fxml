@@ -56,27 +56,27 @@
                     </FXCollections>
                 </items>
             </ChoiceBox>
-            <TextField fx:id="player1" alignment="CENTER" layoutX="720.0" layoutY="264.0" prefHeight="45.0" prefWidth="228.0" text="Player 1 Name" visible="true">
+            <TextField fx:id="player1" alignment="CENTER" layoutX="720.0" layoutY="264.0" prefHeight="45.0" prefWidth="228.0" text="Player 1" visible="true">
                 <font>
                     <Font size="20.0" />
                 </font>
             </TextField>
-            <TextField fx:id="player2" alignment="CENTER" layoutX="720.0" layoutY="328.0" prefHeight="45.0" prefWidth="228.0" text="Player 2 Name" visible="true">
+            <TextField fx:id="player2" alignment="CENTER" layoutX="720.0" layoutY="328.0" prefHeight="45.0" prefWidth="228.0" text="Player 2" visible="true">
                 <font>
                     <Font size="20.0" />
                 </font>
             </TextField>
-            <TextField fx:id="player3" alignment="CENTER" layoutX="720.0" layoutY="390.0" prefHeight="45.0" prefWidth="228.0" text="Player 3 Name" visible="false">
+            <TextField fx:id="player3" alignment="CENTER" layoutX="720.0" layoutY="390.0" prefHeight="45.0" prefWidth="228.0" text="Player 3" visible="false">
                 <font>
                     <Font size="20.0" />
                 </font>
             </TextField>
-            <TextField fx:id="player4" alignment="CENTER" layoutX="720.0" layoutY="451.0" prefHeight="45.0" prefWidth="228.0" text="Player 4 Name" visible="false">
+            <TextField fx:id="player4" alignment="CENTER" layoutX="720.0" layoutY="451.0" prefHeight="45.0" prefWidth="228.0" text="Player 4" visible="false">
                 <font>
                     <Font size="20.0" />
                 </font>
             </TextField>
-            <TextField fx:id="player5" alignment="CENTER" layoutX="720.0" layoutY="513.0" prefHeight="45.0" prefWidth="228.0" text="Player 5 Name" visible="false">
+            <TextField fx:id="player5" alignment="CENTER" layoutX="720.0" layoutY="513.0" prefHeight="45.0" prefWidth="228.0" text="Player 5" visible="false">
                 <font>
                     <Font size="20.0" />
                 </font>

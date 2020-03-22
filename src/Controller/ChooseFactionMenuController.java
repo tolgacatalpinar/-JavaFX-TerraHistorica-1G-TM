@@ -6,8 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,14 +13,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ChooseFactionMenuController extends CreateGameMenuController implements Initializable {
+public class ChooseFactionMenuController  implements Initializable {
 
     @FXML
-    Button backButton, playerQueue;
+    Button backButton, playerQueue, startButton;
 
     @FXML
     ImageView wastelandFaction, forestFaction, lakesFaction, desertFaction, mountainsFaction, swampFaction, plainsFaction;
@@ -36,121 +33,233 @@ public class ChooseFactionMenuController extends CreateGameMenuController implem
 
     Image imProfile;
 
-    public int numbersOfPlayer = 0;
+    String player1Name, player2Name, player3Name, player4Name, player5Name;
 
+    public int numbersOfPlayer;
 
+    int counter = 0;
+
+    public void getNumbersOfPlayer(String str){
+        numbersOfPlayer = Integer.parseInt(str);
+    }
+
+    public void getNamesOfPlayer(String player1, String player2, String player3, String player4, String player5){
+        player1Name = player1;
+        player2Name = player2;
+        player3Name = player3;
+        player4Name = player4;
+        player5Name = player5;
+    }
 
     @FXML
     public void backButtonClicked( MouseEvent event) throws IOException {
+
+
         Stage stage;
 
 
         stage = (Stage) backButton.getScene().getWindow();
-        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/MenuViews/MainMenuView.fxml"));
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MenuViews/MainMenuView.fxml"));
+        Parent root = loader.load();
 
         Scene scene = new Scene(root);
-        stage.setScene(scene);
         stage.setScene(scene);
         stage.show();
 
     }
 
+    public void showStartButton(){
+
+        if(counter == numbersOfPlayer)
+            startButton.setVisible(true);
+
+    }
+
+    public void showPlayerQueue(){
+        if(counter == 0 && counter < numbersOfPlayer)
+            playerQueue.setText("Choose Faction For " + player1Name);
+        else if(counter == 1 && counter < numbersOfPlayer)
+            playerQueue.setText("Choose Faction For " + player2Name);
+        else if(counter == 2 && counter < numbersOfPlayer)
+            playerQueue.setText("Choose Faction For " + player3Name);
+        else if(counter == 3 && counter < numbersOfPlayer)
+            playerQueue.setText("Choose Faction For " + player4Name);
+        else if(counter == 4 && counter < numbersOfPlayer)
+            playerQueue.setText("Choose Faction For " + player5Name);
+        else
+            playerQueue.setText("You can start the game");
+    }
+
     @FXML
     public void vladTheImpalerSelected( MouseEvent event) throws IOException {
-        wastelandFactionSelected.setVisible(true);
-        chooseVladTheImpaler.setVisible(false);
-        chooseGilgamesh.setVisible(false);
+
+        if(counter < numbersOfPlayer) {
+            wastelandFactionSelected.setVisible(true);
+            chooseVladTheImpaler.setVisible(false);
+            chooseGilgamesh.setVisible(false);
+            counter++;
+            showStartButton();
+            showPlayerQueue();
+        }
     }
 
     @FXML
     public void gilgameshSelected( MouseEvent event) throws IOException {
-        wastelandFactionSelected.setVisible(true);
-        chooseVladTheImpaler.setVisible(false);
-        chooseGilgamesh.setVisible(false);
+
+        if(counter < numbersOfPlayer) {
+            wastelandFactionSelected.setVisible(true);
+            chooseVladTheImpaler.setVisible(false);
+            chooseGilgamesh.setVisible(false);
+            counter++;
+            showStartButton();
+            showPlayerQueue();
+        }
     }
 
     @FXML
     public void morganLeFaySelected( MouseEvent event) throws IOException {
-        forestFactionSelected.setVisible(true);
-        chooseMorganLeFay.setVisible(false);
-        chooseHelenOfTroy.setVisible(false);
+        if(counter < numbersOfPlayer) {
+            forestFactionSelected.setVisible(true);
+            chooseMorganLeFay.setVisible(false);
+            chooseHelenOfTroy.setVisible(false);
+            counter++;
+            showStartButton();
+            showPlayerQueue();
+        }
     }
 
     @FXML
     public void helenOfTroySelected( MouseEvent event) throws IOException {
-        forestFactionSelected.setVisible(true);
-        chooseMorganLeFay.setVisible(false);
-        chooseHelenOfTroy.setVisible(false);
+        if(counter < numbersOfPlayer) {
+            forestFactionSelected.setVisible(true);
+            chooseMorganLeFay.setVisible(false);
+            chooseHelenOfTroy.setVisible(false);
+            counter++;
+            showStartButton();
+            showPlayerQueue();
+        }
     }
 
     @FXML
     public void erikTheRedSelected( MouseEvent event) throws IOException {
-        lakesFactionSelected.setVisible(true);
-        chooseErikTheRed.setVisible(false);
-        chooseAmerigoVespucci.setVisible(false);
+        if(counter < numbersOfPlayer) {
+            lakesFactionSelected.setVisible(true);
+            chooseErikTheRed.setVisible(false);
+            chooseAmerigoVespucci.setVisible(false);
+            counter++;
+            showStartButton();
+            showPlayerQueue();
+        }
     }
 
     @FXML
     public void amerigoVespucciSelected( MouseEvent event) throws IOException {
-        lakesFactionSelected.setVisible(true);
-        chooseErikTheRed.setVisible(false);
-        chooseAmerigoVespucci.setVisible(false);
+        if(counter < numbersOfPlayer) {
+            lakesFactionSelected.setVisible(true);
+            chooseErikTheRed.setVisible(false);
+            chooseAmerigoVespucci.setVisible(false);
+            counter++;
+            showStartButton();
+            showPlayerQueue();
+        }
     }
 
     @FXML
     public void dariusTheGreatSelected( MouseEvent event) throws IOException {
-        desertFactionSelected.setVisible(true);
-        chooseDariusTheGreat.setVisible(false);
-        chooseRamessesII.setVisible(false);
+        if(counter < numbersOfPlayer) {
+            desertFactionSelected.setVisible(true);
+            chooseDariusTheGreat.setVisible(false);
+            chooseRamessesII.setVisible(false);
+            counter++;
+            showStartButton();
+            showPlayerQueue();
+        }
     }
 
     @FXML
     public void ramessesIISelected( MouseEvent event) throws IOException {
-        desertFactionSelected.setVisible(true);
-        chooseDariusTheGreat.setVisible(false);
-        chooseRamessesII.setVisible(false);
+        if(counter < numbersOfPlayer) {
+            desertFactionSelected.setVisible(true);
+            chooseDariusTheGreat.setVisible(false);
+            chooseRamessesII.setVisible(false);
+            counter++;
+            showStartButton();
+            showPlayerQueue();
+        }
     }
 
     @FXML
     public void leonardoDaVinciSelected( MouseEvent event) throws IOException {
-        mountainsFactionSelected.setVisible(true);
-        chooseLeonardoDaVinci.setVisible(false);
-        chooseStPatrick.setVisible(false);
+        if(counter < numbersOfPlayer) {
+            mountainsFactionSelected.setVisible(true);
+            chooseLeonardoDaVinci.setVisible(false);
+            chooseStPatrick.setVisible(false);
+            counter++;
+            showStartButton();
+            showPlayerQueue();
+        }
     }
 
     @FXML
     public void stPatrickSelected( MouseEvent event) throws IOException {
-        mountainsFactionSelected.setVisible(true);
-        chooseLeonardoDaVinci.setVisible(false);
-        chooseStPatrick.setVisible(false);
+        if(counter < numbersOfPlayer) {
+            mountainsFactionSelected.setVisible(true);
+            chooseLeonardoDaVinci.setVisible(false);
+            chooseStPatrick.setVisible(false);
+            counter++;
+            showStartButton();
+            showPlayerQueue();
+        }
     }
 
     @FXML
     public void marieCurieSelected( MouseEvent event) throws IOException {
-        swampFactionSelected.setVisible(true);
-        chooseMarieCurie.setVisible(false);
-        chooseAleisterCrowley.setVisible(false);
+        if(counter < numbersOfPlayer) {
+            swampFactionSelected.setVisible(true);
+            chooseMarieCurie.setVisible(false);
+            chooseAleisterCrowley.setVisible(false);
+            counter++;
+            showStartButton();
+            showPlayerQueue();
+        }
     }
 
     @FXML
     public void aleisterCrowleySelected( MouseEvent event) throws IOException {
-        swampFactionSelected.setVisible(true);
-        chooseMarieCurie.setVisible(false);
-        chooseAleisterCrowley.setVisible(false);
+        if(counter < numbersOfPlayer) {
+            swampFactionSelected.setVisible(true);
+            chooseMarieCurie.setVisible(false);
+            chooseAleisterCrowley.setVisible(false);
+            counter++;
+            showStartButton();
+            showPlayerQueue();
+        }
     }
 
     @FXML
     public void buddhaSelected( MouseEvent event) throws IOException {
-        plainsFactionSelected.setVisible(true);
-        chooseBuddha.setVisible(false);
-        chooseHusseinTheTeaMaker.setVisible(false);
+        if(counter < numbersOfPlayer) {
+            plainsFactionSelected.setVisible(true);
+            chooseBuddha.setVisible(false);
+            chooseHusseinTheTeaMaker.setVisible(false);
+            counter++;
+            showStartButton();
+            showPlayerQueue();
+        }
     }
 
     @FXML
     public void husseinTheTeaMakerSelected( MouseEvent event) throws IOException {
-        plainsFactionSelected.setVisible(true);
-        chooseBuddha.setVisible(false);
-        chooseHusseinTheTeaMaker.setVisible(false);
+        if(counter < numbersOfPlayer) {
+            plainsFactionSelected.setVisible(true);
+            chooseBuddha.setVisible(false);
+            chooseHusseinTheTeaMaker.setVisible(false);
+            counter++;
+            showStartButton();
+            showPlayerQueue();
+        }
     }
 
     @FXML
@@ -302,6 +411,7 @@ public class ChooseFactionMenuController extends CreateGameMenuController implem
 
 
 
+
         imProfile = new Image(getClass().getResourceAsStream("/Images/ChooseFactionImages/wasteland.png"));
         wastelandFaction.setImage(imProfile);
 
@@ -350,6 +460,8 @@ public class ChooseFactionMenuController extends CreateGameMenuController implem
 
 
     }
+
+
 
 
 }

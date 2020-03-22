@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox id="vbox" prefHeight="720" prefWidth="1280" stylesheets="@../../CSS/ChooseFactionMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ChooseFactionMenuController">
+<VBox id="vbox" prefHeight="720" prefWidth="1280" stylesheets="@../../CSS/ChooseFactionMenuComponents.css" onMouseMoved="#showPlayerQueue" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ChooseFactionMenuController">
     <Pane prefHeight="720.0" prefWidth="1280.0">
         <children>
             <ImageView fx:id="wastelandFaction" fitHeight="341.0" fitWidth="110.0" layoutX="53.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" />
@@ -38,13 +38,13 @@
 
             <ImageView fx:id="plainsFactionSelected" fitHeight="341.0" fitWidth="109.877777778" layoutX="1117.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" visible="false" />
 
-            <Button id="chooseGilgamesh" fx:id="chooseGilgamesh" alignment="TOP_CENTER" layoutX="27.0" layoutY="134.0" mnemonicParsing="false" onMouseEntered="#onGilgamesh" onMouseExited="#offGilgamesh" onMouseClicked="#vladTheImpalerSelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Gilgamesh" textFill="WHITE">
+            <Button id="chooseGilgamesh" fx:id="chooseGilgamesh" alignment="TOP_CENTER" layoutX="27.0" layoutY="134.0" mnemonicParsing="false" onMouseEntered="#onGilgamesh" onMouseExited="#offGilgamesh" onMouseClicked="#gilgameshSelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Gilgamesh" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="15.0" />
                 </font>
             </Button>
 
-            <Button id="chooseVladTheImpaler" fx:id="chooseVladTheImpaler" alignment="BOTTOM_CENTER" layoutX="27.0" layoutY="360.0" mnemonicParsing="false" onMouseEntered="#onVladTheImpaler" onMouseExited="#offVladTheImpaler" onMouseClicked="#gilgameshSelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Vlad The Impaler" textFill="WHITE">
+            <Button id="chooseVladTheImpaler" fx:id="chooseVladTheImpaler" alignment="BOTTOM_CENTER" layoutX="27.0" layoutY="360.0" mnemonicParsing="false" onMouseEntered="#onVladTheImpaler" onMouseExited="#offVladTheImpaler" onMouseClicked="#vladTheImpalerSelected" opacity="0" prefHeight="226.0" prefWidth="161.0" text="Vlad The Impaler" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="15.0" />
                 </font>
@@ -126,7 +126,7 @@
 
 
 
-            <Button id="playerQueue" fx:id="playerQueue" layoutX="410.0" layoutY="39.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="419.0"  textFill="WHITE">
+            <Button id="playerQueue" fx:id="playerQueue" layoutX="410.0" layoutY="39.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="419.0"   textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="29.0" />
                 </font>
@@ -135,6 +135,12 @@
             <Button id="backButton" fx:id="backButton" layoutX="-37.0" layoutY="664.0" mnemonicParsing="false" onMouseClicked="#backButtonClicked" prefHeight="56.0" prefWidth="354.0" text="Back to Main Menu" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="29.0" />
+                </font>
+            </Button>
+
+            <Button id="startButton" fx:id="startButton" layoutX="456.0" layoutY="600.0" mnemonicParsing="false"  prefHeight="56.0" prefWidth="354.0" text="Start Game" textFill="WHITE" visible="false">
+                <font>
+                    <Font name="Book Antiqua" size="39.0" />
                 </font>
             </Button>
 

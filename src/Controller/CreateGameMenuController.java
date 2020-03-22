@@ -27,7 +27,9 @@ public class CreateGameMenuController extends MainMenuController implements Init
     @FXML
     Button playButton;
 
-    String playerNumber;
+    String playerCountString;
+
+
 
 
 
@@ -37,10 +39,14 @@ public class CreateGameMenuController extends MainMenuController implements Init
 
 
         stage = (Stage) creditsButton.getScene().getWindow();
-        Parent root = (Parent) FXMLLoader.load(getClass().getResource("/View/MenuViews/ChooseFactionMenuView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MenuViews/ChooseFactionMenuView.fxml"));
+        Parent root = loader.load();
+
+        ChooseFactionMenuController controller = loader.getController();
+        controller.getNumbersOfPlayer(playerCount.getSelectionModel().getSelectedItem());
+        controller.getNamesOfPlayer(player1.getText(), player2.getText(), player3.getText(), player4.getText(), player5.getText());
 
         Scene scene = new Scene(root);
-        stage.setScene(scene);
         stage.setScene(scene);
 
         stage.show();
@@ -54,8 +60,10 @@ public class CreateGameMenuController extends MainMenuController implements Init
     @FXML
     public void playerCountIsSelected(ActionEvent event){
 
-        playerNumber = playerCount.getSelectionModel().getSelectedItem();
 
+
+
+        playerCountString = playerCount.getSelectionModel().getSelectedItem();
 
         if(playerCount.getSelectionModel().getSelectedItem().equals("2")){
             player3.setVisible(false);
