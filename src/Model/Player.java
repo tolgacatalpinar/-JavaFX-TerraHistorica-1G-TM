@@ -21,10 +21,11 @@ public class Player {
     private int workerIncome;
     private int priestIncome;
     private int startingDwellingNum;
+    private int priestOnBank = 7; // Not exactly know what it is
     private boolean key;
     private int bridgeNum;
     private int dwellingNum;
-    private int tradingHouseNum;
+    private int tradingPostNum;
     private int templeNum;
     private int sanctuaryNum;
     private int strongholdNum;
@@ -38,6 +39,7 @@ public class Player {
     private boolean havingDwellingBonus;
     private boolean havingTradeHouse;
     private boolean havingSanctuary;
+    private int terraformWorkerCost;
 
 
     public Player(String nickName, int playerId) {
@@ -49,19 +51,29 @@ public class Player {
 
     public void setFaction(Faction faction) {
         this.faction = faction;
+
+    }
+
+    public void initializeGame() {
         workerNum = this.getFaction().INITIAL_WORKER;
         goldNum = this.getFaction().INITIAL_GOLD;
         priestNum = this.getFaction().INITIAL_PRIEST;
         bowlOnePower = faction.INITIAL_BOWL_ONE_POWER;
         bowlTwoPower = faction.INITIAL_BOWL_TWO_POWER;
         bowlThreePower = faction.INITIAL_BOWL_THREE_POWER;
-        startingDwellingNum = this.getFaction().INITIAL_DWELLING_NUMBER;
+        startingDwellingNum = this.getFaction().startingDwellingNum;
         hinduismProgress = this.getFaction().INITIAL_HINDUISM;
         islamProgress = this.getFaction().INITIAL_ISLAM;
         christianityProgress = this.getFaction().INITIAL_CHRISTIANITY;
         judaismProgress = this.getFaction().INITIAL_JUDAISM;
+        workerIncome = faction.INITIAL_WORKER_INCOME;
+        terraformWorkerCost = faction.TERRAFORM_WORKER_COST;
+        powerIncome = 0;
+        priestIncome = 0;
+        goldIncome = 0;
+        spadeLevel = 1;
         dwellingNum = 0;
-        tradingHouseNum = 0;
+        tradingPostNum = 0;
         templeNum = 0;
         sanctuaryNum = 0;
         strongholdNum = 0;
@@ -73,16 +85,6 @@ public class Player {
     }
 
 
-    public void buildBridge() {
-        bridgeNum++;
-
-
-    }
-
-    /**
-     * later
-     * @param
-     */
     public void addPowerToBowl(int powerGain) {
         for(int i = 0; i < powerGain; i++) {
             if (bowlOnePower>0) {
@@ -137,10 +139,12 @@ public class Player {
         if (dwellingNum < this.faction.MAX_DWELLING ) {
             dwellingNum++;
             workerNum -= faction.DWELLING_WORKER_COST;
-            workerIncome = faction.DWELLING_WORKER_INCOME;
+            if ( dwellingNum < faction.MAX_DWELLING) {
+                workerIncome += faction.DWELLING_WORKER_INCOME;
+            }
         }
         else {
-            System.out.println("Max dwelling reached");
+            System.out.println("Cannot build more");
         }
     }
 
@@ -150,46 +154,70 @@ public class Player {
     }
 
     public void upgradeToSanctuary() {
-
-        templeNum--;
-        sanctuaryNum++;
-        workerNum -= faction.SANCTUARY_WORKER_COST;
-        goldNum -= faction.SANCTUARY_GOLD_COST;
-        priestIncome = faction.SANCTUARY_PRIEST_INCOME;
+        if (sanctuaryNum < this.faction.MAX_SANCTUARY ) {
+            templeNum--;
+            sanctuaryNum++;
+            workerNum -= faction.SANCTUARY_WORKER_COST;
+            goldNum -= faction.SANCTUARY_GOLD_COST;
+            priestIncome = faction.SANCTUARY_PRIEST_INCOME;
+        }
+        else {
+            System.out.println("Cannot build more");
+        }
     }
 
     public int upgradeToTemple() {
-        tradingHouseNum--;
-        templeNum++;
-        workerNum -= faction.TEMPLE_WORKER_COST;
-        goldNum -= faction.TEMPLE_GOLD_COST;
-        priestIncome = faction.TEMPLE_PRIEST_INCOME;
-        return faction.favorTilesAfterBuildingTemple;
+        if (templeNum < this.faction.MAX_TEMPLE ) {
+            tradingPostNum--;
+            templeNum++;
+            workerNum -= faction.TEMPLE_WORKER_COST;
+            goldNum -= faction.TEMPLE_GOLD_COST;
+            priestIncome = faction.TEMPLE_PRIEST_INCOME;
+            return faction.favorTilesAfterBuildingTemple;
+        }
+        else {
+            System.out.println("Cannot build more");
+            return -1;
+        }
 
 
     }
 
-    public void upgradeToTradingHouse(boolean isThereAdjacentOpponent) {
-        dwellingNum--;
-        tradingHouseNum++;
+    public void upgradeToTradingPost(boolean isThereAdjacentOpponent) {
 
-        if(isThereAdjacentOpponent) {
-            workerNum -= faction.TRADING_POST_WORKER_COST;
-            goldNum  -= faction.TRADING_POST_GOLD_COST-3;
-        }
-        else {
-            workerNum -= faction.TRADING_POST_WORKER_COST;
-            goldNum  -= faction.TRADING_POST_GOLD_COST;
-        }
+            if (tradingPostNum < faction.MAX_TRADING_POST) {
 
+                dwellingNum--;
+                tradingPostNum++;
+
+                if (isThereAdjacentOpponent) {
+                    workerNum -= faction.TRADING_POST_WORKER_COST;
+                    goldNum -= faction.TRADING_POST_GOLD_COST/2;
+                }
+                else {
+                    workerNum -= faction.TRADING_POST_WORKER_COST;
+                    goldNum -= faction.TRADING_POST_GOLD_COST;
+                }
+
+                goldIncome += faction.tradingPostGoldIncome[tradingPostNum-1];
+                powerIncome += faction.tradingPostPowerIncome[tradingPostNum-1];
+            }
+            else {
+                System.out.println("Cannot build more");
+            }
     }
 
     public void upgradeToStronghold() {
-        tradingHouseNum--;
-        strongholdNum++;
-        workerNum -= faction.STRONGHOLD_WORKER_COST;
-        goldNum -= faction.STRONGHOLD_GOLD_COST;
-        powerIncome = faction.STRONGHOLD_POWER_INCOME;
+        if (strongholdNum < this.faction.MAX_STRONGHOLD ) {
+            tradingPostNum--;
+            strongholdNum++;
+            workerNum -= faction.STRONGHOLD_WORKER_COST;
+            goldNum -= faction.STRONGHOLD_GOLD_COST;
+            faction.afterStronghold();
+        }
+        else {
+            System.out.println("Cannot build more");
+        }
     }
 
     public void progressInReligion(Religion religion) {
@@ -197,38 +225,95 @@ public class Player {
     }
 
     public void sendPriest(Religion religion) {
-        addPowerToBowl(religion.placePriest(playerId,key));
-        priestNum--;
-    }
-
-    public void exchangeResource(String exchanges) {
-
-        if(exchanges == "power for priest") {
-
-        }
-        if(exchanges == "power for worker") {
-
-        }
-        if(exchanges == "power for coin") {
-
-        }
-        if(exchanges == "priest to worker") {
-
-        }
-        if(exchanges == "worker to coin") {
-
-        }
-        if(exchanges == "") {
-
-        }
-        if(exchanges == "") {
-
-        }
-        if(exchanges == "") {
-
-        }
+            if (priestNum > 0) {
+                addPowerToBowl(religion.placePriest(playerId,key));
+                priestOnBank--;
+            }
+            else {
+                System.out.println("No priest available");
+            }
 
     }
+
+    public void usePowerAction(String action) {
+
+        if(action == "power to priest") {
+            if(spendPowerFromBowl(3)){
+                priestNum++;
+            }
+        }
+
+        if(action == "power to worker") {
+            if(spendPowerFromBowl(4)){
+                workerNum += 2;
+            }
+        }
+
+        if(action == "power to bridge") {
+            if(spendPowerFromBowl(3)){
+                bridgeNum++;
+            }
+        }
+
+        if (action == "power to coin") {
+            if (spendPowerFromBowl(4)) {
+                goldNum += 7;
+            }
+        }
+
+        if (action == "power to a spade") {
+            if (spendPowerFromBowl(4)) {
+                //TODO
+            }
+        }
+
+        if (action == "power to two spades") {
+            if (spendPowerFromBowl(6)) {
+                //TODO
+            }
+        }
+
+        }
+
+
+    public void exchangeResources(String exchanges) {
+
+        if (exchanges == "priest to worker") {
+            if (priestNum > 0) {
+                workerNum++;
+            }
+        }
+
+        if (exchanges == "worker to coin") {
+            if (workerNum > 0) {
+                workerNum--;
+                goldNum++;
+            }
+        }
+
+        if (exchanges == "sacrifice power") {
+            sacrificePower(1);
+        }
+
+        if (exchanges == "power to coin") {
+            if (spendPowerFromBowl(1)) {
+                goldNum++;
+            }
+        }
+
+        if (exchanges == "power to worker") {
+            if (spendPowerFromBowl(1)) {
+                workerNum++;
+            }
+        }
+
+        if (exchanges == "power to priest") {
+            if (spendPowerFromBowl(5)) {
+                workerNum++;
+            }
+        }
+    }
+
     public void acceptPowerFromAdjacentOpponent(int powerVal) {
         victoryPointNum -= powerVal - 1;
         addPowerToBowl(powerVal);
@@ -245,13 +330,31 @@ public class Player {
     }
 
     public void upgradeSpadeLevel() {
+            if(spadeLevel < 3) {
+                spadeLevel++;
+                terraformWorkerCost--;
+                priestNum -= faction.SPADE_PRIEST_COST;
+            }
+            else {
+                System.out.println("Max spade level");
+            }
 
     }
 
     public void upgradeShippingLevel() {
+            if(shipLevel < faction.MAX_SHIPPING) {
+                shipLevel++;
+                addVictoryPoints(faction.SHIPPING_UPGRADE_VICTORY_POINTS[shipLevel-1]);
+                //check if resources are enough
+                priestNum -= faction.SHIPPING_PRIEST_COST;
+                goldNum -= faction.SHIPPING_GOLD_COST;
+            }
 
     }
 
+    public boolean haveResources(int requiredGold, int requiredPower, int requiredPriest, int requiredWorker ) {
+            return false;
+    }
 
     public int getWorkerNum() {
         return workerNum;
@@ -326,11 +429,11 @@ public class Player {
     }
 
     public int getTradingPostNum() {
-        return tradingHouseNum;
+        return tradingPostNum;
     }
 
-    public void setTradingPostNum(int tradingHouseNum) {
-        this.tradingHouseNum = tradingHouseNum;
+    public void setTradingPostNum(int tradingPostNum) {
+        this.tradingPostNum = tradingPostNum;
     }
 
     public int getTempleNum() {
