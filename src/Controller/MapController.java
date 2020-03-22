@@ -3,36 +3,101 @@ package Controller;
 
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MapController extends Application implements Initializable {
    @FXML
    Pane mapPane;
    @FXML
-   Button test;
-   @FXML
    BorderPane mapBorderPane;
-
+   Button[][] terrains;
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Map map = new Map();
         //OffsetPane op = new OffsetPane();
         Parent root = FXMLLoader.load(getClass().getResource("/View/GameView.fxml"));
+
+        // SORT FXML
+//       try
+//       {
+//          File file=new File("C://Users//TOLGA//IdeaProjects//TerraHistoricaFX//src//Controller//fxml.txt");    //creates a new file instance
+//          FileReader fr=new FileReader(file);   //reads the file
+//          BufferedReader br=new BufferedReader(fr);  //creates a buffering character input stream
+//          StringBuffer sb=new StringBuffer();    //constructs a string buffer with no characters
+//          String line;
+//          ArrayList<String> list = new ArrayList<>();
+//          while((line=br.readLine())!=null)
+//          {
+//             list.add(line);
+//          }
+//
+//          // SORT
+//          for (int i = 0; i < list.size(); i++) {
+//
+//             for (int j = 1; j < list.size() - i; j++) {
+//                int firstIndex = list.get(j - 1).indexOf("terrain");
+//                firstIndex += 6;
+//                String firstNumber = "";
+//                while(list.get(j - 1).charAt(firstIndex + 1) != ('\"'))
+//                {
+//                   firstNumber += list.get(j - 1).charAt(firstIndex+1);
+//                   firstIndex ++;
+//                   //System.out.println("while in");
+//                }
+//
+//                int secondIndex = list.get(j).indexOf("terrain");
+//                secondIndex += 6;
+//                String secondNumber = "";
+//                while(list.get(j).charAt(secondIndex + 1) != ('\"'))
+//                {
+//                   secondNumber += list.get(j).charAt(secondIndex+1);
+//                   secondIndex ++;
+//                   //System.out.println("while in");
+//                }
+//
+//                System.out.println(firstNumber + "-" + secondNumber);
+//                int firstInt = Integer.parseInt(firstNumber);
+//                int secondInt = Integer.parseInt(secondNumber);
+//                if (firstInt > secondInt) {
+//                   System.out.println("Replace " + firstNumber + " with " + secondNumber);
+//                   // swap arr[j+1] and arr[i]
+//                   String temp = list.get(j - 1);
+//                   list.set(j - 1, list.get(j));
+//                   list.set(j, temp);
+//                }
+//             }
+//          }
+//          for (int i = 0; i < list.size(); i ++)
+//          {
+//             System.out.println( list.get(i));
+//          }
+//          fr.close();    //closes the stream and release the resources
+//       }
+//       catch(IOException e)
+//       {
+//          e.printStackTrace();
+//       }
+
+
+       //
+
+
 
         for(int i = 0; i < 20; i ++)
         {
@@ -90,7 +155,7 @@ public class MapController extends Application implements Initializable {
         //((BorderPane)root).setCenter( terrainsLayout);
         primaryStage.setScene(new Scene(root, 1550, 800));
         primaryStage.setMaximized(true);
-        //primaryStage.show();
+        primaryStage.show();
 
     }
 
@@ -103,11 +168,36 @@ public class MapController extends Application implements Initializable {
    @Override
    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-      for(int i = 0; i < 113; i ++)
+       int index = 0;
+       terrains = new Button[9][13];
+       for(int i = 0; i < 117; i ++)
+       {
+          int row = i / 13;
+          int col = i % 13;
+          if( row % 2 == 0)
+            terrains[row][col] = (Button)mapPane.getChildren().get(index);
+          else
+             if(col == 12) {
+                terrains[row][col] = null;
+                index --;
+             }
+             else
+                terrains[row][col] = (Button)mapPane.getChildren().get(index);
+          index++;
+       }
+      for(int i = 0; i < 9; i ++)
       {
-         System.out.println("Element " + i + ": " + mapPane.getChildren().get(i).getId());
+         for( int j = 0; j < 13; j ++)
+         {
+            Button button = terrains[i][j];
+            if(button == null)
+               System.out.println("Element at: " + i + ", " + j + " " + null );
+            else
+               System.out.println("Element at: " + i + ", " + j + " " + button.getId());
+         }
+
       }
-      System.out.println("Button is: " + test.getId());
+      //System.out.println("Button is: " + test.getId());
       //System.out.println(test..toString());
    }
 }

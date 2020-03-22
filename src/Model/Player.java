@@ -6,9 +6,9 @@ public class Player {
     Faction faction;
     SpecialActionToken specialActionToken;
     private int playerId;
-    private int levelOnePower;
-    private int levelTwoPower;
-    private int levelThreePower;
+    private int bowlOnePower;
+    private int bowlTwoPower;
+    private int bowlThreePower;
     private int workerNum;
     private int priestNum;
     private int goldNum;
@@ -47,13 +47,14 @@ public class Player {
 
     }
 
-    public void chooseFaction(Faction faction) {
+    public void setFaction(Faction faction) {
         this.faction = faction;
         workerNum = this.getFaction().INITIAL_WORKER;
         goldNum = this.getFaction().INITIAL_GOLD;
         priestNum = this.getFaction().INITIAL_PRIEST;
-        //Initial power which level?
-        //addPowerToBowl(this.getFaction().INITIAL_POWER);
+        bowlOnePower = faction.INITIAL_BOWL_ONE_POWER;
+        bowlTwoPower = faction.INITIAL_BOWL_TWO_POWER;
+        bowlThreePower = faction.INITIAL_BOWL_THREE_POWER;
         startingDwellingNum = this.getFaction().INITIAL_DWELLING_NUMBER;
         hinduismProgress = this.getFaction().INITIAL_HINDUISM;
         islamProgress = this.getFaction().INITIAL_ISLAM;
@@ -73,16 +74,64 @@ public class Player {
 
 
     public void buildBridge() {
+        bridgeNum++;
+
 
     }
 
     /**
      * later
-     * @param count
+     * @param
      */
-    public void addPowerToBowl(int count) {
+    public void addPowerToBowl(int powerGain) {
+        for(int i = 0; i < powerGain; i++) {
+            if (bowlOnePower>0) {
+                bowlOnePower--;
+                bowlTwoPower++;
+            }
+            else if ( bowlTwoPower>0) {
+                bowlTwoPower--;
+                bowlThreePower++;
+            }
+            else {
+                System.out.println("Cannot gain further power");
+            }
+        }
+    }
+
+    /**
+     *
+     * @param powerSpent number value of power to be spent
+     * @return true if power from bowl 3 is spent correctly
+     *         false if not enough power in bowl three ( a bool to ask player for sacrificing power )
+     */
+    public boolean spendPowerFromBowl(int powerSpent) {
+            if (bowlThreePower - powerSpent > 0) {
+                bowlThreePower -= powerSpent;
+                bowlOnePower += powerSpent;
+            }
+            else {
+                System.out.println("Not enough power in bowl 3");
+                return false;
+            }
+        return true;
+    }
+
+        /**
+         * Sacrifice power from bowl two
+         */
+        public void sacrificePower(int powerToAddBowlThree) {
+            if(powerToAddBowlThree*2 < bowlTwoPower) {
+                bowlTwoPower -= powerToAddBowlThree*2;
+                bowlThreePower += powerToAddBowlThree;
+            }
+            else {
+                System.out.println("You don't have enough powers to sacrifice");
+        }
+
 
     }
+
 
     public void buildDwelling() {
         if (dwellingNum < this.faction.MAX_DWELLING ) {
@@ -180,10 +229,14 @@ public class Player {
         }
 
     }
+    public void acceptPowerFromAdjacentOpponent(int powerVal) {
+        victoryPointNum -= powerVal - 1;
+        addPowerToBowl(powerVal);
+
+    }
 
 
-
-public void addVictoryPoints(int count) {
+    public void addVictoryPoints(int count) {
         victoryPointNum += count;
 
 }
@@ -199,30 +252,6 @@ public void addVictoryPoints(int count) {
 
     }
 
-
-    public int getLevelOnePower() {
-        return levelOnePower;
-    }
-
-    public void setLevelOnePower(int levelOnePower) {
-        this.levelOnePower = levelOnePower;
-    }
-
-    public int getLevelTwoPower() {
-        return levelTwoPower;
-    }
-
-    public void setLevelTwoPower(int levelTwoPower) {
-        this.levelTwoPower = levelTwoPower;
-    }
-
-    public int getLevelThreePower() {
-        return levelThreePower;
-    }
-
-    public void setLevelThreePower(int levelThreePower) {
-        this.levelThreePower = levelThreePower;
-    }
 
     public int getWorkerNum() {
         return workerNum;

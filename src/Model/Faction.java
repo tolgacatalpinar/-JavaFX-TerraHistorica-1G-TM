@@ -5,9 +5,9 @@ public class Faction {
     public int INITIAL_DWELLING_NUMBER = 2;
     public int INITIAL_VICTORY_POINT;
     public int INITIAL_WORKER  = 3;
-    public int INITIAL_LEVEL_ONE_POWER = 5;
-    public int INITIAL_LEVEL_TWO_POWER = 7;
-    public int INITIAL_LEVEL_THREE_POWER = 0;
+    public int INITIAL_BOWL_ONE_POWER = 5;
+    public int INITIAL_BOWL_TWO_POWER = 7;
+    public int INITIAL_BOWL_THREE_POWER = 0;
     public int INITIAL_ISLAM = 0;
     public int INITIAL_CHRISTIANITY = 0;
     public int INITIAL_JUDAISM = 0;
