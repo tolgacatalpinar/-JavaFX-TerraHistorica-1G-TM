@@ -23,6 +23,7 @@ public class Player {
     private int startingDwellingNum;
     private int priestOnBank = 7; // Not exactly know what it is
     private boolean key;
+    private int neededCombinedPowerTown;
     private int bridgeNum;
     private int dwellingNum;
     private int tradingPostNum;
@@ -40,6 +41,12 @@ public class Player {
     private boolean havingTradeHouse;
     private boolean havingSanctuary;
     private int terraformWorkerCost;
+
+    //Sk Buradan başlıyor ben bunların set ve getinide yapıyorum isimleri değiştirirsin setter ve getterlar en sonra
+    //birde initialize de ettim false oalrak
+    private boolean dwellingToTradingEveryRound;
+    private boolean dwellingEveryRound;
+    private boolean tradingEveryRound;
 
 
     public Player(String nickName, int playerId) {
@@ -78,6 +85,10 @@ public class Player {
         sanctuaryNum = 0;
         strongholdNum = 0;
         key = false;
+        neededCombinedPowerTown = 7;
+        dwellingToTradingEveryRound = false;
+        tradingEveryRound = false;
+        dwellingEveryRound = false;
     }
 
     public Faction getFaction() {
@@ -557,6 +568,35 @@ public class Player {
         this.havingSanctuary = havingSanctuary;
     }
 
+    public int getNeededCombinedPowerTown() {
+        return neededCombinedPowerTown;
+    }
 
+    public void setNeededCombinedPowerTown(int neededCombinedPowerTown) {
+        this.neededCombinedPowerTown = neededCombinedPowerTown;
+    }
 
+    public boolean isDwellingToTradingEveryRound() {
+        return dwellingToTradingEveryRound;
+    }
+
+    public void setDwellingToTradingEveryRound(boolean dwellingToTradingEveryRound) {
+        this.dwellingToTradingEveryRound = dwellingToTradingEveryRound;
+    }
+
+    public boolean isDwellingEveryRound() {
+        return dwellingEveryRound;
+    }
+
+    public void setDwellingEveryRound(boolean dwellingEveryRound) {
+        this.dwellingEveryRound = dwellingEveryRound;
+    }
+
+    public boolean isTradingEveryRound() {
+        return tradingEveryRound;
+    }
+
+    public void setTradingEveryRound(boolean tradingEveryRound) {
+        tradingEveryRound = tradingEveryRound;
+    }
 }

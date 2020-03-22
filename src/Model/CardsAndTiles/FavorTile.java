@@ -1,7 +1,9 @@
 package Model.CardsAndTiles;
 
+import java.util.ArrayList;
+
 public class FavorTile {
-    private int[] playerIds;
+    private ArrayList<Integer> playerIds;
     private int numberOfPlayer;
     private int islamBonus; //water
     private int christianityBonus; //Air
@@ -58,10 +60,10 @@ public class FavorTile {
         this.isTradingHouse = isTradingHouse;
         this.isDwellingBonus = isDwellingBonus;
         this.isPassingBonusForTradingHouse = isPassingBonusForTradingHouse;
-        playerIds = new int[numberOfPlayer];
+        playerIds = new ArrayList<>();
     }
 
-    public int[] getPlayerIds() {
+    public ArrayList<Integer> getPlayerIds() {
         return playerIds;
     }
 
@@ -129,7 +131,7 @@ public class FavorTile {
         return isPassingBonusForTradingHouse;
     }
 
-    public void setPlayerIds(int[] playerIds) {
+    public void setPlayerIds(ArrayList playerIds) {
         this.playerIds = playerIds;
     }
 }
