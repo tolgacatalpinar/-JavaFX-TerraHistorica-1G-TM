@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import Model.ReligionSubclasses.*;
 import Model.CardsAndTiles.BonusCard;
 import Model.CardsAndTiles.CardsAndTiles;
 import Model.CardsAndTiles.FavorTile;
@@ -13,13 +14,28 @@ import View.*;
 public class GameHandler {
 
     Player[] playerList;
-
     CardsAndTiles cardsAndTiles;
-
+    Religion[] religions;
     public GameHandler( int playerSize)
     {
         cardsAndTiles = new CardsAndTiles(playerSize);
         playerList = new Player[playerSize];
+        religions = new Religion[4];
+
+        int [] player_initial_islam = new int[playerSize];
+        int [] player_initial_chirst = new int[playerSize];
+        int [] player_initial_jew = new int[playerSize];
+        int [] player_initial_hindu = new int[playerSize];
+        for (int j = 0; j< playerSize; j++) {
+                player_initial_islam[j] = playerList[j].getInitialIslam();
+                player_initial_chirst[j] = playerList[j].getInitialChristianity();
+                player_initial_jew[j] = playerList[j].getInitialJudaism();
+                player_initial_hindu[j] = playerList[j].getInitialHinduism();
+        }
+        religions[0] = new Islam(playerSize, player_initial_islam);
+        religions[1] = new Christianity(playerSize, player_initial_chirst);
+        religions[2] = new Jewish(playerSize, player_initial_jew);
+        religions[3] = new Hinduism(playerSize, player_initial_hindu);
     }
 
 
@@ -86,7 +102,13 @@ public class GameHandler {
         else
         {
             favorTile.getPlayerIds().add((Integer) player.getPlayerId() );
-            //TODO religion part is missing.
+            player.addPowerToBowl(religion.updateReligion(favorTile.getIslamBonus(),player.getPlayerId(),player.getKey()));
+            player.addPowerToBowl(religion.updateReligion(favorTile.getChristianityBonus(),player.getPlayerId(),player.getKey()));
+            player.addPowerToBowl(religion.updateReligion(favorTile.getJewBonus(),player.getPlayerId(),player.getKey()));
+            player.addPowerToBowl(religion.updateReligion(favorTile.getHinduismBonus(),player.getPlayerId(),player.getKey()));
+
+            religion.updateReligion(favorTile.getChristianityBonus(),player.getPlayerId(),player.getKey());
+
             player.setNeededCombinedPowerTown(6);
             player.addPowerToBowl( favorTile.getPowerBonus());
             player.setWorkerNum(player.getWorkerNum() + favorTile.getWorkerBonus());

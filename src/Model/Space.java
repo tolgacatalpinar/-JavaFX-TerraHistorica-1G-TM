@@ -1,6 +1,9 @@
 package Model;
 
 public class Space{
-    public String imageLoc;
+    public boolean isOccupied;
+    Space(){
+        isOccupied = false;
+    }
 
 }
