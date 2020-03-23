@@ -109,11 +109,6 @@ public class GameHandler {
         }
     }
 
-    //private int christianityPoint;
-    //private int hinduismPoint;
-    //private int islamPoint;
-    //private int jewishPoint;
-
     public void playerChooseTownTile(TownTile townTile, Player player, Religion religion){
         if(townTile.isOccupied()){
             System.err.println("This Tile was chosen by another player");
