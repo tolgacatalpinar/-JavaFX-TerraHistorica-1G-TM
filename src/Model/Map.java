@@ -1,7 +1,5 @@
 package Model;
 
-import Model.TerrainSubclasses.*;
-
 import java.util.ArrayList;
 
 public class Map{
@@ -76,7 +74,7 @@ public class Map{
 
    public int[] buildDwelling(Space space1) {
        int[] location = null; /// burada belki hata olabilir
-       if ( space1 instanceof River){ 
+       if ( space1.getType().equals("River")){
            location = new int[2];
            int row = getRow(space1);
            int column = getColumn(space1);

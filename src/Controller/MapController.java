@@ -216,21 +216,22 @@ public class MapController extends Application implements Initializable {
             else
             {
                switch (terrains[i][j].getId()) {
-                  case "blackHexagon": space = new Swamp();
+                  //TOLGA BURADA HATA VERİYOR KNK
+                  case "blackHexagon": space.setType("Swamp");
                      break;
-                  case "blueHexagon": space = new Lakes();
+                  case "blueHexagon": space.setType("Lakes");
                      break;
-                  case "brownHexagon": space = new Plains();
+                  case "brownHexagon": space.setType("Plains");
                      break;
-                  case "greenHexagon": space = new Forest();
+                  case "greenHexagon": space.setType("Forest");
                      break;
-                  case "redHexagon": space = new Wasteland();
+                  case "redHexagon": space.setType("Wasteland");
                      break;
-                  case "riverHexagon": space = new River();
+                  case "riverHexagon": space.setType("River");
                      break;
-                  case "whiteHexagon": space = new Mountains();
+                  case "whiteHexagon": space.setType("Mountains");
                      break;
-                  default: space = new River();
+                  default: space.setType("River");
                      break;
                }
             }
