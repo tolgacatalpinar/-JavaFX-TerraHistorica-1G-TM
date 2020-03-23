@@ -126,7 +126,10 @@ public class GameHandler {
             player.setVictoryPointNum(player.getVictoryPointNum() + townTile.getVictoryBonus());
             player.setWorkerNum(player.getWorkerNum() + townTile.getWorkerBonus());
             player.setGoldNum(player.getGoldNum() + townTile.getGoldBonus());
-            //TODO religion part is missing
+            player.addPowerToBowl(religion.updateReligion(townTile.getIslamPoint(),player.getPlayerId(),player.getKey()));
+            player.addPowerToBowl(religion.updateReligion(townTile.getChristianityPoint(),player.getPlayerId(),player.getKey()));
+            player.addPowerToBowl(religion.updateReligion(townTile.getJewishPoint(),player.getPlayerId(),player.getKey()));
+            player.addPowerToBowl(religion.updateReligion(townTile.getHinduismPoint(),player.getPlayerId(),player.getKey()));
         }
     }
 

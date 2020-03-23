@@ -49,7 +49,7 @@ public class Religion {
         int awardSearchLength = powerAwardPositions.length;
         if(currentPos >= MAX_LENGTH){
             System.out.println("Cannot advance more on this religion");
-            return -1; // these -1's can represent error messages or throw exceptions
+            return 0; // these -1's can represent error messages or throw exceptions
         }
         if (endPos >= MAX_LENGTH){
             if(keyPlaced){
@@ -105,7 +105,7 @@ public class Religion {
             return this.updateReligion(2, player_id, key);
         }else
             System.out.println("ORDER IS FULL");
-        return -1; // Error value which indicates there is no empty place
+        return 0; // Error value which indicates there is no empty place
         //// these -1's can represent error messages or throw exceptions
     }
     public int[] getPlayerPositions()
