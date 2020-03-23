@@ -582,7 +582,11 @@ public class Player {
     public boolean isHavingSanctuary() {
         return havingSanctuary;
     }
-    
+
+    public void setHavingSanctuary(boolean value) {
+            havingSanctuary = value;
+    }
+
     public int getInitialIslam() {
             return faction.INITIAL_ISLAM;
     }
