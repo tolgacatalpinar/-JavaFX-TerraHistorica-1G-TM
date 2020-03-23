@@ -45,23 +45,23 @@
                 </font>
             </Button>
 
-            <Button id="gameVolume" fx:id="gameVolume" layoutX="439.0" layoutY="167.0" mnemonicParsing="false" onMouseClicked="#exitButtonClicked" prefHeight="100.0" prefWidth="312.0" text="Game Volume:" textFill="WHITE">
+            <Text id="gameVolume" fx:id="gameVolume" fill="WHITE" layoutX="499.0" layoutY="231.0" text="Game Volume:">
                 <font>
                     <Font name="Book Antiqua" size="29.0" />
                 </font>
-            </Button>
+            </Text>
 
-            <Button id="musicVolume" fx:id="musicVolume" layoutX="475.0" layoutY="307.0" mnemonicParsing="false" onMouseClicked="#exitButtonClicked" prefHeight="100.0" prefWidth="240.0" text="Music Volume:" textFill="WHITE">
+            <Text id="musicVolume" fx:id="musicVolume" fill="WHITE" layoutX="497.0" layoutY="366.0" text="Music Volume:">
                 <font>
                     <Font name="Book Antiqua" size="29.0" />
                 </font>
-            </Button>
+            </Text>
 
-            <Button id="muteMusic" fx:id="muteMusic" layoutX="472.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#exitButtonClicked" prefHeight="100.0" prefWidth="246.0" text="Mute Music:" textFill="WHITE">
+            <Text id="muteMusic" fx:id="muteMusic" fill="WHITE" layoutX="514.0" layoutY="509.0" text="Mute Music:">
                 <font>
                     <Font name="Book Antiqua" size="29.0" />
                 </font>
-            </Button>
+            </Text>
 
 
             <Slider layoutX="718.0" layoutY="191.0" prefHeight="59.0" prefWidth="246.0" />

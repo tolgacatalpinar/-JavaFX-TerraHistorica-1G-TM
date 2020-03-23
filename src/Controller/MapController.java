@@ -1,7 +1,11 @@
 package Controller;
 
 
-
+import Model.Map;
+import Model.River;
+import Model.Space;
+import Model.Terrain;
+import Model.TerrainSubclasses.*;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,18 +26,23 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MapController extends Application implements Initializable {
+   final int ROW_NUMBER = 9;
+   final int COLUMN_NUMBER = 13;
    @FXML
    Pane mapPane;
    @FXML
    BorderPane mapBorderPane;
    Button[][] terrains;
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        //Map map = new Map();
-        //OffsetPane op = new OffsetPane();
-        Parent root = FXMLLoader.load(getClass().getResource("/View/GameView.fxml"));
+   Map map;
 
-        // SORT FXML
+   @Override
+   public void start(Stage primaryStage) throws Exception {
+      System.out.println("Start is called");
+      //Map map = new Map();
+      //OffsetPane op = new OffsetPane();
+      Parent root = FXMLLoader.load(getClass().getResource("/View/GameView.fxml"));
+
+      // SORT FXML
 //       try
 //       {
 //          File file=new File("C://Users//TOLGA//IdeaProjects//TerraHistoricaFX//src//Controller//fxml.txt");    //creates a new file instance
@@ -95,14 +104,12 @@ public class MapController extends Application implements Initializable {
 //       }
 
 
-       //
+      //
 
 
-
-        for(int i = 0; i < 20; i ++)
-        {
-           //System.out.println("Element: " + mapPane.getChildren().get(i).getId());
-        }
+      for (int i = 0; i < 20; i++) {
+         //System.out.println("Element: " + mapPane.getChildren().get(i).getId());
+      }
 
 //        for(int i = 0; i< 12; i++ ) {
 //            for (int j = 0; j< 8; j++) {
@@ -129,7 +136,7 @@ public class MapController extends Application implements Initializable {
 //
 //        root.setId("pane");
 
-        // Showing the map screen
+      // Showing the map screen
 //        Button topButton = new Button("TOP");
 //        topButton.setPrefSize(2000, 100);
 //        ((BorderPane)root).setTop( topButton);
@@ -152,52 +159,84 @@ public class MapController extends Application implements Initializable {
 //        terrainsLayout.setPadding(new Insets(50, 150, 50, 150));
 //        terrainsLayout.setCenter(op);
 
-        //((BorderPane)root).setCenter( terrainsLayout);
-        primaryStage.setScene(new Scene(root, 1550, 800));
-        primaryStage.setMaximized(true);
-        primaryStage.show();
-
-    }
+      //((BorderPane)root).setCenter( terrainsLayout);
 
 
+      primaryStage.setScene(new Scene(root, 1550, 800));
+      primaryStage.setMaximized(true);
+      primaryStage.show();
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+   }
+
+
+   public static void main(String[] args) {
+      launch(args);
+   }
 
    @Override
    public void initialize(URL url, ResourceBundle resourceBundle) {
+      System.out.println("Initialize is called");
+      int index = 0;
+      terrains = new Button[ROW_NUMBER][COLUMN_NUMBER];
 
-       int index = 0;
-       terrains = new Button[9][13];
-       for(int i = 0; i < 117; i ++)
-       {
-          int row = i / 13;
-          int col = i % 13;
-          if( row % 2 == 0)
-            terrains[row][col] = (Button)mapPane.getChildren().get(index);
-          else
-             if(col == 12) {
-                terrains[row][col] = null;
-                index --;
-             }
-             else
-                terrains[row][col] = (Button)mapPane.getChildren().get(index);
-          index++;
-       }
-      for(int i = 0; i < 9; i ++)
-      {
-         for( int j = 0; j < 13; j ++)
-         {
-            Button button = terrains[i][j];
-            if(button == null)
-               System.out.println("Element at: " + i + ", " + j + " " + null );
-            else
-               System.out.println("Element at: " + i + ", " + j + " " + button.getId());
-         }
-
+      for (int i = 0; i < ROW_NUMBER * COLUMN_NUMBER; i++) {
+         int row = i / 13;
+         int col = i % 13;
+         if (row % 2 == 0)
+            terrains[row][col] = (Button) mapPane.getChildren().get(index);
+         else if (col == 12) {
+            terrains[row][col] = null;
+            index--;
+         } else
+            terrains[row][col] = (Button) mapPane.getChildren().get(index);
+         index++;
       }
-      //System.out.println("Button is: " + test.getId());
-      //System.out.println(test..toString());
+
+//      for (int i = 0; i < ROW_NUMBER; i++) {
+//         for (int j = 0; j < COLUMN_NUMBER; j++) {
+//            Button button = terrains[i][j];
+//            if (button == null)
+//               System.out.println("Element at: " + i + ", " + j + " " + null);
+//            else
+//               System.out.println("Element at: " + i + ", " + j + " " + button.getId());
+//         }
+//      }
+      createSpaces();
+
+   }
+   public void createSpaces()
+   {
+      System.out.println("Create is called");
+      Space[][] spaces = new Space[ROW_NUMBER][COLUMN_NUMBER];
+      for (int i = 0; i < ROW_NUMBER; i++) {
+         for (int j = 0; j < COLUMN_NUMBER; j++) {
+            Space space;
+            if( terrains[i][j] == null)
+               space = null;
+            else
+            {
+               switch (terrains[i][j].getId()) {
+                  case "blackHexagon": space = new Swamp();
+                     break;
+                  case "blueHexagon": space = new Lakes();
+                     break;
+                  case "brownHexagon": space = new Plains();
+                     break;
+                  case "greenHexagon": space = new Forest();
+                     break;
+                  case "redHexagon": space = new Wasteland();
+                     break;
+                  case "riverHexagon": space = new River();
+                     break;
+                  case "whiteHexagon": space = new Mountains();
+                     break;
+                  default: space = new River();
+                     break;
+               }
+            }
+            spaces[i][j] = space;
+         }
+      }
+      map = new Map(spaces);
    }
 }

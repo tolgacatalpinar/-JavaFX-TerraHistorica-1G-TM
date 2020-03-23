@@ -45,7 +45,7 @@
                 </font>
             </Button>
 
-            <Button id="helpLink" fx:id="helpLink" layoutX="350.0" layoutY="243.0" mnemonicParsing="false" prefHeight="234.0" prefWidth="907.0" text="Link to the Online Manual" textFill="WHITE">
+            <Button id="helpLink" fx:id="helpLink" layoutX="439.0" layoutY="272.0" mnemonicParsing="false" prefHeight="132.0" prefWidth="752.0" text="Link to the Online Manual" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="55.0" />
                 </font>
