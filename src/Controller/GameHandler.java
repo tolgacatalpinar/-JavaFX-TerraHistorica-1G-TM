@@ -58,12 +58,7 @@ public class GameHandler {
             if (previousCardId != -1) {
                 cardsAndTiles.bonusCards.get(previousCardId).setPlayerOcupied(false);
                 cardsAndTiles.bonusCards.get(previousCardId).setPlayerId(-1);
-                player.setGoldIncome(player.getGoldIncome() - cardsAndTiles.bonusCards.get(previousCardId).getGoldBonus());
-                player.setWorkerIncome(player.getWorkerIncome() - cardsAndTiles.bonusCards.get(previousCardId).getWorkerBonus());
                 player.setShipLevel(player.getShipLevel() - cardsAndTiles.bonusCards.get(previousCardId).getShippingRange());
-                player.setPriestIncome(player.getPriestIncome() - cardsAndTiles.bonusCards.get(previousCardId).getPriestBonus());
-                player.setPerBuildingIncome(player.getPerBuildingIncome() - cardsAndTiles.bonusCards.get(previousCardId).getPerBuildingBonus());
-                player.setCultBonusIncome(player.getCultBonusIncome() - cardsAndTiles.bonusCards.get(previousCardId).getCultBonus());
                 player.getSpecialActionToken().isCultTack = false;
                 player.getSpecialActionToken().isSpade = false;
                 player.setHavingDwellingBonus(false);
@@ -72,13 +67,11 @@ public class GameHandler {
             }
             bonusCard.setPlayerOcupied(true);
             bonusCard.setPlayerId(playerId);
-            player.setGoldIncome(player.getGoldIncome() + bonusCard.getGoldBonus());
-            player.setWorkerIncome(player.getWorkerIncome() + bonusCard.getWorkerBonus());
+            player.setGoldNum(player.getGoldIncome() + bonusCard.getGoldBonus());
+            player.setWorkerNum(player.getWorkerIncome() + bonusCard.getWorkerBonus());
             player.addPowerToBowl(bonusCard.getPowerBonus());
             player.setShipLevel(player.getShipLevel() + bonusCard.getShippingRange());
-            player.setPriestIncome(player.getPriestIncome() + bonusCard.getPriestBonus());
-            player.setPerBuildingIncome(player.getPerBuildingIncome() + bonusCard.getPerBuildingBonus());
-            player.setCultBonusIncome(player.getCultBonusIncome() + bonusCard.getCultBonus());
+            player.setPriestNum(player.getPriestIncome() + bonusCard.getPriestBonus());
             player.getSpecialActionToken().isCultTack = bonusCard.isSpecialCult();
             player.getSpecialActionToken().isSpade = bonusCard.isSpacialSpade();
             player.setHavingDwellingBonus(bonusCard.isDwelling());
@@ -87,14 +80,7 @@ public class GameHandler {
         }
     }
 
-   //  private int islamBonus; //water
-   // private int christianityBonus; //Air
-   // private int hinduismBonus; //Fire
-    //private int jewBonus; //earth
 
-
-    //From now on, when passing (see Action #8, page 14), get 2/3/3/4
-    //Victory points for 1/2/3/4 of your Trading houses on the Game board.
     public void playerChooseFavorTile(FavorTile favorTile,Player player, Religion religion){
         if(favorTile.getPlayerIds().size() >= favorTile.getNumberOfPlayer() ){
             System.err.println("You cannot choose this Favor");
@@ -109,14 +95,14 @@ public class GameHandler {
 
             religion.updateReligion(favorTile.getChristianityBonus(),player.getPlayerId(),player.getKey());
 
-            player.setNeededCombinedPowerTown(6);
+            player.setTownPowerValue(6);
             player.addPowerToBowl( favorTile.getPowerBonus());
             player.setWorkerNum(player.getWorkerNum() + favorTile.getWorkerBonus());
             player.setGoldNum(player.getGoldNum() + favorTile.getGoldBonus());
             player.setVictoryPointNum(player.getVictoryPointNum() + favorTile.getVictoryPoint());
-            player.isUpgradeToTradingPostBonus(favorTile.isTradingHouse());
-            player.setDwellingToTradingEveryRound(favorTile.isPassingBonusForTradingHouse());
-            player.setDwellingEveryRound(favorTile.isDwellingBonus());
+            player.setUpgradeToTradingPostBonus(favorTile.isTradingHouse());
+            player.setPassingTradingPostBonus(favorTile.isPassingBonusForTradingHouse());
+            player.setBuildingDwellingBonus(favorTile.isDwellingBonus());
             if(favorTile.isSpecialCult())
             player.getSpecialActionToken().isCultTack = favorTile.isSpecialCult();
 
