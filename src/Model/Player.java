@@ -1,5 +1,7 @@
 package Model;
 
+import Model.StructureSubclasses.Stronghold;
+
 import java.security.PublicKey;
 
 public class Player {
@@ -35,8 +37,8 @@ public class Player {
     private int perBuildingIncome;
     private int cultBonusIncome;
     private boolean havingDwellingBonus;
-    private boolean havingTradeHouse;
-    private boolean havingSanctuary;
+    private boolean havingTradingPostBonus;
+    private boolean havingSanctuaryBonus;
     private int terraformWorkerCost;
     private boolean roundPassed;
 
@@ -210,21 +212,6 @@ public class Player {
                     victoryPointNum += 3;
                 }
 
-                if(roundPassed && isPassingTradingPostBonus) {
-                    if(dwellingNum == 1) {
-                        victoryPointNum += 2;
-                    }
-                    if(dwellingNum == 2) {
-                        victoryPointNum += 3;
-                    }
-                    if (dwellingNum == 3) {
-                        victoryPointNum +=3;
-                    }
-                    if(dwellingNum == 4) {
-                        victoryPointNum+=4;
-                    }
-                }
-
                 goldIncome += faction.tradingPostGoldIncome[tradingPostNum-1];
                 powerIncome += faction.tradingPostPowerIncome[tradingPostNum-1];
             }
@@ -384,6 +371,49 @@ public class Player {
 
     public void passRound() {
             roundPassed = true;
+        if( isPassingTradingPostBonus) {
+            if(tradingPostNum == 1) {
+                victoryPointNum += 2;
+            }
+            if(tradingPostNum == 2) {
+                victoryPointNum += 3;
+            }
+            if (tradingPostNum == 3) {
+                victoryPointNum +=3;
+            }
+            if(tradingPostNum == 4) {
+                victoryPointNum+=4;
+            }
+        }
+        returnBonusCard();
+
+    }
+
+    public void useBonusFromFavorTiles() {
+
+    }
+
+    public void returnBonusCard() {
+            //Collect bonus points
+        if(roundPassed) {
+            if (havingDwellingBonus) {
+                victoryPointNum += dwellingNum * 1;
+            }
+            if (havingTradingPostBonus) {
+                victoryPointNum += tradingPostNum * 2;
+            }
+            if (havingSanctuaryBonus) {
+                victoryPointNum += strongholdNum * 4;
+                victoryPointNum += sanctuaryNum * 4;
+            }
+            havingSanctuaryBonus = false;
+            havingDwellingBonus = false;
+            havingTradingPostBonus = false;
+        }
+    }
+
+    public void useFavorTile() {
+
     }
 
     public int getWorkerNum() {
@@ -573,20 +603,14 @@ public class Player {
         this.havingDwellingBonus = havingDwellingBonus;
     }
 
-    public boolean isHavingTradeHouse() {
-        return havingTradeHouse;
-    }
 
     public void setHavingTradeHouse(boolean havingTradeHouse) {
-        this.havingTradeHouse = havingTradeHouse;
+        havingTradingPostBonus = havingTradeHouse;
     }
 
-    public boolean isHavingSanctuary() {
-        return havingSanctuary;
-    }
 
     public void setHavingSanctuary(boolean value) {
-            havingSanctuary = value;
+            havingSanctuaryBonus = value;
     }
 
     public int getInitialIslam() {
