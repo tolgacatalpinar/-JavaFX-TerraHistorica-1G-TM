@@ -71,7 +71,7 @@ public class GameHandler {
         }
     }
 
-  //  private int islamBonus; //water
+   //  private int islamBonus; //water
    // private int christianityBonus; //Air
    // private int hinduismBonus; //Fire
     //private int jewBonus; //earth
@@ -92,7 +92,7 @@ public class GameHandler {
             player.setWorkerNum(player.getWorkerNum() + favorTile.getWorkerBonus());
             player.setGoldNum(player.getGoldNum() + favorTile.getGoldBonus());
             player.setVictoryPointNum(player.getVictoryPointNum() + favorTile.getVictoryPoint());
-            player.setTradingEveryRound(favorTile.isTradingHouse());
+            player.isUpgradeToTradingPostBonus(favorTile.isTradingHouse());
             player.setDwellingToTradingEveryRound(favorTile.isPassingBonusForTradingHouse());
             player.setDwellingEveryRound(favorTile.isDwellingBonus());
             if(favorTile.isSpecialCult())
