@@ -1,5 +1,7 @@
 package Model;
 
+import java.security.PublicKey;
+
 public class Player {
 
     String nickName;
@@ -13,10 +15,6 @@ public class Player {
     private int priestNum;
     private int goldNum;
     private int victoryPointNum;
-    private int islamProgress;
-    private int christianityProgress;
-    private int hinduismProgress;
-    private int judaismProgress;
     private int powerIncome;
     private int workerIncome;
     private int priestIncome;
@@ -41,13 +39,15 @@ public class Player {
     private boolean havingTradeHouse;
     private boolean havingSanctuary;
     private int terraformWorkerCost;
+    private boolean roundPassed;
 
-    //Sk Buradan başlıyor ben bunların set ve getinide yapıyorum isimleri değiştirirsin setter ve getterlar en sonra
-    //birde initialize de ettim false oalrak
-    private boolean dwellingToTradingEveryRound;
-    private boolean dwellingEveryRound;
-    private boolean tradingEveryRound;
+    private boolean upgradeToTradingPostBonus; //When upgrading a Dwelling to a Trading house, immediately get 3 additional Victory points.
+    private boolean isPassingTradingPostBonus; //From now on, when passing (see Action #8, page 14), get 2/3/3/4 Victory points for 1/2/3/4 of your Trading houses on the Game board.
 
+
+
+    private boolean buildingDwellingBonus; //When building a Dwelling, immediately get 2 additional Victory points.
+    private int townPowerValue;
 
     public Player(String nickName, int playerId) {
         this.nickName = nickName;
@@ -69,12 +69,10 @@ public class Player {
         bowlTwoPower = faction.INITIAL_BOWL_TWO_POWER;
         bowlThreePower = faction.INITIAL_BOWL_THREE_POWER;
         startingDwellingNum = this.getFaction().startingDwellingNum;
-        hinduismProgress = this.getFaction().INITIAL_HINDUISM;
-        islamProgress = this.getFaction().INITIAL_ISLAM;
-        christianityProgress = this.getFaction().INITIAL_CHRISTIANITY;
-        judaismProgress = this.getFaction().INITIAL_JUDAISM;
         workerIncome = faction.INITIAL_WORKER_INCOME;
         terraformWorkerCost = faction.TERRAFORM_WORKER_COST;
+        startingDwellingNum = faction.startingDwellingNum;
+        townPowerValue = 7;
         powerIncome = 0;
         priestIncome = 0;
         goldIncome = 0;
@@ -85,10 +83,11 @@ public class Player {
         sanctuaryNum = 0;
         strongholdNum = 0;
         key = false;
-        neededCombinedPowerTown = 7;
-        dwellingToTradingEveryRound = false;
-        tradingEveryRound = false;
-        dwellingEveryRound = false;
+        upgradeToTradingPostBonus = false;
+        isPassingTradingPostBonus = false;
+        //tradingEveryRound = false;
+        buildingDwellingBonus = false;
+        roundPassed = false;
     }
 
     public Faction getFaction() {
@@ -153,6 +152,9 @@ public class Player {
             if ( dwellingNum < faction.MAX_DWELLING) {
                 workerIncome += faction.DWELLING_WORKER_INCOME;
             }
+            if(buildingDwellingBonus) {
+                victoryPointNum += 2;
+            }
         }
         else {
             System.out.println("Cannot build more");
@@ -208,6 +210,24 @@ public class Player {
                 else {
                     workerNum -= faction.TRADING_POST_WORKER_COST;
                     goldNum -= faction.TRADING_POST_GOLD_COST;
+                }
+                if (upgradeToTradingPostBonus) {
+                    victoryPointNum += 3;
+                }
+
+                if(roundPassed && isPassingTradingPostBonus) {
+                    if(dwellingNum == 1) {
+                        victoryPointNum += 2;
+                    }
+                    if(dwellingNum == 2) {
+                        victoryPointNum += 3;
+                    }
+                    if (dwellingNum == 3) {
+                        victoryPointNum +=3;
+                    }
+                    if(dwellingNum == 4) {
+                        victoryPointNum+=4;
+                    }
                 }
 
                 goldIncome += faction.tradingPostGoldIncome[tradingPostNum-1];
@@ -365,6 +385,10 @@ public class Player {
 
     public boolean haveResources(int requiredGold, int requiredPower, int requiredPriest, int requiredWorker ) {
             return false;
+    }
+
+    public void passRound() {
+            roundPassed = true;
     }
 
     public int getWorkerNum() {
@@ -576,27 +600,61 @@ public class Player {
         this.neededCombinedPowerTown = neededCombinedPowerTown;
     }
 
-    public boolean isDwellingToTradingEveryRound() {
-        return dwellingToTradingEveryRound;
-    }
-
-    public void setDwellingToTradingEveryRound(boolean dwellingToTradingEveryRound) {
-        this.dwellingToTradingEveryRound = dwellingToTradingEveryRound;
-    }
-
-    public boolean isDwellingEveryRound() {
-        return dwellingEveryRound;
-    }
-
-    public void setDwellingEveryRound(boolean dwellingEveryRound) {
-        this.dwellingEveryRound = dwellingEveryRound;
-    }
-
-    public boolean isTradingEveryRound() {
-        return tradingEveryRound;
-    }
-
     public void setTradingEveryRound(boolean tradingEveryRound) {
         tradingEveryRound = tradingEveryRound;
+    }
+
+    public int getInitialIslam() {
+            return faction.INITIAL_ISLAM;
+    }
+
+    public int getInitialChristianity() {
+            return faction.INITIAL_CHRISTIANITY;
+    }
+    public int getInitialJudaism() {
+        return faction.INITIAL_JUDAISM;
+    }
+    public int getInitialHinduism() {
+        return faction.INITIAL_HINDUISM;
+    }
+
+    public boolean isUpgradeToTradingPostBonus() {
+        return upgradeToTradingPostBonus;
+    }
+
+    public void setUpgradeToTradingPostBonus(boolean upgradeToTradingPostBonus) {
+        this.upgradeToTradingPostBonus = upgradeToTradingPostBonus;
+    }
+
+    public boolean isPassingTradingPostBonus() {
+        return isPassingTradingPostBonus;
+    }
+
+    public void setPassingTradingPostBonus(boolean passingTradingPostBonus) {
+        isPassingTradingPostBonus = passingTradingPostBonus;
+    }
+
+    public boolean isBuildingDwellingBonus() {
+        return buildingDwellingBonus;
+    }
+
+    public void setBuildingDwellingBonus(boolean buildingDwellingBonus) {
+        this.buildingDwellingBonus = buildingDwellingBonus;
+    }
+
+    public int getTownPowerValue() {
+        return townPowerValue;
+    }
+
+    public void setTownPowerValue(int townPowerValue) {
+        this.townPowerValue = townPowerValue;
+    }
+
+    public boolean getKey() {
+        return key;
+    }
+
+    public void setKey(boolean key) {
+        this.key = key;
     }
 }
