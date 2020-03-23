@@ -7,27 +7,22 @@ public class CardsAndTiles {
     public ArrayList<BonusCard> bonusCards;
     public ArrayList<FavorTile> favorTiles;
     public ArrayList<ScoringTile> scoringTiles;
-    public ArrayList<BonusCard> selectedBonusCard;
+    public ArrayList<BonusCard> selectedBonusCards;
+    public ArrayList<ScoringTile> selectedScoringTiles;
     public CardsAndTiles(int playerNumber) {
+        townTiles = new ArrayList<>();
+        bonusCards = new ArrayList<>();
+        favorTiles = new ArrayList<>();
+        scoringTiles = new ArrayList<>();
+
         createTownTile(townTiles);
         createBonusCard(bonusCards);
         createFavorTile(favorTiles);
         createScoringTile(scoringTiles);
-        selectedBonusCard = selectedBonusCard(bonusCards,playerNumber);
+        selectedBonusCards = selectedBonusCard(bonusCards,playerNumber);
+        selectedScoringTiles = selectedScoringTiles(scoringTiles);
     }
 
-    private ArrayList<BonusCard> selectedBonusCard(ArrayList<BonusCard> bonusCards,int playerNumber) {
-        ArrayList<BonusCard> selectedBonusCard;
-        selectedBonusCard = new ArrayList<>();
-        int max = playerNumber + 3;
-        int min = 0;
-        int range = max - min + 1;
-        for(int i = 0; i < max;++i){
-            int rand = (int)(Math.random() * range) + min;
-            selectedBonusCard.add(bonusCards.get(rand));
-        }
-        return selectedBonusCard;
-    }
 
     /**
      * Town tiles were created and added into arraylist.
@@ -35,7 +30,6 @@ public class CardsAndTiles {
      * (for going last place (10th) of each religion part, you need at least one key).
     **/
     public static void createTownTile(ArrayList<TownTile> townTiles){
-        townTiles = new ArrayList<>();
         townTiles.add(new TownTile(0,0,8,1,1,1,1,false,0,0));
         townTiles.add(new TownTile(0,0,8,1,1,1,1,false,0,0));
         townTiles.add(new TownTile(0,1,9,0,0,0,0,false,0,0));
@@ -51,10 +45,9 @@ public class CardsAndTiles {
     /**
      * Bonus cards were created and added  into arrayList.
      * The attributes of bonus cards were arranged by looking cards and its requirements, incomes and bonuses.
-     * @param bonusCards
+     * @param bonusCards is array list.
      */
     public static void createBonusCard(ArrayList<BonusCard> bonusCards){
-        bonusCards = new ArrayList<>();
         bonusCards.add(new BonusCard(0,false,0,0,0,0,0,0,1,false,false,false,false,false));
         bonusCards.add(new BonusCard(0,false,0,3,0,0,1,0,0,false,false,false,false,false));
         bonusCards.add(new BonusCard(0,false,6,0,0,0,0,0,0,false,false,false,false,false));
@@ -70,10 +63,9 @@ public class CardsAndTiles {
     /**
      * Favor Tiles were created and added into arraylist.
      * The attributes of favor tiles were arranged by looking tiles and its requirements, incomes and bonuses.
-     * @param favorTiles
+     * @param favorTiles is favor tiles arraylist.
      */
     public static void createFavorTile(ArrayList<FavorTile> favorTiles){
-        favorTiles = new ArrayList<>();
         favorTiles.add(new FavorTile(1,3,0,0,0,0,0,0,0,0,
                 false,false,false,false,false));
         favorTiles.add(new FavorTile(1,0,3,0,0,0,0,0,0,0,
@@ -105,10 +97,9 @@ public class CardsAndTiles {
      * The scoring tiles were created and added into arrayList.
      * The attributes of scoring tiles were arranged by looking tiles and its requirements, incomes and bonuses.
      * However, id and cardcount were not changed. ALso functiality of these variable is unkown by naci dalkiran.
-     * @param scoringTiles
+     * @param scoringTiles is array list.
      */
     public static void createScoringTile(ArrayList<ScoringTile> scoringTiles){
-        scoringTiles = new ArrayList<>();
         scoringTiles.add(new ScoringTile(4,0,0,0,1,0,0,2,0,0,
                 true,false,false,true, false,false,false,false,false));
         scoringTiles.add(new ScoringTile(0,4,0,0,0,4,0,2,0,0,
@@ -130,12 +121,38 @@ public class CardsAndTiles {
 
     public int findPlayerCard(int playerId){
         int playerCardId = -1;
-        for(int i = 0; i < selectedBonusCard.size();++i){
-            if(playerId == selectedBonusCard.get(i).getPlayerId()){
+        for(int i = 0; i < selectedBonusCards.size();++i){
+            if(playerId == selectedBonusCards.get(i).getPlayerId()){
                 playerCardId =i;
                 return playerCardId;
             }
         }
         return playerCardId;
+    }
+
+    private ArrayList<ScoringTile> selectedScoringTiles(ArrayList<ScoringTile> scoringTiles) {
+        ArrayList<ScoringTile> temp;
+        temp = new ArrayList<>();
+        int max = 8;
+        int min = 0;
+        int range = max - min + 1;
+        for(int i = 0; i < 6;++i){
+            int rand = (int)(Math.random() * range) + min;
+            temp.add(scoringTiles.get(rand));
+        }
+        return temp;
+    }
+
+    private ArrayList<BonusCard> selectedBonusCard(ArrayList<BonusCard> bonusCards,int playerNumber) {
+        ArrayList<BonusCard> temp;
+        temp = new ArrayList<>();
+        int max = playerNumber + 3;
+        int min = 0;
+        int range = max - min + 1;
+        for(int i = 0; i < max;++i){
+            int rand = (int)(Math.random() * range) + min;
+            temp.add(bonusCards.get(rand));
+        }
+        return temp;
     }
 }
