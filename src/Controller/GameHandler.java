@@ -38,7 +38,6 @@ public class GameHandler {
         religions[3] = new Hinduism(playerSize, player_initial_hindu);
     }
 
-
     /**
      * playerChoseBonusCard(cardsAndTiles.bonusCards.get(cardIndex), player, playerID);
      * notTakenCard is not used.
@@ -61,9 +60,7 @@ public class GameHandler {
                 player.setShipLevel(player.getShipLevel() - cardsAndTiles.bonusCards.get(previousCardId).getShippingRange());
                 player.getSpecialActionToken().isCultTack = false;
                 player.getSpecialActionToken().isSpade = false;
-                player.setHavingDwellingBonus(false);
-                player.setHavingSanctuary(false);
-                player.setHavingTradeHouse(false);
+                player.returnBonusCard();
             }
             bonusCard.setPlayerOcupied(true);
             bonusCard.setPlayerId(playerId);
@@ -108,11 +105,6 @@ public class GameHandler {
 
         }
     }
-
-    //private int christianityPoint;
-    //private int hinduismPoint;
-    //private int islamPoint;
-    //private int jewishPoint;
 
     public void playerChooseTownTile(TownTile townTile, Player player, Religion religion){
         if(townTile.isOccupied()){
