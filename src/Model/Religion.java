@@ -42,7 +42,7 @@ public class Religion {
      * @return powerAward the amount of power player gained
      *
      */
-    private int updateReligion(int count, int player_id, boolean key){
+    public int updateReligion(int count, int player_id, boolean key){
         int powerAward = 0;
         int currentPos = playerPositions[player_id];
         int endPos = currentPos + count;

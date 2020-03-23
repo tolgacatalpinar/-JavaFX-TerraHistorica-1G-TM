@@ -430,6 +430,8 @@ public class Player {
         return workerIncome;
     }
 
+    public boolean getKey(){return key;}
+
     public void setWorkerIncome(int workerIncome) {
         this.workerIncome = workerIncome;
     }
@@ -627,10 +629,6 @@ public class Player {
 
     public void setTownPowerValue(int townPowerValue) {
         this.townPowerValue = townPowerValue;
-    }
-
-    public boolean getKey() {
-        return key;
     }
 
     public void setKey(boolean key) {
