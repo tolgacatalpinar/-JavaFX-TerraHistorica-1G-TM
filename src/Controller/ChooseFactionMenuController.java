@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,7 +20,10 @@ import java.util.ResourceBundle;
 public class ChooseFactionMenuController  implements Initializable {
 
     @FXML
-    Button backButton, playerQueue, startButton;
+    Button backButton,  startButton;
+
+    @FXML
+    Text playerQueue;
 
     @FXML
     ImageView wastelandFaction, forestFaction, lakesFaction, desertFaction, mountainsFaction, swampFaction, plainsFaction;
