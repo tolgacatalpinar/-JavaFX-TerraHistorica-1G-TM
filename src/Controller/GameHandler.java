@@ -4,6 +4,7 @@ import Model.*;
 import Model.CardsAndTiles.BonusCard;
 import Model.CardsAndTiles.CardsAndTiles;
 import Model.CardsAndTiles.FavorTile;
+import Model.CardsAndTiles.TownTile;
 import Model.FactionSubclasses.DariusTheGreat;
 import Model.FactionSubclasses.VladTheImpaler;
 import View.*;
@@ -44,7 +45,6 @@ public class GameHandler {
                 cardsAndTiles.bonusCards.get(previousCardId).setPlayerId(-1);
                 player.setGoldIncome(player.getGoldIncome() - cardsAndTiles.bonusCards.get(previousCardId).getGoldBonus());
                 player.setWorkerIncome(player.getWorkerIncome() - cardsAndTiles.bonusCards.get(previousCardId).getWorkerBonus());
-                player.setPowerIncome(player.getPowerIncome() - cardsAndTiles.bonusCards.get(previousCardId).getPowerBonus());
                 player.setShipLevel(player.getShipLevel() - cardsAndTiles.bonusCards.get(previousCardId).getShippingRange());
                 player.setPriestIncome(player.getPriestIncome() - cardsAndTiles.bonusCards.get(previousCardId).getPriestBonus());
                 player.setPerBuildingIncome(player.getPerBuildingIncome() - cardsAndTiles.bonusCards.get(previousCardId).getPerBuildingBonus());
@@ -59,7 +59,7 @@ public class GameHandler {
             bonusCard.setPlayerId(playerId);
             player.setGoldIncome(player.getGoldIncome() + bonusCard.getGoldBonus());
             player.setWorkerIncome(player.getWorkerIncome() + bonusCard.getWorkerBonus());
-            player.setPowerIncome(player.getPowerIncome() + bonusCard.getPowerBonus());
+            player.addPowerToBowl(bonusCard.getPowerBonus());
             player.setShipLevel(player.getShipLevel() + bonusCard.getShippingRange());
             player.setPriestIncome(player.getPriestIncome() + bonusCard.getPriestBonus());
             player.setPerBuildingIncome(player.getPerBuildingIncome() + bonusCard.getPerBuildingBonus());
@@ -90,9 +90,9 @@ public class GameHandler {
             favorTile.getPlayerIds().add((Integer) player.getPlayerId() );
             //TODO religion part is missing.
             player.setNeededCombinedPowerTown(6);
-            player.setPowerIncome(player.getPowerIncome() + favorTile.getPowerBonus());
-            player.setWorkerIncome(player.getWorkerIncome() + favorTile.getWorkerBonus());
-            player.setGoldIncome(player.getGoldIncome() + favorTile.getGoldBonus());
+            player.addPowerToBowl( favorTile.getPowerBonus());
+            player.setWorkerNum(player.getWorkerNum() + favorTile.getWorkerBonus());
+            player.setGoldNum(player.getGoldNum() + favorTile.getGoldBonus());
             player.setVictoryPointNum(player.getVictoryPointNum() + favorTile.getVictoryPoint());
             player.setTradingEveryRound(favorTile.isTradingHouse());
             player.setDwellingToTradingEveryRound(favorTile.isPassingBonusForTradingHouse());
@@ -100,6 +100,27 @@ public class GameHandler {
             if(favorTile.isSpecialCult())
             player.getSpecialActionToken().isCultTack = favorTile.isSpecialCult();
 
+        }
+    }
+
+    //private int christianityPoint;
+    //private int hinduismPoint;
+    //private int islamPoint;
+    //private int jewishPoint;
+
+    public void playerChooseTownTile(TownTile townTile, Player player, Religion religion){
+        if(townTile.isOccupied()){
+            System.err.println("This Tile was chosen by another player");
+        }
+        else
+        {
+            townTile.setPlayerId(player.getPlayerId());
+            player.addPowerToBowl( townTile.getPowerBonus());
+            player.setPriestNum(player.getPriestNum() + townTile.getPriestBonus());
+            player.setVictoryPointNum(player.getVictoryPointNum() + townTile.getVictoryBonus());
+            player.setWorkerNum(player.getWorkerNum() + townTile.getWorkerBonus());
+            player.setGoldNum(player.getGoldNum() + townTile.getGoldBonus());
+            //TODO religion part is missing
         }
     }
 

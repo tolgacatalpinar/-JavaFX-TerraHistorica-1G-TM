@@ -11,10 +11,9 @@ public class TownTile {
     private int hinduismPoint;
     private int islamPoint;
     private int jewishPoint;
-    private boolean isShippingBonus;
     private int workerBonus;
     private int goldBonus;
-
+    private boolean occupied;
     /**
      *
      * @param powerBonus power bonus income.
@@ -24,11 +23,10 @@ public class TownTile {
      * @param hinduismPoint hinduism bonus income.
      * @param islamPoint  islam bonus income.
      * @param jewishPoint jewish bonus income.
-     * @param isShippingBonus determine tiles's bonus is shipping bonus or not.
      * @param workerBonus worker bonus income.
      * @param goldBonus gold bonus income.
      */
-    public TownTile(int powerBonus, int priestBonus, int victoryBonus, int christianityPoint, int hinduismPoint, int islamPoint, int jewishPoint, boolean isShippingBonus, int workerBonus, int goldBonus) {
+    public TownTile(int powerBonus, int priestBonus, int victoryBonus, int christianityPoint, int hinduismPoint, int islamPoint, int jewishPoint,  int workerBonus, int goldBonus) {
         this.powerBonus = powerBonus;
         this.priestBonus = priestBonus;
         keyCount = 1;
@@ -37,10 +35,10 @@ public class TownTile {
         this.hinduismPoint = hinduismPoint;
         this.islamPoint = islamPoint;
         this.jewishPoint = jewishPoint;
-        this.isShippingBonus = isShippingBonus;
         this.workerBonus = workerBonus;
         this.goldBonus = goldBonus;
-        playerId = -1;
+        this.playerId = -1;
+        this.occupied = false;
     }
 
     public int getPlayerId() {
@@ -79,10 +77,6 @@ public class TownTile {
         return jewishPoint;
     }
 
-    public boolean isShippingBonus() {
-        return isShippingBonus;
-    }
-
     public int getWorkerBonus() {
         return workerBonus;
     }
@@ -93,5 +87,13 @@ public class TownTile {
 
     public void setPlayerId(int playerId) {
         this.playerId = playerId;
+    }
+
+    public boolean isOccupied() {
+        return occupied;
+    }
+
+    public void setOccupied(boolean occupied) {
+        this.occupied = occupied;
     }
 }

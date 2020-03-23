@@ -30,16 +30,16 @@ public class CardsAndTiles {
      * (for going last place (10th) of each religion part, you need at least one key).
     **/
     public static void createTownTile(ArrayList<TownTile> townTiles){
-        townTiles.add(new TownTile(0,0,8,1,1,1,1,false,0,0));
-        townTiles.add(new TownTile(0,0,8,1,1,1,1,false,0,0));
-        townTiles.add(new TownTile(0,1,9,0,0,0,0,false,0,0));
-        townTiles.add(new TownTile(0,1,9,0,0,0,0,false,0,0));
-        townTiles.add(new TownTile(0,0,7,0,0,0,0,false,2,0));
-        townTiles.add(new TownTile(0,0,7,0,0,0,0,false,2,0));
-        townTiles.add(new TownTile(8,0,6,0,0,0,0,false,0,0));
-        townTiles.add(new TownTile(8,0,6,0,0,0,0,false,0,0));
-        townTiles.add(new TownTile(0,0,5,0,0,0,0,false,0,6));
-        townTiles.add(new TownTile(0,0,5,0,0,0,0,false,0,6));
+        townTiles.add(new TownTile(0,0,8,1,1,1,1,0,0));
+        townTiles.add(new TownTile(0,0,8,1,1,1,1,0,0));
+        townTiles.add(new TownTile(0,1,9,0,0,0,0,0,0));
+        townTiles.add(new TownTile(0,1,9,0,0,0,0,0,0));
+        townTiles.add(new TownTile(0,0,7,0,0,0,0,2,0));
+        townTiles.add(new TownTile(0,0,7,0,0,0,0,2,0));
+        townTiles.add(new TownTile(8,0,6,0,0,0,0,0,0));
+        townTiles.add(new TownTile(8,0,6,0,0,0,0,0,0));
+        townTiles.add(new TownTile(0,0,5,0,0,0,0,0,6));
+        townTiles.add(new TownTile(0,0,5,0,0,0,0,0,6));
     }
 
     /**
