@@ -14,7 +14,6 @@ public class FavorTile {
     private int workerBonus;
     private int goldBonus;
     private int victoryPoint;
-    private int[] roundedVictoryBonus;
     private boolean isSpecialCult;
     private boolean isTownBonus;
     private boolean isTradingHouse;
@@ -42,9 +41,6 @@ public class FavorTile {
      * Rule : From now on, when passing (see Action #8, page 14), get 2/3/3/4 Victory points for 1/2/3/4 of your Trading houses on the Game board.
      */
     public FavorTile(int numberOfPlayer,int islamBonus, int christianityBonus, int hinduismBonus, int jewBonus, int neededCombinedPowerTown, int powerBonus, int workerBonus, int goldBonus, int victoryPoint, boolean isSpecialCult, boolean isTownBonus, boolean isTradingHouse, boolean isDwellingBonus, boolean isPassingBonusForTradingHouse) {
-        if(isPassingBonusForTradingHouse){
-            roundedVictoryBonus = new int [] {1,2,3,4};
-        }
         this.numberOfPlayer = numberOfPlayer;
         this.islamBonus = islamBonus;
         this.christianityBonus = christianityBonus;
@@ -105,10 +101,6 @@ public class FavorTile {
 
     public int getVictoryPoint() {
         return victoryPoint;
-    }
-
-    public int[] getRoundedVictoryBonus() {
-        return roundedVictoryBonus;
     }
 
     public boolean isSpecialCult() {

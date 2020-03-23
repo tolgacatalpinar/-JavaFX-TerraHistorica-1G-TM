@@ -9,7 +9,6 @@ import Model.FactionSubclasses.DariusTheGreat;
 import Model.FactionSubclasses.VladTheImpaler;
 import View.*;
 
-import java.util.ArrayList;
 
 public class GameHandler {
 
@@ -80,7 +79,6 @@ public class GameHandler {
 
     //From now on, when passing (see Action #8, page 14), get 2/3/3/4
     //Victory points for 1/2/3/4 of your Trading houses on the Game board.
-    boolean isPassingBonusForTradingHouse;
     public void playerChooseFavorTile(FavorTile favorTile,Player player, Religion religion){
         if(favorTile.getPlayerIds().size() >= favorTile.getNumberOfPlayer() ){
             System.err.println("You cannot choose this Favor");
@@ -140,8 +138,7 @@ public class GameHandler {
         else
             selectScoringTile(player, 1);
     }
-    public void selectScoringTile( Player player, int count)
-    {
+    public void selectScoringTile( Player player, int count) {
         if( count == 0)
         {
             return;
@@ -152,6 +149,6 @@ public class GameHandler {
 
     public void nomadAbility( Player player)
     {
-        // TO DO
+        // TODO
     }
 }
