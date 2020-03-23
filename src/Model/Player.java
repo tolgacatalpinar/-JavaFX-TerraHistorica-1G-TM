@@ -21,7 +21,6 @@ public class Player {
     private int startingDwellingNum;
     private int priestOnBank = 7; // Not exactly know what it is
     private boolean key;
-    private int neededCombinedPowerTown;
     private int bridgeNum;
     private int dwellingNum;
     private int tradingPostNum;
@@ -43,9 +42,6 @@ public class Player {
 
     private boolean upgradeToTradingPostBonus; //When upgrading a Dwelling to a Trading house, immediately get 3 additional Victory points.
     private boolean isPassingTradingPostBonus; //From now on, when passing (see Action #8, page 14), get 2/3/3/4 Victory points for 1/2/3/4 of your Trading houses on the Game board.
-
-
-
     private boolean buildingDwellingBonus; //When building a Dwelling, immediately get 2 additional Victory points.
     private int townPowerValue;
 
@@ -85,7 +81,6 @@ public class Player {
         key = false;
         upgradeToTradingPostBonus = false;
         isPassingTradingPostBonus = false;
-        //tradingEveryRound = false;
         buildingDwellingBonus = false;
         roundPassed = false;
     }
@@ -589,23 +584,7 @@ public class Player {
     public boolean isHavingSanctuary() {
         return havingSanctuary;
     }
-
-    public void setHavingSanctuary(boolean havingSanctuary) {
-        this.havingSanctuary = havingSanctuary;
-    }
-
-    public int getNeededCombinedPowerTown() {
-        return neededCombinedPowerTown;
-    }
-
-    public void setNeededCombinedPowerTown(int neededCombinedPowerTown) {
-        this.neededCombinedPowerTown = neededCombinedPowerTown;
-    }
-
-    public void setTradingEveryRound(boolean tradingEveryRound) {
-        tradingEveryRound = tradingEveryRound;
-    }
-
+    
     public int getInitialIslam() {
             return faction.INITIAL_ISLAM;
     }
