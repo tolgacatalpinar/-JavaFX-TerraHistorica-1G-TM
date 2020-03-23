@@ -1,5 +1,6 @@
 package Model;
-//to do : Yeni bir list yapalım size ı 1 olsun. Bu listede bridge ile bağlantı kurulan öteki space'i tutarız.
+//to do : Yeni bir list yapalım size ı 1 olsun. Bu listede bridge ile bağlantı kurulan öteki space'i tutarız. Kurarken buildBridge(space) diye
+// diye bir method olur en son döndürürken de getBridgeList()
 public class Space{
     private boolean isOccupied;
     Space(){
