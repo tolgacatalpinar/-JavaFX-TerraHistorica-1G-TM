@@ -1,5 +1,5 @@
 package Model;
-
+//to do : Yeni bir list yapalım size ı 1 olsun. Bu listede bridge ile bağlantı kurulan öteki space'i tutarız.
 public class Space{
     private boolean isOccupied;
     Space(){
