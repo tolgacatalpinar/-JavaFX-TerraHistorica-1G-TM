@@ -56,6 +56,26 @@ public class ChooseFactionMenuController  implements Initializable {
     }
 
     @FXML
+    public void startGameButtonClicked( MouseEvent event) throws IOException {
+
+
+        Stage stage;
+
+
+        stage = (Stage) startButton.getScene().getWindow();
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/GameView.fxml"));
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+
+    @FXML
     public void backButtonClicked( MouseEvent event) throws IOException {
 
 

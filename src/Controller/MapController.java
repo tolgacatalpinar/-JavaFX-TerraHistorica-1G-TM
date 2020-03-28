@@ -162,8 +162,9 @@ public class MapController extends Application implements Initializable {
       //((BorderPane)root).setCenter( terrainsLayout);
 
 
-      primaryStage.setScene(new Scene(root, 1550, 800));
-      primaryStage.setMaximized(true);
+      primaryStage.setScene(new Scene(root, 1280, 720));
+      //primaryStage.setMaximized(true);
+      primaryStage.setResizable(false);
       primaryStage.show();
 
    }
