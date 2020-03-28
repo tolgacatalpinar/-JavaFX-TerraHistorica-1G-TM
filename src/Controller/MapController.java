@@ -2,10 +2,10 @@ package Controller;
 
 
 import Model.Map;
-import Model.River;
+//import Model.River;
 import Model.Space;
 import Model.Terrain;
-import Model.TerrainSubclasses.*;
+//import Model.TerrainSubclasses.*;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -210,9 +210,9 @@ public class MapController extends Application implements Initializable {
       Space[][] spaces = new Space[ROW_NUMBER][COLUMN_NUMBER];
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
-            Space space;
+            Space space = new Space();
             if( terrains[i][j] == null)
-               space = null;
+               space.setType("Empty");
             else
             {
                switch (terrains[i][j].getId()) {

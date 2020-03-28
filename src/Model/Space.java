@@ -4,7 +4,7 @@ package Model;
 public class Space{
     private boolean isOccupied;
     private String type;
-    Space(){
+    public Space(){
         isOccupied = false;
     }
 
@@ -26,7 +26,7 @@ public class Space{
                 type.compareTo("Mountains") == 0
                 || type.compareTo("Lakes") == 0 ||
                 type.compareTo("Forest") == 0
-                || type.compareTo("Plains") == 0 || type.compareTo("Swamp") == 0)  {
+                || type.compareTo("Plains") == 0 || type.compareTo("Swamp") == 0 || type.compareTo("Empty") == 0)  {
             this.type = type;
         }else
             System.out.println("ERROR------False keyword used for space type");
