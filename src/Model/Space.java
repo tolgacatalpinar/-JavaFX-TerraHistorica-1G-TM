@@ -4,6 +4,8 @@ package Model;
 public class Space{
     private boolean isOccupied;
     private String type;
+//    private Space[] bridgeList; // this array holds the other space that can be reached from this space; thanks to bridge(if exists)
+        
     public Space(){
         isOccupied = false;
     }
@@ -11,6 +13,15 @@ public class Space{
     public boolean isOccupied() {
         return isOccupied;
     }
+    
+//     public buildBridge(Space space1){
+//         bridgeList = new Space[1];
+//         bridgeList[0] = space1;
+//     }
+    
+//     public Space[] getBridgeList(){
+//         return bridgeList;
+//     }
 
     public void setOccupied(boolean occupied) {
         isOccupied = occupied;
