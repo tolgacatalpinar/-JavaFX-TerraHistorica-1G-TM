@@ -3,136 +3,125 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="mapBorderPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../Styles/style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MapController">
-   <center>
-      <Pane fx:id="mapPane" prefHeight="396.0" prefWidth="432.0" BorderPane.alignment="CENTER">
+<VBox fx:id="mapVBox" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../Styles/style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MapController">
+
+      <Pane fx:id="mapPane" prefHeight="1280.0" prefWidth="720.0">
          <children>
-             <Button id="brownHexagon" fx:id="terrain1" layoutX="146.0" layoutY="73.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="whiteHexagon" fx:id="terrain2" layoutX="211.0" layoutY="73.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="greenHexagon" fx:id="terrain3" layoutX="277.0" layoutY="73.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blueHexagon" fx:id="terrain4" layoutX="341.0" layoutY="73.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="yellowHexagon" fx:id="terrain5" layoutX="406.0" layoutY="73.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="redHexagon" fx:id="terrain6" layoutX="469.0" layoutY="73.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="brownHexagon" fx:id="terrain7" layoutX="534.0" layoutY="73.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blackHexagon" fx:id="terrain8" layoutX="600.0" layoutY="73.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="redHexagon" fx:id="terrain9" layoutX="666.0" layoutY="73.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="greenHexagon" fx:id="terrain10" layoutX="732.0" layoutY="73.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blueHexagon" fx:id="terrain11" layoutX="797.0" layoutY="73.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="redHexagon" fx:id="terrain12" layoutX="862.0" layoutY="73.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blackHexagon" fx:id="terrain13" layoutX="927.0" layoutY="73.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="yellowHexagon" fx:id="terrain14" layoutX="179.0" layoutY="120.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain15" layoutX="244.0" layoutY="120.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain16" layoutX="309.0" layoutY="120.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="brownHexagon" fx:id="terrain17" layoutX="374.0" layoutY="120.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blackHexagon" fx:id="terrain18" layoutX="437.0" layoutY="120.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain19" layoutX="504.0" layoutY="120.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain20" layoutX="570.0" layoutY="120.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="yellowHexagon" fx:id="terrain21" layoutX="636.0" layoutY="120.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blackHexagon" fx:id="terrain22" layoutX="699.0" layoutY="120.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain23" layoutX="765.0" layoutY="120.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain24" layoutX="830.0" layoutY="120.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="yellowHexagon" fx:id="terrain25" layoutX="895.0" layoutY="120.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain26" layoutX="146.0" layoutY="166.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain27" layoutX="211.0" layoutY="166.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blackHexagon" fx:id="terrain28" layoutX="277.0" layoutY="166.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain29" layoutX="341.0" layoutY="166.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="whiteHexagon" fx:id="terrain30" layoutX="405.0" layoutY="166.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain31" layoutX="471.0" layoutY="166.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="greenHexagon" fx:id="terrain32" layoutX="537.0" layoutY="166.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain33" layoutX="603.0" layoutY="166.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="greenHexagon" fx:id="terrain34" layoutX="669.0" layoutY="166.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain35" layoutX="732.0" layoutY="166.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="whiteHexagon" fx:id="terrain36" layoutX="797.0" layoutY="166.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain37" layoutX="863.0" layoutY="166.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain38" layoutX="927.0" layoutY="166.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="greenHexagon" fx:id="terrain39" layoutX="179.0" layoutY="216.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blueHexagon" fx:id="terrain40" layoutX="244.0" layoutY="216.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="yellowHexagon" fx:id="terrain41" layoutX="309.0" layoutY="216.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain42" layoutX="373.0" layoutY="216.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain43" layoutX="438.0" layoutY="216.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="redHexagon" fx:id="terrain44" layoutX="502.0" layoutY="216.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blueHexagon" fx:id="terrain45" layoutX="569.0" layoutY="216.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain46" layoutX="633.0" layoutY="216.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="redHexagon" fx:id="terrain47" layoutX="699.0" layoutY="216.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain48" layoutX="765.0" layoutY="216.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="redHexagon" fx:id="terrain49" layoutX="831.0" layoutY="216.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="brownHexagon" fx:id="terrain50" layoutX="895.0" layoutY="216.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blackHexagon" fx:id="terrain51" layoutX="147.0" layoutY="263.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="brownHexagon" fx:id="terrain52" layoutX="213.0" layoutY="263.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="redHexagon" fx:id="terrain53" layoutX="277.0" layoutY="263.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blueHexagon" fx:id="terrain54" layoutX="341.0" layoutY="263.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blackHexagon" fx:id="terrain55" layoutX="406.0" layoutY="263.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="brownHexagon" fx:id="terrain56" layoutX="472.0" layoutY="263.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="whiteHexagon" fx:id="terrain57" layoutX="535.0" layoutY="263.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="yellowHexagon" fx:id="terrain58" layoutX="602.0" layoutY="263.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain59" layoutX="666.0" layoutY="263.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain60" layoutX="733.0" layoutY="263.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="greenHexagon" fx:id="terrain61" layoutX="799.0" layoutY="263.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blackHexagon" fx:id="terrain62" layoutX="863.0" layoutY="263.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blueHexagon" fx:id="terrain63" layoutX="928.0" layoutY="263.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="whiteHexagon" fx:id="terrain64" layoutX="179.0" layoutY="309.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="greenHexagon" fx:id="terrain65" layoutX="245.0" layoutY="309.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain66" layoutX="309.0" layoutY="309.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain67" layoutX="374.0" layoutY="309.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="yellowHexagon" fx:id="terrain68" layoutX="439.0" layoutY="309.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="greenHexagon" fx:id="terrain69" layoutX="504.0" layoutY="309.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain70" layoutX="567.0" layoutY="309.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain71" layoutX="635.0" layoutY="309.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain72" layoutX="702.0" layoutY="309.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="brownHexagon" fx:id="terrain73" layoutX="765.0" layoutY="309.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="whiteHexagon" fx:id="terrain74" layoutX="832.0" layoutY="309.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="brownHexagon" fx:id="terrain75" layoutX="895.0" layoutY="309.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain76" layoutX="146.0" layoutY="359.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain77" layoutX="211.0" layoutY="359.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain78" layoutX="277.0" layoutY="359.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="whiteHexagon" fx:id="terrain79" layoutX="341.0" layoutY="359.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain80" layoutX="406.0" layoutY="359.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="redHexagon" fx:id="terrain81" layoutX="472.0" layoutY="359.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain82" layoutX="534.0" layoutY="359.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="greenHexagon" fx:id="terrain83" layoutX="602.0" layoutY="359.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain84" layoutX="669.0" layoutY="359.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="yellowHexagon" fx:id="terrain85" layoutX="732.0" layoutY="359.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blackHexagon" fx:id="terrain86" layoutX="797.0" layoutY="359.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blueHexagon" fx:id="terrain87" layoutX="862.0" layoutY="359.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="yellowHexagon" fx:id="terrain88" layoutX="929.0" layoutY="359.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="yellowHexagon" fx:id="terrain89" layoutX="180.0" layoutY="408.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blueHexagon" fx:id="terrain90" layoutX="244.0" layoutY="408.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="brownHexagon" fx:id="terrain91" layoutX="309.0" layoutY="408.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain92" layoutX="374.0" layoutY="408.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain93" layoutX="439.0" layoutY="408.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain94" layoutX="502.0" layoutY="408.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blueHexagon" fx:id="terrain95" layoutX="567.0" layoutY="408.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blackHexagon" fx:id="terrain96" layoutX="633.0" layoutY="408.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain97" layoutX="699.0" layoutY="408.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="whiteHexagon" fx:id="terrain98" layoutX="765.0" layoutY="408.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="brownHexagon" fx:id="terrain99" layoutX="830.0" layoutY="408.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="whiteHexagon" fx:id="terrain100" layoutX="895.0" layoutY="408.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="redHexagon" fx:id="terrain101" layoutX="146.0" layoutY="456.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blackHexagon" fx:id="terrain102" layoutX="211.0" layoutY="456.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="whiteHexagon" fx:id="terrain103" layoutX="277.0" layoutY="456.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blueHexagon" fx:id="terrain104" layoutX="342.0" layoutY="456.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="redHexagon" fx:id="terrain105" layoutX="405.0" layoutY="456.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="greenHexagon" fx:id="terrain106" layoutX="469.0" layoutY="456.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="yellowHexagon" fx:id="terrain107" layoutX="534.0" layoutY="456.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="redHexagon" fx:id="terrain108" layoutX="600.0" layoutY="456.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="whiteHexagon" fx:id="terrain109" layoutX="666.0" layoutY="456.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="riverHexagon" fx:id="terrain110" layoutX="731.0" layoutY="456.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="blueHexagon" fx:id="terrain111" layoutX="798.0" layoutY="456.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="greenHexagon" fx:id="terrain112" layoutX="864.0" layoutY="456.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
-             <Button id="redHexagon" fx:id="terrain113" layoutX="927.0" layoutY="456.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="brownHexagon" fx:id="terrain1" layoutX="216.0" layoutY="75.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="whiteHexagon" fx:id="terrain2" layoutX="278.0" layoutY="75.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="greenHexagon" fx:id="terrain3" layoutX="345.0" layoutY="75.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blueHexagon" fx:id="terrain4" layoutX="411.0" layoutY="75.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="yellowHexagon" fx:id="terrain5" layoutX="476.0" layoutY="75.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="redHexagon" fx:id="terrain6" layoutX="539.0" layoutY="75.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="brownHexagon" fx:id="terrain7" layoutX="604.0" layoutY="75.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blackHexagon" fx:id="terrain8" layoutX="670.0" layoutY="75.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="redHexagon" fx:id="terrain9" layoutX="736.0" layoutY="75.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="greenHexagon" fx:id="terrain10" layoutX="802.0" layoutY="75.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blueHexagon" fx:id="terrain11" layoutX="867.0" layoutY="75.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="redHexagon" fx:id="terrain12" layoutX="932.0" layoutY="75.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blackHexagon" fx:id="terrain13" layoutX="997.0" layoutY="75.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="yellowHexagon" fx:id="terrain14" layoutX="249.0" layoutY="122.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain15" layoutX="314.0" layoutY="122.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain16" layoutX="379.0" layoutY="122.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="brownHexagon" fx:id="terrain17" layoutX="444.0" layoutY="122.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blackHexagon" fx:id="terrain18" layoutX="507.0" layoutY="122.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain19" layoutX="574.0" layoutY="122.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain20" layoutX="640.0" layoutY="122.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="yellowHexagon" fx:id="terrain21" layoutX="706.0" layoutY="122.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blackHexagon" fx:id="terrain22" layoutX="769.0" layoutY="122.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain23" layoutX="835.0" layoutY="122.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain24" layoutX="900.0" layoutY="122.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="yellowHexagon" fx:id="terrain25" layoutX="965.0" layoutY="122.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain26" layoutX="216.0" layoutY="168.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" visible="false" />
+             <Button id="riverHexagon" fx:id="terrain27" layoutX="281.0" layoutY="168.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blackHexagon" fx:id="terrain28" layoutX="347.0" layoutY="168.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain29" layoutX="411.0" layoutY="168.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="whiteHexagon" fx:id="terrain30" layoutX="475.0" layoutY="168.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain31" layoutX="541.0" layoutY="168.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="greenHexagon" fx:id="terrain32" layoutX="607.0" layoutY="168.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain33" layoutX="673.0" layoutY="168.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="greenHexagon" fx:id="terrain34" layoutX="739.0" layoutY="168.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain35" layoutX="802.0" layoutY="168.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="whiteHexagon" fx:id="terrain36" layoutX="867.0" layoutY="168.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain37" layoutX="933.0" layoutY="168.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain38" layoutX="997.0" layoutY="168.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" visible="false" />
+             <Button id="greenHexagon" fx:id="terrain39" layoutX="249.0" layoutY="218.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blueHexagon" fx:id="terrain40" layoutX="314.0" layoutY="218.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="yellowHexagon" fx:id="terrain41" layoutX="379.0" layoutY="218.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain42" layoutX="443.0" layoutY="218.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain43" layoutX="508.0" layoutY="218.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="redHexagon" fx:id="terrain44" layoutX="572.0" layoutY="218.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blueHexagon" fx:id="terrain45" layoutX="639.0" layoutY="218.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain46" layoutX="703.0" layoutY="218.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="redHexagon" fx:id="terrain47" layoutX="769.0" layoutY="218.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain48" layoutX="835.0" layoutY="218.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="redHexagon" fx:id="terrain49" layoutX="901.0" layoutY="218.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="brownHexagon" fx:id="terrain50" layoutX="965.0" layoutY="218.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blackHexagon" fx:id="terrain51" layoutX="217.0" layoutY="265.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="brownHexagon" fx:id="terrain52" layoutX="283.0" layoutY="265.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="redHexagon" fx:id="terrain53" layoutX="347.0" layoutY="265.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blueHexagon" fx:id="terrain54" layoutX="411.0" layoutY="265.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blackHexagon" fx:id="terrain55" layoutX="476.0" layoutY="265.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="brownHexagon" fx:id="terrain56" layoutX="542.0" layoutY="265.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="whiteHexagon" fx:id="terrain57" layoutX="605.0" layoutY="265.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="yellowHexagon" fx:id="terrain58" layoutX="672.0" layoutY="265.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain59" layoutX="736.0" layoutY="265.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain60" layoutX="803.0" layoutY="265.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="greenHexagon" fx:id="terrain61" layoutX="869.0" layoutY="265.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blackHexagon" fx:id="terrain62" layoutX="933.0" layoutY="265.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blueHexagon" fx:id="terrain63" layoutX="998.0" layoutY="265.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="whiteHexagon" fx:id="terrain64" layoutX="249.0" layoutY="311.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="greenHexagon" fx:id="terrain65" layoutX="315.0" layoutY="311.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain66" layoutX="379.0" layoutY="311.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain67" layoutX="444.0" layoutY="311.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="yellowHexagon" fx:id="terrain68" layoutX="509.0" layoutY="311.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="greenHexagon" fx:id="terrain69" layoutX="574.0" layoutY="311.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain70" layoutX="637.0" layoutY="311.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain71" layoutX="705.0" layoutY="311.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain72" layoutX="772.0" layoutY="311.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="brownHexagon" fx:id="terrain73" layoutX="835.0" layoutY="311.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="whiteHexagon" fx:id="terrain74" layoutX="902.0" layoutY="311.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="brownHexagon" fx:id="terrain75" layoutX="965.0" layoutY="311.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain76" layoutX="216.0" layoutY="361.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" visible="false" />
+             <Button id="riverHexagon" fx:id="terrain77" layoutX="281.0" layoutY="361.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain78" layoutX="347.0" layoutY="361.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="whiteHexagon" fx:id="terrain79" layoutX="411.0" layoutY="361.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain80" layoutX="476.0" layoutY="361.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="redHexagon" fx:id="terrain81" layoutX="542.0" layoutY="361.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain82" layoutX="604.0" layoutY="361.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="greenHexagon" fx:id="terrain83" layoutX="672.0" layoutY="361.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain84" layoutX="739.0" layoutY="361.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="yellowHexagon" fx:id="terrain85" layoutX="802.0" layoutY="361.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blackHexagon" fx:id="terrain86" layoutX="867.0" layoutY="361.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blueHexagon" fx:id="terrain87" layoutX="932.0" layoutY="361.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="yellowHexagon" fx:id="terrain88" layoutX="999.0" layoutY="361.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="yellowHexagon" fx:id="terrain89" layoutX="250.0" layoutY="410.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blueHexagon" fx:id="terrain90" layoutX="314.0" layoutY="410.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="brownHexagon" fx:id="terrain91" layoutX="379.0" layoutY="410.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain92" layoutX="444.0" layoutY="410.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain93" layoutX="509.0" layoutY="410.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain94" layoutX="572.0" layoutY="410.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blueHexagon" fx:id="terrain95" layoutX="637.0" layoutY="410.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blackHexagon" fx:id="terrain96" layoutX="703.0" layoutY="410.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain97" layoutX="769.0" layoutY="410.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="whiteHexagon" fx:id="terrain98" layoutX="835.0" layoutY="410.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="brownHexagon" fx:id="terrain99" layoutX="900.0" layoutY="410.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="whiteHexagon" fx:id="terrain100" layoutX="965.0" layoutY="410.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="redHexagon" fx:id="terrain101" layoutX="216.0" layoutY="458.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blackHexagon" fx:id="terrain102" layoutX="281.0" layoutY="458.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="whiteHexagon" fx:id="terrain103" layoutX="347.0" layoutY="458.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blueHexagon" fx:id="terrain104" layoutX="412.0" layoutY="458.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="redHexagon" fx:id="terrain105" layoutX="475.0" layoutY="458.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="greenHexagon" fx:id="terrain106" layoutX="539.0" layoutY="458.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="yellowHexagon" fx:id="terrain107" layoutX="604.0" layoutY="458.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="redHexagon" fx:id="terrain108" layoutX="670.0" layoutY="458.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="whiteHexagon" fx:id="terrain109" layoutX="736.0" layoutY="458.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="riverHexagon" fx:id="terrain110" layoutX="801.0" layoutY="458.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="blueHexagon" fx:id="terrain111" layoutX="868.0" layoutY="458.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="greenHexagon" fx:id="terrain112" layoutX="934.0" layoutY="458.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
+             <Button id="redHexagon" fx:id="terrain113" layoutX="997.0" layoutY="458.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="65.0" stylesheets="@../CSS/styles.css" />
          </children>
       </Pane>
-   </center>
-   <top>
-      <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="1941.0" text="Button" BorderPane.alignment="CENTER" />
-   </top>
-   <left>
-      <Button mnemonicParsing="false" prefHeight="1055.0" prefWidth="70.0" text="Button" BorderPane.alignment="CENTER" />
-   </left>
-   <right>
-      <Button mnemonicParsing="false" prefHeight="953.0" prefWidth="71.0" text="Button" BorderPane.alignment="CENTER" />
-   </right>
-   <bottom>
-      <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="2172.0" text="Button" BorderPane.alignment="CENTER" />
-   </bottom>
-</BorderPane>
+
+
+</VBox>

@@ -1,35 +1,39 @@
 #blackHexagon {
     -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
-    -fx-background-image: url("../Images/blackTerrain.png");
+    -fx-background-image: url("../Images/TerrainImages/blackTerrain.png");
 }
 #blueHexagon {
     -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
-    -fx-background-image: url("../Images/blueTerrain.png");
+    -fx-background-image: url("../Images/TerrainImages/blueTerrain.png");
 }
 #brownHexagon {
     -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
-    -fx-background-image: url("../Images/brownTerrain.png");
+    -fx-background-image: url("../Images/TerrainImages/brownTerrain.png");
 }
 #greenHexagon {
     -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
-    -fx-background-image: url("../Images/greenTerrain.png");
+    -fx-background-image: url("../Images/TerrainImages/greenTerrain.png");
 }
 #redHexagon {
     -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
-    -fx-background-image: url("../Images/redTerrain.png");
+    -fx-background-image: url("../Images/TerrainImages/redTerrain.png");
 }
 #whiteHexagon {
     -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
-    -fx-background-image: url("../Images/whiteTerrain.png");
+    -fx-background-image: url("../Images/TerrainImages/whiteTerrain.png");
 }
 #yellowHexagon {
     -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
-    -fx-background-image: url("../Images/yellowTerrain.png");
+    -fx-background-image: url("../Images/TerrainImages/yellowTerrain.png");
 }
 #riverHexagon {
     -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
     -fx-background-image: url("../Images/river.jpeg");
 }
+
+
+
+
 #islam_track{
     -fx-background-image: url("../Images/air.png");
 }
