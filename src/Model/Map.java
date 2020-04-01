@@ -258,10 +258,15 @@ public class Map{
 // } 
 
 // public boolean isTown(Space space1, String playerColor){
-//    if(calculateTownScore(Space space1, String playerColor) >= 7)
+//    if(calculateTownScore(Space space1, String playerColor) >= 7){
+//       townScore = 0;   
 //       return true;
-//    else
+//    }  
+//   
+//    else{
+//       townScore = 0;   
 //       return false;
+//    }
 // }
 
 //    public void transformTerrain(Space original, Space newSpace) {
