@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Map{
    public Space[][] spaces;
+   public static int townScore = 0; // bu variable'ı şimdilik istown çalışsın diye ekledim. Belki durur ama oo olması icin buradan kaldırıp
+// player classına da ekleyebiliriz, is town'a da parameter olarak player objesi alırız, öyle de is görür.
 //   public Map(){
 //       spaces = new Space[9][13];
 //       for(int i = 0; i < 117; i++) {
@@ -226,9 +228,41 @@ public class Map{
 //       }
 //    }
      
-//    public boolean isTown(Space newBuilt) {
+// public int calculateTownScore(Space space1, String playerColor){
+//    ArrayList<Space> visited = new ArrayList<Space>();
+//    Space[] adjacents = adjacencyList(space1);
+//    boolean isOver = true;
+   
+//       for( int i = 0; i < adjacents.length && isOver ; i++){     
+//           if(!(adjacents[i].getColor().equals(playerColor)) || visited.contains(adjacents[i]) || !adjacents[i].isOccupied() )
+//              isOver = true;
+//           else
+//              isOver = false;           
+//       }
+      
+//       if( isOver){
+//          townScore = townScore + space1.getStructure().getPoint ;
+//          return townScore
+//       }
+      
+//       else{
+//          for( int i = 0; i < adjacents.length; i++){
+//             if(adjacents[i].getColor().equals(playerColor) && !(visited.contains(adjacents[i])) && adjacents[i].isOccupied()){
+//                visited.add(adjacents[i]);  
+//                return = calculateTownScore(adjacents[i], playerColor); 
+//             } 
+//             else
+//                return 0;
+//          }         
+//       }        
+// } 
+
+// public boolean isTown(Space space1, String playerColor){
+//    if(calculateTownScore(Space space1, String playerColor) >= 7)
+//       return true;
+//    else
 //       return false;
-//    }
+// }
 
 //    public void transformTerrain(Space original, Space newSpace) {
 //       int row = getRow(original);
