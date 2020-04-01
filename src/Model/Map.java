@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Map{
    public Space[][] spaces;
+   public static int townScore = 0; // bu variable'ı şimdilik istown çalışsın diye ekledim. Belki durur ama oo olması icin buradan kaldırıp
+// player classına da ekleyebiliriz, is town'a da parameter olarak player objesi alırız, öyle de is görür.
 //   public Map(){
 //       spaces = new Space[9][13];
 //       for(int i = 0; i < 117; i++) {
@@ -32,10 +34,6 @@ public class Map{
    {
       this.spaces = spaces;
    }
-   public Map()
-   {
-
-   }
 
    public void setSpaces(Space[][] spaces) {
       this.spaces = spaces;
@@ -48,7 +46,6 @@ public class Map{
        for(int i = 0; i < 117 || !found ; i++) {
            row = i / 13;
            column = i % 13;
-
            if (spaces[row][column].equals(space1)){
                found = true;
            }
@@ -63,7 +60,6 @@ public class Map{
        for(int i = 0; i < 117 || !found ; i++) {
            row = i / 13;
            column = i % 13;
-
            if (spaces[row][column].equals(space1)){
                found = true;
            }
@@ -165,7 +161,7 @@ public class Map{
    
 //    public Space[] adjacencyList(Space space1)
 //    {
-//        int[] adjacents = new int[6];
+//        Space[] adjacents = new int[6];
 //        int row, column = -1;
 //        int j = 0;
        
@@ -190,33 +186,33 @@ public class Map{
 //       // bridge case 1
 //       if (math.abs(row1 - row2) == 2 && col1 == col2){
 //          if (row1 % 2 == 0){
-//             if (spaces[(row1+row2)/2][col1] instanceof River && spaces[(row1+row2)/2][col1 - 1] instanceof River)
+//             if (spaces[(row1+row2)/2][col1].getType().equals("River") && spaces[(row1+row2)/2][col1 - 1].getType().equals("River"))
 //                return true;
 //          }
 //          else{
-//             if (spaces[(row1+row2)/2][col1] instanceof River && spaces[(row1+row2)/2][col1 + 1] instanceof River)
+//             if (spaces[(row1+row2)/2][col1].getType().equals("River") && spaces[(row1+row2)/2][col1 + 1].getType().equals("River"))
 //                return true;
 //          }
 //       }
       
 //       // bridge case 2
 //      if (math.abs(row1 - row2) == 1){
-//       if((col2 == col1 + 1) && (spaces[row1][col1 + 1] instanceof River && spaces[row + 1][col1] instanceof River))
+//       if((col2 == col1 + 1) && (spaces[row1][col1 + 1].getType().equals("River") && spaces[row + 1][col1].getType().equals("River")))
 //             return true;
-//       else if ((col2 == col1 - 2) && (spaces[row1][col1 - 1] instanceof River && spaces[row - 1][col1 - 1] instanceof River))
+//       else if ((col2 == col1 - 2) && (spaces[row1][col1 - 1].getType().equals("River") && spaces[row - 1][col1 - 1].getType().equals("River")))
 //             return true;
-//       else if ((col2 == col1 - 2) && (spaces[row1][col1 - 1] instanceof River && spaces[row + 1][col1 - 1] instanceof River))
+//       else if ((col2 == col1 - 2) && (spaces[row1][col1 - 1].getType().equals("River") && spaces[row + 1][col1 - 1].getType().equals("River")))
 //             return true;
-//       else if ((col2 == col1 + 1) && (spaces[row1][col1 + 1] instanceof River && spaces[row - 1][col1] instanceof River))
+//       else if ((col2 == col1 + 1) && (spaces[row1][col1 + 1].getType().equals("River") && spaces[row - 1][col1].getType().equals("River")))
 //             return true;
 //       /////
-//       else if((col2 == col1 + 2) && (spaces[row1][col1 + 1] instanceof River && spaces[row + 1][col1 + 1] instanceof River))
+//       else if((col2 == col1 + 2) && (spaces[row1][col1 + 1].getType().equals("River") && spaces[row + 1][col1 + 1].getType().equals("River")))
 //             return true;
-//       else if ((col2 == col1 - 1) && (spaces[row1][col1 - 1] instanceof River && spaces[row - 1][col1] instanceof River))
+//       else if ((col2 == col1 - 1) && (spaces[row1][col1 - 1].getType().equals("River") && spaces[row - 1][col1].getType().equals("River")))
 //             return true;
-//       else if ((col2 == col1 - 1) && (spaces[row1][col1 - 1] instanceof River && spaces[row + 1][col1] instanceof River))
+//       else if ((col2 == col1 - 1) && (spaces[row1][col1 - 1].getType().equals("River") && spaces[row + 1][col1].getType().equals("River")))
 //             return true;
-//       else if ((col2 == col1 + 2) && (spaces[row1][col1 + 1] instanceof River && spaces[row - 1][col1 + 1] instanceof River))
+//       else if ((col2 == col1 + 2) && (spaces[row1][col1 + 1].getType().equals("River") && spaces[row - 1][col1 + 1].getType().equals("River")))
 //             return true;
 //      }
 //      return false;
@@ -232,9 +228,41 @@ public class Map{
 //       }
 //    }
      
-//    public boolean isTown(Space newBuilt) {
+// public int calculateTownScore(Space space1, String playerColor){
+//    ArrayList<Space> visited = new ArrayList<Space>();
+//    Space[] adjacents = adjacencyList(space1);
+//    boolean isOver = true;
+   
+//       for( int i = 0; i < adjacents.length && isOver ; i++){     
+//           if(!(adjacents[i].getColor().equals(playerColor)) || visited.contains(adjacents[i]) || !adjacents[i].isOccupied() )
+//              isOver = true;
+//           else
+//              isOver = false;           
+//       }
+      
+//       if( isOver){
+//          townScore = townScore + space1.getStructure().getPoint ;
+//          return townScore
+//       }
+      
+//       else{
+//          for( int i = 0; i < adjacents.length; i++){
+//             if(adjacents[i].getColor().equals(playerColor) && !(visited.contains(adjacents[i])) && adjacents[i].isOccupied()){
+//                visited.add(adjacents[i]);  
+//                return = calculateTownScore(adjacents[i], playerColor); 
+//             } 
+//             else
+//                return 0;
+//          }         
+//       }        
+// } 
+
+// public boolean isTown(Space space1, String playerColor){
+//    if(calculateTownScore(Space space1, String playerColor) >= 7)
+//       return true;
+//    else
 //       return false;
-//    }
+// }
 
 //    public void transformTerrain(Space original, Space newSpace) {
 //       int row = getRow(original);
@@ -243,15 +271,15 @@ public class Map{
 //       original = null;
 //    }
    
-//    public boolean UpgradeStructure(Space space1, String playerColor, int upgradeType){
+//    public boolean upgradeStructure(Space space1, String playerColor, int upgradeType){
 //       if(space1.getColor == playerColor && space1.getIsOccupied()){
-//        if( choice == 1 && space1.getStructure() instanceof Dwelling)
+//        if( choice == 1 && space1.getStructure().equals("Dwelling"))
 //           return true;
-//        if( choice == 2 && space1.getStructure() instanceof TradingHouse)  
+//        if( choice == 2 && space1.getStructure().equals("TradingHouse"))  
 //           return true;
-//        if( choice == 3 && space1.getStructure() instanceof TradingHouse)  
+//        if( choice == 3 && space1.getStructure().equals("TradingHouse"))  
 //           return true;
-//        if( choice == 4 && space1.getStructure() instanceof Temple)  
+//        if( choice == 4 && space1.getStructure().equals("Temple"))  
 //           return true;
 //       }
       
@@ -260,8 +288,8 @@ public class Map{
 //    }
    
                                
-//    public ArrayList<Integer> adjacentPlayer(Space space, String playerColor) {
-//       int[] adjacents = adjacencyList(space);
+//    public ArrayList<Space> adjacentPlayer(Space space1, String playerColor) {
+//       Space[] adjacents = adjacencyList(space1);
 //       ArrayList<Space> list=new ArrayList<Space>();
 //       for (int i = 0; i < adjacents.length; i++){
 //          if (adjacents[i].getColor() != playerColor && adjacents[i].isOccupied()){
@@ -273,15 +301,15 @@ public class Map{
    
 //    public boolean canBuild(Space space1, String playerColor){
 //       if(space1.getColor() == playerColor && !space1.isOccupied()){
-//          int[] adjacents = adjacencyList(space1);
+//          Space[] adjacents = adjacencyList(space1);
 //          for (int i = 0; i < adjacents.length; i++){
-//             if (adjacents[i].getColor() == playerColor && adjacents[i].isOccupied()){
+//             if (adjacents[i].getColor() == playerColor && !adjacents[i].isOccupied()){
 //                return true;
 //             }
 //          }
          
 //          Space[] bridgeList = space1.getBridgeList();
-//          if( bridgeList[0].getColor() == playerColor && bridgeList[0].isOccupied())   
+//          if( bridgeList[0].getColor() == playerColor && !(bridgeList[0].isOccupied()))   
 //             return true;
 //       }
 //       return false;
