@@ -26,10 +26,7 @@
     -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
     -fx-background-image: url("../Images/TerrainImages/yellowTerrain.png");
 }
-#riverHexagon {
-    -fx-shape:"M 250 250 L 350 300 L 450 250 L 450 150 L 350 100 L 250 150 L 250 250 ";
-    -fx-background-image: url("../Images/river.jpeg");
-}
+
 
 
 
