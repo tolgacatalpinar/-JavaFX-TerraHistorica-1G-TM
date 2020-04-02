@@ -6,6 +6,7 @@ public class Map{
    public Space[][] spaces;
    public static int townScore = 0; // bu variable'ı şimdilik istown çalışsın diye ekledim. Belki durur ama oo olması icin buradan kaldırıp
 // player classına da ekleyebiliriz, is town'a da parameter olarak player objesi alırız, öyle de is görür.
+   public ArrayList<Space> visited = new ArrayList<Space>(); // 
 //   public Map(){
 //       spaces = new Space[9][13];
 //       for(int i = 0; i < 117; i++) {
@@ -229,7 +230,6 @@ public class Map{
 //    }
      
 // public int calculateTownScore(Space space1, String playerColor){
-//    ArrayList<Space> visited = new ArrayList<Space>();
 //    Space[] adjacents = adjacencyList(space1);
 //    boolean isOver = true;
    
@@ -259,12 +259,14 @@ public class Map{
 
 // public boolean isTown(Space space1, String playerColor){
 //    if(calculateTownScore(Space space1, String playerColor) >= 7){
-//       townScore = 0;   
+//       townScore = 0; 
+//       visited.clear();   
 //       return true;
 //    }  
 //   
 //    else{
-//       townScore = 0;   
+//       townScore = 0;
+//       visited.clear();
 //       return false;
 //    }
 // }
