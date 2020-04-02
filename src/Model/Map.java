@@ -69,57 +69,6 @@ public class Map{
    }
 
 
-   public int[] buildDwelling(Space space1) {
-       int[] location = null; /// burada belki hata olabilir
-       if ( space1.getType().equals("River")){
-           location = new int[2];
-           int row = getRow(space1);
-           int column = getColumn(space1);
-           location[0] = row;
-           location[1] = column;
-       }
-       return location;
-   }
-
-   public boolean isDirectAdjacent(Space space1, Space space2) {
-      // We did not control if one of the spaces is river, because even one of them is river this info can be useful.
-      int row1 = getRow(space1);
-      int row2 = getRow(space2);
-      int col1 = getColumn(space1);
-      int col2 = getColumn(space2);
-      if (row1 % 2 == 0){
-          if ( ((row2 == row1 + 1) || (row2 == row1 - 1)) && ((col2 ==  col1 - 1) || (col2 == col1))){
-           return true;
-          }
-      }
-
-      if (row1 % 2 == 1){
-           if ( ((row2 == row1 + 1) || (row2 == row1 - 1)) && ((col2 ==  col1 + 1) || (col2 == col1))){
-           return true;
-           }
-      }
-
-      if((row1 == row2) && ((col1 == col2 + 1) || (col1 == col2 - 1))){
-          return true;
-      }
-
-      return false;
-   }
-
-   public boolean isIndirectAdjacent(Space space1, Space space2) {
-      int row1 = getRow(space1);
-      int row2 = getRow(space2);
-      int col1 = getColumn(space1);
-      int col2 = getColumn(space2);
-      return false;
-   }
-
-   public boolean isTown(Space newBuilt) {
-      return false;
-   }
-
-
-
 //    public int[] buildDwelling(Space space1, String color) {
 //        int[] location = null; /// burada belki hata olabilir
 //        if ( canBuild(space1, color)){ 
@@ -176,7 +125,57 @@ public class Map{
 //        }
 //        return adjacents;
 //    }
+   
+//    public boolean isUndirectAdjacent(Space space1, Space space2, int shippingLevel){
+//    boolean result;
+//    result = isReachable(space1, space2, shippingLevel, 0, false, null);
+//    visited.clear();
+//    return result;
+// }
 
+// public boolean isReachable(Space space1, Space space2, int shippingLevel, int counter,boolean found, ArrayList<Space> previous){
+//    Space[] adjacents = adjacencyList(space1);
+//    boolean isOver = false;
+//    ArrayList<Space> rivers = new ArrayList<Space>();
+   
+//    for(int i = 0; i < rivers.size() && isOver; i++){
+//       if(visited.contains(rivers.get(i)) || counter >= shippingLevel)
+//          isOver = true;
+//       else
+//          isOver = false;
+//    }
+   
+//    if (isOver || found){
+//       counter--;
+//       return found;
+//    }
+   
+//    else{
+//        for(int i = 0; i < adjacents.length && isOver; i++){
+//           if(adjacents[i] == space2){
+//              found == true;
+//              return found;
+//           }
+          
+//           if(!visited.contains(adjacents[i]) && adjacents[i].getType.equals("River") && !previous.contains(adjacents[i]) ) {
+//              counter++;
+//              previous = rivers;
+//              visited.add(adjacents[i]);
+//              isReachable(adjacents[i], space2, shippingLevel, counter, previous);
+//           }
+//        }    
+//    }
+// }
+   
+// public ArrayList<Space> adjacentRivers(Space space1){
+//    ArrayList<Space> list = new ArrayList<Space>();
+//    Space[] adjacents = adjacencyList(space1);
+   
+//    for(int i = 0; i < adjacents.length(); i++){
+//       if(adjacents[i].getType.equals("River"))
+//          space.add(adjacents[i]);
+//    }
+// }
 
 //    public boolean canBuildBridge( Space space1, Space space2 ) {
 //       int row1 = getRow(space1);
