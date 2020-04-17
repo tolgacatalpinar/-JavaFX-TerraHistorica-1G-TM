@@ -50,7 +50,12 @@ public class ScoringTile {
      * @param isRequiredSpade determines tile require Spade progress to get bonus or not.
      * @param isRequiredTown determines tile require building a town to get bonus or not.
      */
-    public ScoringTile( int requiredIslam, int requiredBudism, int requiredChrist, int requiredJudaism, int priestBonus, int powerBonus, int workerBonus, int victoryBonus, int spadeBonus,int goldBonus, boolean isDwellingBonus, boolean isTradingHouseBonus, boolean isStrongHoldBonus, boolean isRequiredIslam, boolean isRequiredHinduism, boolean isRequiredChrist, boolean isRequiredJudaism, boolean isRequiredSpade, boolean isRequiredTown) {
+    public ScoringTile( int requiredIslam, int requiredBudism, int requiredChrist, int requiredJudaism,
+                        int priestBonus, int powerBonus, int workerBonus, int victoryBonus,
+                        int spadeBonus,int goldBonus, boolean isDwellingBonus, boolean isTradingHouseBonus,
+                        boolean isStrongHoldBonus, boolean isRequiredIslam, boolean isRequiredHinduism,
+                        boolean isRequiredChrist, boolean isRequiredJudaism, boolean isRequiredSpade,
+                        boolean isRequiredTown) {
         this.requiredIslam = requiredIslam;
         this.requiredBudism = requiredBudism;
         this.requiredChrist = requiredChrist;

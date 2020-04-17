@@ -40,7 +40,10 @@ public class FavorTile {
      * @param isPassingBonusForTradingHouse determines tile has passing bonus for trading house each round bonus or not.
      * Rule : From now on, when passing (see Action #8, page 14), get 2/3/3/4 Victory points for 1/2/3/4 of your Trading houses on the Game board.
      */
-    public FavorTile(int numberOfPlayer,int islamBonus, int christianityBonus, int hinduismBonus, int jewBonus, int neededCombinedPowerTown, int powerBonus, int workerBonus, int goldBonus, int victoryPoint, boolean isSpecialCult, boolean isTownBonus, boolean isTradingHouse, boolean isDwellingBonus, boolean isPassingBonusForTradingHouse) {
+    public FavorTile(int numberOfPlayer,int islamBonus, int christianityBonus, int hinduismBonus,
+                     int jewBonus, int neededCombinedPowerTown, int powerBonus, int workerBonus, int goldBonus,
+                     int victoryPoint, boolean isSpecialCult, boolean isTownBonus, boolean isTradingHouse,
+                     boolean isDwellingBonus, boolean isPassingBonusForTradingHouse) {
         this.numberOfPlayer = numberOfPlayer;
         this.islamBonus = islamBonus;
         this.christianityBonus = christianityBonus;

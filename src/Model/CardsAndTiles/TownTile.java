@@ -26,7 +26,8 @@ public class TownTile {
      * @param workerBonus worker bonus income.
      * @param goldBonus gold bonus income.
      */
-    public TownTile(int powerBonus, int priestBonus, int victoryBonus, int christianityPoint, int hinduismPoint, int islamPoint, int jewishPoint,  int workerBonus, int goldBonus) {
+    public TownTile(int powerBonus, int priestBonus, int victoryBonus, int christianityPoint,
+                    int hinduismPoint, int islamPoint, int jewishPoint,  int workerBonus, int goldBonus) {
         this.powerBonus = powerBonus;
         this.priestBonus = priestBonus;
         keyCount = 1;

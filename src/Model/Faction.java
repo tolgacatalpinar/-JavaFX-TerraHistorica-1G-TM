@@ -61,31 +61,9 @@ public class Faction {
     public int spadeNeededToTerraformMountains = 0;
     public int spadeNeededToTerraformWasteland = 0;
     public int spadeNeededToTerraformDesert = 0;
-    public int freeSpadesToTerraformIntoHome;
-    public int priestNeededToSkipTile;
-    public boolean freeTerraFormOnSpecialAction;
-    public boolean gainFavorTileAfterStronghold;
-    public boolean gainActionTokenAfterStronghold;
-    public int advanceOnCultTrackValue;
-    public int additionalVictoryPoints;
-    public boolean payNoCostForDwelling;
-    public boolean tradeVictoryPointForCoin;
-    public boolean tradeCoinsForVictoryPoint;
-    public int getPowerAfterStronghold;
-    public int gainPowerForEachSpade;
-    public int payPriestGetVictoryPoints;
-    public boolean payPriestWhenTransform;
-    public boolean giveWorkersForPriest;
-    public int additionalVictoryPointForEachSpace;
-    public int getVictoryPointsAfterStronghold;
-    public int workerCostOfBridge;
-    public int victoryPointForEachConnectingBridges;
+
     public boolean hasShipping = true;
 
-    private int powerIncome;
-    private int workerIncome;
-    private int priestIncome;
-    private int coinIncome;
 
     public void afterStronghold() {
 

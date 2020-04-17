@@ -30,7 +30,8 @@ public class BonusCard {
      * @param isTradeHouse determine there is trading house bonus or not.
      * @param isSanctuary determine there is sanctuary or stronghold bonus or not.
      */
-    public BonusCard(int notTakenBonus, boolean playerOccupied,int goldBonus, int powerBonus, int shippingRange, int workerBonus, int priestBonus, boolean spacialSpade, boolean specialCult, boolean isDwelling, boolean isTradeHouse, boolean isSanctuary) {
+    public BonusCard(int notTakenBonus, boolean playerOccupied,int goldBonus, int powerBonus,
+                     int shippingRange, int workerBonus, int priestBonus, boolean spacialSpade, boolean specialCult, boolean isDwelling, boolean isTradeHouse, boolean isSanctuary) {
         this.notTakenBonus = notTakenBonus;
         this.playerOcupied = playerOccupied;
         this.goldBonus = goldBonus;
