@@ -2,12 +2,7 @@ package Model;
 
 public class Faction {
 
-    public final int MAX_DWELLING = 8;
-    public final int MAX_TRADING_POST = 4;
-    public final int MAX_TEMPLE = 3;
-    public final int MAX_SANCTUARY = 1;
-    public final int MAX_STRONGHOLD = 1;
-    public int MAX_SHIPPING = 3;
+
     public int INITIAL_VICTORY_POINT = 19;
     public int INITIAL_WORKER  = 3;
     public int INITIAL_WORKER_INCOME = 1;
@@ -22,6 +17,12 @@ public class Faction {
     public int INITIAL_PRIEST = 0;
     public int INITIAL_GOLD = 15;
     public int INITIAL_SPADE = 0;
+    public final int MAX_DWELLING = 8;
+    public final int MAX_TRADING_POST = 4;
+    public final int MAX_TEMPLE = 3;
+    public final int MAX_SANCTUARY = 1;
+    public final int MAX_STRONGHOLD = 1;
+    public int MAX_SHIPPING = 3;
     public int SPADE_PRIEST_COST = 1;
     public int SPADE_GOLD_COST = 5;
     public int SPADE_WORKER_COST = 2;
