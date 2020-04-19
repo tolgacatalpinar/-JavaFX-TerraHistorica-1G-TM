@@ -1,4 +1,4 @@
-package Controller;
+package Model;
 
 import Model.*;
 import Model.ReligionSubclasses.*;
@@ -10,16 +10,17 @@ import Model.FactionSubclasses.DariusTheGreat;
 import Model.FactionSubclasses.VladTheImpaler;
 import View.*;
 
+import java.util.ArrayList;
+
 
 public class GameHandler {
 
     Player[] playerList;
     CardsAndTiles cardsAndTiles;
     Religion[] religions;
-    public GameHandler( int playerSize)
+    public GameHandler(Player[] playerList, int playerSize)
     {
         cardsAndTiles = new CardsAndTiles(playerSize);
-        playerList = new Player[playerSize];
         religions = new Religion[4];
 
         int [] player_initial_islam = new int[playerSize];

@@ -47,11 +47,12 @@ public class Player {
     private boolean buildingDwellingBonus; //When building a Dwelling, immediately get 2 additional Victory points.
     private int townPowerValue;
 
-    public Player(String nickName, int playerId) {
+    public Player(Faction faction, String nickName, int playerId) {
         this.nickName = nickName;
         this.playerId = playerId;
         specialActionToken = new SpecialActionToken();
-
+        this.faction = faction;
+        initializePlayer();
     }
 
     public void setFaction(Faction faction) {

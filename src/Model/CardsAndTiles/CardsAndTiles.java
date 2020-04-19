@@ -20,7 +20,8 @@ public class CardsAndTiles {
         createFavorTile(favorTiles);
         createScoringTile(scoringTiles);
         selectedBonusCards = selectedBonusCard(bonusCards,playerNumber);
-        selectedScoringTiles = selectedScoringTiles(scoringTiles);
+        //The line below gives nullpointerexception since other parts of the code are not yet completed. - Tolga
+        //selectedScoringTiles = selectedScoringTiles(scoringTiles);
     }
 
 

@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Faction;
+import Model.FactionSubclasses.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ChooseFactionMenuController  implements Initializable {
@@ -38,7 +41,8 @@ public class ChooseFactionMenuController  implements Initializable {
     Image imProfile;
 
     String player1Name, player2Name, player3Name, player4Name, player5Name;
-
+    ArrayList<String> playerNames = new ArrayList<>();
+    ArrayList<Faction> factions = new ArrayList<>();
     public int numbersOfPlayer;
 
     int counter = 0;
@@ -53,6 +57,12 @@ public class ChooseFactionMenuController  implements Initializable {
         player3Name = player3;
         player4Name = player4;
         player5Name = player5;
+
+        playerNames.add(player1);
+        playerNames.add(player2);
+        playerNames.add(player3);
+        playerNames.add(player4);
+        playerNames.add(player5);
     }
 
     @FXML
@@ -68,9 +78,14 @@ public class ChooseFactionMenuController  implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/GameView.fxml"));
         Parent root = loader.load();
 
+        GameController gameController = loader.getController();
+        gameController.loadPlayers(factions, playerNames);
+
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+
 
     }
 
@@ -120,6 +135,8 @@ public class ChooseFactionMenuController  implements Initializable {
     public void vladTheImpalerSelected( MouseEvent event) throws IOException {
 
         if(counter < numbersOfPlayer) {
+            Faction newFaction = new VladTheImpaler();
+            factions.add(newFaction);
             wastelandFactionSelected.setVisible(true);
             chooseVladTheImpaler.setVisible(false);
             chooseGilgamesh.setVisible(false);
@@ -133,6 +150,8 @@ public class ChooseFactionMenuController  implements Initializable {
     public void gilgameshSelected( MouseEvent event) throws IOException {
 
         if(counter < numbersOfPlayer) {
+            Faction newFaction = new Gilgamesh();
+            factions.add(newFaction);
             wastelandFactionSelected.setVisible(true);
             chooseVladTheImpaler.setVisible(false);
             chooseGilgamesh.setVisible(false);
@@ -145,6 +164,8 @@ public class ChooseFactionMenuController  implements Initializable {
     @FXML
     public void morganLeFaySelected( MouseEvent event) throws IOException {
         if(counter < numbersOfPlayer) {
+            Faction newFaction = new MorganLeFay();
+            factions.add(newFaction);
             forestFactionSelected.setVisible(true);
             chooseMorganLeFay.setVisible(false);
             chooseHelenOfTroy.setVisible(false);
@@ -157,6 +178,8 @@ public class ChooseFactionMenuController  implements Initializable {
     @FXML
     public void helenOfTroySelected( MouseEvent event) throws IOException {
         if(counter < numbersOfPlayer) {
+           Faction newFaction = new HelenOfTroy();
+           factions.add(newFaction);
             forestFactionSelected.setVisible(true);
             chooseMorganLeFay.setVisible(false);
             chooseHelenOfTroy.setVisible(false);
@@ -169,6 +192,8 @@ public class ChooseFactionMenuController  implements Initializable {
     @FXML
     public void erikTheRedSelected( MouseEvent event) throws IOException {
         if(counter < numbersOfPlayer) {
+           Faction newFaction = new ErikTheRed();
+           factions.add(newFaction);
             lakesFactionSelected.setVisible(true);
             chooseErikTheRed.setVisible(false);
             chooseAmerigoVespucci.setVisible(false);
@@ -181,6 +206,8 @@ public class ChooseFactionMenuController  implements Initializable {
     @FXML
     public void amerigoVespucciSelected( MouseEvent event) throws IOException {
         if(counter < numbersOfPlayer) {
+           Faction newFaction = new AmerigoVespucci();
+           factions.add(newFaction);
             lakesFactionSelected.setVisible(true);
             chooseErikTheRed.setVisible(false);
             chooseAmerigoVespucci.setVisible(false);
@@ -193,6 +220,8 @@ public class ChooseFactionMenuController  implements Initializable {
     @FXML
     public void dariusTheGreatSelected( MouseEvent event) throws IOException {
         if(counter < numbersOfPlayer) {
+           Faction newFaction = new DariusTheGreat();
+           factions.add(newFaction);
             desertFactionSelected.setVisible(true);
             chooseDariusTheGreat.setVisible(false);
             chooseRamessesII.setVisible(false);
@@ -205,6 +234,8 @@ public class ChooseFactionMenuController  implements Initializable {
     @FXML
     public void ramessesIISelected( MouseEvent event) throws IOException {
         if(counter < numbersOfPlayer) {
+           Faction newFaction = new Ramesses();
+           factions.add(newFaction);
             desertFactionSelected.setVisible(true);
             chooseDariusTheGreat.setVisible(false);
             chooseRamessesII.setVisible(false);
@@ -217,6 +248,8 @@ public class ChooseFactionMenuController  implements Initializable {
     @FXML
     public void leonardoDaVinciSelected( MouseEvent event) throws IOException {
         if(counter < numbersOfPlayer) {
+           Faction newFaction = new LeonardoDaVinci();
+           factions.add(newFaction);
             mountainsFactionSelected.setVisible(true);
             chooseLeonardoDaVinci.setVisible(false);
             chooseStPatrick.setVisible(false);
@@ -229,6 +262,8 @@ public class ChooseFactionMenuController  implements Initializable {
     @FXML
     public void stPatrickSelected( MouseEvent event) throws IOException {
         if(counter < numbersOfPlayer) {
+           Faction newFaction = new StPatrick();
+           factions.add(newFaction);
             mountainsFactionSelected.setVisible(true);
             chooseLeonardoDaVinci.setVisible(false);
             chooseStPatrick.setVisible(false);
@@ -241,6 +276,8 @@ public class ChooseFactionMenuController  implements Initializable {
     @FXML
     public void marieCurieSelected( MouseEvent event) throws IOException {
         if(counter < numbersOfPlayer) {
+           Faction newFaction = new MarieCurie();
+           factions.add(newFaction);
             swampFactionSelected.setVisible(true);
             chooseMarieCurie.setVisible(false);
             chooseAleisterCrowley.setVisible(false);
@@ -253,6 +290,8 @@ public class ChooseFactionMenuController  implements Initializable {
     @FXML
     public void aleisterCrowleySelected( MouseEvent event) throws IOException {
         if(counter < numbersOfPlayer) {
+           Faction newFaction = new AliesterCrowley();
+           factions.add(newFaction);
             swampFactionSelected.setVisible(true);
             chooseMarieCurie.setVisible(false);
             chooseAleisterCrowley.setVisible(false);
@@ -265,6 +304,8 @@ public class ChooseFactionMenuController  implements Initializable {
     @FXML
     public void buddhaSelected( MouseEvent event) throws IOException {
         if(counter < numbersOfPlayer) {
+           Faction newFaction = new Buddha();
+           factions.add(newFaction);
             plainsFactionSelected.setVisible(true);
             chooseBuddha.setVisible(false);
             chooseHusseinTheTeaMaker.setVisible(false);
@@ -277,6 +318,8 @@ public class ChooseFactionMenuController  implements Initializable {
     @FXML
     public void husseinTheTeaMakerSelected( MouseEvent event) throws IOException {
         if(counter < numbersOfPlayer) {
+           Faction newFaction = new HusseinTheTeaMaker();
+           factions.add(newFaction);
             plainsFactionSelected.setVisible(true);
             chooseBuddha.setVisible(false);
             chooseHusseinTheTeaMaker.setVisible(false);
