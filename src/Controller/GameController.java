@@ -10,13 +10,18 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Box;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -76,16 +81,28 @@ public class GameController implements Initializable {
 
                   if(playerList != null)
                   {
-                     BorderPane factionsView = new BorderPane();
+                     HBox factionsView = new HBox(5);
+
+                     ArrayList<PlayerView> playerViewList = new ArrayList<>();
                      for( int i = 0; i < playerList.length; i ++)
                      {
                         if(playerList[i] != null)
                         {
-                           PlayerView playerView = new PlayerView(playerList[i]);
-                           factionsView.setRight(playerView);
+                           playerViewList.add(new PlayerView(playerList[i]));
+
                         }
                      }
+                     factionsView.getChildren().addAll(playerViewList);
+                     factionsView.setPadding(new Insets(0, 0, 0, 100));
                      borderPane.setBottom(factionsView);
+
+
+//                     ImageView imview = new ImageView();
+//                     imview.setImage(new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg"));
+//                     imview.setFitHeight(150);
+//                     imview.setFitWidth(50);
+//                     borderPane.setBottom(imview);
+
                   }
 
                }
