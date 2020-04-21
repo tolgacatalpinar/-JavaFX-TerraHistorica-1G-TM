@@ -73,6 +73,7 @@ public class Player {
         startingDwellingNum = this.getFaction().startingDwellingNum;
         workerIncome = faction.INITIAL_WORKER_INCOME;
         terraformWorkerCost = faction.TERRAFORM_WORKER_COST;
+        victoryPointNum = faction.INITIAL_VICTORY_POINT;
         startingDwellingNum = faction.startingDwellingNum;
         townPowerValue = 7;
         powerIncome = 0;
@@ -461,10 +462,6 @@ public class Player {
             havingDwellingBonus = false;
             havingTradingPostBonus = false;
         }
-    }
-
-    public void useFavorTile() {
-
     }
 
     public int getWorkerNum() {

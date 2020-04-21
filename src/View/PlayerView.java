@@ -3,6 +3,7 @@ package View;
 import Model.Faction;
 import Model.FactionSubclasses.*;
 import Model.Player;
+import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -126,6 +127,5 @@ public class PlayerView extends BorderPane {
 
 
    }
-
 
 }

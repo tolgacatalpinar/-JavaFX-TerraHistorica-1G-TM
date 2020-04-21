@@ -27,10 +27,6 @@
     -fx-background-image: url("../Images/TerrainImages/yellowTerrain.png");
 }
 
-
-
-
-
 #islam_track{
     -fx-background-image: url("../Images/air.png");
 }
@@ -48,4 +44,8 @@
 }
 #islam_token_order{
     -fx-background-image: url("../Images/islam_token_order.jpg");
+}
+.paneBackground {
+    -fx-background-image: url("../Images/bg_game.png");
+    -fx-background-size: cover;
 }

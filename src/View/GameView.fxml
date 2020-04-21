@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../Styles/style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GameController">
+<BorderPane fx:id="borderPane" prefHeight="720.0" prefWidth="1280.0" styleClass="paneBackground" stylesheets="@../CSS/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GameController">
 
     <top>
         <HBox alignment="CENTER">
-            <Button prefHeight="50" prefWidth="250" text="Religions" />
-            <Button layoutX="10.0" layoutY="10.0" prefHeight="50" prefWidth="250" text="Score Table" />
-            <Button layoutX="160.0" layoutY="10.0" prefHeight="50" prefWidth="250" text="Bonus Cards" />
-            <Button layoutX="311.0" layoutY="10.0" prefHeight="50" prefWidth="250" text="Favor Tiles" />
-            <Button layoutX="461.0" layoutY="10.0" prefHeight="50" prefWidth="250" text="Town Tiles" />
+            <Button prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Religions" textFill="WHITE">
+            <font>
+               <Font size="20.0" />
+            </font></Button>
+            <Button layoutX="10.0" layoutY="10.0" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Score Table" textFill="WHITE">
+            <font>
+               <Font size="20.0" />
+            </font></Button>
+            <Button layoutX="160.0" layoutY="10.0" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Bonus Cards" textFill="WHITE">
+            <font>
+               <Font size="20.0" />
+            </font></Button>
+            <Button layoutX="311.0" layoutY="10.0" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Favor Tiles" textFill="WHITE">
+            <font>
+               <Font size="20.0" />
+            </font></Button>
+            <Button layoutX="461.0" layoutY="10.0" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Town Tiles" textFill="WHITE">
+            <font>
+               <Font size="20.0" />
+            </font></Button>
         </HBox>
     </top>
     <left>
