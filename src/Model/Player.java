@@ -47,12 +47,17 @@ public class Player {
     private boolean buildingDwellingBonus; //When building a Dwelling, immediately get 2 additional Victory points.
     private int townPowerValue;
 
+    public final int MAX_DWELLING = 8;
+    public final int MAX_TRADING_POST = 4;
+    public final int MAX_TEMPLE = 3;
+    public final int MAX_SANCTUARY = 1;
+    public final int MAX_STRONGHOLD = 1;
+
     public Player(Faction faction, String nickName, int playerId) {
         this.nickName = nickName;
         this.playerId = playerId;
-        specialActionToken = new SpecialActionToken();
+        specialActionToken = new SpecialActionToken(); //Naci
         this.faction = faction;
-        initializePlayer();
     }
 
     public void setFaction(Faction faction) {
@@ -61,35 +66,6 @@ public class Player {
 
     public Faction getFaction() {
         return faction;
-    }
-
-    public void initializePlayer() {
-        workerNum = this.getFaction().INITIAL_WORKER;
-        goldNum = this.getFaction().INITIAL_GOLD;
-        priestNum = this.getFaction().INITIAL_PRIEST;
-        bowlOnePower = faction.INITIAL_BOWL_ONE_POWER;
-        bowlTwoPower = faction.INITIAL_BOWL_TWO_POWER;
-        bowlThreePower = faction.INITIAL_BOWL_THREE_POWER;
-        startingDwellingNum = this.getFaction().startingDwellingNum;
-        workerIncome = faction.INITIAL_WORKER_INCOME;
-        terraformWorkerCost = faction.TERRAFORM_WORKER_COST;
-        victoryPointNum = faction.INITIAL_VICTORY_POINT;
-        startingDwellingNum = faction.startingDwellingNum;
-        townPowerValue = 7;
-        powerIncome = 0;
-        priestIncome = 0;
-        goldIncome = 0;
-        spadeLevel = 1;
-        dwellingNum = 0;
-        tradingPostNum = 0;
-        templeNum = 0;
-        sanctuaryNum = 0;
-        strongholdNum = 0;
-        key = false;
-        upgradeToTradingPostBonus = false;
-        isPassingTradingPostBonus = false;
-        buildingDwellingBonus = false;
-        roundPassed = false;
     }
 
     public boolean addPowerToBowl(int powerGain) {
@@ -143,119 +119,8 @@ public class Player {
         }
     }
 
-    public boolean buildDwelling() {
-    if (dwellingNum < this.faction.MAX_DWELLING ) {
-        if (spendFromResources(faction.DWELLING_WORKER_COST, faction.DWELLING_GOLD_COST, 0)) {
-            dwellingNum++;
 
-            if (dwellingNum < faction.MAX_DWELLING) {
-                workerIncome += faction.DWELLING_WORKER_INCOME;
-            }
-            if (buildingDwellingBonus) {
-                victoryPointNum += 2;
-            }
-            return true;
-        }
-        else {
-            System.out.println("Not enough resources");
-            return false;
-        }
-    }
-    else {
-        System.out.println("Cannot build more");
-        return false;
-    }
-}
-
-    public void townFound() {
-        key = true;
-        //TODO
-    }
-
-    public boolean upgradeToSanctuary() {
-        if (sanctuaryNum < this.faction.MAX_SANCTUARY ) {
-            if (spendFromResources(faction.SANCTUARY_WORKER_COST, faction.SANCTUARY_GOLD_COST, 0)) {
-                templeNum--;
-                sanctuaryNum++;
-                gainPriest(faction.SANCTUARY_PRIEST_INCOME);
-                return true;
-            }
-            else {
-                System.out.println("Not enough resources");
-                return false;
-            }
-        }
-        else {
-            System.out.println("Cannot build more");
-            return false;
-        }
-    }
-
-    public int upgradeToTemple() {
-        if (templeNum < this.faction.MAX_TEMPLE ) {
-            if (spendFromResources(faction.TEMPLE_WORKER_COST, faction.TEMPLE_GOLD_COST, 0)) {
-                tradingPostNum--;
-                templeNum++;
-                gainPriest(faction.TEMPLE_PRIEST_INCOME);
-                return faction.favorTilesAfterBuildingTemple;
-            }
-        }
-        else {
-            System.out.println("Cannot build more");
-        }
-        return -1;
-    }
-
-    public boolean upgradeToTradingPost(boolean isThereAdjacentOpponent) {
-
-            if (tradingPostNum < faction.MAX_TRADING_POST) {
-                int goldCost = faction.TRADING_POST_GOLD_COST;
-                if(isThereAdjacentOpponent) {
-                    goldCost /= 2;
-                }
-                if (spendFromResources(faction.TRADING_POST_WORKER_COST, goldCost, 0)) {
-
-                    dwellingNum--;
-                    tradingPostNum++;
-
-                    if (upgradeToTradingPostBonus) {
-                        victoryPointNum += 3;
-                    }
-
-                    goldIncome += faction.tradingPostGoldIncome[tradingPostNum - 1];
-                    powerIncome += faction.tradingPostPowerIncome[tradingPostNum - 1];
-                    return true;
-                }
-                else {
-                    System.out.println("Not enough resources");
-                }
-            }
-            else {
-                System.out.println("Cannot build more");
-            }
-        return false;
-
-    }
-
-    public boolean upgradeToStronghold() {
-        if (strongholdNum < this.faction.MAX_STRONGHOLD ) {
-            if (spendFromResources(faction.STRONGHOLD_WORKER_COST, faction.STRONGHOLD_GOLD_COST, 0)) {
-                tradingPostNum--;
-                strongholdNum++;
-                faction.afterStronghold();
-                return true;
-            }
-            else {
-                System.out.println("Not enough resources");
-            }
-        }
-        else {
-            System.out.println("Cannot build more");
-        }
-        return false;
-    }
-
-    public void progressInReligion(Religion religion) {
+    public void progressInReligion(Religion religion) { //Will be added to player handler
             if(spendFromResources(0, 0, 1)) {
                 addPowerToBowl(religion.addOrderOfReligion(playerId, key));
             }
@@ -285,48 +150,6 @@ public class Player {
             priestNum += priestCount;
             priestOnBank -= priestCount;
     }
-
-
-    public void usePowerAction(String action) {
-
-        if(action == "power to priest") {
-            if(spendPowerFromBowl(3)){
-                gainPriest(1);
-            }
-        }
-
-        if(action == "power to worker") {
-            if(spendPowerFromBowl(4)){
-                workerNum += 2;
-            }
-        }
-
-        if(action == "power to bridge") {
-            if(spendPowerFromBowl(3)){
-                bridgeNum++;
-            }
-        }
-
-        if (action == "power to coin") {
-            if (spendPowerFromBowl(4)) {
-                goldNum += 7;
-            }
-        }
-
-        if (action == "power to a spade") {
-            if (spendPowerFromBowl(4)) {
-                //TODO
-            }
-        }
-
-        if (action == "power to two spades") {
-            if (spendPowerFromBowl(6)) {
-                //TODO
-            }
-        }
-
-        }
-
 
     public void exchangeResources(String exchanges) {
 
@@ -381,36 +204,6 @@ public class Player {
 
     }
 
-    public void upgradeSpadeLevel() {
-            if(spadeLevel < 3) {
-                spadeLevel++;
-                terraformWorkerCost--;
-                priestNum -= faction.SPADE_PRIEST_COST;
-            }
-            else {
-                System.out.println("Max spade level");
-            }
-
-    }
-
-    public boolean upgradeShippingLevel() {
-            if(shipLevel < faction.MAX_SHIPPING) {
-                if(spendFromResources(0, faction.SHIPPING_GOLD_COST, faction.SHIPPING_PRIEST_COST)) {
-                    shipLevel++;
-                    addVictoryPoints(faction.SHIPPING_UPGRADE_VICTORY_POINTS[shipLevel-1]);
-                    return true;
-                }
-                else {
-                    System.out.println("Not enough resources");
-                }
-
-            }
-            else {
-                System.out.println("Maximum level");
-            }
-            return false;
-
-    }
 
     public boolean spendFromResources(int requiredWorker , int requiredGold , int requiredPriest) {
             if( workerNum-requiredWorker > 0 && goldNum - requiredGold > 0 && priestNum-requiredPriest >0 ) {
@@ -449,7 +242,7 @@ public class Player {
             //Collect bonus points
         if(roundPassed) {
             if (havingDwellingBonus) {
-                victoryPointNum += dwellingNum * 1;
+                victoryPointNum += dwellingNum;
             }
             if (havingTradingPostBonus) {
                 victoryPointNum += tradingPostNum * 2;
@@ -709,5 +502,34 @@ public class Player {
 
     public void setKey(boolean key) {
         this.key = key;
+    }
+
+    public void setRoundPassed(boolean b) {
+            roundPassed = b;
+    }
+
+    public void setIsPassingTradingPostBonus(boolean b) {
+            isPassingTradingPostBonus = b;
+    }
+
+    public void setStartingDwellingNum(int startingDwellingNum) {
+            this.startingDwellingNum = startingDwellingNum;
+    }
+
+    public void setTerraformWorkerCost(int terraform_worker_cost) {
+            terraformWorkerCost = terraform_worker_cost;
+    }
+    public void setBowlOnePower(int bowlOnePower) {
+        this.bowlOnePower = bowlOnePower;
+    }
+    public void setBowlTwoPower(int bowlTwoPower) {
+        this.bowlTwoPower = bowlTwoPower;
+    }
+    public void setBowlThreePower(int bowlThreePower) {
+            this.bowlThreePower = bowlThreePower;
+    }
+
+    public int getTerraformWorkerCost() {
+            return terraformWorkerCost;
     }
 }
