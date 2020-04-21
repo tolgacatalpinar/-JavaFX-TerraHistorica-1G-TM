@@ -29,12 +29,16 @@
 
 #islam_track{
     -fx-background-image: url("../Images/air.png");
+
 }
 #christ_track{
     -fx-background-image: url("../Images/fire.png");
 }
 #jew_track{
     -fx-background-image: url("../Images/earth.png");
+}
+#main_pane{
+    -fx-background-image: url("../Images/religion_bg.png");
 }
 #budism_track{
     -fx-background-image: url("../Images/water.png");
@@ -45,7 +49,27 @@
 #islam_token_order{
     -fx-background-image: url("../Images/islam_token_order.jpg");
 }
+.religionBackground {
+    -fx-background-image: url("../Images/ReligionImages/religion_bg.png");
+    -fx-background-size: cover;
+}
 .paneBackground {
     -fx-background-image: url("../Images/bg_game.png");
+    -fx-background-size: cover;
+}
+.islam_symbol{
+    -fx-background-image: url("../Images/ReligionImages/islam_symbol.png");
+    -fx-background-size: cover;
+}
+.judaism_symbol{
+    -fx-background-image: url("../Images/ReligionImages/judaism_symbol.png");
+    -fx-background-size: cover;
+}
+.hinduism_symbol{
+    -fx-background-image: url("../Images/ReligionImages/hinduism_symbol.png");
+    -fx-background-size: cover;
+}
+.chris_symbol{
+    -fx-background-image: url("../Images/ReligionImages/chris_symbol.png");
     -fx-background-size: cover;
 }
