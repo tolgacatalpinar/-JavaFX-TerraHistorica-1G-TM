@@ -19,7 +19,7 @@
             <font>
                <Font size="20.0" />
             </font></Button>
-            <Button layoutX="160.0" layoutY="10.0" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Bonus Cards" textFill="WHITE">
+            <Button fx:id="bonusCardsButton" onMouseClicked="#bonusCardsClicked" layoutX="160.0" layoutY="10.0" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Bonus Cards" textFill="WHITE">
             <font>
                <Font size="20.0" />
             </font></Button>
@@ -27,7 +27,7 @@
             <font>
                <Font size="20.0" />
             </font></Button>
-            <Button layoutX="461.0" layoutY="10.0" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Town Tiles" textFill="WHITE">
+            <Button fx:id="townTilesButton" onMouseClicked="#townTilesClicked" layoutX="461.0" layoutY="10.0" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Town Tiles" textFill="WHITE">
             <font>
                <Font size="20.0" />
             </font></Button>

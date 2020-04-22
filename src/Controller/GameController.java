@@ -4,7 +4,9 @@ package Controller;
 import Model.*;
 //import Model.River;
 //import Model.TerrainSubclasses.*;
+import Model.CardsAndTiles.BonusCard;
 import Model.CardsAndTiles.FavorTile;
+import View.BonusCardView;
 import View.FavorTileView;
 import View.PlayerView;
 import javafx.application.Application;
@@ -43,9 +45,12 @@ public class GameController implements Initializable {
    Pane mapPane;
    @FXML
    BorderPane borderPane;
-
    @FXML
    Button favorTilesButton;
+   @FXML
+   Button bonusCardsButton;
+   @FXML
+   Button townTilesButton;
    @FXML
    Label testText;
 
@@ -134,6 +139,35 @@ public class GameController implements Initializable {
 
    }
    @FXML
+   public void bonusCardsClicked()
+   {
+      HBox wholeBonus = new HBox();
+
+      ArrayList<BonusCard> bonusCards = gameHandler.getCardsAndTiles().getSelectedBonusCards();
+
+      for (int i = 0; i < bonusCards.size(); i++){
+         HBox temp = new HBox();
+         temp.getChildren().add(new BonusCardView(bonusCards.get(i)));
+         wholeBonus.getChildren().add(temp);
+      }
+     // wholeBonus.getChildren().addAll(bonusBox1,bonusBox2,bonusBox3,bonusBox4);
+      wholeBonus.setPadding(new Insets(100,0,0,50));
+      wholeBonus.setMinHeight(800);
+      wholeBonus.setMinWidth(1200);
+      final Stage dialog = new Stage();
+      dialog.initModality(Modality.APPLICATION_MODAL);
+      Scene dialogScene = new Scene(wholeBonus, 1100, 600);
+      dialog.setScene(dialogScene);
+      dialog.setTitle("Bonus Cards ");
+      dialog.show();
+   }
+   @FXML
+   public void townTilesClicked()
+   {
+      VBox wholeTown = new VBox();
+
+   }
+   @FXML
    public void favorTilesClicked()
    {
       VBox wholeFavor = new VBox();
@@ -203,6 +237,7 @@ public class GameController implements Initializable {
       }
       map = new Map(spaces);
    }
+
    public void loadPlayers(ArrayList<Faction> factionList, ArrayList<String> playerNames)
    {
       int size = factionList.size();

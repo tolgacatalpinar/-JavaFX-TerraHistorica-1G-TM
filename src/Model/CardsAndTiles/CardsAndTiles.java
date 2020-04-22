@@ -140,6 +140,8 @@ public class CardsAndTiles {
         for(int i = 0; i < 6;++i){
             int rand = (int)(Math.random() * range) + min;
             temp.add(scoringTiles.get(rand));
+            scoringTiles.remove(rand);
+            range--;
         }
         return temp;
     }
@@ -153,6 +155,8 @@ public class CardsAndTiles {
         for(int i = 0; i < max;++i){
             int rand = (int)(Math.random() * range) + min;
             temp.add(bonusCards.get(rand));
+            bonusCards.remove(rand);
+            range--;
         }
         return temp;
     }
