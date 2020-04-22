@@ -4,6 +4,8 @@ package Controller;
 import Model.*;
 //import Model.River;
 //import Model.TerrainSubclasses.*;
+import Model.CardsAndTiles.FavorTile;
+import View.FavorTileView;
 import View.PlayerView;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -22,6 +24,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Box;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -40,6 +44,8 @@ public class GameController implements Initializable {
    @FXML
    BorderPane borderPane;
 
+   @FXML
+   Button favorTilesButton;
    @FXML
    Label testText;
 
@@ -125,6 +131,41 @@ public class GameController implements Initializable {
       thread.start();
 
 
+
+   }
+   @FXML
+   public void favorTilesClicked()
+   {
+      VBox wholeFavor = new VBox();
+      HBox favorBox1 = new HBox();
+      HBox favorBox2 = new HBox();
+      HBox favorBox3 = new HBox();
+
+      ArrayList<FavorTile> favorTiles = gameHandler.getCardsAndTiles().getFavorTiles();
+      for( int i = 0; i < favorTiles.size() / 3; i ++)
+      {
+         favorBox1.getChildren().add(new FavorTileView(favorTiles.get(i)));
+      }
+      for( int i = favorTiles.size() / 3; i < favorTiles.size() * 2 / 3; i ++)
+      {
+         favorBox2.getChildren().add(new FavorTileView(favorTiles.get(i)));
+      }
+      for( int i = favorTiles.size() * 2 / 3; i < favorTiles.size(); i ++)
+      {
+         favorBox3.getChildren().add(new FavorTileView(favorTiles.get(i)));
+      }
+      wholeFavor.getChildren().addAll(favorBox1, favorBox2, favorBox3);
+      wholeFavor.setPadding( new Insets(100, 0, 0, 50));
+
+
+      wholeFavor.setMinHeight(800);
+      wholeFavor.setMinWidth(1200);
+      final Stage dialog = new Stage();
+      dialog.initModality(Modality.APPLICATION_MODAL);
+      Scene dialogScene = new Scene(wholeFavor, 1100, 600);
+      dialog.setScene(dialogScene);
+      dialog.setTitle("Favor Tiles");
+      dialog.show();
 
    }
    public void createSpaces()

@@ -23,7 +23,7 @@
             <font>
                <Font size="20.0" />
             </font></Button>
-            <Button layoutX="311.0" layoutY="10.0" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Favor Tiles" textFill="WHITE">
+            <Button fx:id="favorTilesButton" onMouseClicked="#favorTilesClicked" layoutX="311.0" layoutY="10.0" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Favor Tiles" textFill="WHITE">
             <font>
                <Font size="20.0" />
             </font></Button>

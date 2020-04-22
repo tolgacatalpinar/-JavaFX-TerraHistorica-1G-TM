@@ -155,4 +155,16 @@ public class GameHandler {
     {
         // TODO
     }
+
+   public Player[] getPlayerList() {
+      return playerList;
+   }
+
+   public CardsAndTiles getCardsAndTiles() {
+      return cardsAndTiles;
+   }
+
+   public Religion[] getReligions() {
+      return religions;
+   }
 }

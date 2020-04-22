@@ -129,4 +129,5 @@ public class FavorTile {
     public void setPlayerIds(ArrayList playerIds) {
         this.playerIds = playerIds;
     }
+
 }

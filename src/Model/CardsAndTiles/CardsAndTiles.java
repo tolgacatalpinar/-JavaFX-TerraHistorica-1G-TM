@@ -156,4 +156,28 @@ public class CardsAndTiles {
         }
         return temp;
     }
+
+   public ArrayList<TownTile> getTownTiles() {
+      return townTiles;
+   }
+
+   public ArrayList<BonusCard> getBonusCards() {
+      return bonusCards;
+   }
+
+   public ArrayList<FavorTile> getFavorTiles() {
+      return favorTiles;
+   }
+
+   public ArrayList<ScoringTile> getScoringTiles() {
+      return scoringTiles;
+   }
+
+   public ArrayList<BonusCard> getSelectedBonusCards() {
+      return selectedBonusCards;
+   }
+
+   public ArrayList<ScoringTile> getSelectedScoringTiles() {
+      return selectedScoringTiles;
+   }
 }
