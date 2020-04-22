@@ -59,12 +59,11 @@ public class FavorTileView extends HBox {
       setBackground( new Background( new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
    }
    public void addPlayerNumberView(){
-      VBox playerNumber = null;
       String count = "";
       for (int i = 0; i < this.favorTile.getNumberOfPlayer(); i++){
          count = count + "#";
       }
-      playerNumber = new VBox();
+      VBox playerNumber = new VBox();
       Label playerNum = new Label(count);
       playerNumber.getChildren().add(playerNum);
       this.getChildren().add(playerNumber);
