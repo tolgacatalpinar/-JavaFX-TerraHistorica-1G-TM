@@ -6,9 +6,9 @@ import Model.*;
 //import Model.TerrainSubclasses.*;
 import Model.CardsAndTiles.BonusCard;
 import Model.CardsAndTiles.FavorTile;
-import View.BonusCardView;
-import View.FavorTileView;
-import View.PlayerView;
+import Model.CardsAndTiles.ScoringTile;
+import Model.CardsAndTiles.TownTile;
+import View.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -51,6 +51,8 @@ public class GameController implements Initializable {
    Button bonusCardsButton;
    @FXML
    Button townTilesButton;
+   @FXML
+   Button scoringTilesButton;
    @FXML
    Label testText;
 
@@ -150,7 +152,7 @@ public class GameController implements Initializable {
          temp.getChildren().add(new BonusCardView(bonusCards.get(i)));
          wholeBonus.getChildren().add(temp);
       }
-     // wholeBonus.getChildren().addAll(bonusBox1,bonusBox2,bonusBox3,bonusBox4);
+     //wholeBonus.getChildren().addAll(bonusBox1,bonusBox2,bonusBox3,bonusBox4);
       wholeBonus.setPadding(new Insets(100,0,0,50));
       wholeBonus.setMinHeight(800);
       wholeBonus.setMinWidth(1200);
@@ -164,7 +166,59 @@ public class GameController implements Initializable {
    @FXML
    public void townTilesClicked()
    {
-      VBox wholeTown = new VBox();
+      HBox wholeTown = new HBox();
+      VBox first = new VBox();
+      VBox second = new VBox();
+
+      ArrayList<TownTile> townTiles = gameHandler.getCardsAndTiles().getTownTiles();
+
+      for(int i = 0; i < townTiles.size() / 2; i++) {
+         first.getChildren().add(new TownTileView(townTiles.get(i)));
+      }
+      for(int i = townTiles.size()/2; i < townTiles.size() ; i++) {
+         second.getChildren().add(new TownTileView(townTiles.get(i)));
+      }
+      wholeTown.getChildren().addAll(first, second);
+      wholeTown.setPadding( new Insets(100, 0, 0, 50));
+
+
+      wholeTown.setMinHeight(800);
+      wholeTown.setMinWidth(1200);
+      final Stage dialog = new Stage();
+      dialog.initModality(Modality.APPLICATION_MODAL);
+      Scene dialogScene = new Scene(wholeTown, 1100, 600);
+      dialog.setScene(dialogScene);
+      dialog.setTitle("Town Tiles");
+      dialog.show();
+
+   }
+   @FXML
+   public void scoringTilesClicked()
+   {
+      HBox wholeScoring = new HBox();
+      VBox first = new VBox();
+      VBox second = new VBox();
+
+      ArrayList<ScoringTile> scoringTiles = gameHandler.getCardsAndTiles().getSelectedScoringTiles();
+
+      for(int i = 0; i < scoringTiles.size() / 2; i++) {
+         first.getChildren().add(new ScoringTileView(scoringTiles.get(i)));
+      }
+      for(int i = scoringTiles.size()/2; i < scoringTiles.size() ; i++) {
+         second.getChildren().add(new ScoringTileView(scoringTiles.get(i)));
+      }
+      wholeScoring.getChildren().addAll(first, second);
+      wholeScoring.setPadding( new Insets(100, 0, 0, 50));
+
+
+      wholeScoring.setMinHeight(800);
+      wholeScoring.setMinWidth(1200);
+      final Stage dialog = new Stage();
+      dialog.initModality(Modality.APPLICATION_MODAL);
+      Scene dialogScene = new Scene(wholeScoring, 1100, 600);
+      dialog.setScene(dialogScene);
+      dialog.setTitle("Town Tiles");
+      dialog.show();
 
    }
    @FXML

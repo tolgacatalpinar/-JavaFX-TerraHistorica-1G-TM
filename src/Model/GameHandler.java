@@ -135,21 +135,8 @@ public class GameHandler {
         }
     }
 
-    public void chooseScoringTile( Player player)
-    {
-        if( player.getFaction() instanceof VladTheImpaler)
-            selectScoringTile(player, 2);
-        else
-            selectScoringTile(player, 1);
-    }
-    public void selectScoringTile( Player player, int count) {
-        if( count == 0)
-        {
-            return;
-        }
-        count --;
-        ScoringTile.displayScoringTileChoice();
-    }
+
+
 
     public void nomadAbility( Player player)
     {

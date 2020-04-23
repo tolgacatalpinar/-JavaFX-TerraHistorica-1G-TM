@@ -21,7 +21,7 @@ public class CardsAndTiles {
         createScoringTile(scoringTiles);
         selectedBonusCards = selectedBonusCard(bonusCards,playerNumber);
         //The line below gives nullpointerexception since other parts of the code are not yet completed. - Tolga
-        //selectedScoringTiles = selectedScoringTiles(scoringTiles);
+        selectedScoringTiles = selectedScoringTiles(scoringTiles);
     }
 
 
@@ -108,14 +108,14 @@ public class CardsAndTiles {
         scoringTiles.add(new ScoringTile(0,0,4,0,0,0,0,3,1,0,
                 false,true,false,false, false,true,false,false,false));
         scoringTiles.add(new ScoringTile(0,0,0,4,0,0,0,3,1,0,
-                false,true,false,true, false,false,true,false,false));
+                false,true,false,false, false,false,true,false,false));
         scoringTiles.add(new ScoringTile(0,0,2,0,0,0,1,5,0,0,
                 false,false,true,false, false,true,false,false,false));
         scoringTiles.add(new ScoringTile(4,2,0,0,0,0,1,5,0,0,
                 false,false,true,false, true,false,false,false,false));
         scoringTiles.add(new ScoringTile(0,0,0,1,0,0,0,2,0,1,
                 false,false,false,false, false,false,true,true,false));
-        scoringTiles.add(new ScoringTile(4,0,0,4,0,0,0,5,0,0,
+        scoringTiles.add(new ScoringTile(4,0,0,4,0,0,0,5,1,0,
                 false,false,false,false, false,false,true,false,true));
 
     }

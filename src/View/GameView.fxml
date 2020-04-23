@@ -31,6 +31,10 @@
             <font>
                <Font size="20.0" />
             </font></Button>
+            <Button  fx:id="scoringTilesButton" onMouseClicked="#scoringTilesClicked" layoutX="511.0" layoutY="10.0" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Scoing Tiles" textFill="WHITE">
+                <font>
+                    <Font size="20.0" />
+                </font></Button>
         </HBox>
     </top>
     <left>
