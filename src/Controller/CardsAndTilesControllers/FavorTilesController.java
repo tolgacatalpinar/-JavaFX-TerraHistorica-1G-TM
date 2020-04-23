@@ -5,8 +5,8 @@ import Model.GameHandler;
 import View.CardsAndTilesViews.FavorTileView;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -46,6 +46,8 @@ public class FavorTilesController {
       Scene dialogScene = new Scene(wholeFavor, 1100, 600);
       dialog.setScene(dialogScene);
       dialog.setTitle("Favor Tiles");
+      wholeFavor.setBackground(new Background( new BackgroundImage( new Image("favor_tiles_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+              BackgroundSize.DEFAULT)));
       dialog.show();
    }
 }

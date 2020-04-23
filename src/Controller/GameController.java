@@ -1,10 +1,7 @@
 package Controller;
 
 
-import Controller.CardsAndTilesControllers.BonusCardsController;
-import Controller.CardsAndTilesControllers.FavorTilesController;
-import Controller.CardsAndTilesControllers.ScoringTilesController;
-import Controller.CardsAndTilesControllers.TownTilesController;
+import Controller.CardsAndTilesControllers.*;
 import Model.*;
 //import Model.River;
 //import Model.TerrainSubclasses.*;
@@ -43,11 +40,15 @@ public class GameController implements Initializable {
    @FXML
    Button favorTilesButton;
    @FXML
+   Button religions;
+   @FXML
    Button bonusCardsButton;
    @FXML
    Button townTilesButton;
    @FXML
    Button scoringTilesButton;
+   @FXML
+   Button scoreTable;
    @FXML
    Label testText;
 
@@ -134,6 +135,18 @@ public class GameController implements Initializable {
 
 
 
+   }
+   @FXML
+   public void religionsClicked()
+   {
+      ReligionController religionController = new ReligionController();
+      religionController.showReligion(gameHandler);
+   }
+   @FXML
+   public void scoreTableClicked()
+   {
+      ScoreTableController scoreTableController = new ScoreTableController();
+      scoreTableController.showScoreTable(gameHandler);
    }
    @FXML
    public void bonusCardsClicked()

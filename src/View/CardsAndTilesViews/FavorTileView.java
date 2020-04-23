@@ -82,6 +82,10 @@ public class FavorTileView extends VBox {
    }
    public void add(Node node)
    {
+      if( node instanceof Label)
+      {
+         ((Label)node).setTextFill(Color.WHITE);
+      }
       card.add(node);
    }
 }

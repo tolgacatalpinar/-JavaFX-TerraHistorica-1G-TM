@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.GameHandler;
 import Model.Religion;
 import Model.ReligionSubclasses.Christianity;
 import Model.ReligionSubclasses.Hinduism;
@@ -58,6 +59,11 @@ public class ReligionController extends Application{
     private Christianity chirst_track = new Christianity(3, array);
     private Jewish jewish_track = new Jewish(3, array);
     private Religion[] religions = {islam_track, chirst_track, hindu_track, jewish_track};
+
+    public void showReligion(GameHandler gameHandler)
+    {
+
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {

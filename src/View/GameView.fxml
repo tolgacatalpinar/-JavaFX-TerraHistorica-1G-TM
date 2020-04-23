@@ -11,11 +11,11 @@
 
     <top>
         <HBox alignment="CENTER">
-            <Button prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Religions" textFill="WHITE">
+            <Button fx:id="religions" onMouseClicked="#religionsClicked" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Religions" textFill="WHITE">
             <font>
                <Font size="20.0" />
             </font></Button>
-            <Button layoutX="10.0" layoutY="10.0" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Score Table" textFill="WHITE">
+            <Button fx:id="scoreTable" onMouseClicked="#scoreTableClicked" layoutX="10.0" layoutY="10.0" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Score Table" textFill="WHITE">
             <font>
                <Font size="20.0" />
             </font></Button>

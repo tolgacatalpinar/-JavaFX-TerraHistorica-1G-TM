@@ -18,6 +18,7 @@ public class TownTileView extends VBox {
     {
         this.townTile = townTile;
         card = new CardView();
+        card.setSize(40, card.getDEFAULT_MIN_WIDTH() + 25);
 
         if( this.townTile.getPowerBonus() > 0)
             add( new Label("Power : " + this.townTile.getPowerBonus()));
@@ -29,19 +30,25 @@ public class TownTileView extends VBox {
             add( new Label("Gold : " + this.townTile.getGoldBonus()));
         if(this.townTile.getVictoryBonus() > 0)
             add( new Label("Victory Points : " + this.townTile.getVictoryBonus()));
-        if(this.townTile.getChristianityPoint() > 0)
-            add( new Label("Christianity Points : " + this.townTile.getChristianityPoint()));
-        if(this.townTile.getHinduismPoint() > 0)
-            add( new Label("Hinduism Points : " + this.townTile.getHinduismPoint()));
-        if(this.townTile.getIslamPoint() > 0)
-            add( new Label("ıslam Points : " + this.townTile.getIslamPoint()));
-        if(this.townTile.getJewishPoint() > 0)
-            add( new Label("Jewish Points : " + this.townTile.getJewishPoint()));
+//        if(this.townTile.getChristianityPoint() > 0)
+////            add( new Label("Christianity Points : " + this.townTile.getChristianityPoint()));
+////        if(this.townTile.getHinduismPoint() > 0)
+////            add( new Label("Hinduism Points : " + this.townTile.getHinduismPoint()));
+////        if(this.townTile.getIslamPoint() > 0)
+////            add( new Label("ıslam Points : " + this.townTile.getIslamPoint()));
+////        if(this.townTile.getJewishPoint() > 0)
+////            add( new Label("Jewish Points : " + this.townTile.getJewishPoint()));
+       if(this.townTile.getChristianityPoint() > 0)
+          add( new Label("All Religions: +" + this.townTile.getChristianityPoint()));
         getChildren().add(card);
     }
 
     public void add(Node node)
     {
+       if( node instanceof Label)
+       {
+          ((Label)node).setTextFill(Color.WHITE);
+       }
        card.add( node);
     }
 }

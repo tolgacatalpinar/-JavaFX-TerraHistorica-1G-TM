@@ -52,5 +52,31 @@ public class CardView extends HBox {
       VBox.setMargin(this, insets);
    }
 
+   public int getDEFAULT_MIN_HEIGHT() {
+      return DEFAULT_MIN_HEIGHT;
+   }
 
+   public int getDEFAULT_MIN_WIDTH() {
+      return DEFAULT_MIN_WIDTH;
+   }
+
+   public int getDEFAULT_MARGIN_TOP() {
+      return DEFAULT_MARGIN_TOP;
+   }
+
+   public int getDEFAULT_MARGIN_RIGHT() {
+      return DEFAULT_MARGIN_RIGHT;
+   }
+
+   public int getDEFAULT_MARGIN_BOTTOM() {
+      return DEFAULT_MARGIN_BOTTOM;
+   }
+
+   public int getDEFAULT_MARGIN_LEFT() {
+      return DEFAULT_MARGIN_LEFT;
+   }
+
+   public int getDEFAULT_SPACING() {
+      return DEFAULT_SPACING;
+   }
 }

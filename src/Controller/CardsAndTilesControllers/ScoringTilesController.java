@@ -5,8 +5,8 @@ import Model.GameHandler;
 import View.CardsAndTilesViews.ScoringTileView;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -38,7 +38,9 @@ public class ScoringTilesController {
       dialog.initModality(Modality.APPLICATION_MODAL);
       Scene dialogScene = new Scene(wholeScoring, 1100, 600);
       dialog.setScene(dialogScene);
-      dialog.setTitle("Town Tiles");
+      dialog.setTitle("Scoring Tiles");
+      wholeScoring.setBackground(new Background( new BackgroundImage( new Image("scoring_tiles_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+              BackgroundSize.DEFAULT)));
       dialog.show();
    }
 }

@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
 
 public class PlayerView extends BorderPane {
@@ -85,13 +86,19 @@ public class PlayerView extends BorderPane {
    {
       VBox incomes = new VBox();
       Label playerName = new Label(this.playerName);
+      playerName.setTextFill(Color.WHITE);
       playerName.setPadding(new Insets(0, 0, 3, 0));
 
       Label goldIn = new Label("Gold Income: " + player.getGoldIncome());
+      goldIn.setTextFill(Color.WHITE);
       Label priestIn = new Label("Priest Income: " + player.getPriestIncome());
+      priestIn.setTextFill(Color.WHITE);
       Label workerIn = new Label("Worker Income: " + player.getWorkerIncome());
+      workerIn.setTextFill(Color.WHITE);
       Label cultIn = new Label("Cult Income: " + player.getCultBonusIncome());
+      cultIn.setTextFill(Color.WHITE);
       Label powerIn = new Label("Power Income: " + player.getPowerIncome());
+      powerIn.setTextFill(Color.WHITE);
 
       incomes.getChildren().addAll(playerName, goldIn, priestIn, workerIn, cultIn, powerIn);
       incomes.setPadding( new Insets(10, 0, 0, 10));
@@ -104,16 +111,20 @@ public class PlayerView extends BorderPane {
       HBox resources2 = new HBox();
 
       Label gold = new Label("Gold: " + player.getGoldNum());
+      gold.setTextFill(Color.WHITE);
       gold.setPadding( new Insets(0, 3, 0, 0));
 
       Label priest = new Label("Priest: " + player.getPriestNum());
+      priest.setTextFill(Color.WHITE);
       priest.setPadding( new Insets(0, 3, 0, 0));
 
       Label worker = new Label("Worker: " + player.getWorkerNum());
+      worker.setTextFill(Color.WHITE);
       worker.setPadding( new Insets(0, 3, 0, 0));
 
       // POWER IS TO BE ADDED
       Label victory = new Label("Victory: " + player.getVictoryPointNum());
+      victory.setTextFill(Color.WHITE);
       victory.setPadding( new Insets(0, 3, 0, 0));
 
       resources1.getChildren().addAll(gold, priest);

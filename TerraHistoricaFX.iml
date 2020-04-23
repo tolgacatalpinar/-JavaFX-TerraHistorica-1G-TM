@@ -12,6 +12,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/Images/ChooseFactionImages" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Images/MenuImages" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Images/RiverImages" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/TileImages" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
