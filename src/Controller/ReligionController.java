@@ -108,32 +108,32 @@ public class ReligionController extends Application{
                 Label text = new Label();
                 if(j >= 1){
                     if(i == 1){
-                        BackgroundImage myBI= new BackgroundImage(new Image("Images/ReligionImages/chris_track.png",tempGrid.getWidth(),tempGrid.getHeight(),false,true),
+                        BackgroundImage myBI= new BackgroundImage(new Image("chris_track.png",tempGrid.getWidth(),tempGrid.getHeight(),false,true),
                                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                                 BackgroundSize.DEFAULT);
                         //then you set to your node
                         tempGrid.setBackground(new Background(myBI));
                     }else if(i == 0){
-                        BackgroundImage myBI= new BackgroundImage(new Image("Images/ReligionImages/islam_track.png",tempGrid.getWidth(),tempGrid.getHeight(),false,true),
+                        BackgroundImage myBI= new BackgroundImage(new Image("islam_track.png",tempGrid.getWidth(),tempGrid.getHeight(),false,true),
                                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                                 BackgroundSize.DEFAULT);
                         //then you set to your node
                         tempGrid.setBackground(new Background(myBI));
                     }else if( i == 3){
-                        BackgroundImage myBI= new BackgroundImage(new Image("Images/ReligionImages/hindu_track.png",tempGrid.getWidth(),tempGrid.getHeight(),false,true),
+                        BackgroundImage myBI= new BackgroundImage(new Image("hindu_track.png",tempGrid.getWidth(),tempGrid.getHeight(),false,true),
                                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                                 BackgroundSize.DEFAULT);
                         //then you set to your node
                         tempGrid.setBackground(new Background(myBI));
                     }else{
-                        BackgroundImage myBI= new BackgroundImage(new Image("Images/ReligionImages/juda_track.png",tempGrid.getWidth(),tempGrid.getHeight(),false,true),
+                        BackgroundImage myBI= new BackgroundImage(new Image("juda_track.png",tempGrid.getWidth(),tempGrid.getHeight(),false,true),
                                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                                 BackgroundSize.DEFAULT);
                         //then you set to your node
                         tempGrid.setBackground(new Background(myBI));
                     }
                 }else {
-                    BackgroundImage myBI= new BackgroundImage(new Image("Images/ReligionImages/islam_door.png",100,180,false,true),
+                    BackgroundImage myBI= new BackgroundImage(new Image("islam_door.png",100,180,false,true),
                             BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                             BackgroundSize.DEFAULT);
                     //then you set to your node
@@ -153,7 +153,7 @@ public class ReligionController extends Application{
                     text.setFont(new Font("Stencil", 20));
                     text.setTextFill(Color.LIGHTGREY);
                     if(j == 3 || j == 6 || j== 9 || j==11){
-                        ImageView powerImage = new ImageView("Images/ReligionImages/islam_symbol.png");
+                        ImageView powerImage = new ImageView("islam_symbol.png");
                         powerImage.setFitHeight(100);
                         powerImage.setFitWidth(10);
                         gridPane.add(powerImage,j,i);
@@ -179,7 +179,7 @@ public class ReligionController extends Application{
                orderPane.setBackground(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
                if (religions[k].isOccupied(i)) {
                    GridPane orderGridPane = (GridPane) gridPane.getChildren().get(k*12);
-                   BackgroundImage myBI= new BackgroundImage(new Image("Images/ReligionImages/islam_door.png",100,180,false,true),
+                   BackgroundImage myBI= new BackgroundImage(new Image("islam_door.png",100,180,false,true),
                            BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                            BackgroundSize.DEFAULT);
                    //then you set to your node

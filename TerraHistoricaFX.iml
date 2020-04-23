@@ -6,6 +6,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Styles" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Terrains" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/FactionImages" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainImages" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/ReligionImages" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/ChooseFactionImages" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/MenuImages" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/RiverImages" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

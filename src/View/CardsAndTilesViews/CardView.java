@@ -2,6 +2,7 @@ package View.CardsAndTilesViews;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -32,7 +33,9 @@ public class CardView extends HBox {
               "-fx-padding: 30;\n" +
               "-fx-border-width: 2;\n" +
               "-fx-border-style: solid;\n");
-      setBackground( new Background( new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
+      setBackground(new Background( new BackgroundImage( new Image("card_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+              BackgroundSize.DEFAULT)));
+      //setBackground( new Background( new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
    }
 
    public void add(Node pane)
