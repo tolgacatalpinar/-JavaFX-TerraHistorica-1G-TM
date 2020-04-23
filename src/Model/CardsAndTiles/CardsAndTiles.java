@@ -136,7 +136,7 @@ public class CardsAndTiles {
         temp = new ArrayList<>();
         int max = 8;
         int min = 0;
-        int range = max - min + 1;
+        int range = max - min;
         for(int i = 0; i < 6;++i){
             int rand = (int)(Math.random() * range) + min;
             temp.add(scoringTiles.get(rand));
@@ -151,7 +151,7 @@ public class CardsAndTiles {
         temp = new ArrayList<>();
         int max = playerNumber + 3;
         int min = 0;
-        int range = max - min + 1;
+        int range = max - min;
         for(int i = 0; i < max;++i){
             int rand = (int)(Math.random() * range) + min;
             temp.add(bonusCards.get(rand));

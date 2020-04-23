@@ -1,39 +1,34 @@
 package Controller;
 
 
+import Controller.CardsAndTilesControllers.BonusCardsController;
+import Controller.CardsAndTilesControllers.FavorTilesController;
+import Controller.CardsAndTilesControllers.ScoringTilesController;
+import Controller.CardsAndTilesControllers.TownTilesController;
 import Model.*;
 //import Model.River;
 //import Model.TerrainSubclasses.*;
 import Model.CardsAndTiles.BonusCard;
-import Model.CardsAndTiles.FavorTile;
 import Model.CardsAndTiles.ScoringTile;
 import Model.CardsAndTiles.TownTile;
 import View.*;
-import javafx.application.Application;
+import View.CardsAndTilesViews.BonusCardView;
+import View.CardsAndTilesViews.ScoringTileView;
+import View.CardsAndTilesViews.TownTileView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Box;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -143,117 +138,27 @@ public class GameController implements Initializable {
    @FXML
    public void bonusCardsClicked()
    {
-      HBox wholeBonus = new HBox();
-
-      ArrayList<BonusCard> bonusCards = gameHandler.getCardsAndTiles().getSelectedBonusCards();
-
-      for (int i = 0; i < bonusCards.size(); i++){
-         HBox temp = new HBox();
-         temp.getChildren().add(new BonusCardView(bonusCards.get(i)));
-         wholeBonus.getChildren().add(temp);
-      }
-     //wholeBonus.getChildren().addAll(bonusBox1,bonusBox2,bonusBox3,bonusBox4);
-      wholeBonus.setPadding(new Insets(100,0,0,50));
-      wholeBonus.setMinHeight(800);
-      wholeBonus.setMinWidth(1200);
-      final Stage dialog = new Stage();
-      dialog.initModality(Modality.APPLICATION_MODAL);
-      Scene dialogScene = new Scene(wholeBonus, 1100, 600);
-      dialog.setScene(dialogScene);
-      dialog.setTitle("Bonus Cards ");
-      dialog.show();
+      BonusCardsController bonusCardsController = new BonusCardsController();
+      bonusCardsController.showBonusCardsTable(gameHandler);
    }
    @FXML
    public void townTilesClicked()
    {
-      HBox wholeTown = new HBox();
-      VBox first = new VBox();
-      VBox second = new VBox();
-
-      ArrayList<TownTile> townTiles = gameHandler.getCardsAndTiles().getTownTiles();
-
-      for(int i = 0; i < townTiles.size() / 2; i++) {
-         first.getChildren().add(new TownTileView(townTiles.get(i)));
-      }
-      for(int i = townTiles.size()/2; i < townTiles.size() ; i++) {
-         second.getChildren().add(new TownTileView(townTiles.get(i)));
-      }
-      wholeTown.getChildren().addAll(first, second);
-      wholeTown.setPadding( new Insets(100, 0, 0, 50));
-
-
-      wholeTown.setMinHeight(800);
-      wholeTown.setMinWidth(1200);
-      final Stage dialog = new Stage();
-      dialog.initModality(Modality.APPLICATION_MODAL);
-      Scene dialogScene = new Scene(wholeTown, 1100, 600);
-      dialog.setScene(dialogScene);
-      dialog.setTitle("Town Tiles");
-      dialog.show();
-
+      TownTilesController townTilesController = new TownTilesController();
+      townTilesController.showTownTilesTable(gameHandler);
    }
    @FXML
    public void scoringTilesClicked()
    {
-      HBox wholeScoring = new HBox();
-      VBox first = new VBox();
-      VBox second = new VBox();
-
-      ArrayList<ScoringTile> scoringTiles = gameHandler.getCardsAndTiles().getSelectedScoringTiles();
-
-      for(int i = 0; i < scoringTiles.size() / 2; i++) {
-         first.getChildren().add(new ScoringTileView(scoringTiles.get(i)));
-      }
-      for(int i = scoringTiles.size()/2; i < scoringTiles.size() ; i++) {
-         second.getChildren().add(new ScoringTileView(scoringTiles.get(i)));
-      }
-      wholeScoring.getChildren().addAll(first, second);
-      wholeScoring.setPadding( new Insets(100, 0, 0, 50));
-
-
-      wholeScoring.setMinHeight(800);
-      wholeScoring.setMinWidth(1200);
-      final Stage dialog = new Stage();
-      dialog.initModality(Modality.APPLICATION_MODAL);
-      Scene dialogScene = new Scene(wholeScoring, 1100, 600);
-      dialog.setScene(dialogScene);
-      dialog.setTitle("Town Tiles");
-      dialog.show();
+      ScoringTilesController scoringTilesController = new ScoringTilesController();
+      scoringTilesController.showScoringTilesTable(gameHandler);
 
    }
    @FXML
    public void favorTilesClicked()
    {
-      VBox wholeFavor = new VBox();
-      HBox favorBox1 = new HBox();
-      HBox favorBox2 = new HBox();
-      HBox favorBox3 = new HBox();
-
-      ArrayList<FavorTile> favorTiles = gameHandler.getCardsAndTiles().getFavorTiles();
-      for( int i = 0; i < favorTiles.size() / 3; i ++)
-      {
-         favorBox1.getChildren().add(new FavorTileView(favorTiles.get(i)));
-      }
-      for( int i = favorTiles.size() / 3; i < favorTiles.size() * 2 / 3; i ++)
-      {
-         favorBox2.getChildren().add(new FavorTileView(favorTiles.get(i)));
-      }
-      for( int i = favorTiles.size() * 2 / 3; i < favorTiles.size(); i ++)
-      {
-         favorBox3.getChildren().add(new FavorTileView(favorTiles.get(i)));
-      }
-      wholeFavor.getChildren().addAll(favorBox1, favorBox2, favorBox3);
-      wholeFavor.setPadding( new Insets(100, 0, 0, 50));
-
-
-      wholeFavor.setMinHeight(800);
-      wholeFavor.setMinWidth(1200);
-      final Stage dialog = new Stage();
-      dialog.initModality(Modality.APPLICATION_MODAL);
-      Scene dialogScene = new Scene(wholeFavor, 1100, 600);
-      dialog.setScene(dialogScene);
-      dialog.setTitle("Favor Tiles");
-      dialog.show();
+      FavorTilesController favorTilesController = new FavorTilesController();
+      favorTilesController.showFavorTilesTable(gameHandler);
 
    }
    public void createSpaces()
