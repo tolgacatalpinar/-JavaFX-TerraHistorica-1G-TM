@@ -10,4 +10,5 @@ public class Terrain extends Space{
    public Terrain() {
        structure = new Structure();
    }
+   public Structure getStructure(){ return structure;}
 }

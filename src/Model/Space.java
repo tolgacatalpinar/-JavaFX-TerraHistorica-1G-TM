@@ -4,24 +4,40 @@ package Model;
 public class Space{
     private boolean isOccupied;
     private String type;
-//    private Space[] bridgeList; // this array holds the other space that can be reached from this space; thanks to bridge(if exists)
+    private String color;
+    private Space[] bridgeList; // this array holds the other space that can be reached from this space; thanks to bridge(if exists)
+    private Boolean hasBridge;
         
-    public Space(){
+    public Space(String type){
         isOccupied = false;
+        this.type = type;
     }
 
+    public Space(){isOccupied = false;}
     public boolean isOccupied() {
         return isOccupied;
     }
     
-//     public buildBridge(Space space1){
-//         bridgeList = new Space[1];
-//         bridgeList[0] = space1;
-//     }
+     public void buildBridge(Space space1){
+         bridgeList = new Space[1];
+         bridgeList[0] = space1;
+     }
     
-//     public Space[] getBridgeList(){
-//         return bridgeList;
-//     }
+     public Space[] getBridgeList(){
+         return bridgeList;
+     }
+
+     public void setBridge(Boolean status){
+         hasBridge = status;
+     }
+
+     public String getColor(){
+        return color;
+     }
+
+     public Structure getStructure(){
+        return null; // todo
+     }
 
     public void setOccupied(boolean occupied) {
         isOccupied = occupied;

@@ -18,6 +18,7 @@ public class GameHandler {
     Player[] playerList;
     CardsAndTiles cardsAndTiles;
     Religion[] religions;
+    String gameId;
     public GameHandler(Player[] playerList, int playerSize)
     {
         cardsAndTiles = new CardsAndTiles(playerSize);
