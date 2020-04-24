@@ -40,9 +40,7 @@ public class FavorTileView extends VBox {
       if(this.favorTile.isTownBonus())
          add( new Label("Town bon."));
       if (this.favorTile.isPassingBonusForTradingHouse())
-         add(new Label("Passing Trade House Bonus" ));
-
-      addPlayerNumberView();
+         add(new Label("Pass Trading Bonus" ));
 
 
       getChildren().add(card);
@@ -50,14 +48,6 @@ public class FavorTileView extends VBox {
 
 
 
-   }
-   public void addPlayerNumberView(){
-      String count = "";
-      for (int i = 0; i < this.favorTile.getNumberOfPlayer(); i++){
-         count = count + "#\n";
-      }
-      Label playerNum = new Label(count);
-      add(playerNum);
    }
    public void addReligionToView()
    {
