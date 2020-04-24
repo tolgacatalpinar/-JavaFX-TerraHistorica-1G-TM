@@ -5,6 +5,8 @@ import Model.CardsAndTiles.FavorTile;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -19,6 +21,7 @@ public class BonusCardView extends VBox {
         this.bonusCard = bonusCard;
         card = new CardView();
 
+        card.addPlayerSlots(1);
         if( this.bonusCard.getShippingRange() > 0)
             add( new Label("Shipping Range: " + "+" + this.bonusCard.getShippingRange()));
         if( this.bonusCard.getNotTakenBonus() > 0)
@@ -42,6 +45,7 @@ public class BonusCardView extends VBox {
         if(this.bonusCard.isSanctuary())
             add( new Label("StrongHold or Sanctuary - Vict : " + 4));
 
+       //card.addPlayerToSlot(0, new ImageView( new Image("Image_Gilgamesh.jpeg")));
         getChildren().add(card);
 
     }
@@ -53,4 +57,8 @@ public class BonusCardView extends VBox {
        }
        card.getChildren().add(node);
     }
+   public void addPlayerToSlot(ImageView playerView)
+   {
+      card.addPlayerToSlot(0, playerView);
+   }
 }

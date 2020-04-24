@@ -5,6 +5,7 @@ import Model.CardsAndTiles.TownTile;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
@@ -19,6 +20,7 @@ public class TownTileView extends VBox {
         this.townTile = townTile;
         card = new CardView();
         card.setSize(40, card.getDEFAULT_MIN_WIDTH() + 25);
+        card.addPlayerSlots(1);
 
         if( this.townTile.getPowerBonus() > 0)
             add( new Label("Power : " + this.townTile.getPowerBonus()));
@@ -51,4 +53,8 @@ public class TownTileView extends VBox {
        }
        card.add( node);
     }
+   public void addPlayerToSlot(ImageView playerView)
+   {
+      card.addPlayerToSlot(0, playerView);
+   }
 }

@@ -25,13 +25,13 @@ public class TownTilesController {
 
       ArrayList<TownTile> townTiles = gameHandler.getCardsAndTiles().getTownTiles();
 
-      for(int i = 0; i < townTiles.size() / 3; i++) {
+      for(int i = 0; i < (int) Math.ceil((double)townTiles.size() / 3); i++) {
          first.getChildren().add(new TownTileView(townTiles.get(i)));
       }
-      for(int i = townTiles.size() / 3; i < townTiles.size() * 2 / 3 ; i++) {
+      for(int i = (int) Math.ceil((double)townTiles.size() / 3); i < (int) Math.ceil((double)townTiles.size() * 2 / 3); i++) {
          second.getChildren().add(new TownTileView(townTiles.get(i)));
       }
-      for(int i = townTiles.size() * 2 / 3; i < townTiles.size() ; i++) {
+      for(int i = (int) Math.ceil((double)townTiles.size() * 2 / 3); i < townTiles.size() ; i++) {
          third.getChildren().add(new TownTileView(townTiles.get(i)));
       }
       wholeTown.getChildren().addAll(first, second, third);

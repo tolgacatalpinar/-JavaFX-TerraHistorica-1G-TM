@@ -23,15 +23,15 @@ public class FavorTilesController {
       HBox favorBox3 = new HBox();
 
       ArrayList<FavorTile> favorTiles = gameHandler.getCardsAndTiles().getFavorTiles();
-      for( int i = 0; i < favorTiles.size() / 3; i ++)
+      for( int i = 0; i < (int) Math.ceil((double)favorTiles.size() / 3); i ++)
       {
          favorBox1.getChildren().add(new FavorTileView(favorTiles.get(i)));
       }
-      for( int i = favorTiles.size() / 3; i < favorTiles.size() * 2 / 3; i ++)
+      for( int i = (int) Math.ceil((double)favorTiles.size() / 3); i < (int) Math.ceil((double)favorTiles.size() * 2 / 3); i ++)
       {
          favorBox2.getChildren().add(new FavorTileView(favorTiles.get(i)));
       }
-      for( int i = favorTiles.size() * 2 / 3; i < favorTiles.size(); i ++)
+      for( int i = (int) Math.ceil((double)favorTiles.size() * 2 / 3); i < (int) Math.ceil(favorTiles.size()); i ++)
       {
          favorBox3.getChildren().add(new FavorTileView(favorTiles.get(i)));
       }

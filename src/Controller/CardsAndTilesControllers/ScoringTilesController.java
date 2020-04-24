@@ -22,10 +22,10 @@ public class ScoringTilesController {
 
       ArrayList<ScoringTile> scoringTiles = gameHandler.getCardsAndTiles().getSelectedScoringTiles();
 
-      for(int i = 0; i < scoringTiles.size() / 2; i++) {
+      for(int i = 0; i < (int) Math.ceil((double)scoringTiles.size() / 2); i++) {
          first.getChildren().add(new ScoringTileView(scoringTiles.get(i)));
       }
-      for(int i = scoringTiles.size()/2; i < scoringTiles.size() ; i++) {
+      for(int i = (int) Math.ceil((double)scoringTiles.size()/2); i < scoringTiles.size() ; i++) {
          second.getChildren().add(new ScoringTileView(scoringTiles.get(i)));
       }
       wholeScoring.getChildren().addAll(first, second);
