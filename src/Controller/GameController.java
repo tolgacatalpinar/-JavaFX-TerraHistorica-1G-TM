@@ -222,8 +222,6 @@ public class GameController implements Initializable {
       this.playerList = playerList;
 
       gameHandler = new GameHandler(playerList, size);
-      System.out.println("Load players is called. ");
-      System.out.println("Factionlist size: " + factionList.size());
-      System.out.println("first element of playerlist :" + playerList[0].getNickName());
+
    }
 }

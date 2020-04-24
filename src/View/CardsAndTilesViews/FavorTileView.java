@@ -20,6 +20,7 @@ public class FavorTileView extends VBox {
       this.card = new CardView();
       // This must be the first line to be called !! - addPlayerSlots()
       addPlayerSlots();
+      // To test...
       card.addPlayerToSlot(0, new ImageView( new Image("Image_Gilgamesh.jpeg")));
 
       addReligionToView();

@@ -58,6 +58,32 @@ public class Player {
         this.playerId = playerId;
         specialActionToken = new SpecialActionToken(); //Naci
         this.faction = faction;
+       setWorkerNum(getFaction().INITIAL_WORKER);
+       setGoldNum(getFaction().INITIAL_GOLD);
+       setPriestNum(getFaction().INITIAL_PRIEST);
+       setBowlOnePower(getFaction().INITIAL_BOWL_ONE_POWER);
+       setBowlTwoPower(getFaction().INITIAL_BOWL_TWO_POWER);
+       setBowlThreePower( getFaction().INITIAL_BOWL_THREE_POWER);
+       setStartingDwellingNum(getFaction().startingDwellingNum);
+       setWorkerIncome( getFaction().INITIAL_WORKER_INCOME);
+       setTerraformWorkerCost(getFaction().TERRAFORM_WORKER_COST);
+       setVictoryPointNum(getFaction().INITIAL_VICTORY_POINT);
+       setStartingDwellingNum(getFaction().startingDwellingNum);
+       setTownPowerValue(7);
+       setPowerIncome(0);
+       setPriestIncome(0);
+       setGoldIncome(0);
+       setSpadeLevel(1);
+       setDwellingNum(0);
+       setTradingPostNum(0);
+       setTempleNum(0);
+       setSanctuaryNum(0);
+       setStrongholdNum(0);
+       setKey(false);
+       setUpgradeToTradingPostBonus(false);
+       setIsPassingTradingPostBonus(false);
+       setBuildingDwellingBonus(false);
+       setRoundPassed(false);
     }
 
     public void setFaction(Faction faction) {

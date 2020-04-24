@@ -4,34 +4,7 @@ import Model.StructureSubclasses.*;
 
 public class PlayerHandler {
 
-    public void initializePlayer(Player player) {
-        player.setWorkerNum(player.getFaction().INITIAL_WORKER);
-        player.setGoldNum(player.getFaction().INITIAL_GOLD);
-        player.setPriestNum(player.getFaction().INITIAL_PRIEST);
-        player.setBowlOnePower(player.getFaction().INITIAL_BOWL_ONE_POWER);
-        player.setBowlTwoPower(player.getFaction().INITIAL_BOWL_TWO_POWER);
-        player.setBowlThreePower( player.getFaction().INITIAL_BOWL_THREE_POWER);
-        player.setStartingDwellingNum(player.getFaction().startingDwellingNum);
-        player.setWorkerIncome( player.getFaction().INITIAL_WORKER_INCOME);
-        player.setTerraformWorkerCost(player.getFaction().TERRAFORM_WORKER_COST);
-        player.setVictoryPointNum(player.getFaction().INITIAL_VICTORY_POINT);
-        player.setStartingDwellingNum(player.getFaction().startingDwellingNum);
-        player.setTownPowerValue(7);
-        player.setPowerIncome(0);
-        player.setPriestIncome(0);
-        player.setGoldIncome(0);
-        player.setSpadeLevel(1);
-        player.setDwellingNum(0);
-        player.setTradingPostNum(0);
-        player.setTempleNum(0);
-        player.setSanctuaryNum(0);
-        player.setStrongholdNum(0);
-        player.setKey(false);
-        player.setUpgradeToTradingPostBonus(false);
-        player.setIsPassingTradingPostBonus(false);
-        player.setBuildingDwellingBonus(false);
-        player.setRoundPassed(false);
-    }
+
 
     public int buildStructure(Player player, Structure structure, Boolean isThereAdjacentOpponent) {
 
