@@ -45,8 +45,8 @@ public class SpecialActionController {
                 else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Special Action Error");
-                    alert.setHeaderText("You have not special spade action");
-                    alert.setContentText("You cannot do this action");
+                    alert.setContentText("You have not special spade action");
+                    alert.setHeaderText("You cannot do this action");
                     alert.showAndWait();
                 }
 
@@ -65,8 +65,8 @@ public class SpecialActionController {
                 else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Special Action Error");
-                    alert.setHeaderText("You have not special cult action");
-                    alert.setContentText("You cannot do this action");
+                    alert.setHeaderText("You cannot do this action");
+                    alert.setContentText("You have not special cult action");
                     alert.showAndWait();
                 }
             }
@@ -83,8 +83,8 @@ public class SpecialActionController {
                 else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Special Action Error");
-                    alert.setHeaderText("You have not special stronghold ability");
-                    alert.setContentText("You cannot do this action");
+                    alert.setContentText("You have not special stronghold ability");
+                    alert.setHeaderText("You cannot do this action");
                     alert.showAndWait();
                 }
             }
@@ -100,8 +100,8 @@ public class SpecialActionController {
                 else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Special Action Error");
-                    alert.setHeaderText("You have not special faction ability");
-                    alert.setContentText("You cannot do this action!!");
+                    alert.setContentText("You have not special faction ability");
+                    alert.setHeaderText("You cannot do this action!!");
                     alert.showAndWait();
                 }
             }
