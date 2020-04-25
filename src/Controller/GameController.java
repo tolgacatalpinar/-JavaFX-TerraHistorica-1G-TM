@@ -136,6 +136,12 @@ public class GameController implements Initializable {
 
 
    }
+
+   @FXML
+   public void terraformClicked()
+   {
+
+   }
    @FXML
    public void religionsClicked()
    {

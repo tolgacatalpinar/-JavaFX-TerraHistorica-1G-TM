@@ -36,7 +36,7 @@
     </top>
     <left>
         <VBox alignment="CENTER_LEFT" prefHeight="670.0" prefWidth="200.0">
-            <Button prefHeight="50" prefWidth="200.0" text="Terraform" textAlignment="CENTER" textFill="WHITE">
+            <Button prefHeight="50" prefWidth="200.0" text="Terraform" onMouseClicked="#terraformClicked" textAlignment="CENTER" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="18.0" />
                 </font>
