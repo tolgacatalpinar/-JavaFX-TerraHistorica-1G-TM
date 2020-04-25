@@ -45,7 +45,6 @@ public class ReligionController{
     private Button orderButton;
     @FXML
     private GridPane gridPane;
-
     private int[] array = {2, 3, 5};
     private int currentPlayer = 0;
     private int playerCount = 3;
@@ -56,16 +55,20 @@ public class ReligionController{
     private Jewish jewish_track = new Jewish(3, array);
     private Religion[] religions = {islam_track, chirst_track, hindu_track, jewish_track};
 
-    public void showReligion(GameHandler gameHandler) throws Exception
+
+    public void showReligion(GameHandler gameHandler)
     {
         BorderPane border = new BorderPane();
         GridPane gridPane = new GridPane();
-        gridPane.setPadding(new Insets(10,10,10,10));
-        gridPane.setMinHeight(800);
-        gridPane.setMinWidth(1200);
+        border.setPadding(new Insets(10,10,10,10));
+        border.setMaxHeight(600);
+        border.setMaxWidth(1100);
         border.setCenter(gridPane);
-        border.setBackground(new Background( new BackgroundImage( new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT)));
+        BackgroundImage bg = new BackgroundImage( new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        border.setBackground(new Background(bg));
+       //border.setPrefHeight(800);
+        //border.setPrefWidth(1200);
         final Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         Scene dialogScene = new Scene(border, 1100, 600);
