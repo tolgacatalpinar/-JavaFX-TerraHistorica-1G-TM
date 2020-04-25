@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class GameHandler {
 
+    int currentPlayer;
     Player[] playerList;
     CardsAndTiles cardsAndTiles;
     Religion[] religions;
@@ -38,6 +39,9 @@ public class GameHandler {
         religions[1] = new Christianity(playerSize, player_initial_chirst);
         religions[2] = new Jewish(playerSize, player_initial_jew);
         religions[3] = new Hinduism(playerSize, player_initial_hindu);
+        currentPlayer = 0;
+        this.playerList = playerList;
+
     }
 
     /**
@@ -155,4 +159,12 @@ public class GameHandler {
    public Religion[] getReligions() {
       return religions;
    }
+
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
 }

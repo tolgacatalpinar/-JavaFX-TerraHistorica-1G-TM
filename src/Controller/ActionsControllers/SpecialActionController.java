@@ -2,9 +2,12 @@ package Controller.ActionsControllers;
 
 import Model.CardsAndTiles.FavorTile;
 import Model.GameHandler;
+import Model.Player;
 import View.ActionsViews.SpecialActionView;
 import View.CardsAndTilesViews.BonusCardView;
 import View.CardsAndTilesViews.FavorTileView;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,24 +20,72 @@ import java.util.ArrayList;
 
 public class SpecialActionController {
 
-    public boolean isSpade;
-    public boolean isCultTack;
-    public boolean isStrongholdAbility;
-    public boolean isFactionAbility;
     public void showSpeacialActions(GameHandler gameHandler)
     {
         VBox wholeFavor = new VBox();
         HBox firstRow = new HBox();
         HBox secondRow = new HBox();
+        HBox special1 = new HBox();
+        HBox special2 = new HBox();
 
-        firstRow.getChildren().add(new SpecialActionView("Spade Action"));
-        firstRow.getChildren().add(new SpecialActionView("Cult Action"));
+        HBox special3 = new HBox();
+        HBox special4 = new HBox();
+        Player[] players = gameHandler.getPlayerList();
+        int playerId = gameHandler.getCurrentPlayer();
+        Player player = players[playerId];
+        special1.getChildren().add(new SpecialActionView("Spade Action"));
+        special1.setOnMouseClicked(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                if(player.getSpecialActionToken().isCultTack){
+                    System.out.println("Spade Action");
+                    event.consume();
+                }
+                else
+                    System.err.println("Spade Error");
 
+            }
+        });
+        special2.getChildren().add(new SpecialActionView("Cult Action"));
+        special2.setOnMouseClicked(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
 
-        secondRow.getChildren().add(new SpecialActionView("Stronghold Ability"));
-        secondRow.getChildren().add(new SpecialActionView("Faction Ability"));
+                if(player.getSpecialActionToken().isCultTack){
+                    System.out.println("Cult Action");
+                    event.consume();
+                }
+                else
+                    System.err.println("Cult Action Error");
+            }
+        });
 
-
+        special3.getChildren().add(new SpecialActionView("Stronghold Ability"));
+        special3.setOnMouseClicked(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                if(player.getSpecialActionToken().isCultTack){
+                    System.out.println("Stronghold Ability");
+                    event.consume();
+                }
+                else
+                    System.err.println("Stronghold Ability Error");
+            }
+        });
+        special4.getChildren().add(new SpecialActionView("Faction Ability"));
+        special4.setOnMouseClicked(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                if(player.getSpecialActionToken().isCultTack){
+                    System.out.println("Faction Ability");
+                    event.consume();
+                }
+                else
+                    System.err.println("Faction Ability Error");
+            }
+        });
+        firstRow.getChildren().addAll(special1,special2);
+        secondRow.getChildren().addAll(special3,special4);
         wholeFavor.getChildren().addAll(firstRow, secondRow);
         wholeFavor.setPadding( new Insets(100, 0, 0, 50));
 
