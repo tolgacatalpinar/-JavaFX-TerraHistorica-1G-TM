@@ -1,6 +1,7 @@
 package Controller;
 
 
+import Controller.ActionsControllers.SpecialActionController;
 import Controller.ActionsControllers.TerraformController;
 import Controller.CardsAndTilesControllers.*;
 import Model.*;
@@ -52,6 +53,8 @@ public class GameController implements Initializable {
    Button scoreTable;
    @FXML
    Label testText;
+   @FXML
+   Button specialActions;
 
    Button[][] terrains;
    Map map;
@@ -182,6 +185,11 @@ public class GameController implements Initializable {
       FavorTilesController favorTilesController = new FavorTilesController();
       favorTilesController.showFavorTilesTable(gameHandler);
 
+   }
+   @FXML
+   public void specialActionClicked(){
+      SpecialActionController specialActionController = new SpecialActionController();
+      specialActionController.showSpeacialActions(gameHandler);
    }
    public void createSpaces()
    {

@@ -61,7 +61,7 @@
                     <Font name="Book Antiqua" size="18.0" />
                 </font>
             </Button>
-            <Button layoutX="10.0" layoutY="420.0" prefHeight="50" prefWidth="200" text="Special Action" textFill="WHITE">
+            <Button fx:id = "specialActions" onMouseClicked="#specialActionClicked" layoutX="10.0" layoutY="420.0" prefHeight="50" prefWidth="200" text="Special Action" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="18.0" />
                 </font>

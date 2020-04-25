@@ -49,6 +49,7 @@ public class BonusCardView extends VBox {
         getChildren().add(card);
 
     }
+
     public void add(Node node)
     {
        if( node instanceof Label)
