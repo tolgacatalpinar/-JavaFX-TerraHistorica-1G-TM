@@ -10,6 +10,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -41,8 +42,14 @@ public class SpecialActionController {
                     System.out.println("Spade Action");
                     event.consume();
                 }
-                else
-                    System.err.println("Spade Error");
+                else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Special Action Error");
+                    alert.setHeaderText("You have not special spade action");
+                    alert.setContentText("You cannot do this action");
+                    alert.showAndWait();
+                }
+
 
             }
         });
@@ -55,8 +62,13 @@ public class SpecialActionController {
                     System.out.println("Cult Action");
                     event.consume();
                 }
-                else
-                    System.err.println("Cult Action Error");
+                else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Special Action Error");
+                    alert.setHeaderText("You have not special cult action");
+                    alert.setContentText("You cannot do this action");
+                    alert.showAndWait();
+                }
             }
         });
 
@@ -68,8 +80,13 @@ public class SpecialActionController {
                     System.out.println("Stronghold Ability");
                     event.consume();
                 }
-                else
-                    System.err.println("Stronghold Ability Error");
+                else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Special Action Error");
+                    alert.setHeaderText("You have not special stronghold ability");
+                    alert.setContentText("You cannot do this action");
+                    alert.showAndWait();
+                }
             }
         });
         special4.getChildren().add(new SpecialActionView("Faction Ability"));
@@ -80,8 +97,13 @@ public class SpecialActionController {
                     System.out.println("Faction Ability");
                     event.consume();
                 }
-                else
-                    System.err.println("Faction Ability Error");
+                else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Special Action Error");
+                    alert.setHeaderText("You have not special faction ability");
+                    alert.setContentText("You cannot do this action!!");
+                    alert.showAndWait();
+                }
             }
         });
         firstRow.getChildren().addAll(special1,special2);
