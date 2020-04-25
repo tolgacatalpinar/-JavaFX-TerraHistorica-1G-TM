@@ -1,6 +1,7 @@
 package Controller;
 
 
+import Controller.ActionsControllers.TerraformController;
 import Controller.CardsAndTilesControllers.*;
 import Model.*;
 //import Model.River;
@@ -140,6 +141,8 @@ public class GameController implements Initializable {
    @FXML
    public void terraformClicked()
    {
+      TerraformController terraformController = new TerraformController();
+      terraformController.showTerraformTable(gameHandler);
 
    }
    @FXML
