@@ -74,6 +74,7 @@ public class ReligionController{
         Scene dialogScene = new Scene(border, 1100, 600);
         dialog.setScene(dialogScene);
         dialog.setTitle("Religion");
+        dialog.setResizable(false);
         update(gridPane,1,false);
         //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
         dialog.show();

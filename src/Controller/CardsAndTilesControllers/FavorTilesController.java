@@ -46,6 +46,7 @@ public class FavorTilesController {
       Scene dialogScene = new Scene(wholeFavor, 1100, 600);
       dialog.setScene(dialogScene);
       dialog.setTitle("Favor Tiles");
+      dialog.setResizable(false);
       wholeFavor.setBackground(new Background( new BackgroundImage( new Image("favor_tiles_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
               BackgroundSize.DEFAULT)));
       dialog.show();

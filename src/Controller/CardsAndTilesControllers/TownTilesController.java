@@ -45,6 +45,7 @@ public class TownTilesController {
       Scene dialogScene = new Scene(wholeTown, 1100, 600);
       dialog.setScene(dialogScene);
       dialog.setTitle("Town Tiles");
+      dialog.setResizable(false);
       wholeTown.setBackground(new Background( new BackgroundImage( new Image("town_tiles_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
               BackgroundSize.DEFAULT)));
       dialog.show();

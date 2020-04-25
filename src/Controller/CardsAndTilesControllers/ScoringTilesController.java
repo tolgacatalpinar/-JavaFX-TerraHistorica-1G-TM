@@ -39,6 +39,7 @@ public class ScoringTilesController {
       Scene dialogScene = new Scene(wholeScoring, 1100, 600);
       dialog.setScene(dialogScene);
       dialog.setTitle("Scoring Tiles");
+      dialog.setResizable(false);
       wholeScoring.setBackground(new Background( new BackgroundImage( new Image("scoring_tiles_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
               BackgroundSize.DEFAULT)));
       dialog.show();

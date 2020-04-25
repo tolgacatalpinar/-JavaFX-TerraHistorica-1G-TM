@@ -39,6 +39,7 @@ public class BonusCardsController {
       Scene dialogScene = new Scene(wholeBonus, 1100, 600);
       dialog.setScene(dialogScene);
       dialog.setTitle("Bonus Cards ");
+      dialog.setResizable(false);
       wholeBonus.setBackground(new Background( new BackgroundImage( new Image("bonus_cards_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
               BackgroundSize.DEFAULT)));
       dialog.show();
