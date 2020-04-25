@@ -24,8 +24,6 @@ public class BonusCardsController {
       ArrayList<BonusCard> bonusCards = gameHandler.getCardsAndTiles().getSelectedBonusCards();
 
       for (int i = 0; i < (int) Math.ceil((double) bonusCards.size() / 2); i++){
-
-         System.out.println("The number: " + (int) Math.ceil(bonusCards.size() / 2));
          firstRow.getChildren().add(new BonusCardView(bonusCards.get(i)));
       }
       for (int i = (int) Math.ceil((double)bonusCards.size() / 2); i < bonusCards.size(); i++){
