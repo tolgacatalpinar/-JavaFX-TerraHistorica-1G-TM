@@ -33,9 +33,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class ReligionController extends Application{
+public class ReligionController{
     @FXML
     private ChoiceBox<String> choiceBox;
     @FXML
@@ -44,11 +45,6 @@ public class ReligionController extends Application{
     private Button orderButton;
     @FXML
     private GridPane gridPane;
-
-    @FXML
-    private GridPane myOrder;
-    @FXML
-    private Pane main_pane;
 
     private int[] array = {2, 3, 5};
     private int currentPlayer = 0;
@@ -60,45 +56,25 @@ public class ReligionController extends Application{
     private Jewish jewish_track = new Jewish(3, array);
     private Religion[] religions = {islam_track, chirst_track, hindu_track, jewish_track};
 
-    public void showReligion(GameHandler gameHandler)
+    public void showReligion(GameHandler gameHandler) throws Exception
     {
-
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/View/ReligionView.fxml"));
-        gridPane = (GridPane) root.getChildrenUnmodifiable().get(0);
+        BorderPane border = new BorderPane();
+        GridPane gridPane = new GridPane();
+        gridPane.setPadding(new Insets(10,10,10,10));
+        gridPane.setMinHeight(800);
+        gridPane.setMinWidth(1200);
+        border.setCenter(gridPane);
+        border.setBackground(new Background( new BackgroundImage( new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT)));
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        Scene dialogScene = new Scene(border, 1100, 600);
+        dialog.setScene(dialogScene);
+        dialog.setTitle("Religion");
         update(gridPane,1,false);
-
         //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
-        choiceBox = (ChoiceBox<String>) root.getChildrenUnmodifiable().get(1);
-        priestButton = (Button) root.getChildrenUnmodifiable().get(3);
-        priestButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                int religion_index = choiceBox.getSelectionModel().getSelectedIndex();
-                Religion choosen_religion = religions[religion_index];
-                System.out.println("Gained power is " + choosen_religion.placePriest(currentPlayer, playerKeyStatus));
-                System.out.println("Priest placed on " + choiceBox.getSelectionModel().getSelectedItem());
-                System.out.println("Index: " + religion_index);
-                update(gridPane, religion_index, false);
-            }
-        });
-        orderButton = (Button) root.getChildrenUnmodifiable().get(4);
-        orderButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                int religion_index = choiceBox.getSelectionModel().getSelectedIndex();
-                Religion choosen_religion = religions[religion_index];
-                System.out.println("Gained power is " + choosen_religion.addOrderOfReligion(currentPlayer, playerKeyStatus));
-                System.out.println("Order acquired " + choiceBox.getSelectionModel().getSelectedItem());
-                update(gridPane, religion_index, true);
-            }
-        });
-        primaryStage.setScene(new Scene(root, 1920, 1080));
-        primaryStage.setMaximized(true);
-        primaryStage.show();
+        dialog.show();
+
     }
     /**
      * According to religion track's data paint the locations occupied
@@ -208,10 +184,5 @@ public class ReligionController extends Application{
 
         return result;
     }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
 
 }
