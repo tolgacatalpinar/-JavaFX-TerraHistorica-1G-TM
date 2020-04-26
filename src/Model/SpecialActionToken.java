@@ -6,11 +6,11 @@ public class SpecialActionToken {
     public boolean isStrongholdAbility;
     public boolean isFactionAbility;
 
-
+//BUnlar değiştirilip tekrardan false olarak set edilecek ama şimdilik böyle kalması lazım
     public SpecialActionToken() {
-        this.isSpade = false;
-        this.isCultTack = false;
-        this.isStrongholdAbility = false;
-        this.isFactionAbility = false;
+        this.isSpade = true;
+        this.isCultTack = true;
+        this.isStrongholdAbility = true;
+        this.isFactionAbility = true;
     }
 }
