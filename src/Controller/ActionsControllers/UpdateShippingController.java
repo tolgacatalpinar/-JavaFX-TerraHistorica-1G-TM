@@ -17,7 +17,7 @@ public class UpdateShippingController {
         int playerGold = player.getGoldNum();
         if( priestCost<= playerPriest && goldCost <= playerGold && player.getShipLevel() < 3){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("UpgradeShipping");
+            alert.setTitle("Upgrade Shipping");
             alert.setHeaderText("GOLD COST : " + goldCost +"\n" +
                     "PRIEST COST : " + priestCost);
             alert.setContentText("Do you wan to update your shipping level \n" +

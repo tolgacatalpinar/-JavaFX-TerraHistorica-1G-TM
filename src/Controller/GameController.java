@@ -4,6 +4,7 @@ package Controller;
 import Controller.ActionsControllers.SpecialActionController;
 import Controller.ActionsControllers.TerraformController;
 import Controller.ActionsControllers.UpdateShippingController;
+import Controller.ActionsControllers.UpdateSpadeController;
 import Controller.CardsAndTilesControllers.*;
 import Model.*;
 //import Model.River;
@@ -182,7 +183,8 @@ public class GameController implements Initializable {
    @FXML
    public void upgradeSpadeClicked()
    {
-
+      UpdateSpadeController updateShippingController = new UpdateSpadeController();
+      updateShippingController.showUpdateSpadeDialogs(gameHandler);
    }
    @FXML
    public void terraformClicked()

@@ -20,8 +20,6 @@ public class Faction {
     public int SPADE_PRIEST_COST = 1;
     public int SPADE_GOLD_COST = 5;
     public int SPADE_WORKER_COST = 2;
-    public int SPADE_FIRST_UPGRADE_VICTORY = 6;
-    public int SPADE_SECOND_UPGRADE_VICTORY = 6;
     public int SHIPPING_PRIEST_COST = 1;
     public int SHIPPING_GOLD_COST = 4;
     public int SHIPPING_UPGRADE_VICTORY_POINTS[] = {2,3,4,0};
