@@ -41,22 +41,22 @@
                     <Font name="Book Antiqua" size="18.0" />
                 </font>
             </Button>
-            <Button layoutX="10.0" layoutY="320.0" prefHeight="50" prefWidth="200.0" text="Upgrade Shipping" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id = "upgradeShipping" onMouseClicked="#upgradeShippingClicked" layoutX="10.0" layoutY="320.0" prefHeight="50" prefWidth="200.0" text="Upgrade Shipping" textAlignment="CENTER" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="18.0" />
                 </font>
             </Button>
-            <Button layoutX="10.0" layoutY="295.0" prefHeight="50" prefWidth="200.0" text="Upgrade Structure" textFill="WHITE">
+            <Button fx:id = "upgradeStruct" onMouseClicked="#upgradeStructClicked" layoutX="10.0" layoutY="295.0" prefHeight="50" prefWidth="200.0" text="Upgrade Structure" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="18.0" />
                 </font>
             </Button>
-            <Button layoutX="10.0" layoutY="370.0" prefHeight="50" prefWidth="200" text="Send Priest" textFill="WHITE">
+            <Button fx:id = "sendPriest" onMouseClicked="#sentPriestClicked" layoutX="10.0" layoutY="370.0" prefHeight="50" prefWidth="200" text="Send Priest" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="18.0" />
                 </font>
             </Button>
-            <Button layoutX="10.0" layoutY="395.0" prefHeight="50" prefWidth="200" text="Power Action" textFill="WHITE">
+            <Button fx:id = "powerActions" onMouseClicked="#powerActionClicked" layoutX="10.0" layoutY="395.0" prefHeight="50" prefWidth="200" text="Power Action" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="18.0" />
                 </font>
@@ -66,7 +66,7 @@
                     <Font name="Book Antiqua" size="18.0" />
                 </font>
             </Button>
-            <Button layoutX="10.0" layoutY="446.0" prefHeight="50" prefWidth="200" text="Upgrade Spade" textFill="WHITE">
+            <Button fx:id = "upgradeSpade" onMouseClicked="#upgradeSpadeClicked" layoutX="10.0" layoutY="446.0" prefHeight="50" prefWidth="200" text="Upgrade Spade" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="18.0" />
                 </font>

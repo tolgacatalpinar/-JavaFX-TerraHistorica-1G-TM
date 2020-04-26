@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -22,18 +23,21 @@ public class SpecialActionController {
         HBox secondRow = new HBox();
         HBox special1 = new HBox();
         HBox special2 = new HBox();
-
         HBox special3 = new HBox();
         HBox special4 = new HBox();
+
         Player[] players = gameHandler.getPlayerList();
         int playerId = gameHandler.getCurrentPlayerId();
         Player player = players[playerId];
         special1.getChildren().add(new SpecialActionView("Spade Action"));
+        final int[] choice = {0};
         special1.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
-                if(player.getSpecialActionToken().isCultTack){
+                if(player.getSpecialActionToken().isSpade){
                     System.out.println("Spade Action");
+                    choice[0] = 1;
+                    System.out.println(choice[0]);
                     event.consume();
                 }
                 else {
@@ -43,8 +47,6 @@ public class SpecialActionController {
                     alert.setHeaderText("You cannot do this action");
                     alert.showAndWait();
                 }
-
-
             }
         });
         special2.getChildren().add(new SpecialActionView("Cult Action"));
@@ -54,6 +56,9 @@ public class SpecialActionController {
 
                 if(player.getSpecialActionToken().isCultTack){
                     System.out.println("Cult Action");
+                    choice[0] = 2;
+                    System.out.println(choice[0]);
+
                     event.consume();
                 }
                 else {
@@ -70,8 +75,11 @@ public class SpecialActionController {
         special3.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
-                if(player.getSpecialActionToken().isCultTack){
+                if(player.getSpecialActionToken().isStrongholdAbility){
                     System.out.println("Stronghold Ability");
+                    choice[0] = 3;
+                    System.out.println(choice[0]);
+
                     event.consume();
                 }
                 else {
@@ -87,8 +95,43 @@ public class SpecialActionController {
         special4.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
-                if(player.getSpecialActionToken().isCultTack){
+                if(player.getSpecialActionToken().isFactionAbility){
                     System.out.println("Faction Ability");
+                    choice[0] = 4;
+                    System.out.println(choice[0]);
+
+                    event.consume();
+                }
+                else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Special Action Error");
+                    alert.setContentText("You have not special faction ability");
+                    alert.setHeaderText("You cannot do this action!!");
+                    alert.showAndWait();
+                }
+            }
+        });
+        Button apply = new Button();
+        apply.setText("Apply");
+        apply.setFont(Font.font(20));
+        apply.setOnMouseClicked(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                if(choice[0] == 1){
+                    player.getSpecialActionToken().isSpade = false;
+                    player.setSpadeInventory(1);
+                    event.consume();
+                }
+                else if(choice[0] == 2){
+                    player.getSpecialActionToken().isCultTack = false;
+                    event.consume();
+                }
+                else if(choice[0] == 3){
+                    player.getSpecialActionToken().isStrongholdAbility = false;
+                    event.consume();
+                }
+                else if (choice[0] == 4){
+                    player.getSpecialActionToken().isFactionAbility = false;
                     event.consume();
                 }
                 else {
@@ -103,6 +146,7 @@ public class SpecialActionController {
         firstRow.getChildren().addAll(special1,special2);
         secondRow.getChildren().addAll(special3,special4);
         wholeFavor.getChildren().addAll(firstRow, secondRow);
+        wholeFavor.getChildren().add(apply);
         wholeFavor.setPadding( new Insets(100, 0, 0, 50));
 
         wholeFavor.setMinHeight(800);

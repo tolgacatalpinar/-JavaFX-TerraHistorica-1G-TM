@@ -3,6 +3,8 @@ package Controller;
 
 import Controller.ActionsControllers.SpecialActionController;
 import Controller.ActionsControllers.TerraformController;
+import Controller.ActionsControllers.UpdateShippingController;
+import Controller.ActionsControllers.UpdateSpadeController;
 import Controller.CardsAndTilesControllers.*;
 import Model.*;
 //import Model.River;
@@ -19,7 +21,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -30,6 +34,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
@@ -57,6 +62,18 @@ public class GameController implements Initializable {
    Label testText;
    @FXML
    Button specialActions;
+   @FXML
+   Button upgradeShipping;
+   @FXML
+   Button upgradeStruct;
+   @FXML
+   Button sendPriest;
+   @FXML
+   Button powerActions;
+   @FXML
+   Button upgradeSpade;
+
+
 
    Button[][] terrains;
    Map map;
@@ -155,6 +172,34 @@ public class GameController implements Initializable {
       currentPlayerId = gameHandler.getCurrentPlayerId();
       System.out.println("Current player is now: " + playerList[currentPlayerId].getNickName());
       System.out.println("--------------------------------------------------");
+   }
+   @FXML
+   public void upgradeShippingClicked()
+   {
+      UpdateShippingController updateShippingController = new UpdateShippingController();
+      updateShippingController.showUpdateShippingDialogs(gameHandler);
+
+   }
+   @FXML
+   public void upgradeStructClicked()
+   {
+
+   }
+   @FXML
+   public void sentPriestClicked()
+   {
+
+   }
+   @FXML
+   public void powerActionClicked()
+   {
+
+   }
+   @FXML
+   public void upgradeSpadeClicked()
+   {
+      UpdateSpadeController updateShippingController = new UpdateSpadeController();
+      updateShippingController.showUpdateSpadeDialogs(gameHandler);
    }
    @FXML
    public void terraformClicked()
