@@ -19,7 +19,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -30,6 +32,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
@@ -55,6 +58,18 @@ public class GameController implements Initializable {
    Label testText;
    @FXML
    Button specialActions;
+   @FXML
+   Button upgradeShipping;
+   @FXML
+   Button upgradeStruct;
+   @FXML
+   Button sendPriest;
+   @FXML
+   Button powerActions;
+   @FXML
+   Button upgradeSpade;
+
+
 
    Button[][] terrains;
    Map map;
@@ -141,6 +156,61 @@ public class GameController implements Initializable {
 
    }
 
+   @FXML
+   public void upgradeShippingClicked()
+   {
+      Player player = gameHandler.getPlayerList()[gameHandler.getCurrentPlayer()];
+      int priestCost = player.getFaction().SHIPPING_PRIEST_COST;
+      int goldCost = player.getFaction().SHIPPING_GOLD_COST;
+      int playerPriest = player.getPriestNum();
+      int playerGold = player.getGoldNum();
+      if( priestCost<= playerPriest && goldCost <= playerGold && player.getShipLevel() < 3){
+         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+         alert.setTitle("UpgradeShipping");
+         alert.setHeaderText("GOLD COST : " + goldCost +"\n" +
+                              "PRIEST COST : " + priestCost);
+         alert.setContentText("Do you wan to update your shipping level \n" +
+                 "Current Level : " + player.getShipLevel() + "\n" +
+                  "New Level : " + (player.getShipLevel() + 1) );
+         Optional<ButtonType> result = alert.showAndWait();
+         if (result.get() == ButtonType.OK){
+            player.setGoldNum(playerGold-goldCost);
+            player.setPriestNum(playerPriest-priestCost);
+            player.setShipLevel(player.getShipLevel() + 1);
+            player.setVictoryPointNum(player.getVictoryPointNum() + player.getFaction().SHIPPING_UPGRADE_VICTORY_POINTS[player.getShipLevel()]);
+         } else {
+            // ... user chose CANCEL or closed the dialog
+         }
+      }
+      else
+      {
+         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+         alert.setTitle("Update Shipping level");
+         alert.setContentText("You have no required cost or priest");
+         alert.setHeaderText("You cannot do this action!!");
+         alert.showAndWait();
+      }
+   }
+   @FXML
+   public void upgradeStructClicked()
+   {
+
+   }
+   @FXML
+   public void sentPriestClicked()
+   {
+
+   }
+   @FXML
+   public void powerActionClicked()
+   {
+
+   }
+   @FXML
+   public void upgradeSpadeClicked()
+   {
+
+   }
    @FXML
    public void terraformClicked()
    {
