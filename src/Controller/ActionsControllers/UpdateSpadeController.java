@@ -32,7 +32,7 @@ public class UpdateSpadeController {
                 player.setGoldNum(playerGold-goldCost);
                 player.setPriestNum(playerPriest-priestCost);
                 player.setSpadeLevel(player.getSpadeLevel() + 1);
-                player.setVictoryPointNum(player.getVictoryPointNum() + 6);
+                player.setVictoryPointNum(player.getVictoryPointNum() + (player.getSpadeLevel() == 2 ? player.getFaction().SPADE_FIRST_UPGRADE_VICTORY : player.getFaction().SPADE_SECOND_UPGRADE_VICTORY) );
             } else {
                 // ... user chose CANCEL or closed the dialog
             }
@@ -41,10 +41,16 @@ public class UpdateSpadeController {
         {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Update Spade level");
-            alert.setContentText("You have no required cost, priest, worker \n" +
-                    "GOLD COST : " + goldCost +"\n" +
-                    "PRIEST COST : " + priestCost + "\n" +
-                    "WORKER COST : " + workerCost);
+            if(player.getSpadeLevel() == 3 ){
+                alert.setContentText("You have max spade level");
+            }
+            else{
+                alert.setContentText("You have no required cost, priest, worker \n" +
+                        "GOLD COST : " + goldCost +"\n" +
+                        "PRIEST COST : " + priestCost + "\n" +
+                        "WORKER COST : " + workerCost);
+            }
+
             alert.setHeaderText("You cannot do this action!!");
             alert.showAndWait();
         }

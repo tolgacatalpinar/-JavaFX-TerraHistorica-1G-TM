@@ -37,9 +37,16 @@ public class UpdateShippingController {
         {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Update Shipping level");
-            alert.setContentText("You have no required cost or priest\n" +
-                    "GOLD COST : " + goldCost +"\n" +
-                    "PRIEST COST : " + priestCost);
+            if(player.getSpadeLevel() == 3 ){
+                alert.setContentText("You have max shipping level");
+            }
+            else
+            {
+                alert.setContentText("You have no required cost or priest\n" +
+                        "GOLD COST : " + goldCost +"\n" +
+                        "PRIEST COST : " + priestCost);
+            }
+
             alert.setHeaderText("You cannot do this action!!");
             alert.showAndWait();
         }
