@@ -52,6 +52,8 @@ public class GameController implements Initializable {
    @FXML
    Button scoreTable;
    @FXML
+   Button skipRound;
+   @FXML
    Label testText;
    @FXML
    Button specialActions;
@@ -140,7 +142,20 @@ public class GameController implements Initializable {
 
 
    }
+   @FXML
+   public void skipRoundClicked()
+   {
+      int currentPlayerId = gameHandler.getCurrentPlayerId();
+      System.out.println("Current player was: " + playerList[currentPlayerId].getNickName());
+      if( (currentPlayerId + 1) < playerList.length && playerList[currentPlayerId + 1] != null)
+         gameHandler.setCurrentPlayerId(currentPlayerId + 1);
+      else
+         gameHandler.setCurrentPlayerId(0);
 
+      currentPlayerId = gameHandler.getCurrentPlayerId();
+      System.out.println("Current player is now: " + playerList[currentPlayerId].getNickName());
+      System.out.println("--------------------------------------------------");
+   }
    @FXML
    public void terraformClicked()
    {

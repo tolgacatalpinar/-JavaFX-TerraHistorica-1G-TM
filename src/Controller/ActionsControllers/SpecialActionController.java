@@ -1,23 +1,17 @@
 package Controller.ActionsControllers;
 
-import Model.CardsAndTiles.FavorTile;
 import Model.GameHandler;
 import Model.Player;
 import View.ActionsViews.SpecialActionView;
-import View.CardsAndTilesViews.BonusCardView;
-import View.CardsAndTilesViews.FavorTileView;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
 
 public class SpecialActionController {
 
@@ -32,7 +26,7 @@ public class SpecialActionController {
         HBox special3 = new HBox();
         HBox special4 = new HBox();
         Player[] players = gameHandler.getPlayerList();
-        int playerId = gameHandler.getCurrentPlayer();
+        int playerId = gameHandler.getCurrentPlayerId();
         Player player = players[playerId];
         special1.getChildren().add(new SpecialActionView("Spade Action"));
         special1.setOnMouseClicked(new EventHandler<Event>() {

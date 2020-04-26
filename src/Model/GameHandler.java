@@ -1,21 +1,16 @@
 package Model;
 
-import Model.*;
 import Model.ReligionSubclasses.*;
 import Model.CardsAndTiles.BonusCard;
 import Model.CardsAndTiles.CardsAndTiles;
 import Model.CardsAndTiles.FavorTile;
 import Model.CardsAndTiles.TownTile;
 import Model.FactionSubclasses.DariusTheGreat;
-import Model.FactionSubclasses.VladTheImpaler;
-import View.*;
-
-import java.util.ArrayList;
 
 
 public class GameHandler {
 
-    int currentPlayer;
+    int currentPlayerId;
     Player[] playerList;
     CardsAndTiles cardsAndTiles;
     Religion[] religions;
@@ -39,7 +34,7 @@ public class GameHandler {
         religions[1] = new Christianity(playerSize, player_initial_chirst);
         religions[2] = new Jewish(playerSize, player_initial_jew);
         religions[3] = new Hinduism(playerSize, player_initial_hindu);
-        currentPlayer = 0;
+        currentPlayerId = 0;
         this.playerList = playerList;
 
     }
@@ -160,11 +155,12 @@ public class GameHandler {
       return religions;
    }
 
-    public int getCurrentPlayer() {
-        return currentPlayer;
+    public int getCurrentPlayerId() {
+        return currentPlayerId;
     }
 
-    public void setCurrentPlayer(int currentPlayer) {
-        this.currentPlayer = currentPlayer;
+    public void setCurrentPlayerId( int currentPlayerId) {
+
+       this.currentPlayerId = currentPlayerId;
     }
 }
