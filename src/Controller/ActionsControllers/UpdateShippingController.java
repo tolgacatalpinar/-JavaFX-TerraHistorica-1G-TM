@@ -10,7 +10,7 @@ import java.util.Optional;
 public class UpdateShippingController {
     public void showUpdateShippingDialogs(GameHandler gameHandler){
 
-        Player player = gameHandler.getPlayerList()[gameHandler.getCurrentPlayer()];
+        Player player = gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()];
         int priestCost = player.getFaction().SHIPPING_PRIEST_COST;
         int goldCost = player.getFaction().SHIPPING_GOLD_COST;
         int playerPriest = player.getPriestNum();

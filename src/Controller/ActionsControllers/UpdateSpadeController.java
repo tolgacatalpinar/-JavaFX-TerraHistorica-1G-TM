@@ -11,7 +11,7 @@ public class UpdateSpadeController {
 
     public void showUpdateSpadeDialogs(GameHandler gameHandler){
 
-        Player player = gameHandler.getPlayerList()[gameHandler.getCurrentPlayer()];
+        Player player = gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()];
         int priestCost = player.getFaction().SPADE_PRIEST_COST;
         int goldCost = player.getFaction().SPADE_GOLD_COST;
         int workerCost = player.getFaction().SPADE_WORKER_COST;
