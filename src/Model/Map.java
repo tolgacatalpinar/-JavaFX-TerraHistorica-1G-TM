@@ -1,8 +1,9 @@
 package Model;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 
-public class Map{
+public class Map implements Serializable{
    public Space[][] spaces;
    public static int townScore = 0; // bu variable'ı şimdilik istown çalışsın diye ekledim. Belki durur ama oo olması icin buradan kaldırıp
 // player classına da ekleyebiliriz, is town'a da parameter olarak player objesi alırız, öyle de is görür.

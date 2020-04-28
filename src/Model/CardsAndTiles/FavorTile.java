@@ -1,8 +1,8 @@
 package Model.CardsAndTiles;
 
 import java.util.ArrayList;
-
-public class FavorTile {
+import java.io.Serializable;
+public class FavorTile implements Serializable{
     private ArrayList<Integer> playerIds;
     private int numberOfPlayer;
     private int islamBonus; //water

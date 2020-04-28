@@ -1,6 +1,6 @@
 package Model;
-
-public class Structure {
+import java.io.Serializable;
+public class Structure implements Serializable{
     private int buildingScore;
     public Structure(){
         setBuildingScore(0);

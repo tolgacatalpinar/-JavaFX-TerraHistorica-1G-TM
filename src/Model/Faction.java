@@ -1,6 +1,6 @@
 package Model;
-
-public class Faction {
+import java.io.Serializable;
+public class Faction implements Serializable {
 
     public String TERRAIN_TILE;
     public int MAX_SHIPPING = 3;

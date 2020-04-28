@@ -1,5 +1,6 @@
 package Model;
-public class Religion {
+import java.io.Serializable;
+public class Religion implements Serializable{
 
     private final int MAX_LENGTH = 11;
     private int orderOfCult_3;      //Holds id of player who took this area

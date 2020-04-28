@@ -1,6 +1,6 @@
 package Model;
-
-public class SpecialActionToken {
+import java.io.Serializable;
+public class SpecialActionToken implements Serializable {
     public boolean isSpade;
     public boolean isCultTack;
     public boolean isStrongholdAbility;

@@ -3,8 +3,8 @@ package Model.CardsAndTiles;
 import Model.Player;
 
 import java.util.ArrayList;
-
-public class ScoringTile {
+import java.io.Serializable;
+public class ScoringTile implements Serializable{
 
     //Every player can take this tile there is no current number of player.
     private ArrayList<Integer> playerId;

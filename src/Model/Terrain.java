@@ -2,8 +2,8 @@ package Model;
 
 //import javafx.scene.control.Button;
 //import javafx.scene.shape.Polygon;
-
-public class Terrain extends Space{
+import java.io.Serializable;
+public class Terrain extends Space implements Serializable{
 
     private Structure structure;
 

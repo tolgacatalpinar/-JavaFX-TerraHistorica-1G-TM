@@ -1,8 +1,8 @@
 package Model.CardsAndTiles;
 
 import java.util.ArrayList;
-
-public class CardsAndTiles {
+import java.io.Serializable;
+public class CardsAndTiles implements Serializable {
     public ArrayList<TownTile> townTiles;
     public ArrayList<BonusCard> bonusCards;
     public ArrayList<FavorTile> favorTiles;

@@ -1,7 +1,8 @@
 package Model;
 //to do : Yeni bir list yapalım size ı 1 olsun. Bu listede bridge ile bağlantı kurulan öteki space'i tutarız. Kurarken buildBridge(space) diye
 // diye bir method olur en son döndürürken de getBridgeList()
-public class Space{
+import java.io.Serializable;
+public class Space implements Serializable{
     private boolean isOccupied;
     private String type;
     private String color;

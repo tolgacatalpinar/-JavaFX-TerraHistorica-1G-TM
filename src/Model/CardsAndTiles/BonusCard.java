@@ -1,6 +1,6 @@
 package Model.CardsAndTiles;
-
-public class BonusCard {
+import java.io.Serializable;
+public class BonusCard implements Serializable{
     private int notTakenBonus;
     private int playerId;
     private int goldBonus;

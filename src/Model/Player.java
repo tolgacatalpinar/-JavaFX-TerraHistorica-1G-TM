@@ -3,8 +3,9 @@ package Model;
 import Model.StructureSubclasses.Stronghold;
 
 import java.security.PublicKey;
+import java.io.Serializable;
 
-public class Player {
+public class Player implements Serializable{
 
     String nickName;
     String terrainTile;

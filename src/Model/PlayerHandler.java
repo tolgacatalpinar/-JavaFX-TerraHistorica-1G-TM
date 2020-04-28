@@ -1,8 +1,9 @@
 package Model;
 
 import Model.StructureSubclasses.*;
+import java.io.Serializable;
 
-public class PlayerHandler {
+public class PlayerHandler implements Serializable{
 
 
 

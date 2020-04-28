@@ -1,6 +1,6 @@
 package Model.CardsAndTiles;
-
-public class TownTile {
+import java.io.Serializable;
+public class TownTile implements Serializable {
 
     private int playerId;
     private int powerBonus;

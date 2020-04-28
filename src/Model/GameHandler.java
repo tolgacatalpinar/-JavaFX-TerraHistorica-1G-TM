@@ -6,9 +6,9 @@ import Model.CardsAndTiles.CardsAndTiles;
 import Model.CardsAndTiles.FavorTile;
 import Model.CardsAndTiles.TownTile;
 import Model.FactionSubclasses.DariusTheGreat;
+import java.io.Serializable;
 
-
-public class GameHandler {
+public class GameHandler implements Serializable{
 
     int currentPlayerId;
     Player[] playerList;

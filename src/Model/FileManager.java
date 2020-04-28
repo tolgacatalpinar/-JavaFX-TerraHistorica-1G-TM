@@ -1,41 +1,20 @@
 package Model;
-import Model.CardsAndTiles.*;
-
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.IOException;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.io.Serializable;
 
 public class FileManager {
-    Player[] players;
-    Map map;
-    CardsAndTiles cardsAndTiles;
-    File save;
-    FileWriter writer;
+    private File save;
+    private GameHandler game;
+    private Map map;
 
-    public FileManager(GameHandler game, Map map) throws IOException {
-        this.map = map;
-        players = game.getPlayerList();
-        cardsAndTiles =game.getCardsAndTiles();
-        save = createSave(game.gameId);
-        writer = new FileWriter(save);
-    }
-    public void saveGame(File file, GameHandler game)throws IOException  {
-        saveRounds(file, players, 0, 1, writer);
-        savePlayers(file, players, writer);
-        saveCardsAndTiles(file, cardsAndTiles, writer);
-        writer.close();
+    public FileManager(String gameId) throws IOException {
+        save = createSave(gameId);
     }
 
     public static File createSave(String gameId) throws IOException  {
@@ -44,56 +23,39 @@ public class FileManager {
         return save;
     }
 
-    public void savePlayers(File file, Player[] players, FileWriter writer) throws IOException  {
-        int playerCount = players.length;
-        for(int i = 0; i < playerCount; i++){
-            writer.write(players[i].getPlayerId() + "\n" );
-            writer.write(players[i].getNickName() + "\n" );
-            writer.write(players[i].getFaction() + "\n" ); // Faction Object
-            writer.write(players[i].getVictoryPointNum() + "\n" );
-            writer.write(players[i].getGoldNum() + "\n" );
-            writer.write(players[i].getGoldIncome() + "\n" );
-            writer.write(players[i].getWorkerNum() + "\n" );
-            writer.write(players[i].getWorkerIncome() + "\n" );
-            writer.write(players[i].getCultBonusIncome() + "\n" );
-            writer.write(players[i].getPriestNum() + "\n" );
-            writer.write(players[i].getPriestIncome() + "\n" );
-            writer.write(players[i].getSpadeLevel() + "\n" );
-            writer.write(players[i].getShipLevel() + "\n" );
-            writer.write(players[i].getShipLevel() + "\n" );
-            writer.write(players[i].getDwellingNum() + "\n" );
-            writer.write(players[i].getTradingPostNum() + "\n" );
-            writer.write(players[i].getTempleNum() + "\n" );
-            writer.write(players[i].getSanctuaryNum() + "\n" );
-            writer.write(players[i].getStrongholdNum() + "\n" );
-            writer.write(players[i].getBridgeNum() + "\n" );
-            writer.write(players[i].getPerBuildingIncome() + "\n" );
-            writer.write(players[i].getTerraformWorkerCost() + "\n" );
-            writer.write(players[i].getReligionTrackInventory() + "\n" );
-            writer.write(players[i].getSpadeInventory() + "\n" );
-            writer.write(players[i].getTownPowerValue() + "\n" );
-            writer.write(players[i].getKey() + "\n" );
-            writer.write(players[i].getSpecialActionToken() + "\n" );
-            writer.write("\n");
+
+    public void saveGame(GameHandler game, Map map) throws IOException   {
+        FileOutputStream f = new FileOutputStream(save);
+        ObjectOutputStream o = new ObjectOutputStream(f);
+        o.writeObject(game);
+        o.close();
+        f.close();
+    }
+
+    public void loadGame() throws IOException{
+        try {
+            FileInputStream fi = new FileInputStream(save);
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            this.game = (GameHandler) oi.readObject();
+            this.map = (Map) oi.readObject();
+            oi.close();
+            fi.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Error initializing stream");
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        writer.write("separator2" + "\n");
-    }
-    public void saveRounds(File file, Player[] orderedPlayers, int turn, int round, FileWriter writer) throws IOException  {
-        int playerCount = players.length;
-        writer.write(playerCount + "\n");
-        writer.write(turn);
-        writer.write(round);
-        writer.write("separator1" + "\n");
     }
 
-    public void saveCardsAndTiles(File file, CardsAndTiles cardsTiles, FileWriter writer) throws IOException  {
-        ArrayList <FavorTile> favors = cardsTiles.getFavorTiles();
-        ArrayList <ScoringTile> scores = cardsTiles.getScoringTiles();
-        ArrayList <TownTile> towns = cardsTiles.getTownTiles();
-        ArrayList <BonusCard> bonuses = cardsTiles.getBonusCards();
-        ArrayList <ScoringTile> selectedScores = cardsTiles.getSelectedScoringTiles();
-        ArrayList <BonusCard> selectedBonuses = cardsTiles.getSelectedBonusCards();
+    public Map getMap() {
+        return map;
     }
 
-
+    public GameHandler getGame() {
+        return game;
+    }
 }
