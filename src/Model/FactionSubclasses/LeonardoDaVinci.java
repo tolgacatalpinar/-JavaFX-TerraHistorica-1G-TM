@@ -6,6 +6,7 @@ import Model.Player;
 public class LeonardoDaVinci extends Faction { //Engineer
   
   public LeonardoDaVinci() {
+     TERRAIN_TILE = "Mountains";
      INITIAL_WORKER = 2;
      INITIAL_GOLD = 10;
      INITIAL_BOWL_ONE_POWER = 3;

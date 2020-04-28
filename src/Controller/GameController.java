@@ -9,29 +9,17 @@ import Controller.CardsAndTilesControllers.*;
 import Model.*;
 //import Model.River;
 //import Model.TerrainSubclasses.*;
-import Model.CardsAndTiles.BonusCard;
-import Model.CardsAndTiles.ScoringTile;
-import Model.CardsAndTiles.TownTile;
 import View.*;
-import View.CardsAndTilesViews.BonusCardView;
-import View.CardsAndTilesViews.ScoringTileView;
-import View.CardsAndTilesViews.TownTileView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.scene.image.Image;
+
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
@@ -155,8 +143,23 @@ public class GameController implements Initializable {
       thread.start();
 
 
+      /*
+      for(int i = 0; i < 9; i++)
+         for( int j = 0; j < 13; j++){
+            if(!map.spaces[i][j].getType().equals("Wasteland")){
+               if(terrains[i][j] != null)
+                  terrains[i][j].setDisable(true);
+            }
+      }
+
+      */
+
+
+
+
 
    }
+
    @FXML
    public void skipRoundClicked()
    {
@@ -181,6 +184,7 @@ public class GameController implements Initializable {
    @FXML
    public void upgradeStructClicked()
    {
+      System.out.println(gameHandler.getPlayerList()[0].getFaction().TERRAIN_TILE);
 
    }
    @FXML
@@ -191,6 +195,7 @@ public class GameController implements Initializable {
    @FXML
    public void powerActionClicked()
    {
+
 
    }
    @FXML
@@ -203,8 +208,7 @@ public class GameController implements Initializable {
    public void terraformClicked()
    {
 
-      TerraformController terraformController = new TerraformController();
-      terraformController.showTerraformTable(gameHandler);
+      TerraformController.updateTerraform(gameHandler, terrains, map);
 
    }
    @FXML

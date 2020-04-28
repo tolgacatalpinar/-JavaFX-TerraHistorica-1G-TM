@@ -4,6 +4,7 @@ import Model.Faction;
 
 public class Gilgamesh extends Faction {
       public Gilgamesh() {
+        TERRAIN_TILE = "Wasteland";
         INITIAL_HINDUISM = 1; // fire
         INITIAL_CHRISTIANITY = 1; //air
         INITIAL_VICTORY_POINT = 25;

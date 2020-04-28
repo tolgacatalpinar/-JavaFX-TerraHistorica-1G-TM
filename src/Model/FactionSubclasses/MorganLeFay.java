@@ -6,6 +6,7 @@ public class MorganLeFay extends Faction { //witch
   
   public MorganLeFay()
   {
+      TERRAIN_TILE = "Forest";
         INITIAL_CHRISTIANITY = 2; //air
         DWELLING_GOLD_COST = 2;
         DWELLING_WORKER_COST = 1;

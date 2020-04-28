@@ -7,6 +7,7 @@ public class ErikTheRed extends Faction {
   
   public ErikTheRed()
   {
+        TERRAIN_TILE = "Lakes";
         INITIAL_WORKER = 8;
         INITIAL_GOLD = 20;
         INITIAL_HINDUISM = 1; // fire

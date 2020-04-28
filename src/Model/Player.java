@@ -7,6 +7,7 @@ import java.security.PublicKey;
 public class Player {
 
     String nickName;
+    String terrainTile;
     Faction faction;
     SpecialActionToken specialActionToken;
     private int playerId;
@@ -58,6 +59,7 @@ public class Player {
         this.playerId = playerId;
         specialActionToken = new SpecialActionToken(); //Naci
         this.faction = faction;
+        setTerrainTile(getFaction().TERRAIN_TILE);
        setWorkerNum(getFaction().INITIAL_WORKER);
        setGoldNum(getFaction().INITIAL_GOLD);
        setPriestNum(getFaction().INITIAL_PRIEST);
@@ -84,6 +86,10 @@ public class Player {
        setIsPassingTradingPostBonus(false);
        setBuildingDwellingBonus(false);
        setRoundPassed(false);
+    }
+
+    public void setTerrainTile(String terrainTile){
+        this.terrainTile = terrainTile;
     }
 
     public void setFaction(Faction faction) {

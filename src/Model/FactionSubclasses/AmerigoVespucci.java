@@ -6,6 +6,7 @@ public class AmerigoVespucci extends Faction { // mermaids
   
   public AmerigoVespucci()
   {
+      TERRAIN_TILE = "Lakes";
         INITIAL_ISLAM = 2;  //water
         INITIAL_VICTORY_POINT = 19;
         INITIAL_BOWL_ONE_POWER = 3;

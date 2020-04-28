@@ -6,6 +6,7 @@ public class MarieCurie extends Faction { //alchemist
   
   public MarieCurie()
   {
+      TERRAIN_TILE = "Swamp";
         INITIAL_HINDUISM = 1; // fire
         INITIAL_ISLAM = 1;  //water
         INITIAL_VICTORY_POINT = 27;

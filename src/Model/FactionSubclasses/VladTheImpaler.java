@@ -5,6 +5,7 @@ import Model.Player;
 
 public class VladTheImpaler extends Faction { // chaos magician
     public VladTheImpaler() {
+        TERRAIN_TILE = "Wasteland";
         INITIAL_WORKER = 4;
         INITIAL_HINDUISM = 2; //fire
         startingDwellingNum = 1;

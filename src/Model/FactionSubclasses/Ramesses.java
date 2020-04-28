@@ -6,6 +6,7 @@ public class Ramesses extends Faction { // FAKİR
   
   public Ramesses()
   {
+      TERRAIN_TILE = "Desert";
         INITIAL_HINDUISM = 1; // fire
         INITIAL_CHRISTIANITY = 1; //air
         INITIAL_VICTORY_POINT = 33;

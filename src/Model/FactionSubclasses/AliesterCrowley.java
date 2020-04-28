@@ -6,6 +6,7 @@ import Model.Player;
 public class AliesterCrowley extends Faction {
     
     public AliesterCrowley() {
+        TERRAIN_TILE = "Swamp";
         INITIAL_WORKER = 1;
         INITIAL_PRIEST = 1;
         INITIAL_ISLAM = 1;  //water

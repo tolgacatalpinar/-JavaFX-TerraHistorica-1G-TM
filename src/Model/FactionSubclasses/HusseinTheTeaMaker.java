@@ -6,6 +6,7 @@ public class HusseinTheTeaMaker extends Faction { //halfling
   
   public HusseinTheTeaMaker()
   {
+      TERRAIN_TILE = "Plains";
         INITIAL_JUDAISM = 1;  //earth
         INITIAL_CHRISTIANITY = 1; //air
         INITIAL_BOWL_ONE_POWER = 3;

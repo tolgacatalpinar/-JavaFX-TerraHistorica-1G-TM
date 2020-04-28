@@ -2,6 +2,7 @@ package Model;
 
 public class Faction {
 
+    public String TERRAIN_TILE;
     public int MAX_SHIPPING = 3;
     public int INITIAL_VICTORY_POINT = 19;
     public int INITIAL_WORKER  = 3;

@@ -6,6 +6,7 @@ public class StPatrick extends Faction { //dwarwes
   
   public StPatrick ()
   {
+      TERRAIN_TILE = "Mountains";
         INITIAL_JUDAISM = 2;  //earth
         INITIAL_VICTORY_POINT = 20;
         DWELLING_GOLD_COST = 2;

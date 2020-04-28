@@ -6,6 +6,7 @@ public class DariusTheGreat extends Faction { //nomad
          
         public DariusTheGreat ()
        {
+           TERRAIN_TILE = "Desert";
         INITIAL_WORKER = 2;
         INITIAL_HINDUISM = 1; // fire
         INITIAL_JUDAISM = 1;  //earth

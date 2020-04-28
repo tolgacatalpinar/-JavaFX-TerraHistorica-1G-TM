@@ -6,6 +6,7 @@ public class HelenOfTroy extends Faction { // auren
  
   public HelenOfTroy()
   {
+      TERRAIN_TILE = "Forest";
         INITIAL_ISLAM = 1;  //water
         INITIAL_CHRISTIANITY = 1; //air
         INITIAL_VICTORY_POINT = 27;

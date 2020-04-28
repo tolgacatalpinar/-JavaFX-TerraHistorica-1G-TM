@@ -6,6 +6,7 @@ public class Buddha extends Faction {  // cultist
   
   public Buddha()
   {
+      TERRAIN_TILE = "Plains";
         INITIAL_HINDUISM = 1; // fire
         INITIAL_JUDAISM = 1;  //earth
         INITIAL_VICTORY_POINT = 16;
