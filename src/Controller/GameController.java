@@ -25,13 +25,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+import javafx.scene.image.Image;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -79,6 +76,7 @@ public class GameController implements Initializable {
    Map map;
    Player[] playerList;
    GameHandler gameHandler;
+
 
 
    @Override
@@ -204,6 +202,7 @@ public class GameController implements Initializable {
    @FXML
    public void terraformClicked()
    {
+
       TerraformController terraformController = new TerraformController();
       terraformController.showTerraformTable(gameHandler);
 
