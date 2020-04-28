@@ -158,6 +158,7 @@ public class GameController implements Initializable {
 
 
 
+
    }
 
    @FXML
@@ -303,5 +304,15 @@ public class GameController implements Initializable {
 
       gameHandler = new GameHandler(playerList, size);
 
+   }
+   public void loadInitialMap()
+   {
+      for(int i = 0; i < 9; i++)
+         for( int j = 0; j < 13; j++){
+            if(map.spaces[i][j].getType().equals(gameHandler.getPlayerList()[0].getFaction().TERRAIN_TILE)){
+               if(terrains[i][j] != null)
+                  terrains[i][j].setDisable(true);
+            }
+         }
    }
 }

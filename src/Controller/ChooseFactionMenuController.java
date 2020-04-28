@@ -80,6 +80,7 @@ public class ChooseFactionMenuController  implements Initializable {
 
         GameController gameController = loader.getController();
         gameController.loadPlayers(factions, playerNames);
+        gameController.loadInitialMap();
 
 
         Scene scene = new Scene(root);
