@@ -141,14 +141,18 @@ public class GameController implements Initializable {
       // don't let thread prevent JVM shutdown
       thread.setDaemon(true);
       thread.start();
+   }
+   @FXML
+   public void terrainClicked(){
 
+      //terrains[0][3].setStyle("-fx-background-image: url('/Images/TerrainWithStructureImages/blueTerrainWithStructure/blueTerrainWithDwelling.png');");
+      /*
+      setStyle("-fx-border-color: red;\n" +
+              "-fx-padding: 25 0 0 5;\n" +
+              "-fx-border-width: 2;\n" +
+              "-fx-border-style: solid;\n");
 
-
-
-
-
-
-
+       */
 
    }
 
@@ -298,6 +302,7 @@ public class GameController implements Initializable {
    }
    public void loadInitialMap()
    {
+
       for(int i = 0; i < 9; i++)
          for( int j = 0; j < 13; j++){
             if(!map.spaces[i][j].getType().equals(gameHandler.getPlayerList()[0].getFaction().TERRAIN_TILE)){
