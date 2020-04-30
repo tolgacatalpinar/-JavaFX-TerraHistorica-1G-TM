@@ -10,22 +10,17 @@ public class TerrainController {
    public static void buildDwelling(Button button, String color)
    {
       if( color == "Lakes")
-         button.setBackground( new Background(new BackgroundImage( new Image("blueTerrainWithDwelling.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                 BackgroundSize.DEFAULT)));
+         button.setStyle("-fx-background-image: url('/blueTerrainWithDwelling.png');");
       else if( color == "Wasteland")
-         button.setBackground( new Background(new BackgroundImage( new Image("redTerrainWithDwelling.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                 BackgroundSize.DEFAULT)));
+         button.setStyle("-fx-background-image: url('/redTerrainWithDwelling.png');");
       else if( color == "Mountains")
-         button.setBackground( new Background(new BackgroundImage( new Image("whiteTerrainWithDwelling.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                 BackgroundSize.DEFAULT)));
+         button.setStyle("-fx-background-image: url('/whiteTerrainWithDwelling.png');");
       else if( color == "Desert")
-         button.setBackground( new Background(new BackgroundImage( new Image("yellowTerrainWithDwelling.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                 BackgroundSize.DEFAULT)));
+         button.setStyle("-fx-background-image: url('/yellowTerrainWithDwelling.png');");
       else if( color == "Forest")
-         button.setBackground( new Background(new BackgroundImage( new Image("greenTerrainWithDwelling.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                 BackgroundSize.DEFAULT)));
+         button.setStyle("-fx-background-image: url('/greenTerrainWithDwelling.png');");
       else if( color == "Plains")
-         button.setBackground( new Background(new BackgroundImage( new Image("brownTerrainWithDwelling.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                 BackgroundSize.DEFAULT)));
+         button.setStyle("-fx-background-image: url('/brownTerrainWithDwelling.png');");
+
    }
 }

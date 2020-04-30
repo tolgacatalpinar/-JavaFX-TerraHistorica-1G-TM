@@ -332,7 +332,7 @@ public class GameController implements Initializable {
                terrains[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
                   @Override
                   public void handle(MouseEvent event) {
-                     map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType());
+                     map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
                      PlayerHandler.buildStructure(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()], new Dwelling(), false);
                      TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
                   }
