@@ -62,12 +62,10 @@ public class GameController implements Initializable {
    Button upgradeSpade;
 
 
-
    Button[][] terrains;
    Map map;
    Player[] playerList;
    GameHandler gameHandler;
-
 
 
    @Override
@@ -100,15 +98,12 @@ public class GameController implements Initializable {
                @Override
                public void run() {
 
-                  if(playerList != null)
-                  {
+                  if (playerList != null) {
                      HBox factionsView = new HBox(5);
 
                      ArrayList<PlayerView> playerViewList = new ArrayList<>();
-                     for( int i = 0; i < playerList.length; i ++)
-                     {
-                        if(playerList[i] != null)
-                        {
+                     for (int i = 0; i < playerList.length; i++) {
+                        if (playerList[i] != null) {
                            playerViewList.add(new PlayerView(playerList[i]));
 
                         }
@@ -149,9 +144,8 @@ public class GameController implements Initializable {
    }
 
 
-
    @FXML
-   public void terrainClicked(){
+   public void terrainClicked() {
 
       //terrains[0][3].setStyle("-fx-background-image: url('/Images/TerrainWithStructureImages/blueTerrainWithStructure/blueTerrainWithDwelling.png');");
       /*
@@ -165,128 +159,139 @@ public class GameController implements Initializable {
    }
 
    @FXML
-   public void skipRoundClicked()
-   {
+   public void skipRoundClicked() {
+      enableTerrains();
       int currentPlayerId = gameHandler.getCurrentPlayerId();
-      System.out.println("Current player was: " + playerList[currentPlayerId].getNickName());
-      if( (currentPlayerId + 1) < playerList.length && playerList[currentPlayerId + 1] != null)
+//      System.out.println("Current player was: " + playerList[currentPlayerId].getNickName());
+      if ((currentPlayerId + 1) < playerList.length && playerList[currentPlayerId + 1] != null)
          gameHandler.setCurrentPlayerId(currentPlayerId + 1);
       else
          gameHandler.setCurrentPlayerId(0);
 
-      currentPlayerId = gameHandler.getCurrentPlayerId();
-      System.out.println("Current player is now: " + playerList[currentPlayerId].getNickName());
-      System.out.println("--------------------------------------------------");
+      Player currentPlayer = gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()];
+      if(currentPlayer.getDwellingNum() < currentPlayer.getFaction().startingDwellingNum) {
+         System.out.println("if in");
+         setButtonClickForInitialDwellings();
+      }
+
+//      System.out.println("Current player is now: " + playerList[currentPlayerId].getNickName());
+//      System.out.println("--------------------------------------------------");
    }
+
    @FXML
-   public void upgradeShippingClicked()
-   {
+   public void upgradeShippingClicked() {
       UpdateShippingController updateShippingController = new UpdateShippingController();
       updateShippingController.showUpdateShippingDialogs(gameHandler);
 
    }
+
    @FXML
-   public void upgradeStructClicked()
-   {
+   public void upgradeStructClicked() {
       System.out.println(gameHandler.getPlayerList()[0].getFaction().TERRAIN_TILE);
 
    }
+
    @FXML
-   public void sentPriestClicked()
-   {
+   public void sentPriestClicked() {
 
    }
+
    @FXML
-   public void powerActionClicked()
-   {
+   public void powerActionClicked() {
 
 
    }
+
    @FXML
-   public void upgradeSpadeClicked()
-   {
+   public void upgradeSpadeClicked() {
       UpdateSpadeController updateShippingController = new UpdateSpadeController();
       updateShippingController.showUpdateSpadeDialogs(gameHandler);
    }
+
    @FXML
-   public void terraformClicked()
-   {
+   public void terraformClicked() {
 
       TerraformController.updateTerraform(gameHandler, terrains, map);
 
    }
+
    @FXML
-   public void religionsClicked()
-   {
+   public void religionsClicked() {
       ReligionController religionController = new ReligionController();
       religionController.showReligion(gameHandler);
    }
+
    @FXML
-   public void scoreTableClicked()
-   {
+   public void scoreTableClicked() {
       ScoreTableController scoreTableController = new ScoreTableController();
       scoreTableController.showScoreTable(gameHandler);
    }
+
    @FXML
-   public void bonusCardsClicked()
-   {
+   public void bonusCardsClicked() {
       BonusCardsController bonusCardsController = new BonusCardsController();
       bonusCardsController.showBonusCardsTable(gameHandler);
    }
+
    @FXML
-   public void townTilesClicked()
-   {
+   public void townTilesClicked() {
       TownTilesController townTilesController = new TownTilesController();
       townTilesController.showTownTilesTable(gameHandler);
    }
+
    @FXML
-   public void scoringTilesClicked()
-   {
+   public void scoringTilesClicked() {
       ScoringTilesController scoringTilesController = new ScoringTilesController();
       scoringTilesController.showScoringTilesTable(gameHandler);
 
    }
+
    @FXML
-   public void favorTilesClicked()
-   {
+   public void favorTilesClicked() {
       FavorTilesController favorTilesController = new FavorTilesController();
       favorTilesController.showFavorTilesTable(gameHandler);
 
    }
+
    @FXML
-   public void specialActionClicked(){
+   public void specialActionClicked() {
       SpecialActionController specialActionController = new SpecialActionController();
       specialActionController.showSpeacialActions(gameHandler);
    }
-   public void createSpaces()
-   {
+
+   public void createSpaces() {
       System.out.println("Create is called");
       Space[][] spaces = new Space[ROW_NUMBER][COLUMN_NUMBER];
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
             Space space = new Space();
-            if( terrains[i][j] == null)
+            if (terrains[i][j] == null)
                space.setType("Empty");
-            else
-            {
+            else {
                switch (terrains[i][j].getId()) {
-                  case "blackHexagon": space.setType("Swamp");
+                  case "blackHexagon":
+                     space.setType("Swamp");
                      break;
-                  case "blueHexagon": space.setType("Lakes");
+                  case "blueHexagon":
+                     space.setType("Lakes");
                      break;
-                  case "brownHexagon": space.setType("Plains");
+                  case "brownHexagon":
+                     space.setType("Plains");
                      break;
-                  case "greenHexagon": space.setType("Forest");
+                  case "greenHexagon":
+                     space.setType("Forest");
                      break;
                   case "yellowHexagon": space.setType("Desert");
                      break;
                   case "redHexagon": space.setType("Wasteland");
+                  case "riverHexagon":
+                     space.setType("River");
                      break;
-                  case "riverHexagon": space.setType("River");
+                  case "whiteHexagon":
+                     space.setType("Mountains");
                      break;
-                  case "whiteHexagon": space.setType("Mountains");
-                     break;
-                  default: space.setType("River");
+                  default:
+                     space.setType("River");
                      break;
                }
             }
@@ -296,50 +301,62 @@ public class GameController implements Initializable {
       map = new Map(spaces);
    }
 
-   public void loadPlayers(ArrayList<Faction> factionList, ArrayList<String> playerNames)
-   {
+   public void loadPlayers(ArrayList<Faction> factionList, ArrayList<String> playerNames) {
       int size = factionList.size();
 
       Player[] playerList = new Player[5];
-      for( int i = 0; i < size; i ++)
-      {
-         playerList[i] =  new Player(factionList.get(i), playerNames.get(i), i);
+      for (int i = 0; i < size; i++) {
+         playerList[i] = new Player(factionList.get(i), playerNames.get(i), i);
       }
       this.playerList = playerList;
 
       gameHandler = new GameHandler(playerList, size);
 
    }
-   public void loadInitialMap()
-   {
 
-      for(int i = 0; i < 9; i++)
-         for( int j = 0; j < 13; j++){
-            if(!map.spaces[i][j].getType().equals(gameHandler.getPlayerList()[0].getFaction().TERRAIN_TILE)){
-               if(terrains[i][j] != null)
+   public void loadInitialMap() {
+
+      for (int i = 0; i < 9; i++)
+         for (int j = 0; j < 13; j++) {
+            if (!map.spaces[i][j].getType().equals(gameHandler.getPlayerList()[0].getFaction().TERRAIN_TILE)) {
+               if (terrains[i][j] != null)
                   terrains[i][j].setDisable(true);
             }
          }
       System.out.println("Terrain:" + gameHandler.getPlayerList()[0].getFaction().TERRAIN_TILE);
    }
+
    public void setButtonClickForInitialDwellings() {
-      for(int i = 0; i < ROW_NUMBER; i ++)
-      {
-         for( int j = 0; j < COLUMN_NUMBER; j++)
-         {
+      for (int i = 0; i < ROW_NUMBER; i++) {
+         for (int j = 0; j < COLUMN_NUMBER; j++) {
             final int row = i;
             final int col = j;
-            if( terrains[i][j] != null)
-            {
+            if (terrains[i][j] != null) {
                terrains[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
                   @Override
                   public void handle(MouseEvent event) {
                      map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
                      PlayerHandler.buildStructure(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()], new Dwelling(), false);
                      TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
+                     for (int i = 0; i < ROW_NUMBER; i++) {
+                        for (int j = 0; j < COLUMN_NUMBER; j++) {
+                           if( terrains[i][j] != null)
+                              terrains[i][j].setDisable(true);
+                        }
+                     }
+
                   }
                });
             }
+         }
+      }
+   }
+   public void enableTerrains()
+   {
+      for (int i = 0; i < ROW_NUMBER; i++) {
+         for (int j = 0; j < COLUMN_NUMBER; j++) {
+            if( terrains[i][j] != null)
+               terrains[i][j].setDisable(false);
          }
       }
    }
