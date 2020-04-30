@@ -278,6 +278,8 @@ public class GameController implements Initializable {
                      break;
                   case "greenHexagon": space.setType("Forest");
                      break;
+                  case "yellowHexagon": space.setType("Desert");
+                     break;
                   case "redHexagon": space.setType("Wasteland");
                      break;
                   case "riverHexagon": space.setType("River");
