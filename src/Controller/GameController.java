@@ -169,8 +169,9 @@ public class GameController implements Initializable {
          gameHandler.setCurrentPlayerId(0);
 
       Player currentPlayer = gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()];
+      System.out.println("current dwelling: " + currentPlayer.getDwellingNum());
       if(currentPlayer.getDwellingNum() < currentPlayer.getFaction().startingDwellingNum) {
-         System.out.println("if in");
+         loadInitialMap();
          setButtonClickForInitialDwellings();
       }
 
@@ -284,6 +285,7 @@ public class GameController implements Initializable {
                   case "yellowHexagon": space.setType("Desert");
                      break;
                   case "redHexagon": space.setType("Wasteland");
+                     break;
                   case "riverHexagon":
                      space.setType("River");
                      break;
@@ -315,15 +317,14 @@ public class GameController implements Initializable {
    }
 
    public void loadInitialMap() {
-
+      disableAllTerrains();
       for (int i = 0; i < 9; i++)
          for (int j = 0; j < 13; j++) {
-            if (!map.spaces[i][j].getType().equals(gameHandler.getPlayerList()[0].getFaction().TERRAIN_TILE)) {
-               if (terrains[i][j] != null)
-                  terrains[i][j].setDisable(true);
+            if (map.spaces[i][j].getType().equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE)) {
+               if (terrains[i][j] != null && !map.spaces[i][j].isOccupied())
+                  terrains[i][j].setDisable(false);
             }
          }
-      System.out.println("Terrain:" + gameHandler.getPlayerList()[0].getFaction().TERRAIN_TILE);
    }
 
    public void setButtonClickForInitialDwellings() {
@@ -336,7 +337,7 @@ public class GameController implements Initializable {
                   @Override
                   public void handle(MouseEvent event) {
                      map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
-                     PlayerHandler.buildStructure(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()], new Dwelling(), false);
+                     PlayerHandler.buildInitialDwelling(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()]);
                      TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
                      for (int i = 0; i < ROW_NUMBER; i++) {
                         for (int j = 0; j < COLUMN_NUMBER; j++) {
@@ -355,8 +356,17 @@ public class GameController implements Initializable {
    {
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
-            if( terrains[i][j] != null)
+            if( terrains[i][j] != null && map.spaces[i][j].getType() != "River")
                terrains[i][j].setDisable(false);
+         }
+      }
+   }
+   public void disableAllTerrains()
+   {
+      for (int i = 0; i < ROW_NUMBER; i++) {
+         for (int j = 0; j < COLUMN_NUMBER; j++) {
+            if( terrains[i][j] != null)
+               terrains[i][j].setDisable(true);
          }
       }
    }

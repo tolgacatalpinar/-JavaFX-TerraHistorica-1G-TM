@@ -21,6 +21,8 @@ public class TerrainController {
          button.setStyle("-fx-background-image: url('/greenTerrainWithDwelling.png');");
       else if( color == "Plains")
          button.setStyle("-fx-background-image: url('/brownTerrainWithDwelling.png');");
+      else if( color == "Swamp")
+         button.setStyle("-fx-background-image: url('/blackTerrainWithDwelling.png');");
 
    }
 }

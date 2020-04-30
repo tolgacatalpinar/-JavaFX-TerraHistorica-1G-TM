@@ -6,12 +6,24 @@ import java.io.Serializable;
 public class PlayerHandler implements Serializable{
 
 
+   public static void buildInitialDwelling(Player player)
+   {
+      player.setDwellingNum(player.getDwellingNum() + 1);
 
-    public static int buildStructure(Player player, Structure structure, Boolean isThereAdjacentOpponent) {
+      if (player.getDwellingNum() < player.MAX_DWELLING) {
+         player.setWorkerIncome(player.getFaction().DWELLING_WORKER_INCOME);
+      }
+      if (player.isBuildingDwellingBonus()) {
+         player.setVictoryPointNum(player.getVictoryPointNum() + 2);
+      }
+   }
+
+    public static int buildStructure(Player player, Structure structure, boolean isThereAdjacentOpponent) {
 
         if (structure instanceof Dwelling) {
             if (player.getDwellingNum() < player.MAX_DWELLING) {
                 if (player.spendFromResources(player.getFaction().DWELLING_WORKER_COST, player.getFaction().DWELLING_GOLD_COST, 0)) {
+                   System.out.println("dwelling is built");
                     player.setDwellingNum(player.getDwellingNum() + 1);
 
                     if (player.getDwellingNum() < player.MAX_DWELLING) {
