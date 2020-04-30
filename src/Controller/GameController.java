@@ -9,13 +9,16 @@ import Controller.CardsAndTilesControllers.*;
 import Model.*;
 //import Model.River;
 //import Model.TerrainSubclasses.*;
+import Model.StructureSubclasses.Dwelling;
 import View.*;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 import java.net.URL;
@@ -141,7 +144,12 @@ public class GameController implements Initializable {
       // don't let thread prevent JVM shutdown
       thread.setDaemon(true);
       thread.start();
+      setButtonClickForInitialDwellings();
+
    }
+
+
+
    @FXML
    public void terrainClicked(){
 
@@ -310,5 +318,27 @@ public class GameController implements Initializable {
                   terrains[i][j].setDisable(true);
             }
          }
+      System.out.println("Terrain:" + gameHandler.getPlayerList()[0].getFaction().TERRAIN_TILE);
+   }
+   public void setButtonClickForInitialDwellings() {
+      for(int i = 0; i < ROW_NUMBER; i ++)
+      {
+         for( int j = 0; j < COLUMN_NUMBER; j++)
+         {
+            final int row = i;
+            final int col = j;
+            if( terrains[i][j] != null)
+            {
+               terrains[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                  @Override
+                  public void handle(MouseEvent event) {
+                     map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType());
+                     PlayerHandler.buildStructure(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()], new Dwelling(), false);
+                     TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
+                  }
+               });
+            }
+         }
+      }
    }
 }

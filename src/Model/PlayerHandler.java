@@ -7,7 +7,7 @@ public class PlayerHandler implements Serializable{
 
 
 
-    public int buildStructure(Player player, Structure structure, Boolean isThereAdjacentOpponent) {
+    public static int buildStructure(Player player, Structure structure, Boolean isThereAdjacentOpponent) {
 
         if (structure instanceof Dwelling) {
             if (player.getDwellingNum() < player.MAX_DWELLING) {
