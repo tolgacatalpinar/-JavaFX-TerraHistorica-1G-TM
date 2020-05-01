@@ -374,6 +374,7 @@ public class GameController implements Initializable {
          }
       }
    }
+   
 
    public void disableActions(){
       terraform.setDisable(true);
