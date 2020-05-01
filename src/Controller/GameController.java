@@ -162,6 +162,7 @@ public class GameController implements Initializable {
 
    @FXML
    public void skipRoundClicked() {
+      disableButtonClicks();
       enableTerrains();
       enableActions();
       int currentPlayerId = gameHandler.getCurrentPlayerId();
@@ -356,6 +357,15 @@ public class GameController implements Initializable {
          }
       }
    }
+
+   public void disableButtonClicks(){
+      for (int i = 0; i < ROW_NUMBER; i++) {
+         for (int j = 0; j < COLUMN_NUMBER; j++) {
+            if( terrains[i][j] != null)
+               terrains[i][j].setOnMouseClicked(null);
+         }
+      }
+   }
    public void enableTerrains()
    {
       for (int i = 0; i < ROW_NUMBER; i++) {
@@ -374,7 +384,6 @@ public class GameController implements Initializable {
          }
       }
    }
-   
 
    public void disableActions(){
       terraform.setDisable(true);
