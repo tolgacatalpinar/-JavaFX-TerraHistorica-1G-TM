@@ -63,6 +63,8 @@ public class GameController implements Initializable {
    @FXML
    Button upgradeSpade;
 
+   ArrayList<PlayerView> playerViewList;
+
 
    Button[][] terrains;
    Map map;
@@ -103,7 +105,7 @@ public class GameController implements Initializable {
                   if (playerList != null) {
                      HBox factionsView = new HBox(5);
 
-                     ArrayList<PlayerView> playerViewList = new ArrayList<>();
+                     playerViewList = new ArrayList<>();
                      for (int i = 0; i < playerList.length; i++) {
                         if (playerList[i] != null) {
                            playerViewList.add(new PlayerView(playerList[i]));
@@ -111,10 +113,10 @@ public class GameController implements Initializable {
                         }
                      }
                      factionsView.getChildren().addAll(playerViewList);
+                     //displayPlayerTurn(playerViewList);
                      factionsView.setPadding(new Insets(0, 0, 0, 100));
                      borderPane.setBottom(factionsView);
-
-
+                     displayPlayerTurn(playerViewList);
 //                     ImageView imview = new ImageView();
 //                     imview.setImage(new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg"));
 //                     imview.setFitHeight(150);
@@ -128,7 +130,7 @@ public class GameController implements Initializable {
 
             while (true) {
                try {
-                  Thread.sleep(1000);
+                  Thread.sleep(100);
                } catch (InterruptedException ex) {
                }
 
@@ -174,10 +176,11 @@ public class GameController implements Initializable {
 
       Player currentPlayer = gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()];
       System.out.println("current dwelling: " + currentPlayer.getDwellingNum());
-      if(currentPlayer.getDwellingNum() < currentPlayer.getFaction().startingDwellingNum) {
+      if (currentPlayer.getDwellingNum() < currentPlayer.getFaction().startingDwellingNum) {
          loadInitialMap();
          setButtonClickForInitialDwellings();
       }
+
 
 //      System.out.println("Current player is now: " + playerList[currentPlayerId].getNickName());
 //      System.out.println("--------------------------------------------------");
@@ -192,7 +195,7 @@ public class GameController implements Initializable {
 
    @FXML
    public void upgradeStructClicked() {
-      System.out.println(gameHandler.getPlayerList()[0].getFaction().TERRAIN_TILE);
+
 
    }
 
@@ -213,10 +216,18 @@ public class GameController implements Initializable {
       updateShippingController.showUpdateSpadeDialogs(gameHandler);
    }
 
+
    @FXML
    public void terraformClicked() {
 
-      TerraformController.updateTerraform(gameHandler, terrains, map);
+      System.out.println("Terraform");
+      for (int i = 0; i < ROW_NUMBER; i++) {
+         for (int j = 0; j < COLUMN_NUMBER; j++) {
+            if( terrains[i][j] != null)
+               if(!map.spaces[i][j].isOccupied() || !map.spaces[i][j].getType().equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE))
+                  terrains[i][j].setDisable(true);
+         }
+      }
 
    }
 
@@ -321,6 +332,7 @@ public class GameController implements Initializable {
    }
 
    public void loadInitialMap() {
+
       disableActions();
       disableAllTerrains();
       for (int i = 0; i < 9; i++)
@@ -403,5 +415,39 @@ public class GameController implements Initializable {
       powerActions.setDisable(false);
       specialActions.setDisable(false);
       upgradeSpade.setDisable(false);
+   }
+
+   public void displayPlayerTurn(ArrayList<PlayerView> playerViewList){
+
+      for (PlayerView playerView : playerViewList) {
+         playerView.setStyle("");
+      }
+
+
+
+      switch (gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE) {
+         case "Wasteland":
+            playerViewList.get(gameHandler.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(224, 15, 0, 1) , 30,0.5,0,1 );");
+            break;
+         case "Forest":
+            playerViewList.get(gameHandler.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(23, 150, 26, 1) , 30,0.5,0,1 );");
+            break;
+         case "Lakes":
+            playerViewList.get(gameHandler.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(0, 189, 214, 1) , 30,0.5,0,1 );");
+            break;
+         case "Desert":
+            playerViewList.get(gameHandler.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(214, 175, 0, 1) , 30,0.5,0,1 );");
+            break;
+         case "Mountains":
+            playerViewList.get(gameHandler.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(191, 191, 191, 1), 30,0.5,0,1 );");
+            break;
+         case "Swamp":
+            playerViewList.get(gameHandler.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(22, 20, 8, 1), 30,0.5,0,1 );");
+            break;
+         case "Plains":
+            playerViewList.get(gameHandler.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(152, 93, 27, 1), 30,0.5,0,1 );");
+            break;
+      }
+
    }
 }

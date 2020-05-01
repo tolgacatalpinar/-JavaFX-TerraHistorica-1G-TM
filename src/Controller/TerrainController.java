@@ -25,4 +25,23 @@ public class TerrainController {
          button.setStyle("-fx-background-image: url('/blackTerrainWithDwelling.png');");
 
    }
+
+   public static void terraform(Button button, String color)
+   {
+      if( color == "Lakes")
+         button.setStyle("-fx-background-image: url('/blueTerrain.png');");
+      else if( color == "Wasteland")
+         button.setStyle("-fx-background-image: url('/redTerrain.png');");
+      else if( color == "Mountains")
+         button.setStyle("-fx-background-image: url('/whiteTerrain.png');");
+      else if( color == "Desert")
+         button.setStyle("-fx-background-image: url('/yellowTerrain.png');");
+      else if( color == "Forest")
+         button.setStyle("-fx-background-image: url('/greenTerrain.png');");
+      else if( color == "Plains")
+         button.setStyle("-fx-background-image: url('/brownTerrain.png');");
+      else if( color == "Swamp")
+         button.setStyle("-fx-background-image: url('/blackTerrain.png');");
+
+   }
 }
