@@ -51,6 +51,8 @@ public class GameController implements Initializable {
    @FXML
    Button specialActions;
    @FXML
+   Button terraform;
+   @FXML
    Button upgradeShipping;
    @FXML
    Button upgradeStruct;
@@ -161,6 +163,7 @@ public class GameController implements Initializable {
    @FXML
    public void skipRoundClicked() {
       enableTerrains();
+      enableActions();
       int currentPlayerId = gameHandler.getCurrentPlayerId();
 //      System.out.println("Current player was: " + playerList[currentPlayerId].getNickName());
       if ((currentPlayerId + 1) < playerList.length && playerList[currentPlayerId + 1] != null)
@@ -317,6 +320,7 @@ public class GameController implements Initializable {
    }
 
    public void loadInitialMap() {
+      disableActions();
       disableAllTerrains();
       for (int i = 0; i < 9; i++)
          for (int j = 0; j < 13; j++) {
@@ -369,5 +373,25 @@ public class GameController implements Initializable {
                terrains[i][j].setDisable(true);
          }
       }
+   }
+
+   public void disableActions(){
+      terraform.setDisable(true);
+      upgradeShipping.setDisable(true);
+      upgradeStruct.setDisable(true);
+      sendPriest.setDisable(true);
+      powerActions.setDisable(true);
+      specialActions.setDisable(true);
+      upgradeSpade.setDisable(true);
+   }
+
+   public void enableActions(){
+      terraform.setDisable(false);
+      upgradeShipping.setDisable(false);
+      upgradeStruct.setDisable(false);
+      sendPriest.setDisable(false);
+      powerActions.setDisable(false);
+      specialActions.setDisable(false);
+      upgradeSpade.setDisable(false);
    }
 }
