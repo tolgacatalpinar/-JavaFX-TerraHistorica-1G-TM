@@ -353,6 +353,7 @@ public class GameController implements Initializable {
                terrains[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
                   @Override
                   public void handle(MouseEvent event) {
+                     skipRound.setDisable(false);
                      map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
                      PlayerHandler.buildInitialDwelling(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()]);
                      TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
@@ -405,6 +406,7 @@ public class GameController implements Initializable {
       powerActions.setDisable(true);
       specialActions.setDisable(true);
       upgradeSpade.setDisable(true);
+      skipRound.setDisable(true);
    }
 
    public void enableActions(){
@@ -415,6 +417,7 @@ public class GameController implements Initializable {
       powerActions.setDisable(false);
       specialActions.setDisable(false);
       upgradeSpade.setDisable(false);
+      skipRound.setDisable(false);
    }
 
    public void displayPlayerTurn(ArrayList<PlayerView> playerViewList){
@@ -422,9 +425,7 @@ public class GameController implements Initializable {
       for (PlayerView playerView : playerViewList) {
          playerView.setStyle("");
       }
-
-
-
+      
       switch (gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE) {
          case "Wasteland":
             playerViewList.get(gameHandler.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(224, 15, 0, 1) , 30,0.5,0,1 );");
