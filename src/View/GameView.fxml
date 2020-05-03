@@ -46,7 +46,7 @@
                     <Font name="Book Antiqua" size="18.0" />
                 </font>
             </Button>
-            <Button fx:id="upgradeStruct" layoutX="10.0" layoutY="295.0" onMouseClicked="#upgradeStructClicked" prefHeight="50" prefWidth="200.0" text="Upgrade Structure" textFill="WHITE">
+            <Button fx:id="upgradeStruct" layoutX="10.0" layoutY="295.0" onMouseClicked="#upgradeStructureClicked" prefHeight="50" prefWidth="200.0" text="Upgrade Structure" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="18.0" />
                 </font>

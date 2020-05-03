@@ -80,12 +80,13 @@ public class TerraformController {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Build Dwelling");
                 alert.setHeaderText("Do you want to build a dwelling?");
-                alert.setContentText("1 Coin and 2 Workers are needed");
+                alert.setContentText("Cost will be here");
 
                 Optional<ButtonType> dwellingCheck = alert.showAndWait();
                 if (dwellingCheck.get() == ButtonType.OK) {
                     TerrainController.buildDwelling(terrain, result.get());
                     space.setOccupied(true);
+                    space.setBuilding("Dwelling");
                 } else {
                     // ... user chose CANCEL or closed the dialog
                 }

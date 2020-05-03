@@ -46,12 +46,41 @@ public class TerrainController {
 
    }
 
+   public static void upgradeToTradingPost(Button button, String color)
+   {
+      if(color.equals("Lakes"))
+         button.setStyle("-fx-background-image: url('/blueTerrainWithTradingPost.png');");
+      else if(color.equals("Wasteland"))
+         button.setStyle("-fx-background-image: url('/redTerrainWithTradingPost.png');");
+      else if(color.equals("Mountains"))
+         button.setStyle("-fx-background-image: url('/whiteTerrainWithTradingPost.png');");
+      else if(color.equals("Desert"))
+         button.setStyle("-fx-background-image: url('/yellowTerrainWithTradingPost.png');");
+      else if(color.equals("Forest"))
+         button.setStyle("-fx-background-image: url('/greenTerrainWithTradingPost.png');");
+      else if(color.equals("Plains"))
+         button.setStyle("-fx-background-image: url('/brownTerrainWithTradingPost.png');");
+      else if(color.equals("Swamp"))
+         button.setStyle("-fx-background-image: url('/blackTerrainWithTradingPost.png');");
+
+   }
+
    public static void enableTerrains(Button[][] terrains, Map map)
    {
       for (int i = 0; i < 9; i++) {
          for (int j = 0; j < 13; j++) {
             if( terrains[i][j] != null && !map.spaces[i][j].getType().equals("River"))
                terrains[i][j].setDisable(false);
+         }
+      }
+   }
+
+   public static void disableTerrains(Button[][] terrains, Map map)
+   {
+      for (int i = 0; i < 9; i++) {
+         for (int j = 0; j < 13; j++) {
+            if( terrains[i][j] != null && !map.spaces[i][j].getType().equals("River"))
+               terrains[i][j].setDisable(true);
          }
       }
    }

@@ -1,10 +1,7 @@
 package Controller;
 
 
-import Controller.ActionsControllers.SpecialActionController;
-import Controller.ActionsControllers.TerraformController;
-import Controller.ActionsControllers.UpdateShippingController;
-import Controller.ActionsControllers.UpdateSpadeController;
+import Controller.ActionsControllers.*;
 import Controller.CardsAndTilesControllers.*;
 import Model.*;
 //import Model.River;
@@ -182,11 +179,7 @@ public class GameController implements Initializable {
 
    }
 
-   @FXML
-   public void upgradeStructClicked() {
 
-
-   }
 
    @FXML
    public void sentPriestClicked() {
@@ -211,10 +204,9 @@ public class GameController implements Initializable {
       TerraformController.updateMapForTerraform(gameHandler, terrains, map);
    }
 
-   public  void afterAction(){
-      disableButtonClicks();
-      disableActions();
-      enableTerrains();
+   @FXML
+   public void upgradeStructureClicked() {
+      UpgradeStructureController.updateMapForUpgradeStructure(gameHandler, terrains, map);
    }
 
    @FXML
@@ -343,6 +335,7 @@ public class GameController implements Initializable {
                      map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
                      PlayerHandler.buildInitialDwelling(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()]);
                      TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
+                     map.spaces[row][col].setBuilding("Dwelling");
                      for (int i = 0; i < ROW_NUMBER; i++) {
                         for (int j = 0; j < COLUMN_NUMBER; j++) {
                            if( terrains[i][j] != null)
