@@ -17,12 +17,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
@@ -149,20 +152,6 @@ public class GameController implements Initializable {
 
 
    @FXML
-   public void terrainClicked() {
-
-      //terrains[0][3].setStyle("-fx-background-image: url('/Images/TerrainWithStructureImages/blueTerrainWithStructure/blueTerrainWithDwelling.png');");
-      /*
-      setStyle("-fx-border-color: red;\n" +
-              "-fx-padding: 25 0 0 5;\n" +
-              "-fx-border-width: 2;\n" +
-              "-fx-border-style: solid;\n");
-
-       */
-
-   }
-
-   @FXML
    public void skipRoundClicked() {
       disableButtonClicks();
       enableTerrains();
@@ -219,16 +208,13 @@ public class GameController implements Initializable {
 
    @FXML
    public void terraformClicked() {
+      TerraformController.updateMapForTerraform(gameHandler, terrains, map);
+   }
 
-      System.out.println("Terraform");
-      for (int i = 0; i < ROW_NUMBER; i++) {
-         for (int j = 0; j < COLUMN_NUMBER; j++) {
-            if( terrains[i][j] != null)
-               if(!map.spaces[i][j].isOccupied() || !map.spaces[i][j].getType().equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE))
-                  terrains[i][j].setDisable(true);
-         }
-      }
-
+   public  void afterAction(){
+      disableButtonClicks();
+      disableActions();
+      enableTerrains();
    }
 
    @FXML
@@ -370,6 +356,10 @@ public class GameController implements Initializable {
          }
       }
    }
+
+
+
+
 
    public void disableButtonClicks(){
       for (int i = 0; i < ROW_NUMBER; i++) {

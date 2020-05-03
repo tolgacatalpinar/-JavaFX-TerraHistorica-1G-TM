@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Map;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -44,4 +45,24 @@ public class TerrainController {
          button.setStyle("-fx-background-image: url('/blackTerrain.png');");
 
    }
+
+   public static void enableTerrains(Button[][] terrains, Map map)
+   {
+      for (int i = 0; i < 9; i++) {
+         for (int j = 0; j < 13; j++) {
+            if( terrains[i][j] != null && !map.spaces[i][j].getType().equals("River"))
+               terrains[i][j].setDisable(false);
+         }
+      }
+   }
+
+   public static void disableButtonClicks(Button[][] terrains){
+      for (int i = 0; i < 9; i++) {
+         for (int j = 0; j < 13; j++) {
+            if( terrains[i][j] != null)
+               terrains[i][j].setOnMouseClicked(null);
+         }
+      }
+   }
+
 }

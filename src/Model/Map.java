@@ -9,6 +9,8 @@ public class Map implements Serializable {
    public static int townScore = 0; // bu variable'ı şimdilik istown çalışsın diye ekledim. Belki durur ama oo olması icin buradan kaldırıp
    // player classına da ekleyebiliriz, is town'a da parameter olarak player objesi alırız, öyle de is görür.
    public ArrayList<Space> visited = new ArrayList<Space>(); //
+   final int ROW_NUMBER = 9;
+   final int COLUMN_NUMBER = 13;
 
    public Map() {
       spaces = new Space[9][13];
@@ -44,31 +46,27 @@ public class Map implements Serializable {
    }
 
    public int getRow(Space space1) {
-      boolean found = false;
-      int column = -1;
       int row = -1;
-      for (int i = 0; i < 117 || !found; i++) {
-         row = i / 13;
-         column = i % 13;
-         if (spaces[row][column].equals(space1)) {
-            found = true;
+
+      for (int i = 0; i < ROW_NUMBER; i++) {
+         for (int j = 0; j < COLUMN_NUMBER; j++) {
+            if( spaces[i][j].equals(space1))
+               row = i;
          }
       }
       return row;
    }
 
    public int getColumn(Space space1) {
-      boolean found = false;
-      int column = -1;
-      int row = -1;
-      for (int i = 0; i < 117 || !found; i++) {
-         row = i / 13;
-         column = i % 13;
-         if (spaces[row][column].equals(space1)) {
-            found = true;
+      int col = -1;
+
+      for (int i = 0; i < ROW_NUMBER; i++) {
+         for (int j = 0; j < COLUMN_NUMBER; j++) {
+            if( spaces[i][j].equals(space1))
+               col = j;
          }
       }
-      return column;
+      return col;
    }
 
 
@@ -96,10 +94,12 @@ public class Map implements Serializable {
 
    public boolean isDirectAdjacent(Space space1, Space space2) {
       // We did not control if one of the spaces is river, because even one of them is river this info can be useful.
+
       int row1 = getRow(space1);
       int row2 = getRow(space2);
       int col1 = getColumn(space1);
       int col2 = getColumn(space2);
+
       if (row1 % 2 == 0) {
          if (((row2 == row1 + 1) || (row2 == row1 - 1)) && ((col2 == col1 - 1) || (col2 == col1))) {
             return true;
@@ -129,10 +129,14 @@ public class Map implements Serializable {
          row = i / 13;
          column = i % 13;
          if (isDirectAdjacent(space1, spaces[row][column])) {
-            adjacents[j] = spaces[row][column];
-            j++;
+            if(j < 6) {
+               adjacents[j] = spaces[row][column];
+               j++;
+            }
          }
       }
+
+
       return adjacents;
    }
 
