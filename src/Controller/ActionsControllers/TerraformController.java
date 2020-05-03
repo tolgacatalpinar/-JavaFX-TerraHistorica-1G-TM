@@ -41,7 +41,7 @@ public class TerraformController {
                                 terrains[map.getRow(adj[k])][map.getColumn(adj[k])].setOnMouseClicked(new EventHandler<MouseEvent>() {
                                     @Override
                                     public void handle(MouseEvent event) {
-                                        TerraformController.terraformAlertBox(gameHandler, terrains, terrains[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], map, map.spaces[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])]);
+                                        TerraformController.terraform(gameHandler, terrains, terrains[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], map, map.spaces[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])]);
                                     }
                                 });
                             }
@@ -51,7 +51,7 @@ public class TerraformController {
         }
     }
 
-    public static void terraformAlertBox(GameHandler gameHandler, Button[][]terrains, Button terrain, Map map, Space space){
+    public static void terraform(GameHandler gameHandler, Button[][]terrains, Button terrain, Map map, Space space){
 
         List<String> choices = new ArrayList<>();
         choices.add("Wasteland");

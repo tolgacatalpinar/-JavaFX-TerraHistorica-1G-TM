@@ -65,6 +65,63 @@ public class TerrainController {
 
    }
 
+   public static void upgradeToStronghold(Button button, String color)
+   {
+      if(color.equals("Lakes"))
+         button.setStyle("-fx-background-image: url('/blueTerrainWithStronghold.png');");
+      else if(color.equals("Wasteland"))
+         button.setStyle("-fx-background-image: url('/redTerrainWithStronghold.png');");
+      else if(color.equals("Mountains"))
+         button.setStyle("-fx-background-image: url('/whiteTerrainWithStronghold.png');");
+      else if(color.equals("Desert"))
+         button.setStyle("-fx-background-image: url('/yellowTerrainWithStronghold.png');");
+      else if(color.equals("Forest"))
+         button.setStyle("-fx-background-image: url('/greenTerrainWithStronghold.png');");
+      else if(color.equals("Plains"))
+         button.setStyle("-fx-background-image: url('/brownTerrainWithStronghold.png');");
+      else if(color.equals("Swamp"))
+         button.setStyle("-fx-background-image: url('/blackTerrainWithStronghold.png');");
+
+   }
+
+   public static void upgradeToTemple(Button button, String color)
+   {
+      if(color.equals("Lakes"))
+         button.setStyle("-fx-background-image: url('/blueTerrainWithCastle.png');");
+      else if(color.equals("Wasteland"))
+         button.setStyle("-fx-background-image: url('/redTerrainWithCastle.png');");
+      else if(color.equals("Mountains"))
+         button.setStyle("-fx-background-image: url('/whiteTerrainWithCastle.png');");
+      else if(color.equals("Desert"))
+         button.setStyle("-fx-background-image: url('/yellowTerrainWithCastle.png');");
+      else if(color.equals("Forest"))
+         button.setStyle("-fx-background-image: url('/greenTerrainWithCastle.png');");
+      else if(color.equals("Plains"))
+         button.setStyle("-fx-background-image: url('/brownTerrainWithCastle.png');");
+      else if(color.equals("Swamp"))
+         button.setStyle("-fx-background-image: url('/blackTerrainWithCastle.png');");
+
+   }
+
+   public static void upgradeToSanctuary(Button button, String color)
+   {
+      if(color.equals("Lakes"))
+         button.setStyle("-fx-background-image: url('/blueTerrainWithSanctuary.png');");
+      else if(color.equals("Wasteland"))
+         button.setStyle("-fx-background-image: url('/redTerrainWithSanctuary.png');");
+      else if(color.equals("Mountains"))
+         button.setStyle("-fx-background-image: url('/whiteTerrainWithSanctuary.png');");
+      else if(color.equals("Desert"))
+         button.setStyle("-fx-background-image: url('/yellowTerrainWithSanctuary.png');");
+      else if(color.equals("Forest"))
+         button.setStyle("-fx-background-image: url('/greenTerrainWithSanctuary.png');");
+      else if(color.equals("Plains"))
+         button.setStyle("-fx-background-image: url('/brownTerrainWithSanctuary.png');");
+      else if(color.equals("Swamp"))
+         button.setStyle("-fx-background-image: url('/blackTerrainWithSanctuary.png');");
+
+   }
+
    public static void enableTerrains(Button[][] terrains, Map map)
    {
       for (int i = 0; i < 9; i++) {
