@@ -49,7 +49,6 @@ public class TerraformController {
                     }
             }
         }
-
     }
 
     public static void terraformAlertBox(GameHandler gameHandler, Button[][]terrains, Button terrain, Map map, Space space){
@@ -62,7 +61,6 @@ public class TerraformController {
         choices.add("Mountains");
         choices.add("Swamp");
         choices.add("Plains");
-
         choices.remove(space.getType());
 
         ChoiceDialog<String> dialog = new ChoiceDialog<>(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE, choices);
@@ -72,25 +70,25 @@ public class TerraformController {
 
         Optional<String> result = dialog.showAndWait();
 
-        if (result.isPresent()){
-            dialog.setHeaderText("Spade Needed for " + result.get());
-            System.out.println("Your choice: " + result.get());
-        }
-        result.ifPresent(letter -> System.out.println("Your choice: " + letter));
-        TerrainController.terraform(terrain, result.get());
+        if(result.isPresent()) {
+            TerrainController.terraform(terrain, result.get());
+            space.setType(result.get());
 
-        //Asks if the player wants to build dwelling after terraforming
-        if(result.get().equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE)) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Build Dwelling");
-            alert.setHeaderText("Do you want to build a dwelling?");
-            alert.setContentText("1 Coin and 2 Workers are needed");
 
-            Optional<ButtonType> dwellingCheck = alert.showAndWait();
-            if (dwellingCheck.get() == ButtonType.OK) {
-                TerrainController.buildDwelling(terrain, result.get());
-            } else {
-                // ... user chose CANCEL or closed the dialog
+            //Asks if the player wants to build dwelling after terraforming
+            if (result.get().equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE)) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Build Dwelling");
+                alert.setHeaderText("Do you want to build a dwelling?");
+                alert.setContentText("1 Coin and 2 Workers are needed");
+
+                Optional<ButtonType> dwellingCheck = alert.showAndWait();
+                if (dwellingCheck.get() == ButtonType.OK) {
+                    TerrainController.buildDwelling(terrain, result.get());
+                    space.setOccupied(true);
+                } else {
+                    // ... user chose CANCEL or closed the dialog
+                }
             }
         }
         TerrainController.enableTerrains(terrains, map);
