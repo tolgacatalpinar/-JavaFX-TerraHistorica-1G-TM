@@ -27,6 +27,7 @@ public class PlayerView extends BorderPane {
    ImageView imageView;
    String playerName;
    Player player;
+   final int IMAGE_SIZE = 30;
 
    public PlayerView(Player player) {
       playerName = player.getNickName();
@@ -114,8 +115,8 @@ public class PlayerView extends BorderPane {
    {
       HBox resourceBox = new HBox();
       ImageView resourceImage = new ImageView(image);
-      resourceImage.setFitWidth(30);
-      resourceImage.setFitHeight(30);
+      resourceImage.setFitWidth(IMAGE_SIZE);
+      resourceImage.setFitHeight(IMAGE_SIZE);
       ResourceLabel label = new ResourceLabel("\t" + number1);
       label.setTextFill(Color.WHITE);
       resourceBox.getChildren().addAll(resourceImage, label);
@@ -125,8 +126,8 @@ public class PlayerView extends BorderPane {
    {
       HBox resourceBox = new HBox();
       ImageView resourceImage = new ImageView(image);
-      resourceImage.setFitWidth(30);
-      resourceImage.setFitHeight(30);
+      resourceImage.setFitWidth(IMAGE_SIZE);
+      resourceImage.setFitHeight(IMAGE_SIZE);
       ResourceLabel current = new ResourceLabel("\t" + number1);
       ResourceLabel in = new ResourceLabel("\t+" + number2);
       current.setTextFill(Color.WHITE);
@@ -138,8 +139,8 @@ public class PlayerView extends BorderPane {
    {
       HBox resourceBox = new HBox();
       ImageView resourceImage = new ImageView(image);
-      resourceImage.setFitWidth(30);
-      resourceImage.setFitHeight(30);
+      resourceImage.setFitWidth(IMAGE_SIZE);
+      resourceImage.setFitHeight(IMAGE_SIZE);
       ResourceLabel label1 = new ResourceLabel("\t" + number1);
       ResourceLabel label2 = new ResourceLabel("\t" + number2);
       ResourceLabel label3 = new ResourceLabel("\t" + number3);
