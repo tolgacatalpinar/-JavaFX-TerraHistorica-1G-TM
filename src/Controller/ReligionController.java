@@ -45,25 +45,99 @@ public class ReligionController{
     private Button orderButton;
     @FXML
     private GridPane gridPane;
-    private int[] array = {2, 3, 5};
-    private int currentPlayer = 0;
-    private int playerCount = 3;
-    private boolean playerKeyStatus = false;
-    private Islam islam_track = new Islam(3, array);
-    private Hinduism hindu_track = new Hinduism(3, array);
-    private Christianity chirst_track = new Christianity(3, array);
-    private Jewish jewish_track = new Jewish(3, array);
-    private Religion[] religions = {islam_track, chirst_track, hindu_track, jewish_track};
+    private int currentPlayer;
+    private int playerCount;
+    private Religion[] religions;
 
-
-    public void showReligion(GameHandler gameHandler)
+    /**
+     * Status paramater 0 -> Just show board religion
+     * Status paramater 1 -> add to order according to religion choice
+     * Status paramater 2 -> place priest according to religion choice
+     *
+     */
+    public void showReligion(GameHandler gameHandler,int status)
     {
+        religions = gameHandler.getReligions();
+        playerCount = gameHandler.getPlayerCount();
         BorderPane border = new BorderPane();
         GridPane gridPane = new GridPane();
-        border.setPadding(new Insets(10,10,10,10));
+        GridPane religon_buttons = new GridPane();
+
         border.setMaxHeight(600);
         border.setMaxWidth(1100);
         border.setCenter(gridPane);
+        Button to_islam = new Button();
+        Button to_chris = new Button();
+        Button to_hindu = new Button();
+        Button to_juda = new Button();
+        religon_buttons.add(to_islam,1,0);
+        religon_buttons.add(to_chris,1,1);
+        religon_buttons.add(to_hindu,1,2);
+        religon_buttons.add(to_juda,1,3);
+
+        to_islam.setBackground(new Background(new BackgroundImage(new Image("islam_symbol.png"), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true))));
+        to_chris.setBackground(new Background(new BackgroundImage(new Image("chris_symbol.png"), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true))));
+        to_hindu.setBackground(new Background(new BackgroundImage(new Image("hinduism.png"), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true))));
+        to_juda.setBackground(new Background(new BackgroundImage(new Image("judaism_symbol.png"),BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true))));
+        to_islam.setMinWidth(150);
+        to_chris.setMinWidth(150);
+        to_hindu.setMinWidth(150);
+        to_juda.setMinWidth(150);
+        to_islam.setMinHeight(150);
+        to_chris.setMinHeight(150);
+        to_hindu.setMinHeight(150);
+        to_juda.setMinHeight(150);
+        update(gridPane);
+        if(status ==1 ){
+            for (int i = 0; i < 4; i++) {
+                Button temp_button = (Button) getNodeByRowColumnIndex(i,1, religon_buttons);
+                Religion temp_religion = religions[i];
+                temp_button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        System.out.println("Add priest to order for "+ temp_religion.getClass().toString() + " and player "+ currentPlayer);
+                        temp_religion.addOrderOfReligion(currentPlayer,gameHandler.getPlayerList()[currentPlayer].getKey());
+                        disableButtons(religon_buttons);
+                        update(gridPane);
+                    }
+                });
+            }
+        }
+        else if(status == 2 ){
+            for (int i = 0; i < 4; i++) {
+                Button temp_button = (Button) getNodeByRowColumnIndex(i,1, religon_buttons);
+                Religion temp_religion = religions[i];
+                temp_button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        System.out.println("Place priest for "+ temp_religion.getClass().toString() + " and player "+ currentPlayer);
+                        temp_religion.placePriest(currentPlayer,gameHandler.getPlayerList()[currentPlayer].getKey());
+                        disableButtons(religon_buttons);
+                        update(gridPane);
+                    }
+                });
+            }
+        }
+        else{
+            disableButtons(religon_buttons);
+            update(gridPane);
+        }
+
+        religon_buttons.setMinSize(150,600);
+        border.setRight(religon_buttons);
+
         BackgroundImage bg = new BackgroundImage( new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         border.setBackground(new Background(bg));
@@ -75,17 +149,69 @@ public class ReligionController{
         dialog.setScene(dialogScene);
         dialog.setTitle("Religion");
         dialog.setResizable(false);
-        update(gridPane,1,false);
+        //update(gridPane,status);
         //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
         dialog.show();
 
     }
+    public void showChoices(GameHandler gameHandler)
+    {
+        currentPlayer =  gameHandler.getCurrentPlayerId();
+        BorderPane border = new BorderPane();
+        GridPane gridPane = new GridPane();
+        border.setMaxHeight(200);
+        border.setMaxWidth(200);
+        border.setCenter(gridPane);
+        Button add_order = new Button();
+        Button place_priest = new Button();
+        BackgroundImage add_to_order_bg = new BackgroundImage( new Image("add_to_order.jpg",600.0,600.0,true,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        add_order.setBackground(new Background(add_to_order_bg));
+        BackgroundImage place_priest_bg = new BackgroundImage( new Image("place_priest.jpg",600.0,600.0,true,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        place_priest.setBackground(new Background(place_priest_bg));
+
+        gridPane.add(add_order,1,1);
+        gridPane.add(place_priest,2,1);
+        add_order.setPrefSize(600, 600);
+        place_priest.setPrefSize(600, 600);
+
+        BackgroundImage bg = new BackgroundImage( new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        border.setBackground(new Background(bg));
+        final Stage dialog = new Stage();
+
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        Scene dialogScene = new Scene(border, 1200, 600);
+        dialog.setScene(dialogScene);
+        dialog.setTitle("Chose your action");
+        dialog.setResizable(false);
+        //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
+        add_order.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                dialog.close();
+                showReligion(gameHandler, 1);
+            }
+        });
+        place_priest.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                dialog.close();
+                showReligion(gameHandler, 2);
+            }
+        });
+        dialog.show();
+
+
+    }
+
     /**
      * According to religion track's data paint the locations occupied
      *
      * @param gridPane the gridpane that stays at right
      */
-    private void update(GridPane gridPane, int religion_index, boolean isOrder) {
+    private void update(GridPane gridPane) {
         gridPane.getChildren().clear();
         //Setup panes and grid panes
         for(int i = 0; i < 4; i++){
@@ -119,7 +245,7 @@ public class ReligionController{
                         tempGrid.setBackground(new Background(myBI));
                     }
                 }else {
-                    BackgroundImage myBI= new BackgroundImage(new Image("islam_door.png",100,180,false,true),
+                    BackgroundImage myBI= new BackgroundImage(new Image("judaism_starting.png",100,180,false,true),
                             BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                             BackgroundSize.DEFAULT);
                     //then you set to your node
@@ -148,7 +274,7 @@ public class ReligionController{
                 }
             }
         }
-
+        System.out.println("player count "+ playerCount);
         Color[] colors = {Color.BLUE, Color.RED,Color.GREEN};
        for(int i = 0; i< religions.length; i++){
            for (int j = 0; j < playerCount; j++){
@@ -164,8 +290,8 @@ public class ReligionController{
                Pane orderPane = new Pane();
                orderPane.setBackground(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
                if (religions[k].isOccupied(i)) {
-                   GridPane orderGridPane = (GridPane) gridPane.getChildren().get(k*12);
-                   BackgroundImage myBI= new BackgroundImage(new Image("islam_door.png",100,180,false,true),
+                   GridPane orderGridPane = (GridPane) gridPane.getChildren().get(27*k);
+                   BackgroundImage myBI= new BackgroundImage(new Image("judaism_starting.png",100,150,false,true),
                            BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                            BackgroundSize.DEFAULT);
                    //then you set to your node
@@ -187,6 +313,18 @@ public class ReligionController{
         }
 
         return result;
+    }
+    public void disableButtons(GridPane buttons_grid){
+        for (int i = 0; i < 4; i++){
+            Button temp_button = (Button) getNodeByRowColumnIndex(i,1, buttons_grid);
+            temp_button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    System.out.println("Can't do more actions in this round");
+                }
+            });
+        }
+
     }
 
 }

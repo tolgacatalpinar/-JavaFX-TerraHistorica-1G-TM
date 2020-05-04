@@ -183,7 +183,8 @@ public class GameController implements Initializable {
 
    @FXML
    public void sentPriestClicked() {
-
+      ReligionController religionController = new ReligionController();
+      religionController.showChoices(gameHandler);
    }
 
    @FXML
@@ -212,7 +213,7 @@ public class GameController implements Initializable {
    @FXML
    public void religionsClicked() {
       ReligionController religionController = new ReligionController();
-      religionController.showReligion(gameHandler);
+      religionController.showReligion(gameHandler,0);
    }
 
    @FXML

@@ -15,11 +15,12 @@ public class GameHandler implements Serializable{
     CardsAndTiles cardsAndTiles;
     Religion[] religions;
     String gameId;
+    int playerCount;
     public GameHandler(Player[] playerList, int playerSize)
     {
         cardsAndTiles = new CardsAndTiles(playerSize);
         religions = new Religion[4];
-
+        playerCount = playerSize;
         int [] player_initial_islam = new int[playerSize];
         int [] player_initial_chirst = new int[playerSize];
         int [] player_initial_jew = new int[playerSize];
@@ -163,4 +164,8 @@ public class GameHandler implements Serializable{
 
        this.currentPlayerId = currentPlayerId;
     }
+    public int getPlayerCount(){
+        return playerCount;
+    }
+
 }
