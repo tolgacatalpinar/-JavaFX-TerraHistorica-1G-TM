@@ -83,11 +83,11 @@ public class ReligionController{
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true))));
-        to_hindu.setBackground(new Background(new BackgroundImage(new Image("hinduism.png"), BackgroundRepeat.NO_REPEAT,
+        to_juda.setBackground(new Background(new BackgroundImage(new Image("hinduism.png"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true))));
-        to_juda.setBackground(new Background(new BackgroundImage(new Image("judaism_symbol.png"),BackgroundRepeat.NO_REPEAT,
+        to_hindu.setBackground(new Background(new BackgroundImage(new Image("judaism_symbol.png"),BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true))));
@@ -164,17 +164,17 @@ public class ReligionController{
         border.setCenter(gridPane);
         Button add_order = new Button();
         Button place_priest = new Button();
-        BackgroundImage add_to_order_bg = new BackgroundImage( new Image("add_to_order.jpg",600.0,600.0,true,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        BackgroundImage add_to_order_bg = new BackgroundImage( new Image("add_to_order.jpg",300.0,300.0,true,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         add_order.setBackground(new Background(add_to_order_bg));
-        BackgroundImage place_priest_bg = new BackgroundImage( new Image("place_priest.jpg",600.0,600.0,true,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        BackgroundImage place_priest_bg = new BackgroundImage( new Image("place_priest.jpg",300.0,300.0,true,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         place_priest.setBackground(new Background(place_priest_bg));
 
         gridPane.add(add_order,1,1);
         gridPane.add(place_priest,2,1);
-        add_order.setPrefSize(600, 600);
-        place_priest.setPrefSize(600, 600);
+        add_order.setPrefSize(300, 300);
+        place_priest.setPrefSize(300, 300);
 
         BackgroundImage bg = new BackgroundImage( new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
@@ -182,7 +182,7 @@ public class ReligionController{
         final Stage dialog = new Stage();
 
         dialog.initModality(Modality.APPLICATION_MODAL);
-        Scene dialogScene = new Scene(border, 1200, 600);
+        Scene dialogScene = new Scene(border, 600, 300);
         dialog.setScene(dialogScene);
         dialog.setTitle("Chose your action");
         dialog.setResizable(false);
@@ -220,36 +220,59 @@ public class ReligionController{
                 Label text = new Label();
                 if(j >= 1){
                     if(i == 1){
-                        BackgroundImage myBI= new BackgroundImage(new Image("chris_track.png",tempGrid.getWidth(),tempGrid.getHeight(),false,true),
+                        BackgroundImage myBI= new BackgroundImage(new Image("chris_track.png",110,145,false,true),
                                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                                 BackgroundSize.DEFAULT);
                         //then you set to your node
                         tempGrid.setBackground(new Background(myBI));
+
                     }else if(i == 0){
-                        BackgroundImage myBI= new BackgroundImage(new Image("islam_track.png",tempGrid.getWidth(),tempGrid.getHeight(),false,true),
+                        BackgroundImage myBI= new BackgroundImage(new Image("islam_track.png",110,145,false,true),
                                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                                 BackgroundSize.DEFAULT);
                         //then you set to your node
                         tempGrid.setBackground(new Background(myBI));
+
                     }else if( i == 3){
-                        BackgroundImage myBI= new BackgroundImage(new Image("hindu_track.png",tempGrid.getWidth(),tempGrid.getHeight(),false,true),
+                        BackgroundImage myBI= new BackgroundImage(new Image("hindu_track.png",110,145,false,true),
                                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                                 BackgroundSize.DEFAULT);
                         //then you set to your node
                         tempGrid.setBackground(new Background(myBI));
+
                     }else{
-                        BackgroundImage myBI= new BackgroundImage(new Image("juda_track.png",tempGrid.getWidth(),tempGrid.getHeight(),false,true),
+                        BackgroundImage myBI= new BackgroundImage(new Image("juda_track.png",110,145,false,true),
                                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                                 BackgroundSize.DEFAULT);
                         //then you set to your node
                         tempGrid.setBackground(new Background(myBI));
                     }
                 }else {
-                    BackgroundImage myBI= new BackgroundImage(new Image("judaism_starting.png",100,180,false,true),
-                            BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                            BackgroundSize.DEFAULT);
-                    //then you set to your node
-                    tempGrid.setBackground(new Background(myBI));
+                    if(i == 1){
+                        BackgroundImage myBI= new BackgroundImage(new Image("chris_starting.png",80,140,false,true),
+                                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                                BackgroundSize.DEFAULT);
+                        //then you set to your node
+                        tempGrid.setBackground(new Background(myBI));
+                    }else if(i == 0){
+                        BackgroundImage myBI= new BackgroundImage(new Image("plsolsun.png",80,140,false,true),
+                                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                                BackgroundSize.DEFAULT);
+                        //then you set to your node
+                        tempGrid.setBackground(new Background(myBI));
+                    }else if( i == 3){
+                        BackgroundImage myBI= new BackgroundImage(new Image("hindu_starting.png",80,140,false,true),
+                                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                                BackgroundSize.DEFAULT);
+                        //then you set to your node
+                        tempGrid.setBackground(new Background(myBI));
+                    }else{
+                        BackgroundImage myBI= new BackgroundImage(new Image("juda_starting.png",80,140,false,true),
+                                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                                BackgroundSize.DEFAULT);
+                        //then you set to your node
+                        tempGrid.setBackground(new Background(myBI));
+                    }
                 }
                 for(int k = 0; k<4; k++){
                     Pane newPane = new Pane();
