@@ -314,7 +314,7 @@ public class ReligionController{
                orderPane.setBackground(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
                if (religions[k].isOccupied(i)) {
                    GridPane orderGridPane = (GridPane) gridPane.getChildren().get(27*k);
-                   BackgroundImage myBI= new BackgroundImage(new Image("judaism_starting.png",100,150,false,true),
+                   BackgroundImage myBI= new BackgroundImage(new Image("juda_starting.png",100,150,false,true),
                            BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                            BackgroundSize.DEFAULT);
                    //then you set to your node

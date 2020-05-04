@@ -192,6 +192,80 @@ public class PlayerHandler implements Serializable{
 
     }
 
+   public static void returnBonusCard(Player player) {
+      //Collect bonus points
+      if (player.isRoundPassed()) {
+         if (player.isHavingDwellingBonus()) {
+            player.addVictoryPoints( player.getDwellingNum());
+         }
+         if (player.isHavingTradingPostBonus()) {
+            player.addVictoryPoints(player.getTradingPostNum() * 2);
+         }
+         if (player.isHavingSanctuaryBonus()) {
+            player.addVictoryPoints(player.getStrongholdNum() * 4);
+            player.addVictoryPoints(player.getSanctuaryNum() * 4);
+         }
+         player.setHavingSanctuary( false);
+         player.setHavingDwellingBonus( false);
+         player.setHavingTradeHouse( false);
+      }
+   }
+
+   public void useBonusFromFavorTile(Player player) {
+      if (player.isRoundPassed() && player.isPassingTradingPostBonus()) {
+         if (player.getTradingPostNum() == 1) {
+            player.addVictoryPoints(2);
+         }
+         if (player.getTradingPostNum() == 2) {
+            player.addVictoryPoints(3);
+         }
+         if (player.getTradingPostNum() == 3) {
+            player.addVictoryPoints(3);
+         }
+         if (player.getTradingPostNum() == 4) {
+            player.addVictoryPoints(4);
+         }
+      }
+   }
+
+   public void exchangeResources(Player player, String exchanges) {
+
+      if (exchanges == "priest to worker") {
+         if (player.getPriestNum() > 0) {
+            player.setWorkerNum(player.getWorkerNum() + 1);
+         }
+      }
+
+      if (exchanges == "worker to coin") {
+         if (player.getWorkerNum() > 0) {
+            player.setWorkerNum(player.getWorkerNum() + 1);
+            player.setGoldNum(player.getGoldNum() + 1);
+         }
+      }
+
+      if (exchanges == "sacrifice power") {
+         player.sacrificePower();
+      }
+
+      if (exchanges == "power to coin") {
+         if (player.spendPowerFromBowl(1)) {
+            player.setGoldNum(player.getGoldNum() + 1);
+         }
+      }
+
+      if (exchanges == "power to worker") {
+         if (player.spendPowerFromBowl(1)) {
+            player.setWorkerNum(player.getWorkerNum() + 1);
+         }
+      }
+
+      if (exchanges == "power to priest") {
+         if (player.spendPowerFromBowl(5)) {
+            player.setWorkerNum(player.getWorkerNum() + 1);
+         }
+      }
+   }
+
 
 
 }
