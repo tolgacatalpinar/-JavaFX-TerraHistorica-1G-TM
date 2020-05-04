@@ -53,6 +53,8 @@ public class TerraformController {
 
     public static void terraform(GameHandler gameHandler, Button[][]terrains, Button terrain, Map map, Space space){
 
+
+
         List<String> choices = new ArrayList<>();
         choices.add("Wasteland");
         choices.add("Forest");
@@ -74,7 +76,6 @@ public class TerraformController {
             TerrainController.terraform(terrain, result.get());
             space.setType(result.get());
 
-
             //Asks if the player wants to build dwelling after terraforming
             if (result.get().equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE)) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -86,7 +87,7 @@ public class TerraformController {
                 if (dwellingCheck.get() == ButtonType.OK) {
                     TerrainController.buildDwelling(terrain, result.get());
                     space.setOccupied(true);
-                    space.setBuilding("Dwelling");
+                    space.setStructure("Dwelling");
                 } else {
                     // ... user chose CANCEL or closed the dialog
                 }
