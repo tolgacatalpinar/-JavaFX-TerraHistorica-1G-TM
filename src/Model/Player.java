@@ -43,6 +43,12 @@ public class Player implements Serializable{
     private boolean havingSanctuaryBonus;
     private int terraformWorkerCost;
     private boolean roundPassed;
+    private int initialIslam;
+    private int initialHinduism;
+    private int initialJudaism;
+    private int initialChristianity;
+
+
 
     private boolean upgradeToTradingPostBonus; //When upgrading a Dwelling to a Trading house, immediately get 3 additional Victory points.
     private boolean isPassingTradingPostBonus; //From now on, when passing (see Action #8, page 14), get 2/3/3/4 Victory points for 1/2/3/4 of your Trading houses on the Game board.
@@ -82,6 +88,10 @@ public class Player implements Serializable{
        setTempleNum(0);
        setSanctuaryNum(0);
        setStrongholdNum(0);
+       setInitialChristianity(getFaction().INITIAL_CHRISTIANITY);
+       setInitialHinduism(getFaction().INITIAL_HINDUISM);
+       setInitialIslam(getFaction().INITIAL_ISLAM);
+       setInitialJudaism(getFaction().INITIAL_JUDAISM);
        setKey(false);
        setUpgradeToTradingPostBonus(false);
        setIsPassingTradingPostBonus(false);
@@ -564,5 +574,20 @@ public class Player implements Serializable{
 
     public int getTerraformWorkerCost() {
             return terraformWorkerCost;
+    }
+    public void setInitialIslam(int initialIslam) {
+        this.initialIslam = initialIslam;
+    }
+
+    public void setInitialHinduism(int initialHinduism) {
+        this.initialHinduism = initialHinduism;
+    }
+
+    public void setInitialJudaism(int initialJudaism) {
+        this.initialJudaism = initialJudaism;
+    }
+
+    public void setInitialChristianity(int initialChristianity) {
+        this.initialChristianity = initialChristianity;
     }
 }
