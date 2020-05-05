@@ -87,7 +87,7 @@ public class ReligionController{
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true))));
-        to_hindu.setBackground(new Background(new BackgroundImage(new Image("juda_symbol.png"),BackgroundRepeat.NO_REPEAT,
+        to_hindu.setBackground(new Background(new BackgroundImage(new Image("judaism_symbol.png"),BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true))));
