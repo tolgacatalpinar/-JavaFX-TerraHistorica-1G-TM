@@ -87,7 +87,7 @@ public class ReligionController{
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true))));
-        to_hindu.setBackground(new Background(new BackgroundImage(new Image("judaism_symbol.png"),BackgroundRepeat.NO_REPEAT,
+        to_hindu.setBackground(new Background(new BackgroundImage(new Image("juda_symbol.png"),BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true))));
@@ -314,7 +314,7 @@ public class ReligionController{
                orderPane.setBackground(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
                if (religions[k].isOccupied(i)) {
                    GridPane orderGridPane = (GridPane) gridPane.getChildren().get(27*k);
-                   BackgroundImage myBI= new BackgroundImage(new Image("judaism_starting.png",100,150,false,true),
+                   BackgroundImage myBI= new BackgroundImage(new Image("juda_starting.png",100,150,false,true),
                            BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                            BackgroundSize.DEFAULT);
                    //then you set to your node

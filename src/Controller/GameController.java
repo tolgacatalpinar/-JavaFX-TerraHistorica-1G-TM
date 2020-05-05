@@ -189,7 +189,8 @@ public class GameController implements Initializable {
 
    @FXML
    public void powerActionClicked() {
-
+      PowerActionController powerActionController = new PowerActionController();
+      powerActionController.showPowerActions(gameHandler);
 
    }
 
