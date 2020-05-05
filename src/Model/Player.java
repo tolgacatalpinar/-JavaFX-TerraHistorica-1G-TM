@@ -8,6 +8,8 @@ import java.io.Serializable;
 public class Player implements Serializable {
 
    String nickName;
+
+
    String terrainTile;
    Faction faction;
    SpecialActionToken specialActionToken;
@@ -31,7 +33,6 @@ public class Player implements Serializable {
    private int templeNum;
    private int sanctuaryNum;
    private int strongholdNum;
-   private int spadeInventory;
    private int freeSpade;
    private int spadeLevel;
    private int shipLevel;
@@ -78,6 +79,7 @@ public class Player implements Serializable {
       setWorkerIncome(getFaction().INITIAL_WORKER_INCOME);
       setTerraformWorkerCost(getFaction().TERRAFORM_WORKER_COST);
       setVictoryPointNum(getFaction().INITIAL_VICTORY_POINT);
+      setShipLevel(getFaction().INITIAL_SHIPPING_LEVEL);
       setStartingDwellingNum(getFaction().startingDwellingNum);
       setTownPowerValue(7);
       setPowerIncome(0);
@@ -356,14 +358,6 @@ public class Player implements Serializable {
       this.strongholdNum = strongholdNum;
    }
 
-   public int getSpadeInventory() {
-      return spadeInventory;
-   }
-
-   public void setSpadeInventory(int spadeInventory) {
-      this.spadeInventory = spadeInventory;
-   }
-
    public int getSpadeLevel() {
       return spadeLevel;
    }
@@ -586,6 +580,13 @@ public class Player implements Serializable {
 
    public boolean isRoundPassed() {
       return roundPassed;
+   }
+   public int getFreeSpade() {
+      return freeSpade;
+   }
+
+   public void setFreeSpade(int freeSpade) {
+      this.freeSpade = freeSpade;
    }
 
 }

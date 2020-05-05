@@ -17,7 +17,6 @@ public class Faction implements Serializable {
     public int INITIAL_SHIPPING_LEVEL = 0;
     public int INITIAL_PRIEST = 0;
     public int INITIAL_GOLD = 15;
-    public int INITIAL_SPADE = 0;
     public int SPADE_PRIEST_COST = 1;
     public int SPADE_GOLD_COST = 5;
     public int SPADE_WORKER_COST = 2;
@@ -69,12 +68,10 @@ public class Faction implements Serializable {
     public boolean tradeCoinsForVictoryPoint;
     public int getPowerAfterStronghold;
     public int gainPowerForEachSpade;
-    public int payPriestGetVictoryPoints;
     public int getAdditionalVictoryPointsAfterTown;
     public boolean moveOnCultIfTradeAccepted = false;
     public boolean payPriestWhenTransform;
     public boolean giveWorkersForPriest;
-    public int additionalVictoryPointForEachSpace;
     public int additionalVictoryPointForEachSpade;
     public int getVictoryPointsAfterStronghold;
     public int workerCostOfBridge;

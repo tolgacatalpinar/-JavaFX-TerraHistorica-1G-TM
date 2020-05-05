@@ -290,19 +290,19 @@ public class Map implements Serializable {
 
    public boolean upgradeStructure(Space space1, String playerColor, String structure) {
       if (canBuild(space1,playerColor)) {
-         if (space1.getStructure().equals("Dwelling") && structure.equals("TradingPost")){
+         if (space1.getStructure().getBuilding().equals("Dwelling") && structure.equals("TradingPost")){
             space1.setStructure("TradingPost");
             return true;
           }
-         if (space1.getStructure().equals("TradingPost") && structure.equals("Temple")) {
+         if (space1.getStructure().getBuilding().equals("TradingPost") && structure.equals("Temple")) {
             space1.setStructure("Temple");
             return true;
          }
-         if (space1.getStructure().equals("Temple") && structure.equals(("Sanctuary"))) {
+         if (space1.getStructure().getBuilding().equals("Temple") && structure.equals(("Sanctuary"))) {
             space1.setStructure("Sanctuary");
             return true;
          }
-         if (space1.getStructure().equals("TradingPost") && structure.equals(("Stronghold"))) {
+         if (space1.getStructure().getBuilding().equals("TradingPost") && structure.equals(("Stronghold"))) {
             space1.setStructure("Stronghold");
             return true;
          }

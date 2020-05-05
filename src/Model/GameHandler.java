@@ -146,7 +146,15 @@ public class GameHandler implements Serializable{
         return map.adjacentPlayers(space, playerList[currentPlayerId].getTerrainTile());
     }
 
-
+    /**
+     * Getting adjacent spaces to build dwelling
+     * @param space
+     * @return
+     */
+    public ArrayList<Space> getAdjacentSpaces(Space space) {
+        //return map.adjacencyList(space);
+        return null;
+    }
 
     public void terraform(Space space, String toTransform) {
 
@@ -170,6 +178,10 @@ public class GameHandler implements Serializable{
     }
 
     public void buildBridge() {
+
+    }
+
+    public void isTownFound() {
 
     }
 
