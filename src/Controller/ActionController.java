@@ -524,7 +524,7 @@ public class ActionController {
          public void handle(Event event) {
             if (choice[0] == 1) {
                player.getSpecialActionToken().isSpade = false;
-               player.setSpadeInventory(1);
+               player.setFreeSpade(player.getFreeSpade() + 1);
                event.consume();
             } else if (choice[0] == 2) {
                player.getSpecialActionToken().isCultTack = false;
@@ -575,7 +575,7 @@ public class ActionController {
          alert.setTitle("Upgrade Shipping");
          alert.setHeaderText("GOLD COST : " + goldCost + "\n" +
                  "PRIEST COST : " + priestCost);
-         alert.setContentText("Do you wan to update your shipping level \n" +
+         alert.setContentText("Do you want to update your shipping level \n" +
                  "Current Level : " + player.getShipLevel() + "\n" +
                  "New Level : " + (player.getShipLevel() + 1));
          Optional<ButtonType> result = alert.showAndWait();

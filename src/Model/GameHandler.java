@@ -18,6 +18,8 @@ public class GameHandler implements Serializable{
     Map map;
     int playerCount;
     PlayerHandler playerHandler;
+
+
     int currentRound;
     final int MAX_ROUND = 6;
     public GameHandler(Player[] playerList, int playerSize)
@@ -54,7 +56,6 @@ public class GameHandler implements Serializable{
 
     }
 
-
     /**
      * Will be called after ending a turn
      */
@@ -68,7 +69,7 @@ public class GameHandler implements Serializable{
     /**
      * Round is over, update resources and pass to next round
      */
-    public void endRound() {
+    private void endRound() {
 
         for(int i = 0; i < playerCount; i++){
             playerHandler.updateResources(playerList[i]);
@@ -98,20 +99,52 @@ public class GameHandler implements Serializable{
         return true;
     }
 
-    public void buildDwelling(Space space) {
+    /**
+     * This method is to check every time after a player
+     * builds an initial dwelling and ends his/her turn
+     *
+     * @return  false if initial dwelling part continues
+     *          true if it is over, now round is 1
+     */
+    public boolean isRoundZeroOver() {
+
+        for(int i = 0; i < playerCount;i++) {
+            if(playerList[i].getStartingDwellingNum() > playerList[i].getDwellingNum()) {
+                return false;
+            }
+        }
+        currentRound++;
+        return true;
+    }
+
+    /**
+     * This method is used after choosing to build a dwelling or
+     * at the beginning of the game. It controls if
+     * @param space
+     * @return -1 means not enough resource for building a dwelling
+     *          0 means all initial dwellings have been built, end turn
+     *          1 means dwelling is successfully built
+     */
+    public int buildDwelling(Space space) {
 
         if(currentRound > 0) { //Not initial dwellings, check for resources
             if(playerHandler.buildStructure(playerList[currentPlayerId], "Dwelling", false) == 1) {
                 space.setPlayer(playerList[currentPlayerId]);
                 map.buildDwelling(space, playerList[currentPlayerId].getTerrainTile(), false);
+                return 1;
             }
         }
         if(currentRound == 0) { //Initial dwellings, do not check for resources
-            playerHandler.buildInitialDwelling(playerList[currentPlayerId]);
-            space.setPlayer(playerList[currentPlayerId]);
-            map.buildDwelling(space, playerList[currentPlayerId].getTerrainTile(), true);
-        }
+            if(playerList[currentPlayerId].getStartingDwellingNum() > playerList[currentPlayerId].getDwellingNum()) {
+                playerHandler.buildInitialDwelling(playerList[currentPlayerId]);
+                space.setPlayer(playerList[currentPlayerId]);
+                map.buildDwelling(space, playerList[currentPlayerId].getTerrainTile(), true);
+                return 1;
+            }
+            return 0;
 
+        }
+        return -1;
     }
 
     public boolean upgradeStructure(Space space, String structure) {
@@ -121,7 +154,7 @@ public class GameHandler implements Serializable{
         if(playerHandler.buildStructure(playerList[currentPlayerId], structure, adjacentPlayers !=null) == 1) {
             if(!map.upgradeStructure(space,  playerList[currentPlayerId].getTerrainTile(), structure)) {
                 System.out.println("You cannot upgrade current building to " + structure);
-                return false;
+                return false; //Implementation fault
             }
             return true; //Structure is updated successfully
         }
@@ -153,19 +186,21 @@ public class GameHandler implements Serializable{
      */
     public ArrayList<Space> getAdjacentSpaces(Space space) {
         //return map.adjacencyList(space);
+        //TODO
         return null;
     }
 
-    public void terraform(Space space, String toTransform) {
+    public boolean terraform(Space space, String toTransform) {
 
         if (playerHandler.terraform(playerList[currentPlayerId]) ) {
             map.transformTerrain(space, toTransform);
             //Successful terraforming
+            return true;
         }
+        return false; //Not enough resources
     }
 
     public void upgradeSpadeLevel() {
-
         playerHandler.upgradeSpadeLevel(playerList[currentPlayerId]);
     }
 
@@ -177,12 +212,26 @@ public class GameHandler implements Serializable{
 
     }
 
-    public void buildBridge() {
+    public void buildBridge(Space space1, Space space2) {
+        map.buildBridge(space1, space2);
+        //TODO
 
     }
 
-    public void isTownFound() {
-
+    /**
+     * This method is called every time after building or upgrading structure
+     * to see if town found
+     * @param space
+     * @return
+     */
+    public ArrayList<Space> isTownFound(Space space) {
+        if(map.isTown(space, playerList[currentPlayerId].getTerrainTile())){
+            //spaces = map.getTownSpaces(); //Method not implemented
+            playerList[currentPlayerId].townFound();
+            return null;
+            //TODO
+        }
+        return null;
     }
 
     /**
@@ -200,8 +249,9 @@ public class GameHandler implements Serializable{
     public void usePowerAction(String powerAction) {
         if(playerHandler.usePowerAction( powerAction, playerList[currentPlayerId])) {
             if( powerAction.equals("power to bridge")) {
-                buildBridge();
+                //buildBridge();
             }
+            //TODO
 
         }
 
@@ -319,6 +369,10 @@ public class GameHandler implements Serializable{
     }
     public int getPlayerCount(){
         return playerCount;
+    }
+
+    public int getCurrentRound() {
+        return currentRound;
     }
 
 }
