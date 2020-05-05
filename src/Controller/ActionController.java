@@ -85,6 +85,7 @@ public class ActionController {
       HBox choiceBlock = new HBox();
       Button transformButton = new Button("Transform");
 
+
       choiceBlock.getChildren().addAll(promptChoice, choiceBox, transformButton);
       VBox whole = new VBox();
       whole.getChildren().addAll(prompt, choiceBlock);
@@ -95,8 +96,11 @@ public class ActionController {
          @Override
          public void handle(MouseEvent event) {
             String selectedChoice = (String) choiceBox.getValue();
+
+            //gameHandler.terraform(space, selectedChoice);
             TerrainController.terraform(terrain, selectedChoice);
             space.setType(selectedChoice);
+
             terraformStage.close();
             if (selectedChoice.equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE)) {
                Button yesButton = new Button("Yes");
@@ -108,9 +112,11 @@ public class ActionController {
                yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                   @Override
                   public void handle(MouseEvent event) {
+                     //gameHandler.buildDwelling(space);
                      TerrainController.buildDwelling(terrain, selectedChoice);
                      space.setOccupied(true);
                      space.setStructure("Dwelling");
+
                      dwellingChoiceStage.close();
                   }
                });
