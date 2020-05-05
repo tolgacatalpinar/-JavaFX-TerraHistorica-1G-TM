@@ -279,11 +279,16 @@ public class Map implements Serializable {
       }
    }
 
-   public void transformTerrain(Space original, Space newSpace) {
+   /**public void transformTerrain(Space original, Space newSpace) {
       int row = getRow(original);
       int col = getColumn(original);
       spaces[row][col] = newSpace;
       original = null;
+   }*/
+
+
+   public void transformTerrain(Space original, String newType) {
+      original.setType(newType);
    }
 
    public boolean upgradeStructure(Space space1, String playerColor, String structure) {

@@ -101,11 +101,13 @@ public class GameHandler implements Serializable{
 
         if(currentRound > 0) { //Not initial dwellings, check for resources
             if(playerHandler.buildStructure(playerList[currentPlayerId], "Dwelling", false) == 1) {
+                space.setPlayer(playerList[currentPlayerId]);
                 map.buildDwelling(space, playerList[currentPlayerId].getTerrainTile(), false);
             }
         }
         if(currentRound == 0) { //Initial dwellings, do not check for resources
             playerHandler.buildInitialDwelling(playerList[currentPlayerId]);
+            space.setPlayer(playerList[currentPlayerId]);
             map.buildDwelling(space, playerList[currentPlayerId].getTerrainTile(), true);
         }
 
@@ -144,6 +146,14 @@ public class GameHandler implements Serializable{
     }
 
 
+
+    public void terraform(Space space, String toTransform) {
+
+        if (playerHandler.terraform(playerList[currentPlayerId]) ) {
+            map.transformTerrain(space, toTransform);
+            //Successful terraforming
+        }
+    }
 
     /**
      * playerChoseBonusCard(cardsAndTiles.bonusCards.get(cardIndex), player, playerID);
