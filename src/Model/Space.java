@@ -9,11 +9,20 @@ public class Space implements Serializable{
     private Space[] bridgeList; // this array holds the other space that can be reached from this space; thanks to bridge(if exists)
     private Boolean hasBridge;
     private Structure structure;
+    private Player player;
         
     public Space(String type){
         isOccupied = false;
         this.type = type;
         structure = null;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Model.Player getPlayer() {
+        return player;
     }
 
     public Space(){

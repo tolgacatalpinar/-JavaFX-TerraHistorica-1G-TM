@@ -70,27 +70,24 @@ public class Map implements Serializable {
    }
 
 
-   public int[] buildDwelling(Space space1, String color, boolean isInitialDwelling) {
-      int[] location = null; /// burada belki hata olabilir
+   public boolean buildDwelling(Space space1, String color, boolean isInitialDwelling) {
       if (isInitialDwelling) {
          if (canBuildTurnOne(space1, color)) {
-            location = new int[2];
             int row = getRow(space1);
             int column = getColumn(space1);
-            location[0] = row;
-            location[1] = column;
             space1.setOccupied(true);
+            return true;
          }
-      } else if (canBuild(space1, color)) {
-         location = new int[2];
+      }
+      else if (canBuild(space1, color)) {
          int row = getRow(space1);
          int column = getColumn(space1);
-         location[0] = row;
-         location[1] = column;
          space1.setOccupied(true);
+         return true;
       }
-      return location;
+         return false;
    }
+
 
    public boolean isDirectAdjacent(Space space1, Space space2) {
       // We did not control if one of the spaces is river, because even one of them is river this info can be useful.
@@ -320,6 +317,16 @@ public class Map implements Serializable {
       }
       return list;
    }
+   public ArrayList<Player> adjacentPlayers(Space space1, String playerColor) {
+      Space[] adjacents = adjacencyList(space1);
+      ArrayList<Player> list = new ArrayList<Player>();
+      for (int i = 0; i < adjacents.length; i++) {
+         if (!(adjacents[i].getColor().equals(playerColor)) && adjacents[i].isOccupied() && !list.contains(adjacents[i].getPlayer())) {
+            list.add(adjacents[i].getPlayer());
+         }
+      }
+      return list;
+   }
 
    public boolean canBuild(Space space1, String playerColor) {
       if (space1.getColor().equals(playerColor) && !space1.isOccupied()) {
@@ -344,12 +351,4 @@ public class Map implements Serializable {
       }
       return false;
    }
-
-   public ArrayList<Player> adjacentPlayers(Space space,  String color) {
-
-      //TODO
-      return null;
-
-   }
-
 }
