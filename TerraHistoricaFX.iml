@@ -7,20 +7,21 @@
       <sourceFolder url="file://$MODULE_DIR$/src/Styles" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Terrains" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Images/FactionImages" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainImages" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Images/ReligionImages" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Images/ChooseFactionImages" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Images/MenuImages" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Images/RiverImages" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Images" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Images/TileImages" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages/blackTerrainWithStructure" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages/blueTerrainWithStructure" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages/brownTerrainWithStructure" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages/greenTerrainWithStructure" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages/redTerrainWithStructure" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages/whiteTerrainWithStructure" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages/yellowTerrainWithStructure" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainImages" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages/desertWithStructure" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages/forestWithStructure" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages/lakesWithStructure" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages/mountainsWithStructure" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages/plainsWithStructure" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages/swampWithStructure" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages/wastelandWithStructure" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
