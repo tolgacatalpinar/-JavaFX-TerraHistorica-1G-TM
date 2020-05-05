@@ -10,14 +10,18 @@ public class Gilgamesh extends Faction {
         INITIAL_VICTORY_POINT = 25;
         DWELLING_WORKER_COST = 1;
         DWELLING_WORKER_INCOME = 1;
-        spadeNeededToTerraformPlains = 0;
         spadeNeededToTerraformPlains = 2;
-        spadeNeededToTerraformSwamp = 3;
-        spadeNeededToTerraformLakes = 3;
+        spadeNeededToTerraformSwamp = 2;
+        spadeNeededToTerraformLakes = 2;
         spadeNeededToTerraformForest = 2;
-        spadeNeededToTerraformMountains = 1;
-        spadeNeededToTerraformDesert = 1;
+        spadeNeededToTerraformMountains = 2;
+        spadeNeededToTerraformDesert = 2;
 
       }
 
+  @Override
+  public void afterStronghold() {
+    super.afterStronghold();
+    freeSpadesToTerraformIntoHome =2;
+  }
 }

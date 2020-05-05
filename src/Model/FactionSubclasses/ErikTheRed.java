@@ -35,10 +35,13 @@ public class ErikTheRed extends Faction {
         spadeNeededToTerraformMountains = 2;
         spadeNeededToTerraformWasteland = 3;
         spadeNeededToTerraformDesert = 3;
+        foundingTownWorkerBonus = 3;
 
   }
 
-
-
-
+      @Override
+      public void afterStronghold() {
+            super.afterStronghold();
+            actionToken_dwelling_to_trading = true;
+      }
 }

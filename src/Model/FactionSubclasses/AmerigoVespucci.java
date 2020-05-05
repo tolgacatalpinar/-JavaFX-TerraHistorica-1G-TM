@@ -25,8 +25,13 @@ public class AmerigoVespucci extends Faction { // mermaids
       spadeNeededToTerraformMountains = 2;
       spadeNeededToTerraformWasteland = 3;
       spadeNeededToTerraformDesert = 3;
-
+      remainingSkipRiverChanceOnTown = 1;
   }
 
+    @Override
+    public void afterStronghold() {
+        super.afterStronghold();
+
+    }
 }
 

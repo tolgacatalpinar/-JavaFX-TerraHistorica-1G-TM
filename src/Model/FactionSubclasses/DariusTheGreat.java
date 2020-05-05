@@ -25,4 +25,10 @@ public class DariusTheGreat extends Faction { //nomad
            spadeNeededToTerraformWasteland = 1;
 
        }
+
+    @Override
+    public void afterStronghold() {
+        super.afterStronghold();
+        gainActionTokenAfterStronghold = true;
+    }
 }

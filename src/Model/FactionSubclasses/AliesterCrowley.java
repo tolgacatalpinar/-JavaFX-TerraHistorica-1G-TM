@@ -4,7 +4,7 @@ import Model.Faction;
 import Model.Player;
 
 public class AliesterCrowley extends Faction {
-    
+    //Darkling
     public AliesterCrowley() {
         TERRAIN_TILE = "Swamp";
         INITIAL_WORKER = 1;
@@ -27,12 +27,14 @@ public class AliesterCrowley extends Faction {
         spadeNeededToTerraformMountains = 3;
         spadeNeededToTerraformWasteland = 3;
         spadeNeededToTerraformDesert = 2;
-
-
-
-
-
-
+        payPriestWhenTransform = true;
     }
 
+
+    @Override
+    public void afterStronghold() {
+        super.afterStronghold();
+        giveWorkersForPriest = true;
+        increaseShippingAfterStronghold = true;
+    }
 }

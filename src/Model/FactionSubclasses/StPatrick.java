@@ -22,6 +22,15 @@ public class StPatrick extends Faction { //dwarwes
       spadeNeededToTerraformWasteland = 1;
       spadeNeededToTerraformDesert = 2;
       hasShipping = false;
-
+      rangeOfSkipTile = 1;
+      additionalWorkerOnTunneling = 2;
+      additionalVictoryPointForEachSkipTile = 4;
+      skipTileWhenCalculatingLongestPath = true;
   }
+
+    @Override
+    public void afterStronghold() {
+        super.afterStronghold();
+        additionalWorkerOnTunneling = 1;
+    }
 }
