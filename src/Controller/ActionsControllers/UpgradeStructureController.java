@@ -21,18 +21,18 @@ public class UpgradeStructureController {
         for (int i = 0; i < ROW_NUMBER; i++) {
             for (int j = 0; j < COLUMN_NUMBER; j++) {
                 if( terrains[i][j] != null)
-                    if(map.spaces[i][j].isOccupied() && map.spaces[i][j].getType().equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE) && !map.spaces[i][j].getBuilding().equals("Stronghold") && !map.spaces[i][j].getBuilding().equals("Sanctuary")) {
+                    if(map.spaces[i][j].isOccupied() && map.spaces[i][j].getType().equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE) && !map.spaces[i][j].getStructure().getBuilding().equals("Stronghold") && !map.spaces[i][j].getStructure().getBuilding().equals("Sanctuary")) {
                         terrains[i][j].setDisable(false);
                         int finalI = i;
                         int finalJ = j;
                         terrains[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
-                                if(map.spaces[finalI][finalJ].getBuilding().equals("Dwelling"))
+                                if(map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Dwelling"))
                                     upgradeToTradingPost(gameHandler, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
-                                else if(map.spaces[finalI][finalJ].getBuilding().equals("Trading Post"))
+                                else if(map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Trading Post"))
                                     upgradeToStrongholdOrTemple(gameHandler, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
-                                else if(map.spaces[finalI][finalJ].getBuilding().equals("Temple"))
+                                else if(map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Temple"))
                                     upgradeToSanctuary(gameHandler, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
                             }
                         });
@@ -50,7 +50,7 @@ public class UpgradeStructureController {
         Optional<ButtonType> result = alert.showAndWait();
         if (((Optional) result).get() == ButtonType.OK){
             TerrainController.upgradeToTradingPost(terrain, gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE);
-            space.setBuilding("Trading Post");
+            space.setStructure("Trading Post");
         } else {
             // ... user chose CANCEL or closed the dialog
         }
@@ -74,10 +74,10 @@ public class UpgradeStructureController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == stronghold){
             TerrainController.upgradeToStronghold(terrain, gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE);
-            space.setBuilding("Stronghold");
+            space.setStructure("Stronghold");
         } else if (result.get() == temple) {
             TerrainController.upgradeToTemple(terrain, gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE);
-            space.setBuilding("Temple");
+            space.setStructure("Temple");
         } else {
             // ... user chose CANCEL or closed the dialog
         }
@@ -96,7 +96,7 @@ public class UpgradeStructureController {
         Optional<ButtonType> result = alert.showAndWait();
         if (((Optional) result).get() == ButtonType.OK){
             TerrainController.upgradeToSanctuary(terrain, gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE);
-            space.setBuilding("Sanctuary");
+            space.setStructure("Sanctuary");
         } else {
             // ... user chose CANCEL or closed the dialog
         }

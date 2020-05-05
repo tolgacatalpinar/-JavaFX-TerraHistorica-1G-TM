@@ -9,25 +9,25 @@
     <top>
         <HBox alignment="CENTER">
             <Button fx:id="religions" onMouseClicked="#religionsClicked" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Religions" textFill="WHITE">
-            <font>
-               <Font name="Book Antiqua" size="20.0" />
-            </font></Button>
+                <font>
+                    <Font name="Book Antiqua" size="20.0" />
+                </font></Button>
             <Button fx:id="scoreTable" layoutX="10.0" layoutY="10.0" onMouseClicked="#scoreTableClicked" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Score Table" textFill="WHITE">
-            <font>
-               <Font name="Book Antiqua" size="20.0" />
-            </font></Button>
+                <font>
+                    <Font name="Book Antiqua" size="20.0" />
+                </font></Button>
             <Button fx:id="bonusCardsButton" layoutX="160.0" layoutY="10.0" onMouseClicked="#bonusCardsClicked" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Bonus Cards" textFill="WHITE">
-            <font>
-               <Font name="Book Antiqua" size="20.0" />
-            </font></Button>
+                <font>
+                    <Font name="Book Antiqua" size="20.0" />
+                </font></Button>
             <Button fx:id="favorTilesButton" layoutX="311.0" layoutY="10.0" onMouseClicked="#favorTilesClicked" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Favor Tiles" textFill="WHITE">
-            <font>
-               <Font name="Book Antiqua" size="20.0" />
-            </font></Button>
+                <font>
+                    <Font name="Book Antiqua" size="20.0" />
+                </font></Button>
             <Button fx:id="townTilesButton" layoutX="461.0" layoutY="10.0" onMouseClicked="#townTilesClicked" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Town Tiles" textFill="WHITE">
-            <font>
-               <Font name="Book Antiqua" size="20.0" />
-            </font></Button>
+                <font>
+                    <Font name="Book Antiqua" size="20.0" />
+                </font></Button>
             <Button fx:id="scoringTilesButton" layoutX="511.0" layoutY="10.0" onMouseClicked="#scoringTilesClicked" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Scoring Tiles" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="20.0" />

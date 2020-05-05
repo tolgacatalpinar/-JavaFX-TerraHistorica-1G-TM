@@ -8,28 +8,28 @@ public class Space implements Serializable{
     private String color;
     private Space[] bridgeList; // this array holds the other space that can be reached from this space; thanks to bridge(if exists)
     private Boolean hasBridge;
-    private String building;
+    private Structure structure;
         
     public Space(String type){
         isOccupied = false;
         this.type = type;
-        building = "Empty";
+        structure = null;
     }
 
     public Space(){
         isOccupied = false;
-        building = "Empty";
+        structure = null;
     }
     public boolean isOccupied() {
         return isOccupied;
     }
 
-    public void setBuilding(String building){
-        this.building = building;
+    public void setStructure(String building){
+        this.structure = new Structure(building);
     }
 
-    public String getBuilding(){
-        return building;
+    public Structure getStructure(){
+        return structure;
     }
     
      public void buildBridge(Space space1){
@@ -49,9 +49,6 @@ public class Space implements Serializable{
         return color;
      }
 
-     public Structure getStructure(){
-        return null; // todo
-     }
 
     public void setOccupied(boolean occupied) {
         isOccupied = occupied;

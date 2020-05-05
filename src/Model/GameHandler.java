@@ -62,7 +62,7 @@ public class GameHandler implements Serializable{
                 player.setShipLevel(player.getShipLevel() - cardsAndTiles.bonusCards.get(previousCardId).getShippingRange());
                 player.getSpecialActionToken().isCultTack = false;
                 player.getSpecialActionToken().isSpade = false;
-                player.returnBonusCard();
+                PlayerHandler.returnBonusCard(player);
             }
             bonusCard.setPlayerOcupied(true);
             bonusCard.setPlayerId(playerId);

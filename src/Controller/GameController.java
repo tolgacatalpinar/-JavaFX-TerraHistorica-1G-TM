@@ -337,7 +337,7 @@ public class GameController implements Initializable {
                      map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
                      PlayerHandler.buildInitialDwelling(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()]);
                      TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
-                     map.spaces[row][col].setBuilding("Dwelling");
+                     map.spaces[row][col].setStructure("Dwelling");
                      for (int i = 0; i < ROW_NUMBER; i++) {
                         for (int j = 0; j < COLUMN_NUMBER; j++) {
                            if( terrains[i][j] != null)
