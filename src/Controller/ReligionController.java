@@ -314,9 +314,29 @@ public class ReligionController{
                orderPane.setBackground(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
                if (religions[k].isOccupied(i)) {
                    GridPane orderGridPane = (GridPane) gridPane.getChildren().get(27*k);
-                   BackgroundImage myBI= new BackgroundImage(new Image("juda_starting.png",100,150,false,true),
-                           BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                           BackgroundSize.DEFAULT);
+                   BackgroundImage myBI;
+                   if(k == 1){
+                        myBI= new BackgroundImage(new Image("chris_starting.png",80,140,false,true),
+                               BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                               BackgroundSize.DEFAULT);
+                       //then you set to your node
+                   }else if(k == 0){
+                        myBI= new BackgroundImage(new Image("plsolsun.png",80,140,false,true),
+                               BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                               BackgroundSize.DEFAULT);
+                       //then you set to your node
+
+                   }else if( k == 3){
+                        myBI= new BackgroundImage(new Image("hindu_starting.png",80,140,false,true),
+                               BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                               BackgroundSize.DEFAULT);
+                       //then you set to your node
+                   }else{
+                        myBI= new BackgroundImage(new Image("juda_starting.png",80,140,false,true),
+                               BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                               BackgroundSize.DEFAULT);
+                       //then you set to your node
+                   }
                    //then you set to your node
                    orderGridPane.setBackground(new Background(myBI));
                    orderGridPane.add(orderPane, i % 2, i / 2);
