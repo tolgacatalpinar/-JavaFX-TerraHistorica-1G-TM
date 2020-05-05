@@ -278,7 +278,15 @@ public class PlayerHandler implements Serializable{
      * @param player
      */
     public void updateResources(Player player) {
-       //TODO
+
+        player.setGoldNum(player.getGoldNum() + player.getGoldIncome());
+        player.setGoldIncome(0);
+        player.setWorkerNum(player.getWorkerNum() + player.getWorkerIncome());
+        player.setWorkerIncome(0);
+        player.gainPriest(player.getPriestIncome());
+        player.setPriestIncome(0);
+        player.addPowerToBowl(player.getPowerIncome());
+        player.setPowerIncome(0);
 
     }
 

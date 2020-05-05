@@ -30,4 +30,5 @@ public class Structure implements Serializable{
     public int getBuildingScore() {
         return buildingScore;
     }
+
 }

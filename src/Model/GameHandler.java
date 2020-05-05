@@ -72,10 +72,13 @@ public class GameHandler implements Serializable{
         for(int i = 0; i < playerCount; i++){
             playerHandler.updateResources(playerList[i]);
         }
-
+        currentRound++;
+        if(currentRound > MAX_ROUND) {
+            System.out.println("GAME OVER");
+        }
     }
 
-    public void passAge() {
+    public void passRound() {
         playerHandler.passRound(playerList[currentPlayerId]);
 
         if(isRoundOver()) {
@@ -139,7 +142,7 @@ public class GameHandler implements Serializable{
     public ArrayList<Player> getAdjacentPlayerList(Space space) {
         return map.adjacentPlayers(space, playerList[currentPlayerId].getTerrainTile());
     }
-    
+
 
 
     /**
