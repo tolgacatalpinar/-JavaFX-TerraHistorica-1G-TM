@@ -7,25 +7,25 @@
 }
 
 #blackHexagon {
-    -fx-background-image: url("../Images/TerrainImages/blackTerrain.png");
+    -fx-background-image: url("../Images/TerrainImages/swamp.png");
 }
 #blueHexagon {
-    -fx-background-image: url("../Images/TerrainImages/blueTerrain.png");
+    -fx-background-image: url("../Images/TerrainImages/lakes.png");
 }
 #brownHexagon {
-    -fx-background-image: url("../Images/TerrainImages/brownTerrain.png");
+    -fx-background-image: url("../Images/TerrainImages/plains.png");
 }
 #greenHexagon {
-    -fx-background-image: url("../Images/TerrainImages/greenTerrain.png");
+    -fx-background-image: url("../Images/TerrainImages/forest.png");
 }
 #redHexagon {
-    -fx-background-image: url("../Images/TerrainImages/redTerrain.png");
+    -fx-background-image: url("../Images/TerrainImages/wasteland.png");
 }
 #whiteHexagon {
-    -fx-background-image: url("../Images/TerrainImages/whiteTerrain.png");
+    -fx-background-image: url("../Images/TerrainImages/mountains.png");
 }
 #yellowHexagon {
-    -fx-background-image: url("../Images/TerrainImages/yellowTerrain.png");
+    -fx-background-image: url("../Images/TerrainImages/desert.png");
 }
 
 #islam_track{

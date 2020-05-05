@@ -345,7 +345,6 @@ public class GameController implements Initializable {
                               terrains[i][j].setDisable(true);
                         }
                      }
-
                   }
                });
             }
