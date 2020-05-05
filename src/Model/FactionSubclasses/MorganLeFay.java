@@ -18,6 +18,15 @@ public class MorganLeFay extends Faction { //witch
       spadeNeededToTerraformMountains = 0;
       spadeNeededToTerraformWasteland = 0;
       spadeNeededToTerraformDesert = 0;
+      getAdditionalVictoryPointsAfterTown = 5;
+
 
   }
+
+    @Override
+    public void afterStronghold() {
+        super.afterStronghold();
+        freeDwellingOnSpecialAction = true;
+
+    }
 }

@@ -24,6 +24,13 @@ public class HusseinTheTeaMaker extends Faction { //halfling
       spadeNeededToTerraformMountains = 3;
       spadeNeededToTerraformWasteland = 2;
       spadeNeededToTerraformDesert = 1;
+      additionalVictoryPointForEachSpade = 1;
+
+  }
+
+    @Override
+    public void afterStronghold() {
+        super.afterStronghold();
 
   }
 }
