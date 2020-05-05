@@ -64,6 +64,7 @@ public class Player implements Serializable {
    public Player(Faction faction, String nickName, int playerId) {
       this.nickName = nickName;
       this.playerId = playerId;
+      freeSpade = 0;
       specialActionToken = new SpecialActionToken(); //Naci
       this.faction = faction;
       setTerrainTile(getFaction().TERRAIN_TILE);
@@ -245,9 +246,6 @@ public class Player implements Serializable {
       //useBonusFromFavorTile();
 
    }
-
-
-
 
 
    public int getWorkerNum() {

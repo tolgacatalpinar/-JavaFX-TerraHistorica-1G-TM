@@ -15,7 +15,6 @@ public class GameHandler implements Serializable{
     Player[] playerList;
     CardsAndTiles cardsAndTiles;
     Religion[] religions;
-    String gameId;
     Map map;
     int playerCount;
     PlayerHandler playerHandler;
@@ -61,7 +60,9 @@ public class GameHandler implements Serializable{
      */
     public void endTurn() {
         currentPlayerId++;
-        currentPlayerId = currentPlayerId%playerCount;
+        if(currentPlayerId >= playerCount) {
+            currentPlayerId = 0;
+        }
     }
 
     /**
@@ -118,7 +119,7 @@ public class GameHandler implements Serializable{
         ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,  playerList[currentPlayerId].getTerrainTile()); //Method is not implemented yet
 
         if(playerHandler.buildStructure(playerList[currentPlayerId], structure, adjacentPlayers !=null) == 1) {
-            if(map.upgradeStructure(space,  playerList[currentPlayerId].getTerrainTile(), structure) == false) {
+            if(!map.upgradeStructure(space,  playerList[currentPlayerId].getTerrainTile(), structure)) {
                 System.out.println("You cannot upgrade current building to " + structure);
                 return false;
             }
@@ -154,6 +155,47 @@ public class GameHandler implements Serializable{
             //Successful terraforming
         }
     }
+
+    public void upgradeSpadeLevel() {
+
+        playerHandler.upgradeSpadeLevel(playerList[currentPlayerId]);
+    }
+
+    public void upgradeShippingLevel() {
+        playerHandler.upgradeShippingLevel(playerList[currentPlayerId]);
+    }
+
+    public void placePriest() {
+
+    }
+
+    public void buildBridge() {
+
+    }
+
+    /**
+     * May be moved from playerhandler to gamehandler instead of using twice
+     * @param exchange
+     */
+    public void exchangeResources(String exchange){
+        playerHandler.exchangeResources(playerList[currentPlayerId], exchange);
+    }
+
+    /**
+     * May be moved from playerhandler to gamehandler instead of using twice
+     * @param powerAction
+     */
+    public void usePowerAction(String powerAction) {
+        if(playerHandler.usePowerAction( powerAction, playerList[currentPlayerId])) {
+            if( powerAction.equals("power to bridge")) {
+                buildBridge();
+            }
+
+        }
+
+    }
+
+
 
     /**
      * playerChoseBonusCard(cardsAndTiles.bonusCards.get(cardIndex), player, playerID);

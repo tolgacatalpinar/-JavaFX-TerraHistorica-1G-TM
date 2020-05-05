@@ -128,50 +128,64 @@ public class PlayerHandler implements Serializable{
         player.addPowerToBowl(powerVal);
     }
 
-    public void usePowerAction(String action, Player player) {
+    public boolean usePowerAction(String action, Player player) {
 
         if(action == "power to priest") {
             if(player.spendPowerFromBowl(3)){
                 player.gainPriest(1);
+                return true;
             }
         }
 
         if(action == "power to worker") {
             if(player.spendPowerFromBowl(4)){
                 player.setWorkerNum(player.getWorkerNum()+2);
+                return true;
             }
         }
 
         if(action == "power to bridge") {
             if(player.spendPowerFromBowl(3)){
                 player.setBridgeNum(player.getBridgeNum()+1);
+                return true;
             }
         }
 
         if (action == "power to gold") {
             if (player.spendPowerFromBowl(4)) {
                 player.setGoldNum(player.getGoldNum()+7);
+                return true;
             }
         }
 
         if (action == "power to a spade") {
             if (player.spendPowerFromBowl(4)) {
                 //TODO
+                return true;
             }
         }
 
         if (action == "power to two spades") {
             if (player.spendPowerFromBowl(6)) {
                 //TODO
+                return true;
             }
         }
+        return false;
 
     }
+
     public void upgradeSpadeLevel(Player player) {
         if(player.getSpadeLevel() < 3) {
-            player.setSpadeLevel(player.getSpadeLevel()+1);
-            player.setTerraformWorkerCost(player.getTerraformWorkerCost()-1);
-            player.spendPriest(player.getFaction().SPADE_PRIEST_COST);
+            if(player.spendFromResources(player.getFaction().SPADE_WORKER_COST,player.getFaction().SPADE_GOLD_COST,player.getFaction().SPADE_PRIEST_COST)) {
+                player.setSpadeLevel(player.getSpadeLevel()+1);
+                player.setTerraformWorkerCost(player.getTerraformWorkerCost()-1);
+                if(player.getSpadeLevel() == 2)
+                    player.addVictoryPoints(player.getFaction().SPADE_FIRST_UPGRADE_VICTORY);
+                else if (player.getSpadeLevel() == 3) {
+                    player.addVictoryPoints(player.getFaction().SPADE_SECOND_UPGRADE_VICTORY);
+                }
+            }
         }
         else {
             System.out.println("Max spade level");
@@ -234,44 +248,43 @@ public class PlayerHandler implements Serializable{
       }
    }
 
-   public void exchangeResources(Player player, String exchanges) {
+    public void exchangeResources(Player player, String exchanges) {
 
-      if (exchanges == "priest to worker") {
-         if (player.getPriestNum() > 0) {
-            player.setWorkerNum(player.getWorkerNum() + 1);
-         }
-      }
+        if (exchanges == "priest to worker") {
+            if (player.getPriestNum() > 0) {
+                player.setWorkerNum(player.getWorkerNum() + 1);
+            }
+        }
 
-      if (exchanges == "worker to coin") {
-         if (player.getWorkerNum() > 0) {
-            player.setWorkerNum(player.getWorkerNum() + 1);
-            player.setGoldNum(player.getGoldNum() + 1);
-         }
-      }
+        if (exchanges == "worker to coin") {
+            if (player.getWorkerNum() > 0) {
+                player.setWorkerNum(player.getWorkerNum() + 1);
+                player.setGoldNum(player.getGoldNum() + 1);
+            }
+        }
 
-      if (exchanges == "sacrifice power") {
-         player.sacrificePower();
-      }
+        if (exchanges == "sacrifice power") {
+            player.sacrificePower();
+        }
 
-      if (exchanges == "power to coin") {
-         if (player.spendPowerFromBowl(1)) {
-            player.setGoldNum(player.getGoldNum() + 1);
-         }
-      }
+        if (exchanges == "power to coin") {
+            if (player.spendPowerFromBowl(1)) {
+                player.setGoldNum(player.getGoldNum() + 1);
+            }
+        }
 
-      if (exchanges == "power to worker") {
-         if (player.spendPowerFromBowl(1)) {
-            player.setWorkerNum(player.getWorkerNum() + 1);
-         }
-      }
+        if (exchanges == "power to worker") {
+            if (player.spendPowerFromBowl(1)) {
+                player.setWorkerNum(player.getWorkerNum() + 1);
+            }
+        }
 
-      if (exchanges == "power to priest") {
-         if (player.spendPowerFromBowl(5)) {
-            player.setWorkerNum(player.getWorkerNum() + 1);
-         }
-      }
-   }
-
+        if (exchanges == "power to priest") {
+            if (player.spendPowerFromBowl(5)) {
+                player.setWorkerNum(player.getWorkerNum() + 1);
+            }
+        }
+    }
 
     /**
      * Updates resources of player according to income, end of round
@@ -295,7 +308,15 @@ public class PlayerHandler implements Serializable{
     }
 
     public boolean terraform(Player player) {
-        player.spendSpadeToTerraform(player.getTerrainTile());
-        return true;
+        if ( player.getFaction().payPriestWhenTransform) {
+            player.spendPriest(1);
+            return true;
+        }
+        else {
+            if(player.spendSpadeToTerraform(player.getTerrainTile())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
