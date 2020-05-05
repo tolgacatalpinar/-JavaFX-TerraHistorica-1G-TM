@@ -186,10 +186,6 @@ public class Player implements Serializable {
       priestOnBank -= priestCount;
    }
 
-
-
-
-
    public void addVictoryPoints(int count) {
       victoryPointNum += count;
 
