@@ -286,16 +286,24 @@ public class Map implements Serializable {
       original = null;
    }
 
-   public boolean upgradeStructure(Space space1, String playerColor, int choice) {
-      if (space1.getColor().equals(playerColor) && space1.isOccupied()) {
-         if (choice == 1 && space1.getStructure().equals("Dwelling"))
+   public boolean upgradeStructure(Space space1, String playerColor, String structure) {
+      if (canBuild(space1,playerColor)) {
+         if (space1.getStructure().equals("Dwelling") && structure.equals("TradingPost")){
+            space1.setStructure("TradingPost");
             return true;
-         if (choice == 2 && space1.getStructure().equals("TradingHouse"))
+          }
+         if (space1.getStructure().equals("TradingPost") && structure.equals("Temple")) {
+            space1.setStructure("Temple");
             return true;
-         if (choice == 3 && space1.getStructure().equals("TradingHouse"))
+         }
+         if (space1.getStructure().equals("Temple") && structure.equals(("Sanctuary"))) {
+            space1.setStructure("Sanctuary");
             return true;
-         if (choice == 4 && space1.getStructure().equals("Temple"))
+         }
+         if (space1.getStructure().equals("TradingPost") && structure.equals(("Stronghold"))) {
+            space1.setStructure("Stronghold");
             return true;
+         }
       }
 
       return false;
@@ -335,6 +343,13 @@ public class Map implements Serializable {
          return true;
       }
       return false;
+   }
+
+   public ArrayList<Player> adjacentPlayers(Space space,  String color) {
+
+      //TODO
+      return null;
+
    }
 
 }

@@ -7,6 +7,7 @@ import Model.CardsAndTiles.FavorTile;
 import Model.CardsAndTiles.TownTile;
 import Model.FactionSubclasses.DariusTheGreat;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class GameHandler implements Serializable{
 
@@ -15,12 +16,28 @@ public class GameHandler implements Serializable{
     CardsAndTiles cardsAndTiles;
     Religion[] religions;
     String gameId;
+    Map map;
     int playerCount;
+    PlayerHandler playerHandler;
+    int currentRound;
+    final int MAX_ROUND = 6;
     public GameHandler(Player[] playerList, int playerSize)
     {
-        cardsAndTiles = new CardsAndTiles(playerSize);
-        religions = new Religion[4];
+        //Initialize map
+        map = new Map();
+
+        //Get Players
         playerCount = playerSize;
+        currentPlayerId = 0;
+        this.playerList = playerList;
+        playerHandler = new PlayerHandler();
+
+        cardsAndTiles = new CardsAndTiles(playerSize);
+
+        currentRound = 0;
+
+        //Initialize religions
+        religions = new Religion[4];
         int [] player_initial_islam = new int[playerSize];
         int [] player_initial_chirst = new int[playerSize];
         int [] player_initial_jew = new int[playerSize];
@@ -35,10 +52,95 @@ public class GameHandler implements Serializable{
         religions[1] = new Christianity(playerSize, player_initial_chirst);
         religions[2] = new Jewish(playerSize, player_initial_jew);
         religions[3] = new Hinduism(playerSize, player_initial_hindu);
-        currentPlayerId = 0;
-        this.playerList = playerList;
 
     }
+
+
+    /**
+     * Will be called after ending a turn
+     */
+    public void endTurn() {
+        currentPlayerId++;
+        currentPlayerId = currentPlayerId%playerCount;
+    }
+
+    /**
+     * Round is over, update resources and pass to next round
+     */
+    public void endRound() {
+
+        for(int i = 0; i < playerCount; i++){
+            playerHandler.updateResources(playerList[i]);
+        }
+
+    }
+
+    public void passAge() {
+        playerHandler.passRound(playerList[currentPlayerId]);
+
+        if(isRoundOver()) {
+            endRound();
+        }
+        endTurn();
+    }
+
+    private boolean isRoundOver() {
+
+        for (int i = 0; i < playerCount; i++) {
+            if (!playerList[i].isRoundPassed()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void buildDwelling(Space space) {
+
+        if(currentRound > 0) { //Not initial dwellings, check for resources
+            if(playerHandler.buildStructure(playerList[currentPlayerId], "Dwelling", false) == 1) {
+                map.buildDwelling(space, playerList[currentPlayerId].getTerrainTile(), false);
+            }
+        }
+        if(currentRound == 0) { //Initial dwellings, do not check for resources
+            playerHandler.buildInitialDwelling(playerList[currentPlayerId]);
+            map.buildDwelling(space, playerList[currentPlayerId].getTerrainTile(), true);
+        }
+
+    }
+
+    public boolean upgradeStructure(Space space, String structure) {
+
+        ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,  playerList[currentPlayerId].getTerrainTile()); //Method is not implemented yet
+
+        if(playerHandler.buildStructure(playerList[currentPlayerId], structure, adjacentPlayers !=null) == 1) {
+            if(map.upgradeStructure(space,  playerList[currentPlayerId].getTerrainTile(), structure) == false) {
+                System.out.println("You cannot upgrade current building to " + structure);
+                return false;
+            }
+            return true; //Structure is updated successfully
+        }
+        return false; //Structure cannot be upgraded
+    }
+
+    /**
+     * This method is called each time after upgrading a structure is successful
+     * and for each player in the adjacent player list that accepts to exchange power and vp
+     */
+    public void acceptPowerFromAdjacentOpponent(Player player, int powerVal) {
+                playerHandler.acceptPowerFromAdjacentOpponent(powerVal, player);
+    }
+
+    /**
+     * This method is called after upgrading a structure, to get the adjacent opponents
+     * and ask them if they want to exchange power
+     * @param space that contains upgraded structure of current player
+     * @return the list that are adjacent to the space
+     */
+    public ArrayList<Player> getAdjacentPlayerList(Space space) {
+        return map.adjacentPlayers(space, playerList[currentPlayerId].getTerrainTile());
+    }
+    
+
 
     /**
      * playerChoseBonusCard(cardsAndTiles.bonusCards.get(cardIndex), player, playerID);
@@ -127,22 +229,6 @@ public class GameHandler implements Serializable{
         }
     }
 
-    public void buildTradingPost( Player player)
-    {
-        //player.buildTradingPost();
-        if(player.getFaction() instanceof DariusTheGreat )
-        {
-            nomadAbility( player);
-        }
-    }
-
-
-
-
-    public void nomadAbility( Player player)
-    {
-        // TODO
-    }
 
    public Player[] getPlayerList() {
       return playerList;

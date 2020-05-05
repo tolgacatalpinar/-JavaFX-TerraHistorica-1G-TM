@@ -188,11 +188,6 @@ public class Player implements Serializable {
 
 
 
-   public void acceptPowerFromAdjacentOpponent(int powerVal) {
-      victoryPointNum -= powerVal - 1;
-      addPowerToBowl(powerVal);
-
-   }
 
 
    public void addVictoryPoints(int count) {
@@ -560,4 +555,5 @@ public class Player implements Serializable {
    public boolean isRoundPassed() {
       return roundPassed;
    }
+
 }

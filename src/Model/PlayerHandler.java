@@ -18,9 +18,9 @@ public class PlayerHandler implements Serializable{
       }
    }
 
-    public static int buildStructure(Player player, Structure structure, boolean isThereAdjacentOpponent) {
+    public static int buildStructure(Player player, String structure, boolean isThereAdjacentOpponent) {
 
-        if (structure instanceof Dwelling) {
+        if (structure.equals("Dwelling")) {
             if (player.getDwellingNum() < player.MAX_DWELLING) {
                 if (player.spendFromResources(player.getFaction().DWELLING_WORKER_COST, player.getFaction().DWELLING_GOLD_COST, 0)) {
                    System.out.println("dwelling is built");
@@ -44,7 +44,7 @@ public class PlayerHandler implements Serializable{
 
         }
 
-        if (structure instanceof TradingHouse) {
+        if (structure.equals("TradingPost")) {
             if (player.getTradingPostNum() < player.MAX_TRADING_POST) {
                 int goldCost = player.getFaction().TRADING_POST_GOLD_COST;
                 if (isThereAdjacentOpponent) {
@@ -70,7 +70,7 @@ public class PlayerHandler implements Serializable{
                 return 0; //Cannot build more
             }
         }
-        if (structure instanceof Stronghold) {
+        if (structure.equals("Stronghold")) {
             if (player.getStrongholdNum() < player.MAX_STRONGHOLD) {
                 if (player.spendFromResources(player.getFaction().STRONGHOLD_WORKER_COST, player.getFaction().STRONGHOLD_GOLD_COST, 0)) {
                     player.setTradingPostNum(player.getTradingPostNum() - 1);
@@ -86,7 +86,7 @@ public class PlayerHandler implements Serializable{
                 return 0; //Cannot build more
             }
         }
-        if (structure instanceof Sanctuary) {
+        if (structure.equals("Sanctuary")) {
             if (player.getSanctuaryNum() < player.MAX_SANCTUARY) {
                 if (player.spendFromResources(player.getFaction().SANCTUARY_WORKER_COST, player.getFaction().SANCTUARY_GOLD_COST, 0)) {
                     player.setTempleNum(player.getTempleNum() - 1);
@@ -102,7 +102,7 @@ public class PlayerHandler implements Serializable{
                 return 0; //Cannot build more
             }
         }
-        if (structure instanceof Temple) {
+        if (structure.equals("Temple")) {
             if (player.getTempleNum() < player.MAX_TEMPLE) {
                 if (player.spendFromResources(player.getFaction().TEMPLE_WORKER_COST, player.getFaction().TEMPLE_GOLD_COST, 0)) {
                     player.setTradingPostNum(player.getTradingPostNum()-1);
@@ -118,9 +118,15 @@ public class PlayerHandler implements Serializable{
                 return 0; //Cannot build more
             }
         }
-        return 0; //Can be changed, represents structure parameter is buggy
+        return -2; //Wrong string
     }
 
+
+
+    public void acceptPowerFromAdjacentOpponent(int powerVal, Player player) {
+        player.setVictoryPointNum(player.getVictoryPointNum() - (powerVal - 1));
+        player.addPowerToBowl(powerVal);
+    }
 
     public void usePowerAction(String action, Player player) {
 
@@ -267,5 +273,16 @@ public class PlayerHandler implements Serializable{
    }
 
 
+    /**
+     * Updates resources of player according to income, end of round
+     * @param player
+     */
+    public void updateResources(Player player) {
+       //TODO
 
+    }
+
+    public void passRound(Player player) {
+        player.passRound();
+    }
 }
