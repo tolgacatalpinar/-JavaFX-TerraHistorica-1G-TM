@@ -20,6 +20,17 @@ public class MarieCurie extends Faction { //alchemist
       spadeNeededToTerraformMountains = 3;
       spadeNeededToTerraformWasteland = 3;
       spadeNeededToTerraformDesert = 2;
+      tradeCoinsForVictoryPoint = true;
+      tradeVictoryPointForCoin = true;
+
+      getVictoryPointsAfterTown = 12;
 
   }
+
+    @Override
+    public void afterStronghold() {
+        super.afterStronghold();
+        gainPowerForEachSpade = 2;
+        getPowerAfterStronghold = 12;
+    }
 }

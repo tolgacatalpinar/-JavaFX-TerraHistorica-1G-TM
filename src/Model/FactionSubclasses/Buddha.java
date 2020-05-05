@@ -21,6 +21,14 @@ public class Buddha extends Faction {  // cultist
       spadeNeededToTerraformMountains = 3;
       spadeNeededToTerraformWasteland = 2;
       spadeNeededToTerraformDesert = 1;
-
+      moveOnCultIfTradeAccepted = true;
   }
+
+
+    @Override
+    public void afterStronghold() {
+        super.afterStronghold();
+        getVictoryPointsAfterStronghold = 7;
+    }
+
 }

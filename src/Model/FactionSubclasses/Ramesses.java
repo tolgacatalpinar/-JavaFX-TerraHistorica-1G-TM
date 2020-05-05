@@ -25,7 +25,15 @@ public class Ramesses extends Faction { // FAKİR
       spadeNeededToTerraformMountains = 2;
       spadeNeededToTerraformWasteland = 1;
       hasShipping = false;
-
+      rangeOfSkipTile = 1;
+      priestNeededToSkipTile = 1;
+      additionalVictoryPointForEachSkipTile = 4;
+      skipTileWhenCalculatingLongestPath = true;
   }
-    
+
+    @Override
+    public void afterStronghold() {
+        super.afterStronghold();
+        rangeOfSkipTile = 2;
+    }
 }

@@ -23,5 +23,11 @@ public class HelenOfTroy extends Faction { // auren
       spadeNeededToTerraformDesert = 0;
 
   }
-  
+
+    @Override
+    public void afterStronghold() {
+        super.afterStronghold();
+        advanceOnCultTrackValue = 2;
+        gainFavorTileAfterStronghold = true;
+    }
 }

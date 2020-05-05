@@ -23,5 +23,9 @@ public class VladTheImpaler extends Faction { // chaos magician
         spadeNeededToTerraformDesert = 1;
     }
 
-
+    @Override
+    public void afterStronghold() {
+        super.afterStronghold();
+        canPlayDoubleTurn = true;
+    }
 }

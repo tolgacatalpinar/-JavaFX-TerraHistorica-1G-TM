@@ -28,9 +28,12 @@ public class LeonardoDaVinci extends Faction { //Engineer
      spadeNeededToTerraformForest = 1;
      spadeNeededToTerraformWasteland = 1;
      spadeNeededToTerraformDesert = 2;
+      workerCostOfBridge = 2;
 
   }
-
-
-
+   @Override
+   public void afterStronghold() {
+      super.afterStronghold();
+      victoryPointForEachConnectingBridges = 3;
+  }
 }

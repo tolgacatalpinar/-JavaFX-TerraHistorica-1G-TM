@@ -293,4 +293,9 @@ public class PlayerHandler implements Serializable{
     public void passRound(Player player) {
         player.passRound();
     }
+
+    public boolean terraform(Player player) {
+        player.spendSpadeToTerraform(player.getTerrainTile());
+        return true;
+    }
 }
