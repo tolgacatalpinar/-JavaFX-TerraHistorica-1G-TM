@@ -1,7 +1,5 @@
 package Controller;
 
-
-import Controller.ActionsControllers.*;
 import Controller.CardsAndTilesControllers.*;
 import Model.*;
 //import Model.River;
@@ -26,8 +24,11 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
+
    final int ROW_NUMBER = 9;
+
    final int COLUMN_NUMBER = 13;
+
    @FXML
    Pane mapPane;
    @FXML
@@ -63,10 +64,12 @@ public class GameController implements Initializable {
    @FXML
    Button upgradeSpade;
 
+
    ArrayList<PlayerView> playerViewList;
 
 
    Button[][] terrains;
+   Button[] actions;
    Map map;
    Player[] playerList;
    GameHandler gameHandler;
@@ -174,8 +177,8 @@ public class GameController implements Initializable {
 
    @FXML
    public void upgradeShippingClicked() {
-      UpdateShippingController updateShippingController = new UpdateShippingController();
-      updateShippingController.showUpdateShippingDialogs(gameHandler);
+
+      ActionController.showUpdateShippingDialogs(gameHandler);
 
    }
 
@@ -189,26 +192,25 @@ public class GameController implements Initializable {
 
    @FXML
    public void powerActionClicked() {
-      PowerActionController powerActionController = new PowerActionController();
-      powerActionController.showPowerActions(gameHandler);
+      ActionController.showPowerActions(gameHandler);
 
    }
 
    @FXML
    public void upgradeSpadeClicked() {
-      UpdateSpadeController updateShippingController = new UpdateSpadeController();
-      updateShippingController.showUpdateSpadeDialogs(gameHandler);
+
+      ActionController.showUpdateSpadeDialogs(gameHandler);
    }
 
 
    @FXML
    public void terraformClicked() {
-      TerraformController.updateMapForTerraform(gameHandler, terrains, map);
+      ActionController.terraform(gameHandler, terrains, map);
    }
 
    @FXML
    public void upgradeStructureClicked() {
-      UpgradeStructureController.updateMapForUpgradeStructure(gameHandler, terrains, map);
+      ActionController.upgradeStructure(gameHandler, terrains, map);
    }
 
    @FXML
@@ -251,8 +253,7 @@ public class GameController implements Initializable {
 
    @FXML
    public void specialActionClicked() {
-      SpecialActionController specialActionController = new SpecialActionController();
-      specialActionController.showSpeacialActions(gameHandler);
+      ActionController.showSpeacialActions(gameHandler);
    }
 
    public void createSpaces() {
@@ -351,11 +352,7 @@ public class GameController implements Initializable {
          }
       }
    }
-
-
-
-
-
+   
    public void disableButtonClicks(){
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
