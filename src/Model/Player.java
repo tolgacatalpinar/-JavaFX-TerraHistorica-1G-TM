@@ -32,6 +32,7 @@ public class Player implements Serializable {
    private int sanctuaryNum;
    private int strongholdNum;
    private int spadeInventory;
+   private int freeSpade;
    private int spadeLevel;
    private int shipLevel;
    private int religionTrackInventory;
@@ -191,12 +192,49 @@ public class Player implements Serializable {
 
    }
 
+   public boolean spendSpadeToTerraform(String color) {
+
+      int spadeNeeded = 0;
+      if( color.equals("Wasteland")) {
+         spadeNeeded = faction.spadeNeededToTerraformWasteland;
+      }
+      else if(color.equals("Swamp")) {
+         spadeNeeded = faction.spadeNeededToTerraformSwamp;
+      }
+      else if (color.equals("Desert")) {
+         spadeNeeded = faction.spadeNeededToTerraformDesert;
+      }
+      else if (color.equals("Plains")) {
+         spadeNeeded = faction.spadeNeededToTerraformPlains;
+      }
+      else if (color.equals("Mountains")) {
+         spadeNeeded = faction.spadeNeededToTerraformMountains;
+      }
+      else if (color.equals("Lakes")) {
+         spadeNeeded = faction.spadeNeededToTerraformLakes;
+      }
+      else if (color.equals("Forest")) {
+         spadeNeeded = faction.spadeNeededToTerraformForest;
+      }
+      else {
+         System.out.println("Wrong color name");
+         return false;
+      }
+      spadeNeeded -= freeSpade;
+      if (workerNum - spadeNeeded*terraformWorkerCost >= 0) {
+         workerNum -= spadeNeeded*terraformWorkerCost;
+         return true;
+      }
+      System.out.println("Not enough resources");
+      return false;
+   }
 
    public boolean spendFromResources(int requiredWorker, int requiredGold, int requiredPriest) {
       if (workerNum - requiredWorker > 0 && goldNum - requiredGold > 0 && priestNum - requiredPriest > 0) {
          workerNum -= requiredWorker;
          goldNum -= requiredGold;
          spendPriest(requiredPriest);
+         return true;
       }
       return false;
    }
