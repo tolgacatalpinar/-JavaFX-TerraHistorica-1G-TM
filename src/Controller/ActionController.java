@@ -80,11 +80,9 @@ public class ActionController {
       Label promptChoice = new Label("Terrain type: ");
       ChoiceBox choiceBox = new ChoiceBox();
       choiceBox.getItems().addAll(choices);
-      choiceBox.setValue(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE);
       BorderPane pane = new BorderPane();
       HBox choiceBlock = new HBox();
       Button transformButton = new Button("Transform");
-
 
       choiceBlock.getChildren().addAll(promptChoice, choiceBox, transformButton);
       VBox whole = new VBox();
@@ -96,11 +94,8 @@ public class ActionController {
          @Override
          public void handle(MouseEvent event) {
             String selectedChoice = (String) choiceBox.getValue();
-
-            //gameHandler.terraform(space, selectedChoice);
             TerrainController.terraform(terrain, selectedChoice);
             space.setType(selectedChoice);
-
             terraformStage.close();
             if (selectedChoice.equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE)) {
                Button yesButton = new Button("Yes");
@@ -112,11 +107,9 @@ public class ActionController {
                yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                   @Override
                   public void handle(MouseEvent event) {
-                     //gameHandler.buildDwelling(space);
                      TerrainController.buildDwelling(terrain, selectedChoice);
                      space.setOccupied(true);
                      space.setStructure("Dwelling");
-
                      dwellingChoiceStage.close();
                   }
                });
@@ -244,12 +237,12 @@ public class ActionController {
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
-            if( templeButton.isSelected() && !strongholdButton.isSelected())
+            if( !templeButton.isDisable() && strongholdButton.isDisable())
             {
                TerrainController.upgradeToTemple(terrain, gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE);
                space.setStructure("Temple");
             }
-            else if(!templeButton.isSelected() && strongholdButton.isSelected())
+            else if(templeButton.isDisable() && !strongholdButton.isDisable())
             {
                TerrainController.upgradeToStronghold(terrain, gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE);
                space.setStructure("Stronghold");
@@ -531,7 +524,7 @@ public class ActionController {
          public void handle(Event event) {
             if (choice[0] == 1) {
                player.getSpecialActionToken().isSpade = false;
-               player.setFreeSpade(player.getFreeSpade()+1);
+               player.setFreeSpade(player.getFreeSpade() + 1);
                event.consume();
             } else if (choice[0] == 2) {
                player.getSpecialActionToken().isCultTack = false;

@@ -249,6 +249,10 @@ public class Player implements Serializable {
 
    }
 
+   public void townFound() {
+      key = true;
+   }
+
 
    public int getWorkerNum() {
       return workerNum;
