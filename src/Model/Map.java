@@ -70,22 +70,19 @@ public class Map implements Serializable {
    }
 
 
-   public boolean buildDwelling(Space space1, String color, boolean isInitialDwelling) {
+   public void buildDwelling(Space space1, String color, boolean isInitialDwelling) {
       if (isInitialDwelling) {
          if (canBuildTurnOne(space1, color)) {
-            int row = getRow(space1);
-            int column = getColumn(space1);
             space1.setOccupied(true);
-            return true;
+            space1.setStructure("Dwelling");
+
          }
       }
       else if (canBuild(space1, color)) {
-         int row = getRow(space1);
-         int column = getColumn(space1);
          space1.setOccupied(true);
-         return true;
+         space1.setStructure("Dwelling");
       }
-         return false;
+
    }
 
 
@@ -103,17 +100,13 @@ public class Map implements Serializable {
          }
       }
 
-      if (row1 % 2 == 1) {
+      if (row1 % 2 == 1)
          if (((row2 == row1 + 1) || (row2 == row1 - 1)) && ((col2 == col1 + 1) || (col2 == col1))) {
             return true;
          }
-      }
 
-      if ((row1 == row2) && ((col1 == col2 + 1) || (col1 == col2 - 1))) {
-         return true;
-      }
 
-      return false;
+      return (row1 == row2) && ((col1 == col2 + 1) || (col1 == col2 - 1));
    }
 
 
@@ -181,9 +174,9 @@ public class Map implements Serializable {
       ArrayList<Space> list = new ArrayList<Space>();
       Space[] adjacents = adjacencyList(space1);
 
-      for (int i = 0; i < adjacents.length; i++) {
-         if (adjacents[i].getType().equals("River"))
-            list.add(adjacents[i]);
+      for (Space adjacent : adjacents) {
+         if (adjacent.getType().equals("River"))
+            list.add(adjacent);
       }
       return list;
    }
@@ -222,8 +215,7 @@ public class Map implements Serializable {
             return true;
          else if ((col2 == col1 - 1) && (spaces[row1][col1 - 1].getType().equals("River") && spaces[row1 + 1][col1].getType().equals("River")))
             return true;
-         else if ((col2 == col1 + 2) && (spaces[row1][col1 + 1].getType().equals("River") && spaces[row1 - 1][col1 + 1].getType().equals("River")))
-            return true;
+         else return (col2 == col1 + 2) && (spaces[row1][col1 + 1].getType().equals("River") && spaces[row1 - 1][col1 + 1].getType().equals("River"));
       }
       return false;
    }
@@ -243,23 +235,19 @@ public class Map implements Serializable {
       boolean isOver = true;
 
       for (int i = 0; i < adjacents.length && isOver; i++) {
-         if (!(adjacents[i].getColor().equals(playerColor)) || visited.contains(adjacents[i]) || !adjacents[i].isOccupied())
-            isOver = true;
-         else
-            isOver = false;
+         isOver = !(adjacents[i].getColor().equals(playerColor)) || visited.contains(adjacents[i]) || !adjacents[i].isOccupied();
       }
 
       if (isOver) {
          townScore = townScore + space1.getStructure().getBuildingScore();
          return townScore;
-      } else {
-         for (int i = 0; i < adjacents.length; i++) {
-            if (adjacents[i].getColor().equals(playerColor) && !(visited.contains(adjacents[i])) && adjacents[i].isOccupied()) {
-               visited.add(adjacents[i]);
-               return calculateTownScore(adjacents[i], playerColor);
-            } else
-               return 0;
-         }
+      }
+      else {
+         for (Space adjacent : adjacents)
+            if (adjacent.getColor().equals(playerColor) && !(visited.contains(adjacent)) && adjacent.isOccupied()) {
+               visited.add(adjacent);
+               return calculateTownScore(adjacent, playerColor);
+            }
       }
       return townScore;
    }
@@ -276,12 +264,6 @@ public class Map implements Serializable {
       }
    }
 
-   /**public void transformTerrain(Space original, Space newSpace) {
-      int row = getRow(original);
-      int col = getColumn(original);
-      spaces[row][col] = newSpace;
-      original = null;
-   }*/
 
 
    public void transformTerrain(Space original, String newType) {
@@ -312,22 +294,22 @@ public class Map implements Serializable {
    }
 
 
-   public ArrayList<Space> adjacentPlayer(Space space1, String playerColor) {
-      Space[] adjacents = adjacencyList(space1);
-      ArrayList<Space> list = new ArrayList<Space>();
-      for (int i = 0; i < adjacents.length; i++) {
-         if (!(adjacents[i].getColor().equals(playerColor)) && adjacents[i].isOccupied()) {
-            list.add(adjacents[i]);
-         }
-      }
-      return list;
-   }
+//   public ArrayList<Space> adjacentPlayer(Space space1, String playerColor) {
+//      Space[] adjacents = adjacencyList(space1);
+//      ArrayList<Space> list = new ArrayList<>();
+//      for (Space adjacent : adjacents) {
+//         if (!(adjacent.getColor().equals(playerColor)) && adjacent.isOccupied()) {
+//            list.add(adjacent);
+//         }
+//      }
+//      return list;
+//   }
    public ArrayList<Player> adjacentPlayers(Space space1, String playerColor) {
       Space[] adjacents = adjacencyList(space1);
-      ArrayList<Player> list = new ArrayList<Player>();
-      for (int i = 0; i < adjacents.length; i++) {
-         if (!(adjacents[i].getColor().equals(playerColor)) && adjacents[i].isOccupied() && !list.contains(adjacents[i].getPlayer())) {
-            list.add(adjacents[i].getPlayer());
+      ArrayList<Player> list = new ArrayList<>();
+      for (Space adjacent : adjacents) {
+         if (!(adjacent.getColor().equals(playerColor)) && adjacent.isOccupied() && !list.contains(adjacent.getPlayer())) {
+            list.add(adjacent.getPlayer());
          }
       }
       return list;
@@ -336,24 +318,20 @@ public class Map implements Serializable {
    public boolean canBuild(Space space1, String playerColor) {
       if (space1.getColor().equals(playerColor) && !space1.isOccupied()) {
          Space[] adjacents = adjacencyList(space1);
-         for (int i = 0; i < adjacents.length; i++) {
-            if (adjacents[i].getColor().equals(playerColor) && !adjacents[i].isOccupied()) {
+         for (Space adjacent : adjacents) {
+            if (adjacent.getColor().equals(playerColor) && !adjacent.isOccupied()) {
                return true;
             }
          }
 
          Space[] bridgeList = space1.getBridgeList();
-         if (bridgeList[0].getColor().equals(playerColor) && !(bridgeList[0].isOccupied()))
-            return true;
+         return bridgeList[0].getColor().equals(playerColor) && !(bridgeList[0].isOccupied());
       }
       return false;
    }
 
 
    public boolean canBuildTurnOne(Space space1, String playerColor) {
-      if (space1.getColor().equals(playerColor) && !space1.isOccupied()) {
-         return true;
-      }
-      return false;
+      return space1.getColor().equals(playerColor) && !space1.isOccupied();
    }
 }
