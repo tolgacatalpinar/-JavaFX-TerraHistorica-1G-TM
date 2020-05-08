@@ -1,5 +1,6 @@
 package Model;
 
+import java.awt.*;
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -230,6 +231,16 @@ public class Map implements Serializable {
       }
    }
 
+   public ArrayList<Space> bridgeables(Space space1){
+      Space[] adjacents = adjacencyList(space1);
+      ArrayList<Space> bridgeables = new ArrayList<Space>();
+      for (Space adjacent : adjacents) {
+         if (canBuildBridge(space1, adjacent)) {
+            bridgeables.add(adjacent);
+         }
+      }
+      return bridgeables;
+   }
    public int calculateTownScore(Space space1, String playerColor) {
       Space[] adjacents = adjacencyList(space1);
       boolean isOver = true;
