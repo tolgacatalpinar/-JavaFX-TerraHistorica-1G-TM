@@ -31,12 +31,12 @@ public class ActionController {
    final static int COLUMN_NUMBER = 13;
    private static int selection = -1;
 
-   public static void terraform(GameHandler gameHandler, Button[][] terrains, Map map) {
+   public static void terraform(Player[] playerArr, Button[][] terrains, int curPlayerId ,Map map) {
 
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
             if (terrains[i][j] != null)
-               if (!map.spaces[i][j].isOccupied() || !map.spaces[i][j].getType().equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE))
+               if (!map.spaces[i][j].isOccupied() || !map.spaces[i][j].getType().equals(playerArr[curPlayerId].getFaction().TERRAIN_TILE))
                   terrains[i][j].setDisable(true);
          }
       }
@@ -44,7 +44,7 @@ public class ActionController {
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
             if (terrains[i][j] != null && map.spaces[i][j] != null)
-               if (map.spaces[i][j].getType().equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE) && map.spaces[i][j].isOccupied()) {
+               if (map.spaces[i][j].getType().equals(playerArr[curPlayerId].getFaction().TERRAIN_TILE) && map.spaces[i][j].isOccupied()) {
                   adj = map.adjacencyList(map.spaces[i][j]);
                   for (int k = 0; k < adj.length; k++) {
                      if (adj[k] != null && terrains[map.getRow(adj[k])][map.getColumn(adj[k])] != null && !map.spaces[map.getRow(adj[k])][map.getColumn(adj[k])].getType().equals("River") && !map.spaces[map.getRow(adj[k])][map.getColumn(adj[k])].isOccupied() && terrains[map.getRow(adj[k])][map.getColumn(adj[k])].isDisable()) {
@@ -54,7 +54,8 @@ public class ActionController {
                         terrains[map.getRow(adj[k])][map.getColumn(adj[k])].setOnMouseClicked(new EventHandler<MouseEvent>() {
                            @Override
                            public void handle(MouseEvent event) {
-                              terraformAlertBox(gameHandler, terrains, terrains[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], map, map.spaces[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])]);
+                              //BUNA DİKKAT
+                              // terraformAlertBox(gameHandler, terrains, terrains[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], map, map.spaces[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])]);
                            }
                         });
                      }
@@ -64,6 +65,13 @@ public class ActionController {
       }
    }
 
+   /**
+    * BUNU TAŞIYALIM
+    *
+    *
+    *
+    *
+    */
    public static void terraformAlertBox(GameHandler gameHandler, Button[][] terrains, Button terrain, Map map, Space space) {
 
       List<String> choices = new ArrayList<>();
@@ -166,26 +174,30 @@ public class ActionController {
 //        TerrainController.disableButtonClicks(terrains);
    }
 
-   public static void upgradeStructure(GameHandler gameHandler, Button[][] terrains, Map map) {
+   public static void upgradeStructure(Player[] playerArr, int currentPlayerId,Button[][] terrains, Map map) {
       TerrainController.disableTerrains(terrains, map);
 
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
             if (terrains[i][j] != null)
-               if (map.spaces[i][j].isOccupied() && map.spaces[i][j].getType().equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE) && !map.spaces[i][j].getStructure().getBuilding().equals("Stronghold") && !map.spaces[i][j].getStructure().getBuilding().equals("Sanctuary")) {
+               if (map.spaces[i][j].isOccupied() && map.spaces[i][j].getType().equals(playerArr[currentPlayerId].getFaction().TERRAIN_TILE) && !map.spaces[i][j].getStructure().getBuilding().equals("Stronghold") && !map.spaces[i][j].getStructure().getBuilding().equals("Sanctuary")) {
                   terrains[i][j].setDisable(false);
                   int finalI = i;
                   int finalJ = j;
                   terrains[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
                      @Override
                      public void handle(MouseEvent event) {
+                        /**
+                         * TODO
+                         * LOGİC DEĞİŞİTOR
+                         */
                         //gameHandler.upgradeStructure(map.spaces[finalI][finalJ], map.spaces[finalI][finalJ].getStructure().getBuilding())
                         if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Dwelling"))
-                           upgradeToTradingPost(gameHandler, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
+                           upgradeToTradingPost(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
                         else if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Trading Post"))
-                           upgradeToStrongholdOrTemple(gameHandler, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
+                           upgradeToStrongholdOrTemple(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
                         else if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Temple"))
-                           upgradeToSanctuary(gameHandler, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
+                           upgradeToSanctuary(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
                      }
                   });
                }
@@ -193,29 +205,31 @@ public class ActionController {
       }
    }
 
-   public static void upgradeToTradingPost(GameHandler gameHandler, Button[][] terrains, Button terrain, Map map, Space space) {
+   public static void upgradeToTradingPost(Player[] playerArr, int currentPlayerId, Button[][] terrains, Button terrain, Map map, Space space) {
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
-      BorderPane pane = DialogueController.getDwellingUpgradePromptPane(gameHandler, "Do you want to upgrade this Dwelling to a Trading Post?", yesButton, noButton);
-      Stage stage = DialogueController.getStage("Upgrade dwelling", pane, new Image("favor_tiles_background.jpg"));
-      stage.show();
+      /**TODO
+       * BUNLARA DA BAKILMASI LAZIM
+       */
+      //BorderPane pane = DialogueController.getDwellingUpgradePromptPane(gameHandler, "Do you want to upgrade this Dwelling to a Trading Post?", yesButton, noButton);
+      //Stage stage = DialogueController.getStage("Upgrade dwelling", pane, new Image("favor_tiles_background.jpg"));
+      //stage.show();
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
-            TerrainController.upgradeToTradingPost(terrain, gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE);
+            TerrainController.upgradeToTradingPost(terrain, playerArr[currentPlayerId].getFaction().TERRAIN_TILE);
             space.setStructure("Trading Post");
-            stage.close();
+           // stage.close();
          }
       });
       noButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
-            stage.close();
+            //stage.close();
          }
       });
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
-
 
 //      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 //      alert.setTitle("Upgrade Structure");
@@ -233,35 +247,37 @@ public class ActionController {
 //      TerrainController.disableButtonClicks(terrains);
    }
 
-   public static void upgradeToStrongholdOrTemple(GameHandler gameHandler, Button[][] terrains, Button terrain, Map map, Space space) {
+   public static void upgradeToStrongholdOrTemple(Player[] playerArr,int curPlayerId,Button[][] terrains, Button terrain, Map map, Space space) {
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
       RadioButton templeButton = new RadioButton("Temple");
       RadioButton strongholdButton = new RadioButton("Stronghold");
-      BorderPane pane = DialogueController.getTradingPostUpgradePromptPane(gameHandler, "Do you want to upgrade this Trading Post to a Temple\n at the expense of: ", "Do you want to upgrade this Trading Post to a Stronghold\n at the expense of: ", yesButton, noButton, templeButton, strongholdButton);
-
-      Stage stage = DialogueController.getStage("Upgrade Trading Post", pane, new Image("favor_tiles_background.jpg"));
-      stage.show();
+      //BorderPane pane = DialogueController.getTradingPostUpgradePromptPane(gameHandler, "Do you want to upgrade this Trading Post to a Temple\n at the expense of: ", "Do you want to upgrade this Trading Post to a Stronghold\n at the expense of: ", yesButton, noButton, templeButton, strongholdButton);
+      /**TODO
+       * DIKKATTTTTTTT
+       */
+      //Stage stage = DialogueController.getStage("Upgrade Trading Post", pane, new Image("favor_tiles_background.jpg"));
+      //stage.show();
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
             if( templeButton.isSelected() && !strongholdButton.isSelected())
             {
-               TerrainController.upgradeToTemple(terrain, gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE);
+               TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                space.setStructure("Temple");
             }
             else if(!templeButton.isSelected() && strongholdButton.isSelected())
             {
-               TerrainController.upgradeToStronghold(terrain, gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE);
+               TerrainController.upgradeToStronghold(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                space.setStructure("Stronghold");
             }
-            stage.close();
+            //stage.close();
          }
       });
       noButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
-            stage.close();
+            //stage.close();
          }
       });
       TerrainController.enableTerrains(terrains, map);
@@ -296,26 +312,29 @@ public class ActionController {
 
    }
 
-   public static void upgradeToSanctuary(GameHandler gameHandler, Button[][] terrains, Button terrain, Map map, Space space) {
+   public static void upgradeToSanctuary(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space) {
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
+      /**
+       * TODO
+       * DIKKATTTT
+       */
+      //BorderPane pane = DialogueController.getTempleUpgradePromptPane(gameHandler, "Do you want to upgrade this Temple to a Sanctuary\n at the expense of: ", yesButton, noButton);
 
-      BorderPane pane = DialogueController.getTempleUpgradePromptPane(gameHandler, "Do you want to upgrade this Temple to a Sanctuary\n at the expense of: ", yesButton, noButton);
-
-      Stage stage = DialogueController.getStage("Upgrade Temple", pane, new Image("favor_tiles_background.jpg"));
-      stage.show();
+      //Stage stage = DialogueController.getStage("Upgrade Temple", pane, new Image("favor_tiles_background.jpg"));
+      //stage.show();
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
-            TerrainController.upgradeToSanctuary(terrain, gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE);
+            TerrainController.upgradeToSanctuary(terrain,playerArr[curPlayerId].getFaction().TERRAIN_TILE);
             space.setStructure("Sanctuary");
-            stage.close();
+            //stage.close();
          }
       });
       noButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
-            stage.close();
+            //stage.close();
          }
       });
       TerrainController.enableTerrains(terrains, map);
@@ -340,6 +359,35 @@ public class ActionController {
 //      TerrainController.disableButtonClicks(terrains);
    }
 
+   //TODO
+   public void  upgradeShipping(int curPlayerId,Player[] playerArr){
+
+   }
+   //TODO
+   public void sendPriest(Player[] playerArr, int curPlayerId){
+
+   }
+   //TODO
+   public void usePowerAction(int curPlayerId, Player[] playerArr){
+
+   }
+   //TODO
+   public void useSpecialAction(int curPlayerId, Player[] playerArr){
+
+   }
+   //TODO
+   public void exchangeResources(int curPlayerId, Player[] playerArr){
+
+   }
+   //TODO
+   public void upgradeSpace(int curPlayerId, Player[] playerArr){
+
+   }
+   //TODO
+   public void skipTurn(int curPlayerId, Player[] playerArr){
+
+   }
+
 
 
    public static int getSelection() {
@@ -350,6 +398,10 @@ public class ActionController {
       ActionController.selection = selection;
    }
 
+   /**TODO
+    * TAŞINACAK HERHALDE BU DA
+    * @param gameHandler
+    */
    public static void showPowerActions(GameHandler gameHandler) {
 
       BorderPane border = new BorderPane();
@@ -434,6 +486,10 @@ public class ActionController {
 
    }
 
+   /**TODO
+    * TAŞINACAK
+    * @param gameHandler
+    */
    public static void showSpeacialActions(GameHandler gameHandler) {
       VBox wholeFavor = new VBox();
       HBox firstRow = new HBox();
@@ -571,6 +627,10 @@ public class ActionController {
       dialog.show();
    }
 
+   /**TODO
+    * TAŞINACAK
+    * @param gameHandler
+    */
    public static void showUpdateShippingDialogs(GameHandler gameHandler) {
 
       Player player = gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()];
@@ -611,6 +671,10 @@ public class ActionController {
       }
    }
 
+   /**TODO
+    * TAŞINACAK
+    * @param gameHandler
+    */
    public static void showUpdateSpadeDialogs(GameHandler gameHandler) {
 
       Player player = gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()];
@@ -655,6 +719,12 @@ public class ActionController {
       }
    }
 
+   /**TODO
+    * RAPORDA YOK
+    * @param gameHandler
+    * @param terrains
+    * @param map
+    */
    public static void buildBridge(GameHandler gameHandler, Button[][] terrains, Map map){
 
       for (int i = 0; i < ROW_NUMBER; i++) {
