@@ -177,7 +177,7 @@ public class GameController implements Initializable {
          roundController.setCurrentPlayerId(curPlayerId + 1);
       else
          roundController.setCurrentPlayerId(0);
-
+      curPlayerId = roundController.getCurrentPlayerId();
       currentPlayer = playerList[roundController.getCurrentPlayerId()];
       System.out.println("current dwelling: " + currentPlayer.getDwellingNum());
       if (currentPlayer.getDwellingNum() < currentPlayer.getFaction().startingDwellingNum) {
