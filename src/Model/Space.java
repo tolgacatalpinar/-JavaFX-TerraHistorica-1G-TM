@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class Space implements Serializable{
     private boolean isOccupied;
     private String type;
-    private String color;
     private Space[] bridgeList; // this array holds the other space that can be reached from this space; thanks to bridge(if exists)
     private Boolean hasBridge;
     private Structure structure;
@@ -54,9 +53,7 @@ public class Space implements Serializable{
          hasBridge = status;
      }
 
-     public String getColor(){
-        return color;
-     }
+
 
 
     public void setOccupied(boolean occupied) {
@@ -76,7 +73,6 @@ public class Space implements Serializable{
                 ||type.compareTo("Forest") == 0
                 ||type.compareTo("Plains") == 0 || type.compareTo("Swamp") == 0 || type.compareTo("Empty") == 0)  {
             this.type = type;
-            this.color = type;
         }else
             System.out.println("ERROR------False keyword used for space type");
 
