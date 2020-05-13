@@ -1,5 +1,7 @@
 package Model.CardsAndTiles;
 
+import Model.Player;
+
 import java.util.ArrayList;
 import java.io.Serializable;
 public class CardsAndTiles implements Serializable {
@@ -9,12 +11,13 @@ public class CardsAndTiles implements Serializable {
     public ArrayList<ScoringTile> scoringTiles;
     public ArrayList<BonusCard> selectedBonusCards;
     public ArrayList<ScoringTile> selectedScoringTiles;
-    public CardsAndTiles(int playerNumber) {
+    public Player[] players;
+    public CardsAndTiles(int playerNumber, Player[] players) {
         townTiles = new ArrayList<>();
         bonusCards = new ArrayList<>();
         favorTiles = new ArrayList<>();
         scoringTiles = new ArrayList<>();
-
+        this.players = players;
         createTownTile(townTiles);
         createBonusCard(bonusCards);
         createFavorTile(favorTiles);
@@ -160,6 +163,16 @@ public class CardsAndTiles implements Serializable {
         }
         return temp;
     }
+
+    public void returnScorintTileBonus(){
+
+    }
+    public void returnBonusCards(int playerId,int choiceIndex){
+
+    }
+
+
+
 
    public ArrayList<TownTile> getTownTiles() {
       return townTiles;
