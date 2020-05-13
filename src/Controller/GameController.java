@@ -71,6 +71,8 @@ public class GameController implements Initializable {
    Button[][] terrains;
    Button[] actions;
    Map map;
+   int curPlayerId;
+   Religion[] religionArr;
    Player[] playerList;
    GameHandler gameHandler;
    CardsAndTiles cardsAndTiles;
@@ -150,7 +152,10 @@ public class GameController implements Initializable {
       setButtonClickForInitialDwellings();
 
    }
+   @FXML
+   public void chooseAction(int choice){
 
+   }
 
    @FXML
    public void skipTurnClicked() {
@@ -177,7 +182,7 @@ public class GameController implements Initializable {
    }
 
    @FXML
-   public void passRoundClicked(){
+   public void skipRoundClicked(){
 
    }
 
@@ -185,8 +190,6 @@ public class GameController implements Initializable {
    public void upgradeShippingClicked() {
       ActionController.showUpdateShippingDialogs(gameHandler);
    }
-
-
 
    @FXML
    public void sentPriestClicked() {
@@ -207,12 +210,12 @@ public class GameController implements Initializable {
 
    @FXML
    public void terraformClicked() {
-      ActionController.terraform(gameHandler, terrains, map);
+      ActionController.terraform(playerList,curPlayerId, terrains, map);
    }
 
    @FXML
    public void upgradeStructureClicked() {
-      ActionController.upgradeStructure(gameHandler, terrains, map);
+      ActionController.upgradeStructure(playerList, curPlayerId,terrains, map);
    }
 
    @FXML
@@ -242,8 +245,7 @@ public class GameController implements Initializable {
       cardsAndTilesController.showScoringTilesTable(this);
    }
 
-   @FXML
-   public void exchangeResourcesClicked(){
+   @FXML   public void exchangeResourcesClicked(){
 
    }
 
@@ -251,6 +253,10 @@ public class GameController implements Initializable {
    public void favorTilesClicked() {
 
       cardsAndTilesController.showFavorTilesTable(this);
+
+   }
+   //TODO
+   public void skipTurn(){
 
    }
 
@@ -329,6 +335,9 @@ public class GameController implements Initializable {
          }
    }
 
+   /**TODO
+    * TAŞINACAK
+    */
    public void setButtonClickForInitialDwellings() {
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
@@ -355,7 +364,10 @@ public class GameController implements Initializable {
          }
       }
    }
-   
+
+   /**TODO
+    * TAŞINACAK
+    */
    public void disableButtonClicks(){
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
@@ -364,6 +376,9 @@ public class GameController implements Initializable {
          }
       }
    }
+   /**TODO
+    * TAŞINACAK
+    */
    public void enableTerrains()
    {
       for (int i = 0; i < ROW_NUMBER; i++) {
@@ -373,6 +388,9 @@ public class GameController implements Initializable {
          }
       }
    }
+   /**TODO
+    * TAŞINACAK
+    */
    public void disableAllTerrains()
    {
       for (int i = 0; i < ROW_NUMBER; i++) {
@@ -382,7 +400,9 @@ public class GameController implements Initializable {
          }
       }
    }
-
+   /**TODO
+    * TAŞINACAK
+    */
    public void disableActions(){
       terraform.setDisable(true);
       upgradeShipping.setDisable(true);
@@ -394,7 +414,9 @@ public class GameController implements Initializable {
       passRound.setDisable(true);
       skipTurn.setDisable(true);
    }
-
+   /**TODO
+    * TAŞINACAK
+    */
    public void enableActions(){
       terraform.setDisable(false);
       upgradeShipping.setDisable(false);
@@ -406,7 +428,9 @@ public class GameController implements Initializable {
       passRound.setDisable(false);
       skipTurn.setDisable(false);
    }
-
+   /**TODO
+    * TAŞINACAK
+    */
    public void displayPlayerTurn(ArrayList<PlayerView> playerViewList){
 
       for (PlayerView playerView : playerViewList) {

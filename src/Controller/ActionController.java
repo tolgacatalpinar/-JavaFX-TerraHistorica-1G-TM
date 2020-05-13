@@ -31,7 +31,7 @@ public class ActionController {
    final static int COLUMN_NUMBER = 13;
    private static int selection = -1;
 
-   public static void terraform(Player[] playerArr, Button[][] terrains, int curPlayerId ,Map map) {
+   public static void terraform(Player[] playerArr, int curPlayerId ,Button[][] terrains,Map map) {
 
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
