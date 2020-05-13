@@ -128,7 +128,7 @@ public class GameHandler implements Serializable{
         if(currentRound > 0) { //Not initial dwellings, check for resources
             if(playerHandler.buildStructure(playerList[currentPlayerId], "Dwelling", false) == 1) {
                 space.setPlayer(playerList[currentPlayerId]);
-                map.buildDwelling(space, playerList[currentPlayerId].getFaction().TERRAIN_TILE, false);
+              //  map.buildDwelling(space, playerList[currentPlayerId].getFaction().TERRAIN_TILE, false);
                 return 1;
             }
         }
@@ -136,7 +136,7 @@ public class GameHandler implements Serializable{
             if(playerList[currentPlayerId].getStartingDwellingNum() > playerList[currentPlayerId].getDwellingNum()) {
                 playerHandler.buildInitialDwelling(playerList[currentPlayerId]);
                 space.setPlayer(playerList[currentPlayerId]);
-                map.buildDwelling(space, playerList[currentPlayerId].getFaction().TERRAIN_TILE, true);
+            //    map.buildDwelling(space, playerList[currentPlayerId].getFaction().TERRAIN_TILE, true);
                 return 1;
             }
             return 0;
@@ -144,13 +144,13 @@ public class GameHandler implements Serializable{
         }
         return -1;
     }
+/*
+  //  public boolean upgradeStructure(Space space, String structure) {
 
-    public boolean upgradeStructure(Space space, String structure) {
+      //  ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,  playerList[currentPlayerId].getFaction().TERRAIN_TILE); //Method is not implemented yet
 
-        ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,  playerList[currentPlayerId].getFaction().TERRAIN_TILE); //Method is not implemented yet
-
-        if(playerHandler.buildStructure(playerList[currentPlayerId], structure, adjacentPlayers !=null) == 1) {
-            if(!map.upgradeStructure(space,  playerList[currentPlayerId].getFaction().TERRAIN_TILE, structure)) {
+     //   if(playerHandler.buildStructure(playerList[currentPlayerId], structure, adjacentPlayers !=null) == 1) {
+     //       if(!map.upgradeStructure(space,  playerList[currentPlayerId].getFaction().TERRAIN_TILE, structure)) {
                 System.out.println("You cannot upgrade current building to " + structure);
                 return false; //Implementation fault
             }
@@ -158,7 +158,7 @@ public class GameHandler implements Serializable{
         }
         return false; //Structure cannot be upgraded
     }
-
+*/
     /**
      * This method is called each time after upgrading a structure is successful
      * and for each player in the adjacent player list that accepts to exchange power and vp
@@ -173,9 +173,9 @@ public class GameHandler implements Serializable{
      * @param space that contains upgraded structure of current player
      * @return the list that are adjacent to the space
      */
-    public ArrayList<Player> getAdjacentPlayerList(Space space) {
-        return map.adjacentPlayers(space, playerList[currentPlayerId].getFaction().TERRAIN_TILE);
-    }
+    //public ArrayList<Player> getAdjacentPlayerList(Space space) {
+  //      return map.adjacentPlayers(space, playerList[currentPlayerId].getFaction().TERRAIN_TILE);
+    //}
 
     /**
      * Getting adjacent spaces to build dwelling
@@ -191,7 +191,7 @@ public class GameHandler implements Serializable{
     public boolean terraform(Space space, String toTransform) {
 
         if (playerHandler.terraform(playerList[currentPlayerId]) ) {
-            map.transformTerrain(space, toTransform);
+        //    map.transformTerrain(space, toTransform);
             //Successful terraforming
             return true;
         }
@@ -211,7 +211,7 @@ public class GameHandler implements Serializable{
     }
 
     public void buildBridge(Space space1, Space space2) {
-        map.buildBridge(space1, space2);
+ //       map.buildBridge(space1, space2);
         //TODO
 
     }
@@ -222,15 +222,15 @@ public class GameHandler implements Serializable{
      * @param space
      * @return
      */
-    public ArrayList<Space> isTownFound(Space space) {
-        if(map.isTown(space, playerList[currentPlayerId].getFaction().TERRAIN_TILE)){
+   // public ArrayList<Space> isTownFound(Space space) {
+     //   if(map.isTown(space, playerList[currentPlayerId].getFaction().TERRAIN_TILE)){
             //spaces = map.getTownSpaces(); //Method not implemented
             //playerList[currentPlayerId].townFound(); //TODO
-            return null;
+     //       return null;
             //TODO
-        }
-        return null;
-    }
+      //  }
+      //  return null;
+    //}
 
     /**
      * May be moved from playerhandler to gamehandler instead of using twice

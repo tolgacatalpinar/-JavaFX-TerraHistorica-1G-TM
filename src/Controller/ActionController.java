@@ -400,9 +400,9 @@ public class ActionController {
 
    /**TODO
     * TAŞINACAK HERHALDE BU DA
-    * @param gameHandler
+    * @param
     */
-   public static void showPowerActions(GameHandler gameHandler) {
+   public static void showPowerActions() {
 
       BorderPane border = new BorderPane();
       BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -500,7 +500,7 @@ public class ActionController {
       HBox special4 = new HBox();
 
       Player[] players = gameController.getPlayerList();
-      int playerId = gameController.getCurrentPlayerId();
+      int playerId = gameController.curPlayerId;
       Player player = players[playerId];
       special1.getChildren().add(new SpecialActionView("Spade Action"));
       final int[] choice = {0};
@@ -629,11 +629,11 @@ public class ActionController {
 
    /**TODO
     * TAŞINACAK
-    * @param gameHandler
+    * @param
     */
-   public static void showUpdateShippingDialogs(GameHandler gameHandler) {
+   public static void showUpdateShippingDialogs(Player[] playerList, int currentPlayerId ) {
 
-      Player player = gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()];
+      Player player = playerList[currentPlayerId];
       int priestCost = player.getFaction().SHIPPING_PRIEST_COST;
       int goldCost = player.getFaction().SHIPPING_GOLD_COST;
       int playerPriest = player.getPriestNum();
@@ -673,11 +673,11 @@ public class ActionController {
 
    /**TODO
     * TAŞINACAK
-    * @param gameHandler
+    *
     */
-   public static void showUpdateSpadeDialogs(GameHandler gameHandler) {
+   public static void showUpdateSpadeDialogs(Player[] playerList, int currentPlayerId) {
 
-      Player player = gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()];
+      Player player = playerList[currentPlayerId];
       int priestCost = player.getFaction().SPADE_PRIEST_COST;
       int goldCost = player.getFaction().SPADE_GOLD_COST;
       int workerCost = player.getFaction().SPADE_WORKER_COST;

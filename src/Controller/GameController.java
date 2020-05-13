@@ -81,7 +81,10 @@ public class GameController implements Initializable {
    Player[] playerList;
    CardsAndTiles cardsAndTiles;
    CardsAndTilesController cardsAndTilesController;
-   int curre
+   RoundController roundController;
+   PlayerHandler playerHandler;
+   Player currentPlayer;
+
    @Override
    public void initialize(URL url, ResourceBundle resourceBundle) {
       actions = new Button[]{specialActions, terraform, upgradeShipping, upgradeStruct, sendPriest, powerActions, upgradeSpade};
@@ -167,14 +170,14 @@ public class GameController implements Initializable {
       disableButtonClicks();
       enableTerrains();
       enableActions();
-      int currentPlayerId = gameHandler.getCurrentPlayerId();
+      curPlayerId = roundController.getCurrentPlayerId();
 //      System.out.println("Current player was: " + playerList[currentPlayerId].getNickName());
-      if ((currentPlayerId + 1) < playerList.length && playerList[currentPlayerId + 1] != null)
-         gameHandler.setCurrentPlayerId(currentPlayerId + 1);
+      if ((curPlayerId + 1) < playerList.length && playerList[curPlayerId + 1] != null)
+         roundController.setCurrentPlayerId(curPlayerId + 1);
       else
-         gameHandler.setCurrentPlayerId(0);
+         roundController.setCurrentPlayerId(0);
 
-      Player currentPlayer = gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()];
+      currentPlayer = playerList[roundController.getCurrentPlayerId()];
       System.out.println("current dwelling: " + currentPlayer.getDwellingNum());
       if (currentPlayer.getDwellingNum() < currentPlayer.getFaction().startingDwellingNum) {
          loadInitialMap();
@@ -190,24 +193,24 @@ public class GameController implements Initializable {
 
    @FXML
    public void upgradeShippingClicked() {
-      ActionController.showUpdateShippingDialogs(gameHandler);
+      ActionController.showUpdateShippingDialogs(playerList,curPlayerId);
    }
 
    @FXML
    public void sentPriestClicked() {
       ReligionController religionController = new ReligionController();
-      religionController.showChoices(gameHandler);
+      religionController.showChoices( playerList, religionArr,  curPlayerId);
    }
 
    @FXML
    public void powerActionClicked() {
-      ActionController.showPowerActions(gameHandler);
+      ActionController.showPowerActions();
    }
 
    @FXML
    public void upgradeSpadeClicked() {
 
-      ActionController.showUpdateSpadeDialogs(gameHandler);
+      ActionController.showUpdateSpadeDialogs(playerList,curPlayerId);
    }
 
    @FXML
@@ -223,7 +226,7 @@ public class GameController implements Initializable {
    @FXML
    public void religionsClicked() {
       ReligionController religionController = new ReligionController();
-      religionController.showReligion(gameHandler,0);
+      religionController.showReligion(playerList,0,religionArr,playerList.length);
    }
 
    @FXML
@@ -317,6 +320,8 @@ public class GameController implements Initializable {
          playerList[i] = new Player(factionList.get(i), playerNames.get(i), i);
       }
       this.playerList = playerList;
+      playerHandler = new PlayerHandler();
+      roundController = new RoundController(playerList,playerHandler);
 
 
    }
@@ -348,7 +353,7 @@ public class GameController implements Initializable {
       disableAllTerrains();
       for (int i = 0; i < 9; i++)
          for (int j = 0; j < 13; j++) {
-            if (map.spaces[i][j].getType().equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE)) {
+            if (map.spaces[i][j].getType().equals(playerList[curPlayerId].getFaction().TERRAIN_TILE)) {
                if (terrains[i][j] != null && !map.spaces[i][j].isOccupied())
                   terrains[i][j].setDisable(false);
             }
@@ -369,7 +374,7 @@ public class GameController implements Initializable {
                   public void handle(MouseEvent event) {
                      skipTurn.setDisable(false);
                      map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
-                     PlayerHandler.buildInitialDwelling(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()]);
+                     playerHandler.buildInitialDwelling(playerList[curPlayerId]);
                      TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
                      map.spaces[row][col].setStructure("Dwelling");
                      for (int i = 0; i < ROW_NUMBER; i++) {
@@ -457,27 +462,27 @@ public class GameController implements Initializable {
          playerView.setStyle("");
       }
       
-      switch (playerList[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE) {
+      switch (playerList[curPlayerId].getFaction().TERRAIN_TILE) {
          case "Wasteland":
-            playerViewList.get(gameHandler.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(224, 15, 0, 1) , 30,0.5,0,1 );");
+            playerViewList.get(curPlayerId).setStyle("-fx-effect: dropshadow( gaussian , rgba(224, 15, 0, 1) , 30,0.5,0,1 );");
             break;
          case "Forest":
-            playerViewList.get(gameHandler.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(23, 150, 26, 1) , 30,0.5,0,1 );");
+            playerViewList.get(curPlayerId).setStyle("-fx-effect: dropshadow( gaussian , rgba(23, 150, 26, 1) , 30,0.5,0,1 );");
             break;
          case "Lakes":
-            playerViewList.get(gameHandler.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(0, 189, 214, 1) , 30,0.5,0,1 );");
+            playerViewList.get(curPlayerId).setStyle("-fx-effect: dropshadow( gaussian , rgba(0, 189, 214, 1) , 30,0.5,0,1 );");
             break;
          case "Desert":
-            playerViewList.get(gameHandler.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(214, 175, 0, 1) , 30,0.5,0,1 );");
+            playerViewList.get(curPlayerId).setStyle("-fx-effect: dropshadow( gaussian , rgba(214, 175, 0, 1) , 30,0.5,0,1 );");
             break;
          case "Mountains":
-            playerViewList.get(gameHandler.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(191, 191, 191, 1), 30,0.5,0,1 );");
+            playerViewList.get(curPlayerId).setStyle("-fx-effect: dropshadow( gaussian , rgba(191, 191, 191, 1), 30,0.5,0,1 );");
             break;
          case "Swamp":
-            playerViewList.get(gameHandler.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(22, 20, 8, 1), 30,0.5,0,1 );");
+            playerViewList.get(curPlayerId).setStyle("-fx-effect: dropshadow( gaussian , rgba(22, 20, 8, 1), 30,0.5,0,1 );");
             break;
          case "Plains":
-            playerViewList.get(gameHandler.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(152, 93, 27, 1), 30,0.5,0,1 );");
+            playerViewList.get(curPlayerId).setStyle("-fx-effect: dropshadow( gaussian , rgba(152, 93, 27, 1), 30,0.5,0,1 );");
             break;
       }
 
