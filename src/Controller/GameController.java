@@ -68,6 +68,9 @@ public class GameController implements Initializable {
    @FXML
    Button upgradeSpade;
 
+   public Player[] getPlayerList() {
+      return playerList;
+   }
 
    ArrayList<PlayerView> playerViewList;
    Button[][] terrains;
@@ -76,9 +79,9 @@ public class GameController implements Initializable {
    int curPlayerId;
    Religion[] religionArr;
    Player[] playerList;
-   GameHandler gameHandler;
    CardsAndTiles cardsAndTiles;
    CardsAndTilesController cardsAndTilesController;
+   int curre
    @Override
    public void initialize(URL url, ResourceBundle resourceBundle) {
       actions = new Button[]{specialActions, terraform, upgradeShipping, upgradeStruct, sendPriest, powerActions, upgradeSpade};
@@ -261,7 +264,7 @@ public class GameController implements Initializable {
 
    @FXML
    public void specialActionClicked() {
-      ActionController.showSpeacialActions(gameHandler);
+      ActionController.showSpeacialActions(this);
    }
 
    public void createSpaces() {
