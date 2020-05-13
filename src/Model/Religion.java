@@ -32,7 +32,7 @@ public class Religion implements Serializable{
         powerAwardPositions[7] = 2;
         powerAwardPositions[10] = 3;
         for(int i = 0; i< playerCount; i++){
-            updateReligion(initial_religion_points[i], i, false);
+            updateReligion(initial_religion_points[i], i, 0);
         }
     }
     /**
@@ -43,7 +43,7 @@ public class Religion implements Serializable{
      * @return powerAward the amount of power player gained
      *
      */
-    public int updateReligion(int count, int player_id, boolean key){
+    public int updateReligion(int count, int player_id, int key){
         int powerAward = 0;
         int currentPos = playerPositions[player_id];
         int endPos = currentPos + count;
@@ -58,7 +58,7 @@ public class Religion implements Serializable{
                 awardSearchLength -= 1;
                 endPos = MAX_LENGTH-1;
             }
-            if (!key){
+            if (key == 0){
                 System.out.println("Since there is no key end pos is stuck on 9"); // Can be replaced with an GUI message
                 awardSearchLength -= 1;
                 endPos = MAX_LENGTH-1;
@@ -87,11 +87,11 @@ public class Religion implements Serializable{
         }
         return false;
     }
-    public int placePriest(int player_id,boolean key) {
+    public int placePriest(int player_id,int key) {
         return updateReligion(1, player_id, key);
     }
 
-    public  int addOrderOfReligion(int player_id, boolean key){
+    public  int addOrderOfReligion(int player_id, int key){
         if(orderOfCult_3 == -1) {
             orderOfCult_3 = player_id;
             return this.updateReligion(3, player_id, key);

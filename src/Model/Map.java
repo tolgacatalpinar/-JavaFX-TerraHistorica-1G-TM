@@ -341,7 +341,6 @@ public class Map implements Serializable {
       return false;
    }
 
-
    public boolean canBuildTurnOne(Space space1, String playerColor) {
       return space1.getType().equals(playerColor) && !space1.isOccupied();
    }
