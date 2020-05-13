@@ -171,7 +171,8 @@ public class GameController implements Initializable {
       enableTerrains();
       enableActions();
       curPlayerId = roundController.getCurrentPlayerId();
-//      System.out.println("Current player was: " + playerList[currentPlayerId].getNickName());
+      System.out.println("Current player was: " + playerList[curPlayerId].getNickName());
+      System.out.println(curPlayerId);
       if ((curPlayerId + 1) < playerList.length && playerList[curPlayerId + 1] != null)
          roundController.setCurrentPlayerId(curPlayerId + 1);
       else
@@ -185,8 +186,8 @@ public class GameController implements Initializable {
       }
 
 
-//      System.out.println("Current player is now: " + playerList[currentPlayerId].getNickName());
-//      System.out.println("--------------------------------------------------");
+      System.out.println("Current player is now: " + playerList[curPlayerId].getNickName());
+      System.out.println("--------------------------------------------------");
    }
 
 
