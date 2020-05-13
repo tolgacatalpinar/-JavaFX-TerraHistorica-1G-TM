@@ -21,9 +21,17 @@ public class RoundController {
     public int getCurrentPlayerId(){
         return currentPlayerId;
     }
-    
+
     public int getCurrentRound(){
         return currentRound;
+    }
+
+    public void setCurrentPlayerId(int currentPlayerId){
+        this.currentPlayerId = currentPlayerId;
+    }
+
+    public void setPlayerCount(int playerCount){
+        this.playerCount = playerCount;
     }
 
     /**
