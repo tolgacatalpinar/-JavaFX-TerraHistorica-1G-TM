@@ -77,11 +77,12 @@ public class ChooseFactionMenuController  implements Initializable {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/GameView.fxml"));
         Parent root = loader.load();
-
         GameController gameController = loader.getController();
-        gameController.loadPlayers(factions, playerNames);
+        int totalPlayerNumber = factions.size();
+        gameController.loadPlayers(factions, playerNames,totalPlayerNumber);
         gameController.loadInitialMap();
-
+        gameController.loadCardsAndTiles(totalPlayerNumber);
+        gameController.loadReligion(totalPlayerNumber);
 
 
         Scene scene = new Scene(root);

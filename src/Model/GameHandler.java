@@ -15,7 +15,6 @@ public class GameHandler implements Serializable{
     Player[] playerList;
     CardsAndTiles cardsAndTiles;
     Religion[] religions;
-    Map map;
     int playerCount;
     PlayerHandler playerHandler;
 
@@ -25,7 +24,6 @@ public class GameHandler implements Serializable{
     public GameHandler(Player[] playerList, int playerSize)
     {
         //Initialize map
-        map = new Map();
 
         //Get Players
         playerCount = playerSize;

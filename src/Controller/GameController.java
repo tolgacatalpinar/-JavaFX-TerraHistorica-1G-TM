@@ -4,6 +4,10 @@ import Model.*;
 //import Model.River;
 //import Model.TerrainSubclasses.*;
 import Model.CardsAndTiles.CardsAndTiles;
+import Model.ReligionSubclasses.Christianity;
+import Model.ReligionSubclasses.Hinduism;
+import Model.ReligionSubclasses.Islam;
+import Model.ReligionSubclasses.Jewish;
 import View.*;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -66,8 +70,6 @@ public class GameController implements Initializable {
 
 
    ArrayList<PlayerView> playerViewList;
-
-
    Button[][] terrains;
    Button[] actions;
    Map map;
@@ -181,10 +183,7 @@ public class GameController implements Initializable {
 //      System.out.println("--------------------------------------------------");
    }
 
-   @FXML
-   public void skipRoundClicked(){
 
-   }
 
    @FXML
    public void upgradeShippingClicked() {
@@ -308,18 +307,36 @@ public class GameController implements Initializable {
       map = new Map(spaces);
    }
 
-   public void loadPlayers(ArrayList<Faction> factionList, ArrayList<String> playerNames) {
-      int size = factionList.size();
+   public void loadPlayers(ArrayList<Faction> factionList, ArrayList<String> playerNames,int totalPlayerNumber) {
 
-      Player[] playerList = new Player[5];
-      for (int i = 0; i < size; i++) {
+      Player[] playerList = new Player[totalPlayerNumber];
+      for (int i = 0; i < totalPlayerNumber; i++) {
          playerList[i] = new Player(factionList.get(i), playerNames.get(i), i);
       }
       this.playerList = playerList;
 
-      gameHandler = new GameHandler(playerList, size);
+
+   }
+   public void loadCardsAndTiles(int totalPlayerNumber){
       cardsAndTiles = new CardsAndTiles(playerList.length,playerList);
       cardsAndTilesController = new CardsAndTilesController();
+   }
+   public void loadReligion(int totalPlayerNumber){
+      religionArr = new Religion[4];
+      int [] player_initial_islam = new int[totalPlayerNumber];
+      int [] player_initial_chirst = new int[totalPlayerNumber];
+      int [] player_initial_jew = new int[totalPlayerNumber];
+      int [] player_initial_hindu = new int[totalPlayerNumber];
+      for (int j = 0; j< totalPlayerNumber; j++) {
+         player_initial_islam[j] = playerList[j].getInitialIslam();
+         player_initial_chirst[j] = playerList[j].getInitialChristianity();
+         player_initial_jew[j] = playerList[j].getInitialJudaism();
+         player_initial_hindu[j] = playerList[j].getInitialHinduism();
+      }
+      religionArr[0] = new Islam(totalPlayerNumber, player_initial_islam);
+      religionArr[1] = new Christianity(totalPlayerNumber, player_initial_chirst);
+      religionArr[2] = new Jewish(totalPlayerNumber, player_initial_jew);
+      religionArr[3] = new Hinduism(totalPlayerNumber, player_initial_hindu);
    }
 
    public void loadInitialMap() {
@@ -437,7 +454,7 @@ public class GameController implements Initializable {
          playerView.setStyle("");
       }
       
-      switch (gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE) {
+      switch (playerList[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE) {
          case "Wasteland":
             playerViewList.get(gameHandler.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(224, 15, 0, 1) , 30,0.5,0,1 );");
             break;
