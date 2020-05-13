@@ -488,9 +488,9 @@ public class ActionController {
 
    /**TODO
     * TAŞINACAK
-    * @param gameHandler
+    * @param gameController
     */
-   public static void showSpeacialActions(GameHandler gameHandler) {
+   public static void showSpeacialActions(GameController gameController) {
       VBox wholeFavor = new VBox();
       HBox firstRow = new HBox();
       HBox secondRow = new HBox();
@@ -499,8 +499,8 @@ public class ActionController {
       HBox special3 = new HBox();
       HBox special4 = new HBox();
 
-      Player[] players = gameHandler.getPlayerList();
-      int playerId = gameHandler.getCurrentPlayerId();
+      Player[] players = gameController.getPlayerList();
+      int playerId = gameController.getCurrentPlayerId();
       Player player = players[playerId];
       special1.getChildren().add(new SpecialActionView("Spade Action"));
       final int[] choice = {0};
