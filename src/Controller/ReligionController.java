@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.GameHandler;
+import Model.Player;
 import Model.Religion;
 import Model.ReligionSubclasses.Christianity;
 import Model.ReligionSubclasses.Hinduism;
@@ -55,10 +56,9 @@ public class ReligionController{
      * Status paramater 2 -> place priest according to religion choice
      *
      */
-    public void showReligion(GameHandler gameHandler,int status)
+    public void showReligion(Player[] playerArr,int status, Religion[] religions,int currentPlayer)
     {
-        religions = gameHandler.getReligions();
-        playerCount = gameHandler.getPlayerCount();
+
         BorderPane border = new BorderPane();
         GridPane gridPane = new GridPane();
         GridPane religon_buttons = new GridPane();
@@ -108,7 +108,7 @@ public class ReligionController{
                     @Override
                     public void handle(MouseEvent event) {
                         System.out.println("Add priest to order for "+ temp_religion.getClass().toString() + " and player "+ currentPlayer);
-                        temp_religion.addOrderOfReligion(currentPlayer,gameHandler.getPlayerList()[currentPlayer].getKey());
+                        temp_religion.addOrderOfReligion(currentPlayer,playerArr[currentPlayer].getKey());
                         disableButtons(religon_buttons);
                         update(gridPane);
                     }
@@ -123,7 +123,7 @@ public class ReligionController{
                     @Override
                     public void handle(MouseEvent event) {
                         System.out.println("Place priest for "+ temp_religion.getClass().toString() + " and player "+ currentPlayer);
-                        temp_religion.placePriest(currentPlayer,gameHandler.getPlayerList()[currentPlayer].getKey());
+                        temp_religion.placePriest(currentPlayer,playerArr[currentPlayer].getKey());
                         disableButtons(religon_buttons);
                         update(gridPane);
                     }
@@ -154,9 +154,8 @@ public class ReligionController{
         dialog.show();
 
     }
-    public void showChoices(GameHandler gameHandler)
+    public void showChoices(Player[] playerArr, Religion[] religionArr, int currentPlayer)
     {
-        currentPlayer =  gameHandler.getCurrentPlayerId();
         BorderPane border = new BorderPane();
         GridPane gridPane = new GridPane();
         border.setMaxHeight(200);
@@ -191,14 +190,14 @@ public class ReligionController{
             @Override
             public void handle(MouseEvent event) {
                 dialog.close();
-                showReligion(gameHandler, 1);
+                showReligion(playerArr, 1,religions,currentPlayer);
             }
         });
         place_priest.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 dialog.close();
-                showReligion(gameHandler, 2);
+                showReligion(playerArr, 1,religions,currentPlayer);
             }
         });
         dialog.show();
