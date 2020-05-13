@@ -8,7 +8,7 @@
 
     <top>
         <HBox alignment="CENTER">
-            <Button fx:id="religions" onMouseClicked="#religionsClicked" prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Religions" textFill="WHITE">
+            <Button fx:id="religions" onMouseClicked="#religionsClicked"  prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Religions" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="20.0" />
                 </font></Button>
@@ -32,6 +32,11 @@
                 <font>
                     <Font name="Book Antiqua" size="20.0" />
                 </font></Button>
+            <Button fx:id="exchangeResourcesButton" layoutX="511.0"  layoutY="10.0" onMouseClicked="#exchangeResourcesClicked" prefHeight="50" prefWidth="282.0" style="-fx-background-color: transparent;" text="Exchange Resources" textFill="WHITE">
+                <font>
+                    <Font name="Book Antiqua" size="20.0" />
+                </font></Button>
+
         </HBox>
     </top>
     <left>
@@ -71,7 +76,12 @@
                     <Font name="Book Antiqua" size="18.0" />
                 </font>
             </Button>
-            <Button fx:id="skipRound" layoutX="10.0" layoutY="471.0" onMouseClicked="#skipRoundClicked" prefHeight="50" prefWidth="200" text="Skip Round" textFill="WHITE">
+            <Button fx:id="passRound" layoutX="10.0" layoutY="471.0" onMouseClicked="#passRoundClicked" prefHeight="50" prefWidth="200" text="Pass Round" textFill="WHITE">
+                <font>
+                    <Font name="Book Antiqua" size="18.0" />
+                </font>
+            </Button>
+            <Button fx:id="skipTurn" layoutX="10.0" layoutY="496.0" onMouseClicked="#skipTurnClicked" prefHeight="50" prefWidth="200" text="Skip Turn" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="18.0" />
                 </font>

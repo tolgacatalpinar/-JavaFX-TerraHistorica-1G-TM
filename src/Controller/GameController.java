@@ -44,9 +44,13 @@ public class GameController implements Initializable {
    @FXML
    Button scoringTilesButton;
    @FXML
+   Button exchangeResourcesButton;
+   @FXML
    Button scoreTable;
    @FXML
-   Button skipRound;
+   Button passRound;
+   @FXML
+   Button skipTurn;
    @FXML
    Label testText;
    @FXML
@@ -153,7 +157,7 @@ public class GameController implements Initializable {
 
 
    @FXML
-   public void skipRoundClicked() {
+   public void skipTurnClicked() {
       disableButtonClicks();
       enableTerrains();
       enableActions();
@@ -174,6 +178,11 @@ public class GameController implements Initializable {
 
 //      System.out.println("Current player is now: " + playerList[currentPlayerId].getNickName());
 //      System.out.println("--------------------------------------------------");
+   }
+
+   @FXML
+   public void passRoundClicked(){
+
    }
 
    @FXML
@@ -238,6 +247,10 @@ public class GameController implements Initializable {
    public void scoringTilesClicked() {
       ScoringTilesController scoringTilesController = new ScoringTilesController();
       scoringTilesController.showScoringTilesTable(gameHandler);
+   }
+
+   @FXML
+   public void exchangeResourcesClicked(){
 
    }
 
@@ -331,7 +344,7 @@ public class GameController implements Initializable {
                terrains[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
                   @Override
                   public void handle(MouseEvent event) {
-                     skipRound.setDisable(false);
+                     skipTurn.setDisable(false);
                      map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
                      PlayerHandler.buildInitialDwelling(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()]);
                      TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
@@ -384,7 +397,8 @@ public class GameController implements Initializable {
       powerActions.setDisable(true);
       specialActions.setDisable(true);
       upgradeSpade.setDisable(true);
-      skipRound.setDisable(true);
+      passRound.setDisable(true);
+      skipTurn.setDisable(true);
    }
 
    public void enableActions(){
@@ -395,7 +409,8 @@ public class GameController implements Initializable {
       powerActions.setDisable(false);
       specialActions.setDisable(false);
       upgradeSpade.setDisable(false);
-      skipRound.setDisable(false);
+      passRound.setDisable(false);
+      skipTurn.setDisable(false);
    }
 
    public void displayPlayerTurn(ArrayList<PlayerView> playerViewList){
