@@ -4,6 +4,10 @@ import Model.Faction;
 
 public class Gilgamesh extends Faction {
       public Gilgamesh() {
+        setInitials();
+      }
+
+      public void setInitials() {
         TERRAIN_TILE = "Wasteland";
         INITIAL_HINDUISM = 1; // fire
         INITIAL_CHRISTIANITY = 1; //air
@@ -16,12 +20,9 @@ public class Gilgamesh extends Faction {
         spadeNeededToTerraformForest = 2;
         spadeNeededToTerraformMountains = 2;
         spadeNeededToTerraformDesert = 2;
-
       }
 
-  @Override
   public void afterStronghold() {
-    super.afterStronghold();
     freeSpadesToTerraformIntoHome =2;
   }
 }

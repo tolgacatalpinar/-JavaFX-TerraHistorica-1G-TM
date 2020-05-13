@@ -6,12 +6,15 @@ public class StPatrick extends Faction { //dwarwes
   
   public StPatrick ()
   {
+    setInitials();
+  }
+  public void setInitials() {
       TERRAIN_TILE = "Mountains";
-        INITIAL_JUDAISM = 2;  //earth
-        INITIAL_VICTORY_POINT = 20;
-        DWELLING_GOLD_COST = 2;
-        DWELLING_WORKER_COST = 1;
-        DWELLING_WORKER_INCOME = 1;
+      INITIAL_JUDAISM = 2;  //earth
+      INITIAL_VICTORY_POINT = 20;
+      DWELLING_GOLD_COST = 2;
+      DWELLING_WORKER_COST = 1;
+      DWELLING_WORKER_INCOME = 1;
       tradingPostGoldIncome = new int[]{3, 2, 2, 3};
       SHIPPING_UPGRADE_VICTORY_POINTS = new int[]{};
       spadeNeededToTerraformPlains = 0;
@@ -28,9 +31,7 @@ public class StPatrick extends Faction { //dwarwes
       skipTileWhenCalculatingLongestPath = true;
   }
 
-    @Override
     public void afterStronghold() {
-        super.afterStronghold();
         additionalWorkerOnTunneling = 1;
     }
 }

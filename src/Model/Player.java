@@ -8,9 +8,6 @@ import java.io.Serializable;
 public class Player implements Serializable {
 
    String nickName;
-
-
-   String terrainTile;
    Faction faction;
    SpecialActionToken specialActionToken;
    private int playerId;
@@ -26,7 +23,7 @@ public class Player implements Serializable {
    private int priestIncome;
    private int startingDwellingNum;
    private int priestOnBank = 7; // Not exactly know what it is
-   private boolean key;
+   private int key;
    private int bridgeNum;
    private int dwellingNum;
    private int tradingPostNum;
@@ -45,22 +42,10 @@ public class Player implements Serializable {
    private boolean havingSanctuaryBonus;
    private int terraformWorkerCost;
    private boolean roundPassed;
-   private int initialIslam;
-   private int initialHinduism;
-   private int initialJudaism;
-   private int initialChristianity;
-
-
    private boolean upgradeToTradingPostBonus; //When upgrading a Dwelling to a Trading house, immediately get 3 additional Victory points.
    private boolean isPassingTradingPostBonus; //From now on, when passing (see Action #8, page 14), get 2/3/3/4 Victory points for 1/2/3/4 of your Trading houses on the Game board.
    private boolean buildingDwellingBonus; //When building a Dwelling, immediately get 2 additional Victory points.
    private int townPowerValue;
-
-   public final int MAX_DWELLING = 8;
-   public final int MAX_TRADING_POST = 4;
-   public final int MAX_TEMPLE = 3;
-   public final int MAX_SANCTUARY = 1;
-   public final int MAX_STRONGHOLD = 1;
 
    public Player(Faction faction, String nickName, int playerId) {
       this.nickName = nickName;
@@ -68,7 +53,6 @@ public class Player implements Serializable {
       freeSpade = 0;
       specialActionToken = new SpecialActionToken(); //Naci
       this.faction = faction;
-      setTerrainTile(getFaction().TERRAIN_TILE);
       setWorkerNum(getFaction().INITIAL_WORKER);
       setGoldNum(getFaction().INITIAL_GOLD);
       setPriestNum(getFaction().INITIAL_PRIEST);
@@ -91,23 +75,11 @@ public class Player implements Serializable {
       setTempleNum(0);
       setSanctuaryNum(0);
       setStrongholdNum(0);
-      setInitialChristianity(getFaction().INITIAL_CHRISTIANITY);
-      setInitialHinduism(getFaction().INITIAL_HINDUISM);
-      setInitialIslam(getFaction().INITIAL_ISLAM);
-      setInitialJudaism(getFaction().INITIAL_JUDAISM);
-      setKey(false);
+      setKey(0);
       setUpgradeToTradingPostBonus(false);
       setIsPassingTradingPostBonus(false);
       setBuildingDwellingBonus(false);
       setRoundPassed(false);
-   }
-
-   public void setTerrainTile(String terrainTile) {
-      this.terrainTile = terrainTile;
-   }
-
-   public void setFaction(Faction faction) {
-      this.faction = faction;
    }
 
    public Faction getFaction() {
@@ -148,37 +120,10 @@ public class Player implements Serializable {
 
    /**
     * Sacrifice power from bowl two
-    */
+
    public boolean sacrificePower() {
-      if (2 < bowlTwoPower) {
-         bowlTwoPower -= 2;
-         bowlThreePower += 1;
-         return true;
-      } else {
-         System.out.println("You don't have enough power to sacrifice");
-         return false;
-      }
-   }
 
-
-   public void progressInReligion(Religion religion) { //Will be added to player handler
-      if (spendFromResources(0, 0, 1)) {
-         addPowerToBowl(religion.addOrderOfReligion(playerId, key));
-      } else {
-         System.out.println("Not enough priest");
-      }
-   }
-
-   public boolean sendPriest(Religion religion) {
-      if (spendFromResources(0, 0, 1)) {
-         addPowerToBowl(religion.placePriest(playerId, key));
-         priestOnBank--;
-         return true;
-      } else {
-         System.out.println("Not enough priest");
-      }
-      return false;
-   }
+   }*/
 
    public void spendPriest(int priestCount) {
       priestNum -= priestCount;
@@ -195,7 +140,7 @@ public class Player implements Serializable {
 
    }
 
-   public boolean spendSpadeToTerraform(String color) {
+   public boolean spendFreeSpade(String color) { //Spend free spade method
 
       int spadeNeeded = 0;
       if( color.equals("Wasteland")) {
@@ -242,18 +187,6 @@ public class Player implements Serializable {
       return false;
    }
 
-   public void passRound() {
-      roundPassed = true;
-      //returnBonusCard();
-      //useBonusFromFavorTile();
-
-   }
-
-   public void townFound() {
-      key = true;
-   }
-
-
    public int getWorkerNum() {
       return workerNum;
    }
@@ -298,7 +231,7 @@ public class Player implements Serializable {
       return workerIncome;
    }
 
-   public boolean getKey() {
+   public int getKey() {
       return key;
    }
 
@@ -494,7 +427,7 @@ public class Player implements Serializable {
       this.townPowerValue = townPowerValue;
    }
 
-   public void setKey(boolean key) {
+   public void setKey(int key) {
       this.key = key;
    }
 
@@ -530,26 +463,6 @@ public class Player implements Serializable {
       return terraformWorkerCost;
    }
 
-   public void setInitialIslam(int initialIslam) {
-      this.initialIslam = initialIslam;
-   }
-
-   public void setInitialHinduism(int initialHinduism) {
-      this.initialHinduism = initialHinduism;
-   }
-
-   public void setInitialJudaism(int initialJudaism) {
-      this.initialJudaism = initialJudaism;
-   }
-
-   public void setInitialChristianity(int initialChristianity) {
-      this.initialChristianity = initialChristianity;
-   }
-
-   public String getTerrainTile() {
-      return terrainTile;
-   }
-
    public int getBowlOnePower() {
       return bowlOnePower;
    }
@@ -570,10 +483,6 @@ public class Player implements Serializable {
       return priestOnBank;
    }
 
-   public boolean isKey() {
-      return key;
-   }
-
    public boolean isHavingTradingPostBonus() {
       return havingTradingPostBonus;
    }
@@ -585,6 +494,7 @@ public class Player implements Serializable {
    public boolean isRoundPassed() {
       return roundPassed;
    }
+
    public int getFreeSpade() {
       return freeSpade;
    }

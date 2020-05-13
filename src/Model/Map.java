@@ -246,7 +246,7 @@ public class Map implements Serializable {
       boolean isOver = true;
 
       for (int i = 0; i < adjacents.length && isOver; i++) {
-         isOver = !(adjacents[i].getColor().equals(playerColor)) || visited.contains(adjacents[i]) || !adjacents[i].isOccupied();
+         isOver = !(adjacents[i].getType().equals(playerColor)) || visited.contains(adjacents[i]) || !adjacents[i].isOccupied();
       }
 
       if (isOver) {
@@ -255,7 +255,7 @@ public class Map implements Serializable {
       }
       else {
          for (Space adjacent : adjacents)
-            if (adjacent.getColor().equals(playerColor) && !(visited.contains(adjacent)) && adjacent.isOccupied()) {
+            if (adjacent.getType().equals(playerColor) && !(visited.contains(adjacent)) && adjacent.isOccupied()) {
                visited.add(adjacent);
                return calculateTownScore(adjacent, playerColor);
             }
@@ -319,7 +319,7 @@ public class Map implements Serializable {
       Space[] adjacents = adjacencyList(space1);
       ArrayList<Player> list = new ArrayList<>();
       for (Space adjacent : adjacents) {
-         if (!(adjacent.getColor().equals(playerColor)) && adjacent.isOccupied() && !list.contains(adjacent.getPlayer())) {
+         if (!(adjacent.getType().equals(playerColor)) && adjacent.isOccupied() && !list.contains(adjacent.getPlayer())) {
             list.add(adjacent.getPlayer());
          }
       }
@@ -327,22 +327,22 @@ public class Map implements Serializable {
    }
 
    public boolean canBuild(Space space1, String playerColor) {
-      if (space1.getColor().equals(playerColor) && !space1.isOccupied()) {
+      if (space1.getType().equals(playerColor) && !space1.isOccupied()) {
          Space[] adjacents = adjacencyList(space1);
          for (Space adjacent : adjacents) {
-            if (adjacent.getColor().equals(playerColor) && !adjacent.isOccupied()) {
+            if (adjacent.getType().equals(playerColor) && !adjacent.isOccupied()) {
                return true;
             }
          }
 
          Space[] bridgeList = space1.getBridgeList();
-         return bridgeList[0].getColor().equals(playerColor) && !(bridgeList[0].isOccupied());
+         return bridgeList[0].getType().equals(playerColor) && !(bridgeList[0].isOccupied());
       }
       return false;
    }
 
 
    public boolean canBuildTurnOne(Space space1, String playerColor) {
-      return space1.getColor().equals(playerColor) && !space1.isOccupied();
+      return space1.getType().equals(playerColor) && !space1.isOccupied();
    }
 }

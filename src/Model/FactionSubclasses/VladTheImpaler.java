@@ -5,6 +5,9 @@ import Model.Player;
 
 public class VladTheImpaler extends Faction { // chaos magician
     public VladTheImpaler() {
+       setInitials();
+    }
+    public void setInitials() {
         TERRAIN_TILE = "Wasteland";
         INITIAL_WORKER = 4;
         INITIAL_HINDUISM = 2; //fire
@@ -23,9 +26,7 @@ public class VladTheImpaler extends Faction { // chaos magician
         spadeNeededToTerraformDesert = 1;
     }
 
-    @Override
     public void afterStronghold() {
-        super.afterStronghold();
         canPlayDoubleTurn = true;
     }
 }

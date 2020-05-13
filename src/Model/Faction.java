@@ -29,6 +29,11 @@ public class Faction implements Serializable {
     public int STRONGHOLD_GOLD_COST = 6;
     //public int STRONGHOLD_POWER_INCOME = 2;
     //public int STRONGHOLD_PRIEST_INCOME = 1;
+    public int MAX_DWELLING = 7;
+    public int MAX_TRADING_POST = 4;
+    public int MAX_TEMPLE = 2;
+    public int MAX_SANCTUARY = 1;
+    public int MAX_STRONGHOLD = 1;
     public int SANCTUARY_WORKER_COST = 4;
     public int SANCTUARY_GOLD_COST = 10;
     public int SANCTUARY_PRIEST_INCOME = 1;
@@ -84,10 +89,8 @@ public class Faction implements Serializable {
     public int additionalVictoryPointForEachSkipTile = 0;
     public boolean skipTileWhenCalculatingLongestPath;
     public int getVictoryPointsAfterTown = 0;
+
     public void afterStronghold() {
 
     }
-
-
-
 }
