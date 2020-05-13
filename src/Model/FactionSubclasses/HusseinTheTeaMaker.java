@@ -6,18 +6,21 @@ public class HusseinTheTeaMaker extends Faction { //halfling
   
   public HusseinTheTeaMaker()
   {
+      setInitials();
+  }
+  public void setInitials() {
       TERRAIN_TILE = "Plains";
-        INITIAL_JUDAISM = 1;  //earth
-        INITIAL_CHRISTIANITY = 1; //air
-        INITIAL_BOWL_ONE_POWER = 3;
-        INITIAL_BOWL_TWO_POWER = 9;
-        INITIAL_VICTORY_POINT = 20;
-        DWELLING_GOLD_COST = 2;
-        DWELLING_WORKER_COST = 1;
-        DWELLING_WORKER_INCOME = 1;
-        STRONGHOLD_GOLD_COST = 8;
-        SPADE_GOLD_COST = 1;
-        SPADE_WORKER_COST = 2;
+      INITIAL_JUDAISM = 1;  //earth
+      INITIAL_CHRISTIANITY = 1; //air
+      INITIAL_BOWL_ONE_POWER = 3;
+      INITIAL_BOWL_TWO_POWER = 9;
+      INITIAL_VICTORY_POINT = 20;
+      DWELLING_GOLD_COST = 2;
+      DWELLING_WORKER_COST = 1;
+      DWELLING_WORKER_INCOME = 1;
+      STRONGHOLD_GOLD_COST = 8;
+      SPADE_GOLD_COST = 1;
+      SPADE_WORKER_COST = 2;
       spadeNeededToTerraformSwamp = 1;
       spadeNeededToTerraformLakes = 2;
       spadeNeededToTerraformForest = 3;
@@ -25,12 +28,9 @@ public class HusseinTheTeaMaker extends Faction { //halfling
       spadeNeededToTerraformWasteland = 2;
       spadeNeededToTerraformDesert = 1;
       additionalVictoryPointForEachSpade = 1;
-
   }
 
-    @Override
     public void afterStronghold() {
-        super.afterStronghold();
 
   }
 }

@@ -89,10 +89,5 @@ public class Faction implements Serializable {
     public int additionalVictoryPointForEachSkipTile = 0;
     public boolean skipTileWhenCalculatingLongestPath;
     public int getVictoryPointsAfterTown = 0;
-    public void afterStronghold() {
-
-    }
-
-
 
 }

@@ -4,14 +4,16 @@ import Model.Faction;
 
 public class MorganLeFay extends Faction { //witch
   
-  public MorganLeFay()
-  {
+  public MorganLeFay() {
+   setInitials();
+  }
+  public void setInitials() {
       TERRAIN_TILE = "Forest";
-        INITIAL_CHRISTIANITY = 2; //air
-        DWELLING_GOLD_COST = 2;
-        DWELLING_WORKER_COST = 1;
-        DWELLING_WORKER_INCOME = 1;
-        spadeNeededToTerraformPlains = 0;
+      INITIAL_CHRISTIANITY = 2; //air
+      DWELLING_GOLD_COST = 2;
+      DWELLING_WORKER_COST = 1;
+      DWELLING_WORKER_INCOME = 1;
+      spadeNeededToTerraformPlains = 0;
       spadeNeededToTerraformSwamp = 0;
       spadeNeededToTerraformLakes = 0;
       spadeNeededToTerraformForest = 0;
@@ -19,14 +21,9 @@ public class MorganLeFay extends Faction { //witch
       spadeNeededToTerraformWasteland = 0;
       spadeNeededToTerraformDesert = 0;
       getAdditionalVictoryPointsAfterTown = 5;
-
-
   }
 
-    @Override
     public void afterStronghold() {
-        super.afterStronghold();
         freeDwellingOnSpecialAction = true;
-
     }
 }

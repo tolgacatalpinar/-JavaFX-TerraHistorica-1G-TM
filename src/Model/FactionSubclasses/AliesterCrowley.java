@@ -6,11 +6,14 @@ import Model.Player;
 public class AliesterCrowley extends Faction {
     //Darkling
     public AliesterCrowley() {
+        setInitials();
+    }
+    public void setInitials() {
         TERRAIN_TILE = "Swamp";
         INITIAL_WORKER = 1;
         INITIAL_PRIEST = 1;
         INITIAL_ISLAM = 1;  //water
-        INITIAL_JUDAISM = 1;  //earth     
+        INITIAL_JUDAISM = 1;  //earth
         INITIAL_VICTORY_POINT = 15;
         DWELLING_GOLD_COST = 2;
         DWELLING_WORKER_COST = 1;
@@ -30,10 +33,7 @@ public class AliesterCrowley extends Faction {
         payPriestWhenTransform = true;
     }
 
-
-    @Override
     public void afterStronghold() {
-        super.afterStronghold();
         giveWorkersForPriest = true;
         increaseShippingAfterStronghold = true;
     }
