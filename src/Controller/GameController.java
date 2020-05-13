@@ -1,10 +1,9 @@
 package Controller;
 
-import Controller.CardsAndTilesControllers.*;
 import Model.*;
 //import Model.River;
 //import Model.TerrainSubclasses.*;
-import Model.StructureSubclasses.Dwelling;
+import Model.CardsAndTiles.CardsAndTiles;
 import View.*;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -12,15 +11,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
@@ -77,8 +73,8 @@ public class GameController implements Initializable {
    Map map;
    Player[] playerList;
    GameHandler gameHandler;
-
-
+   CardsAndTiles cardsAndTiles;
+   CardsAndTilesController cardsAndTilesController;
    @Override
    public void initialize(URL url, ResourceBundle resourceBundle) {
       actions = new Button[]{specialActions, terraform, upgradeShipping, upgradeStruct, sendPriest, powerActions, upgradeSpade};
@@ -227,26 +223,23 @@ public class GameController implements Initializable {
 
    @FXML
    public void scoreTableClicked() {
-      ScoreTableController scoreTableController = new ScoreTableController();
-      scoreTableController.showScoreTable(gameHandler);
+      cardsAndTilesController.showScoreTable(this);
    }
 
    @FXML
    public void bonusCardsClicked() {
-      BonusCardsController bonusCardsController = new BonusCardsController();
-      bonusCardsController.showBonusCardsTable(gameHandler);
+      cardsAndTilesController.showBonusCardsTable(this);
    }
 
    @FXML
    public void townTilesClicked() {
-      TownTilesController townTilesController = new TownTilesController();
-      townTilesController.showTownTilesTable(gameHandler);
+      cardsAndTilesController.showTownTilesTable(this);
    }
 
    @FXML
    public void scoringTilesClicked() {
-      ScoringTilesController scoringTilesController = new ScoringTilesController();
-      scoringTilesController.showScoringTilesTable(gameHandler);
+
+      cardsAndTilesController.showScoringTilesTable(this);
    }
 
    @FXML
@@ -256,8 +249,8 @@ public class GameController implements Initializable {
 
    @FXML
    public void favorTilesClicked() {
-      FavorTilesController favorTilesController = new FavorTilesController();
-      favorTilesController.showFavorTilesTable(gameHandler);
+
+      cardsAndTilesController.showFavorTilesTable(this);
 
    }
 
@@ -319,7 +312,8 @@ public class GameController implements Initializable {
       this.playerList = playerList;
 
       gameHandler = new GameHandler(playerList, size);
-
+      cardsAndTiles = new CardsAndTiles(playerList.length,playerList);
+      cardsAndTilesController = new CardsAndTilesController();
    }
 
    public void loadInitialMap() {
@@ -443,5 +437,9 @@ public class GameController implements Initializable {
             break;
       }
 
+   }
+
+   public CardsAndTiles getCardsAndTiles() {
+      return cardsAndTiles;
    }
 }

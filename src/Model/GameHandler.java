@@ -33,7 +33,7 @@ public class GameHandler implements Serializable{
         this.playerList = playerList;
         playerHandler = new PlayerHandler();
 
-        cardsAndTiles = new CardsAndTiles(playerSize);
+        cardsAndTiles = new CardsAndTiles(playerSize,playerList);
 
         currentRound = 0;
 
@@ -259,13 +259,7 @@ public class GameHandler implements Serializable{
 
 
 
-    /**
-     * playerChoseBonusCard(cardsAndTiles.bonusCards.get(cardIndex), player, playerID);
-     * notTakenCard is not used.
-     * TODO
-     * @param bonusCard which is chosen by the player.
-     * @param player who select bonusCard.
-     */
+
     public void playerChoseBonusCard(BonusCard bonusCard, Player player) {
         if (bonusCard.isPlayerOcupied()) {
             System.err.println(" Please choose different Bonus Card \n" +

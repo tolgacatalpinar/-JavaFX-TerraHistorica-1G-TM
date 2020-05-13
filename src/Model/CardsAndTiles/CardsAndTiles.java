@@ -164,7 +164,7 @@ public class CardsAndTiles implements Serializable {
         return temp;
     }
 
-    public void returnScorintTileBonus(){
+    public void returnScoringTileBonus(){
 
     }
     public void returnBonusCards(int playerId,int choiceIndex){
