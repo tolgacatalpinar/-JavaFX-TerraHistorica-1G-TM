@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class PlayerHandler implements Serializable{
 
 
-   public static void buildInitialDwelling(Player player)
+   public  void buildInitialDwelling(Player player)
    {
       player.setDwellingNum(player.getDwellingNum() + 1);
 
@@ -18,7 +18,7 @@ public class PlayerHandler implements Serializable{
       }
    }
 
-    public static int buildStructure(Player player, String structure, boolean isThereAdjacentOpponent) {
+    public  int buildStructure(Player player, String structure, boolean isThereAdjacentOpponent) {
 
         if (structure.equals("Dwelling")) {
             if (player.getDwellingNum() < player.getFaction().MAX_DWELLING) {
