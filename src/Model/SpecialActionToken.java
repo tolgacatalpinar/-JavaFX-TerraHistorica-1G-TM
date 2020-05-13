@@ -6,7 +6,7 @@ public class SpecialActionToken implements Serializable {
     public boolean isStrongholdAbility;
     public boolean isFactionAbility;
 
-//BUnlar değiştirilip tekrardan false olarak set edilecek ama şimdilik böyle kalması lazım
+//Bunlar değiştirilip tekrardan false olarak set edilecek ama şimdilik böyle kalması lazım
     public SpecialActionToken() {
         this.isSpade = true;
         this.isCultTack = true;

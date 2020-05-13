@@ -11,6 +11,7 @@ public class Map implements Serializable {
    public ArrayList<Space> visited = new ArrayList<Space>(); //
    final int ROW_NUMBER = 9;
    final int COLUMN_NUMBER = 13;
+   public CoordinateTuple bridgeCoordinates;
 
    public Map() {
       spaces = new Space[9][13];

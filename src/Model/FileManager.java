@@ -1,4 +1,7 @@
 package Model;
+import Controller.GameController;
+import Controller.RoundController;
+
 import java.io.File;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -10,8 +13,9 @@ import java.io.Serializable;
 
 public class FileManager {
     private File save;
-    private GameHandler game;
-    private Map map;
+    private GameController game;
+    private RoundController rounds;
+    //private Map map; Lazımsa ekleyelim ama raporda yok
 
     public FileManager(String gameId) throws IOException {
         save = createSave(gameId);
@@ -24,7 +28,7 @@ public class FileManager {
     }
 
 
-    public void saveGame(GameHandler game, Map map) throws IOException   {
+    public void saveGame(GameController game, RoundController rounds) throws IOException   {
         FileOutputStream f = new FileOutputStream(save);
         ObjectOutputStream o = new ObjectOutputStream(f);
         o.writeObject(game);
@@ -36,8 +40,8 @@ public class FileManager {
         try {
             FileInputStream fi = new FileInputStream(save);
             ObjectInputStream oi = new ObjectInputStream(fi);
-            this.game = (GameHandler) oi.readObject();
-            this.map = (Map) oi.readObject();
+            this.game = (GameController) oi.readObject();
+            //this.map = (Map) oi.readObject();
             oi.close();
             fi.close();
 
@@ -50,12 +54,16 @@ public class FileManager {
             e.printStackTrace();
         }
     }
-
+/** Bu raporda yok da kalacak mı abi
     public Map getMap() {
         return map;
     }
-
-    public GameHandler getGame() {
+*/
+    public GameController getGame() {
         return game;
+    }
+
+    public RoundController getRounds() {
+        return rounds;
     }
 }
