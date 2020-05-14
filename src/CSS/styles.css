@@ -39,7 +39,7 @@
     -fx-background-image: url("../Images/earth.png");
 }
 #main_pane{
-    -fx-background-image: url("../Images/religion_bg.png");
+    -fx-background-image: url("../Images/ReligionImages/religion_bg.png");
 }
 #budism_track{
     -fx-background-image: url("../Images/water.png");
@@ -67,7 +67,7 @@
     -fx-background-size: cover;
 }
 .hinduism_symbol{
-    -fx-background-image: url("../Images/ReligionImages/hinduism_symbol.png");
+    -fx-background-image: url("../Images/ReligionImages/hinduism.png");
     -fx-background-size: cover;
 }
 .chris_symbol{
