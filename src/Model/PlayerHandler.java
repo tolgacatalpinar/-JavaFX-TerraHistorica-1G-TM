@@ -312,13 +312,13 @@ public class PlayerHandler implements Serializable{
         player.setRoundPassed(true);
     }
 
-    public boolean terraform(Player player) {
+    public boolean terraform(Player player, String typeToChange) {
         if ( player.getFaction().payPriestWhenTransform) {
             player.spendPriest(1);
             return true;
         }
         else {
-            if(player.spendFreeSpade(player.getFaction().TERRAIN_TILE)) {
+            if(player.spendFreeSpade(typeToChange)) {
                 return true;
             }
         }

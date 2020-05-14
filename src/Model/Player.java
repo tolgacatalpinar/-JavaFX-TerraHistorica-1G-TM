@@ -174,6 +174,7 @@ public class Player implements Serializable {
          return true;
       }
       System.out.println("Not enough resources");
+      spadeNeeded += freeSpade;
       return false;
    }
 

@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.GameHandler;
-import Model.Map;
-import Model.Player;
-import Model.Space;
+import Model.*;
 import Model.StructureSubclasses.Stronghold;
 import View.ActionsViews.SpecialActionView;
 import javafx.event.Event;
@@ -54,7 +51,6 @@ public class ActionController {
                         terrains[map.getRow(adj[k])][map.getColumn(adj[k])].setOnMouseClicked(new EventHandler<MouseEvent>() {
                            @Override
                            public void handle(MouseEvent event) {
-                              //BUNA DİKKAT
                               terraformAction(playerArr, curPlayerId, terrains, terrains[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], map, map.spaces[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])]);
                            }
                         });
@@ -83,6 +79,7 @@ public class ActionController {
       choices.add("Swamp");
       choices.add("Plains");
       choices.remove(space.getType());
+      PlayerHandler playerHandler = new PlayerHandler();
 
       Label prompt = new Label("Please choose the terrain to be transformed into.");
       Label promptChoice = new Label("Terrain type: ");
@@ -103,10 +100,13 @@ public class ActionController {
          @Override
          public void handle(MouseEvent event) {
             String selectedChoice = (String) choiceBox.getValue();
-
-            //gameHandler.terraform(space, selectedChoice);
-            TerrainController.terraform(terrain, selectedChoice);
-            space.setType(selectedChoice);
+            if (playerHandler.terraform(playerArr[curPlayerId],space.getType())){
+               TerrainController.terraform(terrain, selectedChoice);
+               space.setType(selectedChoice);
+               System.out.println("Döndü");
+            }else{
+               System.out.println("No enough resources");
+            }
 
             terraformStage.close();
             if (selectedChoice.equals(playerArr[curPlayerId].getFaction().TERRAIN_TILE)) {
@@ -120,11 +120,11 @@ public class ActionController {
                   @Override
                   public void handle(MouseEvent event) {
 
-                     //gameHandler.buildDwelling(space);
-                     TerrainController.buildDwelling(terrain, selectedChoice);
-                     space.setOccupied(true);
-                     space.setStructure("Dwelling");
-
+                     if(playerHandler.buildStructure(playerArr[curPlayerId],"Dwelling",false) != -1) {
+                        TerrainController.buildDwelling(terrain, selectedChoice);
+                        space.setOccupied(true);
+                        space.setStructure("Dwelling");
+                     }
                      dwellingChoiceStage.close();
                   }
                });

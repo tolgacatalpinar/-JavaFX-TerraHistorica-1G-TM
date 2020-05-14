@@ -169,22 +169,24 @@ public class GameController implements Initializable {
       disableButtonClicks();
       enableTerrains();
       enableActions();
-      System.out.println("Current player was: " + playerList[roundController.getCurrentPlayerId()].getNickName());
-      System.out.println(roundController.getCurrentPlayerId());
-      if ((roundController.getCurrentPlayerId() + 1) < playerList.length && playerList[roundController.getCurrentPlayerId() + 1] != null)
-         roundController.setCurrentPlayerId(roundController.currentPlayerId + 1);
-      else
-         roundController.setCurrentPlayerId(0);
-      currentPlayer = playerList[roundController.getCurrentPlayerId()];
-      System.out.println("current dwelling: " + currentPlayer.getDwellingNum());
-      if (currentPlayer.getDwellingNum() < currentPlayer.getFaction().startingDwellingNum) {
-         loadInitialMap();
-         setButtonClickForInitialDwellings();
+      if(roundController.currentRound == 0) {
+         System.out.println("Current player was: " + playerList[roundController.getCurrentPlayerId()].getNickName());
+         System.out.println(roundController.getCurrentPlayerId());
+         if ((roundController.getCurrentPlayerId() + 1) < playerList.length && playerList[roundController.getCurrentPlayerId() + 1] != null)
+            roundController.setCurrentPlayerId(roundController.currentPlayerId + 1);
+         else
+            roundController.setCurrentPlayerId(0);
+         currentPlayer = playerList[roundController.getCurrentPlayerId()];
+         System.out.println("current dwelling: " + currentPlayer.getDwellingNum());
+         if (currentPlayer.getDwellingNum() < currentPlayer.getFaction().startingDwellingNum) {
+            loadInitialMap();
+            setButtonClickForInitialDwellings();
+         }
+         System.out.println("Current player is now: " + playerList[roundController.getCurrentPlayerId()].getNickName());
+         System.out.println("--------------------------------------------------");
+      }else{
+         roundController.endTurn(playerList);
       }
-
-
-      System.out.println("Current player is now: " + playerList[roundController.getCurrentPlayerId()].getNickName());
-      System.out.println("--------------------------------------------------");
    }
 
    @FXML

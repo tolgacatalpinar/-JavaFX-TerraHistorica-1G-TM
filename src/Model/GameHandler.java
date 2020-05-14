@@ -190,7 +190,7 @@ public class GameHandler implements Serializable{
 
     public boolean terraform(Space space, String toTransform) {
 
-        if (playerHandler.terraform(playerList[currentPlayerId]) ) {
+        if (playerHandler.terraform(playerList[currentPlayerId],toTransform) ) {
         //    map.transformTerrain(space, toTransform);
             //Successful terraforming
             return true;

@@ -28,6 +28,10 @@ public class RoundController {
         return currentRound;
     }
 
+    public void setCurrentRound(int currentRound) {
+        this.currentRound = currentRound;
+    }
+
     public void setCurrentPlayerId(int currentPlayerId){
         this.currentPlayerId = currentPlayerId;
     }
@@ -41,6 +45,9 @@ public class RoundController {
      */
     public void endTurn(Player[] playerList) { //Skip Turn Clicked
         currentPlayerId++;
+        if(currentPlayerId >= playerCount) {
+            currentPlayerId = 0;
+        }
         if(!isRoundOver()){
         while(playerList[currentPlayerId].isRoundPassed()){
             currentPlayerId++;
@@ -49,7 +56,6 @@ public class RoundController {
             }
             }
         }
-        currentPlayerId = 0;
     }
 
     /**
@@ -66,6 +72,7 @@ public class RoundController {
             playerHandler.updateResources(playerList[i]);
         }
         currentRound++;
+        System.out.println("Round is : "+ currentRound);
         if(currentRound > MAX_ROUND) {
             System.out.println("GAME OVER");
         }
@@ -78,11 +85,11 @@ public class RoundController {
         lastPassedIndex++;
         if(isRoundOver()) {
             endRound(playerList);
-        }
-        endTurn(playerList);
+        }else
+            endTurn(playerList);
     }
 
-    private boolean isRoundOver() {
+    public boolean isRoundOver() {
         return lastPassedIndex == playerCount;
     }
 
