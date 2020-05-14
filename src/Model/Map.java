@@ -25,7 +25,7 @@ public class Map implements Serializable {
             space = new Space("Mountains");
          else if (i == 2 || i == 9 || i == 32 || i == 34 || i == 39 || i == 62 || i == 66 || i == 70 || i == 85 || i == 109 || i == 115)
             space = new Space("Forest");
-         else if (i == 3 || i == 10 || i == 40 || i == 45 || i == 55 || i == 65 || i == 89 || i == 92 || i == 97 || i == 107 || i == 114)
+         else if (i == 3 || i == 10 || i == 40 || i == 45 || i == 55 || i == 64 || i == 89 || i == 92 || i == 97 || i == 107 || i == 114)
             space = new Space("Lakes");
          else if (i == 5 || i == 8 || i == 11 || i == 44 || i == 47 || i == 49 || i == 54 || i == 83 || i == 104 || i == 108 || i == 111 || i == 116)
             space = new Space("Wasteland");
@@ -131,44 +131,17 @@ public class Map implements Serializable {
       return adjacents;
    }
 
-   public boolean isUndirectAdjacent(Space space1, Space space2, int shippingLevel) {
-      boolean result;
-      result = isReachable(space1, space2, shippingLevel, 0, false, null);
-      visited.clear();
-      return result;
-   }
+//   public boolean isUndirectAdjacent(Space space1, Space space2, int shippingLevel) {
+//      boolean result;
+//      result = isReachable(space1, space2, shippingLevel, 0, false, null);
+//      visited.clear();
+//      return result;
+//   }
 
-   public boolean isReachable(Space space1, Space space2, int shippingLevel, int counter, boolean found, ArrayList<Space> previous) {
-      Space[] adjacents = adjacencyList(space1);
-      boolean isOver = false;
-      ArrayList<Space> rivers = new ArrayList<Space>();
+   public boolean isReachable(Space space1, Space space2, int shippingLevel){
 
-      for (int i = 0; i < rivers.size() && isOver; i++) {
-         if (visited.contains(rivers.get(i)) || counter >= shippingLevel)
-            isOver = true;
-         else
-            isOver = false;
-      }
 
-      if (isOver || found) {
-         counter--;
-         return found;
-      } else {
-         for (int i = 0; i < adjacents.length && isOver; i++) {
-            if (adjacents[i] == space2) {
-               found = true;
-               return found;
-            }
-
-            if (!visited.contains(adjacents[i]) && adjacents[i].getType().equals("River") && !previous.contains(adjacents[i])) {
-               counter++;
-               previous = rivers;
-               visited.add(adjacents[i]);
-               isReachable(adjacents[i], space2, shippingLevel, counter, found, previous);
-            }
-         }
-      }
-      return found;
+      return false;
    }
 
    public ArrayList<Space> adjacentRivers(Space space1) {
@@ -188,6 +161,10 @@ public class Map implements Serializable {
       int col1 = getColumn(space1);
       int col2 = getColumn(space2);
 
+      //preliminary case
+      if (space1.getType().equals("River") || space2.getType().equals("River"))
+         return false;
+
       // bridge case 1
       if (Math.abs(row1 - row2) == 2 && col1 == col2) {
          if (row1 % 2 == 0) {
@@ -199,27 +176,42 @@ public class Map implements Serializable {
          }
       }
 
-      // bridge case 2
-      if (Math.abs(row1 - row2) == 1) {
-         if ((col2 == col1 + 1) && (spaces[row1][col1 + 1].getType().equals("River") && spaces[row1 + 1][col1].getType().equals("River")))
-            return true;
-         else if ((col2 == col1 - 2) && (spaces[row1][col1 - 1].getType().equals("River") && spaces[row1 - 1][col1 - 1].getType().equals("River")))
-            return true;
-         else if ((col2 == col1 - 2) && (spaces[row1][col1 - 1].getType().equals("River") && spaces[row1 + 1][col1 - 1].getType().equals("River")))
-            return true;
-         else if ((col2 == col1 + 1) && (spaces[row1][col1 + 1].getType().equals("River") && spaces[row1 - 1][col1].getType().equals("River")))
-            return true;
-            /////
-         else if ((col2 == col1 + 2) && (spaces[row1][col1 + 1].getType().equals("River") && spaces[row1 + 1][col1 + 1].getType().equals("River")))
-            return true;
-         else if ((col2 == col1 - 1) && (spaces[row1][col1 - 1].getType().equals("River") && spaces[row1 - 1][col1].getType().equals("River")))
-            return true;
-         else if ((col2 == col1 - 1) && (spaces[row1][col1 - 1].getType().equals("River") && spaces[row1 + 1][col1].getType().equals("River")))
-            return true;
-         else return (col2 == col1 + 2) && (spaces[row1][col1 + 1].getType().equals("River") && spaces[row1 - 1][col1 + 1].getType().equals("River"));
+      if (row1-row2 == 1)
+      {
+         if (row1%2 == 0)
+         {
+            return ((col2 == col1 - 2 && spaces[row1][col1-1].getType().equals("River") && spaces[row1 - 1][col1 - 1].getType().equals("River"))||
+                    (col2 == col1 + 1 && spaces[row1][col1+1].getType().equals("River") && spaces[row1 - 1][col1].getType().equals("River")));
+         }
+
+         else
+         {
+            return ((col2 == col1 - 1 && spaces[row1][col1-1].getType().equals("River") && spaces[row1 - 1][col1 ].getType().equals("River")) ||
+                    (col2 == col1 + 2 && spaces[row1][col1+1].getType().equals("River") && spaces[row1 - 1][col1 + 1 ].getType().equals("River")));
+         }
       }
+
+      if (row2-row1 == 1)
+      {
+         if (row2%2 == 0)
+         {
+            return ((col1 == col2 - 2 && spaces[row2][col2-1].getType().equals("River") && spaces[row2 - 1][col2 - 1].getType().equals("River"))||
+                    (col1 == col2 + 1 && spaces[row2][col2+1].getType().equals("River") && spaces[row2 - 1][col2].getType().equals("River")));
+         }
+
+         else
+         {
+            return ((col1 == col2 - 1 && spaces[row2][col2-1].getType().equals("River") && spaces[row2 - 1][col2 ].getType().equals("River")) ||
+                    (col1 == col2 + 2 && spaces[row2][col2+1].getType().equals("River") && spaces[row2 - 1][col2 + 1 ].getType().equals("River")));
+         }
+      }
+
+
+
       return false;
    }
+
+
 
    public void buildBridge(Space space1, Space space2) {
       if (canBuildBridge(space1, space2)) {
@@ -232,15 +224,19 @@ public class Map implements Serializable {
    }
 
    public ArrayList<Space> bridgeables(Space space1){
-      Space[] adjacents = adjacencyList(space1);
+
       ArrayList<Space> bridgeables = new ArrayList<Space>();
-      for (Space adjacent : adjacents) {
-         if (canBuildBridge(space1, adjacent)) {
-            bridgeables.add(adjacent);
+      for (int i = 0; i < ROW_NUMBER; i++) {
+         for (int j = 0; j < COLUMN_NUMBER; j++) {
+            if (canBuildBridge(space1, spaces[i][j])) {
+               bridgeables.add(spaces[i][j]);
+               System.out.println(i + " - " + j);
+            }
          }
       }
       return bridgeables;
    }
+
    public int calculateTownScore(Space space1, String playerColor) {
       Space[] adjacents = adjacencyList(space1);
       boolean isOver = true;

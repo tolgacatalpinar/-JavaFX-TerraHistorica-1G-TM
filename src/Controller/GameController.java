@@ -22,8 +22,8 @@ import javafx.scene.layout.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-public class GameController implements Initializable {
+import java.io.Serializable;
+public class GameController implements Initializable, Serializable {
 
    final int ROW_NUMBER = 9;
 
@@ -191,11 +191,8 @@ public class GameController implements Initializable {
 
    @FXML
    public void passRoundClicked(){
-
-      cardsAndTilesController.showBonusCardsTable(cardsAndTiles,currentPlayer);
+      cardsAndTilesController.showBonusCardsTable(cardsAndTiles,playerList[roundController.getCurrentPlayerId()]);
       roundController.passRound(playerList);
-
-
 
    }
 

@@ -17,11 +17,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-public class ActionController {
+public class ActionController implements Serializable {
    final static int ROW_NUMBER = 9;
    final static int COLUMN_NUMBER = 13;
    private static int selection = -1;

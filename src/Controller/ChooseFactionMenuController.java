@@ -19,8 +19,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-public class ChooseFactionMenuController  implements Initializable {
+import java.io.Serializable;
+public class ChooseFactionMenuController  implements Initializable, Serializable{
 
     @FXML
     Button backButton,  startButton;

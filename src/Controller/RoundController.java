@@ -2,8 +2,8 @@ package Controller;
 
 import Model.Player;
 import Model.PlayerHandler;
-
-public class RoundController {
+import java.io.Serializable;
+public class RoundController implements  Serializable{
     int currentPlayerId = 0;
     int playerCount = 0;
     int currentRound = 0;

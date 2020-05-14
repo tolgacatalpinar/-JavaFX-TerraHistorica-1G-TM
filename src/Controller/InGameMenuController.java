@@ -3,8 +3,8 @@ package Controller;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
-
-public class InGameMenuController {
+import java.io.Serializable;
+public class InGameMenuController implements Serializable {
     Slider volumeSlider;
     Button setButton;
     ChoiceBox resolutions;

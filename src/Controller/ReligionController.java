@@ -36,8 +36,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-public class ReligionController{
+import java.io.Serializable;
+public class ReligionController implements Serializable{
     @FXML
     private ChoiceBox<String> choiceBox;
     @FXML

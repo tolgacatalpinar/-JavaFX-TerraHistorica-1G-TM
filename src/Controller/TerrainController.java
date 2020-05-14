@@ -5,8 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-
-public class TerrainController {
+import java.io.Serializable;
+public class TerrainController implements Serializable {
 
    public static void buildDwelling(Button button, String color)
    {

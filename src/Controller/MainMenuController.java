@@ -16,8 +16,8 @@ import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import static java.util.Objects.requireNonNull;
-
-public class MainMenuController   implements Initializable {
+import java.io.Serializable;
+public class MainMenuController   implements Initializable, Serializable {
 
     @FXML
     Button createGameButton, loadGameButton, settingsButton, helpButton, creditsButton, exitButton, helpLink;
