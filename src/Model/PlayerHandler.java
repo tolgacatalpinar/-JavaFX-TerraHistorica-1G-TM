@@ -175,7 +175,7 @@ public class PlayerHandler implements Serializable{
 
     }
 
-    public void upgradeSpadeLevel(Player player) {
+    public int upgradeSpadeLevel(Player player) {
         if(player.getSpadeLevel() < 3) {
             if(player.spendFromResources(player.getFaction().SPADE_WORKER_COST,player.getFaction().SPADE_GOLD_COST,player.getFaction().SPADE_PRIEST_COST)) {
                 player.setSpadeLevel(player.getSpadeLevel()+1);
@@ -185,10 +185,15 @@ public class PlayerHandler implements Serializable{
                 else if (player.getSpadeLevel() == 3) {
                     player.addVictoryPoints(player.getFaction().SPADE_SECOND_UPGRADE_VICTORY);
                 }
+                return 1;
+            }
+            else {
+                return -1; //Not enough resources
             }
         }
         else {
             System.out.println("Max spade level");
+            return 0; //Max spade
         }
 
     }
