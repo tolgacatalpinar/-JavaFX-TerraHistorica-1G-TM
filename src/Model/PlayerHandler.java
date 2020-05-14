@@ -91,7 +91,7 @@ public class PlayerHandler implements Serializable{
                 if (player.spendFromResources(player.getFaction().SANCTUARY_WORKER_COST, player.getFaction().SANCTUARY_GOLD_COST, 0)) {
                     player.setTempleNum(player.getTempleNum() - 1);
                     player.setSanctuaryNum(player.getSanctuaryNum() + 1);
-                    player.setPriestIncome(player.getFaction().SANCTUARY_PRIEST_INCOME);
+                    player.setPriestIncome(player.getPriestIncome() + player.getFaction().SANCTUARY_PRIEST_INCOME);
                     return 1;
                 }
                 else {
@@ -107,7 +107,7 @@ public class PlayerHandler implements Serializable{
                 if (player.spendFromResources(player.getFaction().TEMPLE_WORKER_COST, player.getFaction().TEMPLE_GOLD_COST, 0)) {
                     player.setTradingPostNum(player.getTradingPostNum()-1);
                     player.setTempleNum(player.getTempleNum()+1);
-                    player.setPriestIncome(player.getFaction().TEMPLE_PRIEST_INCOME);
+                    player.setPriestIncome(player.getPriestIncome() + player.getFaction().TEMPLE_PRIEST_INCOME);
                     return player.getFaction().favorTilesAfterBuildingTemple;
                 }
                 else {
