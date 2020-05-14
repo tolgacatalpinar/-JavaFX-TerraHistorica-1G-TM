@@ -71,10 +71,8 @@ public class CardsAndTilesController {
                 public void handle(MouseEvent event) {
                     if (selection != finalI)
                         tempPane.setEffect(null);
-                    ;
                 }
             });
-
             tempPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -85,6 +83,16 @@ public class CardsAndTilesController {
                     }
                 }
             });
+            if(bonusCards.get(i).isPlayerOcupied()){
+                    DropShadow borderGlow = new DropShadow();
+                    borderGlow.setColor(Color.RED);
+                    borderGlow.setOffsetX(0f);
+                    borderGlow.setOffsetY(0f);
+                    borderGlow.setWidth(50);
+                    borderGlow.setHeight(50);
+                    tempPane.setEffect(borderGlow);
+                    tempPane.setDisable(true);
+            }
             gridPane.add(tempPane, i % 3, i / 3);
         }
         select.setOnMouseClicked(new EventHandler<MouseEvent>() {
