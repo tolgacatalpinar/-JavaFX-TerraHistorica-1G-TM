@@ -191,14 +191,17 @@ public class GameController implements Initializable {
 
    @FXML
    public void passRoundClicked(){
-      bonusCardsClicked();
+
+      cardsAndTilesController.showBonusCardsTable(cardsAndTiles,currentPlayer);
       roundController.passRound(playerList);
-      bonusCardsClicked();
+
+
+
    }
 
    @FXML
    public void bonusCardsClicked() {
-      cardsAndTilesController.showBonusCardsTable(this);
+      cardsAndTilesController.showBonusCardsTable(cardsAndTiles,currentPlayer);
    }
 
    @FXML
@@ -248,13 +251,13 @@ public class GameController implements Initializable {
 
    @FXML
    public void townTilesClicked() {
-      cardsAndTilesController.showTownTilesTable(this);
+      cardsAndTilesController.showTownTilesTable(cardsAndTiles);
    }
 
    @FXML
    public void scoringTilesClicked() {
 
-      cardsAndTilesController.showScoringTilesTable(this);
+      cardsAndTilesController.showScoringTilesTable(cardsAndTiles);
    }
 
    @FXML   public void exchangeResourcesClicked(){
@@ -264,7 +267,7 @@ public class GameController implements Initializable {
    @FXML
    public void favorTilesClicked() {
 
-      cardsAndTilesController.showFavorTilesTable(this);
+      cardsAndTilesController.showFavorTilesTable(cardsAndTiles);
 
    }
    //TODO

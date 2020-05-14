@@ -26,10 +26,10 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class CardsAndTilesController {
-    private static int selection = -1;
-    public void showBonusCardsTable(GameController gameController)
+    private  int selection = -1;
+    public void showBonusCardsTable(CardsAndTiles cardsAndTiles,Player current)
     {
-        ArrayList<BonusCard> bonusCards = gameController.getCardsAndTiles().getSelectedBonusCards();
+        ArrayList<BonusCard> bonusCards = cardsAndTiles.getSelectedBonusCards();
         BorderPane border = new BorderPane();
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
@@ -49,6 +49,7 @@ public class CardsAndTilesController {
                 BackgroundSize.DEFAULT)));
         dialog.setScene(dialogScene);
         dialog.setTitle("Bonus Cards ");
+
         for (int i = 0; i < bonusCards.size(); i++) {
             GridPane tempPane = new GridPane();
             tempPane.getChildren().add(new BonusCardView(bonusCards.get(i)));
@@ -91,27 +92,29 @@ public class CardsAndTilesController {
             public void handle(MouseEvent event) {
                 int chosen = getSelection();
                 System.out.println("Selected " + chosen);
+                cardsAndTiles.playerChoseBonusCard(cardsAndTiles.selectedBonusCards.get(selection),current);
                 dialog.close();
             }
         });
 
         dialog.show();
 
+
     }
-    public static int getSelection() {
+    public  int getSelection() {
         return selection;
     }
-    public static void setSelection(int i) {
+    public  void setSelection(int i) {
         selection = i;
     }
-    public void showFavorTilesTable(GameController gameController)
+    public void showFavorTilesTable(CardsAndTiles cardsAndTiles)
     {
         VBox wholeFavor = new VBox();
         HBox favorBox1 = new HBox();
         HBox favorBox2 = new HBox();
         HBox favorBox3 = new HBox();
 
-        ArrayList<FavorTile> favorTiles = gameController.getCardsAndTiles().getFavorTiles();
+        ArrayList<FavorTile> favorTiles = cardsAndTiles.getFavorTiles();
         for( int i = 0; i < (int) Math.ceil((double)favorTiles.size() / 3); i ++)
         {
             favorBox1.getChildren().add(new FavorTileView(favorTiles.get(i)));
@@ -139,7 +142,7 @@ public class CardsAndTilesController {
                 BackgroundSize.DEFAULT)));
         dialog.show();
     }
-    public void showScoreTable(GameController gameController)
+    public void showScoreTable()
     {
         Pane emptyPane = new Pane();
 
@@ -153,13 +156,13 @@ public class CardsAndTilesController {
                 BackgroundSize.DEFAULT)));
         dialog.show();
     }
-    public void showScoringTilesTable(GameController gameController)
+    public void showScoringTilesTable(CardsAndTiles cardsAndTiles)
     {
         HBox wholeScoring = new HBox();
         VBox first = new VBox();
         VBox second = new VBox();
 
-        ArrayList<ScoringTile> scoringTiles = gameController.getCardsAndTiles().getSelectedScoringTiles();
+        ArrayList<ScoringTile> scoringTiles = cardsAndTiles.getSelectedScoringTiles();
 
         for(int i = 0; i < (int) Math.ceil((double)scoringTiles.size() / 2); i++) {
             first.getChildren().add(new ScoringTileView(scoringTiles.get(i)));
@@ -183,7 +186,7 @@ public class CardsAndTilesController {
                 BackgroundSize.DEFAULT)));
         dialog.show();
     }
-    public void showTownTilesTable(GameController gameController)
+    public void showTownTilesTable(CardsAndTiles cardsAndTiles)
     {
         VBox wholeTown = new VBox();
         HBox first = new HBox();
@@ -191,7 +194,7 @@ public class CardsAndTilesController {
         HBox third = new HBox();
 
 
-        ArrayList<TownTile> townTiles = gameController.getCardsAndTiles().getTownTiles();
+        ArrayList<TownTile> townTiles = cardsAndTiles.getTownTiles();
 
         for(int i = 0; i < (int) Math.ceil((double)townTiles.size() / 3); i++) {
             first.getChildren().add(new TownTileView(townTiles.get(i)));

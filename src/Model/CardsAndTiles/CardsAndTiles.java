@@ -189,8 +189,8 @@ public class CardsAndTiles implements Serializable {
             }
             bonusCard.setPlayerOcupied(true);
             bonusCard.setPlayerId(playerId);
-            player.setGoldNum(player.getGoldIncome() + bonusCard.getGoldBonus());
-            player.setWorkerNum(player.getWorkerIncome() + bonusCard.getWorkerBonus());
+            player.setGoldNum(player.getGoldNum() + bonusCard.getGoldBonus());
+            player.setWorkerNum(player.getWorkerNum() + bonusCard.getWorkerBonus());
             player.addPowerToBowl(bonusCard.getPowerBonus());
             player.setShipLevel(player.getShipLevel() + bonusCard.getShippingRange());
             player.setPriestNum(player.getPriestIncome() + bonusCard.getPriestBonus());
