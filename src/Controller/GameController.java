@@ -216,11 +216,13 @@ public class GameController implements Initializable {
    public void upgradeSpadeClicked() {
 
       ActionController.showUpdateSpadeDialogs(playerList,roundController.getCurrentPlayerId());
+
    }
 
    @FXML
    public void terraformClicked() {
       ActionController.terraform(playerList,roundController.getCurrentPlayerId(), terrains, map);
+
    }
 
    @FXML
@@ -273,6 +275,7 @@ public class GameController implements Initializable {
    @FXML
    public void specialActionClicked() {
       ActionController.showSpeacialActions(this);
+      disableActions(true);
    }
 
    public void createSpaces() {
@@ -354,7 +357,7 @@ public class GameController implements Initializable {
 
    public void loadInitialMap() {
 
-      disableActions();
+      disableActions(false);
       disableAllTerrains();
       for (int i = 0; i < 9; i++)
          for (int j = 0; j < 13; j++) {
@@ -433,7 +436,7 @@ public class GameController implements Initializable {
    /**TODO
     * TAŞINACAK
     */
-   public void disableActions(){
+   public void disableActions(boolean isSkip){
       terraform.setDisable(true);
       upgradeShipping.setDisable(true);
       upgradeStruct.setDisable(true);
@@ -442,7 +445,8 @@ public class GameController implements Initializable {
       specialActions.setDisable(true);
       upgradeSpade.setDisable(true);
       passRound.setDisable(true);
-      skipTurn.setDisable(true);
+      if (!isSkip)
+         skipTurn.setDisable(true);
    }
    /**TODO
     * TAŞINACAK
