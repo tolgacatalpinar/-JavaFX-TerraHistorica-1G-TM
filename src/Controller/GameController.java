@@ -189,7 +189,7 @@ public class GameController implements Initializable {
 
    @FXML
    public void passRoundClicked(){
-      //
+      roundController.passRound(playerList);
    }
 
 
@@ -324,7 +324,7 @@ public class GameController implements Initializable {
       }
       this.playerList = playerList;
       playerHandler = new PlayerHandler();
-      roundController = new RoundController(playerList,playerHandler);
+      roundController = new RoundController(playerList);
 
 
    }
