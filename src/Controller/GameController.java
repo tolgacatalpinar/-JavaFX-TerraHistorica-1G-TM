@@ -86,7 +86,7 @@ public class GameController implements Initializable {
 
    @Override
    public void initialize(URL url, ResourceBundle resourceBundle) {
-      actions = new Button[]{specialActions, terraform, upgradeShipping, upgradeStruct, sendPriest, powerActions, upgradeSpade};
+      actions = new Button[]{specialActions, terraform, upgradeShipping, upgradeStruct, sendPriest, powerActions, upgradeSpade, passRound};
       System.out.println("Initialize is called");
       int index = 0;
       terrains = new Button[ROW_NUMBER][COLUMN_NUMBER];
@@ -216,18 +216,16 @@ public class GameController implements Initializable {
    public void upgradeSpadeClicked() {
 
       ActionController.showUpdateSpadeDialogs(playerList,roundController.getCurrentPlayerId());
-
    }
 
    @FXML
    public void terraformClicked() {
-      ActionController.terraform(playerList,roundController.getCurrentPlayerId(), terrains, map);
-
+      ActionController.terraform(playerList,roundController.getCurrentPlayerId(), terrains, map, actions);
    }
 
    @FXML
    public void upgradeStructureClicked() {
-      ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(),terrains, map);
+      ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(),terrains, map, actions);
    }
 
    @FXML
@@ -275,7 +273,6 @@ public class GameController implements Initializable {
    @FXML
    public void specialActionClicked() {
       ActionController.showSpeacialActions(this);
-      disableActions(true);
    }
 
    public void createSpaces() {
@@ -357,7 +354,7 @@ public class GameController implements Initializable {
 
    public void loadInitialMap() {
 
-      disableActions(false);
+      disableActions();
       disableAllTerrains();
       for (int i = 0; i < 9; i++)
          for (int j = 0; j < 13; j++) {
@@ -436,7 +433,7 @@ public class GameController implements Initializable {
    /**TODO
     * TAŞINACAK
     */
-   public void disableActions(boolean isSkip){
+   public void disableActions(){
       terraform.setDisable(true);
       upgradeShipping.setDisable(true);
       upgradeStruct.setDisable(true);
@@ -445,8 +442,7 @@ public class GameController implements Initializable {
       specialActions.setDisable(true);
       upgradeSpade.setDisable(true);
       passRound.setDisable(true);
-      if (!isSkip)
-         skipTurn.setDisable(true);
+      skipTurn.setDisable(true);
    }
    /**TODO
     * TAŞINACAK
