@@ -20,7 +20,6 @@ public class Ramesses extends Faction { // FAKİR
       SPADE_SECOND_UPGRADE_VICTORY = 0;
       INITIAL_BOWL_ONE_POWER = 7;
       INITIAL_BOWL_TWO_POWER = 5;
-      SHIPPING_UPGRADE_VICTORY_POINTS = new int[]{};
       spadeNeededToTerraformPlains = 1;
       spadeNeededToTerraformSwamp = 2;
       spadeNeededToTerraformLakes = 3;

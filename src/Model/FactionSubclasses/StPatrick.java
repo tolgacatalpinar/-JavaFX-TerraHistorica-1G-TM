@@ -16,7 +16,6 @@ public class StPatrick extends Faction { //dwarwes
       DWELLING_WORKER_COST = 1;
       DWELLING_WORKER_INCOME = 1;
       tradingPostGoldIncome = new int[]{3, 2, 2, 3};
-      SHIPPING_UPGRADE_VICTORY_POINTS = new int[]{};
       spadeNeededToTerraformPlains = 0;
       spadeNeededToTerraformPlains = 3;
       spadeNeededToTerraformSwamp = 3;
