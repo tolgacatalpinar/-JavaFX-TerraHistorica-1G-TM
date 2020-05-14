@@ -9,6 +9,7 @@ public class Ramesses extends Faction { // FAKİR
       setInitials();
   }
   public void setInitials() {
+      MAX_SPADE_LEVEL = 2;
       TERRAIN_TILE = "Desert";
       INITIAL_HINDUISM = 1; // fire
       INITIAL_CHRISTIANITY = 1; //air

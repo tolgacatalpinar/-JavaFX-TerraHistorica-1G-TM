@@ -9,6 +9,7 @@ public class AliesterCrowley extends Faction {
         setInitials();
     }
     public void setInitials() {
+        MAX_SPADE_LEVEL = 0;
         TERRAIN_TILE = "Swamp";
         INITIAL_WORKER = 1;
         INITIAL_PRIEST = 1;
@@ -20,10 +21,8 @@ public class AliesterCrowley extends Faction {
         DWELLING_WORKER_INCOME = 1;
         SANCTUARY_GOLD_COST = 10;
         SANCTUARY_PRIEST_INCOME = 2;
-        SPADE_FIRST_UPGRADE_VICTORY = 2;
         SPADE_GOLD_COST = 0;
         SPADE_WORKER_COST = 0;
-        SPADE_SECOND_UPGRADE_VICTORY = 0;
         spadeNeededToTerraformPlains = 1;
         spadeNeededToTerraformLakes = 1;
         spadeNeededToTerraformForest = 2;

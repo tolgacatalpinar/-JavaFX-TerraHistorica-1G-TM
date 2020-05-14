@@ -128,55 +128,51 @@ public class PlayerHandler implements Serializable{
         player.addPowerToBowl(powerVal);
     }
 
-    public boolean usePowerAction(String action, Player player) {
+    public boolean usePowerAction(int actionId, Player player) {
 
-        if(action == "power to priest") {
-            if(player.spendPowerFromBowl(3)){
+        if(actionId == 1) {//Build bridge
+
+        }
+
+        else if(actionId == 2) {// 3 power for 1 priest
+            if(player.spendPowerFromBowl(3)) {
                 player.gainPriest(1);
                 return true;
             }
         }
 
-        if(action == "power to worker") {
-            if(player.spendPowerFromBowl(4)){
+        else if(actionId == 3) {//4 power for 2 workers
+            if(player.spendPowerFromBowl(4)) {
                 player.setWorkerNum(player.getWorkerNum()+2);
                 return true;
             }
         }
 
-        if(action == "power to bridge") {
-            if(player.spendPowerFromBowl(3)){
-                player.setBridgeNum(player.getBridgeNum()+1);
-                return true;
-            }
-        }
-
-        if (action == "power to gold") {
-            if (player.spendPowerFromBowl(4)) {
+        else if (actionId == 4) {//4 power for 7 gold
+            if(player.spendPowerFromBowl(4)) {
                 player.setGoldNum(player.getGoldNum()+7);
                 return true;
             }
         }
-
-        if (action == "power to a spade") {
-            if (player.spendPowerFromBowl(4)) {
-                //TODO
+        //After action 5 or 6, player can terraform and build dwelling immedieately
+        else if (actionId == 5) {//4 power for 1 free spade
+            if(player.spendPowerFromBowl(4)) {
+                player.setFreeSpade(player.getFreeSpade()+1);
                 return true;
             }
         }
 
-        if (action == "power to two spades") {
+        else if (actionId == 6) {//6 power for 2 free spade
             if (player.spendPowerFromBowl(6)) {
-                //TODO
+                player.setFreeSpade(player.getFreeSpade() + 2);
                 return true;
             }
         }
         return false;
-
     }
 
     public int upgradeSpadeLevel(Player player) {
-        if(player.getSpadeLevel() < 3) {
+        if(player.getSpadeLevel() < player.getFaction().MAX_SPADE_LEVEL) {
             if(player.spendFromResources(player.getFaction().SPADE_WORKER_COST,player.getFaction().SPADE_GOLD_COST,player.getFaction().SPADE_PRIEST_COST)) {
                 player.setSpadeLevel(player.getSpadeLevel()+1);
                 player.setTerraformWorkerCost(player.getTerraformWorkerCost()-1);
@@ -259,47 +255,48 @@ public class PlayerHandler implements Serializable{
 //      }
 //   }
 
-    public void exchangeResources(Player player, String exchanges) {
+    public boolean exchangeResources(Player player, int exchangeId) {
 
-        if (exchanges == "priest to worker") {
-            if (player.getPriestNum() > 0) {
-                player.setWorkerNum(player.getWorkerNum() + 1);
-            }
-        }
+       if(exchangeId == 1) { //5 power for 1 priest
+           if(player.spendPowerFromBowl(5)) {
+               player.gainPriest(1);
+               return true;
+           }
+       }
+       else if(exchangeId ==2) { //1 priest for 1 worker
+           if (player.getPriestNum() >= 1) {
+               player.spendPriest(1);
+               player.setWorkerNum(player.getWorkerNum()+1);
+               return true;
+           }
+       }
+       else if (exchangeId == 3) { //3 power for 1 worker
+           if(player.spendPowerFromBowl(3)) {
+               player.setWorkerNum(player.getWorkerNum()+1);
+               return true;
+           }
 
-        if (exchanges == "worker to coin") {
-            if (player.getWorkerNum() > 0) {
-                player.setWorkerNum(player.getWorkerNum() + 1);
-                player.setGoldNum(player.getGoldNum() + 1);
-            }
-        }
-
-        if (exchanges == "sacrifice power") {
-            if (2 < player.getBowlTwoPower()) {
-                player.setBowlTwoPower(player.getBowlTwoPower()-2);
-                player.setBowlThreePower(player.getBowlTwoPower()+1);
-            } else {
-                System.out.println("You don't have enough power to sacrifice");
-            }
-        }
-
-        if (exchanges == "power to coin") {
-            if (player.spendPowerFromBowl(1)) {
-                player.setGoldNum(player.getGoldNum() + 1);
-            }
-        }
-
-        if (exchanges == "power to worker") {
-            if (player.spendPowerFromBowl(1)) {
-                player.setWorkerNum(player.getWorkerNum() + 1);
-            }
-        }
-
-        if (exchanges == "power to priest") {
-            if (player.spendPowerFromBowl(5)) {
-                player.setWorkerNum(player.getWorkerNum() + 1);
-            }
-        }
+       }
+       else if (exchangeId == 4) { //1 worker for 1 coin
+           if(player.getWorkerNum() >= 1) {
+               player.setWorkerNum(player.getWorkerNum()-1);
+               player.setGoldNum(player.getGoldNum()+1);
+           }
+       }
+       else if (exchangeId == 5) { //1 power for 1 coin
+           if(player.spendPowerFromBowl(1)) {
+               player.setGoldNum(player.getGoldNum()+1);
+               return true;
+           }
+       }
+       else if(exchangeId == 6 ) { //sacrifice power
+           if (2 < player.getBowlTwoPower()) {
+               player.setBowlTwoPower(player.getBowlTwoPower()-2);
+               player.setBowlThreePower(player.getBowlThreePower()+1);
+               return true;
+           }
+       }
+        return false;
     }
 
     /**
@@ -320,17 +317,11 @@ public class PlayerHandler implements Serializable{
     }
 
     public boolean terraform(Player player, String typeToChange) {
-        if ( player.getFaction().payPriestWhenTransform) {
-            if(player.spendFromResources(0,0,1))
-                return true;
-        }
-        else {
             if(player.spendFreeSpade(typeToChange)) {
                 return true;
             }
+            return false;
         }
-        return false;
-    }
 
     public boolean townFound(Player player) {
         //TODO
