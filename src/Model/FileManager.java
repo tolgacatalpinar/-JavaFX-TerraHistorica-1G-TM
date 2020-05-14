@@ -15,7 +15,6 @@ public class FileManager {
     private File save;
     private GameController game;
     private RoundController rounds;
-    //private Map map; Lazımsa ekleyelim ama raporda yok
 
     public FileManager(String gameId) throws IOException {
         save = createSave(gameId);
@@ -32,6 +31,7 @@ public class FileManager {
         FileOutputStream f = new FileOutputStream(save);
         ObjectOutputStream o = new ObjectOutputStream(f);
         o.writeObject(game);
+        o.writeObject(rounds);
         o.close();
         f.close();
     }
@@ -41,7 +41,7 @@ public class FileManager {
             FileInputStream fi = new FileInputStream(save);
             ObjectInputStream oi = new ObjectInputStream(fi);
             this.game = (GameController) oi.readObject();
-            //this.map = (Map) oi.readObject();
+            this.rounds = (RoundController) oi.readObject();
             oi.close();
             fi.close();
 
@@ -54,11 +54,7 @@ public class FileManager {
             e.printStackTrace();
         }
     }
-/** Bu raporda yok da kalacak mı abi
-    public Map getMap() {
-        return map;
-    }
-*/
+
     public GameController getGame() {
         return game;
     }

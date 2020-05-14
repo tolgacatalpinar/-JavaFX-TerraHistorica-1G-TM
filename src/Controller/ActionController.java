@@ -26,7 +26,7 @@ public class ActionController {
    final static int COLUMN_NUMBER = 13;
    private static int selection = -1;
 
-   public static void terraform(Player[] playerArr, int curPlayerId ,Button[][] terrains,Map map) {
+   public static void terraform(Player[] playerArr, int curPlayerId ,Button[][] terrains,Map map, Button[] actions) {
 
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
@@ -49,7 +49,7 @@ public class ActionController {
                         terrains[map.getRow(adj[k])][map.getColumn(adj[k])].setOnMouseClicked(new EventHandler<MouseEvent>() {
                            @Override
                            public void handle(MouseEvent event) {
-                              terraformAction(playerArr, curPlayerId, terrains, terrains[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], map, map.spaces[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])]);
+                              terraformAction(playerArr, curPlayerId, terrains, terrains[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], map, map.spaces[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], actions);
                            }
                         });
                      }
@@ -66,7 +66,7 @@ public class ActionController {
     *
     *
     */
-   public static void terraformAction(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space) {
+   public static void terraformAction(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions) {
 
       List<String> choices = new ArrayList<>();
       choices.add("Wasteland");
@@ -100,6 +100,7 @@ public class ActionController {
             String selectedChoice = (String) choiceBox.getValue();
             boolean flag = true;
             if (playerHandler.terraform(playerArr[curPlayerId],space.getType())){
+               disableActions(actions);
                TerrainController.terraform(terrain, selectedChoice);
                space.setType(selectedChoice);
             }else{
@@ -175,7 +176,7 @@ public class ActionController {
 //        TerrainController.disableButtonClicks(terrains);
    }
 
-   public static void upgradeStructure(Player[] playerArr, int currentPlayerId,Button[][] terrains, Map map) {
+   public static void upgradeStructure(Player[] playerArr, int currentPlayerId,Button[][] terrains, Map map, Button[] actions) {
       TerrainController.disableTerrains(terrains, map);
 
       for (int i = 0; i < ROW_NUMBER; i++) {
@@ -194,12 +195,11 @@ public class ActionController {
                          */
                         //gameHandler.upgradeStructure(map.spaces[finalI][finalJ], map.spaces[finalI][finalJ].getStructure().getBuilding())
                         if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Dwelling"))
-
-                           upgradeToTradingPost(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
+                           upgradeToTradingPost(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ],actions);
                         else if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Trading Post"))
-                           upgradeToStrongholdOrTemple(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
+                           upgradeToStrongholdOrTemple(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ], actions);
                         else if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Temple"))
-                           upgradeToSanctuary(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
+                           upgradeToSanctuary(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ], actions);
                      }
                   });
                }
@@ -207,7 +207,7 @@ public class ActionController {
       }
    }
 
-   public static void upgradeToTradingPost(Player[] playerArr, int currentPlayerId, Button[][] terrains, Button terrain, Map map, Space space) {
+   public static void upgradeToTradingPost(Player[] playerArr, int currentPlayerId, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions) {
       PlayerHandler playerHandler = new PlayerHandler();
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
@@ -225,6 +225,7 @@ public class ActionController {
              * YANDAKİ UŞAKLARA SOR
              */
             if(returnCase == 1){
+               disableActions(actions);
                TerrainController.upgradeToTradingPost(terrain, playerArr[currentPlayerId].getFaction().TERRAIN_TILE);
                space.setStructure("Trading Post");
                stage.close();
@@ -260,7 +261,7 @@ public class ActionController {
 //      TerrainController.disableButtonClicks(terrains);
    }
 
-   public static void upgradeToStrongholdOrTemple(Player[] playerArr,int curPlayerId,Button[][] terrains, Button terrain, Map map, Space space) {
+   public static void upgradeToStrongholdOrTemple(Player[] playerArr,int curPlayerId,Button[][] terrains, Button terrain, Map map, Space space, Button[] actions) {
       PlayerHandler playerHandler = new PlayerHandler();
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
@@ -280,6 +281,7 @@ public class ActionController {
                 * YANDAKİ UŞAKLARA SOR
                 */
                if(returnCase == 1){
+                  disableActions(actions);
                   TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                   space.setStructure("Temple");
                }else if (returnCase == -1){
@@ -296,6 +298,7 @@ public class ActionController {
                 * YANDAKİ UŞAKLARA SOR
                 */
                if(returnCase == 1){
+                  disableActions(actions);
                   TerrainController.upgradeToStronghold(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                   space.setStructure("Stronghold");
                }else if (returnCase == -1){
@@ -345,7 +348,7 @@ public class ActionController {
 
    }
 
-   public static void upgradeToSanctuary(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space) {
+   public static void upgradeToSanctuary(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions) {
       PlayerHandler playerHandler = new PlayerHandler();
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
@@ -366,6 +369,7 @@ public class ActionController {
              * YANDAKİ UŞAKLARA SOR
              */
             if(returnCase == 1){
+               disableActions(actions);
                TerrainController.upgradeToSanctuary(terrain,playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                space.setStructure("Sanctuary");
             }else if (returnCase == -1){
@@ -420,7 +424,7 @@ public class ActionController {
 
    }
    //TODO
-   public void upgradeSpace(int curPlayerId, Player[] playerArr){
+   public static void upgradeSpadeLevel(int curPlayerId, Player[] playerArr){
 
    }
    //TODO
@@ -671,14 +675,11 @@ public class ActionController {
     * TAŞINACAK
     * @param
     */
-   public static void showUpdateShippingDialogs(Player[] playerList, int currentPlayerId ) {
-
+   public static void showUpdateShippingDialogs(Player[] playerList, int currentPlayerId , Button[] actions) {
+      PlayerHandler playerHandler = new PlayerHandler();
       Player player = playerList[currentPlayerId];
       int priestCost = player.getFaction().SHIPPING_PRIEST_COST;
       int goldCost = player.getFaction().SHIPPING_GOLD_COST;
-      int playerPriest = player.getPriestNum();
-      int playerGold = player.getGoldNum();
-      if (priestCost <= playerPriest && goldCost <= playerGold && player.getShipLevel() < 3) {
          Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
          alert.setTitle("Upgrade Shipping");
          alert.setHeaderText("GOLD COST : " + goldCost + "\n" +
@@ -688,82 +689,79 @@ public class ActionController {
                  "New Level : " + (player.getShipLevel() + 1));
          Optional<ButtonType> result = alert.showAndWait();
          if (result.get() == ButtonType.OK) {
-            player.setGoldNum(playerGold - goldCost);
-            player.setPriestNum(playerPriest - priestCost);
-            player.setShipLevel(player.getShipLevel() + 1);
-            player.setVictoryPointNum(player.getVictoryPointNum() + player.getFaction().SHIPPING_UPGRADE_VICTORY_POINTS[player.getShipLevel()]);
+            alert.setTitle("Upgrading Shipping Level");
+            int returnCase = playerHandler.upgradeShippingLevel(player);
+            if (returnCase == 1) {
+               disableActions(actions);
+               alert.setHeaderText("Upgraded successfully \n");
+               alert.setContentText("");
+            } else if (returnCase == -1) {
+               alert.setHeaderText("No enough resources");
+               alert.setContentText("You have no required cost, priest, worker \n" +
+                       "GOLD COST : " + goldCost + "\n" +
+                       "PRIEST COST : " + priestCost + "\n");
+            } else if (returnCase == -2){
+               alert.setHeaderText("You have no ability to ship");
+               alert.setContentText("");
+            }
+            else{
+               alert.setHeaderText("You have max shipping level");
+               alert.setContentText("");
+            }
+            alert.showAndWait();
          } else {
             // ... user chose CANCEL or closed the dialog
          }
-      } else {
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-         alert.setTitle("Update Shipping level");
-         if (player.getSpadeLevel() == 3) {
-            alert.setContentText("You have max shipping level");
-         } else {
-            alert.setContentText("You have no required cost or priest\n" +
-                    "GOLD COST : " + goldCost + "\n" +
-                    "PRIEST COST : " + priestCost);
-         }
-
-         alert.setHeaderText("You cannot do this action!!");
-         alert.showAndWait();
-      }
    }
+
 
    /**TODO
     * TAŞINACAK
     *
     */
-   public static void showUpdateSpadeDialogs(Player[] playerList, int currentPlayerId) {
-
+   public static void showUpdateSpadeDialogs(Player[] playerList, int currentPlayerId, Button[] actions) {
+      PlayerHandler playerHandler = new PlayerHandler();
       Player player = playerList[currentPlayerId];
       int priestCost = player.getFaction().SPADE_PRIEST_COST;
       int goldCost = player.getFaction().SPADE_GOLD_COST;
       int workerCost = player.getFaction().SPADE_WORKER_COST;
-      int playerPriest = player.getPriestNum();
-      int playerGold = player.getGoldNum();
-      int playerWorker = player.getWorkerNum();
-      if (priestCost <= playerPriest && goldCost <= playerGold && workerCost <= playerWorker && player.getSpadeLevel() < 3) {
          Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
          alert.setTitle("Upgrade Spade");
          alert.setHeaderText("GOLD COST : " + goldCost + "\n" +
                  "PRIEST COST : " + priestCost + "\n" +
                  "WORKER COST : " + workerCost);
-         alert.setContentText("Do you wan to update your spade level \n" +
-                 "Current Level : " + player.getSpadeLevel() + "\n" +
-                 "New Level : " + (player.getSpadeLevel() + 1));
+         alert.setContentText("Do you want to update your spade level \n" +
+                 "Current Level : " + player.getSpadeLevel() + "\n"
+                 );
          Optional<ButtonType> result = alert.showAndWait();
          if (result.get() == ButtonType.OK) {
-            player.setGoldNum(playerGold - goldCost);
-            player.setPriestNum(playerPriest - priestCost);
-            player.setSpadeLevel(player.getSpadeLevel() + 1);
-            player.setVictoryPointNum(player.getVictoryPointNum() + (player.getSpadeLevel() == 2 ? player.getFaction().SPADE_FIRST_UPGRADE_VICTORY : player.getFaction().SPADE_SECOND_UPGRADE_VICTORY));
+            alert.setTitle("Update Spade level");
+            int returnCase = playerHandler.upgradeSpadeLevel(player);
+            if (returnCase == 1){
+               disableActions(actions);
+               alert.setHeaderText("Upgraded successfully \n");
+               alert.setContentText("");
+            }else if (returnCase == -1) {
+               alert.setHeaderText("No enough resources");
+               alert.setContentText("You have no required cost, priest, worker \n" +
+                       "GOLD COST : " + goldCost + "\n" +
+                       "PRIEST COST : " + priestCost + "\n" +
+                       "WORKER COST : " + workerCost);
+            }else{
+               alert.setHeaderText("You have max spade level");
+               alert.setContentText("");
+            }
+            alert.showAndWait();
          } else {
             // ... user chose CANCEL or closed the dialog
          }
-      } else {
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-         alert.setTitle("Update Spade level");
-         if (player.getSpadeLevel() == 3) {
-            alert.setContentText("You have max spade level");
-         } else {
-            alert.setContentText("You have no required cost, priest, worker \n" +
-                    "GOLD COST : " + goldCost + "\n" +
-                    "PRIEST COST : " + priestCost + "\n" +
-                    "WORKER COST : " + workerCost);
-         }
 
-         alert.setHeaderText("You cannot do this action!!");
-         alert.showAndWait();
-      }
+
+
    }
 
    /**TODO
     * RAPORDA YOK
-    * @param gameHandler
-    * @param terrains
-    * @param map
     */
    public static void buildBridge(GameHandler gameHandler, Button[][] terrains, Map map){
 
@@ -798,6 +796,11 @@ public class ActionController {
 
 
 
+   }
+
+   public static void disableActions(Button[] actions){
+      for(int i = 0; i < actions.length; i++)
+         actions[i].setDisable(true);
    }
 
 
