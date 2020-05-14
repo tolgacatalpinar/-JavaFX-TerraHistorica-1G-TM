@@ -14,7 +14,7 @@ public class Faction implements Serializable {
     public int INITIAL_CHRISTIANITY = 0;
     public int INITIAL_JUDAISM = 0;
     public int INITIAL_HINDUISM = 0;
-    public int INITIAL_SHIPPING_LEVEL = 1;
+    public int INITIAL_SHIPPING_LEVEL = 0;
     public int INITIAL_PRIEST = 0;
     public int INITIAL_GOLD = 15;
     public int SPADE_PRIEST_COST = 1;

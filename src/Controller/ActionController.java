@@ -672,14 +672,11 @@ public class ActionController {
     * TAŞINACAK
     * @param
     */
-   public static void showUpdateShippingDialogs(Player[] playerList, int currentPlayerId ) {
+   public static void showUpdateShippingDialogs(Player[] playerList, int currentPlayerId , Button[] actions) {
       PlayerHandler playerHandler = new PlayerHandler();
       Player player = playerList[currentPlayerId];
       int priestCost = player.getFaction().SHIPPING_PRIEST_COST;
       int goldCost = player.getFaction().SHIPPING_GOLD_COST;
-      int playerPriest = player.getPriestNum();
-      int playerGold = player.getGoldNum();
-      if (priestCost <= playerPriest && goldCost <= playerGold && player.getShipLevel() < 3) {
          Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
          alert.setTitle("Upgrade Shipping");
          alert.setHeaderText("GOLD COST : " + goldCost + "\n" +
@@ -692,6 +689,7 @@ public class ActionController {
             alert.setTitle("Upgrading Shipping Level");
             int returnCase = playerHandler.upgradeShippingLevel(player);
             if (returnCase == 1) {
+               disableActions(actions);
                alert.setHeaderText("Upgraded successfully \n");
                alert.setContentText("");
             } else if (returnCase == -1) {
@@ -699,7 +697,11 @@ public class ActionController {
                alert.setContentText("You have no required cost, priest, worker \n" +
                        "GOLD COST : " + goldCost + "\n" +
                        "PRIEST COST : " + priestCost + "\n");
-            } else {
+            } else if (returnCase == -2){
+               alert.setHeaderText("You have no ability to ship");
+               alert.setContentText("");
+            }
+            else{
                alert.setHeaderText("You have max shipping level");
                alert.setContentText("");
             }
@@ -707,14 +709,14 @@ public class ActionController {
          } else {
             // ... user chose CANCEL or closed the dialog
          }
-      }
    }
+
 
    /**TODO
     * TAŞINACAK
     *
     */
-   public static void showUpdateSpadeDialogs(Player[] playerList, int currentPlayerId) {
+   public static void showUpdateSpadeDialogs(Player[] playerList, int currentPlayerId, Button[] actions) {
       PlayerHandler playerHandler = new PlayerHandler();
       Player player = playerList[currentPlayerId];
       int priestCost = player.getFaction().SPADE_PRIEST_COST;
@@ -733,6 +735,7 @@ public class ActionController {
             alert.setTitle("Update Spade level");
             int returnCase = playerHandler.upgradeSpadeLevel(player);
             if (returnCase == 1){
+               disableActions(actions);
                alert.setHeaderText("Upgraded successfully \n");
                alert.setContentText("");
             }else if (returnCase == -1) {

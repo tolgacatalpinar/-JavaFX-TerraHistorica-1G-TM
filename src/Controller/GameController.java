@@ -198,7 +198,7 @@ public class GameController implements Initializable {
 
    @FXML
    public void upgradeShippingClicked() {
-      ActionController.showUpdateShippingDialogs(playerList,roundController.getCurrentPlayerId());
+      ActionController.showUpdateShippingDialogs(playerList,roundController.getCurrentPlayerId(),actions);
    }
 
    @FXML
@@ -215,7 +215,7 @@ public class GameController implements Initializable {
    @FXML
    public void upgradeSpadeClicked() {
 
-      ActionController.showUpdateSpadeDialogs(playerList,roundController.getCurrentPlayerId());
+      ActionController.showUpdateSpadeDialogs(playerList,roundController.getCurrentPlayerId(),actions);
    }
 
    @FXML
