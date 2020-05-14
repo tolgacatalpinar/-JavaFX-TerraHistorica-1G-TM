@@ -24,7 +24,6 @@ public class HelenOfTroy extends Faction { // auren
       spadeNeededToTerraformMountains = 0;
       spadeNeededToTerraformWasteland = 0;
       spadeNeededToTerraformDesert = 0;
-
   }
 
     public void afterStronghold() {
