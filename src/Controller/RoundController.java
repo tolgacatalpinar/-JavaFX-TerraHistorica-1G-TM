@@ -39,11 +39,17 @@ public class RoundController {
     /**
      * Will be called after ending a turn
      */
-    public void endTurn() { //Skip Turn Clicked
+    public void endTurn(Player[] playerList) { //Skip Turn Clicked
         currentPlayerId++;
-        if(currentPlayerId >= playerCount) {
-            currentPlayerId = 0;
+        if(!isRoundOver()){
+        while(playerList[currentPlayerId].isRoundPassed()){
+            currentPlayerId++;
+            if(currentPlayerId >= playerCount) {
+                currentPlayerId = 0;
+            }
+            }
         }
+        currentPlayerId = 0;
     }
 
     /**
@@ -52,7 +58,7 @@ public class RoundController {
     private void endRound(Player[] playerList) { //Pass Round Clicked
         for(int i = 0; i < passRoundPlayerList.length; i++){
             System.out.println(passRoundPlayerList[i]);
-            //playerList[i] = passRoundPlayerList[i];
+            playerList[i] = passRoundPlayerList[i];
         }
         lastPassedIndex = 0;
         System.out.println("Round Over");
@@ -66,15 +72,14 @@ public class RoundController {
     }
 
     public void passRound(Player[] playerList) {
-        System.out.println(playerList[0]);
-        System.out.println(currentPlayerId);
+        System.out.println(playerList[currentPlayerId]);
         playerHandler.passRound(playerList[currentPlayerId]);
         passRoundPlayerList[lastPassedIndex] = playerList[currentPlayerId];
         lastPassedIndex++;
         if(isRoundOver()) {
             endRound(playerList);
         }
-        endTurn();
+        endTurn(playerList);
     }
 
     private boolean isRoundOver() {
