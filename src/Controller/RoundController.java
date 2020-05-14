@@ -10,12 +10,14 @@ public class RoundController {
     int currentRound = 0;
     final int MAX_ROUND = 6;
     PlayerHandler playerHandler;
-    Player[] passRoundPlayerList;
     int lastPassedIndex = 0;
+    Player[] passRoundPlayerList;
 
     RoundController(Player[] playerList){
         currentPlayerId = 0;
         this.playerCount = playerList.length;
+        playerHandler= new PlayerHandler();
+        passRoundPlayerList = new Player[playerCount];
     }
 
     public int getCurrentPlayerId(){
@@ -48,7 +50,10 @@ public class RoundController {
      * Round is over, update resources and pass to next round
      */
     private void endRound(Player[] playerList) { //Pass Round Clicked
-        playerList = passRoundPlayerList;
+        for(int i = 0; i < passRoundPlayerList.length; i++){
+            System.out.println(passRoundPlayerList[i]);
+            //playerList[i] = passRoundPlayerList[i];
+        }
         lastPassedIndex = 0;
         System.out.println("Round Over");
         for(int i = 0; i < playerCount; i++){
@@ -63,9 +68,6 @@ public class RoundController {
     public void passRound(Player[] playerList) {
         System.out.println(playerList[0]);
         System.out.println(currentPlayerId);
-        for(int i = 0; i < playerList.length; i++){
-            System.out.println(playerList[i].getPlayerId());
-        }
         playerHandler.passRound(playerList[currentPlayerId]);
         passRoundPlayerList[lastPassedIndex] = playerList[currentPlayerId];
         lastPassedIndex++;
@@ -76,7 +78,7 @@ public class RoundController {
     }
 
     private boolean isRoundOver() {
-        return lastPassedIndex == playerCount-1;
+        return lastPassedIndex == playerCount;
     }
 
     /**
