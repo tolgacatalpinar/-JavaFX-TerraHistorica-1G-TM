@@ -187,6 +187,11 @@ public class GameController implements Initializable {
       System.out.println("--------------------------------------------------");
    }
 
+   @FXML
+   public void passRoundClicked(){
+      //
+   }
+
 
 
    @FXML

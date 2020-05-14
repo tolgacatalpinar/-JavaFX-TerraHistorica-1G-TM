@@ -76,7 +76,7 @@
                     <Font name="Book Antiqua" size="18.0" />
                 </font>
             </Button>
-            <Button fx:id="passRound" layoutX="10.0" layoutY="471.0" prefHeight="50" prefWidth="200" text="Pass Round" textFill="WHITE">
+            <Button fx:id="passRound" layoutX="10.0" layoutY="471.0" onMouseClicked="#passRoundClicked" prefHeight="50" prefWidth="200" text="Pass Round" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="18.0" />
                 </font>

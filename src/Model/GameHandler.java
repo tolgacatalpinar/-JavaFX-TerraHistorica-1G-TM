@@ -65,7 +65,7 @@ public class GameHandler implements Serializable{
 //    }
 //
 //    /**
-//     * Round is over, update resources and pass to next round
+//     * Round is over, update resources and pass to senext round
 //     */
 //    private void endRound() {
 //
