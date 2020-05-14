@@ -127,6 +127,7 @@ public class ActionController {
                         System.out.println("Max reached");
                      dwellingChoiceStage.close();
                   }
+
                });
                noButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                   @Override
@@ -260,6 +261,7 @@ public class ActionController {
    }
 
    public static void upgradeToStrongholdOrTemple(Player[] playerArr,int curPlayerId,Button[][] terrains, Button terrain, Map map, Space space) {
+      PlayerHandler playerHandler = new PlayerHandler();
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
       RadioButton templeButton = new RadioButton("Temple");
@@ -272,13 +274,35 @@ public class ActionController {
          public void handle(MouseEvent event) {
             if( templeButton.isSelected() && !strongholdButton.isSelected())
             {
-               TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
-               space.setStructure("Temple");
+               int returnCase = playerHandler.buildStructure(playerArr[curPlayerId], "Temple", false);
+               /**
+                * TODO
+                * YANDAKİ UŞAKLARA SOR
+                */
+               if(returnCase == 1){
+                  TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
+                  space.setStructure("Temple");
+               }else if (returnCase == -1){
+                  System.out.println("Not enough resources");
+               }else
+                  System.out.println("Max reached");
+               stage.close();
             }
             else if(!templeButton.isSelected() && strongholdButton.isSelected())
             {
-               TerrainController.upgradeToStronghold(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
-               space.setStructure("Stronghold");
+               int returnCase = playerHandler.buildStructure(playerArr[curPlayerId], "Stronghold", false);
+               /**
+                * TODO
+                * YANDAKİ UŞAKLARA SOR
+                */
+               if(returnCase == 1){
+                  TerrainController.upgradeToStronghold(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
+                  space.setStructure("Stronghold");
+               }else if (returnCase == -1){
+                  System.out.println("Not enough resources");
+               }else
+                  System.out.println("Max reached");
+               stage.close();
             }
             stage.close();
          }
@@ -322,6 +346,7 @@ public class ActionController {
    }
 
    public static void upgradeToSanctuary(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space) {
+      PlayerHandler playerHandler = new PlayerHandler();
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
       /**
@@ -334,8 +359,19 @@ public class ActionController {
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
-            TerrainController.upgradeToSanctuary(terrain,playerArr[curPlayerId].getFaction().TERRAIN_TILE);
-            space.setStructure("Sanctuary");
+
+            int returnCase = playerHandler.buildStructure(playerArr[curPlayerId], "Stronghold", false);
+            /**
+             * TODO
+             * YANDAKİ UŞAKLARA SOR
+             */
+            if(returnCase == 1){
+               TerrainController.upgradeToSanctuary(terrain,playerArr[curPlayerId].getFaction().TERRAIN_TILE);
+               space.setStructure("Sanctuary");
+            }else if (returnCase == -1){
+               System.out.println("Not enough resources");
+            }else
+               System.out.println("Max reached");
             stage.close();
          }
       });
