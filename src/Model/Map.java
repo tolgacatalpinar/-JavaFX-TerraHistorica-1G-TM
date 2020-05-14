@@ -319,7 +319,7 @@ public class Map implements Serializable {
       Space[] adjacents = adjacencyList(space1);
       ArrayList<Player> list = new ArrayList<>();
       for (Space adjacent : adjacents) {
-         if (!(adjacent.getType().equals(playerColor)) && adjacent.isOccupied() && !list.contains(adjacent.getPlayer())) {
+         if ( adjacent != null && !(adjacent.getType().equals(playerColor)) && adjacent.isOccupied() && !list.contains(adjacent.getPlayer())) {
             list.add(adjacent.getPlayer());
          }
       }

@@ -218,7 +218,7 @@ public class ActionController {
          public void handle(MouseEvent event) {
             ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
             System.out.println(adjacentPlayers.size());
-            int returnCase = playerHandler.buildStructure(playerArr[currentPlayerId], "TradingPost", adjacentPlayers != null);
+            int returnCase = playerHandler.buildStructure(playerArr[currentPlayerId], "TradingPost", adjacentPlayers.size() != 0);
             /**
              * TODO
              * YANDAKİ UŞAKLARA SOR
