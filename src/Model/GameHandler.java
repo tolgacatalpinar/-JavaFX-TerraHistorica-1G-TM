@@ -236,14 +236,16 @@ public class GameHandler implements Serializable{
      * May be moved from playerhandler to gamehandler instead of using twice
      * @param exchange
      */
+    /*
     public void exchangeResources(String exchange){
        // playerHandler.exchangeResources(playerList[currentPlayerId], exchange);
     }
-
+*/
     /**
      * May be moved from playerhandler to gamehandler instead of using twice
-     * @param powerAction
+     * @param
      */
+    /*
     public void usePowerAction(String powerAction) {
 //        if(playerHandler.usePowerAction( powerAction, playerList[currentPlayerId])) {
 //            if( powerAction.equals("power to bridge")) {
@@ -254,89 +256,13 @@ public class GameHandler implements Serializable{
 //        }
 
     }
+*/
 
 
 
 
-    public void playerChoseBonusCard(BonusCard bonusCard, Player player) {
-        if (bonusCard.isPlayerOcupied()) {
-            System.err.println(" Please choose different Bonus Card \n" +
-                    "This card was chosen by another player");
-
-        }
-        else {
-            int playerId = player.getPlayerId();
-            int previousCardId = cardsAndTiles.findPlayerCard(playerId);
-            if (previousCardId != -1) {
-                cardsAndTiles.bonusCards.get(previousCardId).setPlayerOcupied(false);
-                cardsAndTiles.bonusCards.get(previousCardId).setPlayerId(-1);
-                player.setShipLevel(player.getShipLevel() - cardsAndTiles.bonusCards.get(previousCardId).getShippingRange());
-                player.getSpecialActionToken().isCultTack = false;
-                player.getSpecialActionToken().isSpade = false;
-                //PlayerHandler.returnBonusCard(player); //TODO
-            }
-            bonusCard.setPlayerOcupied(true);
-            bonusCard.setPlayerId(playerId);
-            player.setGoldNum(player.getGoldIncome() + bonusCard.getGoldBonus());
-            player.setWorkerNum(player.getWorkerIncome() + bonusCard.getWorkerBonus());
-            player.addPowerToBowl(bonusCard.getPowerBonus());
-            player.setShipLevel(player.getShipLevel() + bonusCard.getShippingRange());
-            player.setPriestNum(player.getPriestIncome() + bonusCard.getPriestBonus());
-            player.getSpecialActionToken().isCultTack = bonusCard.isSpecialCult();
-            player.getSpecialActionToken().isSpade = bonusCard.isSpacialSpade();
-            player.setHavingDwellingBonus(bonusCard.isDwelling());
-            player.setHavingSanctuary(bonusCard.isSanctuary());
-            player.setHavingTradeHouse(bonusCard.isTradeHouse());
-        }
-    }
 
 
-    public void playerChooseFavorTile(FavorTile favorTile,Player player, Religion religion){
-        if(favorTile.getPlayerIds().size() >= favorTile.getNumberOfPlayer() ){
-            System.err.println("You cannot choose this Favor");
-        }
-        else
-        {
-            favorTile.getPlayerIds().add((Integer) player.getPlayerId() );
-            player.addPowerToBowl(religion.updateReligion(favorTile.getIslamBonus(),player.getPlayerId(),player.getKey()));
-            player.addPowerToBowl(religion.updateReligion(favorTile.getChristianityBonus(),player.getPlayerId(),player.getKey()));
-            player.addPowerToBowl(religion.updateReligion(favorTile.getJewBonus(),player.getPlayerId(),player.getKey()));
-            player.addPowerToBowl(religion.updateReligion(favorTile.getHinduismBonus(),player.getPlayerId(),player.getKey()));
-
-            religion.updateReligion(favorTile.getChristianityBonus(),player.getPlayerId(),player.getKey());
-
-            player.setTownPowerValue(6);
-            player.addPowerToBowl( favorTile.getPowerBonus());
-            player.setWorkerNum(player.getWorkerNum() + favorTile.getWorkerBonus());
-            player.setGoldNum(player.getGoldNum() + favorTile.getGoldBonus());
-            player.setVictoryPointNum(player.getVictoryPointNum() + favorTile.getVictoryPoint());
-            player.setUpgradeToTradingPostBonus(favorTile.isTradingHouse());
-            player.setPassingTradingPostBonus(favorTile.isPassingBonusForTradingHouse());
-            player.setBuildingDwellingBonus(favorTile.isDwellingBonus());
-            if(favorTile.isSpecialCult())
-            player.getSpecialActionToken().isCultTack = favorTile.isSpecialCult();
-
-        }
-    }
-
-    public void playerChooseTownTile(TownTile townTile, Player player, Religion religion){
-        if(townTile.isOccupied()){
-            System.err.println("This Tile was chosen by another player");
-        }
-        else
-        {
-            townTile.setPlayerId(player.getPlayerId());
-            player.addPowerToBowl( townTile.getPowerBonus());
-            player.setPriestNum(player.getPriestNum() + townTile.getPriestBonus());
-            player.setVictoryPointNum(player.getVictoryPointNum() + townTile.getVictoryBonus());
-            player.setWorkerNum(player.getWorkerNum() + townTile.getWorkerBonus());
-            player.setGoldNum(player.getGoldNum() + townTile.getGoldBonus());
-            player.addPowerToBowl(religion.updateReligion(townTile.getIslamPoint(),player.getPlayerId(),player.getKey()));
-            player.addPowerToBowl(religion.updateReligion(townTile.getChristianityPoint(),player.getPlayerId(),player.getKey()));
-            player.addPowerToBowl(religion.updateReligion(townTile.getJewishPoint(),player.getPlayerId(),player.getKey()));
-            player.addPowerToBowl(religion.updateReligion(townTile.getHinduismPoint(),player.getPlayerId(),player.getKey()));
-        }
-    }
 
 
    public Player[] getPlayerList() {
