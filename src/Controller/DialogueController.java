@@ -61,17 +61,17 @@ public class DialogueController {
 
       return pane;
    }
-   public static BorderPane getTradingPostUpgradePromptPane(GameHandler gameHandler, String templePromptMessage, String strongholdPromptMessage, Button yesButton, Button noButton, RadioButton templeButton, RadioButton strongholdButton)
+   public static BorderPane getTradingPostUpgradePromptPane(Player[] playerArr,int curPlayerId, String templePromptMessage, String strongholdPromptMessage, Button yesButton, Button noButton, RadioButton templeButton, RadioButton strongholdButton)
    {
       Label templePrompt = new Label(templePromptMessage);
       ImageView goldImTemple = new ImageView(new Image("gold.png"));
       goldImTemple.setFitHeight(30);
       goldImTemple.setFitWidth(30);
-      Label goldLabelTemple = new Label("" + gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TEMPLE_GOLD_COST);
+      Label goldLabelTemple = new Label("" + playerArr[curPlayerId].getFaction().TEMPLE_GOLD_COST);
       ImageView workerImTemple = new ImageView(new Image("gold.png"));
       workerImTemple.setFitHeight(30);
       workerImTemple.setFitWidth(30);
-      Label workerLabelTemple = new Label("" + gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TEMPLE_WORKER_COST);
+      Label workerLabelTemple = new Label("" + playerArr[curPlayerId].getFaction().TEMPLE_WORKER_COST);
 
       ImageView goldImStrong = new ImageView(new Image("gold.png"));
       goldImStrong.setFitHeight(30);
@@ -81,8 +81,8 @@ public class DialogueController {
       workerImStrong.setFitWidth(30);
 
       Label strongholdPrompt = new Label(strongholdPromptMessage);
-      Label goldLabelStronghold = new Label("" + gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().STRONGHOLD_GOLD_COST);
-      Label workerLabelStronghold = new Label("" + gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().STRONGHOLD_WORKER_COST);
+      Label goldLabelStronghold = new Label("" + playerArr[curPlayerId].getFaction().STRONGHOLD_GOLD_COST);
+      Label workerLabelStronghold = new Label("" + playerArr[curPlayerId].getFaction().STRONGHOLD_WORKER_COST);
 
       HBox buttons = new HBox();
       buttons.getChildren().addAll(yesButton, noButton);
@@ -105,17 +105,17 @@ public class DialogueController {
 
       return pane;
    }
-   public static BorderPane getTempleUpgradePromptPane(GameHandler gameHandler, String promptMessage, Button yesButton, Button noButton)
+   public static BorderPane getTempleUpgradePromptPane(Player[] playerArr, int curPlayerId, String promptMessage, Button yesButton, Button noButton)
    {
       Label prompt = new Label(promptMessage);
       ImageView goldIm = new ImageView(new Image("gold.png"));
       goldIm.setFitHeight(30);
       goldIm.setFitWidth(30);
-      Label goldLabel = new Label("" + gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TEMPLE_GOLD_COST);
+      Label goldLabel = new Label("" + playerArr[curPlayerId].getFaction().TEMPLE_GOLD_COST);
       ImageView workerIm = new ImageView(new Image("gold.png"));
       workerIm.setFitHeight(30);
       workerIm.setFitWidth(30);
-      Label workerLabel = new Label("" + gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TEMPLE_WORKER_COST);
+      Label workerLabel = new Label("" + playerArr[curPlayerId].getFaction().TEMPLE_WORKER_COST);
 
       HBox requiredResources = new HBox();
       HBox buttons = new HBox();

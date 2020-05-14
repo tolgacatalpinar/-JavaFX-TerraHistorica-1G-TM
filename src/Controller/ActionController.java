@@ -208,43 +208,40 @@ public class ActionController {
    public static void upgradeToTradingPost(Player[] playerArr, int currentPlayerId, Button[][] terrains, Button terrain, Map map, Space space) {
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
-      /**TODO
-       * BUNLARA DA BAKILMASI LAZIM
-       */
-      //BorderPane pane = DialogueController.getDwellingUpgradePromptPane(gameHandler, "Do you want to upgrade this Dwelling to a Trading Post?", yesButton, noButton);
-      //Stage stage = DialogueController.getStage("Upgrade dwelling", pane, new Image("favor_tiles_background.jpg"));
-      //stage.show();
+      BorderPane pane = DialogueController.getDwellingUpgradePromptPane(playerArr,currentPlayerId, "Do you want to upgrade this Dwelling to a Trading Post?", yesButton, noButton);
+      Stage stage = DialogueController.getStage("Upgrade dwelling", pane, new Image("favor_tiles_background.jpg"));
+      stage.show();
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
             TerrainController.upgradeToTradingPost(terrain, playerArr[currentPlayerId].getFaction().TERRAIN_TILE);
             space.setStructure("Trading Post");
-           // stage.close();
+            stage.close();
          }
       });
       noButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
-            //stage.close();
+            stage.close();
          }
       });
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
 
-//      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//      alert.setTitle("Upgrade Structure");
-//      alert.setHeaderText("Do you want to upgrade this Dwelling to a Trading Post?");
-//      alert.setContentText("Cost will be here");
-//
-//      Optional<ButtonType> result = alert.showAndWait();
-//      if (((Optional) result).get() == ButtonType.OK) {
-//         TerrainController.upgradeToTradingPost(terrain, gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE);
-//         space.setStructure("Trading Post");
-//      } else {
-//         // ... user chose CANCEL or closed the dialog
-//      }
-//      TerrainController.enableTerrains(terrains, map);
-//      TerrainController.disableButtonClicks(terrains);
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setTitle("Upgrade Structure");
+      alert.setHeaderText("Do you want to upgrade this Dwelling to a Trading Post?");
+      alert.setContentText("Cost will be here");
+
+      Optional<ButtonType> result = alert.showAndWait();
+      if (((Optional) result).get() == ButtonType.OK) {
+         TerrainController.upgradeToTradingPost(terrain, playerArr[currentPlayerId].getFaction().TERRAIN_TILE);
+         space.setStructure("Trading Post");
+      } else {
+         // ... user chose CANCEL or closed the dialog
+      }
+      TerrainController.enableTerrains(terrains, map);
+      TerrainController.disableButtonClicks(terrains);
    }
 
    public static void upgradeToStrongholdOrTemple(Player[] playerArr,int curPlayerId,Button[][] terrains, Button terrain, Map map, Space space) {
@@ -252,12 +249,9 @@ public class ActionController {
       Button noButton = new Button("No");
       RadioButton templeButton = new RadioButton("Temple");
       RadioButton strongholdButton = new RadioButton("Stronghold");
-      //BorderPane pane = DialogueController.getTradingPostUpgradePromptPane(gameHandler, "Do you want to upgrade this Trading Post to a Temple\n at the expense of: ", "Do you want to upgrade this Trading Post to a Stronghold\n at the expense of: ", yesButton, noButton, templeButton, strongholdButton);
-      /**TODO
-       * DIKKATTTTTTTT
-       */
-      //Stage stage = DialogueController.getStage("Upgrade Trading Post", pane, new Image("favor_tiles_background.jpg"));
-      //stage.show();
+      BorderPane pane = DialogueController.getTradingPostUpgradePromptPane(playerArr,curPlayerId, "Do you want to upgrade this Trading Post to a Temple\n at the expense of: ", "Do you want to upgrade this Trading Post to a Stronghold\n at the expense of: ", yesButton, noButton, templeButton, strongholdButton);
+      Stage stage = DialogueController.getStage("Upgrade Trading Post", pane, new Image("favor_tiles_background.jpg"));
+      stage.show();
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
@@ -271,13 +265,13 @@ public class ActionController {
                TerrainController.upgradeToStronghold(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                space.setStructure("Stronghold");
             }
-            //stage.close();
+            stage.close();
          }
       });
       noButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
-            //stage.close();
+            stage.close();
          }
       });
       TerrainController.enableTerrains(terrains, map);
@@ -285,30 +279,30 @@ public class ActionController {
 
 
 
-//      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//      alert.setTitle("Upgrade Structure");
-//      alert.setHeaderText("Do you want to upgrade this Trading Post to a Stronghold or Temple?");
-//      alert.setContentText("Cost will be here");
-//
-//      ButtonType stronghold = new ButtonType("Stronghold");
-//      ButtonType temple = new ButtonType("Temple");
-//      ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-//
-//      alert.getButtonTypes().setAll(stronghold, temple, buttonTypeCancel);
-//
-//      Optional<ButtonType> result = alert.showAndWait();
-//      if (result.get() == stronghold) {
-//         TerrainController.upgradeToStronghold(terrain, gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE);
-//         space.setStructure("Stronghold");
-//      } else if (result.get() == temple) {
-//         TerrainController.upgradeToTemple(terrain, gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE);
-//         space.setStructure("Temple");
-//      } else {
-//         // ... user chose CANCEL or closed the dialog
-//      }
-//
-//      TerrainController.enableTerrains(terrains, map);
-//      TerrainController.disableButtonClicks(terrains);
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setTitle("Upgrade Structure");
+      alert.setHeaderText("Do you want to upgrade this Trading Post to a Stronghold or Temple?");
+      alert.setContentText("Cost will be here");
+
+      ButtonType stronghold = new ButtonType("Stronghold");
+      ButtonType temple = new ButtonType("Temple");
+      ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+      alert.getButtonTypes().setAll(stronghold, temple, buttonTypeCancel);
+
+      Optional<ButtonType> result = alert.showAndWait();
+      if (result.get() == stronghold) {
+         TerrainController.upgradeToStronghold(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
+         space.setStructure("Stronghold");
+      } else if (result.get() == temple) {
+         TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
+         space.setStructure("Temple");
+      } else {
+         // ... user chose CANCEL or closed the dialog
+      }
+
+      TerrainController.enableTerrains(terrains, map);
+      TerrainController.disableButtonClicks(terrains);
 
    }
 
@@ -319,44 +313,39 @@ public class ActionController {
        * TODO
        * DIKKATTTT
        */
-      //BorderPane pane = DialogueController.getTempleUpgradePromptPane(gameHandler, "Do you want to upgrade this Temple to a Sanctuary\n at the expense of: ", yesButton, noButton);
-
-      //Stage stage = DialogueController.getStage("Upgrade Temple", pane, new Image("favor_tiles_background.jpg"));
-      //stage.show();
+      BorderPane pane = DialogueController.getTempleUpgradePromptPane(playerArr,curPlayerId, "Do you want to upgrade this Temple to a Sanctuary\n at the expense of: ", yesButton, noButton);
+      Stage stage = DialogueController.getStage("Upgrade Temple", pane, new Image("favor_tiles_background.jpg"));
+      stage.show();
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
             TerrainController.upgradeToSanctuary(terrain,playerArr[curPlayerId].getFaction().TERRAIN_TILE);
             space.setStructure("Sanctuary");
-            //stage.close();
+            stage.close();
          }
       });
       noButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
-            //stage.close();
+            stage.close();
          }
       });
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setTitle("Upgrade Structure");
+      alert.setHeaderText("Do you want to upgrade this Temple to a Sanctuary?");
+      alert.setContentText("Cost will be here");
 
-
-
-
-//      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//      alert.setTitle("Upgrade Structure");
-//      alert.setHeaderText("Do you want to upgrade this Temple to a Sanctuary?");
-//      alert.setContentText("Cost will be here");
-//
-//      Optional<ButtonType> result = alert.showAndWait();
-//      if (((Optional) result).get() == ButtonType.OK) {
-//         TerrainController.upgradeToSanctuary(terrain, gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE);
-//         space.setStructure("Sanctuary");
-//      } else {
-//         // ... user chose CANCEL or closed the dialog
-//      }
-//      TerrainController.enableTerrains(terrains, map);
-//      TerrainController.disableButtonClicks(terrains);
+      Optional<ButtonType> result = alert.showAndWait();
+      if (((Optional) result).get() == ButtonType.OK) {
+         TerrainController.upgradeToSanctuary(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
+         space.setStructure("Sanctuary");
+      } else {
+         // ... user chose CANCEL or closed the dialog
+      }
+      TerrainController.enableTerrains(terrains, map);
+      TerrainController.disableButtonClicks(terrains);
    }
 
    //TODO

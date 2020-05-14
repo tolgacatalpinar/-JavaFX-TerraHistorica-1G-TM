@@ -339,10 +339,10 @@ public class GameController implements Initializable {
          player_initial_jew[j] = playerList[j].getInitialJudaism();
          player_initial_hindu[j] = playerList[j].getInitialHinduism();
       }
-      religionArr[0] = new Islam(totalPlayerNumber, player_initial_islam);
-      religionArr[1] = new Christianity(totalPlayerNumber, player_initial_chirst);
-      religionArr[2] = new Jewish(totalPlayerNumber, player_initial_jew);
-      religionArr[3] = new Hinduism(totalPlayerNumber, player_initial_hindu);
+      religionArr[0] = new Religion(totalPlayerNumber, player_initial_islam);
+      religionArr[1] = new Religion(totalPlayerNumber, player_initial_chirst);
+      religionArr[2] = new Religion(totalPlayerNumber, player_initial_jew);
+      religionArr[3] = new Religion(totalPlayerNumber, player_initial_hindu);
    }
 
    public void loadInitialMap() {
