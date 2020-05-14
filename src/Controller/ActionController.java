@@ -500,7 +500,7 @@ public class ActionController {
       HBox special4 = new HBox();
 
       Player[] players = gameController.getPlayerList();
-      int playerId = gameController.curPlayerId;
+      int playerId = gameController.roundController.getCurrentPlayerId();
       Player player = players[playerId];
       special1.getChildren().add(new SpecialActionView("Spade Action"));
       final int[] choice = {0};
