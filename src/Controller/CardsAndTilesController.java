@@ -3,12 +3,17 @@ package Controller;
 import Controller.GameController;
 import Model.CardsAndTiles.*;
 import Model.GameHandler;
+import Model.Player;
 import View.CardsAndTilesViews.BonusCardView;
 import View.CardsAndTilesViews.FavorTileView;
 import View.CardsAndTilesViews.ScoringTileView;
 import View.CardsAndTilesViews.TownTileView;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
@@ -34,6 +39,14 @@ public class CardsAndTilesController {
             secondRow.getChildren().add(new BonusCardView(bonusCards.get(i)));
         }
         wholeBonus.getChildren().addAll(firstRow, secondRow);
+        Button select = new Button("select");
+        select.setOnMouseClicked(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+
+            }
+        });
+        wholeBonus.getChildren().add(select);
         wholeBonus.setPadding(new Insets(100,0,0,50));
         wholeBonus.setMinHeight(800);
         wholeBonus.setMinWidth(1200);
