@@ -198,23 +198,23 @@ public class PlayerHandler implements Serializable{
 
     }
 
-    public boolean upgradeShippingLevel(Player player) {
+    public int upgradeShippingLevel(Player player) {
         if(player.getShipLevel()< player.getFaction().MAX_SHIPPING) {
             if(player.spendFromResources(0, player.getFaction().SHIPPING_GOLD_COST, player.getFaction().SHIPPING_PRIEST_COST)) {
                 player.setShipLevel(player.getShipLevel()+1);
                 player.addVictoryPoints(player.getFaction().SHIPPING_UPGRADE_VICTORY_POINTS[player.getShipLevel()-1]);
-                return true;
+                return 1;
             }
             else {
                 System.out.println("Not enough resources");
+                return -1;
             }
 
         }
         else {
             System.out.println("Maximum level");
+            return 0;
         }
-        return false;
-
     }
 
 //   public static void returnBonusCard(Player player) {
