@@ -298,13 +298,9 @@ public class PlayerHandler implements Serializable{
     public void updateResources(Player player) {
 
         player.setGoldNum(player.getGoldNum() + player.getGoldIncome());
-        player.setGoldIncome(0);
         player.setWorkerNum(player.getWorkerNum() + player.getWorkerIncome());
-        player.setWorkerIncome(0);
         player.gainPriest(player.getPriestIncome());
-        player.setPriestIncome(0);
         player.addPowerToBowl(player.getPowerIncome());
-        player.setPowerIncome(0);
 
     }
 
@@ -314,8 +310,8 @@ public class PlayerHandler implements Serializable{
 
     public boolean terraform(Player player, String typeToChange) {
         if ( player.getFaction().payPriestWhenTransform) {
-            player.spendPriest(1);
-            return true;
+            if(player.spendFromResources(0,0,1))
+                return true;
         }
         else {
             if(player.spendFreeSpade(typeToChange)) {

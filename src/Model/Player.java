@@ -179,7 +179,7 @@ public class Player implements Serializable {
    }
 
    public boolean spendFromResources(int requiredWorker, int requiredGold, int requiredPriest) {
-      if (workerNum - requiredWorker > 0 && goldNum - requiredGold > 0 && priestNum - requiredPriest > 0) {
+      if (workerNum - requiredWorker >= 0 && goldNum - requiredGold >= 0 && priestNum - requiredPriest >= 0) {
          workerNum -= requiredWorker;
          goldNum -= requiredGold;
          spendPriest(requiredPriest);

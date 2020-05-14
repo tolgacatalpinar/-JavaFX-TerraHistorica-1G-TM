@@ -21,9 +21,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 public class ActionController {
-
    final static int ROW_NUMBER = 9;
    final static int COLUMN_NUMBER = 13;
    private static int selection = -1;
@@ -100,31 +98,33 @@ public class ActionController {
          @Override
          public void handle(MouseEvent event) {
             String selectedChoice = (String) choiceBox.getValue();
+            boolean flag = true;
             if (playerHandler.terraform(playerArr[curPlayerId],space.getType())){
                TerrainController.terraform(terrain, selectedChoice);
                space.setType(selectedChoice);
-               System.out.println("Döndü");
             }else{
+               flag = false;
                System.out.println("No enough resources");
             }
-
             terraformStage.close();
-            if (selectedChoice.equals(playerArr[curPlayerId].getFaction().TERRAIN_TILE)) {
+            if (selectedChoice.equals(playerArr[curPlayerId].getFaction().TERRAIN_TILE) && flag) {
                Button yesButton = new Button("Yes");
                Button noButton = new Button("No");
                BorderPane pane = DialogueController.getDwellingUpgradePromptPane(playerArr, curPlayerId, "Do you want to build a dwelling into that terrain? The cost will be: ", yesButton, noButton);
-
                Stage dwellingChoiceStage = DialogueController.getStage("Do you want to build dwelling?", pane, new Image("favor_tiles_background.jpg"));
                dwellingChoiceStage.show();
                yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                   @Override
                   public void handle(MouseEvent event) {
-
-                     if(playerHandler.buildStructure(playerArr[curPlayerId],"Dwelling",false) != -1) {
+                     int returnCase =  playerHandler.buildStructure(playerArr[curPlayerId],"Dwelling",false);
+                     if( returnCase == 1) {
                         TerrainController.buildDwelling(terrain, selectedChoice);
                         space.setOccupied(true);
                         space.setStructure("Dwelling");
-                     }
+                     }else if( returnCase == -1){
+                        System.out.println("Not enough resources");
+                     }else
+                        System.out.println("Max reached");
                      dwellingChoiceStage.close();
                   }
                });
@@ -193,6 +193,7 @@ public class ActionController {
                          */
                         //gameHandler.upgradeStructure(map.spaces[finalI][finalJ], map.spaces[finalI][finalJ].getStructure().getBuilding())
                         if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Dwelling"))
+
                            upgradeToTradingPost(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
                         else if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Trading Post"))
                            upgradeToStrongholdOrTemple(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
@@ -206,6 +207,7 @@ public class ActionController {
    }
 
    public static void upgradeToTradingPost(Player[] playerArr, int currentPlayerId, Button[][] terrains, Button terrain, Map map, Space space) {
+      PlayerHandler playerHandler = new PlayerHandler();
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
       BorderPane pane = DialogueController.getDwellingUpgradePromptPane(playerArr,currentPlayerId, "Do you want to upgrade this Dwelling to a Trading Post?", yesButton, noButton);
@@ -214,9 +216,22 @@ public class ActionController {
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
-            TerrainController.upgradeToTradingPost(terrain, playerArr[currentPlayerId].getFaction().TERRAIN_TILE);
-            space.setStructure("Trading Post");
-            stage.close();
+            ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
+            System.out.println(adjacentPlayers.size());
+            int returnCase = playerHandler.buildStructure(playerArr[currentPlayerId], "TradingPost", adjacentPlayers != null);
+            /**
+             * TODO
+             * YANDAKİ UŞAKLARA SOR
+             */
+            if(returnCase == 1){
+               TerrainController.upgradeToTradingPost(terrain, playerArr[currentPlayerId].getFaction().TERRAIN_TILE);
+               space.setStructure("Trading Post");
+               stage.close();
+            }else if (returnCase == -1){
+               System.out.println("Not enough resources");
+            }else
+               System.out.println("Max reached");
+
          }
       });
       noButton.setOnMouseClicked(new EventHandler<MouseEvent>() {

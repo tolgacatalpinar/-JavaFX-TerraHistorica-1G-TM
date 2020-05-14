@@ -4,7 +4,6 @@ import Model.Player;
 import Model.PlayerHandler;
 
 public class RoundController {
-
     int currentPlayerId = 0;
     int playerCount = 0;
     int currentRound = 0;
@@ -70,7 +69,9 @@ public class RoundController {
         System.out.println("Round Over");
         for(int i = 0; i < playerCount; i++){
             playerHandler.updateResources(playerList[i]);
+            playerList[i].setRoundPassed(false);
         }
+        currentPlayerId = 0;
         currentRound++;
         System.out.println("Round is : "+ currentRound);
         if(currentRound > MAX_ROUND) {
