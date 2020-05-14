@@ -62,9 +62,9 @@ public class RoundController {
      */
     private void endRound(Player[] playerList) { //Pass Round Clicked
         for(int i = 0; i < passRoundPlayerList.length; i++){
-            System.out.println(passRoundPlayerList[i]);
             playerList[i] = passRoundPlayerList[i];
         }
+
         lastPassedIndex = 0;
         System.out.println("Round Over");
         for(int i = 0; i < playerCount; i++){

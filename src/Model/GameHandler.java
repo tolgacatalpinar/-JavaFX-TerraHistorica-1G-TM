@@ -237,7 +237,7 @@ public class GameHandler implements Serializable{
      * @param exchange
      */
     public void exchangeResources(String exchange){
-        playerHandler.exchangeResources(playerList[currentPlayerId], exchange);
+       // playerHandler.exchangeResources(playerList[currentPlayerId], exchange);
     }
 
     /**
@@ -245,13 +245,13 @@ public class GameHandler implements Serializable{
      * @param powerAction
      */
     public void usePowerAction(String powerAction) {
-        if(playerHandler.usePowerAction( powerAction, playerList[currentPlayerId])) {
-            if( powerAction.equals("power to bridge")) {
-                //buildBridge();
-            }
-            //TODO
-
-        }
+//        if(playerHandler.usePowerAction( powerAction, playerList[currentPlayerId])) {
+//            if( powerAction.equals("power to bridge")) {
+//                //buildBridge();
+//            }
+//            //TODO
+//
+//        }
 
     }
 

@@ -193,6 +193,7 @@ public class GameController implements Initializable {
    public void passRoundClicked(){
       bonusCardsClicked();
       roundController.passRound(playerList);
+      bonusCardsClicked();
    }
 
    @FXML
@@ -240,7 +241,7 @@ public class GameController implements Initializable {
 
    @FXML
    public void scoreTableClicked() {
-      cardsAndTilesController.showScoreTable(this);
+
    }
 
 
