@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.GameHandler;
+import Model.Player;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -36,17 +37,17 @@ public class DialogueController {
               BackgroundSize.DEFAULT)));
       return dialog;
    }
-   public static BorderPane getDwellingUpgradePromptPane(GameHandler gameHandler, String promptMessage, Button yesButton, Button noButton)
+   public static BorderPane getDwellingUpgradePromptPane(Player[] playerArr, int curPlayerId, String promptMessage, Button yesButton, Button noButton)
    {
       Label prompt = new Label(promptMessage);
       ImageView goldIm = new ImageView(new Image("gold.png"));
       goldIm.setFitHeight(30);
       goldIm.setFitWidth(30);
-      Label goldLabel = new Label("" + gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().DWELLING_GOLD_COST);
+      Label goldLabel = new Label("" + playerArr[curPlayerId].getFaction().DWELLING_GOLD_COST);
       ImageView workerIm = new ImageView(new Image("gold.png"));
       workerIm.setFitHeight(30);
       workerIm.setFitWidth(30);
-      Label workerLabel = new Label("" + gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().DWELLING_WORKER_COST);
+      Label workerLabel = new Label("" + playerArr[curPlayerId].getFaction().DWELLING_WORKER_COST);
 
       HBox requiredResources = new HBox();
       HBox buttons = new HBox();

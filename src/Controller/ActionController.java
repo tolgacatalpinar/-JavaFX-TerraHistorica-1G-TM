@@ -55,7 +55,7 @@ public class ActionController {
                            @Override
                            public void handle(MouseEvent event) {
                               //BUNA DİKKAT
-                              // terraformAlertBox(gameHandler, terrains, terrains[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], map, map.spaces[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])]);
+                              terraformAlertBox(playerArr, curPlayerId, terrains, terrains[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], map, map.spaces[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])]);
                            }
                         });
                      }
@@ -72,7 +72,7 @@ public class ActionController {
     *
     *
     */
-   public static void terraformAlertBox(GameHandler gameHandler, Button[][] terrains, Button terrain, Map map, Space space) {
+   public static void terraformAlertBox(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space) {
 
       List<String> choices = new ArrayList<>();
       choices.add("Wasteland");
@@ -88,7 +88,7 @@ public class ActionController {
       Label promptChoice = new Label("Terrain type: ");
       ChoiceBox choiceBox = new ChoiceBox();
       choiceBox.getItems().addAll(choices);
-      choiceBox.setValue(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE);
+      choiceBox.setValue(playerArr[curPlayerId].getFaction().TERRAIN_TILE);
       BorderPane pane = new BorderPane();
       HBox choiceBlock = new HBox();
       Button transformButton = new Button("Transform");
@@ -109,10 +109,10 @@ public class ActionController {
             space.setType(selectedChoice);
 
             terraformStage.close();
-            if (selectedChoice.equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE)) {
+            if (selectedChoice.equals(playerArr[curPlayerId].getFaction().TERRAIN_TILE)) {
                Button yesButton = new Button("Yes");
                Button noButton = new Button("No");
-               BorderPane pane = DialogueController.getDwellingUpgradePromptPane(gameHandler, "Do you want to build a dwelling into that terrain? The cost will be: ", yesButton, noButton);
+               BorderPane pane = DialogueController.getDwellingUpgradePromptPane(playerArr, curPlayerId, "Do you want to build a dwelling into that terrain? The cost will be: ", yesButton, noButton);
 
                Stage dwellingChoiceStage = DialogueController.getStage("Do you want to build dwelling?", pane, new Image("favor_tiles_background.jpg"));
                dwellingChoiceStage.show();
