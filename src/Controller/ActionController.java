@@ -195,12 +195,11 @@ public class ActionController {
                          */
                         //gameHandler.upgradeStructure(map.spaces[finalI][finalJ], map.spaces[finalI][finalJ].getStructure().getBuilding())
                         if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Dwelling"))
-
-                           upgradeToTradingPost(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
+                           upgradeToTradingPost(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ],actions);
                         else if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Trading Post"))
-                           upgradeToStrongholdOrTemple(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
+                           upgradeToStrongholdOrTemple(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ], actions);
                         else if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Temple"))
-                           upgradeToSanctuary(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ]);
+                           upgradeToSanctuary(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ], actions);
                      }
                   });
                }
@@ -208,7 +207,7 @@ public class ActionController {
       }
    }
 
-   public static void upgradeToTradingPost(Player[] playerArr, int currentPlayerId, Button[][] terrains, Button terrain, Map map, Space space) {
+   public static void upgradeToTradingPost(Player[] playerArr, int currentPlayerId, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions) {
       PlayerHandler playerHandler = new PlayerHandler();
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
@@ -226,6 +225,7 @@ public class ActionController {
              * YANDAKİ UŞAKLARA SOR
              */
             if(returnCase == 1){
+               disableActions(actions);
                TerrainController.upgradeToTradingPost(terrain, playerArr[currentPlayerId].getFaction().TERRAIN_TILE);
                space.setStructure("Trading Post");
                stage.close();
@@ -261,7 +261,7 @@ public class ActionController {
 //      TerrainController.disableButtonClicks(terrains);
    }
 
-   public static void upgradeToStrongholdOrTemple(Player[] playerArr,int curPlayerId,Button[][] terrains, Button terrain, Map map, Space space) {
+   public static void upgradeToStrongholdOrTemple(Player[] playerArr,int curPlayerId,Button[][] terrains, Button terrain, Map map, Space space, Button[] actions) {
       PlayerHandler playerHandler = new PlayerHandler();
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
@@ -281,6 +281,7 @@ public class ActionController {
                 * YANDAKİ UŞAKLARA SOR
                 */
                if(returnCase == 1){
+                  disableActions(actions);
                   TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                   space.setStructure("Temple");
                }else if (returnCase == -1){
@@ -297,6 +298,7 @@ public class ActionController {
                 * YANDAKİ UŞAKLARA SOR
                 */
                if(returnCase == 1){
+                  disableActions(actions);
                   TerrainController.upgradeToStronghold(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                   space.setStructure("Stronghold");
                }else if (returnCase == -1){
@@ -346,7 +348,7 @@ public class ActionController {
 
    }
 
-   public static void upgradeToSanctuary(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space) {
+   public static void upgradeToSanctuary(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions) {
       PlayerHandler playerHandler = new PlayerHandler();
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
@@ -367,6 +369,7 @@ public class ActionController {
              * YANDAKİ UŞAKLARA SOR
              */
             if(returnCase == 1){
+               disableActions(actions);
                TerrainController.upgradeToSanctuary(terrain,playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                space.setStructure("Sanctuary");
             }else if (returnCase == -1){
