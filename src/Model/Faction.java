@@ -4,6 +4,7 @@ public class Faction implements Serializable {
 
     public String TERRAIN_TILE;
     public int MAX_SHIPPING = 3;
+    public int MAX_SPADE_LEVEL = 3;
     public int INITIAL_VICTORY_POINT = 19;
     public int INITIAL_WORKER  = 3;
     public int INITIAL_WORKER_INCOME = 1;

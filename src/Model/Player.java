@@ -169,6 +169,14 @@ public class Player implements Serializable {
          return false;
       }
       spadeNeeded -= freeSpade;
+      if(faction.payPriestWhenTransform) {
+         if(priestNum - spadeNeeded >= 0) {
+            spendPriest(spadeNeeded);
+            addVictoryPoints(2);
+            return true;
+         }
+         return false;
+      }
       if (workerNum - spadeNeeded*terraformWorkerCost >= 0) {
          workerNum -= spadeNeeded*terraformWorkerCost;
          return true;

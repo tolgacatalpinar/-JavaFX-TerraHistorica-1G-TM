@@ -366,7 +366,14 @@ public class ReligionController{
                 }
             });
         }
-
     }
+
+    /**
+     * For calculating scores coming by religons
+     */
+//    public int[] calculateReligionScores(){
+//
+//        return ;
+//    }
 
 }

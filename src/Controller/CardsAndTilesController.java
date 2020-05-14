@@ -3,58 +3,127 @@ package Controller;
 import Controller.GameController;
 import Model.CardsAndTiles.*;
 import Model.GameHandler;
+import Model.Player;
 import View.CardsAndTilesViews.BonusCardView;
 import View.CardsAndTilesViews.FavorTileView;
 import View.CardsAndTilesViews.ScoringTileView;
 import View.CardsAndTilesViews.TownTileView;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class CardsAndTilesController {
-
-    public void showBonusCardsTable(GameController gameController)
+    private  int selection = -1;
+    public void showBonusCardsTable(CardsAndTiles cardsAndTiles,Player current)
     {
-        VBox wholeBonus = new VBox();
-        HBox firstRow = new HBox();
-        HBox secondRow = new HBox();
-
-        ArrayList<BonusCard> bonusCards = gameController.getCardsAndTiles().getSelectedBonusCards();
-
-        for (int i = 0; i < (int) Math.ceil((double) bonusCards.size() / 2); i++){
-            firstRow.getChildren().add(new BonusCardView(bonusCards.get(i)));
-        }
-        for (int i = (int) Math.ceil((double)bonusCards.size() / 2); i < bonusCards.size(); i++){
-
-            secondRow.getChildren().add(new BonusCardView(bonusCards.get(i)));
-        }
-        wholeBonus.getChildren().addAll(firstRow, secondRow);
-        wholeBonus.setPadding(new Insets(100,0,0,50));
-        wholeBonus.setMinHeight(800);
-        wholeBonus.setMinWidth(1200);
+        selection = -1;
+        ArrayList<BonusCard> bonusCards = cardsAndTiles.getSelectedBonusCards();
+        BorderPane border = new BorderPane();
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        Button select = new Button("Select");
+        select.setMaxHeight(100);
+        select.setMinWidth(100);
+        BorderPane border_bottom = new BorderPane();
+        border.setBottom(border_bottom);
+        border_bottom.setCenter(select);
         final Stage dialog = new Stage();
+        border.setCenter(gridPane);
         dialog.initModality(Modality.APPLICATION_MODAL);
-        Scene dialogScene = new Scene(wholeBonus, 1100, 600);
+        Scene dialogScene = new Scene(border, 1100, 600);
+        dialog.setResizable(false);
+        border.setBackground(new Background( new BackgroundImage( new Image("bonus_cards_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT)));
         dialog.setScene(dialogScene);
         dialog.setTitle("Bonus Cards ");
-        dialog.setResizable(false);
-        wholeBonus.setBackground(new Background( new BackgroundImage( new Image("bonus_cards_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT)));
+
+        for (int i = 0; i < bonusCards.size(); i++) {
+            GridPane tempPane = new GridPane();
+            tempPane.getChildren().add(new BonusCardView(bonusCards.get(i)));
+            tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    DropShadow borderGlow = new DropShadow();
+                    borderGlow.setColor(Color.BLUE);
+                    borderGlow.setOffsetX(0f);
+                    borderGlow.setOffsetY(0f);
+                    borderGlow.setWidth(50);
+                    borderGlow.setHeight(50);
+                    tempPane.setEffect(borderGlow);
+                }
+            });
+            int finalI = i;
+            tempPane.setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if (selection != finalI)
+                        tempPane.setEffect(null);
+                }
+            });
+            tempPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    setSelection(finalI);
+                    for (int i = 0; i < bonusCards.size(); i++) {
+                        if (i != getSelection())
+                            gridPane.getChildren().get(i).setEffect(null);
+                    }
+                }
+            });
+            if(bonusCards.get(i).isPlayerOcupied()){
+                    DropShadow borderGlow = new DropShadow();
+                    borderGlow.setColor(Color.RED);
+                    borderGlow.setOffsetX(0f);
+                    borderGlow.setOffsetY(0f);
+                    borderGlow.setWidth(50);
+                    borderGlow.setHeight(50);
+                    tempPane.setEffect(borderGlow);
+                    tempPane.setDisable(true);
+            }
+            gridPane.add(tempPane, i % 3, i / 3);
+        }
+        select.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                int chosen = getSelection();
+                System.out.println("Selected " + chosen);
+                cardsAndTiles.playerChoseBonusCard(cardsAndTiles.selectedBonusCards.get(selection),current);
+                dialog.close();
+            }
+        });
+
         dialog.show();
+
+
     }
-    public void showFavorTilesTable(GameController gameController)
+    public  int getSelection() {
+        return selection;
+    }
+    public  void setSelection(int i) {
+        selection = i;
+    }
+    public void showFavorTilesTable(CardsAndTiles cardsAndTiles)
     {
         VBox wholeFavor = new VBox();
         HBox favorBox1 = new HBox();
         HBox favorBox2 = new HBox();
         HBox favorBox3 = new HBox();
 
-        ArrayList<FavorTile> favorTiles = gameController.getCardsAndTiles().getFavorTiles();
+        ArrayList<FavorTile> favorTiles = cardsAndTiles.getFavorTiles();
         for( int i = 0; i < (int) Math.ceil((double)favorTiles.size() / 3); i ++)
         {
             favorBox1.getChildren().add(new FavorTileView(favorTiles.get(i)));
@@ -70,7 +139,6 @@ public class CardsAndTilesController {
         wholeFavor.getChildren().addAll(favorBox1, favorBox2, favorBox3);
         wholeFavor.setPadding( new Insets(100, 0, 0, 50));
 
-
         wholeFavor.setMinHeight(800);
         wholeFavor.setMinWidth(1200);
         final Stage dialog = new Stage();
@@ -83,7 +151,7 @@ public class CardsAndTilesController {
                 BackgroundSize.DEFAULT)));
         dialog.show();
     }
-    public void showScoreTable(GameController gameController)
+    public void showScoreTable()
     {
         Pane emptyPane = new Pane();
 
@@ -97,13 +165,13 @@ public class CardsAndTilesController {
                 BackgroundSize.DEFAULT)));
         dialog.show();
     }
-    public void showScoringTilesTable(GameController gameController)
+    public void showScoringTilesTable(CardsAndTiles cardsAndTiles)
     {
         HBox wholeScoring = new HBox();
         VBox first = new VBox();
         VBox second = new VBox();
 
-        ArrayList<ScoringTile> scoringTiles = gameController.getCardsAndTiles().getSelectedScoringTiles();
+        ArrayList<ScoringTile> scoringTiles = cardsAndTiles.getSelectedScoringTiles();
 
         for(int i = 0; i < (int) Math.ceil((double)scoringTiles.size() / 2); i++) {
             first.getChildren().add(new ScoringTileView(scoringTiles.get(i)));
@@ -127,7 +195,7 @@ public class CardsAndTilesController {
                 BackgroundSize.DEFAULT)));
         dialog.show();
     }
-    public void showTownTilesTable(GameController gameController)
+    public void showTownTilesTable(CardsAndTiles cardsAndTiles)
     {
         VBox wholeTown = new VBox();
         HBox first = new HBox();
@@ -135,7 +203,7 @@ public class CardsAndTilesController {
         HBox third = new HBox();
 
 
-        ArrayList<TownTile> townTiles = gameController.getCardsAndTiles().getTownTiles();
+        ArrayList<TownTile> townTiles = cardsAndTiles.getTownTiles();
 
         for(int i = 0; i < (int) Math.ceil((double)townTiles.size() / 3); i++) {
             first.getChildren().add(new TownTileView(townTiles.get(i)));
