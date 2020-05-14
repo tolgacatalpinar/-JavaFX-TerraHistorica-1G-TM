@@ -191,11 +191,8 @@ public class GameController implements Initializable {
 
    @FXML
    public void passRoundClicked(){
-
-      cardsAndTilesController.showBonusCardsTable(cardsAndTiles,currentPlayer);
+      cardsAndTilesController.showBonusCardsTable(cardsAndTiles,playerList[roundController.getCurrentPlayerId()]);
       roundController.passRound(playerList);
-
-
 
    }
 

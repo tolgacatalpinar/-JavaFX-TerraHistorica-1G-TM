@@ -29,6 +29,7 @@ public class CardsAndTilesController {
     private  int selection = -1;
     public void showBonusCardsTable(CardsAndTiles cardsAndTiles,Player current)
     {
+        selection = -1;
         ArrayList<BonusCard> bonusCards = cardsAndTiles.getSelectedBonusCards();
         BorderPane border = new BorderPane();
         GridPane gridPane = new GridPane();
