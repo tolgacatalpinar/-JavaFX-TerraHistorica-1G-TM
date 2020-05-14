@@ -86,7 +86,7 @@ public class GameController implements Initializable {
 
    @Override
    public void initialize(URL url, ResourceBundle resourceBundle) {
-      actions = new Button[]{specialActions, terraform, upgradeShipping, upgradeStruct, sendPriest, powerActions, upgradeSpade};
+      actions = new Button[]{specialActions, terraform, upgradeShipping, upgradeStruct, sendPriest, powerActions, upgradeSpade, passRound};
       System.out.println("Initialize is called");
       int index = 0;
       terrains = new Button[ROW_NUMBER][COLUMN_NUMBER];
@@ -220,12 +220,12 @@ public class GameController implements Initializable {
 
    @FXML
    public void terraformClicked() {
-      ActionController.terraform(playerList,roundController.getCurrentPlayerId(), terrains, map);
+      ActionController.terraform(playerList,roundController.getCurrentPlayerId(), terrains, map, actions);
    }
 
    @FXML
    public void upgradeStructureClicked() {
-      ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(),terrains, map);
+      ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(),terrains, map, actions);
    }
 
    @FXML

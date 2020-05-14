@@ -26,7 +26,7 @@ public class ActionController {
    final static int COLUMN_NUMBER = 13;
    private static int selection = -1;
 
-   public static void terraform(Player[] playerArr, int curPlayerId ,Button[][] terrains,Map map) {
+   public static void terraform(Player[] playerArr, int curPlayerId ,Button[][] terrains,Map map, Button[] actions) {
 
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
@@ -49,7 +49,7 @@ public class ActionController {
                         terrains[map.getRow(adj[k])][map.getColumn(adj[k])].setOnMouseClicked(new EventHandler<MouseEvent>() {
                            @Override
                            public void handle(MouseEvent event) {
-                              terraformAction(playerArr, curPlayerId, terrains, terrains[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], map, map.spaces[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])]);
+                              terraformAction(playerArr, curPlayerId, terrains, terrains[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], map, map.spaces[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], actions);
                            }
                         });
                      }
@@ -66,7 +66,7 @@ public class ActionController {
     *
     *
     */
-   public static void terraformAction(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space) {
+   public static void terraformAction(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions) {
 
       List<String> choices = new ArrayList<>();
       choices.add("Wasteland");
@@ -100,6 +100,7 @@ public class ActionController {
             String selectedChoice = (String) choiceBox.getValue();
             boolean flag = true;
             if (playerHandler.terraform(playerArr[curPlayerId],space.getType())){
+               disableActions(actions);
                TerrainController.terraform(terrain, selectedChoice);
                space.setType(selectedChoice);
             }else{
@@ -175,7 +176,7 @@ public class ActionController {
 //        TerrainController.disableButtonClicks(terrains);
    }
 
-   public static void upgradeStructure(Player[] playerArr, int currentPlayerId,Button[][] terrains, Map map) {
+   public static void upgradeStructure(Player[] playerArr, int currentPlayerId,Button[][] terrains, Map map, Button[] actions) {
       TerrainController.disableTerrains(terrains, map);
 
       for (int i = 0; i < ROW_NUMBER; i++) {
@@ -798,6 +799,11 @@ public class ActionController {
 
 
 
+   }
+
+   public static void disableActions(Button[] actions){
+      for(int i = 0; i < actions.length; i++)
+         actions[i].setDisable(true);
    }
 
 
