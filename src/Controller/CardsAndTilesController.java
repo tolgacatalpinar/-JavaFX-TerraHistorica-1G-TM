@@ -24,8 +24,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-
-public class CardsAndTilesController {
+import java.io.Serializable;
+public class CardsAndTilesController implements Serializable {
     private  int selection = -1;
     public void showBonusCardsTable(CardsAndTiles cardsAndTiles,Player current)
     {

@@ -14,8 +14,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-public class DialogueController {
+import java.io.Serializable;
+public class DialogueController implements  Serializable{
 
    private static int STAGE_WIDTH = 400;
    private static int STAGE_HEIGHT = 300;

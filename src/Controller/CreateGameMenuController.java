@@ -17,8 +17,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-public class CreateGameMenuController extends MainMenuController implements Initializable {
+import java.io.Serializable;
+public class CreateGameMenuController extends MainMenuController implements Initializable, Serializable {
 
     @FXML
     TextField player1, player2, player3, player4, player5;
