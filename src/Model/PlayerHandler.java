@@ -130,39 +130,44 @@ public class PlayerHandler implements Serializable{
 
     public boolean usePowerAction(int actionId, Player player) {
 
-        if(actionId == 1) {//Build bridge
-
+        if(actionId == 0) {//Build bridge
+            if(player.getBridgeNum() < player.getFaction().MAX_BRIDGE) {
+                if(player.spendPowerFromBowl(3)) {
+                    player.setBridgeNum(player.getBridgeNum()+1);
+                    player.addVictoryPoints(player.getFaction().victoryPointForEachConnectingBridges);
+                }
+            }
         }
 
-        else if(actionId == 2) {// 3 power for 1 priest
+        else if(actionId == 1) {// 3 power for 1 priest
             if(player.spendPowerFromBowl(3)) {
                 player.gainPriest(1);
                 return true;
             }
         }
 
-        else if(actionId == 3) {//4 power for 2 workers
+        else if(actionId == 2) {//4 power for 2 workers
             if(player.spendPowerFromBowl(4)) {
                 player.setWorkerNum(player.getWorkerNum()+2);
                 return true;
             }
         }
 
-        else if (actionId == 4) {//4 power for 7 gold
+        else if (actionId == 3) {//4 power for 7 gold
             if(player.spendPowerFromBowl(4)) {
                 player.setGoldNum(player.getGoldNum()+7);
                 return true;
             }
         }
         //After action 5 or 6, player can terraform and build dwelling immedieately
-        else if (actionId == 5) {//4 power for 1 free spade
+        else if (actionId == 4) {//4 power for 1 free spade
             if(player.spendPowerFromBowl(4)) {
                 player.setFreeSpade(player.getFreeSpade()+1);
                 return true;
             }
         }
 
-        else if (actionId == 6) {//6 power for 2 free spade
+        else if (actionId == 5) {//6 power for 2 free spade
             if (player.spendPowerFromBowl(6)) {
                 player.setFreeSpade(player.getFreeSpade() + 2);
                 return true;

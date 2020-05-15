@@ -465,7 +465,7 @@ public class ActionController implements Serializable {
     * TAŞINACAK HERHALDE BU DA
     * @param
     */
-   public static void showPowerActions() {
+   public static void showPowerActions(GameController gameController) {
 
       BorderPane border = new BorderPane();
       BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -479,6 +479,9 @@ public class ActionController implements Serializable {
       BorderPane border_bottom = new BorderPane();
       border.setBottom(border_bottom);
       border_bottom.setCenter(select);
+      Player[] players = gameController.getPlayerList();
+      int playerId = gameController.roundController.getCurrentPlayerId();
+      Player player = players[playerId];
 
       for (int i = 0; i < 6; i++) {
          GridPane tempPane = new GridPane();
@@ -531,9 +534,33 @@ public class ActionController implements Serializable {
       select.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
-
+            PlayerHandler playerHandler = new PlayerHandler();
             int chosen = getSelection();
             System.out.println("Selection: " + chosen);
+            if(chosen == 0) {
+               playerHandler.usePowerAction(0, player);
+
+            }
+            else if(chosen == 1) {
+               playerHandler.usePowerAction(1, player);
+
+            }
+            else if(chosen == 2) {
+               playerHandler.usePowerAction(2, player);
+
+            }
+            else if (chosen == 3) {
+               playerHandler.usePowerAction(3, player);
+
+            }
+            else if (chosen == 4) {
+               playerHandler.usePowerAction(4, player);
+
+            }
+            else if (chosen == 5) {
+               playerHandler.usePowerAction(5, player);
+
+            }
          }
       });
       border.setCenter(gridPane);

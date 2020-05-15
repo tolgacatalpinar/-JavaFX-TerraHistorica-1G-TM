@@ -31,6 +31,7 @@ public class LeonardoDaVinci extends Faction { //Engineer
       spadeNeededToTerraformForest = 1;
       spadeNeededToTerraformWasteland = 1;
       spadeNeededToTerraformDesert = 2;
+      victoryPointForEachConnectingBridges = 2;
       workerCostOfBridge = 2;
   }
 

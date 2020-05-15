@@ -3,6 +3,7 @@ import java.io.Serializable;
 public class Faction implements Serializable {
 
     public String TERRAIN_TILE;
+    public int MAX_BRIDGE = 3;
     public int MAX_SHIPPING = 3;
     public int MAX_SPADE_LEVEL = 3;
     public int INITIAL_VICTORY_POINT = 19;
@@ -81,7 +82,7 @@ public class Faction implements Serializable {
     public int additionalVictoryPointForEachSpade;
     public int getVictoryPointsAfterStronghold;
     public int workerCostOfBridge;
-    public int victoryPointForEachConnectingBridges;
+    public int victoryPointForEachConnectingBridges = 0;
     public boolean increaseShippingAfterStronghold = false;
     public boolean hasShipping = true;
     public int foundingTownWorkerBonus = 0;

@@ -219,7 +219,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void powerActionClicked() {
-      ActionController.showPowerActions();
+      ActionController.showPowerActions(this);
    }
 
    @FXML
