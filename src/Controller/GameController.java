@@ -26,6 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -77,9 +78,7 @@ public class GameController implements Initializable, Serializable {
    @FXML
    Button upgradeSpade;
 
-   public Player[] getPlayerList() {
-      return playerList;
-   }
+
 
    ArrayList<PlayerView> playerViewList;
    Button[][] terrains;
@@ -92,6 +91,11 @@ public class GameController implements Initializable, Serializable {
    RoundController roundController;
    PlayerHandler playerHandler;
    Player currentPlayer;
+
+
+   public GameController() throws IOException {
+   }
+
 
    @Override
    public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -177,8 +181,11 @@ public class GameController implements Initializable, Serializable {
    }
 
    @FXML
-   public void saveGameClicked(){
+   public void saveGameClicked()throws IOException{
       System.out.println("Save Game Clicked");
+      FileManager fm = new FileManager("12");
+      fm.saveGame(this, roundController );
+      System.out.println("saved");
    }
 
    @FXML
@@ -267,12 +274,12 @@ public class GameController implements Initializable, Serializable {
 
 
    @FXML
-   public void townTilesClicked() {
+   public void townTilesClicked() throws IOException {
       cardsAndTilesController.showTownTilesTable(cardsAndTiles);
    }
 
    @FXML
-   public void scoringTilesClicked() {
+   public void scoringTilesClicked()  {
 
       cardsAndTilesController.showScoringTilesTable(cardsAndTiles);
    }
@@ -664,6 +671,41 @@ public class GameController implements Initializable, Serializable {
 
 
    public CardsAndTiles getCardsAndTiles() {
+
       return cardsAndTiles;
+   }
+   public Map getMap() {
+      return map;
+   }
+   public Player[] getPlayerList() {
+      return playerList;
+   }
+   public Religion[] getReligionArr() {
+      return religionArr;
+   }
+   public PlayerHandler getPlayerHandler(){
+      return playerHandler;
+   }
+   public Player getCurrentPlayer() {
+      return currentPlayer;
+   }
+
+   public void setMap(Map map){
+      this.map = map;
+   }
+   public void setPlayerList(Player[] playerList){
+      this.playerList = playerList;
+   }
+   public void setCardsAndTiles(CardsAndTiles cat){
+      this.cardsAndTiles = cat;
+   }
+   public void setReligionArr(Religion[] religions){
+      this.religionArr = religions;
+   }
+   public void setPlayerHandler(PlayerHandler ph){
+      this.playerHandler = ph;
+   }
+   public void setCurrentPlayer(Player p1){
+      this.currentPlayer = p1;
    }
 }

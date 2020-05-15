@@ -1,6 +1,7 @@
 package Model;
 import Controller.GameController;
 import Controller.RoundController;
+import Model.CardsAndTiles.CardsAndTiles;
 
 import java.io.File;
 import java.io.ObjectInputStream;
@@ -30,7 +31,12 @@ public class FileManager {
     public void saveGame(GameController game, RoundController rounds) throws IOException   {
         FileOutputStream f = new FileOutputStream(save);
         ObjectOutputStream o = new ObjectOutputStream(f);
-        o.writeObject(game);
+        o.writeObject(game.getMap());
+        o.writeObject(game.getPlayerList());
+        o.writeObject(game.getCardsAndTiles());
+        o.writeObject(game.getReligionArr());
+        o.writeObject(game.getPlayerHandler());
+        o.writeObject(game.getCurrentPlayer());
         o.writeObject(rounds);
         o.close();
         f.close();
@@ -40,7 +46,12 @@ public class FileManager {
         try {
             FileInputStream fi = new FileInputStream(save);
             ObjectInputStream oi = new ObjectInputStream(fi);
-            this.game = (GameController) oi.readObject();
+            this.game.setMap((Map) oi.readObject());
+            this.game.setPlayerList((Player[]) oi.readObject());
+            this.game.setCardsAndTiles((CardsAndTiles) oi.readObject());
+            this.game.setReligionArr((Religion[]) oi.readObject());
+            this.game.setPlayerHandler((PlayerHandler) oi.readObject());
+            this.game.setCurrentPlayer((Player) oi.readObject());
             this.rounds = (RoundController) oi.readObject();
             oi.close();
             fi.close();
