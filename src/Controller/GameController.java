@@ -86,6 +86,9 @@ public class GameController implements Initializable, Serializable {
 
    @Override
    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+
       actions = new Button[]{specialActions, terraform, upgradeShipping, upgradeStruct, sendPriest, powerActions, upgradeSpade, passRound};
       System.out.println("Initialize is called");
       int index = 0;
@@ -207,9 +210,11 @@ public class GameController implements Initializable, Serializable {
    }
 
    @FXML
-   public void sentPriestClicked() {
+   public void sendPriestClicked() {
       ReligionController religionController = new ReligionController();
       religionController.showChoices( playerList, religionArr,  roundController.getCurrentPlayerId());
+//      disableAllTerrains();
+//      map.showBridgableTerrains(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map);
    }
 
    @FXML
@@ -317,6 +322,48 @@ public class GameController implements Initializable, Serializable {
             spaces[i][j] = space;
          }
       }
+      for(int i = 0; i < ROW_NUMBER; i++) {
+         for (int j = 0; j < COLUMN_NUMBER; j++) {
+
+            if(i == 0){
+               if(j == 2 || j == 6 || j == 10)
+                  spaces[i][j].setBridgability(true);
+            }
+            else if(i == 1){
+               spaces[i][j].setBridgability(true);
+            }
+            else if(i == 2){
+               if(j == 2 || j == 4 || j == 6 || j == 8 || j == 10)
+                  spaces[i][j].setBridgability(true);
+            }
+            else if(i == 3){
+               if(j == 0|| j == 2 || j == 5 || j == 6 || j == 8 || j == 10 || j == 11)
+                  spaces[i][j].setBridgability(true);
+            }
+            else if(i == 4){
+               if(j == 4 || j == 7 || j == 10)
+                  spaces[i][j].setBridgability(true);
+            }
+            else if(i == 5){
+               if(j == 0|| j == 1 || j == 4 || j == 5)
+                  spaces[i][j].setBridgability(true);
+            }
+            else if(i == 6){
+               if(j == 3 || j == 5 || j == 7 || j == 9)
+                  spaces[i][j].setBridgability(true);
+            }
+            else if(i == 7){
+               if(j == 0 || j == 1 || j == 6 || j == 7 || j == 9)
+                  spaces[i][j].setBridgability(true);
+            }
+            else if(i == 8){
+               if(j == 5 || j == 8)
+                  spaces[i][j].setBridgability(true);
+            }
+
+         }
+      }
+
       map = new Map(spaces);
    }
 
