@@ -1,12 +1,20 @@
 package Controller;
 
 import Model.Map;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Translate;
+
 import java.io.Serializable;
 public class TerrainController implements Serializable {
+
+   final static int ROW_NUMBER = 9;
+   final static int COLUMN_NUMBER = 13;
 
    public static void buildDwelling(Button button, String color)
    {
@@ -147,6 +155,91 @@ public class TerrainController implements Serializable {
          for (int j = 0; j < 13; j++) {
             if( terrains[i][j] != null)
                terrains[i][j].setOnMouseClicked(null);
+         }
+      }
+   }
+
+   public static void buildBridge(String type, Button[][] terrains, Map map, Pane mapPane, Button[] actions) {
+      for(int i = 0; i < ROW_NUMBER; i++){
+         for( int j = 0; j < COLUMN_NUMBER; j++){
+            if(terrains[i][j] != null && map.spaces[i][j] != null)
+               if(type.equals(map.spaces[i][j].getType()) && map.spaces[i][j].isOccupied() && map.spaces[i][j].getBridgability()) {
+                  terrains[i][j].setDisable(false);
+                  double x1 = terrains[i][j].getLayoutX();
+                  double y1 = terrains[i][j].getLayoutY();
+                  int finalI = i;
+                  int finalJ = j;
+                  terrains[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                     @Override
+                     public void handle(MouseEvent event) {
+                        terrains[finalI][finalJ].setDisable(true);
+                        for (int k = 0; k < ROW_NUMBER; k++) {
+                           for (int l = 0; l < COLUMN_NUMBER; l++) {
+                              if (map.canBuildBridge(map.spaces[finalI][finalJ], map.spaces[k][l])) {
+                                 terrains[k][l].setDisable(false);
+                                 double x2 = terrains[k][l].getLayoutX();
+                                 double y2 = terrains[k][l].getLayoutY();
+                                 int finalK = k;
+                                 int finalL = l;
+                                 terrains[k][l].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                                    @Override
+                                    public void handle(MouseEvent event) {
+                                       for(int a = 0; a < ROW_NUMBER; a++){
+                                          for( int b = 0; b < COLUMN_NUMBER; b++) {
+                                             if(terrains[a][b] != null) {
+                                                terrains[a][b].setDisable(false);
+                                             }
+                                          }
+                                       }
+                                       double x = (x1 + x2)/2;
+                                       double y = (y1 + y2)/2;
+
+                                       if(Math.abs(x1- x2) < 5){
+                                          Image imProfile = new Image(getClass().getResourceAsStream("/Images/bridgeLittle.png"));
+                                          ImageView imView = new ImageView(imProfile);
+                                          Translate translate = new Translate();
+                                          translate.setX(x+22);
+                                          translate.setY(y+12);
+                                          mapPane.getChildren().add(imView);
+                                          imView.getTransforms().addAll(translate);
+
+                                       }
+
+                                       else if((x2- x1 > 5 && y2 - y1 > 5) || (x1- x2 > 5 && y1 - y2 > 5)){
+                                          Image imProfile = new Image(getClass().getResourceAsStream("/Images/bridgeMinus60.png"));
+                                          ImageView imView = new ImageView(imProfile);
+                                          Translate translate = new Translate();
+                                          translate.setX(x+9);
+                                          translate.setY(y+13);
+                                          mapPane.getChildren().add(imView);
+                                          imView.getTransforms().addAll(translate);
+                                       }
+
+                                       else if((x2- x1 > 5 && y1 - y2 > 5) || (x1- x2 > 5 && y2 - y1 > 5)){
+                                          Image imProfile = new Image(getClass().getResourceAsStream("/Images/bridgePlus60.png"));
+                                          ImageView imView = new ImageView(imProfile);
+                                          Translate translate = new Translate();
+                                          translate.setX(x+11);
+                                          translate.setY(y+13);
+                                          mapPane.getChildren().add(imView);
+                                          imView.getTransforms().addAll(translate);
+                                       }
+
+
+
+                                       System.out.println("x1: " + x1 + "y1: "  + y1 + "\nx2: " + x2 + "y2: " + y2);
+                                       map.spaces[finalK][finalL].setBridgeConnection(true);
+                                       map.spaces[finalK][finalL].setBridgeType(type);
+                                       for(int i = 0; i < actions.length; i++)
+                                          actions[i].setDisable(true);
+                                    }
+                                 });
+                              }
+                           }
+                        }
+                     }
+                  });
+               }
          }
       }
    }

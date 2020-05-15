@@ -49,7 +49,7 @@ public class ReligionController implements Serializable{
     private int currentPlayer;
     private int playerCount;
     private Religion[] religions;
-
+    Color[] colors = new Color[5];
     /**
      * Status paramater 0 -> Just show board religion
      * Status paramater 1 -> add to order according to religion choice
@@ -59,6 +59,27 @@ public class ReligionController implements Serializable{
     public void showReligion(Player[] playerArr,int status, Religion[] religions,int currentPlayer)
     {
 
+        for (int i = 0; i< playerArr.length; i++ ) {
+            String color = playerArr[i].getFaction().TERRAIN_TILE;
+            if(color == "Mountain"){
+                colors[i] = Color.GRAY;
+            }else if(color == "Swamp"){
+                colors[i] = Color.BLACK;
+            } else if(color == "Wasteland"){
+            colors[i] = Color.RED;
+            }else if(color == "Lakes"){
+                colors[i] = Color.BLUE;
+            } else if(color == "Forest"){
+                colors[i] = Color.GREEN;
+            }else if(color == "Desert"){
+                colors[i] = Color.YELLOW;
+            } else if(color == "Plains"){
+                colors[i] = Color.BROWN;
+            }else
+                colors[i] = Color.CYAN;
+        }
+        this.religions = religions;
+        playerCount = playerArr.length;
         BorderPane border = new BorderPane();
         GridPane gridPane = new GridPane();
         GridPane religon_buttons = new GridPane();
@@ -156,6 +177,7 @@ public class ReligionController implements Serializable{
     }
     public void showChoices(Player[] playerArr, Religion[] religionArr, int currentPlayer)
     {
+        religions = religionArr;
         BorderPane border = new BorderPane();
         GridPane gridPane = new GridPane();
         border.setMaxHeight(200);
@@ -297,7 +319,6 @@ public class ReligionController implements Serializable{
             }
         }
         System.out.println("player count "+ playerCount);
-        Color[] colors = {Color.BLUE, Color.RED,Color.GREEN};
        for(int i = 0; i< religions.length; i++){
            for (int j = 0; j < playerCount; j++){
                int position = religions[i].getPlayerPositions()[j];
