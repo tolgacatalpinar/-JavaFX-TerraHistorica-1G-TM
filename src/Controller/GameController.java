@@ -177,6 +177,11 @@ public class GameController implements Initializable, Serializable {
    }
 
    @FXML
+   public void saveGameClicked(){
+      System.out.println("Save Game Clicked");
+   }
+
+   @FXML
    public void skipTurnClicked() {
       disableButtonClicks();
       enableTerrains();
@@ -556,7 +561,7 @@ public class GameController implements Initializable, Serializable {
     * TAŞINACAK HERHALDE BU DA
     * @param
     */
-   public void showPowerActions() { 
+   public void showPowerActions() {
 
       BorderPane border = new BorderPane();
       BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
