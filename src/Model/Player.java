@@ -37,9 +37,7 @@ public class Player implements Serializable {
    private int goldIncome;
    private int perBuildingIncome;
    private int cultBonusIncome;
-   private boolean havingDwellingBonus;
-   private boolean havingTradingPostBonus;
-   private boolean havingSanctuaryBonus;
+
    private int terraformWorkerCost;
    private boolean roundPassed;
    private boolean upgradeToTradingPostBonus; //When upgrading a Dwelling to a Trading house, immediately get 3 additional Victory points.
@@ -370,24 +368,6 @@ public class Player implements Serializable {
       this.cultBonusIncome = cultBonusIncome;
    }
 
-   public boolean isHavingDwellingBonus() {
-      return havingDwellingBonus;
-   }
-
-   public void setHavingDwellingBonus(boolean havingDwellingBonus) {
-      this.havingDwellingBonus = havingDwellingBonus;
-   }
-
-
-   public void setHavingTradeHouse(boolean havingTradeHouse) {
-      havingTradingPostBonus = havingTradeHouse;
-   }
-
-
-   public void setHavingSanctuary(boolean value) {
-      havingSanctuaryBonus = value;
-   }
-
    public int getInitialIslam() {
       return faction.INITIAL_ISLAM;
    }
@@ -490,14 +470,6 @@ public class Player implements Serializable {
 
    public int getPriestOnBank() {
       return priestOnBank;
-   }
-
-   public boolean isHavingTradingPostBonus() {
-      return havingTradingPostBonus;
-   }
-
-   public boolean isHavingSanctuaryBonus() {
-      return havingSanctuaryBonus;
    }
 
    public boolean isRoundPassed() {
