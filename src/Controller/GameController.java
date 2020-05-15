@@ -533,7 +533,6 @@ public class GameController implements Initializable, Serializable {
       specialActions.setDisable(true);
       upgradeSpade.setDisable(true);
       passRound.setDisable(true);
-      skipTurn.setDisable(true);
    }
    /**TODO
     * TAŞINACAK
@@ -670,7 +669,7 @@ public class GameController implements Initializable, Serializable {
             dialog.close();
             if(getSelection() == 0) {
                disableAllTerrains();
-               map.showBridgableTerrains(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map);
+               TerrainController.buildBridge(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map, mapPane, actions);
             }
          }
       });

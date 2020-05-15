@@ -1,9 +1,15 @@
 package Model;
 
 import Controller.ActionController;
+import Controller.GameController;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.transform.Translate;
 
 import java.io.Serializable;
 
@@ -246,46 +252,7 @@ public class Map implements Serializable {
       return bridgeables;
    }
 
-   public void showBridgableTerrains(String type, Button[][] terrains, Map map) {
-      for(int i = 0; i < ROW_NUMBER; i++){
-         for( int j = 0; j < COLUMN_NUMBER; j++){
-            if(terrains[i][j] != null && map.spaces[i][j] != null)
-               if(type.equals(map.spaces[i][j].getType()) && map.spaces[i][j].isOccupied() && map.spaces[i][j].getBridgability()) {
-                  terrains[i][j].setDisable(false);
-                  int finalI = i;
-                  int finalJ = j;
-                  terrains[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
-                     @Override
-                     public void handle(MouseEvent event) {
-                        terrains[finalI][finalJ].setDisable(true);
-                        for (int k = 0; k < ROW_NUMBER; k++) {
-                           for (int l = 0; l < COLUMN_NUMBER; l++) {
-                              if (canBuildBridge(map.spaces[finalI][finalJ], spaces[k][l])) {
-                                 terrains[k][l].setDisable(false);
-                                 int finalK = k;
-                                 int finalL = l;
-                                 terrains[k][l].setOnMouseClicked(new EventHandler<MouseEvent>() {
-                                    @Override
-                                    public void handle(MouseEvent event) {
-                                       for(int a = 0; a < ROW_NUMBER; a++){
-                                          for( int b = 0; b < COLUMN_NUMBER; b++) {
-                                             if(terrains[a][b] != null)
-                                                terrains[a][b].setDisable(false);
-                                          }
-                                       }
-                                       map.spaces[finalK][finalL].setBridgeConnection(true);
-                                       map.spaces[finalK][finalL].setBridgeType(type);
-                                    }
-                                 });
-                              }
-                           }
-                        }
-                     }
-                  });
-               }
-         }
-      }
-   }
+
 
    public int calculateTownScore(Space space1, String playerColor) {
       Space[] adjacents = adjacencyList(space1);
