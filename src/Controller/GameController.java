@@ -4,10 +4,6 @@ import Model.*;
 //import Model.River;
 //import Model.TerrainSubclasses.*;
 import Model.CardsAndTiles.CardsAndTiles;
-import Model.ReligionSubclasses.Christianity;
-import Model.ReligionSubclasses.Hinduism;
-import Model.ReligionSubclasses.Islam;
-import Model.ReligionSubclasses.Jewish;
 import View.*;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -79,7 +75,6 @@ public class GameController implements Initializable, Serializable {
    Button upgradeSpade;
 
 
-
    ArrayList<PlayerView> playerViewList;
    Button[][] terrains;
    Button[] actions;
@@ -106,7 +101,6 @@ public class GameController implements Initializable, Serializable {
       System.out.println("Initialize is called");
       int index = 0;
       terrains = new Button[ROW_NUMBER][COLUMN_NUMBER];
-
       for (int i = 0; i < ROW_NUMBER * COLUMN_NUMBER; i++) {
          int row = i / 13;
          int col = i % 13;
@@ -119,7 +113,6 @@ public class GameController implements Initializable, Serializable {
             terrains[row][col] = (Button) mapPane.getChildren().get(index);
          index++;
       }
-
       createSpaces();
       //testText.setText(playerList[0].getNickName());
       Thread thread = new Thread(new Runnable() {
@@ -216,7 +209,15 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void passRoundClicked(){
       cardsAndTilesController.showBonusCardsTable(cardsAndTiles,playerList[roundController.getCurrentPlayerId()]);
+      int round1 = roundController.getCurrentRound();
       roundController.passRound(playerList);
+      int round2 = roundController.getCurrentRound();
+      if(round1 != round2){
+         for (int i = 0; i< playerList.length; i++){
+            cardsAndTiles.returnScoringTileBonus(playerList[i], round1);
+         }
+
+      }
 
    }
 
@@ -258,8 +259,27 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void upgradeStructureClicked() {
       ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(),terrains, map, actions);
+//      System.out.println(shouldChooseFavorTile);
+//      if(shouldChooseFavorTile){
+//         System.out.println("GİRDİİİĞ");
+//         CardsAndTilesController.showFavorTilesTable(cardsAndTiles,playerList[roundController.getCurrentPlayerId()],religionArr);
+//      }
+      //System.out.println("SAAAAAAAAAAAA");
+//      try{
+//         while (!ActionController.actionDone) {
+//            Thread.sleep(500);
+//         }
+//      }catch (InterruptedException ie){
+//
+//      }
+//      if(ActionController.actionDone){
+//         if(ActionController.favorTile)
+//         System.out.println("GİRDİİİĞ");
+//         CardsAndTilesController.showFavorTilesTable(cardsAndTiles,playerList[roundController.getCurrentPlayerId()],religionArr);
+//      }
+//      ActionController.actionDone = false;
+//      ActionController.favorTile = false;
    }
-
    @FXML
    public void religionsClicked() {
       ReligionController religionController = new ReligionController();
@@ -268,7 +288,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void scoreTableClicked() {
-
+      cardsAndTilesController.showScoringTilesTable(cardsAndTiles);
    }
 
 
@@ -291,7 +311,7 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void favorTilesClicked() {
 
-      cardsAndTilesController.showFavorTilesTable(cardsAndTiles);
+      cardsAndTilesController.showFavorTilesTable(cardsAndTiles,playerList[roundController.getCurrentPlayerId()], religionArr );
 
    }
    //TODO

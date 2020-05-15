@@ -37,6 +37,9 @@ public class Player implements Serializable {
    private int goldIncome;
    private int perBuildingIncome;
    private int cultBonusIncome;
+   private int numOfFavorTile;
+
+
    private boolean havingDwellingBonus;
    private boolean havingTradingPostBonus;
    private boolean havingSanctuaryBonus;
@@ -75,6 +78,7 @@ public class Player implements Serializable {
       setTempleNum(0);
       setSanctuaryNum(0);
       setStrongholdNum(0);
+      setNumOfFavorTile(0);
       setKey(0);
       setUpgradeToTradingPostBonus(false);
       setIsPassingTradingPostBonus(false);
@@ -196,6 +200,14 @@ public class Player implements Serializable {
       return false;
    }
 
+
+   public int getNumOfFavorTile() {
+      return numOfFavorTile;
+   }
+
+   public void setNumOfFavorTile(int numOfFavorTile) {
+      this.numOfFavorTile = numOfFavorTile;
+   }
    public int getWorkerNum() {
       return workerNum;
    }
