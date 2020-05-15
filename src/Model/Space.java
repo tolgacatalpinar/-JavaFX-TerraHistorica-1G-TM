@@ -4,9 +4,13 @@ package Model;
 import java.io.Serializable;
 public class Space implements Serializable{
     private boolean isOccupied;
+    private boolean bridgability;
+    private boolean bridgeConnection;
+    private String bridgeType;
     private String type;
     private Space[] bridgeList; // this array holds the other space that can be reached from this space; thanks to bridge(if exists)
     private Boolean hasBridge;
+
     private Structure structure;
     private Player player;
         
@@ -14,7 +18,36 @@ public class Space implements Serializable{
         isOccupied = false;
         this.type = type;
         structure = null;
+        bridgability = false;
+        bridgeConnection = false;
+        bridgeType = "";
     }
+
+    public String getBridgeType(){
+        return bridgeType;
+    }
+
+    public void setBridgeType(String bridgeType){
+        this.bridgeType = bridgeType;
+    }
+
+    public boolean getBridgability(){
+        return bridgability;
+    }
+
+    public void setBridgability(boolean bridgability){
+        this.bridgability = bridgability;
+    }
+
+    public boolean getBridgeConnection(){
+        return bridgeConnection;
+    }
+
+    public void setBridgeConnection(boolean bridgeConnection){
+        this.bridgeConnection = bridgeConnection;
+    }
+
+
 
     public void setPlayer(Player player) {
         this.player = player;

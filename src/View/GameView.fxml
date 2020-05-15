@@ -56,7 +56,7 @@
                     <Font name="Book Antiqua" size="18.0" />
                 </font>
             </Button>
-            <Button fx:id="sendPriest" layoutX="10.0" layoutY="370.0" onMouseClicked="#sentPriestClicked" prefHeight="50" prefWidth="200" text="Send Priest" textFill="WHITE">
+            <Button fx:id="sendPriest" layoutX="10.0" layoutY="370.0" onMouseClicked="#sendPriestClicked" prefHeight="50" prefWidth="200" text="Send Priest" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="18.0" />
                 </font>

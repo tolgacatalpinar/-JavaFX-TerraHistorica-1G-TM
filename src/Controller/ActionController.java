@@ -31,7 +31,7 @@ public class ActionController implements Serializable {
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
             if (terrains[i][j] != null)
-               if (!map.spaces[i][j].isOccupied() || !map.spaces[i][j].getType().equals(playerArr[curPlayerId].getFaction().TERRAIN_TILE))
+               if ((!map.spaces[i][j].isOccupied() || !map.spaces[i][j].getType().equals(playerArr[curPlayerId].getFaction().TERRAIN_TILE)))
                   terrains[i][j].setDisable(true);
          }
       }
@@ -56,6 +56,25 @@ public class ActionController implements Serializable {
                   }
                }
          }
+         for (int k = 0; k < ROW_NUMBER; k++) {
+            for (int l = 0; l < COLUMN_NUMBER; l++) {
+               if (terrains[k][l] != null && map.spaces[k][l] != null) {
+                  if (map.spaces[k][l].getBridgeConnection() && map.spaces[k][l].getBridgeType().equals(playerArr[curPlayerId].getFaction().TERRAIN_TILE))
+                     terrains[k][l].setDisable(false);
+                  int finalK = k;
+                  int finalL = l;
+                  terrains[k][l].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                     @Override
+                     public void handle(MouseEvent event) {
+                        terraformAction(playerArr, curPlayerId, terrains, terrains[finalK][finalL], map, map.spaces[finalK][finalL], actions);
+                     }
+                  });
+               }
+            }
+
+
+            }
+
       }
    }
 
@@ -493,7 +512,7 @@ public class ActionController implements Serializable {
             public void handle(MouseEvent event) {
                if (selection != finalI)
                   tempPane.setEffect(null);
-               ;
+
             }
          });
 
@@ -514,7 +533,7 @@ public class ActionController implements Serializable {
          public void handle(MouseEvent event) {
 
             int chosen = getSelection();
-            System.out.println("Selected" + chosen);
+            System.out.println("Selection: " + chosen);
          }
       });
       border.setCenter(gridPane);
