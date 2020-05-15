@@ -371,6 +371,7 @@ public class ActionController implements Serializable {
       PlayerHandler playerHandler = new PlayerHandler();
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
+
       /**
        * TODO
        * DIKKATTTT
