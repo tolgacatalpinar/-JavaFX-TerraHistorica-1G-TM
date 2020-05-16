@@ -211,7 +211,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void passRoundClicked() {
-      cardsAndTilesController.showBonusCardsTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()]);
+      cardsAndTilesController.showBonusCardsTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()],true);
       int round1 = roundController.getCurrentRound();
       roundController.passRound(playerList);
       int round2 = roundController.getCurrentRound();
@@ -226,7 +226,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void bonusCardsClicked() {
-      cardsAndTilesController.showBonusCardsTable(cardsAndTiles, currentPlayer);
+      cardsAndTilesController.showBonusCardsTable(cardsAndTiles, currentPlayer,false);
    }
 
    @FXML
@@ -433,7 +433,7 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void favorTilesClicked() {
 
-      cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], religionArr);
+      cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], religionArr,false);
 
    }
 

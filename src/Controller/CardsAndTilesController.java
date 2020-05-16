@@ -37,7 +37,7 @@ public class CardsAndTilesController {
     }
 
     private  int selectionFavorTile = -1;
-    public void showBonusCardsTable(CardsAndTiles cardsAndTiles,Player current)
+    public void showBonusCardsTable(CardsAndTiles cardsAndTiles,Player current,boolean check)
     {
         selectionBonus = -1;
         ArrayList<BonusCard> bonusCards = cardsAndTiles.getSelectedBonusCards();
@@ -106,15 +106,18 @@ public class CardsAndTilesController {
             }
             gridPane.add(tempPane, i % 3, i / 3);
         }
-        select.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                int chosen = getSelectionBonus();
-                System.out.println("Selected " + chosen);
-                cardsAndTiles.playerChoseBonusCard(cardsAndTiles.selectedBonusCards.get(selectionBonus),current);
-                dialog.close();
-            }
-        });
+        if(check){
+            select.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    int chosen = getSelectionBonus();
+                    System.out.println("Selected " + chosen);
+                    cardsAndTiles.playerChoseBonusCard(cardsAndTiles.selectedBonusCards.get(selectionBonus),current);
+                    dialog.close();
+                }
+            });
+        }
+
 
         dialog.show();
 
@@ -126,7 +129,7 @@ public class CardsAndTilesController {
     public  void setSelectionBonus(int i) {
         selectionBonus = i;
     }
-    public  int showFavorTilesTable(CardsAndTiles cardsAndTiles, Player current, Religion[] religions)
+    public  int showFavorTilesTable(CardsAndTiles cardsAndTiles, Player current, Religion[] religions,boolean check)
     {
         setSelectionFavorTile(-1);
         ArrayList<FavorTile> favorTiles = cardsAndTiles.getFavorTiles();
@@ -196,51 +199,54 @@ public class CardsAndTilesController {
             }
             gridPane.add(tempPane, i % 4, i / 4);
         }
-        select.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                int chosen = getSelectionFavorTile();
-                int[] returnInfo = {0,0,0};
-                int religion_index = -1;
-                if(cardsAndTiles.favorTiles.get(selectionFavorTile).getIslamBonus() != 0){
-                    religion_index = 0;
-                    cardsAndTiles.playerChooseFavorTile(cardsAndTiles.favorTiles.get(selectionFavorTile),current,religions[0]);
-                    returnInfo=religions[0].updateReligion(cardsAndTiles.favorTiles.get(selectionFavorTile).getIslamBonus(),current.getPlayerId(),current.getKey());
-                }else if(cardsAndTiles.favorTiles.get(selectionFavorTile).getChristianityBonus() != 0){
-                    religion_index = 1;
-                    cardsAndTiles.playerChooseFavorTile(cardsAndTiles.favorTiles.get(selectionFavorTile),current,religions[1]);
-                    returnInfo =religions[1].updateReligion(cardsAndTiles.favorTiles.get(selectionFavorTile).getChristianityBonus(),current.getPlayerId(),current.getKey());
-                }else if(cardsAndTiles.favorTiles.get(selectionFavorTile).getHinduismBonus() != 0){
-                    religion_index = 3;
-                    cardsAndTiles.playerChooseFavorTile(cardsAndTiles.favorTiles.get(selectionFavorTile),current,religions[3]);
-                    returnInfo =religions[3].updateReligion(cardsAndTiles.favorTiles.get(selectionFavorTile).getHinduismBonus(),current.getPlayerId(),current.getKey());
+        if(check){
+            select.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    int chosen = getSelectionFavorTile();
+                    int[] returnInfo = {0,0,0};
+                    int religion_index = -1;
+                    if(cardsAndTiles.favorTiles.get(selectionFavorTile).getIslamBonus() != 0){
+                        religion_index = 0;
+                        cardsAndTiles.playerChooseFavorTile(cardsAndTiles.favorTiles.get(selectionFavorTile),current,religions[0]);
+                        returnInfo=religions[0].updateReligion(cardsAndTiles.favorTiles.get(selectionFavorTile).getIslamBonus(),current.getPlayerId(),current.getKey());
+                    }else if(cardsAndTiles.favorTiles.get(selectionFavorTile).getChristianityBonus() != 0){
+                        religion_index = 1;
+                        cardsAndTiles.playerChooseFavorTile(cardsAndTiles.favorTiles.get(selectionFavorTile),current,religions[1]);
+                        returnInfo =religions[1].updateReligion(cardsAndTiles.favorTiles.get(selectionFavorTile).getChristianityBonus(),current.getPlayerId(),current.getKey());
+                    }else if(cardsAndTiles.favorTiles.get(selectionFavorTile).getHinduismBonus() != 0){
+                        religion_index = 3;
+                        cardsAndTiles.playerChooseFavorTile(cardsAndTiles.favorTiles.get(selectionFavorTile),current,religions[3]);
+                        returnInfo =religions[3].updateReligion(cardsAndTiles.favorTiles.get(selectionFavorTile).getHinduismBonus(),current.getPlayerId(),current.getKey());
+                    }
+                    else if(cardsAndTiles.favorTiles.get(selectionFavorTile).getJewBonus() != 0){
+                        religion_index = 2;
+                        cardsAndTiles.playerChooseFavorTile(cardsAndTiles.favorTiles.get(selectionFavorTile),current,religions[2]);
+                        returnInfo = religions[2].updateReligion(cardsAndTiles.favorTiles.get(selectionFavorTile).getJewBonus(),current.getPlayerId(),current.getKey());
+                    }
+                    System.out.println("Selected " + chosen);
+                    if(returnInfo[1] == 4) {
+                        System.out.println("Cannot advance more on this religion");
+                    }
+                    else if( returnInfo[1] == 1) {
+                        System.out.println("Since someone used key, you can't reach end"); // Can be replaced with a GUI message
+                    }
+                    else if( returnInfo[1] == 2) {
+                        System.out.println("Since there is no key end pos is stuck on 9"); // Can be replaced with a GUI message
+                    }
+                    else if ( returnInfo[1] == 3) {
+                        current.setKey(current.getKey()-1);
+                    }
+                    if(returnInfo[2] > 0 ) {
+                        //Store the progress value for favor tile bonuses
+                        current.addPowerToBowl(returnInfo[0]);
+                    }
+                    religions[religion_index].updateRoundBasedPositions(returnInfo[2], current.getPlayerId());
+                    dialog.close();
                 }
-                else if(cardsAndTiles.favorTiles.get(selectionFavorTile).getJewBonus() != 0){
-                    religion_index = 2;
-                    cardsAndTiles.playerChooseFavorTile(cardsAndTiles.favorTiles.get(selectionFavorTile),current,religions[2]);
-                    returnInfo = religions[2].updateReligion(cardsAndTiles.favorTiles.get(selectionFavorTile).getJewBonus(),current.getPlayerId(),current.getKey());
-                }
-                System.out.println("Selected " + chosen);
-                if(returnInfo[1] == 4) {
-                    System.out.println("Cannot advance more on this religion");
-                }
-                else if( returnInfo[1] == 1) {
-                    System.out.println("Since someone used key, you can't reach end"); // Can be replaced with a GUI message
-                }
-                else if( returnInfo[1] == 2) {
-                    System.out.println("Since there is no key end pos is stuck on 9"); // Can be replaced with a GUI message
-                }
-                else if ( returnInfo[1] == 3) {
-                    current.setKey(current.getKey()-1);
-                }
-                if(returnInfo[2] > 0 ) {
-                    //Store the progress value for favor tile bonuses
-                    current.addPowerToBowl(returnInfo[0]);
-                }
-                religions[religion_index].updateRoundBasedPositions(returnInfo[2], current.getPlayerId());
-                dialog.close();
-            }
-        });
+            });
+        }
+
         dialog.showAndWait();
         return getSelectionFavorTile();
 

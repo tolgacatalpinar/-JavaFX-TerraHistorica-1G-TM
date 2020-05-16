@@ -333,7 +333,7 @@ public class ActionController implements Serializable {
                   disableActions(actions);
                   TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                   CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
-                  cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions);
+                  cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
                   space.setStructure("Temple");
                   stage.close();
                   actiondone = true;
@@ -431,7 +431,7 @@ public class ActionController implements Serializable {
                disableActions(actions);
                TerrainController.upgradeToSanctuary(terrain,playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
-               cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions);
+               cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
                space.setStructure("Sanctuary");
             }else if (returnCase == -1){
                System.out.println("Not enough resources");
