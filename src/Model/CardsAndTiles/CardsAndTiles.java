@@ -215,7 +215,7 @@ public class CardsAndTiles implements Serializable {
             }
         }
     }
-    public void returnScoringTile(int round1, int round2,Player[] playerList ){
+    public void returnScoringTile(int round1, int round2,Player[] playerList,Religion[] religionArr ){
         if(round1 != round2){
             for (int i = 0; i< playerList.length; i++){
                 ScoringTile currentScoringTile = selectedScoringTiles.get(round2 - 1);
@@ -224,6 +224,16 @@ public class CardsAndTiles implements Serializable {
                 playerList[i].setSanctuaryStrongholdScoringTile (currentScoringTile.isStrongHoldBonus());
                 playerList[i].setSpadeScoringTile (currentScoringTile.isRequiredSpade());
                 playerList[i].setTownScoringTile (currentScoringTile.isRequiredTown());
+                if(currentScoringTile.isRequiredIslam() && currentScoringTile.getRequiredIslam() >= ){
+
+                }else if(currentScoringTile.isRequiredChrist() && currentScoringTile.getRequiredChrist() >= ){
+
+                }else if(currentScoringTile.isRequiredBudism() && currentScoringTile.getRequiredBudism() >= ){
+
+                }
+                else if(currentScoringTile.isRequiredJudaism() && currentScoringTile.getRequiredJudaism() >= ){
+
+                }
             }
 
         }
@@ -235,14 +245,7 @@ public class CardsAndTiles implements Serializable {
         else
         {
             favorTile.getPlayerIds().add((Integer) player.getPlayerId() );
-//            player.addPowerToBowl(religion.updateReligion(favorTile.getIslamBonus(),player.getPlayerId(),player.getKey()));
-//            player.addPowerToBowl(religion.updateReligion(favorTile.getChristianityBonus(),player.getPlayerId(),player.getKey()));
-//            player.addPowerToBowl(religion.updateReligion(favorTile.getJewBonus(),player.getPlayerId(),player.getKey()));
-//            player.addPowerToBowl(religion.updateReligion(favorTile.getHinduismBonus(),player.getPlayerId(),player.getKey()));
-
-            religion.updateReligion(favorTile.getChristianityBonus(),player.getPlayerId(),player.getKey());
-
-            player.setTownPowerValue(6);
+            player.setTownPowerValue(favorTile.getNeededCombinedPowerTown());
             player.addPowerToBowl( favorTile.getPowerBonus());
             player.setWorkerNum(player.getWorkerNum() + favorTile.getWorkerBonus());
             player.setGoldNum(player.getGoldNum() + favorTile.getGoldBonus());

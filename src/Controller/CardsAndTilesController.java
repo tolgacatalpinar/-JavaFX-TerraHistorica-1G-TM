@@ -203,6 +203,7 @@ public class CardsAndTilesController {
                 System.out.println("Selected " + chosen);
                 if(cardsAndTiles.favorTiles.get(selectionFavorTile).getIslamBonus() != 0){
                     cardsAndTiles.playerChooseFavorTile(cardsAndTiles.favorTiles.get(selectionFavorTile),current,religions[0]);
+                    = religions[0].updateReligion(cardsAndTiles.favorTiles.get(selectionFavorTile).getIslamBonus(),current.getPlayerId(),current.getKey());
                 }else if(cardsAndTiles.favorTiles.get(selectionFavorTile).getChristianityBonus() != 0){
                     cardsAndTiles.playerChooseFavorTile(cardsAndTiles.favorTiles.get(selectionFavorTile),current,religions[1]);
                 }else if(cardsAndTiles.favorTiles.get(selectionFavorTile).getHinduismBonus() != 0){

@@ -214,7 +214,8 @@ public class GameController implements Initializable, Serializable {
       int round1 = roundController.getCurrentRound();
       roundController.passRound(playerList);
       int round2 = roundController.getCurrentRound();
-      cardsAndTiles.returnScoringTile(round1, round2, playerList);
+      cardsAndTiles.returnScoringTile(round1, round2, playerList,religionArr);
+
       //Reset advancement on religion for this round
       if(round2 != round1){
          for (Religion religion : religionArr) {
