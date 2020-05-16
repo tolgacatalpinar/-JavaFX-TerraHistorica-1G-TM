@@ -456,7 +456,15 @@ public class ReligionController implements Serializable{
         int[] scoreForEachPlayer = new int[playerList.length];
             for (int i = 0; i < religions.length; i++){
                 int [] playerPos = religions[i].getPlayerPositions();
+                int max = 0;
+                int highest;
+                int second;
+                int third;
                 for(int j = 0; j < playerList.length; j++){
+                    if (playerPos[j] > max){
+                        max = playerPos[j];
+
+                    }
                     System.out.println("Player"+j+" at pos :"+playerPos[j]);
 
                }
