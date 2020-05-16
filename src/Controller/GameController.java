@@ -213,18 +213,7 @@ public class GameController implements Initializable, Serializable {
       int round1 = roundController.getCurrentRound();
       roundController.passRound(playerList);
       int round2 = roundController.getCurrentRound();
-      if(round1 != round2){
-         for (int i = 0; i< playerList.length; i++){
-            ScoringTile currentScoringTile = cardsAndTiles.getSelectedScoringTiles().get(round2 - 1);
-            playerList[i].setDwellingScoringTile (currentScoringTile.isDwellingBonus());
-            playerList[i].setTradingPostScoringTile (currentScoringTile.isTradingHouseBonus());
-            playerList[i].setSanctuaryStrongholdScoringTile (currentScoringTile.isStrongHoldBonus());
-            playerList[i].setSpadeScoringTile (currentScoringTile.isRequiredSpade());
-            playerList[i].setTownScoringTile (currentScoringTile.isRequiredTown());
-         }
-
-      }
-
+      cardsAndTiles.returnScoringTile(round1,round2,playerList);
 
    }
 

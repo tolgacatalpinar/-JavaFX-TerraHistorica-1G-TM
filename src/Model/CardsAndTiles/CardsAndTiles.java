@@ -215,7 +215,19 @@ public class CardsAndTiles implements Serializable {
             }
         }
     }
+    public void returnScoringTile(int round1, int round2,Player[] playerList ){
+        if(round1 != round2){
+            for (int i = 0; i< playerList.length; i++){
+                ScoringTile currentScoringTile = selectedScoringTiles.get(round2 - 1);
+                playerList[i].setDwellingScoringTile (currentScoringTile.isDwellingBonus());
+                playerList[i].setTradingPostScoringTile (currentScoringTile.isTradingHouseBonus());
+                playerList[i].setSanctuaryStrongholdScoringTile (currentScoringTile.isStrongHoldBonus());
+                playerList[i].setSpadeScoringTile (currentScoringTile.isRequiredSpade());
+                playerList[i].setTownScoringTile (currentScoringTile.isRequiredTown());
+            }
 
+        }
+    }
     public void playerChooseFavorTile(FavorTile favorTile,Player player, Religion religion){
         if(favorTile.getPlayerIds().size() >= favorTile.getNumberOfPlayer() ){
             System.err.println("You cannot choose this Favor");
