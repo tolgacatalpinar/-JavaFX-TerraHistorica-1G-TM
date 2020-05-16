@@ -376,11 +376,11 @@ public class CardsAndTilesController {
                     public void handle(MouseEvent event) {
                         int chosen = getSelectionTown();
                         int[] returnInfo;
+                        System.out.println("Selected " + chosen);
                         if(cardsAndTiles.townTiles.get(selectionTown).getIslamPoint() != 0){
                             cardsAndTiles.playerChooseTownTile(cardsAndTiles.townTiles.get(selectionTown),current);
-                            System.out.println("Selected " + chosen);
                             for(int i = 0; i < 4;i++){
-                                returnInfo=religions[i].updateReligion(cardsAndTiles.townTiles.get(selectionTown).getIslamPoint(),current.getPlayerId(),current.getKey());
+                                returnInfo=religions[i].updateReligion(1,current.getPlayerId(),current.getKey());
                                 if(returnInfo[1] == 4) {
                                     System.out.println("Cannot advance more on this religion");
                                 }
@@ -398,8 +398,10 @@ public class CardsAndTilesController {
                                 }
                                 religions[i].updateRoundBasedPositions(returnInfo[2], current.getPlayerId());
                             }
-
                         }
+                        else
+                            cardsAndTiles.playerChooseTownTile(cardsAndTiles.townTiles.get(selectionTown),current);
+
 
                         dialog.close();
                     }
