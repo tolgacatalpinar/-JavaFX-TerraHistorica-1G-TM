@@ -22,6 +22,7 @@ public class Religion implements Serializable{
         keyPlaced = false;
         playerPositions = new int[playerCount];
         setupReligion(playerCount,initial_religion_points);
+        roundBasedPosition = new int[playerCount];
     }
 
 
@@ -149,5 +150,13 @@ public class Religion implements Serializable{
 
     public int getOrderOfCult_2_3() {
         return orderOfCult_2_3;
+    }
+
+    public int[] getRoundBasedPosition() {
+        return roundBasedPosition;
+    }
+
+    public void setRoundBasedPosition(int[] roundBasedPosition) {
+        this.roundBasedPosition = roundBasedPosition;
     }
 }
