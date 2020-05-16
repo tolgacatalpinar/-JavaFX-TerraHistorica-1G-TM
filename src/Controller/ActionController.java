@@ -1,20 +1,17 @@
 package Controller;
 
 import Model.*;
+import Model.CardsAndTiles.CardsAndTiles;
 import Model.Map;
-import Model.StructureSubclasses.Stronghold;
 import View.ActionsViews.SpecialActionView;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -42,7 +39,30 @@ public class ActionController implements Serializable {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
             if (terrains[i][j] != null && map.spaces[i][j] != null)
                if (map.spaces[i][j].getType().equals(playerArr[curPlayerId].getFaction().TERRAIN_TILE) && map.spaces[i][j].isOccupied()) {
-                  adj = map.adjacencyList(map.spaces[i][j]);
+                  adj = map.getAdjacentNonRivers(map.spaces[i][j]);
+                  // Tolga ekledi
+                  ArrayList<Space> reachableTerrains = new ArrayList<>();
+                  map.getShippingEnabledTerrains(playerArr[curPlayerId].getShipLevel(), map.spaces[i][j], reachableTerrains);
+                  for( int k = 0; k < adj.length; k ++)
+                  {
+                     if( !reachableTerrains.contains(adj[k]))
+                     {
+                        reachableTerrains.add(adj[k]);
+                     }
+                  }
+                  for( int k = 0; k < reachableTerrains.size(); k ++)
+                  {
+                     terrains[map.getRow(reachableTerrains.get(k))][map.getColumn(reachableTerrains.get(k))].setDisable(false);
+                     Space[] finalAdj = adj;
+                     int finalK = k;
+                     terrains[map.getRow(adj[k])][map.getColumn(adj[k])].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                           terraformAction(playerArr, curPlayerId, terrains, terrains[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], map, map.spaces[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], actions);
+                        }
+                     });
+                  }
+                  ///////////////////////////////////////
                   for (int k = 0; k < adj.length; k++) {
                      if (adj[k] != null && terrains[map.getRow(adj[k])][map.getColumn(adj[k])] != null && !map.spaces[map.getRow(adj[k])][map.getColumn(adj[k])].getType().equals("River") && !map.spaces[map.getRow(adj[k])][map.getColumn(adj[k])].isOccupied() && terrains[map.getRow(adj[k])][map.getColumn(adj[k])].isDisable()) {
                         terrains[map.getRow(adj[k])][map.getColumn(adj[k])].setDisable(false);
@@ -170,7 +190,7 @@ public class ActionController implements Serializable {
 //        dialog.setContentText("Terrain Tile: " );
 //        Optional<String> result = dialog.showAndWait();
 //        if(result.isPresent()) {
-//            TerrainController.terraform(terrain, result.get());
+//            Controller.TerrainController.terraform(terrain, result.get());
 //            space.setType(result.get());
 //
 //            //Asks if the player wants to build dwelling after terraforming
@@ -182,7 +202,7 @@ public class ActionController implements Serializable {
 //
 //                Optional<ButtonType> dwellingCheck = alert.showAndWait();
 //                if (dwellingCheck.get() == ButtonType.OK) {
-//                    TerrainController.buildDwelling(terrain, result.get());
+//                    Controller.TerrainController.buildDwelling(terrain, result.get());
 //                    space.setOccupied(true);
 //                    space.setStructure("Dwelling");
 //
@@ -191,11 +211,11 @@ public class ActionController implements Serializable {
 //                }
 //            }
 //        }
-//        TerrainController.enableTerrains(terrains, map);
-//        TerrainController.disableButtonClicks(terrains);
+//        Controller.TerrainController.enableTerrains(terrains, map);
+//        Controller.TerrainController.disableButtonClicks(terrains);
    }
 
-   public  static void upgradeStructure(Player[] playerArr, int currentPlayerId,Button[][] terrains, Map map, Button[] actions) {
+   public  static void upgradeStructure(Player[] playerArr, int currentPlayerId,Button[][] terrains, Map map, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions) {
       TerrainController.disableTerrains(terrains, map);
 
       for (int i = 0; i < ROW_NUMBER; i++) {
@@ -216,7 +236,7 @@ public class ActionController implements Serializable {
                         if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Dwelling"))
                            upgradeToTradingPost(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ],actions);
                         else if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Trading Post"))
-                           upgradeToStrongholdOrTemple(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ], actions);
+                           upgradeToStrongholdOrTemple(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ], actions, cardsAndTiles, religions);
                         else if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Temple"))
                            upgradeToSanctuary(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ], actions);
                      }
@@ -276,16 +296,16 @@ public class ActionController implements Serializable {
 //
 //      Optional<ButtonType> result = alert.showAndWait();
 //      if (((Optional) result).get() == ButtonType.OK) {
-//         TerrainController.upgradeToTradingPost(terrain, playerArr[currentPlayerId].getFaction().TERRAIN_TILE);
+//         Controller.TerrainController.upgradeToTradingPost(terrain, playerArr[currentPlayerId].getFaction().TERRAIN_TILE);
 //         space.setStructure("Trading Post");
 //      } else {
 //         // ... user chose CANCEL or closed the dialog
 //      }
-//      TerrainController.enableTerrains(terrains, map);
-//      TerrainController.disableButtonClicks(terrains);
+//      Controller.TerrainController.enableTerrains(terrains, map);
+//      Controller.TerrainController.disableButtonClicks(terrains);
    }
 
-   public static void upgradeToStrongholdOrTemple(Player[] playerArr,int curPlayerId,Button[][] terrains, Button terrain, Map map, Space space, Button[] actions) {
+   public static void upgradeToStrongholdOrTemple(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions) {
       PlayerHandler playerHandler = new PlayerHandler();
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
@@ -308,6 +328,8 @@ public class ActionController implements Serializable {
                   canChooseFavorTile = true;
                   disableActions(actions);
                   TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
+                  CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
+                  cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions);
                   space.setStructure("Temple");
                   stage.close();
                   actiondone = true;
@@ -366,17 +388,17 @@ public class ActionController implements Serializable {
 //
 //      Optional<ButtonType> result = alert.showAndWait();
 //      if (result.get() == stronghold) {
-//         TerrainController.upgradeToStronghold(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
+//         Controller.TerrainController.upgradeToStronghold(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
 //         space.setStructure("Stronghold");
 //      } else if (result.get() == temple) {
-//         TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
+//         Controller.TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
 //         space.setStructure("Temple");
 //      } else {
 //         // ... user chose CANCEL or closed the dialog
 //      }
 //
-//      TerrainController.enableTerrains(terrains, map);
-//      TerrainController.disableButtonClicks(terrains);
+//      Controller.TerrainController.enableTerrains(terrains, map);
+//      Controller.TerrainController.disableButtonClicks(terrains);
 
    }
 
@@ -427,13 +449,13 @@ public class ActionController implements Serializable {
 //
 //      Optional<ButtonType> result = alert.showAndWait();
 //      if (((Optional) result).get() == ButtonType.OK) {
-//         TerrainController.upgradeToSanctuary(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
+//         Controller.TerrainController.upgradeToSanctuary(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
 //         space.setStructure("Sanctuary");
 //      } else {
 //         // ... user chose CANCEL or closed the dialog
 //      }
-//      TerrainController.enableTerrains(terrains, map);
-//      TerrainController.disableButtonClicks(terrains);
+//      Controller.TerrainController.enableTerrains(terrains, map);
+//      Controller.TerrainController.disableButtonClicks(terrains);
    }
 
    //TODO

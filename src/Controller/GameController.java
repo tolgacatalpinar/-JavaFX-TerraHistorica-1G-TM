@@ -255,7 +255,7 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void upgradeStructureClicked() {
 
-      ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(), terrains, map, actions);
+      ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(), terrains, map, actions, cardsAndTiles, religionArr);
 //      ThreadB b = new ThreadB();
 //      b.start();
 //      synchronized (b) {
