@@ -369,6 +369,18 @@ public class Map implements Serializable {
       }
       return riversViaShipping;
    }
+   private void addEnabledTerrainsOnlyFourLevelShipping(Space space, ArrayList<Space> reachableTerrains)
+   {
+      Space[] riversAroundSpace = getAdjacentRivers(space);
+      Space[] riversViaShipping = getOneLevelDistantRivers(getOneLevelDistantRivers(getOneLevelDistantRivers(riversAroundSpace)));
+      for (Space riverViaShipping : riversViaShipping) {
+         Space[] accessableTerrains = getAdjacentNonRivers(riverViaShipping);
+         for (Space terrain : accessableTerrains) {
+            if (terrain != null && !reachableTerrains.contains(terrain))
+               reachableTerrains.add(terrain);
+         }
+      }
+   }
    private void addEnabledTerrainsOnlyThreeLevelShipping(Space space, ArrayList<Space> reachableTerrains)
    {
       Space[] riversAroundSpace = getAdjacentRivers(space);
@@ -438,6 +450,12 @@ public class Map implements Serializable {
             addEnabledTerrainsOnlyOneLevelShipping(space, reachableTerrains);
             addEnabledTerrainsOnlyTwoLevelShipping(space, reachableTerrains);
             addEnabledTerrainsOnlyThreeLevelShipping(space, reachableTerrains);
+            break;
+         case 4:
+            addEnabledTerrainsOnlyOneLevelShipping(space, reachableTerrains);
+            addEnabledTerrainsOnlyTwoLevelShipping(space, reachableTerrains);
+            addEnabledTerrainsOnlyThreeLevelShipping(space, reachableTerrains);
+            addEnabledTerrainsOnlyFourLevelShipping(space, reachableTerrains);
             break;
       }
    }
