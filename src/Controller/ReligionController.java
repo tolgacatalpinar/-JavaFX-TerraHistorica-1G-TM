@@ -172,6 +172,7 @@ public class ReligionController implements Serializable{
             for (int i = 0; i < 4; i++) {
                 Button temp_button = (Button) getNodeByRowColumnIndex(i,1, religon_buttons);
                 Religion temp_religion = religions[i];
+                int finalI = i;
                 temp_button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
@@ -201,7 +202,7 @@ public class ReligionController implements Serializable{
                                     playerArr[currentPlayer].spendPriest(1);
                                 playerArr[currentPlayer].addPowerToBowl(returnInfo[0]);
                             }
-
+                            temp_religion.updateRoundBasedPositions(returnInfo[2],currentPlayer);
                         }
                         else {
                             System.out.println("Not enough resources");
