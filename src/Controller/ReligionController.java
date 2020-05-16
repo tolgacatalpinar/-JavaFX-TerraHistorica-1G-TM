@@ -172,7 +172,6 @@ public class ReligionController implements Serializable{
             for (int i = 0; i < 4; i++) {
                 Button temp_button = (Button) getNodeByRowColumnIndex(i,1, religon_buttons);
                 Religion temp_religion = religions[i];
-                int finalI = i;
                 temp_button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {

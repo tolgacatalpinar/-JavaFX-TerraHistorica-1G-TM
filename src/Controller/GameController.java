@@ -114,6 +114,7 @@ public class GameController implements Initializable, Serializable {
             terrains[row][col] = (Button) mapPane.getChildren().get(index);
          index++;
       }
+
       createSpaces();
       //testText.setText(playerList[0].getNickName());
       Thread thread = new Thread(new Runnable() {
@@ -541,6 +542,7 @@ public class GameController implements Initializable, Serializable {
    public void loadCardsAndTiles(int totalPlayerNumber) {
       cardsAndTiles = new CardsAndTiles(playerList.length, playerList);
       cardsAndTilesController = new CardsAndTilesController();
+      cardsAndTiles.returnScoringTile(0, 1, playerList,religionArr);
    }
 
    public void loadReligion(int totalPlayerNumber) {
