@@ -52,30 +52,34 @@ public class ActionController implements Serializable {
                   }
                   for( int k = 0; k < reachableTerrains.size(); k ++)
                   {
-                     terrains[map.getRow(reachableTerrains.get(k))][map.getColumn(reachableTerrains.get(k))].setDisable(false);
-                     Space[] finalAdj = adj;
-                     int finalK = k;
-                     terrains[map.getRow(adj[k])][map.getColumn(adj[k])].setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent event) {
-                           terraformAction(playerArr, curPlayerId, terrains, terrains[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], map, map.spaces[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], actions);
-                        }
-                     });
-                  }
-                  ///////////////////////////////////////
-                  for (int k = 0; k < adj.length; k++) {
-                     if (adj[k] != null && terrains[map.getRow(adj[k])][map.getColumn(adj[k])] != null && !map.spaces[map.getRow(adj[k])][map.getColumn(adj[k])].getType().equals("River") && !map.spaces[map.getRow(adj[k])][map.getColumn(adj[k])].isOccupied() && terrains[map.getRow(adj[k])][map.getColumn(adj[k])].isDisable()) {
-                        terrains[map.getRow(adj[k])][map.getColumn(adj[k])].setDisable(false);
-                        Space[] finalAdj = adj;
+                     if (reachableTerrains.get(k) != null && terrains[map.getRow(reachableTerrains.get(k))][map.getColumn(reachableTerrains.get(k))] != null && !map.spaces[map.getRow(reachableTerrains.get(k))][map.getColumn(reachableTerrains.get(k))].getType().equals("River") && !map.spaces[map.getRow(reachableTerrains.get(k))][map.getColumn(reachableTerrains.get(k))].isOccupied() && terrains[map.getRow(reachableTerrains.get(k))][map.getColumn(reachableTerrains.get(k))].isDisable()) {
+                        terrains[map.getRow(reachableTerrains.get(k))][map.getColumn(reachableTerrains.get(k))].setDisable(false);
+                        ArrayList<Space> finalAdj = reachableTerrains;
                         int finalK = k;
-                        terrains[map.getRow(adj[k])][map.getColumn(adj[k])].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        terrains[map.getRow(reachableTerrains.get(k))][map.getColumn(reachableTerrains.get(k))].setOnMouseClicked(new EventHandler<MouseEvent>() {
                            @Override
                            public void handle(MouseEvent event) {
-                              terraformAction(playerArr, curPlayerId, terrains, terrains[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], map, map.spaces[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], actions);
+                              terraformAction(playerArr, curPlayerId, terrains, terrains[map.getRow(finalAdj.get(finalK))][map.getColumn(finalAdj.get(finalK))], map, map.spaces[map.getRow(finalAdj.get(finalK))][map.getColumn(finalAdj.get(finalK))], actions);
                            }
                         });
                      }
+
+
                   }
+                  ///////////////////////////////////////
+//                  for (int k = 0; k < adj.length; k++) {
+//                     if (adj[k] != null && terrains[map.getRow(adj[k])][map.getColumn(adj[k])] != null && !map.spaces[map.getRow(adj[k])][map.getColumn(adj[k])].getType().equals("River") && !map.spaces[map.getRow(adj[k])][map.getColumn(adj[k])].isOccupied() && terrains[map.getRow(adj[k])][map.getColumn(adj[k])].isDisable()) {
+//                        terrains[map.getRow(adj[k])][map.getColumn(adj[k])].setDisable(false);
+//                        Space[] finalAdj = adj;
+//                        int finalK = k;
+//                        terrains[map.getRow(adj[k])][map.getColumn(adj[k])].setOnMouseClicked(new EventHandler<MouseEvent>() {
+//                           @Override
+//                           public void handle(MouseEvent event) {
+//                              terraformAction(playerArr, curPlayerId, terrains, terrains[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], map, map.spaces[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], actions);
+//                           }
+//                        });
+//                     }
+//                  }
                }
          }
          for (int k = 0; k < ROW_NUMBER; k++) {
