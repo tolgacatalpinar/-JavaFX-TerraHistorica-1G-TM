@@ -18,11 +18,11 @@ public class ScoringTileView extends VBox {
     ScoringTile scoringTile;
     CardView card;
 
-    public ScoringTileView( ScoringTile scoringTile)
+    public ScoringTileView( ScoringTile scoringTile,int index)
     {
         this.scoringTile = scoringTile;
         card = new CardView();
-
+            add(new Label(""+(index + 1) + "\n"));
         if(this.scoringTile.isDwellingBonus() )
             add( new Label("Dwel - Vict: " + this.scoringTile.getVictoryBonus()));
         if(this.scoringTile.isTradingHouseBonus() )

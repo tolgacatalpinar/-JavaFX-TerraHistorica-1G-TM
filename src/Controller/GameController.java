@@ -114,6 +114,7 @@ public class GameController implements Initializable, Serializable {
             terrains[row][col] = (Button) mapPane.getChildren().get(index);
          index++;
       }
+
       createSpaces();
       //testText.setText(playerList[0].getNickName());
       Thread thread = new Thread(new Runnable() {
@@ -210,12 +211,11 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void passRoundClicked() {
-      cardsAndTilesController.showBonusCardsTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()]);
+      cardsAndTilesController.showBonusCardsTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()],true);
       int round1 = roundController.getCurrentRound();
       roundController.passRound(playerList);
       int round2 = roundController.getCurrentRound();
       cardsAndTiles.returnScoringTile(round1, round2, playerList,religionArr);
-
       //Reset advancement on religion for this round
       if(round2 != round1){
          for (Religion religion : religionArr) {
@@ -226,7 +226,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void bonusCardsClicked() {
-      cardsAndTilesController.showBonusCardsTable(cardsAndTiles, currentPlayer);
+      cardsAndTilesController.showBonusCardsTable(cardsAndTiles, currentPlayer,false);
    }
 
    @FXML
@@ -330,7 +330,8 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void townTilesClicked() throws IOException {
-      cardsAndTilesController.showTownTilesTable(cardsAndTiles);
+      //todo
+      cardsAndTilesController.showTownTilesTable(cardsAndTiles,true);
    }
 
    @FXML
@@ -475,7 +476,7 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void favorTilesClicked() {
 
-      cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], religionArr);
+      cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], religionArr,false);
 
    }
 
@@ -584,6 +585,7 @@ public class GameController implements Initializable, Serializable {
    public void loadCardsAndTiles(int totalPlayerNumber) {
       cardsAndTiles = new CardsAndTiles(playerList.length, playerList);
       cardsAndTilesController = new CardsAndTilesController();
+      cardsAndTiles.returnScoringTile(0, 1, playerList,religionArr);
    }
 
    public void loadReligion(int totalPlayerNumber) {
