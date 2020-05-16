@@ -11,7 +11,7 @@ public class PlayerHandler implements Serializable{
       player.setDwellingNum(player.getDwellingNum() + 1);
 
       if (player.getDwellingNum() < player.getFaction().MAX_DWELLING) {
-         player.setWorkerIncome(player.getFaction().DWELLING_WORKER_INCOME);
+         player.setWorkerIncome(player.getFaction().DWELLING_WORKER_INCOME + player.getWorkerIncome());
       }
    }
 
@@ -24,7 +24,7 @@ public class PlayerHandler implements Serializable{
                     player.setDwellingNum(player.getDwellingNum() + 1);
 
                     if (player.getDwellingNum() < player.getFaction().MAX_DWELLING) {
-                        player.setWorkerIncome(player.getFaction().DWELLING_WORKER_INCOME);
+                        player.setWorkerIncome(player.getFaction().DWELLING_WORKER_INCOME + player.getWorkerIncome());
                     }
                     if (player.isDwellingFavorTile()) {
                         player.setVictoryPointNum(player.getVictoryPointNum() + 2);
@@ -346,11 +346,6 @@ public class PlayerHandler implements Serializable{
         if(player.isTownScoringTile()) {
             player.addVictoryPoints(5);
         }
-    }
-
-    //SENA YAPALIM SENLE ŞUNU
-    public void progressInReligion(Player player, Religion religion) {
-        //TODO
     }
 
 }

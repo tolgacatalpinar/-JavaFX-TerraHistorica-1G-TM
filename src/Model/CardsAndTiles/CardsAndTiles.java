@@ -224,14 +224,14 @@ public class CardsAndTiles implements Serializable {
                 playerList[i].setSanctuaryStrongholdScoringTile (currentScoringTile.isStrongHoldBonus());
                 playerList[i].setSpadeScoringTile (currentScoringTile.isRequiredSpade());
                 playerList[i].setTownScoringTile (currentScoringTile.isRequiredTown());
-                if(currentScoringTile.isRequiredIslam() && currentScoringTile.getRequiredIslam() >= ){
+                if(currentScoringTile.isRequiredIslam() && currentScoringTile.getRequiredIslam() >= 0){
 
-                }else if(currentScoringTile.isRequiredChrist() && currentScoringTile.getRequiredChrist() >= ){
+                }else if(currentScoringTile.isRequiredChrist() && currentScoringTile.getRequiredChrist() >= 0){
 
-                }else if(currentScoringTile.isRequiredBudism() && currentScoringTile.getRequiredBudism() >= ){
+                }else if(currentScoringTile.isRequiredBudism() && currentScoringTile.getRequiredBudism() >= 0){
 
                 }
-                else if(currentScoringTile.isRequiredJudaism() && currentScoringTile.getRequiredJudaism() >= ){
+                else if(currentScoringTile.isRequiredJudaism() && currentScoringTile.getRequiredJudaism() >= 0){
 
                 }
             }
