@@ -240,7 +240,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void powerActionClicked() {
-      showPowerActions();
+      showPowerActions(playerList[roundController.currentPlayerId]);
 
 
    }
@@ -587,7 +587,7 @@ public class GameController implements Initializable, Serializable {
     * TAŞINACAK HERHALDE BU DA
     * @param
     */
-   public void showPowerActions() {
+   public void showPowerActions(Player currentPlayer) {
 
       BorderPane border = new BorderPane();
       BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -663,21 +663,42 @@ public class GameController implements Initializable, Serializable {
 
          @Override
          public void handle(MouseEvent event) {
+            playerList[roundController.currentPlayerId].setBowlThreePower(12);
             int chosen = getSelection();
             System.out.println("Selection: " + chosen);
             setSelection(chosen);
             dialog.close();
-            if(getSelection() == 0) {
-               disableAllTerrains();
-               TerrainController.buildBridge(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map, mapPane, actions);
+            if (getSelection() == 0) {
+               if (playerHandler.usePowerAction(0, currentPlayer)) {
+                  disableAllTerrains();
+                  TerrainController.buildBridge(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map, mapPane, actions);
+                  System.out.println("Köprü kuruldu");
+               }
+               //ELSE PROMPT NO ENOUGH RESOURCE
+            } else if (getSelection() == 4) {
+               if (playerHandler.usePowerAction(4, currentPlayer)) {
+                  disableActions();
+                  terraform.setDisable(false);
+               }
+            }else if ( getSelection() == 5) {
+               if (playerHandler.usePowerAction(5, currentPlayer)) {
+                  disableActions();
+                  terraform.setDisable(false);
+                  if (currentPlayer.getFreeSpade() > 0) {
+                     disableActions();
+                     terraform.setDisable(false);
+                  }
+               }
             }
-         }
-      });
-
+             else {
+               if (playerHandler.usePowerAction(getSelection(), currentPlayer)) {
+                  System.out.println("Köprü kuruldu");
+               }
+            }
+         }});
       //update(gridPane,status);
       //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
       dialog.show();
-
    }
 
    public  int getSelection() {

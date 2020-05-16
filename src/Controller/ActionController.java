@@ -59,21 +59,22 @@ public class ActionController implements Serializable {
          for (int k = 0; k < ROW_NUMBER; k++) {
             for (int l = 0; l < COLUMN_NUMBER; l++) {
                if (terrains[k][l] != null && map.spaces[k][l] != null) {
-                  if (map.spaces[k][l].getBridgeConnection() && map.spaces[k][l].getBridgeType().equals(playerArr[curPlayerId].getFaction().TERRAIN_TILE))
+                  if (map.spaces[k][l].getBridgeConnection() && map.spaces[k][l].getBridgeType().equals(playerArr[curPlayerId].getFaction().TERRAIN_TILE)) {
                      terrains[k][l].setDisable(false);
-                  int finalK = k;
-                  int finalL = l;
-                  terrains[k][l].setOnMouseClicked(new EventHandler<MouseEvent>() {
-                     @Override
-                     public void handle(MouseEvent event) {
-                        terraformAction(playerArr, curPlayerId, terrains, terrains[finalK][finalL], map, map.spaces[finalK][finalL], actions);
-                     }
-                  });
+                     int finalK = k;
+                     int finalL = l;
+                     terrains[k][l].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                           terraformAction(playerArr, curPlayerId, terrains, terrains[finalK][finalL], map, map.spaces[finalK][finalL], actions);
+                        }
+                     });
+                  }
                }
             }
 
 
-            }
+         }
 
       }
    }
