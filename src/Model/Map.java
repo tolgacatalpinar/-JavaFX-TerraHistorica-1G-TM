@@ -55,7 +55,7 @@ public class Map implements Serializable {
 
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
-            if( spaces[i][j].equals(space1))
+            if (spaces[i][j].equals(space1))
                row = i;
          }
       }
@@ -67,7 +67,7 @@ public class Map implements Serializable {
 
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
-            if( spaces[i][j].equals(space1))
+            if (spaces[i][j].equals(space1))
                col = j;
          }
       }
@@ -82,8 +82,7 @@ public class Map implements Serializable {
             space1.setStructure("Dwelling");
 
          }
-      }
-      else if (canBuild(space1, color)) {
+      } else if (canBuild(space1, color)) {
          space1.setOccupied(true);
          space1.setStructure("Dwelling");
       }
@@ -124,7 +123,7 @@ public class Map implements Serializable {
          row = i / 13;
          column = i % 13;
          if (isDirectAdjacent(space1, spaces[row][column])) {
-            if(j < 6) {
+            if (j < 6) {
                adjacents[j] = spaces[row][column];
                j++;
             }
@@ -142,7 +141,7 @@ public class Map implements Serializable {
 //      return result;
 //   }
 
-   public boolean isReachable(Space space1, Space space2, int shippingLevel){
+   public boolean isReachable(Space space1, Space space2, int shippingLevel) {
 
 
       return false;
@@ -154,20 +153,21 @@ public class Map implements Serializable {
 
       int count = 0;
       for (Space adjacent : adjacents) {
-         if (adjacent.getType().equals("River")) {
+         if (adjacent != null && adjacent.getType().equals("River")) {
             riverArr[count] = adjacent;
             count++;
          }
       }
       return riverArr;
    }
+
    public Space[] getAdjacentNonRivers(Space space1) {
       Space[] nonRiverArr = new Space[6];
       Space[] adjacents = getAdjacentSpaces(space1);
 
       int count = 0;
       for (Space adjacent : adjacents) {
-         if (!adjacent.getType().equals("River")) {
+         if (adjacent != null && !adjacent.getType().equals("River")) {
             nonRiverArr[count] = adjacent;
             count++;
          }
@@ -196,36 +196,25 @@ public class Map implements Serializable {
          }
       }
 
-      if (row1-row2 == 1)
-      {
-         if (row1%2 == 0)
-         {
-            return ((col2 == col1 - 2 && spaces[row1][col1-1].getType().equals("River") && spaces[row1 - 1][col1 - 1].getType().equals("River"))||
-                    (col2 == col1 + 1 && spaces[row1][col1+1].getType().equals("River") && spaces[row1 - 1][col1].getType().equals("River")));
-         }
-
-         else
-         {
-            return ((col2 == col1 - 1 && spaces[row1][col1-1].getType().equals("River") && spaces[row1 - 1][col1 ].getType().equals("River")) ||
-                    (col2 == col1 + 2 && spaces[row1][col1+1].getType().equals("River") && spaces[row1 - 1][col1 + 1 ].getType().equals("River")));
+      if (row1 - row2 == 1) {
+         if (row1 % 2 == 0) {
+            return ((col2 == col1 - 2 && spaces[row1][col1 - 1].getType().equals("River") && spaces[row1 - 1][col1 - 1].getType().equals("River")) ||
+                    (col2 == col1 + 1 && spaces[row1][col1 + 1].getType().equals("River") && spaces[row1 - 1][col1].getType().equals("River")));
+         } else {
+            return ((col2 == col1 - 1 && spaces[row1][col1 - 1].getType().equals("River") && spaces[row1 - 1][col1].getType().equals("River")) ||
+                    (col2 == col1 + 2 && spaces[row1][col1 + 1].getType().equals("River") && spaces[row1 - 1][col1 + 1].getType().equals("River")));
          }
       }
 
-      if (row2-row1 == 1)
-      {
-         if (row2%2 == 0)
-         {
-            return ((col1 == col2 - 2 && spaces[row2][col2-1].getType().equals("River") && spaces[row2 - 1][col2 - 1].getType().equals("River"))||
-                    (col1 == col2 + 1 && spaces[row2][col2+1].getType().equals("River") && spaces[row2 - 1][col2].getType().equals("River")));
-         }
-
-         else
-         {
-            return ((col1 == col2 - 1 && spaces[row2][col2-1].getType().equals("River") && spaces[row2 - 1][col2 ].getType().equals("River")) ||
-                    (col1 == col2 + 2 && spaces[row2][col2+1].getType().equals("River") && spaces[row2 - 1][col2 + 1 ].getType().equals("River")));
+      if (row2 - row1 == 1) {
+         if (row2 % 2 == 0) {
+            return ((col1 == col2 - 2 && spaces[row2][col2 - 1].getType().equals("River") && spaces[row2 - 1][col2 - 1].getType().equals("River")) ||
+                    (col1 == col2 + 1 && spaces[row2][col2 + 1].getType().equals("River") && spaces[row2 - 1][col2].getType().equals("River")));
+         } else {
+            return ((col1 == col2 - 1 && spaces[row2][col2 - 1].getType().equals("River") && spaces[row2 - 1][col2].getType().equals("River")) ||
+                    (col1 == col2 + 2 && spaces[row2][col2 + 1].getType().equals("River") && spaces[row2 - 1][col2 + 1].getType().equals("River")));
          }
       }
-
 
 
       return false;
@@ -241,7 +230,7 @@ public class Map implements Serializable {
       }
    }
 
-   public ArrayList<Space> bridgeables(Space space1){
+   public ArrayList<Space> bridgeables(Space space1) {
 
       ArrayList<Space> bridgeables = new ArrayList<Space>();
       for (int i = 0; i < ROW_NUMBER; i++) {
@@ -256,7 +245,6 @@ public class Map implements Serializable {
    }
 
 
-
    public int calculateTownScore(Space space1, String playerColor) {
       Space[] adjacents = getAdjacentSpaces(space1);
       boolean isOver = true;
@@ -268,8 +256,7 @@ public class Map implements Serializable {
       if (isOver) {
          townScore = townScore + space1.getStructure().getBuildingScore();
          return townScore;
-      }
-      else {
+      } else {
          for (Space adjacent : adjacents)
             if (adjacent.getType().equals(playerColor) && !(visited.contains(adjacent)) && adjacent.isOccupied()) {
                visited.add(adjacent);
@@ -292,17 +279,16 @@ public class Map implements Serializable {
    }
 
 
-
    public void transformTerrain(Space original, String newType) {
       original.setType(newType);
    }
 
    public boolean upgradeStructure(Space space1, String playerColor, String structure) {
-      if (canBuild(space1,playerColor)) {
-         if (space1.getStructure().getBuilding().equals("Dwelling") && structure.equals("TradingPost")){
+      if (canBuild(space1, playerColor)) {
+         if (space1.getStructure().getBuilding().equals("Dwelling") && structure.equals("TradingPost")) {
             space1.setStructure("TradingPost");
             return true;
-          }
+         }
          if (space1.getStructure().getBuilding().equals("TradingPost") && structure.equals("Temple")) {
             space1.setStructure("Temple");
             return true;
@@ -321,7 +307,7 @@ public class Map implements Serializable {
    }
 
 
-//   public ArrayList<Space> adjacentPlayer(Space space1, String playerColor) {
+   //   public ArrayList<Space> adjacentPlayer(Space space1, String playerColor) {
 //      Space[] adjacents = adjacencyList(space1);
 //      ArrayList<Space> list = new ArrayList<>();
 //      for (Space adjacent : adjacents) {
@@ -335,7 +321,7 @@ public class Map implements Serializable {
       Space[] adjacents = getAdjacentSpaces(space1);
       ArrayList<Player> list = new ArrayList<>();
       for (Space adjacent : adjacents) {
-         if ( adjacent != null && !(adjacent.getType().equals(playerColor)) && adjacent.isOccupied() && !list.contains(adjacent.getPlayer())) {
+         if (adjacent != null && !(adjacent.getType().equals(playerColor)) && adjacent.isOccupied() && !list.contains(adjacent.getPlayer())) {
             list.add(adjacent.getPlayer());
          }
       }
@@ -360,42 +346,58 @@ public class Map implements Serializable {
    public boolean canBuildTurnOne(Space space1, String playerColor) {
       return space1.getType().equals(playerColor) && !space1.isOccupied();
    }
-   public void getShippingEnabledTerrains(int shipping, Space space, ArrayList<Space> reachableTerrains)
-   {
-      Space[] riversAroundSpace = getAdjacentRivers(space);
-      if(shipping == 1)
-      {
-         Space[] riversViaShipping = new Space[6];
 
-         for( Space riverAroundSpace : riversAroundSpace)
-         {
-            Space[] adjacentRivers = getAdjacentRivers(riverAroundSpace);
-            for( int i = 0; i < adjacentRivers.length; i ++)
-            {
-               boolean doesExist = false;
-               for( int j = 0; j < riversAroundSpace.length; j ++)
-               {
-                  if(adjacentRivers[i]!= null && riversAroundSpace[j] != null && riversAroundSpace[j].equals(adjacentRivers[i]))
-                     doesExist = true;
-               }
-               if(!doesExist)
-               {
-                  int index = 0;
-                  while(riversViaShipping[index] != null)
-                     index ++;
-                  riversViaShipping[index] = adjacentRivers[i];
-               }
+   private void addEnabledTerrainsOnlyTwoLevelShipping(Space space, ArrayList<Space> reachableTerrains) {
+      Space[] riversAroundSpace = getAdjacentRivers(space);
+      Space[] riversViaShipping = new Space[6];
+
+      for (Space riverAroundSpace : riversAroundSpace) {
+         Space[] adjacentRivers = getAdjacentRivers(riverAroundSpace);
+         for (int i = 0; i < adjacentRivers.length; i++) {
+            boolean doesExist = false;
+            for (int j = 0; j < riversAroundSpace.length; j++) {
+               if (adjacentRivers[i] != null && riversAroundSpace[j] != null && riversAroundSpace[j].equals(adjacentRivers[i]))
+                  doesExist = true;
+            }
+            if (!doesExist) {
+               int index = 0;
+               while (riversViaShipping[index] != null)
+                  index++;
+               riversViaShipping[index] = adjacentRivers[i];
             }
          }
-         for( Space riverViaShipping : riversViaShipping)
-         {
-            Space[] accessableTerrains = getAdjacentNonRivers(riverViaShipping);
-            for( Space terrain : accessableTerrains)
-            {
-               if(!reachableTerrains.contains(terrain))
-                  reachableTerrains.add(terrain);
-            }
+      }
+      for (Space riverViaShipping : riversViaShipping) {
+         Space[] accessableTerrains = getAdjacentNonRivers(riverViaShipping);
+         for (Space terrain : accessableTerrains) {
+            if (terrain != null && !reachableTerrains.contains(terrain))
+               reachableTerrains.add(terrain);
          }
+      }
+
+   }
+   private void addEnabledTerrainsOnlyOneLevelShipping(Space space, ArrayList<Space> reachableTerrains) {
+      Space[] riversAroundSpace = getAdjacentRivers(space);
+
+      for (Space riverAroundSpace : riversAroundSpace) {
+         Space[] accessableTerrains = getAdjacentNonRivers(riverAroundSpace);
+         for (Space terrain : accessableTerrains) {
+            if (terrain != null && !reachableTerrains.contains(terrain))
+               reachableTerrains.add(terrain);
+         }
+      }
+
+   }
+
+   public void getShippingEnabledTerrains(int shipping, Space space, ArrayList<Space> reachableTerrains) {
+      switch (shipping)
+      {
+         case 1:
+            addEnabledTerrainsOnlyOneLevelShipping(space, reachableTerrains);
+            break;
+         case 2:
+            addEnabledTerrainsOnlyOneLevelShipping(space, reachableTerrains);
+            addEnabledTerrainsOnlyTwoLevelShipping(space, reachableTerrains);
       }
    }
 }
