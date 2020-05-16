@@ -498,9 +498,8 @@ public class ActionController implements Serializable {
 
    /**TODO
     * TAŞINACAK
-    * @param gameController
     */
-   public static void showSpeacialActions(GameController gameController) {
+   public static void showSpeacialActions(Player[] playerList,Religion[] religions,int currentPlayerId) {
       VBox wholeFavor = new VBox();
       HBox firstRow = new HBox();
       HBox secondRow = new HBox();
@@ -508,19 +507,17 @@ public class ActionController implements Serializable {
       HBox special2 = new HBox();
       HBox special3 = new HBox();
       HBox special4 = new HBox();
-
-      Player[] players = gameController.getPlayerList();
-      int playerId = gameController.roundController.getCurrentPlayerId();
-      Player player = players[playerId];
+      Player currentPlayer = playerList[currentPlayerId];
       special1.getChildren().add(new SpecialActionView("Spade Action"));
       final int[] choice = {0};
       special1.setOnMouseClicked(new EventHandler<Event>() {
          @Override
          public void handle(Event event) {
-            if (player.getSpecialActionToken().isSpade) {
+            if (currentPlayer.getSpecialActionToken().isSpade) {
                System.out.println("Spade Action");
                choice[0] = 1;
                System.out.println(choice[0]);
+
                event.consume();
             } else {
                Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -535,12 +532,12 @@ public class ActionController implements Serializable {
       special2.setOnMouseClicked(new EventHandler<Event>() {
          @Override
          public void handle(Event event) {
-
-            if (player.getSpecialActionToken().isCultTack) {
+            ReligionController religionController = new ReligionController();
+            if (currentPlayer.getSpecialActionToken().isCultTack) {
                System.out.println("Cult Action");
                choice[0] = 2;
                System.out.println(choice[0]);
-
+               religionController.showReligion(playerList,2,religions,currentPlayerId, true);
                event.consume();
             } else {
                Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -556,7 +553,7 @@ public class ActionController implements Serializable {
       special3.setOnMouseClicked(new EventHandler<Event>() {
          @Override
          public void handle(Event event) {
-            if (player.getSpecialActionToken().isStrongholdAbility) {
+            if (currentPlayer.getSpecialActionToken().isStrongholdAbility) {
                System.out.println("Stronghold Ability");
                choice[0] = 3;
                System.out.println(choice[0]);
@@ -575,7 +572,7 @@ public class ActionController implements Serializable {
       special4.setOnMouseClicked(new EventHandler<Event>() {
          @Override
          public void handle(Event event) {
-            if (player.getSpecialActionToken().isFactionAbility) {
+            if (currentPlayer.getSpecialActionToken().isFactionAbility) {
                System.out.println("Faction Ability");
                choice[0] = 4;
                System.out.println(choice[0]);
@@ -597,17 +594,17 @@ public class ActionController implements Serializable {
          @Override
          public void handle(Event event) {
             if (choice[0] == 1) {
-               player.getSpecialActionToken().isSpade = false;
-               player.setFreeSpade(player.getFreeSpade() + 1);
+               currentPlayer.getSpecialActionToken().isSpade = false;
+               currentPlayer.setFreeSpade(currentPlayer.getFreeSpade() + 1);
                event.consume();
             } else if (choice[0] == 2) {
-               player.getSpecialActionToken().isCultTack = false;
+               currentPlayer.getSpecialActionToken().isCultTack = false;
                event.consume();
             } else if (choice[0] == 3) {
-               player.getSpecialActionToken().isStrongholdAbility = false;
+               currentPlayer.getSpecialActionToken().isStrongholdAbility = false;
                event.consume();
             } else if (choice[0] == 4) {
-               player.getSpecialActionToken().isFactionAbility = false;
+               currentPlayer.getSpecialActionToken().isFactionAbility = false;
                event.consume();
             } else {
                Alert alert = new Alert(Alert.AlertType.INFORMATION);

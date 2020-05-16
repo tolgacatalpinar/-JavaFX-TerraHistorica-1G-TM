@@ -1,5 +1,7 @@
 package Model;
 import java.io.Serializable;
+import java.util.Arrays;
+
 public class Religion implements Serializable{
 
     private final int MAX_LENGTH = 11;
@@ -9,6 +11,7 @@ public class Religion implements Serializable{
     private int orderOfCult_2_3;    //Holds id of player who took this are
     private  boolean keyPlaced;
     private int[] playerPositions;
+    private int[] roundBasedPosition;
     private int[] powerAwardPositions; //placed /wrt the higher value of track number
 
     public Religion(int playerCount, int[] initial_religion_points){
@@ -134,7 +137,12 @@ public class Religion implements Serializable{
     public int getOrderOfCult_2_1() {
         return orderOfCult_2_1;
     }
-
+    public void updateRoundBasedPositions(int amount, int playerIndex){
+        roundBasedPosition[playerIndex] += amount;
+    }
+    public void resetRoundBasedPosition(){
+        Arrays.fill(roundBasedPosition, 0);
+    }
     public int getOrderOfCult_2_2() {
         return orderOfCult_2_2;
     }
