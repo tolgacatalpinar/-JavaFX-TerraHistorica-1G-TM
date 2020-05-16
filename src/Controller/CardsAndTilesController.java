@@ -209,16 +209,16 @@ public class CardsAndTilesController {
                 }else if(cardsAndTiles.favorTiles.get(selectionFavorTile).getChristianityBonus() != 0){
                     religion_index = 1;
                     cardsAndTiles.playerChooseFavorTile(cardsAndTiles.favorTiles.get(selectionFavorTile),current,religions[1]);
-                    returnInfo =religions[0].updateReligion(cardsAndTiles.favorTiles.get(selectionFavorTile).getChristianityBonus(),current.getPlayerId(),current.getKey());
+                    returnInfo =religions[1].updateReligion(cardsAndTiles.favorTiles.get(selectionFavorTile).getChristianityBonus(),current.getPlayerId(),current.getKey());
                 }else if(cardsAndTiles.favorTiles.get(selectionFavorTile).getHinduismBonus() != 0){
-                    religion_index = 2;
-                    cardsAndTiles.playerChooseFavorTile(cardsAndTiles.favorTiles.get(selectionFavorTile),current,religions[2]);
-                    returnInfo =religions[0].updateReligion(cardsAndTiles.favorTiles.get(selectionFavorTile).getHinduismBonus(),current.getPlayerId(),current.getKey());
-                }
-                else if(cardsAndTiles.favorTiles.get(selectionFavorTile).getJewBonus() != 0){
                     religion_index = 3;
                     cardsAndTiles.playerChooseFavorTile(cardsAndTiles.favorTiles.get(selectionFavorTile),current,religions[3]);
-                    returnInfo = religions[0].updateReligion(cardsAndTiles.favorTiles.get(selectionFavorTile).getJewBonus(),current.getPlayerId(),current.getKey());
+                    returnInfo =religions[3].updateReligion(cardsAndTiles.favorTiles.get(selectionFavorTile).getHinduismBonus(),current.getPlayerId(),current.getKey());
+                }
+                else if(cardsAndTiles.favorTiles.get(selectionFavorTile).getJewBonus() != 0){
+                    religion_index = 2;
+                    cardsAndTiles.playerChooseFavorTile(cardsAndTiles.favorTiles.get(selectionFavorTile),current,religions[2]);
+                    returnInfo = religions[2].updateReligion(cardsAndTiles.favorTiles.get(selectionFavorTile).getJewBonus(),current.getPlayerId(),current.getKey());
                 }
                 System.out.println("Selected " + chosen);
                 if(returnInfo[1] == 4) {
