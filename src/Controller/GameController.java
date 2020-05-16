@@ -785,18 +785,9 @@ public class GameController implements Initializable, Serializable {
             option = new HBox(power_image, label1, power_middle, spade,label2 );
          }
          GridPane tempPane = new GridPane();
-         ImageView power_left = new ImageView("chris_track.png");
-         ImageView power_right = new ImageView("juda_track.png");
-         ImageView power_middle = new ImageView("purple_arrow.png");
-         power_middle.setFitWidth(tempPane.getWidth() / 3);
-         power_middle.setFitHeight(tempPane.getHeight() / 3);
-         power_left.setFitWidth(tempPane.getWidth() / 3);
-         power_left.setFitHeight(tempPane.getHeight() / 3);
-         power_right.setFitWidth(tempPane.getWidth() / 3);
-         power_right.setFitHeight(tempPane.getHeight() / 3);
-         tempPane.add(power_left, 0, 0);
-         tempPane.add(power_middle, 1, 0);
-         tempPane.add(power_right, 2, 0);
+         option.setMaxWidth(tempPane.getWidth() / 3);
+         option.setMaxHeight(tempPane.getHeight() / 3);
+         tempPane.add(option,0,0);
          tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
