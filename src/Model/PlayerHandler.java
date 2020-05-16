@@ -346,6 +346,7 @@ public class PlayerHandler implements Serializable{
             player.addVictoryPoints(5);
         }
     }
+
     //SENA YAPALIM SENLE ŞUNU
     public void progressInReligion(Player player, Religion religion) {
         //TODO

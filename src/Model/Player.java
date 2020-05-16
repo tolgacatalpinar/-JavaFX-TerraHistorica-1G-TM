@@ -22,6 +22,8 @@ public class Player implements Serializable {
    private int workerIncome;
    private int priestIncome;
    private int startingDwellingNum;
+
+
    private int priestOnBank = 7; // Not exactly know what it is
    private int key;
    private int bridgeNum;
@@ -553,6 +555,10 @@ public class Player implements Serializable {
    public void setTownScoringTile(boolean townScoringTile) {
 
       isTownScoringTile = townScoringTile;
+   }
+
+   public void setPriestOnBank(int priestOnBank) {
+      this.priestOnBank = priestOnBank;
    }
 
 }

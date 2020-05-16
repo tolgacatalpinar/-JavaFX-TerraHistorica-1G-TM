@@ -133,8 +133,33 @@ public class ReligionController implements Serializable{
                     public void handle(MouseEvent event) {
                         System.out.println("Add priest to order for "+ temp_religion.getClass().toString() + " and player "+ currentPlayer);
                         //if(playerArr[currentPlayer])
-                        //int gained_power = temp_religion.addOrderOfReligion(currentPlayer,playerArr[currentPlayer].getKey());
-                        //currentPlayer.indir
+                        if(playerArr[currentPlayer].getPriestNum() > 0){
+                            int[] returnInfo = temp_religion.addOrderOfReligion(currentPlayer,playerArr[currentPlayer].getKey());
+                            if(returnInfo[1] == 4) {
+                                System.out.println("Cannot advance more on this religion");
+                            }
+                            else if( returnInfo[1] == 1) {
+                                System.out.println("Since someone used key, you can't reach end"); // Can be replaced with a GUI message
+                            }
+                            else if( returnInfo[1] == 2) {
+                                System.out.println("Since there is no key end pos is stuck on 9"); // Can be replaced with a GUI message
+                            }
+                            else if ( returnInfo[1] == 3) {
+                                if(playerArr[currentPlayer].getKey() > 0){
+                                    playerArr[currentPlayer].setKey(playerArr[currentPlayer].getKey()-1);
+                                }
+                            }
+                            if(returnInfo[2] > 0 ) {
+                                //Store the progress value for favor tile bonuses
+                                playerArr[currentPlayer].spendPriest(1);
+                                playerArr[currentPlayer].setPriestOnBank(playerArr[currentPlayer].getPriestOnBank()-1);
+                                playerArr[currentPlayer].addPowerToBowl(returnInfo[0]);
+                            }
+
+                        }
+                        else {
+                            System.out.println("Not enough resources");
+                        }
                         //play
                         disableButtons(religon_buttons);
                         update(gridPane);

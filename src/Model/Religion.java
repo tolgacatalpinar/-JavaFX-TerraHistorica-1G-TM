@@ -51,17 +51,17 @@ public class Religion implements Serializable{
         int endPos = currentPos + count;
         int awardSearchLength = powerAwardPositions.length;
         if(currentPos >= MAX_LENGTH){
-            System.out.println("Cannot advance more on this religion");
+            returnInfo[1] = 4;
         }
-        if (endPos >= MAX_LENGTH){
+        else if (endPos >= MAX_LENGTH){
             if(keyPlaced){
-                System.out.println("Since someone used key, you can't reach end"); // Can be replaced with an GUI message
+                //System.out.println("Since someone used key, you can't reach end"); // Can be replaced with an GUI message
                 awardSearchLength -= 1;
                 endPos = MAX_LENGTH-1;
                 returnInfo[1] = 1;
             }
-            if (key == 0){
-                System.out.println("Since there is no key end pos is stuck on 9"); // Can be replaced with an GUI message
+            else if (key == 0){
+                //System.out.println("Since there is no key end pos is stuck on 9"); // Can be replaced with an GUI message
                 awardSearchLength -= 1;
                 endPos = MAX_LENGTH-1;
                 returnInfo[1] = 2;
