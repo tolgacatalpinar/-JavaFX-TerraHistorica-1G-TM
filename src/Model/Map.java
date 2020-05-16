@@ -86,7 +86,6 @@ public class Map implements Serializable {
          space1.setOccupied(true);
          space1.setStructure("Dwelling");
       }
-
    }
 
 
@@ -245,34 +244,90 @@ public class Map implements Serializable {
    }
 
 
-   public int calculateTownScore(Space space1, String playerColor) {
+   public int calculateTownScore(Space space1, String playerColor, int townScore) {
       Space[] adjacents = getAdjacentSpaces(space1);
       boolean isOver = true;
 
       for (int i = 0; i < adjacents.length && isOver; i++) {
-         isOver = !(adjacents[i].getType().equals(playerColor)) || visited.contains(adjacents[i]) || !adjacents[i].isOccupied();
+         isOver = ((!(adjacents[i].getType().equals(playerColor))) || (visited.contains(adjacents[i])) || (!adjacents[i].isOccupied()));
       }
 
       if (isOver) {
-         townScore = townScore + space1.getStructure().getBuildingScore();
+
+//         if (space1.getStructure().getBuilding().equals("Stronghold"))
+//         {
+//            townScore = townScore + 3;
+//         }
+//
+//         if (space1.getStructure().getBuilding().equals("Dwelling"))
+//         {
+//            townScore = townScore + 1;
+//         }
+//
+//         if (space1.getStructure().getBuilding().equals("Temple"))
+//         {
+//            townScore = townScore + 3;
+//         }
+//
+//         if (space1.getStructure().getBuilding().equals("Sanctuary"))
+//         {
+//            townScore = townScore + 4;
+//         }
+//
+//         if (space1.getStructure().getBuilding().equals("Trading Post"))
+//         {
+//            townScore = townScore + 2;
+//         }
+
          return townScore;
-      } else {
+      }
+      else {
          for (Space adjacent : adjacents)
             if (adjacent.getType().equals(playerColor) && !(visited.contains(adjacent)) && adjacent.isOccupied()) {
                visited.add(adjacent);
-               return calculateTownScore(adjacent, playerColor);
+               int add = 0;
+               if (space1.getStructure().getBuilding().equals("Stronghold"))
+               {
+                  add = 3;
+               }
+
+               if (space1.getStructure().getBuilding().equals("Dwelling"))
+               {
+                  add = 1;
+               }
+
+               if (space1.getStructure().getBuilding().equals("Temple"))
+               {
+                  add = 3;
+               }
+
+               if (space1.getStructure().getBuilding().equals("Sanctuary"))
+               {
+                  add = 4;
+               }
+
+               if (space1.getStructure().getBuilding().equals("Trading Post"))
+               {
+                  add = 2;
+               }
+               return calculateTownScore(adjacent, playerColor, townScore + add);
             }
       }
+      System.out.println("Burdan döndü");
       return townScore;
+
    }
 
    public boolean isTown(Space space1, String playerColor) {
-      if (calculateTownScore(space1, playerColor) >= 7) {
-         townScore = 0;
+      int num = calculateTownScore(space1, playerColor,0);
+      System.out.println(num);
+      System.out.println("Town score is  " + num);
+      if (num <= 6) {
+         System.out.println("Town değil");
          visited.clear();
          return true;
       } else {
-         townScore = 0;
+         System.out.println("Town oldu!");
          visited.clear();
          return false;
       }
