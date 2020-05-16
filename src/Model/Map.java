@@ -226,8 +226,6 @@ public class Map implements Serializable {
       return false;
    }
 
-
-
    public void buildBridge(Space space1, Space space2) {
       if (canBuildBridge(space1, space2)) {
          space1.setBridge(true);

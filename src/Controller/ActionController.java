@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import Model.Map;
 import Model.StructureSubclasses.Stronghold;
 import View.ActionsViews.SpecialActionView;
 import javafx.event.Event;
@@ -18,13 +19,14 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
 public class ActionController implements Serializable {
    final static int ROW_NUMBER = 9;
    final static int COLUMN_NUMBER = 13;
    private static int selection = -1;
+   public static boolean actiondone = false;
+   public static boolean canChooseFavorTile  = false;
 
    public static void terraform(Player[] playerArr, int curPlayerId ,Button[][] terrains,Map map, Button[] actions) {
 
@@ -72,10 +74,7 @@ public class ActionController implements Serializable {
                   }
                }
             }
-
-
          }
-
       }
    }
 
@@ -196,7 +195,7 @@ public class ActionController implements Serializable {
 //        TerrainController.disableButtonClicks(terrains);
    }
 
-   public static void upgradeStructure(Player[] playerArr, int currentPlayerId,Button[][] terrains, Map map, Button[] actions) {
+   public  static void upgradeStructure(Player[] playerArr, int currentPlayerId,Button[][] terrains, Map map, Button[] actions) {
       TerrainController.disableTerrains(terrains, map);
 
       for (int i = 0; i < ROW_NUMBER; i++) {
@@ -249,10 +248,15 @@ public class ActionController implements Serializable {
                TerrainController.upgradeToTradingPost(terrain, playerArr[currentPlayerId].getFaction().TERRAIN_TILE);
                space.setStructure("Trading Post");
                stage.close();
+               actiondone = true;
             }else if (returnCase == -1){
                System.out.println("Not enough resources");
+               stage.close();
+               actiondone = true;
             }else
                System.out.println("Max reached");
+               stage.close();
+               actiondone = true;
 
          }
       });
@@ -289,7 +293,7 @@ public class ActionController implements Serializable {
       RadioButton strongholdButton = new RadioButton("Stronghold");
       BorderPane pane = DialogueController.getTradingPostUpgradePromptPane(playerArr,curPlayerId, "Do you want to upgrade this Trading Post to a Temple\n at the expense of: ", "Do you want to upgrade this Trading Post to a Stronghold\n at the expense of: ", yesButton, noButton, templeButton, strongholdButton);
       Stage stage = DialogueController.getStage("Upgrade Trading Post", pane, new Image("favor_tiles_background.jpg"));
-      stage.show();
+
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
@@ -301,14 +305,20 @@ public class ActionController implements Serializable {
                 * YANDAKİ UŞAKLARA SOR
                 */
                if(returnCase == 1){
+                  canChooseFavorTile = true;
                   disableActions(actions);
                   TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                   space.setStructure("Temple");
+                  stage.close();
+                  actiondone = true;
                }else if (returnCase == -1){
                   System.out.println("Not enough resources");
+                  stage.close();
+                  actiondone = true;
                }else
                   System.out.println("Max reached");
                stage.close();
+
             }
             else if(!templeButton.isSelected() && strongholdButton.isSelected())
             {
@@ -328,17 +338,19 @@ public class ActionController implements Serializable {
                stage.close();
             }
             stage.close();
+            actiondone = true;
          }
       });
       noButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
             stage.close();
+            actiondone = true;
          }
       });
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
-
+      stage.showAndWait();
 
 
 //      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

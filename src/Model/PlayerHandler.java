@@ -271,39 +271,39 @@ public class PlayerHandler implements Serializable{
 
     public boolean exchangeResources(Player player, int exchangeId) {
 
-       if(exchangeId == 1) { //5 power for 1 priest
+       if(exchangeId == 0) { //5 power for 1 priest
            if(player.spendPowerFromBowl(5)) {
                player.gainPriest(1);
                return true;
            }
        }
-       else if(exchangeId ==2) { //1 priest for 1 worker
+       else if(exchangeId ==1) { //1 priest for 1 worker
            if (player.getPriestNum() >= 1) {
                player.spendPriest(1);
                player.setWorkerNum(player.getWorkerNum()+1);
                return true;
            }
        }
-       else if (exchangeId == 3) { //3 power for 1 worker
+       else if (exchangeId == 2) { //3 power for 1 worker
            if(player.spendPowerFromBowl(3)) {
                player.setWorkerNum(player.getWorkerNum()+1);
                return true;
            }
 
        }
-       else if (exchangeId == 4) { //1 worker for 1 coin
+       else if (exchangeId == 3) { //1 worker for 1 coin
            if(player.getWorkerNum() >= 1) {
                player.setWorkerNum(player.getWorkerNum()-1);
                player.setGoldNum(player.getGoldNum()+1);
            }
        }
-       else if (exchangeId == 5) { //1 power for 1 coin
+       else if (exchangeId == 4) { //1 power for 1 coin
            if(player.spendPowerFromBowl(1)) {
                player.setGoldNum(player.getGoldNum()+1);
                return true;
            }
        }
-       else if(exchangeId == 6 ) { //sacrifice power
+       else if(exchangeId == 5 ) { //sacrifice power
            if (2 < player.getBowlTwoPower()) {
                player.setBowlTwoPower(player.getBowlTwoPower()-2);
                player.setBowlThreePower(player.getBowlThreePower()+1);
@@ -346,7 +346,7 @@ public class PlayerHandler implements Serializable{
             player.addVictoryPoints(5);
         }
     }
-
+    //SENA YAPALIM SENLE ŞUNU
     public void progressInReligion(Player player, Religion religion) {
         //TODO
     }
