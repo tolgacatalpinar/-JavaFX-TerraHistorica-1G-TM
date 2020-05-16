@@ -268,22 +268,21 @@ public class CardsAndTiles implements Serializable {
         }
     }
 
-    public void playerChooseTownTile(TownTile townTile, Player player, Religion religion){
+    public void playerChooseTownTile(TownTile townTile, Player player){
         if(townTile.isOccupied()){
             System.err.println("This Tile was chosen by another player");
         }
         else
         {
+            townTile.setOccupied(true);
             townTile.setPlayerId(player.getPlayerId());
             player.addPowerToBowl( townTile.getPowerBonus());
             player.setPriestNum(player.getPriestNum() + townTile.getPriestBonus());
             player.setVictoryPointNum(player.getVictoryPointNum() + townTile.getVictoryBonus());
             player.setWorkerNum(player.getWorkerNum() + townTile.getWorkerBonus());
             player.setGoldNum(player.getGoldNum() + townTile.getGoldBonus());
-//            player.addPowerToBowl(religion.updateReligion(townTile.getIslamPoint(),player.getPlayerId(),player.getKey()));
-//            player.addPowerToBowl(religion.updateReligion(townTile.getChristianityPoint(),player.getPlayerId(),player.getKey()));
-//            player.addPowerToBowl(religion.updateReligion(townTile.getJewishPoint(),player.getPlayerId(),player.getKey()));
-//            player.addPowerToBowl(religion.updateReligion(townTile.getHinduismPoint(),player.getPlayerId(),player.getKey()));
+            player.setKey(player.getKey() + 1);
+
         }
     }
 
