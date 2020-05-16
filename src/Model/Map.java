@@ -347,16 +347,16 @@ public class Map implements Serializable {
       return space1.getType().equals(playerColor) && !space1.isOccupied();
    }
 
-   private void addEnabledTerrainsOnlyTwoLevelShipping(Space space, ArrayList<Space> reachableTerrains) {
-      Space[] riversAroundSpace = getAdjacentRivers(space);
-      Space[] riversViaShipping = new Space[6];
+   private Space[] getOneLevelDistantRivers(Space[] rivers)
+   {
+      Space[] riversViaShipping = new Space[10];
 
-      for (Space riverAroundSpace : riversAroundSpace) {
+      for (Space riverAroundSpace : rivers) {
          Space[] adjacentRivers = getAdjacentRivers(riverAroundSpace);
          for (int i = 0; i < adjacentRivers.length; i++) {
             boolean doesExist = false;
-            for (int j = 0; j < riversAroundSpace.length; j++) {
-               if (adjacentRivers[i] != null && riversAroundSpace[j] != null && riversAroundSpace[j].equals(adjacentRivers[i]))
+            for (int j = 0; j < rivers.length; j++) {
+               if (adjacentRivers[i] != null && rivers[j] != null && rivers[j].equals(adjacentRivers[i]))
                   doesExist = true;
             }
             if (!doesExist) {
@@ -367,6 +367,41 @@ public class Map implements Serializable {
             }
          }
       }
+      return riversViaShipping;
+   }
+   private void addEnabledTerrainsOnlyThreeLevelShipping(Space space, ArrayList<Space> reachableTerrains)
+   {
+      Space[] riversAroundSpace = getAdjacentRivers(space);
+      Space[] riversViaShipping = getOneLevelDistantRivers(getOneLevelDistantRivers(riversAroundSpace));
+      for (Space riverViaShipping : riversViaShipping) {
+         Space[] accessableTerrains = getAdjacentNonRivers(riverViaShipping);
+         for (Space terrain : accessableTerrains) {
+            if (terrain != null && !reachableTerrains.contains(terrain))
+               reachableTerrains.add(terrain);
+         }
+      }
+   }
+   private void addEnabledTerrainsOnlyTwoLevelShipping(Space space, ArrayList<Space> reachableTerrains) {
+      Space[] riversAroundSpace = getAdjacentRivers(space);
+//      Space[] riversViaShipping = new Space[6];
+//
+//      for (Space riverAroundSpace : riversAroundSpace) {
+//         Space[] adjacentRivers = getAdjacentRivers(riverAroundSpace);
+//         for (int i = 0; i < adjacentRivers.length; i++) {
+//            boolean doesExist = false;
+//            for (int j = 0; j < riversAroundSpace.length; j++) {
+//               if (adjacentRivers[i] != null && riversAroundSpace[j] != null && riversAroundSpace[j].equals(adjacentRivers[i]))
+//                  doesExist = true;
+//            }
+//            if (!doesExist) {
+//               int index = 0;
+//               while (riversViaShipping[index] != null)
+//                  index++;
+//               riversViaShipping[index] = adjacentRivers[i];
+//            }
+//         }
+//      }
+      Space[] riversViaShipping = getOneLevelDistantRivers(riversAroundSpace);
       for (Space riverViaShipping : riversViaShipping) {
          Space[] accessableTerrains = getAdjacentNonRivers(riverViaShipping);
          for (Space terrain : accessableTerrains) {
@@ -398,6 +433,12 @@ public class Map implements Serializable {
          case 2:
             addEnabledTerrainsOnlyOneLevelShipping(space, reachableTerrains);
             addEnabledTerrainsOnlyTwoLevelShipping(space, reachableTerrains);
+            break;
+         case 3:
+            addEnabledTerrainsOnlyOneLevelShipping(space, reachableTerrains);
+            addEnabledTerrainsOnlyTwoLevelShipping(space, reachableTerrains);
+            addEnabledTerrainsOnlyThreeLevelShipping(space, reachableTerrains);
+            break;
       }
    }
 }
