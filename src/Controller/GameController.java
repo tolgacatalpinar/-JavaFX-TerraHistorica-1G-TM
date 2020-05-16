@@ -357,19 +357,61 @@ public class GameController implements Initializable, Serializable {
       border_bottom.setCenter(select);
 
       for (int i = 0; i < 6; i++) {
+         ImageView power_middle = new ImageView("arrow.png");
+         ImageView power_image = new ImageView("power.png");
+         ImageView priest = new ImageView("priest.png");
+         ImageView worker =  new ImageView("worker.png");
+         ImageView gold = new ImageView("gold.png");
+         Label label1 = new Label("\n3");
+         label1.setTextFill(Color.WHITE);
+         Label label2 = new Label("\n2");
+         label2.setTextFill(Color.WHITE);
+         label1.setFont(new Font("Stencil", 40));
+         label2.setFont(new Font("Stencil", 40));
+         label1.setOpacity(0.6);
+         label2.setOpacity(0.6);
+         power_middle.setFitHeight(150);
+         power_middle.setFitWidth(150);
+         priest.setFitWidth(150);
+         priest.setFitHeight(150);
+         worker.setFitWidth(150);
+         worker.setFitHeight(150);
+         gold.setFitWidth(140);
+         gold.setFitHeight(140);
+         power_image.setFitWidth(150);
+         power_image.setFitHeight(150);
+         HBox option;
+         if(i == 0){
+            label1.setText("\n5");
+            label2.setText("\n1");
+            option = new HBox(power_image, label1, power_middle, priest,label2 );
+         }else if (i == 1) {
+            label1.setText("\n1");
+            label2.setText("\n1");
+            option = new HBox(priest, label1, power_middle, worker,label2 );
+         }else if (i == 2) {
+            label1.setText("\n3");
+            label2.setText("\n1");
+            option = new HBox(power_image, label1 , power_middle, worker, label2 );
+         }else if (i == 3) {
+            label1.setText("\n1");
+            label2.setText("\n1");
+            option = new HBox(worker, label1, power_middle, gold , label2);
+         }else if (i == 4) {
+            label1.setText("\n1");
+            label2.setText("\n1");
+            option = new HBox(power_image, label1, power_middle,gold, label2);
+         }else {
+            label1.setText("\nBOWL 2");
+            label2.setText("\nBOWL 3");
+
+            option = new HBox(power_image, label1, power_middle,label2 );
+         }
          GridPane tempPane = new GridPane();
-         ImageView power_left = new ImageView("chris_track.png");
-         ImageView power_right = new ImageView("juda_track.png");
-         ImageView power_middle = new ImageView("purple_arrow.png");
-         power_middle.setFitWidth(tempPane.getWidth() / 3);
-         power_middle.setFitHeight(tempPane.getHeight() / 3);
-         power_left.setFitWidth(tempPane.getWidth() / 3);
-         power_left.setFitHeight(tempPane.getHeight() / 3);
-         power_right.setFitWidth(tempPane.getWidth() / 3);
-         power_right.setFitHeight(tempPane.getHeight() / 3);
-         tempPane.add(power_left, 0, 0);
-         tempPane.add(power_middle, 1, 0);
-         tempPane.add(power_right, 2, 0);
+         option.setMaxWidth(tempPane.getWidth() / 3);
+         option.setMaxHeight(tempPane.getHeight() / 3);
+         tempPane.add(option,0,0);
+
          tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -402,7 +444,7 @@ public class GameController implements Initializable, Serializable {
                }
             }
          });
-         gridPane.add(tempPane, i % 3, i / 3);
+         gridPane.add(tempPane, i % 2, i / 2);
       }
 
       border.setCenter(gridPane);
@@ -417,7 +459,7 @@ public class GameController implements Initializable, Serializable {
 
          @Override
          public void handle(MouseEvent event) {
-            playerList[roundController.currentPlayerId].setBowlThreePower(12);
+            playerList[roundController.currentPlayerId].setBowlThreePower(12); //TODO
             int chosen = getSelection();
             System.out.println("Selection: " + chosen);
             setSelection(chosen);
