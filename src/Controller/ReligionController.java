@@ -62,7 +62,7 @@ public class ReligionController implements Serializable{
      * Status paramater 2 -> place priest according to religion choice
      *
      */
-    public void showReligion(Player[] playerArr,int status, Religion[] religions,int currentPlayer)
+    public void showReligion(Player[] playerArr,int status, Religion[] religions,int currentPlayer,boolean kaltrekşın)
     {
 
         for (int i = 0; i< playerArr.length; i++ ) {
@@ -156,7 +156,7 @@ public class ReligionController implements Serializable{
                                 playerArr[currentPlayer].setPriestOnBank(playerArr[currentPlayer].getPriestOnBank()-1);
                                 playerArr[currentPlayer].addPowerToBowl(returnInfo[0]);
                             }
-
+                            temp_religion.updateRoundBasedPositions(returnInfo[2], currentPlayer);
                         }
                         else {
                             System.out.println("Not enough resources");
@@ -178,7 +178,7 @@ public class ReligionController implements Serializable{
                         System.out.println("Place priest for "+ temp_religion.getClass().toString() + " and player "+ currentPlayer);
                         Player curPlayer  = playerArr[currentPlayer];
 
-                        if(playerArr[currentPlayer].getPriestNum() > 0){
+                        if(kaltrekşın||playerArr[currentPlayer].getPriestNum() > 0){
                             int[] returnInfo = temp_religion.placePriest(currentPlayer,playerArr[currentPlayer].getKey());
                             System.out.println(returnInfo[0] + " " + returnInfo[1] + " " + returnInfo[2]);
                             if(returnInfo[1] == 4) {
@@ -195,7 +195,10 @@ public class ReligionController implements Serializable{
                             }
                             if(returnInfo[2] > 0 ) {
                                 //Store the progress value for favor tile bonuses
-                                playerArr[currentPlayer].spendPriest(1);
+                                if(kaltrekşın){
+                                    playerArr[currentPlayer].getSpecialActionToken().isCultTack = false;
+                                }else
+                                    playerArr[currentPlayer].spendPriest(1);
                                 playerArr[currentPlayer].addPowerToBowl(returnInfo[0]);
                             }
 
@@ -270,14 +273,14 @@ public class ReligionController implements Serializable{
             @Override
             public void handle(MouseEvent event) {
                 dialog.close();
-                showReligion(playerArr, 1,religions,currentPlayer);
+                showReligion(playerArr, 1,religions,currentPlayer, false);
             }
         });
         place_priest.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 dialog.close();
-                showReligion(playerArr, 2,religions,currentPlayer);
+                showReligion(playerArr, 2,religions,currentPlayer,false);
             }
         });
         dialog.show();

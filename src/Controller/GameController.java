@@ -20,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -214,7 +215,12 @@ public class GameController implements Initializable, Serializable {
       roundController.passRound(playerList);
       int round2 = roundController.getCurrentRound();
       cardsAndTiles.returnScoringTile(round1,round2,playerList);
-
+      //Reset advancement on religion for this round
+      if(round2 != round1){
+         for (Religion religion : religionArr) {
+            religion.resetRoundBasedPosition();
+         }
+      }
    }
 
    @FXML
@@ -309,7 +315,7 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void religionsClicked() {
       ReligionController religionController = new ReligionController();
-      religionController.showReligion(playerList,0,religionArr,playerList.length);
+      religionController.showReligion(playerList,0,religionArr,playerList.length, false);
    }
 
    @FXML
@@ -436,7 +442,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void specialActionClicked() {
-      ActionController.showSpeacialActions(this);
+      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId());
    }
 
    public void createSpaces() {
@@ -718,19 +724,61 @@ public class GameController implements Initializable, Serializable {
       border_bottom.setCenter(select);
 
       for (int i = 0; i < 6; i++) {
+         ImageView power_middle = new ImageView("arrow.png");
+         ImageView power_image = new ImageView("power.png");
+         ImageView bridge = new ImageView("bridge.png");
+         ImageView priest = new ImageView("priest.png");
+         ImageView worker =  new ImageView("worker.png");
+         ImageView gold = new ImageView("gold.png");
+         ImageView spade =  new ImageView("spade.png");
+         Label label1 = new Label("\n3");
+         label1.setTextFill(Color.WHITE);
+         Label label2 = new Label("\n2");
+         label2.setTextFill(Color.WHITE);
+         label1.setFont(new Font("Stencil", 40));
+         label2.setFont(new Font("Stencil", 40));
+         label1.setOpacity(0.6);
+         label2.setOpacity(0.6);
+         power_middle.setFitHeight(150);
+         power_middle.setFitWidth(150);
+         priest.setFitWidth(150);
+         priest.setFitHeight(150);
+         worker.setFitWidth(150);
+         worker.setFitHeight(150);
+         gold.setFitWidth(150);
+         gold.setFitHeight(150);
+         spade.setFitWidth(150);
+         spade.setFitHeight(150);
+         power_image.setFitWidth(150);
+         power_image.setFitHeight(150);
+         bridge.setFitHeight(150);
+         bridge.setFitWidth(150);
+         HBox option;
+         if(i == 0){
+              label2.setText("\n1");
+              option = new HBox(power_image, label1, power_middle, bridge,label2 );
+         }else if (i == 1) {
+               label2.setText("\n1");
+               option = new HBox(power_image, label1, power_middle, priest,label2 );
+         }else if (i == 2) {
+            label1.setText("\n4");
+            option = new HBox(power_image, label1 , power_middle, worker, label2 );
+         }else if (i == 3) {
+            label1.setText("\n4");
+            label2.setText("\n7");
+            option = new HBox(power_image, label1, power_middle,gold , label2);
+         }else if (i == 4) {
+             label1.setText("\n4");
+             label2.setText("\n1");
+             option = new HBox(power_image, label1, power_middle,spade, label2);
+         }else {
+            label1.setText("\n6");
+            option = new HBox(power_image, label1, power_middle, spade,label2 );
+         }
          GridPane tempPane = new GridPane();
-         ImageView power_left = new ImageView("chris_track.png");
-         ImageView power_right = new ImageView("juda_track.png");
-         ImageView power_middle = new ImageView("purple_arrow.png");
-         power_middle.setFitWidth(tempPane.getWidth() / 3);
-         power_middle.setFitHeight(tempPane.getHeight() / 3);
-         power_left.setFitWidth(tempPane.getWidth() / 3);
-         power_left.setFitHeight(tempPane.getHeight() / 3);
-         power_right.setFitWidth(tempPane.getWidth() / 3);
-         power_right.setFitHeight(tempPane.getHeight() / 3);
-         tempPane.add(power_left, 0, 0);
-         tempPane.add(power_middle, 1, 0);
-         tempPane.add(power_right, 2, 0);
+         option.setMaxWidth(tempPane.getWidth() / 3);
+         option.setMaxHeight(tempPane.getHeight()/3);
+         tempPane.add(option, 0,0);
          tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -763,7 +811,7 @@ public class GameController implements Initializable, Serializable {
                }
             }
          });
-         gridPane.add(tempPane, i % 3, i / 3);
+         gridPane.add(tempPane, i % 2, i / 2);
       }
 
       border.setCenter(gridPane);
