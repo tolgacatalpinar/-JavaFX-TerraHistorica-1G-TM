@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-public class CardView extends HBox {
+public class CardView extends VBox {
 
    private final int DEFAULT_MIN_HEIGHT = 130;
    private final int DEFAULT_MIN_WIDTH = 220;
@@ -40,8 +40,11 @@ public class CardView extends HBox {
       //setBackground( new Background( new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
    }
 
-   public void add(Node pane)
+   public void add(Node pane,int index)
    {
+      getChildren().add(index,pane);
+   }
+   public void add(Node pane){
       getChildren().add(pane);
    }
    public void addPlayerSlots( int slotNumber)

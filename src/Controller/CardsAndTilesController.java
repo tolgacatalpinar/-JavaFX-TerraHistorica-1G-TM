@@ -278,7 +278,7 @@ public class CardsAndTilesController {
         dialog.show();
         for (int i = 0; i < scoringTiles.size(); i++) {
             GridPane tempPane = new GridPane();
-            tempPane.getChildren().add(new ScoringTileView(scoringTiles.get(i)));
+            tempPane.getChildren().add(new ScoringTileView(scoringTiles.get(i),i));
             gridPane.add(tempPane, i % 2, i / 2);
         }
         dialog.show();
