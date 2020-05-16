@@ -35,15 +35,24 @@ public class Player implements Serializable {
    private int shipLevel;
    private int religionTrackInventory;
    private int goldIncome;
-   private int perBuildingIncome;
    private int cultBonusIncome;
    private int numOfFavorTile;
 
    private int terraformWorkerCost;
    private boolean roundPassed;
-   private boolean upgradeToTradingPostBonus; //When upgrading a Dwelling to a Trading house, immediately get 3 additional Victory points.
-   private boolean isPassingTradingPostBonus; //From now on, when passing (see Action #8, page 14), get 2/3/3/4 Victory points for 1/2/3/4 of your Trading houses on the Game board.
-   private boolean buildingDwellingBonus; //When building a Dwelling, immediately get 2 additional Victory points.
+
+   //Favor Tile bonus variables
+   private boolean isTradingPostFavorTile; //When upgrading a Dwelling to a Trading house, immediately get 3 additional Victory points.
+   private boolean isDwellingFavorTile; //From now on, when passing (see Action #8, page 14), get 2/3/3/4 Victory points for 1/2/3/4 of your Trading houses on the Game board.
+   private boolean isPassingFavorTile; //When building a Dwelling, immediately get 2 additional Victory points.
+
+   //Scoring Tile Bonus Variables
+   private boolean isDwellingScoringTile;
+   private boolean isTradingPostScoringTile;
+   private boolean isSanctuaryStrongholdScoringTile; //Fena isim oldu ha
+   private boolean isSpadeScoringTile;
+   private boolean isTownScoringTile;
+
    private int townPowerValue;
 
    public Player(Faction faction, String nickName, int playerId) {
@@ -76,10 +85,14 @@ public class Player implements Serializable {
       setStrongholdNum(0);
       setNumOfFavorTile(0);
       setKey(0);
-      setUpgradeToTradingPostBonus(false);
-      setIsPassingTradingPostBonus(false);
-      setBuildingDwellingBonus(false);
       setRoundPassed(false);
+      setDwellingFavorTile(false);
+      setPassingFavorTile(false);
+      setTradingPostFavorTile(false);
+      setDwellingScoringTile(false);
+      setTradingPostScoringTile(false);
+      setSanctuaryStrongholdScoringTile(false);
+      setSpadeScoringTile(false);
    }
 
    public Faction getFaction() {
@@ -168,7 +181,21 @@ public class Player implements Serializable {
          System.out.println("Wrong color name");
          return false;
       }
-      spadeNeeded -= freeSpade;
+      if(freeSpade >= spadeNeeded) {
+         freeSpade-=spadeNeeded;
+         if(isSpadeScoringTile){
+            addVictoryPoints(2*spadeNeeded);
+         }
+         return true;
+      }
+      else if((spadeNeeded-freeSpade)*terraformWorkerCost < workerNum && !faction.payPriestWhenTransform) {
+         freeSpade = 0;
+         if(isSpadeScoringTile){
+            addVictoryPoints(2*freeSpade);
+         }
+         workerNum -= spadeNeeded*terraformWorkerCost;
+         return true;
+      }
       if(faction.payPriestWhenTransform) {
          if(priestNum - spadeNeeded >= 0) {
             spendPriest(spadeNeeded);
@@ -177,12 +204,15 @@ public class Player implements Serializable {
          }
          return false;
       }
-      if (workerNum - spadeNeeded*terraformWorkerCost >= 0) {
-         workerNum -= spadeNeeded*terraformWorkerCost;
+      else if((spadeNeeded-freeSpade) < priestNum && faction.payPriestWhenTransform) {
+         freeSpade = 0;
+         if(isSpadeScoringTile){
+            addVictoryPoints(2*freeSpade);
+         }
+         priestNum -= spadeNeeded;
          return true;
       }
       System.out.println("Not enough resources");
-      spadeNeeded += freeSpade;
       return false;
    }
 
@@ -362,13 +392,6 @@ public class Player implements Serializable {
       return playerId;
    }
 
-   public int getPerBuildingIncome() {
-      return perBuildingIncome;
-   }
-
-   public void setPerBuildingIncome(int perBuildingIncome) {
-      this.perBuildingIncome = perBuildingIncome;
-   }
 
    public int getCultBonusIncome() {
       return cultBonusIncome;
@@ -394,30 +417,6 @@ public class Player implements Serializable {
       return faction.INITIAL_HINDUISM;
    }
 
-   public boolean isUpgradeToTradingPostBonus() {
-      return upgradeToTradingPostBonus;
-   }
-
-   public void setUpgradeToTradingPostBonus(boolean upgradeToTradingPostBonus) {
-      this.upgradeToTradingPostBonus = upgradeToTradingPostBonus;
-   }
-
-   public boolean isPassingTradingPostBonus() {
-      return isPassingTradingPostBonus;
-   }
-
-   public void setPassingTradingPostBonus(boolean passingTradingPostBonus) {
-      isPassingTradingPostBonus = passingTradingPostBonus;
-   }
-
-   public boolean isBuildingDwellingBonus() {
-      return buildingDwellingBonus;
-   }
-
-   public void setBuildingDwellingBonus(boolean buildingDwellingBonus) {
-      this.buildingDwellingBonus = buildingDwellingBonus;
-   }
-
    public int getTownPowerValue() {
       return townPowerValue;
    }
@@ -434,9 +433,6 @@ public class Player implements Serializable {
       roundPassed = b;
    }
 
-   public void setIsPassingTradingPostBonus(boolean b) {
-      isPassingTradingPostBonus = b;
-   }
 
    public void setStartingDwellingNum(int startingDwellingNum) {
       this.startingDwellingNum = startingDwellingNum;
@@ -481,7 +477,7 @@ public class Player implements Serializable {
    public int getPriestOnBank() {
       return priestOnBank;
    }
-   
+
    public boolean isRoundPassed() {
       return roundPassed;
    }
@@ -492,6 +488,70 @@ public class Player implements Serializable {
 
    public void setFreeSpade(int freeSpade) {
       this.freeSpade = freeSpade;
+   }
+
+   public boolean isTradingPostFavorTile() {
+      return isTradingPostFavorTile;
+   }
+
+   public void setTradingPostFavorTile(boolean tradingPostFavorTile) {
+      isTradingPostFavorTile = tradingPostFavorTile;
+   }
+
+   public boolean isDwellingFavorTile() {
+      return isDwellingFavorTile;
+   }
+
+   public void setDwellingFavorTile(boolean dwellingFavorTile) {
+      isDwellingFavorTile = dwellingFavorTile;
+   }
+
+   public boolean isPassingFavorTile() {
+      return isPassingFavorTile;
+   }
+
+   public void setPassingFavorTile(boolean passingFavorTile) {
+      isPassingFavorTile = passingFavorTile;
+   }
+
+   public boolean isDwellingScoringTile() {
+      return isDwellingScoringTile;
+   }
+
+   public void setDwellingScoringTile(boolean dwellingScoringTile) {
+      isDwellingScoringTile = dwellingScoringTile;
+   }
+
+   public boolean isTradingPostScoringTile() {
+      return isTradingPostScoringTile;
+   }
+
+   public void setTradingPostScoringTile(boolean tradingPostScoringTile) {
+      isTradingPostScoringTile = tradingPostScoringTile;
+   }
+
+   public boolean isSanctuaryStrongholdScoringTile() {
+      return isSanctuaryStrongholdScoringTile;
+   }
+
+   public void setSanctuaryStrongholdScoringTile(boolean sanctuaryStrongholdScoringTile) {
+      isSanctuaryStrongholdScoringTile = sanctuaryStrongholdScoringTile;
+   }
+
+   public boolean isSpadeScoringTile() {
+      return isSpadeScoringTile;
+   }
+
+   public void setSpadeScoringTile(boolean spadeScoringTile) {
+      isSpadeScoringTile = spadeScoringTile;
+   }
+
+   public boolean isTownScoringTile() {
+      return isTownScoringTile;
+   }
+
+   public void setTownScoringTile(boolean townScoringTile) {
+      isTownScoringTile = townScoringTile;
    }
 
 }
