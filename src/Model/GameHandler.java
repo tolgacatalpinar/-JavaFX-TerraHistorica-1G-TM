@@ -284,9 +284,7 @@ public class GameHandler implements Serializable{
             player.setPriestNum(player.getPriestIncome() + bonusCard.getPriestBonus());
             player.getSpecialActionToken().isCultTack = bonusCard.isSpecialCult();
             player.getSpecialActionToken().isSpade = bonusCard.isSpacialSpade();
-            player.setHavingDwellingBonus(bonusCard.isDwelling());
-            player.setHavingSanctuary(bonusCard.isSanctuary());
-            player.setHavingTradeHouse(bonusCard.isTradeHouse());
+
         }
     }
 

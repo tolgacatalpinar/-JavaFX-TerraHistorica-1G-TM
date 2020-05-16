@@ -21,12 +21,13 @@ public class ScoringTile implements Serializable{
     private boolean isDwellingBonus;
     private boolean isTradingHouseBonus;
     private boolean isStrongHoldBonus;
+    private boolean isRequiredSpade;
+    private boolean isRequiredTown;
     private boolean isRequiredIslam;
     private boolean isRequiredHinduism;
     private boolean isRequiredChrist;
     private boolean isRequiredJudaism;
-    private boolean isRequiredSpade;
-    private boolean isRequiredTown;
+
 
     /**
      *

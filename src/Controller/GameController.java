@@ -4,6 +4,7 @@ import Model.*;
 //import Model.River;
 //import Model.TerrainSubclasses.*;
 import Model.CardsAndTiles.CardsAndTiles;
+import Model.CardsAndTiles.ScoringTile;
 import View.*;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -214,10 +215,16 @@ public class GameController implements Initializable, Serializable {
       int round2 = roundController.getCurrentRound();
       if(round1 != round2){
          for (int i = 0; i< playerList.length; i++){
-            cardsAndTiles.returnScoringTileBonus(playerList[i], round1);
+            ScoringTile currentScoringTile = cardsAndTiles.getSelectedScoringTiles().get(round2 - 1);
+            playerList[i].setDwellingScoringTile (currentScoringTile.isDwellingBonus());
+            playerList[i].setTradingPostScoringTile (currentScoringTile.isTradingHouseBonus());
+            playerList[i].setSanctuaryStrongholdScoringTile (currentScoringTile.isStrongHoldBonus());
+            playerList[i].setSpadeScoringTile (currentScoringTile.isRequiredSpade());
+            playerList[i].setTownScoringTile (currentScoringTile.isRequiredTown());
          }
 
       }
+
 
    }
 
