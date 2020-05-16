@@ -308,9 +308,7 @@ public class GameHandler implements Serializable{
             player.setWorkerNum(player.getWorkerNum() + favorTile.getWorkerBonus());
             player.setGoldNum(player.getGoldNum() + favorTile.getGoldBonus());
             player.setVictoryPointNum(player.getVictoryPointNum() + favorTile.getVictoryPoint());
-            player.setUpgradeToTradingPostBonus(favorTile.isTradingHouse());
-            player.setPassingTradingPostBonus(favorTile.isPassingBonusForTradingHouse());
-            player.setBuildingDwellingBonus(favorTile.isDwellingBonus());
+
             if(favorTile.isSpecialCult())
             player.getSpecialActionToken().isCultTack = favorTile.isSpecialCult();
 
