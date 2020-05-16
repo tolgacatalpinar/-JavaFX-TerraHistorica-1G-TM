@@ -551,7 +551,28 @@ public class Player implements Serializable {
    }
 
    public void setTownScoringTile(boolean townScoringTile) {
+
       isTownScoringTile = townScoringTile;
    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
 
 }
