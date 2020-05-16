@@ -144,6 +144,7 @@ public class PlayerHandler implements Serializable{
                 if(player.spendPowerFromBowl(3)) {
                     player.setBridgeNum(player.getBridgeNum()+1);
                     player.addVictoryPoints(player.getFaction().victoryPointForEachConnectingBridges);
+                    return true;
                 }
             }
         }

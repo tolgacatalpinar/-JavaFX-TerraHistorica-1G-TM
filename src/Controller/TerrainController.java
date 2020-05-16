@@ -176,7 +176,7 @@ public class TerrainController implements Serializable {
                         terrains[finalI][finalJ].setDisable(true);
                         for (int k = 0; k < ROW_NUMBER; k++) {
                            for (int l = 0; l < COLUMN_NUMBER; l++) {
-                              if (map.canBuildBridge(map.spaces[finalI][finalJ], map.spaces[k][l])) {
+                              if (map.canBuildBridge(map.spaces[finalI][finalJ], map.spaces[k][l]) && !map.spaces[k][l].getBridgeConnection()) {
                                  terrains[k][l].setDisable(false);
                                  double x2 = terrains[k][l].getLayoutX();
                                  double y2 = terrains[k][l].getLayoutY();
