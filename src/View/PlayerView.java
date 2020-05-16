@@ -8,9 +8,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
 
@@ -30,6 +28,7 @@ public class PlayerView extends BorderPane {
    final int IMAGE_SIZE = 30;
 
    public PlayerView(Player player) {
+      this.setBackground(new Background(new BackgroundFill(Color.DARKBLUE, new CornerRadii(0), Insets.EMPTY)));
       playerName = player.getNickName();
       this.player = player;
       Faction faction = player.getFaction();
@@ -103,11 +102,12 @@ public class PlayerView extends BorderPane {
       HBox worker = getSingleResourceView(new Image("worker.png"), player.getWorkerNum(), player.getWorkerIncome());
       HBox power = getSingleResourceView(new Image("power.png"), player.getBowlOnePower(), player.getBowlTwoPower(), player.getBowlThreePower(), player.getPowerIncome());
       HBox victory = getSingleResourceView(new Image("victory_point.png"), player.getVictoryPointNum());
+      HBox spade = getSingleResourceView(new Image("spade.png"), player.getFreeSpade(), player.getTerraformWorkerCost());
 //      HBox cult = getSingleResourceView(new Image("gold.png"), player.getC(), player.getGoldIncome());
 //      HBox power = getSingleResourceView(new Image("gold.png"), player.getPower(), player.getGoldIncome());
 
 
-      resources.getChildren().addAll(gold, priest, worker, power, victory);
+      resources.getChildren().addAll(gold, priest, worker, power, victory, spade);
       resources.setPadding( new Insets(10, 0, 0, 10));
       setRight(resources);
    }
