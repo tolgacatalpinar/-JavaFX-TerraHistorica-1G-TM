@@ -797,12 +797,25 @@ public class GameController implements Initializable, Serializable {
             setSelection(chosen);
             dialog.close();
             if (getSelection() == 0) {
-               if (playerHandler.usePowerAction(0, currentPlayer)) {
-                  disableAllTerrains();
-                  TerrainController.buildBridge(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map, mapPane, actions);
-                  System.out.println("Köprü kuruldu");
+               boolean checkBridgability = false;
+               for(int i = 0; i < ROW_NUMBER; i++) {
+                  for (int j = 0; j < COLUMN_NUMBER; j++) {
+                     if (map.spaces[i][j].getType().equals(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE) && map.spaces[i][j].getBridgability() && !map.spaces[i][j].getBridgeConnection() && map.spaces[i][j].isOccupied()) {
+                        System.out.println("lala");
+                        checkBridgability = true;
+                     }
+                  }
                }
-               //ELSE PROMPT NO ENOUGH RESOURCE
+               if(checkBridgability) {
+                  if (playerHandler.usePowerAction(0, currentPlayer)) {
+                     System.out.println("Girdi");
+                     disableAllTerrains();
+                     TerrainController.buildBridge(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map, mapPane, actions);
+                     System.out.println("Köprü kuruldu");
+                  }
+                  //ELSE PROMPT NOT ENOUGH RESOURCES
+               }
+               //ELSE PROMPT NO BRIDGABLE TERRAINS
             } else if (getSelection() == 4) {
                if (playerHandler.usePowerAction(4, currentPlayer)) {
                   disableActions();
