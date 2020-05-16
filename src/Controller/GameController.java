@@ -330,7 +330,8 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void townTilesClicked() throws IOException {
-      cardsAndTilesController.showTownTilesTable(cardsAndTiles);
+      //todo
+      cardsAndTilesController.showTownTilesTable(cardsAndTiles,true);
    }
 
    @FXML

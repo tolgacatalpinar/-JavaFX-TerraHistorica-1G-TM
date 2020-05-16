@@ -45,12 +45,10 @@ public class CardsAndTilesController {
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
         gridPane.setVgap(10);
-        Button select = new Button("Select");
-        select.setMaxHeight(100);
-        select.setMinWidth(100);
+
         BorderPane border_bottom = new BorderPane();
         border.setBottom(border_bottom);
-        border_bottom.setCenter(select);
+
         final Stage dialog = new Stage();
         border.setCenter(gridPane);
         dialog.initModality(Modality.APPLICATION_MODAL);
@@ -107,6 +105,10 @@ public class CardsAndTilesController {
             gridPane.add(tempPane, i % 3, i / 3);
         }
         if(check){
+            Button select = new Button("Select");
+            select.setMaxHeight(100);
+            select.setMinWidth(100);
+            border_bottom.setCenter(select);
             select.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -137,12 +139,10 @@ public class CardsAndTilesController {
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
         gridPane.setVgap(10);
-        Button select = new Button("Select");
-        select.setMaxHeight(100);
-        select.setMinWidth(100);
+
         BorderPane border_bottom = new BorderPane();
         border.setBottom(border_bottom);
-        border_bottom.setCenter(select);
+
         final Stage dialog = new Stage();
         border.setCenter(gridPane);
         dialog.initModality(Modality.APPLICATION_MODAL);
@@ -199,6 +199,10 @@ public class CardsAndTilesController {
             gridPane.add(tempPane, i % 4, i / 4);
         }
         if(check){
+            Button select = new Button("Select");
+            select.setMaxHeight(100);
+            select.setMinWidth(100);
+            border_bottom.setCenter(select);
             select.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -292,7 +296,7 @@ public class CardsAndTilesController {
 
     }
 
-    public void showTownTilesTable(CardsAndTiles cardsAndTiles) {
+    public void showTownTilesTable(CardsAndTiles cardsAndTiles,boolean check) {
 
         setSelectionFavorTile(-1);
         ArrayList<TownTile> townTiles = cardsAndTiles.getTownTiles();
@@ -300,12 +304,10 @@ public class CardsAndTilesController {
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
         gridPane.setVgap(10);
-        Button select = new Button("Select");
-        select.setMaxHeight(100);
-        select.setMinWidth(100);
+
         BorderPane border_bottom = new BorderPane();
         border.setBottom(border_bottom);
-        border_bottom.setCenter(select);
+
         final Stage dialog = new Stage();
         border.setCenter(gridPane);
         dialog.initModality(Modality.APPLICATION_MODAL);
@@ -347,7 +349,7 @@ public class CardsAndTilesController {
                     }
                 }
             });
-            if (townTiles.get(i).getPlayerIds().size() >= townTiles.get(i).getNumberOfPlayer()) {
+            if (townTiles.get(i).isOccupied()) {
                 DropShadow borderGlow = new DropShadow();
                 borderGlow.setColor(Color.RED);
                 borderGlow.setOffsetX(0f);
@@ -357,16 +359,25 @@ public class CardsAndTilesController {
                 tempPane.setEffect(borderGlow);
                 tempPane.setDisable(true);
             }
-            select.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    int chosen = getSelectionFavorTile();
-                    int[] returnInfo = {0,0,0};
-                    int religion_index = -1;
-                    System.out.println("Selected " + chosen);
-                    dialog.close();
-                }
-            });
+            if(check){
+                Button select = new Button("Select");
+                select.setMaxHeight(100);
+                select.setMinWidth(100);
+                border_bottom.setCenter(select);
+                select.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        int chosen = getSelectionFavorTile();
+                        System.out.println("Selected " + chosen);
+                        dialog.close();
+                    }
+                });
+            }
+            else{
+
+            }
+
+
             gridPane.add(tempPane, i % 4, i / 4);
             dialog.setScene(dialogScene);
             dialog.setTitle("Town Tiles");
