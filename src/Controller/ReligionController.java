@@ -129,6 +129,7 @@ public class ReligionController implements Serializable{
                     @Override
                     public void handle(MouseEvent event) {
                         System.out.println("Add priest to order for "+ temp_religion.getClass().toString() + " and player "+ currentPlayer);
+                        //if(playerArr[currentPlayer])
                         temp_religion.addOrderOfReligion(currentPlayer,playerArr[currentPlayer].getKey());
                         disableButtons(religon_buttons);
                         update(gridPane);

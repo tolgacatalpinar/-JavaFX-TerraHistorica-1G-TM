@@ -265,7 +265,22 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void upgradeStructureClicked() {
-      ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(),terrains, map, actions);
+
+      ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(), terrains, map, actions);
+//      ThreadB b = new ThreadB();
+//      b.start();
+//      synchronized (b) {
+//         try {
+//            System.out.println("Waiting for b to complete...");
+//            b.wait();
+//         } catch (InterruptedException e) {
+//            e.printStackTrace();
+//         }
+//         ActionController.actiondone = false;
+//         System.out.println(ActionController.canChooseFavorTile);
+//      }
+
+   }
 //      System.out.println(shouldChooseFavorTile);
 //      if(shouldChooseFavorTile){
 //         System.out.println("GİRDİİİĞ");
@@ -286,7 +301,22 @@ public class GameController implements Initializable, Serializable {
 //      }
 //      ActionController.actionDone = false;
 //      ActionController.favorTile = false;
-   }
+
+//   class ThreadB extends Thread {
+//      int total;
+//
+//      @Override
+//      public void run() {
+//         synchronized (this) {
+//
+//            while (!ActionController.actiondone)
+//                 ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(), terrains, map, actions);
+//
+//            notify();
+//
+//         }
+//      }
+//   }
    @FXML
    public void religionsClicked() {
       ReligionController religionController = new ReligionController();
@@ -312,6 +342,92 @@ public class GameController implements Initializable, Serializable {
    }
 
    @FXML   public void exchangeResourcesClicked(){
+
+      BorderPane border = new BorderPane();
+      BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+      border.setBackground(new Background(bg));
+      GridPane gridPane = new GridPane();
+      gridPane.setHgap(10);
+      gridPane.setVgap(10);
+      Button select = new Button("Select");
+      select.setMaxHeight(100);
+      select.setMinWidth(100);
+      BorderPane border_bottom = new BorderPane();
+      border.setBottom(border_bottom);
+      border_bottom.setCenter(select);
+
+      for (int i = 0; i < 6; i++) {
+         GridPane tempPane = new GridPane();
+         ImageView power_left = new ImageView("chris_track.png");
+         ImageView power_right = new ImageView("juda_track.png");
+         ImageView power_middle = new ImageView("purple_arrow.png");
+         power_middle.setFitWidth(tempPane.getWidth() / 3);
+         power_middle.setFitHeight(tempPane.getHeight() / 3);
+         power_left.setFitWidth(tempPane.getWidth() / 3);
+         power_left.setFitHeight(tempPane.getHeight() / 3);
+         power_right.setFitWidth(tempPane.getWidth() / 3);
+         power_right.setFitHeight(tempPane.getHeight() / 3);
+         tempPane.add(power_left, 0, 0);
+         tempPane.add(power_middle, 1, 0);
+         tempPane.add(power_right, 2, 0);
+         tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+               DropShadow borderGlow = new DropShadow();
+               borderGlow.setColor(Color.ORANGE);
+               borderGlow.setOffsetX(0f);
+               borderGlow.setOffsetY(0f);
+               borderGlow.setWidth(50);
+               borderGlow.setHeight(50);
+               tempPane.setEffect(borderGlow);
+            }
+         });
+         int finalI = i;
+         tempPane.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+               if (selection != finalI)
+                  tempPane.setEffect(null);
+
+            }
+         });
+
+         tempPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+               setSelection(finalI);
+               for (int i = 0; i < 6; i++) {
+                  if (i != getSelection())
+                     gridPane.getChildren().get(i).setEffect(null);
+               }
+            }
+         });
+         gridPane.add(tempPane, i % 3, i / 3);
+      }
+
+      border.setCenter(gridPane);
+      final Stage dialog = new Stage();
+      dialog.initModality(Modality.APPLICATION_MODAL);
+      Scene dialogScene = new Scene(border, 1100, 600);
+      dialog.setScene(dialogScene);
+      dialog.setTitle("Power Action");
+      dialog.setResizable(false);
+
+      select.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+         @Override
+         public void handle(MouseEvent event) {
+            playerList[roundController.currentPlayerId].setBowlThreePower(12);
+            int chosen = getSelection();
+            System.out.println("Selection: " + chosen);
+            setSelection(chosen);
+            playerHandler.exchangeResources(playerList[roundController.getCurrentPlayerId()], chosen);
+            dialog.close();
+            }
+         });
+      //update(gridPane,status);
+      //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
+      dialog.showAndWait();
 
    }
 
