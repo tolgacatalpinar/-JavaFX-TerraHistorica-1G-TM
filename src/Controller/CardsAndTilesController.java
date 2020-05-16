@@ -148,7 +148,6 @@ public class CardsAndTilesController {
         dialog.initModality(Modality.APPLICATION_MODAL);
         Scene dialogScene = new Scene(border, 1100, 600);
         dialog.setResizable(false);
-        border.setBackground(new Background( new BackgroundImage( new Image("bonus_cards_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         dialog.setScene(dialogScene);
         dialog.setTitle("Favor Tiles");
         border.setBackground(new Background( new BackgroundImage( new Image("favor_tiles_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
@@ -267,6 +266,7 @@ public class CardsAndTilesController {
     }
     public void showScoringTilesTable(CardsAndTiles cardsAndTiles)
     {
+
         ArrayList<ScoringTile> scoringTiles = cardsAndTiles.getSelectedScoringTiles();
         BorderPane border = new BorderPane();
         GridPane gridPane = new GridPane();
@@ -289,42 +289,91 @@ public class CardsAndTilesController {
         }
         dialog.show();
 
+
     }
 
-    public void showTownTilesTable(CardsAndTiles cardsAndTiles)
-    {
-        VBox wholeTown = new VBox();
-        HBox first = new HBox();
-        HBox second = new HBox();
-        HBox third = new HBox();
+    public void showTownTilesTable(CardsAndTiles cardsAndTiles) {
 
-
+        setSelectionFavorTile(-1);
         ArrayList<TownTile> townTiles = cardsAndTiles.getTownTiles();
-
-        for(int i = 0; i < (int) Math.ceil((double)townTiles.size() / 3); i++) {
-            first.getChildren().add(new TownTileView(townTiles.get(i)));
-        }
-        for(int i = (int) Math.ceil((double)townTiles.size() / 3); i < (int) Math.ceil((double)townTiles.size() * 2 / 3); i++) {
-            second.getChildren().add(new TownTileView(townTiles.get(i)));
-        }
-        for(int i = (int) Math.ceil((double)townTiles.size() * 2 / 3); i < townTiles.size() ; i++) {
-            third.getChildren().add(new TownTileView(townTiles.get(i)));
-        }
-        wholeTown.getChildren().addAll(first, second, third);
-        wholeTown.setPadding( new Insets(100, 0, 0, 50));
-
-
-        wholeTown.setMinHeight(800);
-        wholeTown.setMinWidth(1200);
+        BorderPane border = new BorderPane();
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        Button select = new Button("Select");
+        select.setMaxHeight(100);
+        select.setMinWidth(100);
+        BorderPane border_bottom = new BorderPane();
+        border.setBottom(border_bottom);
+        border_bottom.setCenter(select);
         final Stage dialog = new Stage();
+        border.setCenter(gridPane);
         dialog.initModality(Modality.APPLICATION_MODAL);
-        Scene dialogScene = new Scene(wholeTown, 1100, 600);
-        dialog.setScene(dialogScene);
-        dialog.setTitle("Town Tiles");
+        Scene dialogScene = new Scene(border, 1100, 600);
         dialog.setResizable(false);
-        wholeTown.setBackground(new Background( new BackgroundImage( new Image("town_tiles_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT)));
-        dialog.show();
-    }
+        dialog.setScene(dialogScene);
+        dialog.setTitle("Favor Tiles");
 
+        for (int i = 0; i < townTiles.size(); i++) {
+            GridPane tempPane = new GridPane();
+            tempPane.getChildren().add(new TownTileView(townTiles.get(i)));
+            tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    DropShadow borderGlow = new DropShadow();
+                    borderGlow.setColor(Color.BLUE);
+                    borderGlow.setOffsetX(0f);
+                    borderGlow.setOffsetY(0f);
+                    borderGlow.setWidth(50);
+                    borderGlow.setHeight(50);
+                    tempPane.setEffect(borderGlow);
+                }
+            });
+            int finalI = i;
+            tempPane.setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if (selectionFavorTile != finalI)
+                        tempPane.setEffect(null);
+                }
+            });
+            tempPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    setSelectionFavorTile(finalI);
+                    for (int i = 0; i < townTiles.size(); i++) {
+                        if (i != getSelectionFavorTile())
+                            gridPane.getChildren().get(i).setEffect(null);
+                    }
+                }
+            });
+            if (townTiles.get(i).getPlayerIds().size() >= townTiles.get(i).getNumberOfPlayer()) {
+                DropShadow borderGlow = new DropShadow();
+                borderGlow.setColor(Color.RED);
+                borderGlow.setOffsetX(0f);
+                borderGlow.setOffsetY(0f);
+                borderGlow.setWidth(50);
+                borderGlow.setHeight(50);
+                tempPane.setEffect(borderGlow);
+                tempPane.setDisable(true);
+            }
+            select.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    int chosen = getSelectionFavorTile();
+                    int[] returnInfo = {0,0,0};
+                    int religion_index = -1;
+                    System.out.println("Selected " + chosen);
+                    dialog.close();
+                }
+            });
+            gridPane.add(tempPane, i % 4, i / 4);
+            dialog.setScene(dialogScene);
+            dialog.setTitle("Town Tiles");
+            dialog.setResizable(false);
+            border.setBackground(new Background(new BackgroundImage(new Image("town_tiles_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                    BackgroundSize.DEFAULT)));
+            dialog.show();
+        }
+    }
 }
