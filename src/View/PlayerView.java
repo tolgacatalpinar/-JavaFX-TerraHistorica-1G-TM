@@ -99,10 +99,10 @@ public class PlayerView extends BorderPane {
       playerName.setTextFill(Color.WHITE);
       playerName.setPadding(new Insets(0, 0, 3, 0));
       HBox gold = getSingleResourceView(new Image("gold.png"), player.getGoldNum(), player.getGoldIncome());
-      HBox priest = getSingleResourceView(new Image("gold.png"), player.getPriestNum(), player.getPriestNum());
-      HBox worker = getSingleResourceView(new Image("gold.png"), player.getWorkerNum(), player.getWorkerIncome());
-      HBox power = getSingleResourceView(new Image("gold.png"), player.getBowlOnePower(), player.getBowlTwoPower(), player.getBowlThreePower(), player.getPowerIncome());
-      HBox victory = getSingleResourceView(new Image("gold.png"), player.getVictoryPointNum());
+      HBox priest = getSingleResourceView(new Image("priest.png"), player.getPriestNum(), player.getPriestNum());
+      HBox worker = getSingleResourceView(new Image("worker.png"), player.getWorkerNum(), player.getWorkerIncome());
+      HBox power = getSingleResourceView(new Image("power.png"), player.getBowlOnePower(), player.getBowlTwoPower(), player.getBowlThreePower(), player.getPowerIncome());
+      HBox victory = getSingleResourceView(new Image("victory_point.png"), player.getVictoryPointNum());
 //      HBox cult = getSingleResourceView(new Image("gold.png"), player.getC(), player.getGoldIncome());
 //      HBox power = getSingleResourceView(new Image("gold.png"), player.getPower(), player.getGoldIncome());
 

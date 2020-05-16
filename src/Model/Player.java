@@ -555,26 +555,4 @@ public class Player implements Serializable {
       isTownScoringTile = townScoringTile;
    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
 }
