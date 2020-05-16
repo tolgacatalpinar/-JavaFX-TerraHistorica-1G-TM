@@ -165,12 +165,20 @@ public class CardsAndTiles implements Serializable {
         return temp;
     }
 
-    public void returnScoringTileBonus(Player player, int round){
+    private ArrayList<Integer> playerId;
+    private int requiredIslam; //water
+    private int requiredBudism; //fire
+    private int requiredChrist; //Air
+    private int requiredJudaism; //earth
+    private int priestBonus;
+    private int powerBonus;
+    private int workerBonus;
+    private int victoryBonus;
+    private int spadeBonus;
+    private int goldBonus;
 
-    }
-    public void returnBonusCards(int playerId,int choiceIndex){
 
-    }
+
     public void playerChoseBonusCard(BonusCard bonusCard, Player player) {
         if (bonusCard.isPlayerOcupied()) {
             System.err.println(" Please choose different Bonus Card \n" +
@@ -196,9 +204,15 @@ public class CardsAndTiles implements Serializable {
             player.setPriestNum(player.getPriestNum() + bonusCard.getPriestBonus());
             player.getSpecialActionToken().isCultTack = bonusCard.isSpecialCult();
             player.getSpecialActionToken().isSpade = bonusCard.isSpacialSpade();
-            player.setHavingDwellingBonus(bonusCard.isDwelling());
-            player.setHavingSanctuary(bonusCard.isSanctuary());
-            player.setHavingTradeHouse(bonusCard.isTradeHouse());
+            if(bonusCard.isDwelling()){
+                player.setVictoryPointNum(player.getVictoryPointNum() + player.getDwellingNum() *1 );
+            }
+            if(bonusCard.isTradeHouse()){
+                player.setVictoryPointNum(player.getVictoryPointNum() + player.getTradingPostNum() *2 );
+            }
+            if(bonusCard.isSanctuary()){
+                player.setVictoryPointNum(player.getVictoryPointNum() + (player.getSanctuaryNum() + player.getTempleNum()) * 4 );
+            }
         }
     }
 
@@ -221,9 +235,9 @@ public class CardsAndTiles implements Serializable {
             player.setWorkerNum(player.getWorkerNum() + favorTile.getWorkerBonus());
             player.setGoldNum(player.getGoldNum() + favorTile.getGoldBonus());
             player.setVictoryPointNum(player.getVictoryPointNum() + favorTile.getVictoryPoint());
-            player.setUpgradeToTradingPostBonus(favorTile.isTradingHouse());
-            player.setPassingTradingPostBonus(favorTile.isPassingBonusForTradingHouse());
-            player.setBuildingDwellingBonus(favorTile.isDwellingBonus());
+            player.setTradingPostFavorTile(favorTile.isTradingHouse());
+            player.setPassingFavorTile(favorTile.isPassingBonusForTradingHouse());
+            player.setDwellingFavorTile(favorTile.isDwellingBonus());
             if(favorTile.isSpecialCult())
                 player.getSpecialActionToken().isCultTack = favorTile.isSpecialCult();
 

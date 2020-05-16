@@ -284,9 +284,7 @@ public class GameHandler implements Serializable{
             player.setPriestNum(player.getPriestIncome() + bonusCard.getPriestBonus());
             player.getSpecialActionToken().isCultTack = bonusCard.isSpecialCult();
             player.getSpecialActionToken().isSpade = bonusCard.isSpacialSpade();
-            player.setHavingDwellingBonus(bonusCard.isDwelling());
-            player.setHavingSanctuary(bonusCard.isSanctuary());
-            player.setHavingTradeHouse(bonusCard.isTradeHouse());
+
         }
     }
 
@@ -310,9 +308,7 @@ public class GameHandler implements Serializable{
             player.setWorkerNum(player.getWorkerNum() + favorTile.getWorkerBonus());
             player.setGoldNum(player.getGoldNum() + favorTile.getGoldBonus());
             player.setVictoryPointNum(player.getVictoryPointNum() + favorTile.getVictoryPoint());
-            player.setUpgradeToTradingPostBonus(favorTile.isTradingHouse());
-            player.setPassingTradingPostBonus(favorTile.isPassingBonusForTradingHouse());
-            player.setBuildingDwellingBonus(favorTile.isDwellingBonus());
+
             if(favorTile.isSpecialCult())
             player.getSpecialActionToken().isCultTack = favorTile.isSpecialCult();
 

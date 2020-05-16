@@ -13,9 +13,6 @@ public class PlayerHandler implements Serializable{
       if (player.getDwellingNum() < player.getFaction().MAX_DWELLING) {
          player.setWorkerIncome(player.getFaction().DWELLING_WORKER_INCOME);
       }
-      if (player.isBuildingDwellingBonus()) {
-         player.setVictoryPointNum(player.getVictoryPointNum() + 2);
-      }
    }
 
     public  int buildStructure(Player player, String structure, boolean isThereAdjacentOpponent) {
@@ -29,7 +26,10 @@ public class PlayerHandler implements Serializable{
                     if (player.getDwellingNum() < player.getFaction().MAX_DWELLING) {
                         player.setWorkerIncome(player.getFaction().DWELLING_WORKER_INCOME);
                     }
-                    if (player.isBuildingDwellingBonus()) {
+                    if (player.isDwellingFavorTile()) {
+                        player.setVictoryPointNum(player.getVictoryPointNum() + 2);
+                    }
+                    if (player.isDwellingScoringTile()) {
                         player.setVictoryPointNum(player.getVictoryPointNum() + 2);
                     }
                     return 1; //As successful
@@ -55,7 +55,10 @@ public class PlayerHandler implements Serializable{
                     player.setDwellingNum(player.getDwellingNum() - 1);
                     player.setTradingPostNum(player.getTradingPostNum() + 1);
 
-                    if (player.isUpgradeToTradingPostBonus()) {
+                    if (player.isTradingPostFavorTile()) {
+                        player.setVictoryPointNum(player.getVictoryPointNum() + 3);
+                    }
+                    if (player.isTradingPostScoringTile()) {
                         player.setVictoryPointNum(player.getVictoryPointNum() + 3);
                     }
                     player.setGoldIncome(player.getFaction().tradingPostGoldIncome[player.getTradingPostNum() - 1] + 1);
@@ -76,6 +79,9 @@ public class PlayerHandler implements Serializable{
                     player.setTradingPostNum(player.getTradingPostNum() - 1);
                     player.setStrongholdNum(player.getStrongholdNum() + 1);
                     player.getFaction().afterStronghold(); //Not implemented yet
+                    if( player.isSanctuaryStrongholdScoringTile()) {
+                        player.setVictoryPointNum(player.getVictoryPointNum() + 5);
+                    }
                     return 1;
                 }
                 else {
@@ -92,6 +98,9 @@ public class PlayerHandler implements Serializable{
                     player.setTempleNum(player.getTempleNum() - 1);
                     player.setSanctuaryNum(player.getSanctuaryNum() + 1);
                     player.setPriestIncome(player.getPriestIncome() + player.getFaction().SANCTUARY_PRIEST_INCOME);
+                    if(player.isSanctuaryStrongholdScoringTile()) {
+                        player.setVictoryPointNum(player.getVictoryPointNum() + 5);
+                    }
                     return 1;
                 }
                 else {
@@ -318,6 +327,10 @@ public class PlayerHandler implements Serializable{
     }
 
     public void passRound(Player player) {
+        if(player.isPassingFavorTile() && player.getTradingPostNum() > 0) {
+            int arr[] = {2,3,3,4};
+            player.addVictoryPoints(arr[player.getTradingPostNum()-1]);
+        }
         player.setRoundPassed(true);
     }
 
@@ -328,9 +341,10 @@ public class PlayerHandler implements Serializable{
             return false;
         }
 
-    public boolean townFound(Player player) {
-        //TODO
-        return false;
+    public void townFound(Player player) {
+        if(player.isTownScoringTile()) {
+            player.addVictoryPoints(5);
+        }
     }
 
     public void progressInReligion(Player player, Religion religion) {
