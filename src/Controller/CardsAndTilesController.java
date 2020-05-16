@@ -147,7 +147,7 @@ public class CardsAndTilesController {
         dialog.setResizable(false);
         border.setBackground(new Background( new BackgroundImage( new Image("bonus_cards_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         dialog.setScene(dialogScene);
-        dialog.setTitle("Bonus Cards ");
+        dialog.setTitle("Favor Tiles");
         border.setBackground(new Background( new BackgroundImage( new Image("favor_tiles_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT)));
 

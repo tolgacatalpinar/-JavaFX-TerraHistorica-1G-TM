@@ -140,6 +140,7 @@ public class TerrainController implements Serializable {
       }
    }
 
+
    public static void disableTerrains(Button[][] terrains, Map map)
    {
       for (int i = 0; i < 9; i++) {

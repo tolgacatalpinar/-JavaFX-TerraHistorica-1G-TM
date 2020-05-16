@@ -38,8 +38,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
+import java.util.stream.IntStream;
 
 public class ReligionController implements Serializable{
     @FXML
@@ -455,30 +455,38 @@ public class ReligionController implements Serializable{
      *
      *
      */
-    public int[] calculateReligionScores(Religion[] religions,Player[] playerList){
-        int[] scoreForEachPlayer = new int[playerList.length];
-            for (int i = 0; i < religions.length; i++){
-                int [] playerPos = religions[i].getPlayerPositions();
-                int max = 0;
-                int highest;
-                int second;
-                int third;
-                for(int j = 0; j < playerList.length; j++){
-                    if (playerPos[j] > max){
-                        max = playerPos[j];
+    public void calculateReligionScores(Religion[] religions,Player[] playerList) {
 
+        ArrayList<ArrayList<ArrayList<Integer>>> realResult = new ArrayList<>();
+
+        for(int i = 0; i < religions.length; i++) {
+
+            int [] playerPositions = religions[i].getPlayerPositions();
+            int firstThree = 0;
+            ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+
+            for (int j= 10; j >= 0; j--) {
+
+                ArrayList<Integer> players = new ArrayList<Integer>();
+                for ( int k = 0; k < playerPositions.length; k++) {
+                    if ( playerPositions[k] == j) {
+                        players.add(k);
+                        System.out.println("girişşş " + players.get(0));
                     }
-                    System.out.println("Player"+j+" at pos :"+playerPos[j]);
+                }
+                System.out.println("Player added to result in j = " + j);
+                result.add(players);
+                System.out.println(result.get(0));
+                if( result.get(firstThree).size() > 0) {
+                    firstThree++;
+                    System.out.println("First three = " + firstThree);
+                }
 
-               }
-                System.out.println();
-                Arrays.sort(playerPos);
-//                for(int j = 0; j < playerCount; j++){
-//
-               }
+            }
+            realResult.add(result);
+        }
 
 
-        return scoreForEachPlayer;
     }
 
 }

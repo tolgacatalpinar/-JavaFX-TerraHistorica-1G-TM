@@ -98,7 +98,6 @@ public class GameController implements Initializable, Serializable {
    public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-
       actions = new Button[]{specialActions, terraform, upgradeShipping, upgradeStruct, sendPriest, powerActions, upgradeSpade, passRound};
       System.out.println("Initialize is called");
       int index = 0;
@@ -170,16 +169,17 @@ public class GameController implements Initializable, Serializable {
       setButtonClickForInitialDwellings();
 
    }
+
    @FXML
-   public void chooseAction(int choice){
+   public void chooseAction(int choice) {
 
    }
 
    @FXML
-   public void saveGameClicked()throws IOException{
+   public void saveGameClicked() throws IOException {
       System.out.println("Save Game Clicked");
       FileManager fm = new FileManager("12");
-      fm.saveGame(this, roundController );
+      fm.saveGame(this, roundController);
       System.out.println("saved");
    }
 
@@ -188,7 +188,7 @@ public class GameController implements Initializable, Serializable {
       disableButtonClicks();
       enableTerrains();
       enableActions();
-      if(roundController.currentRound == 0) {
+      if (roundController.currentRound == 0) {
          System.out.println("Current player was: " + playerList[roundController.getCurrentPlayerId()].getNickName());
          System.out.println(roundController.getCurrentPlayerId());
          if ((roundController.getCurrentPlayerId() + 1) < playerList.length && playerList[roundController.getCurrentPlayerId() + 1] != null)
@@ -203,18 +203,18 @@ public class GameController implements Initializable, Serializable {
          }
          System.out.println("Current player is now: " + playerList[roundController.getCurrentPlayerId()].getNickName());
          System.out.println("--------------------------------------------------");
-      }else{
+      } else {
          roundController.endTurn(playerList);
       }
    }
 
    @FXML
-   public void passRoundClicked(){
-      cardsAndTilesController.showBonusCardsTable(cardsAndTiles,playerList[roundController.getCurrentPlayerId()]);
+   public void passRoundClicked() {
+      cardsAndTilesController.showBonusCardsTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()]);
       int round1 = roundController.getCurrentRound();
       roundController.passRound(playerList);
       int round2 = roundController.getCurrentRound();
-      cardsAndTiles.returnScoringTile(round1,round2,playerList);
+      cardsAndTiles.returnScoringTile(round1, round2, playerList);
       //Reset advancement on religion for this round
       if(round2 != round1){
          for (Religion religion : religionArr) {
@@ -225,18 +225,18 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void bonusCardsClicked() {
-      cardsAndTilesController.showBonusCardsTable(cardsAndTiles,currentPlayer);
+      cardsAndTilesController.showBonusCardsTable(cardsAndTiles, currentPlayer);
    }
 
    @FXML
    public void upgradeShippingClicked() {
-      ActionController.showUpdateShippingDialogs(playerList,roundController.getCurrentPlayerId(),actions);
+      ActionController.showUpdateShippingDialogs(playerList, roundController.getCurrentPlayerId(), actions);
    }
 
    @FXML
    public void sendPriestClicked() {
       ReligionController religionController = new ReligionController();
-      religionController.showChoices( playerList, religionArr,  roundController.getCurrentPlayerId());
+      religionController.showChoices(playerList, religionArr, roundController.getCurrentPlayerId());
 
    }
 
@@ -250,18 +250,18 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void upgradeSpadeClicked() {
 
-      ActionController.showUpdateSpadeDialogs(playerList,roundController.getCurrentPlayerId(),actions);
+      ActionController.showUpdateSpadeDialogs(playerList, roundController.getCurrentPlayerId(), actions);
    }
 
    @FXML
    public void terraformClicked() {
-      ActionController.terraform(playerList,roundController.getCurrentPlayerId(), terrains, map, actions);
+      ActionController.terraform(playerList, roundController.getCurrentPlayerId(), terrains, map, actions);
    }
 
    @FXML
    public void upgradeStructureClicked() {
 
-      ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(), terrains, map, actions);
+      ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(), terrains, map, actions, cardsAndTiles, religionArr);
 //      ThreadB b = new ThreadB();
 //      b.start();
 //      synchronized (b) {
@@ -281,7 +281,7 @@ public class GameController implements Initializable, Serializable {
 //         System.out.println("GİRDİİİĞ");
 //         CardsAndTilesController.showFavorTilesTable(cardsAndTiles,playerList[roundController.getCurrentPlayerId()],religionArr);
 //      }
-      //System.out.println("SAAAAAAAAAAAA");
+   //System.out.println("SAAAAAAAAAAAA");
 //      try{
 //         while (!ActionController.actionDone) {
 //            Thread.sleep(500);
@@ -297,7 +297,7 @@ public class GameController implements Initializable, Serializable {
 //      ActionController.actionDone = false;
 //      ActionController.favorTile = false;
 
-//   class ThreadB extends Thread {
+   //   class ThreadB extends Thread {
 //      int total;
 //
 //      @Override
@@ -315,7 +315,7 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void religionsClicked() {
       ReligionController religionController = new ReligionController();
-      religionController.showReligion(playerList,0,religionArr,playerList.length, false);
+      religionController.showReligion(playerList, 0, religionArr, playerList.length, false);
    }
 
    @FXML
@@ -327,19 +327,19 @@ public class GameController implements Initializable, Serializable {
    }
 
 
-
    @FXML
    public void townTilesClicked() throws IOException {
       cardsAndTilesController.showTownTilesTable(cardsAndTiles);
    }
 
    @FXML
-   public void scoringTilesClicked()  {
+   public void scoringTilesClicked() {
 
       cardsAndTilesController.showScoringTilesTable(cardsAndTiles);
    }
 
-   @FXML   public void exchangeResourcesClicked(){
+   @FXML
+   public void exchangeResourcesClicked() {
 
       BorderPane border = new BorderPane();
       BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -421,8 +421,8 @@ public class GameController implements Initializable, Serializable {
             setSelection(chosen);
             playerHandler.exchangeResources(playerList[roundController.getCurrentPlayerId()], chosen);
             dialog.close();
-            }
-         });
+         }
+      });
       //update(gridPane,status);
       //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
       dialog.showAndWait();
@@ -432,11 +432,12 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void favorTilesClicked() {
 
-      cardsAndTilesController.showFavorTilesTable(cardsAndTiles,playerList[roundController.getCurrentPlayerId()], religionArr );
+      cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], religionArr);
 
    }
+
    //TODO
-   public void skipTurn(){
+   public void skipTurn() {
 
    }
 
@@ -467,9 +468,11 @@ public class GameController implements Initializable, Serializable {
                   case "greenHexagon":
                      space.setType("Forest");
                      break;
-                  case "yellowHexagon": space.setType("Desert");
+                  case "yellowHexagon":
+                     space.setType("Desert");
                      break;
-                  case "redHexagon": space.setType("Wasteland");
+                  case "redHexagon":
+                     space.setType("Wasteland");
                      break;
                   case "riverHexagon":
                      space.setType("River");
@@ -485,42 +488,34 @@ public class GameController implements Initializable, Serializable {
             spaces[i][j] = space;
          }
       }
-      for(int i = 0; i < ROW_NUMBER; i++) {
+      for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
 
-            if(i == 0){
-               if(j == 2 || j == 6 || j == 10)
+            if (i == 0) {
+               if (j == 2 || j == 6 || j == 10)
                   spaces[i][j].setBridgability(true);
-            }
-            else if(i == 1){
+            } else if (i == 1) {
                spaces[i][j].setBridgability(true);
-            }
-            else if(i == 2){
-               if(j == 2 || j == 4 || j == 6 || j == 8 || j == 10)
+            } else if (i == 2) {
+               if (j == 2 || j == 4 || j == 6 || j == 8 || j == 10)
                   spaces[i][j].setBridgability(true);
-            }
-            else if(i == 3){
-               if(j == 0|| j == 2 || j == 5 || j == 6 || j == 8 || j == 10 || j == 11)
+            } else if (i == 3) {
+               if (j == 0 || j == 2 || j == 5 || j == 6 || j == 8 || j == 10 || j == 11)
                   spaces[i][j].setBridgability(true);
-            }
-            else if(i == 4){
-               if(j == 4 || j == 7 || j == 10)
+            } else if (i == 4) {
+               if (j == 4 || j == 7 || j == 10)
                   spaces[i][j].setBridgability(true);
-            }
-            else if(i == 5){
-               if(j == 0|| j == 1 || j == 4 || j == 5)
+            } else if (i == 5) {
+               if (j == 0 || j == 1 || j == 4 || j == 5)
                   spaces[i][j].setBridgability(true);
-            }
-            else if(i == 6){
-               if(j == 3 || j == 5 || j == 7 || j == 9)
+            } else if (i == 6) {
+               if (j == 3 || j == 5 || j == 7 || j == 9)
                   spaces[i][j].setBridgability(true);
-            }
-            else if(i == 7){
-               if(j == 0 || j == 1 || j == 6 || j == 7 || j == 9)
+            } else if (i == 7) {
+               if (j == 0 || j == 1 || j == 6 || j == 7 || j == 9)
                   spaces[i][j].setBridgability(true);
-            }
-            else if(i == 8){
-               if(j == 5 || j == 8)
+            } else if (i == 8) {
+               if (j == 5 || j == 8)
                   spaces[i][j].setBridgability(true);
             }
 
@@ -530,7 +525,7 @@ public class GameController implements Initializable, Serializable {
       map = new Map(spaces);
    }
 
-   public void loadPlayers(ArrayList<Faction> factionList, ArrayList<String> playerNames,int totalPlayerNumber) {
+   public void loadPlayers(ArrayList<Faction> factionList, ArrayList<String> playerNames, int totalPlayerNumber) {
 
       Player[] playerList = new Player[totalPlayerNumber];
       for (int i = 0; i < totalPlayerNumber; i++) {
@@ -542,17 +537,19 @@ public class GameController implements Initializable, Serializable {
 
 
    }
-   public void loadCardsAndTiles(int totalPlayerNumber){
-      cardsAndTiles = new CardsAndTiles(playerList.length,playerList);
+
+   public void loadCardsAndTiles(int totalPlayerNumber) {
+      cardsAndTiles = new CardsAndTiles(playerList.length, playerList);
       cardsAndTilesController = new CardsAndTilesController();
    }
-   public void loadReligion(int totalPlayerNumber){
+
+   public void loadReligion(int totalPlayerNumber) {
       religionArr = new Religion[4];
-      int [] player_initial_islam = new int[totalPlayerNumber];
-      int [] player_initial_chirst = new int[totalPlayerNumber];
-      int [] player_initial_jew = new int[totalPlayerNumber];
-      int [] player_initial_hindu = new int[totalPlayerNumber];
-      for (int j = 0; j< totalPlayerNumber; j++) {
+      int[] player_initial_islam = new int[totalPlayerNumber];
+      int[] player_initial_chirst = new int[totalPlayerNumber];
+      int[] player_initial_jew = new int[totalPlayerNumber];
+      int[] player_initial_hindu = new int[totalPlayerNumber];
+      for (int j = 0; j < totalPlayerNumber; j++) {
          player_initial_islam[j] = playerList[j].getInitialIslam();
          player_initial_chirst[j] = playerList[j].getInitialChristianity();
          player_initial_jew[j] = playerList[j].getInitialJudaism();
@@ -577,7 +574,8 @@ public class GameController implements Initializable, Serializable {
          }
    }
 
-   /**TODO
+   /**
+    * TODO
     * TAŞINACAK
     */
    public void setButtonClickForInitialDwellings() {
@@ -596,7 +594,7 @@ public class GameController implements Initializable, Serializable {
                      map.spaces[row][col].setStructure("Dwelling");
                      for (int i = 0; i < ROW_NUMBER; i++) {
                         for (int j = 0; j < COLUMN_NUMBER; j++) {
-                           if( terrains[i][j] != null)
+                           if (terrains[i][j] != null)
                               terrains[i][j].setDisable(true);
                         }
                      }
@@ -607,45 +605,50 @@ public class GameController implements Initializable, Serializable {
       }
    }
 
-   /**TODO
+   /**
+    * TODO
     * TAŞINACAK
     */
-   public void disableButtonClicks(){
+   public void disableButtonClicks() {
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
-            if( terrains[i][j] != null)
+            if (terrains[i][j] != null)
                terrains[i][j].setOnMouseClicked(null);
          }
       }
    }
-   /**TODO
+
+   /**
+    * TODO
     * TAŞINACAK
     */
-   public void enableTerrains()
-   {
+   public void enableTerrains() {
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
-            if( terrains[i][j] != null && map.spaces[i][j].getType() != "River")
+            if (terrains[i][j] != null && map.spaces[i][j].getType() != "River")
                terrains[i][j].setDisable(false);
          }
       }
    }
-   /**TODO
+
+   /**
+    * TODO
     * TAŞINACAK
     */
-   public void disableAllTerrains()
-   {
+   public void disableAllTerrains() {
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
-            if( terrains[i][j] != null)
+            if (terrains[i][j] != null)
                terrains[i][j].setDisable(true);
          }
       }
    }
-   /**TODO
+
+   /**
+    * TODO
     * TAŞINACAK
     */
-   public void disableActions(){
+   public void disableActions() {
       terraform.setDisable(true);
       upgradeShipping.setDisable(true);
       upgradeStruct.setDisable(true);
@@ -655,10 +658,12 @@ public class GameController implements Initializable, Serializable {
       upgradeSpade.setDisable(true);
       passRound.setDisable(true);
    }
-   /**TODO
+
+   /**
+    * TODO
     * TAŞINACAK
     */
-   public void enableActions(){
+   public void enableActions() {
       terraform.setDisable(false);
       upgradeShipping.setDisable(false);
       upgradeStruct.setDisable(false);
@@ -669,15 +674,17 @@ public class GameController implements Initializable, Serializable {
       passRound.setDisable(false);
       skipTurn.setDisable(false);
    }
-   /**TODO
+
+   /**
+    * TODO
     * TAŞINACAK
     */
-   public void displayPlayerTurn(ArrayList<PlayerView> playerViewList){
+   public void displayPlayerTurn(ArrayList<PlayerView> playerViewList) {
 
       for (PlayerView playerView : playerViewList) {
          playerView.setStyle("");
       }
-      
+
       switch (playerList[roundController.getCurrentPlayerId()].getFaction().TERRAIN_TILE) {
          case "Wasteland":
             playerViewList.get(roundController.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(224, 15, 0, 1) , 30,0.5,0,1 );");
@@ -704,8 +711,10 @@ public class GameController implements Initializable, Serializable {
 
    }
 
-   /**TODO
+   /**
+    * TODO
     * TAŞINACAK HERHALDE BU DA
+    *
     * @param
     */
    public void showPowerActions(Player currentPlayer) {
@@ -776,9 +785,18 @@ public class GameController implements Initializable, Serializable {
             option = new HBox(power_image, label1, power_middle, spade,label2 );
          }
          GridPane tempPane = new GridPane();
-         option.setMaxWidth(tempPane.getWidth() / 3);
-         option.setMaxHeight(tempPane.getHeight()/3);
-         tempPane.add(option, 0,0);
+         ImageView power_left = new ImageView("chris_track.png");
+         ImageView power_right = new ImageView("juda_track.png");
+         ImageView power_middle = new ImageView("purple_arrow.png");
+         power_middle.setFitWidth(tempPane.getWidth() / 3);
+         power_middle.setFitHeight(tempPane.getHeight() / 3);
+         power_left.setFitWidth(tempPane.getWidth() / 3);
+         power_left.setFitHeight(tempPane.getHeight() / 3);
+         power_right.setFitWidth(tempPane.getWidth() / 3);
+         power_right.setFitHeight(tempPane.getHeight() / 3);
+         tempPane.add(power_left, 0, 0);
+         tempPane.add(power_middle, 1, 0);
+         tempPane.add(power_right, 2, 0);
          tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -856,7 +874,7 @@ public class GameController implements Initializable, Serializable {
                   disableActions();
                   terraform.setDisable(false);
                }
-            }else if ( getSelection() == 5) {
+            } else if (getSelection() == 5) {
                if (playerHandler.usePowerAction(5, currentPlayer)) {
                   disableActions();
                   terraform.setDisable(false);
@@ -865,23 +883,23 @@ public class GameController implements Initializable, Serializable {
                      terraform.setDisable(false);
                   }
                }
-            }
-             else {
+            } else {
                if (playerHandler.usePowerAction(getSelection(), currentPlayer)) {
                   System.out.println("Köprü kuruldu");
                }
             }
-         }});
+         }
+      });
       //update(gridPane,status);
       //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
       dialog.show();
    }
 
-   public  int getSelection() {
+   public int getSelection() {
       return selection;
    }
 
-   private  void setSelection(int selection) {
+   private void setSelection(int selection) {
       this.selection = selection;
    }
 
@@ -890,38 +908,49 @@ public class GameController implements Initializable, Serializable {
 
       return cardsAndTiles;
    }
+
    public Map getMap() {
       return map;
    }
+
    public Player[] getPlayerList() {
       return playerList;
    }
+
    public Religion[] getReligionArr() {
       return religionArr;
    }
-   public PlayerHandler getPlayerHandler(){
+
+   public PlayerHandler getPlayerHandler() {
       return playerHandler;
    }
+
    public Player getCurrentPlayer() {
       return currentPlayer;
    }
 
-   public void setMap(Map map){
+   public void setMap(Map map) {
       this.map = map;
    }
-   public void setPlayerList(Player[] playerList){
+
+   public void setPlayerList(Player[] playerList) {
       this.playerList = playerList;
    }
-   public void setCardsAndTiles(CardsAndTiles cat){
+
+   public void setCardsAndTiles(CardsAndTiles cat) {
       this.cardsAndTiles = cat;
    }
-   public void setReligionArr(Religion[] religions){
+
+   public void setReligionArr(Religion[] religions) {
       this.religionArr = religions;
    }
-   public void setPlayerHandler(PlayerHandler ph){
+
+   public void setPlayerHandler(PlayerHandler ph) {
       this.playerHandler = ph;
    }
-   public void setCurrentPlayer(Player p1){
+
+   public void setCurrentPlayer(Player p1) {
       this.currentPlayer = p1;
    }
+
 }
