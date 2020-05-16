@@ -2,6 +2,7 @@ package Controller;
 
 import Model.GameHandler;
 import Model.Player;
+import Model.PlayerHandler;
 import Model.Religion;
 import Model.ReligionSubclasses.Christianity;
 import Model.ReligionSubclasses.Hinduism;
@@ -49,7 +50,9 @@ public class ReligionController implements Serializable{
     private int currentPlayer;
     private int playerCount;
     private Religion[] religions;
+    private PlayerHandler playerHandler = new PlayerHandler();
     Color[] colors = new Color[5];
+
     /**
      * Status paramater 0 -> Just show board religion
      * Status paramater 1 -> add to order according to religion choice
@@ -130,7 +133,9 @@ public class ReligionController implements Serializable{
                     public void handle(MouseEvent event) {
                         System.out.println("Add priest to order for "+ temp_religion.getClass().toString() + " and player "+ currentPlayer);
                         //if(playerArr[currentPlayer])
-                        temp_religion.addOrderOfReligion(currentPlayer,playerArr[currentPlayer].getKey());
+                        //int gained_power = temp_religion.addOrderOfReligion(currentPlayer,playerArr[currentPlayer].getKey());
+                        //currentPlayer.indir
+                        //play
                         disableButtons(religon_buttons);
                         update(gridPane);
                     }
@@ -145,7 +150,13 @@ public class ReligionController implements Serializable{
                     @Override
                     public void handle(MouseEvent event) {
                         System.out.println("Place priest for "+ temp_religion.getClass().toString() + " and player "+ currentPlayer);
-                        temp_religion.placePriest(currentPlayer,playerArr[currentPlayer].getKey());
+                        Player curPlayer  = playerArr[currentPlayer];
+
+                        if(curPlayer.spendFromResources(0,0,1)) {
+                            int[] returnInfo = temp_religion.placePriest(currentPlayer,playerArr[currentPlayer].getKey());
+                            curPlayer.addPowerToBowl(returnInfo[0]);
+
+                        }
                         disableButtons(religon_buttons);
                         update(gridPane);
                     }

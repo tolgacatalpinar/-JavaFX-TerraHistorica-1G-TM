@@ -43,27 +43,32 @@ public class Religion implements Serializable{
      * @return powerAward the amount of power player gained
      *
      */
-    public int updateReligion(int count, int player_id, int key){
+    public int[] updateReligion(int count, int player_id, int key){
+        int[] returnInfo = {0,0,0};
+        //powerGain, case, kaç ilerledi
         int powerAward = 0;
         int currentPos = playerPositions[player_id];
         int endPos = currentPos + count;
         int awardSearchLength = powerAwardPositions.length;
         if(currentPos >= MAX_LENGTH){
             System.out.println("Cannot advance more on this religion");
-            return 0; // these -1's can represent error messages or throw exceptions
         }
         if (endPos >= MAX_LENGTH){
             if(keyPlaced){
                 System.out.println("Since someone used key, you can't reach end"); // Can be replaced with an GUI message
                 awardSearchLength -= 1;
                 endPos = MAX_LENGTH-1;
+                returnInfo[1] = 1;
             }
             if (key == 0){
                 System.out.println("Since there is no key end pos is stuck on 9"); // Can be replaced with an GUI message
                 awardSearchLength -= 1;
                 endPos = MAX_LENGTH-1;
-            }else
+                returnInfo[1] = 2;
+            }else{
                 keyPlaced = true;
+                returnInfo[1] = 3;
+            }
         }
         for (int i = 0; i< awardSearchLength; i++ ){
             if (currentPos < i && endPos >= i){
@@ -71,7 +76,9 @@ public class Religion implements Serializable{
             }
         }
         playerPositions[player_id] = endPos;
-        return powerAward;
+        returnInfo[0] = powerAward;
+        returnInfo[2] = endPos - currentPos;
+        return returnInfo;
     }
     public boolean isOccupied(int index) {
 
@@ -87,11 +94,12 @@ public class Religion implements Serializable{
         }
         return false;
     }
-    public int placePriest(int player_id,int key) {
+    public int[] placePriest(int player_id,int key) {
         return updateReligion(1, player_id, key);
     }
 
-    public  int addOrderOfReligion(int player_id, int key){
+    public  int[] addOrderOfReligion(int player_id, int key){
+        int[] returnInfo = {-1,-1,-1};
         if(orderOfCult_3 == -1) {
             orderOfCult_3 = player_id;
             return this.updateReligion(3, player_id, key);
@@ -106,7 +114,7 @@ public class Religion implements Serializable{
             return this.updateReligion(2, player_id, key);
         }else
             System.out.println("ORDER IS FULL");
-        return 0; // Error value which indicates there is no empty place
+        return returnInfo; // Error value which indicates there is no empty place
         //// these -1's can represent error messages or throw exceptions
     }
     public int[] getPlayerPositions()
