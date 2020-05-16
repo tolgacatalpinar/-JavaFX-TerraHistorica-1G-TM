@@ -225,18 +225,27 @@ public class CardsAndTiles implements Serializable {
                 playerList[i].setSpadeScoringTile (currentScoringTile.isRequiredSpade());
                 playerList[i].setTownScoringTile (currentScoringTile.isRequiredTown());
                 if(currentScoringTile.isRequiredIslam() && currentScoringTile.getRequiredIslam() >= religionArr[0].getRoundBasedPosition()[i] ){
-
+                    helperReturnScoring(playerList[i],currentScoringTile);
                 }else if(currentScoringTile.isRequiredChrist() && currentScoringTile.getRequiredChrist() >= religionArr[1].getRoundBasedPosition()[i]){
-
-                }else if(currentScoringTile.isRequiredBudism() && currentScoringTile.getRequiredBudism() >=religionArr[2].getRoundBasedPosition()[i] ){
-
+                    helperReturnScoring(playerList[i],currentScoringTile);
+                }else if(currentScoringTile.isRequiredBudism() && currentScoringTile.getRequiredBudism() >=religionArr[3].getRoundBasedPosition()[i] ){
+                    helperReturnScoring(playerList[i],currentScoringTile);
                 }
-                else if(currentScoringTile.isRequiredJudaism() && currentScoringTile.getRequiredJudaism() >=religionArr[3].getRoundBasedPosition()[i] ){
+                else if(currentScoringTile.isRequiredJudaism() && currentScoringTile.getRequiredJudaism() >=religionArr[2].getRoundBasedPosition()[i] ){
+                    helperReturnScoring(playerList[i],currentScoringTile);
 
                 }
             }
 
         }
+    }
+    public void helperReturnScoring(Player player, ScoringTile scoringTile){
+        player.setPriestNum(player.getPriestNum() + scoringTile.getPriestBonus());
+        player.setWorkerNum(player.getWorkerNum() + scoringTile.getWorkerBonus());
+        player.addPowerToBowl(scoringTile.getPowerBonus());
+        player.setVictoryPointNum(player.getVictoryPointNum() + scoringTile.getVictoryBonus());
+        player.setSpadeLevel(player.getSpadeLevel() + scoringTile.getSpadeBonus());
+        player.setGoldNum(player.getGoldNum() + scoringTile.getGoldBonus());
     }
     public void playerChooseFavorTile(FavorTile favorTile,Player player, Religion religion){
         if(favorTile.getPlayerIds().size() >= favorTile.getNumberOfPlayer() ){
