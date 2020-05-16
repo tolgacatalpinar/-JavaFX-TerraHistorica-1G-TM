@@ -38,6 +38,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class ReligionController implements Serializable{
     @FXML
     private ChoiceBox<String> choiceBox;
@@ -177,6 +180,7 @@ public class ReligionController implements Serializable{
 
                         if(playerArr[currentPlayer].getPriestNum() > 0){
                             int[] returnInfo = temp_religion.placePriest(currentPlayer,playerArr[currentPlayer].getKey());
+                            System.out.println(returnInfo[0] + " " + returnInfo[1] + " " + returnInfo[2]);
                             if(returnInfo[1] == 4) {
                                 System.out.println("Cannot advance more on this religion");
                             }
@@ -273,7 +277,7 @@ public class ReligionController implements Serializable{
             @Override
             public void handle(MouseEvent event) {
                 dialog.close();
-                showReligion(playerArr, 1,religions,currentPlayer);
+                showReligion(playerArr, 2,religions,currentPlayer);
             }
         });
         dialog.show();
@@ -444,11 +448,26 @@ public class ReligionController implements Serializable{
     }
 
     /**
-     * For calculating scores coming by religons
+     *
+     *
+     *
      */
-//    public int[] calculateReligionScores(){
+    public int[] calculateReligionScores(Religion[] religions,Player[] playerList){
+        int[] scoreForEachPlayer = new int[playerList.length];
+            for (int i = 0; i < religions.length; i++){
+                int [] playerPos = religions[i].getPlayerPositions();
+                for(int j = 0; j < playerList.length; j++){
+                    System.out.println("Player"+j+" at pos :"+playerPos[j]);
+
+               }
+                System.out.println();
+                Arrays.sort(playerPos);
+//                for(int j = 0; j < playerCount; j++){
 //
-//        return ;
-//    }
+               }
+
+
+        return scoreForEachPlayer;
+    }
 
 }

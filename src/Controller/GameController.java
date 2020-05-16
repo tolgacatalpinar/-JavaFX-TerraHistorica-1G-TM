@@ -325,7 +325,10 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void scoreTableClicked() {
-      cardsAndTilesController.showScoringTilesTable(cardsAndTiles);
+      ReligionController religionController = new ReligionController();
+      religionController.calculateReligionScores(religionArr, playerList);
+      //cardsAndTilesController.showScoringTilesTable(cardsAndTiles);
+
    }
 
 

@@ -53,20 +53,20 @@ public class Religion implements Serializable{
         if(currentPos >= MAX_LENGTH){
             returnInfo[1] = 4;
         }
-        else if (endPos >= MAX_LENGTH){
+        else if (endPos >= MAX_LENGTH-1){
             if(keyPlaced){
                 //System.out.println("Since someone used key, you can't reach end"); // Can be replaced with an GUI message
                 awardSearchLength -= 1;
-                endPos = MAX_LENGTH-1;
+                endPos = MAX_LENGTH-2;
                 returnInfo[1] = 1;
-            }
-            else if (key == 0){
+            }if (key == 0){
                 //System.out.println("Since there is no key end pos is stuck on 9"); // Can be replaced with an GUI message
                 awardSearchLength -= 1;
-                endPos = MAX_LENGTH-1;
+                endPos = MAX_LENGTH-2;
                 returnInfo[1] = 2;
             }else{
                 keyPlaced = true;
+                endPos = MAX_LENGTH-1;
                 returnInfo[1] = 3;
             }
         }
@@ -100,18 +100,23 @@ public class Religion implements Serializable{
 
     public  int[] addOrderOfReligion(int player_id, int key){
         int[] returnInfo = {-1,-1,-1};
+
         if(orderOfCult_3 == -1) {
-            orderOfCult_3 = player_id;
-            return this.updateReligion(3, player_id, key);
+            returnInfo = this.updateReligion(3, player_id, key);
+            if (returnInfo[1] == 0)
+                orderOfCult_3 = player_id;
         }else if (orderOfCult_2_1 == -1){
-            orderOfCult_2_1 = player_id;
-            return this.updateReligion(2, player_id, key);
+            returnInfo = this.updateReligion(2, player_id, key);
+            if (returnInfo[1] == 0)
+                orderOfCult_2_1 = player_id;
         }else if (orderOfCult_2_2 == -1){
-            orderOfCult_2_2 = player_id;
-            return this.updateReligion(2, player_id, key);
+            returnInfo = this.updateReligion(2, player_id, key);
+            if (returnInfo[1] == 0)
+                orderOfCult_2_2 = player_id;
         }else if (orderOfCult_2_3 == -1){
-            orderOfCult_2_3 = player_id;
-            return this.updateReligion(2, player_id, key);
+            returnInfo = this.updateReligion(2, player_id, key);
+            if (returnInfo[1] == 0)
+                orderOfCult_2_3 = player_id;
         }else
             System.out.println("ORDER IS FULL");
         return returnInfo; // Error value which indicates there is no empty place
