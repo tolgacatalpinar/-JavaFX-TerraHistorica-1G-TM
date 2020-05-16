@@ -785,6 +785,7 @@ public class GameController implements Initializable, Serializable {
             dialog.close();
             if (getSelection() == 0) {
                if (playerHandler.usePowerAction(0, currentPlayer)) {
+                  System.out.println("Girdi");
                   disableAllTerrains();
                   TerrainController.buildBridge(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map, mapPane, actions);
                   System.out.println("Köprü kuruldu");
