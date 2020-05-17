@@ -25,7 +25,7 @@ public class ActionController implements Serializable {
    public static boolean actiondone = false;
    public static boolean canChooseFavorTile  = false;
 
-   public static void terraform(Player[] playerArr, int curPlayerId ,Button[][] terrains,Map map, Button[] actions) {
+   public static void terraform(Player[] playerArr, int curPlayerId ,Button[][] terrains,Map map, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions) {
 
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
@@ -59,7 +59,7 @@ public class ActionController implements Serializable {
                         terrains[map.getRow(reachableTerrains.get(k))][map.getColumn(reachableTerrains.get(k))].setOnMouseClicked(new EventHandler<MouseEvent>() {
                            @Override
                            public void handle(MouseEvent event) {
-                              terraformAction(playerArr, curPlayerId, terrains, terrains[map.getRow(finalAdj.get(finalK))][map.getColumn(finalAdj.get(finalK))], map, map.spaces[map.getRow(finalAdj.get(finalK))][map.getColumn(finalAdj.get(finalK))], actions,map.getRow(finalAdj.get(finalK)),map.getColumn(finalAdj.get(finalK)));
+                              terraformAction(playerArr, curPlayerId, terrains, terrains[map.getRow(finalAdj.get(finalK))][map.getColumn(finalAdj.get(finalK))], map, map.spaces[map.getRow(finalAdj.get(finalK))][map.getColumn(finalAdj.get(finalK))], actions,cardsAndTiles,religions,map.getRow(finalAdj.get(finalK)),map.getColumn(finalAdj.get(finalK)));
                            }
                         });
                      }
@@ -92,7 +92,7 @@ public class ActionController implements Serializable {
                      terrains[k][l].setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
-                           terraformAction(playerArr, curPlayerId, terrains, terrains[finalK][finalL], map, map.spaces[finalK][finalL], actions ,finalK, finalL);
+                           terraformAction(playerArr, curPlayerId, terrains, terrains[finalK][finalL], map, map.spaces[finalK][finalL], actions,cardsAndTiles,religions ,finalK, finalL);
                         }
                      });
                   }
@@ -109,7 +109,7 @@ public class ActionController implements Serializable {
     *
     *
     */
-   public static void terraformAction(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, int x, int y) {
+   public static void terraformAction(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions,CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
 
       List<String> choices = new ArrayList<>();
       choices.add("Wasteland");
@@ -165,9 +165,12 @@ public class ActionController implements Serializable {
                         TerrainController.buildDwelling(terrain, selectedChoice);
                         space.setOccupied(true);
                         space.setStructure("Dwelling");
-                        int townScore = map.calculateTownScore2(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
-                        if(townScore >= playerArr[curPlayerId].getTownPowerValue())
+                        int townScore = map.calculateTownScore(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
+                        if(townScore >= playerArr[curPlayerId].getTownPowerValue()){
                            playerHandler.townFound(playerArr[curPlayerId]);
+                           CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
+                           cardsAndTilesController.showTownTilesTable(cardsAndTiles, playerArr[curPlayerId],religions,true);
+                        }
                         System.out.println("Town score is *************"+ townScore);
                      }else if( returnCase == -1){
                         System.out.println("Not enough resources");
@@ -242,7 +245,7 @@ public class ActionController implements Serializable {
                          */
                         //gameHandler.upgradeStructure(map.spaces[finalI][finalJ], map.spaces[finalI][finalJ].getStructure().getBuilding())
                         if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Dwelling"))
-                           upgradeToTradingPost(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ],actions, finalI, finalJ);
+                           upgradeToTradingPost(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ],actions,cardsAndTiles,religions,finalI, finalJ);
                         else if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Trading Post"))
                            upgradeToStrongholdOrTemple(playerArr,currentPlayerId, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ], actions, cardsAndTiles, religions, finalI, finalJ);
                         else if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Temple"))
@@ -255,7 +258,7 @@ public class ActionController implements Serializable {
       }
    }
 
-   public static void upgradeToTradingPost(Player[] playerArr, int currentPlayerId, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, int x, int y) {
+   public static void upgradeToTradingPost(Player[] playerArr, int currentPlayerId, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions,CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
       PlayerHandler playerHandler = new PlayerHandler();
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
@@ -277,9 +280,13 @@ public class ActionController implements Serializable {
                TerrainController.upgradeToTradingPost(terrain, playerArr[currentPlayerId].getFaction().TERRAIN_TILE);
                space.setStructure("Trading Post");
                stage.close();
-               int townScore = map.calculateTownScore2(x,y, playerArr[currentPlayerId].getFaction().TERRAIN_TILE, playerArr[currentPlayerId].getTownPowerValue());
-               if(townScore >= playerArr[currentPlayerId].getTownPowerValue())
+               int townScore = map.calculateTownScore(x,y, playerArr[currentPlayerId].getFaction().TERRAIN_TILE, playerArr[currentPlayerId].getTownPowerValue());
+               if(townScore >= playerArr[currentPlayerId].getTownPowerValue()){
                   playerHandler.townFound(playerArr[currentPlayerId]);
+                  CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
+                  cardsAndTilesController.showTownTilesTable(cardsAndTiles, playerArr[currentPlayerId],religions,true);
+
+               }
                System.out.println("Town score is *************"+ townScore);
                actiondone = true;
             }else if (returnCase == -1){
@@ -341,13 +348,17 @@ public class ActionController implements Serializable {
                   canChooseFavorTile = true;
                   disableActions(actions);
                   TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
+                  System.out.println("Town power value is " + playerArr[curPlayerId].getTownPowerValue());
                   CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
                   cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
                   space.setStructure("Temple");
                   stage.close();
-                  int townScore = map.calculateTownScore2(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
-                  if(townScore >= playerArr[curPlayerId].getTownPowerValue())
+                  int townScore = map.calculateTownScore(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
+                  System.out.println("Town power value is " + playerArr[curPlayerId].getTownPowerValue());
+                  if(townScore >= playerArr[curPlayerId].getTownPowerValue()){
                      playerHandler.townFound(playerArr[curPlayerId]);
+                     cardsAndTilesController.showTownTilesTable(cardsAndTiles, playerArr[curPlayerId],religions,true);
+                  }
                   System.out.println("Town score is *************"+ townScore);
                   actiondone = true;
                }else if (returnCase == -1){
@@ -370,9 +381,12 @@ public class ActionController implements Serializable {
                   disableActions(actions);
                   TerrainController.upgradeToStronghold(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                   space.setStructure("Stronghold");
-                  int townScore = map.calculateTownScore2(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
-                  if(townScore >= playerArr[curPlayerId].getTownPowerValue())
+                  int townScore = map.calculateTownScore(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
+                  if(townScore >= playerArr[curPlayerId].getTownPowerValue()){
                      playerHandler.townFound(playerArr[curPlayerId]);
+                     CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
+                     cardsAndTilesController.showTownTilesTable(cardsAndTiles, playerArr[curPlayerId],religions,true);
+                  }
                   System.out.println("Town score is *************"+ townScore);
                }else if (returnCase == -1){
                   System.out.println("Not enough resources");
@@ -450,9 +464,11 @@ public class ActionController implements Serializable {
                CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
                cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
                space.setStructure("Sanctuary");
-               int townScore = map.calculateTownScore2(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
-               if(townScore >= playerArr[curPlayerId].getTownPowerValue())
+               int townScore = map.calculateTownScore(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
+               if(townScore >= playerArr[curPlayerId].getTownPowerValue()){
                   playerHandler.townFound(playerArr[curPlayerId]);
+                  cardsAndTilesController.showTownTilesTable(cardsAndTiles, playerArr[curPlayerId],religions,true);
+               }
                System.out.println("Town score is *************"+ townScore);
             }else if (returnCase == -1){
                System.out.println("Not enough resources");
