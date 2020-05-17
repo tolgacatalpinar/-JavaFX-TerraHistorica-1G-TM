@@ -25,64 +25,100 @@ public class PlayerView extends BorderPane {
    ImageView imageView;
    String playerName;
    Player player;
-   final int IMAGE_SIZE = 30;
+   final int IMAGE_SIZE = 20;
 
    public PlayerView(Player player) {
-      this.setBackground(new Background(new BackgroundFill(Color.DARKBLUE, new CornerRadii(0), Insets.EMPTY)));
+
+      //Image imProfile = new Image(getClass().getResourceAsStream("/Images/a.png"));
+//      ImageView imView = new ImageView(imProfile);
+//      imView.setFitWidth(50);
+
+      //BackgroundImage bgImg = new BackgroundImage( imProfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(100,100,true,true,false, true));
+
+      //Background bg = new Background(bgImg);
+
+
+      //this.setStyle("-fx-background-color: RED");
+
+      //this.setBackground(bg);
+//      Color color = Color.RED;
+//      ImageView im = new ImageView(Color.RED)
+//      Background bg = new Background( new BackgroundFill(color, null, null ));
+//      this.setBackground(bg);
+
       playerName = player.getNickName();
+
       this.player = player;
+
       Faction faction = player.getFaction();
+
       imageView = new ImageView();
+
       if (faction instanceof AliesterCrowley) {
          Image image = new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg");
          addImage(image);
+         getStyleClass().add("swamp");
       } else if (faction instanceof AmerigoVespucci) {
          Image image = new Image("file:src/Images/FactionImages/Image_AmerigoVespucci.jpeg");
          addImage(image);
+         getStyleClass().add("lakes");
       } else if (faction instanceof Buddha) {
          Image image = new Image("file:src/Images/FactionImages/Image_Buddha.jpeg");
          addImage(image);
+         getStyleClass().add("plains");
       } else if (faction instanceof DariusTheGreat) {
          Image image = new Image("file:src/Images/FactionImages/Image_DariusTheGreat.jpeg");
          addImage(image);
+         getStyleClass().add("desert");
       } else if (faction instanceof ErikTheRed) {
          Image image = new Image("file:src/Images/FactionImages/Image_ErikTheRed.jpeg");
          addImage(image);
+         getStyleClass().add("lakes");
       } else if (faction instanceof Gilgamesh) {
          Image image = new Image("file:src/Images/FactionImages/Image_Gilgamesh.jpeg");
          addImage(image);
+         getStyleClass().add("wasteland");
       } else if (faction instanceof HelenOfTroy) {
          Image image = new Image("file:src/Images/FactionImages/Image_HelenOfTroy.jpeg");
          addImage(image);
+         getStyleClass().add("forest");
       } else if (faction instanceof HusseinTheTeaMaker) {
          Image image = new Image("file:src/Images/FactionImages/Image_HusseinTheTeaMaker.jpeg");
          addImage(image);
+         getStyleClass().add("plains");
       } else if (faction instanceof LeonardoDaVinci) {
          Image image = new Image("file:src/Images/FactionImages/Image_LeonardoDaVinci.jpeg");
          addImage(image);
+         getStyleClass().add("mountains");
       } else if (faction instanceof MarieCurie) {
          Image image = new Image("file:src/Images/FactionImages/Image_MarieCurie.jpeg");
          addImage(image);
+         getStyleClass().add("swamp");
       } else if (faction instanceof MorganLeFay) {
          Image image = new Image("file:src/Images/FactionImages/Image_MorganLeFay.jpeg");
          addImage(image);
+         getStyleClass().add("swamp");
       } else if (faction instanceof Ramesses) {
          Image image = new Image("file:src/Images/FactionImages/Image_Ramesses.jpeg");
          addImage(image);
+         getStyleClass().add("desert");
       } else if (faction instanceof StPatrick) {
          Image image = new Image("file:src/Images/FactionImages/Image_StPatrick.jpeg");
          addImage(image);
+         getStyleClass().add("mountains");
       } else if (faction instanceof VladTheImpaler) {
          Image image = new Image("file:src/Images/FactionImages/Image_VladTheImpaler.jpeg");
          addImage(image);
+         getStyleClass().add("wasteland");
       }
       //addIncomes();
       //addResources();
       addAllResources();
-      this.setPadding(new Insets(20, 50, 20, 0));
+      this.setPadding(new Insets(0, 50, 0, 0));
    }
 
    public void addImage(Image image) {
+
       imageView.setImage(image);
       imageView.setFitWidth(80);
       imageView.setFitHeight(120);
@@ -90,9 +126,11 @@ public class PlayerView extends BorderPane {
       setCenter(imageView);
       //this.insets
       //setMargin(this, new Insets(60));
+
    }
    public void addAllResources()
    {
+
       VBox resources = new VBox();
       ResourceLabel playerName = new ResourceLabel(this.playerName);
       playerName.setTextFill(Color.WHITE);
@@ -106,10 +144,10 @@ public class PlayerView extends BorderPane {
 //      HBox cult = getSingleResourceView(new Image("gold.png"), player.getC(), player.getGoldIncome());
 //      HBox power = getSingleResourceView(new Image("gold.png"), player.getPower(), player.getGoldIncome());
 
-
       resources.getChildren().addAll(gold, priest, worker, power, victory, spade);
-      resources.setPadding( new Insets(10, 0, 0, 10));
+      resources.setPadding( new Insets(10, 0, 0, 20));
       setRight(resources);
+
    }
    public HBox getSingleResourceView( Image image, int number1)
    {
@@ -118,7 +156,10 @@ public class PlayerView extends BorderPane {
       resourceImage.setFitWidth(IMAGE_SIZE);
       resourceImage.setFitHeight(IMAGE_SIZE);
       ResourceLabel label = new ResourceLabel("\t" + number1);
+
       label.setTextFill(Color.WHITE);
+      label.getStyleClass().add("textShadow");
+
       resourceBox.getChildren().addAll(resourceImage, label);
       return resourceBox;
    }
@@ -130,8 +171,14 @@ public class PlayerView extends BorderPane {
       resourceImage.setFitHeight(IMAGE_SIZE);
       ResourceLabel current = new ResourceLabel("\t" + number1);
       ResourceLabel in = new ResourceLabel("\t+" + number2);
+
+
       current.setTextFill(Color.WHITE);
+      current.getStyleClass().add("textShadow");
+
       in.setTextFill(Color.GREEN);
+      in.getStyleClass().add("textShadow");
+
       resourceBox.getChildren().addAll(resourceImage, current, in);
       return resourceBox;
    }
@@ -146,9 +193,17 @@ public class PlayerView extends BorderPane {
       ResourceLabel label3 = new ResourceLabel("\t" + number3);
       ResourceLabel label4 = new ResourceLabel("\t+" + number4);
       label1.setTextFill(Color.WHITE);
+      label1.getStyleClass().add("textShadow");
+
       label2.setTextFill(Color.WHITE);
+      label2.getStyleClass().add("textShadow");
+
       label3.setTextFill(Color.WHITE);
+      label3.getStyleClass().add("textShadow");
+
       label4.setTextFill(Color.GREEN);
+      label4.getStyleClass().add("textShadow");
+
       resourceBox.getChildren().addAll(resourceImage, label1, label2, label3, label4);
       return resourceBox;
    }

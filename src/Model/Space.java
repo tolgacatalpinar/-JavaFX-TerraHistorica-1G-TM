@@ -8,9 +8,41 @@ public class Space implements Serializable{
     private boolean bridgeConnection;
     private String bridgeType;
     private String type;
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    private int x = -1;
+    private int y  = -1;
     private Space[] bridgeList; // this array holds the other space that can be reached from this space; thanks to bridge(if exists)
     private Boolean hasBridge;
 
+
+
+    private boolean marked;
+
+    public boolean isMarkedForScore() {
+        return markedForScore;
+    }
+
+    public void setMarkedForScore(boolean markedForScore) {
+        this.markedForScore = markedForScore;
+    }
+
+    private boolean markedForScore;
     private Structure structure;
     private Player player;
         
@@ -21,6 +53,7 @@ public class Space implements Serializable{
         bridgability = false;
         bridgeConnection = false;
         bridgeType = "";
+        marked = false;
     }
 
     public String getBridgeType(){
@@ -46,7 +79,13 @@ public class Space implements Serializable{
     public void setBridgeConnection(boolean bridgeConnection){
         this.bridgeConnection = bridgeConnection;
     }
+    public boolean isMarked() {
+        return marked;
+    }
 
+    public void setMarked(boolean marked) {
+        this.marked = marked;
+    }
 
 
     public void setPlayer(Player player) {

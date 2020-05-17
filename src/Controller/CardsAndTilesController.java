@@ -1,23 +1,17 @@
 package Controller;
 
-import Controller.GameController;
 import Model.CardsAndTiles.*;
-import Model.GameHandler;
 import Model.Player;
 import Model.Religion;
 import View.CardsAndTilesViews.BonusCardView;
 import View.CardsAndTilesViews.FavorTileView;
 import View.CardsAndTilesViews.ScoringTileView;
 import View.CardsAndTilesViews.TownTileView;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -375,12 +369,13 @@ public class CardsAndTilesController {
                     @Override
                     public void handle(MouseEvent event) {
                         int chosen = getSelectionTown();
+                        System.out.println();
                         int[] returnInfo;
-                        System.out.println("Selected " + chosen);
+                        cardsAndTiles.playerChooseTownTile(cardsAndTiles.townTiles.get(selectionTown),current);
                         if(cardsAndTiles.townTiles.get(selectionTown).getIslamPoint() != 0){
-                            cardsAndTiles.playerChooseTownTile(cardsAndTiles.townTiles.get(selectionTown),current);
+                            System.out.println("Selected " + chosen);
                             for(int i = 0; i < 4;i++){
-                                returnInfo=religions[i].updateReligion(1,current.getPlayerId(),current.getKey());
+                                returnInfo=religions[i].updateReligion(cardsAndTiles.townTiles.get(selectionTown).getIslamPoint(),current.getPlayerId(),current.getKey());
                                 if(returnInfo[1] == 4) {
                                     System.out.println("Cannot advance more on this religion");
                                 }
@@ -398,10 +393,8 @@ public class CardsAndTilesController {
                                 }
                                 religions[i].updateRoundBasedPositions(returnInfo[2], current.getPlayerId());
                             }
-                        }
-                        else
-                            cardsAndTiles.playerChooseTownTile(cardsAndTiles.townTiles.get(selectionTown),current);
 
+                        }
 
                         dialog.close();
                     }

@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 public class Map implements Serializable {
    public Space[][] spaces;
-   public static int townScore = 0; // bu variable'ı şimdilik istown çalışsın diye ekledim. Belki durur ama oo olması icin buradan kaldırıp
-   // player classına da ekleyebiliriz, is town'a da parameter olarak player objesi alırız, öyle de is görür.
    public ArrayList<Space> visited = new ArrayList<Space>(); //
    final int ROW_NUMBER = 9;
    final int COLUMN_NUMBER = 13;
@@ -242,97 +240,148 @@ public class Map implements Serializable {
       }
       return bridgeables;
    }
+   public int calculateTownScoreHelper(int x, int y, String playerColor, ArrayList<Space> traversed){
+         Space space1 = this.spaces[x][y];
+      if(space1.getType() == "River" || space1.getType() == "Empty" || x-1 < 0 || y-1 < 0 || x > ROW_NUMBER-1 || y > COLUMN_NUMBER-1 ||space1.isMarked() ||!space1.isOccupied()|| space1.getType() != playerColor ){
+         return 0;
+      }else{
+         space1.setMarked(true);
+         System.out.println("X is "+ x + " Y is "+ y + "Player color is" + playerColor);
+         traversed.add(spaces[x][y]);
+         if (x %2 == 0){
+            return (
+                    calculateTownScoreHelper(x-1, y-1, playerColor, traversed )
+                    + calculateTownScoreHelper(x-1, y, playerColor, traversed)
+                    + calculateTownScoreHelper(x+1, y, playerColor, traversed)
+                    +calculateTownScoreHelper(x, y+1, playerColor,traversed )
+                    + calculateTownScoreHelper(x, y-1, playerColor, traversed)
+                    + calculateTownScoreHelper(x+1, y-1, playerColor,traversed )
+                   );
 
+         }else{
+            return (calculateTownScoreHelper(x-1, y, playerColor, traversed)
+                    + calculateTownScoreHelper(x+1, y, playerColor, traversed)
+                    +calculateTownScoreHelper(x, y+1, playerColor, traversed)
+                    + calculateTownScoreHelper(x, y-1, playerColor, traversed)
+                    +calculateTownScoreHelper(x-1, y+1, playerColor, traversed)
+                    + calculateTownScoreHelper(x+1, y, playerColor, traversed));
 
-   public int calculateTownScore(Space space1, String playerColor, int townScore) {
-      Space[] adjacents = getAdjacentSpaces(space1);
-      boolean isOver = true;
+         }
 
-      for (int i = 0; i < adjacents.length && isOver; i++) {
-         isOver = ((!(adjacents[i].getType().equals(playerColor))) || (visited.contains(adjacents[i])) || (!adjacents[i].isOccupied()));
       }
-
-      if (isOver) {
-
-//         if (space1.getStructure().getBuilding().equals("Stronghold"))
-//         {
-//            townScore = townScore + 3;
-//         }
-//
-//         if (space1.getStructure().getBuilding().equals("Dwelling"))
-//         {
-//            townScore = townScore + 1;
-//         }
-//
-//         if (space1.getStructure().getBuilding().equals("Temple"))
-//         {
-//            townScore = townScore + 3;
-//         }
-//
-//         if (space1.getStructure().getBuilding().equals("Sanctuary"))
-//         {
-//            townScore = townScore + 4;
-//         }
-//
-//         if (space1.getStructure().getBuilding().equals("Trading Post"))
-//         {
-//            townScore = townScore + 2;
-//         }
-
-         return townScore;
-      }
-      else {
-         for (Space adjacent : adjacents)
-            if (adjacent.getType().equals(playerColor) && !(visited.contains(adjacent)) && adjacent.isOccupied()) {
-               visited.add(adjacent);
-               int add = 0;
-               if (space1.getStructure().getBuilding().equals("Stronghold"))
-               {
-                  add = 3;
-               }
-
-               if (space1.getStructure().getBuilding().equals("Dwelling"))
-               {
-                  add = 1;
-               }
-
-               if (space1.getStructure().getBuilding().equals("Temple"))
-               {
-                  add = 3;
-               }
-
-               if (space1.getStructure().getBuilding().equals("Sanctuary"))
-               {
-                  add = 4;
-               }
-
-               if (space1.getStructure().getBuilding().equals("Trading Post"))
-               {
-                  add = 2;
-               }
-               return calculateTownScore(adjacent, playerColor, townScore + add);
+   }
+   public ArrayList<Integer>[] calculatePathScores(Player[] playerList){
+      int[] scoresPath = getLongestPathValues(playerList);
+      ArrayList<Integer>[] playerTable = new ArrayList[3];
+      playerTable[0] = (new ArrayList<Integer>());
+      playerTable[2] = (new ArrayList<Integer>());
+      playerTable[1] = (new ArrayList<Integer>());
+      int count = 0;
+      while(count < 3) {
+         int maxValue = 0;
+         for(int j = 0; j < scoresPath.length; j++) {
+            if(scoresPath[j] > maxValue) {
+               maxValue = scoresPath[j];
             }
+         }
+         for(int k = 0; k < scoresPath.length; k++) {
+            if( scoresPath[k] == maxValue) {
+               playerTable[count].add(k);
+               scoresPath[k] = -1;
+            }
+         }
+         count++;
       }
-      System.out.println("Burdan döndü");
-      return townScore;
-
+      return playerTable;
    }
 
-   public boolean isTown(Space space1, String playerColor) {
-      int num = calculateTownScore(space1, playerColor,0);
-      System.out.println(num);
-      System.out.println("Town score is  " + num);
-      if (num <= 6) {
-         System.out.println("Town değil");
-         visited.clear();
-         return true;
-      } else {
-         System.out.println("Town oldu!");
-         visited.clear();
-         return false;
+   public int getLongestPathHelper(int x, int y, String playerColor, ArrayList<Space> traversed){
+      Space space1 = this.spaces[x][y];
+      if(space1.getType() == "River" || space1.getType() == "Empty" || x-1 < 0 || y-1 < 0 || x > ROW_NUMBER-1 || y > COLUMN_NUMBER-1 ||space1.isMarkedForScore() ||!space1.isOccupied()|| space1.getType() != playerColor ){
+         return 0;
+      }else{
+         space1.setMarkedForScore(true);
+         System.out.println("X is "+ x + " Y is "+ y + "Player color is" + playerColor);
+         traversed.add(spaces[x][y]);
+         if (x %2 == 0){
+            return (
+                    getLongestPathHelper(x-1, y-1, playerColor, traversed )
+                            + getLongestPathHelper(x-1, y, playerColor, traversed)
+                            + getLongestPathHelper(x+1, y, playerColor, traversed)
+                            +getLongestPathHelper(x, y+1, playerColor,traversed )
+                            + getLongestPathHelper(x, y-1, playerColor, traversed)
+                            + getLongestPathHelper(x+1, y-1, playerColor,traversed )
+            );
+
+         }else{
+            return (getLongestPathHelper(x-1, y, playerColor, traversed)
+                    + getLongestPathHelper(x+1, y, playerColor, traversed)
+                    +getLongestPathHelper(x, y+1, playerColor, traversed)
+                    + getLongestPathHelper(x, y-1, playerColor, traversed)
+                    +getLongestPathHelper(x-1, y+1, playerColor, traversed)
+                    + getLongestPathHelper(x+1, y, playerColor, traversed));
+         }
       }
    }
-
+   public int[] getLongestPathValues(Player[] players) {
+      int[] playerScores = new int[players.length];
+      for (int player_index = 0; player_index < players.length; player_index++) {
+         ArrayList<Space> playerTerrains = new ArrayList<Space>();
+         for (int i = 0; i < 9; i++) { //row
+            for (int j = 0; j < 13; j++) {
+               if (spaces[i][j].getType().equals(players[player_index].getFaction().TERRAIN_TILE)) {
+                  playerTerrains.add(spaces[i][j]);
+               }
+            }
+         }
+         int max = -1;
+         int temp = 0;
+         for (int k = 0; k < playerTerrains.size(); k++) {
+            ArrayList<Space> traversed = new ArrayList<Space>();
+            getLongestPathHelper(playerTerrains.get(k).getX(), playerTerrains.get(k).getY(), players[player_index].getFaction().TERRAIN_TILE, traversed);
+            temp = traversed.size();
+            if(max <temp)
+               max = temp;
+            unmarkAll(false);
+         }
+         playerScores[player_index] = max;
+      }
+      return playerScores;
+   }
+   public void unmarkAll(boolean isTown){
+      for (int i = 0; i < 9; i++) { //row
+         for (int j = 0; j < 13; j++) {
+            if(!isTown)
+               spaces[i][j].setMarkedForScore(false);
+            else
+               spaces[i][j].setMarked(false);
+         }
+         }
+   }
+   public int calculateTownScore(int x1, int y1, String playerColor , int townThreshold){
+      ArrayList<Space> traversed = new ArrayList<Space>();
+      calculateTownScoreHelper(x1,y1, playerColor, traversed);
+      int calculated = 0;
+      for (int i = 0; i< traversed.size(); i++){
+         calculated += traversed.get(i).getStructure().getBuildingScore();
+      }
+      System.out.println("Calculated" + calculated);
+      if (calculated < townThreshold){
+         for (int i = 0; i< traversed.size(); i++){
+            traversed.get(i).setMarked(false);
+         }
+         Space[] adjacentSpaces = getAdjacentSpaces(spaces[x1][y1]);
+         for (int j = 0; j< adjacentSpaces.length; j++){
+            if(adjacentSpaces[j].getType().equals(playerColor)){
+               if (adjacentSpaces[j].isMarked())
+                  spaces[x1][y1].setMarked(true);
+            }
+         }
+      }else{
+         System.out.println("Town founded");
+      }
+      return  calculated;
+   }
 
    public void transformTerrain(Space original, String newType) {
       original.setType(newType);
@@ -514,4 +563,5 @@ public class Map implements Serializable {
             break;
       }
    }
+
 }

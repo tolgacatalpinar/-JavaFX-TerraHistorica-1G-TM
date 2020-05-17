@@ -1,5 +1,41 @@
+.textShadow{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 10, 1, 1);
+}
+
+.wasteland{
+    -fx-background-color: rgba(136, 0, 18, 0.56);
+}
+
+.plains{
+    -fx-background-color: rgba(136, 76, 29, 0.51);
+}
+
+.lakes{
+    -fx-background-color: rgba(0, 122, 136, 0.51);
+}
+
+.desert{
+    -fx-background-color: rgba(133, 128, 50, 0.51);
+}
+
+.mountains{
+    -fx-background-color: rgba(126, 123, 118, 0.5);
+}
+
+.swamp{
+    -fx-background-color: rgba(48, 45, 38, 0.52);
+}
+
+.forest{
+    -fx-background-color: rgba(6, 127, 4, 0.51);
+}
+
 .button {
     -fx-background-color: transparent;
+
+    width: 200px;
+    height: 400px;
+    object-fit: cover;
 }
 
 .button:hover{

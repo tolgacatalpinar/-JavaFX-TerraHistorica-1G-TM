@@ -2,7 +2,6 @@ package Controller;
 
 import Model.Faction;
 import Model.FactionSubclasses.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -88,6 +87,10 @@ public class ChooseFactionMenuController  implements Initializable, Serializable
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
+
+
+        stage.setX(0);
+        stage.setY(0);
         stage.show();
 
 

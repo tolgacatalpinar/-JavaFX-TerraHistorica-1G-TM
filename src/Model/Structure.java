@@ -12,8 +12,18 @@ public class Structure implements Serializable{
     }
 
     public Structure(String building){
-        setBuildingScore(0);
         this.buildingType = building;
+        if(buildingType.equals("Dwelling"))
+            setBuildingScore(1);
+        else if(buildingType.equals("Trading Post"))
+            setBuildingScore(2);
+        else if(buildingType.equals("Stronghold"))
+            setBuildingScore(3);
+        else if(buildingType.equals("Temple"))
+            setBuildingScore(3);
+        else if(buildingType.equals("Sanctuary"))
+            setBuildingScore(4);
+
     }
 
     public void setBuilding(String building){

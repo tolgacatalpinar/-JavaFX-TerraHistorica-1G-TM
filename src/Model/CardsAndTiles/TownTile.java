@@ -5,7 +5,6 @@ public class TownTile implements Serializable {
     private int playerId;
     private int powerBonus;
     private int priestBonus;
-    private int  keyCount;
     private int victoryBonus;
     private int christianityPoint;
     private int hinduismPoint;
@@ -30,7 +29,6 @@ public class TownTile implements Serializable {
                     int hinduismPoint, int islamPoint, int jewishPoint,  int workerBonus, int goldBonus) {
         this.powerBonus = powerBonus;
         this.priestBonus = priestBonus;
-        keyCount = 1;
         this.victoryBonus = victoryBonus;
         this.christianityPoint = christianityPoint;
         this.hinduismPoint = hinduismPoint;
@@ -52,10 +50,6 @@ public class TownTile implements Serializable {
 
     public int getPriestBonus() {
         return priestBonus;
-    }
-
-    public int getKeyCount() {
-        return keyCount;
     }
 
     public int getVictoryBonus() {

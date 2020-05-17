@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.GameHandler;
 import Model.Player;
 import Model.PlayerHandler;
 import Model.Religion;
@@ -177,7 +176,6 @@ public class ReligionController implements Serializable{
                     public void handle(MouseEvent event) {
                         System.out.println("Place priest for "+ temp_religion.getClass().toString() + " and player "+ currentPlayer);
                         Player curPlayer  = playerArr[currentPlayer];
-
                         if(kaltrekşın||playerArr[currentPlayer].getPriestNum() > 0){
                             int[] returnInfo = temp_religion.placePriest(currentPlayer,playerArr[currentPlayer].getKey());
                             System.out.println(returnInfo[0] + " " + returnInfo[1] + " " + returnInfo[2]);
@@ -455,38 +453,37 @@ public class ReligionController implements Serializable{
      *
      *
      */
-    public void calculateReligionScores(Religion[] religions,Player[] playerList) {
+    public ArrayList<ArrayList<Integer>>[] calculateReligionScores(Religion[] religions,Player[] playerList) {
 
-        ArrayList<ArrayList<ArrayList<Integer>>> realResult = new ArrayList<>();
+        ArrayList<ArrayList<Integer>>[] realResult = new ArrayList[religions.length];
 
         for(int i = 0; i < religions.length; i++) {
-
             int [] playerPositions = religions[i].getPlayerPositions();
-            int firstThree = 0;
             ArrayList<ArrayList<Integer>> result = new ArrayList<>();
-
+            int playerCount = 0;
             for (int j= 10; j >= 0; j--) {
-
                 ArrayList<Integer> players = new ArrayList<Integer>();
                 for ( int k = 0; k < playerPositions.length; k++) {
                     if ( playerPositions[k] == j) {
                         players.add(k);
-                        System.out.println("girişşş " + players.get(0));
+                        playerCount++;
                     }
                 }
-                System.out.println("Player added to result in j = " + j);
-                result.add(players);
-                System.out.println(result.get(0));
-                if( result.get(firstThree).size() > 0) {
-                    firstThree++;
-                    System.out.println("First three = " + firstThree);
+                if(players.size() > 0)
+                    result.add(players);
+
+                if( result.size() >=3 ) {
+                    break;
                 }
-
             }
-            realResult.add(result);
+            if(playerCount >= playerList.length && result.size() < 3) {
+                while (result.size() < 3) {
+                    result.add(new ArrayList<Integer>());
+                }
+            }
+            realResult[i] = result;
         }
-
-
+        return realResult;
     }
 
 }
