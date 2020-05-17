@@ -25,6 +25,8 @@ public class SoundController {
    {
       if(currentMusicGroup != null)
       {
+         if( currentMusicGroup.getChildren().get(0) instanceof MediaView)
+            ((MediaView)currentMusicGroup.getChildren().get(0)).getMediaPlayer().stop();
          currentMusicGroup = null;
       }
       currentMusicGroup = new Group();

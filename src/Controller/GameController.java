@@ -97,13 +97,13 @@ public class GameController implements Initializable, Serializable {
 
 
    public GameController() throws IOException {
-      SoundController.playGameMusic(30);
+
    }
 
 
    @Override
    public void initialize(URL url, ResourceBundle resourceBundle) {
-
+      SoundController.playGameMusic(30);
 
       actions = new Button[]{specialActions, terraform, upgradeShipping, upgradeStruct, sendPriest, powerActions, upgradeSpade, passRound};
       System.out.println("Initialize is called");
