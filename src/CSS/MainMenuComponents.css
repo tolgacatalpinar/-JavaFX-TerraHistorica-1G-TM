@@ -1,5 +1,9 @@
 #vbox {
     -fx-background-image: url('../Images/MenuImages/MainMenuBackground.png');
+    -fx-background-size:     cover;                      /* <------ */
+    -fx-background-repeat:   no-repeat;
+    -fx-background-position: center center;              /* optional, center the image */
+
 }
 
 .button {

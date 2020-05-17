@@ -176,7 +176,6 @@ public class ReligionController implements Serializable{
                     public void handle(MouseEvent event) {
                         System.out.println("Place priest for "+ temp_religion.getClass().toString() + " and player "+ currentPlayer);
                         Player curPlayer  = playerArr[currentPlayer];
-
                         if(kaltrekşın||playerArr[currentPlayer].getPriestNum() > 0){
                             int[] returnInfo = temp_religion.placePriest(currentPlayer,playerArr[currentPlayer].getKey());
                             System.out.println(returnInfo[0] + " " + returnInfo[1] + " " + returnInfo[2]);
