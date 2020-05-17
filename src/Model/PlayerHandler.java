@@ -343,6 +343,8 @@ public class PlayerHandler implements Serializable{
         }
 
     public void townFound(Player player) {
+        player.setWorkerNum(player.getWorkerNum() + player.getFaction().foundingTownWorkerBonus);
+        player.addVictoryPoints(player.getFaction().getAdditionalVictoryPointsAfterTown);
         if(player.isTownScoringTile()) {
             player.addVictoryPoints(5);
         }

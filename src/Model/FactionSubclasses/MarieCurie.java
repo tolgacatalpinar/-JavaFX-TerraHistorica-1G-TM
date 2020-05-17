@@ -26,6 +26,7 @@ public class MarieCurie extends Faction { //alchemist
       tradeCoinsForVictoryPoint = true;
       tradeVictoryPointForCoin = true;
       getVictoryPointsAfterTown = 12;
+      sorcerersStone = true;
   }
 
     public void afterStronghold() {
