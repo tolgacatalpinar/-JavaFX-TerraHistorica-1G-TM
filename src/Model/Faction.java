@@ -69,17 +69,16 @@ public class Faction implements Serializable {
     public boolean gainFavorTileAfterStronghold;
     public boolean gainActionTokenAfterStronghold;
     public int advanceOnCultTrackValue;
-    public int additionalVictoryPoints;
     public boolean payNoCostForDwelling;
     public boolean tradeVictoryPointForCoin;
     public boolean tradeCoinsForVictoryPoint;
     public int getPowerAfterStronghold;
     public int gainPowerForEachSpade;
-    public int getAdditionalVictoryPointsAfterTown;
+    public int getAdditionalVictoryPointsAfterTown = 0;
     public boolean moveOnCultIfTradeAccepted = false;
     public boolean payPriestWhenTransform;
     public boolean giveWorkersForPriest;
-    public int additionalVictoryPointForEachSpade;
+    public int additionalVictoryPointForEachSpade = 0;
     public int getVictoryPointsAfterStronghold;
     public int workerCostOfBridge;
     public int victoryPointForEachConnectingBridges = 0;
@@ -91,6 +90,7 @@ public class Faction implements Serializable {
     public int additionalVictoryPointForEachSkipTile = 0;
     public boolean skipTileWhenCalculatingLongestPath;
     public int getVictoryPointsAfterTown = 0;
+    public boolean sorcerersStone = false;
 
     public void afterStronghold() {
 
