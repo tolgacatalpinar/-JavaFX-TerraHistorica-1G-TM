@@ -2,6 +2,10 @@ package Controller;
 
 import Model.*;
 //import Model.River;
+import javafx.scene.Group;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 //import Model.TerrainSubclasses.*;
 import Model.CardsAndTiles.CardsAndTiles;
 import Model.CardsAndTiles.ScoringTile;
@@ -25,6 +29,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -92,6 +97,7 @@ public class GameController implements Initializable, Serializable {
 
 
    public GameController() throws IOException {
+      SoundController.playGameMusic(40);
    }
 
 
