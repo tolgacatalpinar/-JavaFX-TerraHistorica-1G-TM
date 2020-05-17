@@ -272,6 +272,8 @@ public class TerrainController implements Serializable {
                                        System.out.println("x1: " + x1 + "y1: "  + y1 + "\nx2: " + x2 + "y2: " + y2);
                                        map.spaces[finalK][finalL].setBridgeConnection(true);
                                        map.spaces[finalK][finalL].setBridgeType(type);
+                                       map.spaces[finalI][finalJ].setBridgeConnection(true);
+                                       map.spaces[finalI][finalJ].setBridgeType(type);
                                        for(int i = 0; i < actions.length; i++)
                                           actions[i].setDisable(true);
                                     }

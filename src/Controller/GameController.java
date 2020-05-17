@@ -243,6 +243,9 @@ public class GameController implements Initializable, Serializable {
             religion.resetRoundBasedPosition();
          }
       }
+
+      System.out.println("Victory Point = " + engineerStrongholdAbility());
+
    }
 
    @FXML
@@ -999,6 +1002,24 @@ public class GameController implements Initializable, Serializable {
 
    }
 
+   public int engineerStrongholdAbility() {
+      int counter = 0;
+      for (int i = 0; i < ROW_NUMBER; i++) {
+         for (int j = 0; j < COLUMN_NUMBER; j++) {
+            if (map.spaces[i][j] != null) {
+               if (map.spaces[i][j].getType().equals("Mountains") && map.spaces[i][j].getBridgeConnection()) {
+                  ArrayList<Space> bridgables = map.bridgeables(map.spaces[i][j]);
+                  for (int k = 0; k < bridgables.size(); k++)
+                     if (bridgables.get(k).getBridgeConnection() && bridgables.get(k).getBridgeType().equals("Mountains") && bridgables.get(k).isOccupied()) {
+                        counter++;
+                     }
+               }
+            }
+         }
+      }
+      return 3*(counter/2);
+   }
+
 
 
    public Map getMap() {
@@ -1044,7 +1065,5 @@ public class GameController implements Initializable, Serializable {
    public void setCurrentPlayer(Player p1) {
       this.currentPlayer = p1;
    }
-
-
 
 }
