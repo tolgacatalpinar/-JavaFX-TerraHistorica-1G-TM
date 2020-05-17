@@ -273,7 +273,7 @@ public class Map implements Serializable {
       }
    }
 
-   public int calculateLongestHelper(int x, int y, String playerColor, ArrayList<Space> traversed){
+   public int getLongestPathHelper(int x, int y, String playerColor, ArrayList<Space> traversed){
       Space space1 = this.spaces[x][y];
       if(space1.getType() == "River" || space1.getType() == "Empty" || x-1 < 0 || y-1 < 0 || x > ROW_NUMBER-1 || y > COLUMN_NUMBER-1 ||space1.isMarkedForScore() ||!space1.isOccupied()|| space1.getType() != playerColor ){
          return 0;
@@ -283,25 +283,25 @@ public class Map implements Serializable {
          traversed.add(spaces[x][y]);
          if (x %2 == 0){
             return (
-                    calculateLongestHelper(x-1, y-1, playerColor, traversed )
-                            + calculateLongestHelper(x-1, y, playerColor, traversed)
-                            + calculateLongestHelper(x+1, y, playerColor, traversed)
-                            +calculateLongestHelper(x, y+1, playerColor,traversed )
-                            + calculateLongestHelper(x, y-1, playerColor, traversed)
-                            + calculateLongestHelper(x+1, y-1, playerColor,traversed )
+                    getLongestPathHelper(x-1, y-1, playerColor, traversed )
+                            + getLongestPathHelper(x-1, y, playerColor, traversed)
+                            + getLongestPathHelper(x+1, y, playerColor, traversed)
+                            +getLongestPathHelper(x, y+1, playerColor,traversed )
+                            + getLongestPathHelper(x, y-1, playerColor, traversed)
+                            + getLongestPathHelper(x+1, y-1, playerColor,traversed )
             );
 
          }else{
-            return (calculateLongestHelper(x-1, y, playerColor, traversed)
-                    + calculateLongestHelper(x+1, y, playerColor, traversed)
-                    +calculateLongestHelper(x, y+1, playerColor, traversed)
-                    + calculateLongestHelper(x, y-1, playerColor, traversed)
-                    +calculateLongestHelper(x-1, y+1, playerColor, traversed)
-                    + calculateLongestHelper(x+1, y, playerColor, traversed));
+            return (getLongestPathHelper(x-1, y, playerColor, traversed)
+                    + getLongestPathHelper(x+1, y, playerColor, traversed)
+                    +getLongestPathHelper(x, y+1, playerColor, traversed)
+                    + getLongestPathHelper(x, y-1, playerColor, traversed)
+                    +getLongestPathHelper(x-1, y+1, playerColor, traversed)
+                    + getLongestPathHelper(x+1, y, playerColor, traversed));
          }
       }
    }
-   public int[] calculateLongestConnection(Player[] players, Map map) {
+   public int[] getLongestPathValues(Player[] players, Map map) {
       int[] playerScores = new int[players.length];
       for (int player_index = 0; player_index < players.length; player_index++) {
          ArrayList<Space> playerTerrains = new ArrayList<Space>();
@@ -315,7 +315,7 @@ public class Map implements Serializable {
          int max = -1;
          for (int k = 0; k < playerTerrains.size(); k++) {
             ArrayList<Space> traversed = new ArrayList<Space>();
-            calculateLongestHelper(playerTerrains.get(k).getX(), playerTerrains.get(k).getY(), players[player_index].getFaction().TERRAIN_TILE, traversed);
+            getLongestPathHelper(playerTerrains.get(k).getX(), playerTerrains.get(k).getY(), players[player_index].getFaction().TERRAIN_TILE, traversed);
             if (max < traversed.size()) {
                max = traversed.size();
             }
@@ -522,8 +522,8 @@ public class Map implements Serializable {
             break;
       }
    }
-   public ArrayList<Integer>[] calculatePathScores(Player[] playerList){
-      int[] scoresPath = getLongestPathValues(playerList);
+   public ArrayList<Integer>[] calculatePathScores(Player[] playerList, Map map){
+      int[] scoresPath = getLongestPathValues(playerList, map);
       ArrayList<Integer>[] playerTable = new ArrayList[3];
       playerTable[0] = (new ArrayList<Integer>());
       playerTable[2] = (new ArrayList<Integer>());
