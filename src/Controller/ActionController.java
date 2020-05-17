@@ -373,7 +373,7 @@ public class ActionController implements Serializable {
                 * TODO
                 * YANDAKİ UŞAKLARA SOR
                 */
-               if(returnCase == 1){
+               if(returnCase > 0){
                   Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                   for(int i = 0; i < adjacentPlayers.size(); i++) {
                      alert.setTitle("Offer for " + adjacentPlayers.get(i).getNickName());
@@ -391,7 +391,9 @@ public class ActionController implements Serializable {
                   TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                   System.out.println("Town power value is " + playerArr[curPlayerId].getTownPowerValue());
                   CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
-                  cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
+                  for(int i = 0; i < returnCase; i++) {
+                     cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
+                  }
                   space.setStructure("Temple");
                   stage.close();
                   int townScore = map.calculateTownScore(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
@@ -512,7 +514,7 @@ public class ActionController implements Serializable {
              * TODO
              * YANDAKİ UŞAKLARA SOR
              */
-            if(returnCase == 1){
+            if(returnCase > 0){
                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                for(int i = 0; i < adjacentPlayers.size(); i++) {
                   alert.setTitle("Offer for " + adjacentPlayers.get(i).getNickName());
@@ -528,7 +530,9 @@ public class ActionController implements Serializable {
                disableActions(actions);
                TerrainController.upgradeToSanctuary(terrain,playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
-               cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
+               for(int i = 0; i < returnCase; i++) {
+                  cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
+               }
                space.setStructure("Sanctuary");
                int townScore = map.calculateTownScore(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
                if(townScore >= playerArr[curPlayerId].getTownPowerValue()){
