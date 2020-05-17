@@ -29,6 +29,7 @@ public class PlayerView extends BorderPane {
 
    public PlayerView(Player player) {
 
+
       //Image imProfile = new Image(getClass().getResourceAsStream("/Images/a.png"));
 //      ImageView imView = new ImageView(imProfile);
 //      imView.setFitWidth(50);
@@ -114,7 +115,7 @@ public class PlayerView extends BorderPane {
       //addIncomes();
       //addResources();
       addAllResources();
-      this.setPadding(new Insets(0, 50, 0, 0));
+      this.setPadding(new Insets(0, 20, 0, 0));
    }
 
    public void addImage(Image image) {
@@ -144,7 +145,10 @@ public class PlayerView extends BorderPane {
 //      HBox cult = getSingleResourceView(new Image("gold.png"), player.getC(), player.getGoldIncome());
 //      HBox power = getSingleResourceView(new Image("gold.png"), player.getPower(), player.getGoldIncome());
 
-      resources.getChildren().addAll(gold, priest, worker, power, victory, spade);
+      HBox shipping = getSingleResourceView(new Image("shipping.png"), player.getShipLevel());
+
+
+      resources.getChildren().addAll(gold, priest, worker, power, victory, spade, shipping);
       resources.setPadding( new Insets(10, 0, 0, 20));
       setRight(resources);
 

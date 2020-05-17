@@ -137,14 +137,16 @@ public class GameController implements Initializable, Serializable {
                      }
                      factionsView.getChildren().addAll(playerViewList);
                      //displayPlayerTurn(playerViewList);
-                     factionsView.setPadding(new Insets(0, 0, 0, 100));
+                     factionsView.setPadding(new Insets(0, 0, 0, 20));
                      //factionsView.setStyle("fx-margin-bottom: 150;");
 //                     VBox.setMargin(factionsView, new Insets(0,0,1500,0));
                      //factionsView.setMargin(,);
 
+                     factionsView.setMaxWidth(200);
                      borderPane.setBottom(factionsView);
                      borderPane.setPadding(new Insets(0,0,50,0));
                      displayPlayerTurn(playerViewList);
+                     showTown(terrains, map);
 //                     ImageView imview = new ImageView();
 //                     imview.setImage(new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg"));
 //                     imview.setFitHeight(150);
@@ -171,7 +173,7 @@ public class GameController implements Initializable, Serializable {
       // don't let thread prevent JVM shutdown
       thread.setDaemon(true);
       thread.start();
-      setButtonClickForInitialDwellings();
+      TerrainController.setButtonClickForInitialDwellings(terrains,map,skipTurn,currentPlayer,roundController);
 
    }
 
@@ -182,12 +184,27 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void saveGameClicked() throws IOException {
-      System.out.println("Save Game Clicked");
       FileManager fm = new FileManager("12");
       fm.saveGame(this, roundController);
       System.out.println("saved");
    }
 
+   @FXML
+   public void loadGameClicked() throws IOException
+   {
+      FileManager fm = new FileManager("12");
+      fm.loadGame();
+      //
+      this.map = fm.getGameController().map;
+      this.religionArr = fm.getGameController().religionArr;
+      this.playerList = fm.getGameController().playerList;
+      this.cardsAndTiles = fm.getGameController().cardsAndTiles;
+      this.cardsAndTilesController = fm.getGameController().cardsAndTilesController;
+      this.playerHandler = fm.getGameController().playerHandler;
+      this.currentPlayer = fm.getGameController().currentPlayer;
+
+      this.roundController = fm.getRoundController();
+   }
    @FXML
    public void skipTurnClicked() {
       disableButtonClicks();
@@ -204,7 +221,7 @@ public class GameController implements Initializable, Serializable {
          System.out.println("current dwelling: " + currentPlayer.getDwellingNum());
          if (currentPlayer.getDwellingNum() < currentPlayer.getFaction().startingDwellingNum) {
             loadInitialMap();
-            setButtonClickForInitialDwellings();
+            TerrainController.setButtonClickForInitialDwellings(terrains,map,skipTurn,currentPlayer,roundController);
          }
          System.out.println("Current player is now: " + playerList[roundController.getCurrentPlayerId()].getNickName());
          System.out.println("--------------------------------------------------");
@@ -261,12 +278,14 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void terraformClicked() {
       ActionController.terraform(playerList, roundController.getCurrentPlayerId(), terrains, map, actions, cardsAndTiles,religionArr);
+
    }
 
    @FXML
    public void upgradeStructureClicked() {
 
       ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(), terrains, map, actions, cardsAndTiles, religionArr);
+
 //      ThreadB b = new ThreadB();
 //      b.start();
 //      synchronized (b) {
@@ -517,34 +536,6 @@ public class GameController implements Initializable, Serializable {
     * TODO
     * TAŞINACAK
     */
-   public void setButtonClickForInitialDwellings() {
-      for (int i = 0; i < ROW_NUMBER; i++) {
-         for (int j = 0; j < COLUMN_NUMBER; j++) {
-            final int row = i;
-            final int col = j;
-            if (terrains[i][j] != null) {
-               terrains[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
-                  @Override
-                  public void handle(MouseEvent event) {
-                     skipTurn.setDisable(false);
-                     map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
-                     playerHandler.buildInitialDwelling(playerList[roundController.getCurrentPlayerId()]);
-                     map.spaces[row][col].setPlayer(playerList[roundController.getCurrentPlayerId()]);
-
-                     TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
-                     map.spaces[row][col].setStructure("Dwelling");
-                     for (int i = 0; i < ROW_NUMBER; i++) {
-                        for (int j = 0; j < COLUMN_NUMBER; j++) {
-                           if (terrains[i][j] != null)
-                              terrains[i][j].setDisable(true);
-                        }
-                     }
-                  }
-               });
-            }
-         }
-      }
-   }
 
    /**
     * TODO
@@ -967,6 +958,18 @@ public class GameController implements Initializable, Serializable {
    public CardsAndTiles getCardsAndTiles() {
 
       return cardsAndTiles;
+   }
+
+   public void showTown(Button[][] terrains, Map map)
+
+   {
+      for (int i = 0; i < 9; i++) {
+         for (int j = 0; j < 13; j++) {
+            if( terrains[i][j] != null && map.spaces[i][j].isMarked())
+               terrains[i][j].getStyleClass().add("townShadow");
+         }
+      }
+
    }
 
 

@@ -88,7 +88,7 @@ public class ChooseFactionMenuController  implements Initializable, Serializable
         Scene scene = new Scene(root);
         stage.setScene(scene);
 
-
+        stage.setMaximized(true);
         stage.setX(0);
         stage.setY(0);
         stage.show();

@@ -10,15 +10,15 @@ import java.io.IOException;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.io.Serializable;
+
 
 public class FileManager {
-    private File save;
-    private GameController game;
-    private RoundController rounds;
+    private File fileName;
+    private GameController gameController;
+    private RoundController roundController;
 
     public FileManager(String gameId) throws IOException {
-        save = createSave(gameId);
+        fileName = createSave(gameId);
     }
 
     public static File createSave(String gameId) throws IOException  {
@@ -29,7 +29,7 @@ public class FileManager {
 
 
     public void saveGame(GameController game, RoundController rounds) throws IOException   {
-        FileOutputStream f = new FileOutputStream(save);
+        FileOutputStream f = new FileOutputStream(fileName);
         ObjectOutputStream o = new ObjectOutputStream(f);
         o.writeObject(game.getMap());
         o.writeObject(game.getPlayerList());
@@ -42,17 +42,18 @@ public class FileManager {
         f.close();
     }
 
-    public void loadGame() throws IOException{
+    public void loadGame( ) throws IOException{
         try {
-            FileInputStream fi = new FileInputStream(save);
+           //File save = new File( "12.txt");
+            FileInputStream fi = new FileInputStream(fileName);
             ObjectInputStream oi = new ObjectInputStream(fi);
-            this.game.setMap((Map) oi.readObject());
-            this.game.setPlayerList((Player[]) oi.readObject());
-            this.game.setCardsAndTiles((CardsAndTiles) oi.readObject());
-            this.game.setReligionArr((Religion[]) oi.readObject());
-            this.game.setPlayerHandler((PlayerHandler) oi.readObject());
-            this.game.setCurrentPlayer((Player) oi.readObject());
-            this.rounds = (RoundController) oi.readObject();
+            this.gameController.setMap((Map) oi.readObject());
+            this.gameController.setPlayerList((Player[]) oi.readObject());
+            this.gameController.setCardsAndTiles((CardsAndTiles) oi.readObject());
+            this.gameController.setReligionArr((Religion[]) oi.readObject());
+            this.gameController.setPlayerHandler((PlayerHandler) oi.readObject());
+            this.gameController.setCurrentPlayer((Player) oi.readObject());
+            this.roundController = (RoundController) oi.readObject();
             oi.close();
             fi.close();
 
@@ -66,11 +67,11 @@ public class FileManager {
         }
     }
 
-    public GameController getGame() {
-        return game;
+    public GameController getGameController() {
+        return gameController;
     }
 
-    public RoundController getRounds() {
-        return rounds;
+    public RoundController getRoundController() {
+        return roundController;
     }
 }

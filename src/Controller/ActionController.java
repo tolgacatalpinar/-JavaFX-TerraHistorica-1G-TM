@@ -422,12 +422,16 @@ public class ActionController implements Serializable {
                if(returnCase == 1){
                   Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                   for(int i = 0; i < adjacentPlayers.size(); i++) {
+
                      alert.setTitle("Offer for " + adjacentPlayers.get(i).getNickName());
                      alert.setHeaderText("Do you want to spend victory points to get power?");
                      alert.setContentText("Cost will be here");
                      Optional<ButtonType> result = alert.showAndWait();
                      if (((Optional) result).get() == ButtonType.OK) {
                         playerHandler.acceptPowerFromAdjacentOpponent(3, adjacentPlayers.get(i));
+                        playerArr[curPlayerId].getSpecialActionToken().setStrongholdAbility(true);
+                        System.out.println(playerArr[curPlayerId].getFaction().freeDwellingOnSpecialAction);
+                        playerArr[curPlayerId].getFaction().afterStronghold();
                      } else {
                         // ... user chose CANCEL or closed the dialog
                      }
