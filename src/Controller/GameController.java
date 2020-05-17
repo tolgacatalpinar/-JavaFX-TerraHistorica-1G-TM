@@ -334,15 +334,18 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void scoreTableClicked() {
       ReligionController religionController = new ReligionController();
-      //RAGGED ARRAYİN ANNESİ AĞLADI ALTAYA SELAM OLSUN
-      ArrayList<ArrayList<Integer>>[] scores = religionController.calculateReligionScores(religionArr, playerList);
+      //FOR RELIGION
+      ArrayList<ArrayList<Integer>>[] scoresReligion = religionController.calculateReligionScores(religionArr, playerList);
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Scores Of Religion");
-      alert.setContentText("For Islam: " + "1. PLAYERS " + scores[0].get(0)+ " 2. PLAYERS " + scores[0].get(1) +" 3. PLAYERS" + scores[0].get(2) +
-                           "\nFor Chris: " +  "1. PLAYERS " + scores[1].get(0)+ " 2. PLAYERS " + scores[1].get(1) +" 3. PLAYERS" + scores[1].get(2) +
-                           "\nFor Juda: " +  "1. PLAYERS " + scores[2].get(0)+ " 2. PLAYERS " + scores[2].get(1) +" 3. PLAYERS" + scores[2].get(2) +
-                           "\nFor Hindu: " +  "1. PLAYERS " + scores[3].get(0)+ " 2. PLAYERS " + scores[3].get(1) +" 3. PLAYERS" + scores[3].get(2));
+      alert.setContentText("For Islam: " + "1. PLAYERS " + scoresReligion[0].get(0)+ " 2. PLAYERS " + scoresReligion[0].get(1) +" 3. PLAYERS" + scoresReligion[0].get(2) +
+                           "\nFor Chris: " +  "1. PLAYERS " + scoresReligion[1].get(0)+ " 2. PLAYERS " + scoresReligion[1].get(1) +" 3. PLAYERS" + scoresReligion[1].get(2) +
+                           "\nFor Juda: " +  "1. PLAYERS " + scoresReligion[2].get(0)+ " 2. PLAYERS " + scoresReligion[2].get(1) +" 3. PLAYERS" + scoresReligion[2].get(2) +
+                           "\nFor Hindu: " +  "1. PLAYERS " + scoresReligion[3].get(0)+ " 2. PLAYERS " + scoresReligion[3].get(1) +" 3. PLAYERS" + scoresReligion[3].get(2));
       alert.showAndWait();
+      //FOR LONGEST PATH
+      ArrayList<Integer>[] scoresReligion = map.calculatePathScores(playerList);
+
    }
 
 

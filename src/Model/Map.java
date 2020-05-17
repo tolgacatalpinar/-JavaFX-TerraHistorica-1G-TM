@@ -3,6 +3,7 @@ package Model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Map implements Serializable {
    public Space[][] spaces;
@@ -470,5 +471,29 @@ public class Map implements Serializable {
             addEnabledTerrainsOnlyFourLevelShipping(space, reachableTerrains);
             break;
       }
+   }
+   public ArrayList<Integer>[] calculatePathScores(Player[] playerList){
+      int[] scoresPath = getLongestPathValues(playerList);
+      ArrayList<Integer>[] playerTable = new ArrayList[3];
+      playerTable[0] = (new ArrayList<Integer>());
+      playerTable[2] = (new ArrayList<Integer>());
+      playerTable[1] = (new ArrayList<Integer>());
+      int count = 0;
+      while(count < 3) {
+         int maxValue = 0;
+         for(int j = 0; j < scoresPath.length; j++) {
+            if(scoresPath[j] > maxValue) {
+               maxValue = scoresPath[j];
+            }
+         }
+         for(int k = 0; k < scoresPath.length; k++) {
+            if( scoresPath[k] == maxValue) {
+               playerTable[count].add(k);
+               scoresPath[k] = -1;
+            }
+         }
+         count++;
+      }
+      return playerTable;
    }
 }
