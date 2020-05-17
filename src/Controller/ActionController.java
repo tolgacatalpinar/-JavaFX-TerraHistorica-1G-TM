@@ -163,6 +163,8 @@ public class ActionController implements Serializable {
                      int returnCase =  playerHandler.buildStructure(playerArr[curPlayerId],"Dwelling",false);
                      if( returnCase == 1) {
                         TerrainController.buildDwelling(terrain, selectedChoice);
+                        space.setPlayer(playerArr[curPlayerId]);
+                        // now adjacentPlayerMethod does not return null;
                         space.setOccupied(true);
                         space.setStructure("Dwelling");
                         int townScore = map.calculateTownScore(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
@@ -295,8 +297,8 @@ public class ActionController implements Serializable {
                actiondone = true;
             }else
                System.out.println("Max reached");
-               stage.close();
-               actiondone = true;
+            stage.close();
+            actiondone = true;
 
          }
       });
@@ -678,38 +680,38 @@ public class ActionController implements Serializable {
       Player player = playerList[currentPlayerId];
       int priestCost = player.getFaction().SHIPPING_PRIEST_COST;
       int goldCost = player.getFaction().SHIPPING_GOLD_COST;
-         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-         alert.setTitle("Upgrade Shipping");
-         alert.setHeaderText("GOLD COST : " + goldCost + "\n" +
-                 "PRIEST COST : " + priestCost);
-         alert.setContentText("Do you wan to update your shipping level \n" +
-                 "Current Level : " + player.getShipLevel() + "\n" +
-                 "New Level : " + (player.getShipLevel() + 1));
-         Optional<ButtonType> result = alert.showAndWait();
-         if (result.get() == ButtonType.OK) {
-            alert.setTitle("Upgrading Shipping Level");
-            int returnCase = playerHandler.upgradeShippingLevel(player);
-            if (returnCase == 1) {
-               disableActions(actions);
-               alert.setHeaderText("Upgraded successfully \n");
-               alert.setContentText("");
-            } else if (returnCase == -1) {
-               alert.setHeaderText("No enough resources");
-               alert.setContentText("You have no required cost, priest, worker \n" +
-                       "GOLD COST : " + goldCost + "\n" +
-                       "PRIEST COST : " + priestCost + "\n");
-            } else if (returnCase == -2){
-               alert.setHeaderText("You have no ability to ship");
-               alert.setContentText("");
-            }
-            else{
-               alert.setHeaderText("You have max shipping level");
-               alert.setContentText("");
-            }
-            alert.showAndWait();
-         } else {
-            // ... user chose CANCEL or closed the dialog
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setTitle("Upgrade Shipping");
+      alert.setHeaderText("GOLD COST : " + goldCost + "\n" +
+              "PRIEST COST : " + priestCost);
+      alert.setContentText("Do you wan to update your shipping level \n" +
+              "Current Level : " + player.getShipLevel() + "\n" +
+              "New Level : " + (player.getShipLevel() + 1));
+      Optional<ButtonType> result = alert.showAndWait();
+      if (result.get() == ButtonType.OK) {
+         alert.setTitle("Upgrading Shipping Level");
+         int returnCase = playerHandler.upgradeShippingLevel(player);
+         if (returnCase == 1) {
+            disableActions(actions);
+            alert.setHeaderText("Upgraded successfully \n");
+            alert.setContentText("");
+         } else if (returnCase == -1) {
+            alert.setHeaderText("No enough resources");
+            alert.setContentText("You have no required cost, priest, worker \n" +
+                    "GOLD COST : " + goldCost + "\n" +
+                    "PRIEST COST : " + priestCost + "\n");
+         } else if (returnCase == -2){
+            alert.setHeaderText("You have no ability to ship");
+            alert.setContentText("");
          }
+         else{
+            alert.setHeaderText("You have max shipping level");
+            alert.setContentText("");
+         }
+         alert.showAndWait();
+      } else {
+         // ... user chose CANCEL or closed the dialog
+      }
    }
 
 
@@ -723,36 +725,36 @@ public class ActionController implements Serializable {
       int priestCost = player.getFaction().SPADE_PRIEST_COST;
       int goldCost = player.getFaction().SPADE_GOLD_COST;
       int workerCost = player.getFaction().SPADE_WORKER_COST;
-         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-         alert.setTitle("Upgrade Spade");
-         alert.setHeaderText("GOLD COST : " + goldCost + "\n" +
-                 "PRIEST COST : " + priestCost + "\n" +
-                 "WORKER COST : " + workerCost);
-         alert.setContentText("Do you want to update your spade level \n" +
-                 "Current Level : " + player.getSpadeLevel() + "\n"
-                 );
-         Optional<ButtonType> result = alert.showAndWait();
-         if (result.get() == ButtonType.OK) {
-            alert.setTitle("Update Spade level");
-            int returnCase = playerHandler.upgradeSpadeLevel(player);
-            if (returnCase == 1){
-               disableActions(actions);
-               alert.setHeaderText("Upgraded successfully \n");
-               alert.setContentText("");
-            }else if (returnCase == -1) {
-               alert.setHeaderText("No enough resources");
-               alert.setContentText("You have no required cost, priest, worker \n" +
-                       "GOLD COST : " + goldCost + "\n" +
-                       "PRIEST COST : " + priestCost + "\n" +
-                       "WORKER COST : " + workerCost);
-            }else{
-               alert.setHeaderText("You have max spade level");
-               alert.setContentText("");
-            }
-            alert.showAndWait();
-         } else {
-            // ... user chose CANCEL or closed the dialog
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setTitle("Upgrade Spade");
+      alert.setHeaderText("GOLD COST : " + goldCost + "\n" +
+              "PRIEST COST : " + priestCost + "\n" +
+              "WORKER COST : " + workerCost);
+      alert.setContentText("Do you want to update your spade level \n" +
+              "Current Level : " + player.getSpadeLevel() + "\n"
+      );
+      Optional<ButtonType> result = alert.showAndWait();
+      if (result.get() == ButtonType.OK) {
+         alert.setTitle("Update Spade level");
+         int returnCase = playerHandler.upgradeSpadeLevel(player);
+         if (returnCase == 1){
+            disableActions(actions);
+            alert.setHeaderText("Upgraded successfully \n");
+            alert.setContentText("");
+         }else if (returnCase == -1) {
+            alert.setHeaderText("No enough resources");
+            alert.setContentText("You have no required cost, priest, worker \n" +
+                    "GOLD COST : " + goldCost + "\n" +
+                    "PRIEST COST : " + priestCost + "\n" +
+                    "WORKER COST : " + workerCost);
+         }else{
+            alert.setHeaderText("You have max spade level");
+            alert.setContentText("");
          }
+         alert.showAndWait();
+      } else {
+         // ... user chose CANCEL or closed the dialog
+      }
 
 
 

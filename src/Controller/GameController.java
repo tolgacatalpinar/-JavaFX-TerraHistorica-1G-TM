@@ -103,7 +103,7 @@ public class GameController implements Initializable, Serializable {
 
    @Override
    public void initialize(URL url, ResourceBundle resourceBundle) {
-      SoundController.playGameMusic(30);
+      //SoundController.playGameMusic(30);
 
       actions = new Button[]{specialActions, terraform, upgradeShipping, upgradeStruct, sendPriest, powerActions, upgradeSpade, passRound};
       System.out.println("Initialize is called");
@@ -537,6 +537,8 @@ public class GameController implements Initializable, Serializable {
                      skipTurn.setDisable(false);
                      map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
                      playerHandler.buildInitialDwelling(playerList[roundController.getCurrentPlayerId()]);
+                     map.spaces[row][col].setPlayer(playerList[roundController.getCurrentPlayerId()]);
+
                      TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
                      map.spaces[row][col].setStructure("Dwelling");
                      for (int i = 0; i < ROW_NUMBER; i++) {
