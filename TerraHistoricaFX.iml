@@ -23,6 +23,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages/swampWithStructure" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Images/TerrainWithStructureImages/wastelandWithStructure" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Sounds" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Images/DialogueImages" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
