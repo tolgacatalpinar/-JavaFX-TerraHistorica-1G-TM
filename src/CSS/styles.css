@@ -1,5 +1,5 @@
 .test{
-    -fx-background-color: #D5563B;
+    -fx-background-color: rgba(76, 175, 80, 0.3);
 }
 .button {
     -fx-background-color: transparent;
