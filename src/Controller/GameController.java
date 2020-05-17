@@ -422,6 +422,8 @@ public class GameController implements Initializable, Serializable {
                }
             }
             spaces[i][j] = space;
+            space.setX(i);
+            space.setY(j);
          }
       }
       for (int i = 0; i < ROW_NUMBER; i++) {
@@ -890,8 +892,6 @@ public class GameController implements Initializable, Serializable {
             option = new HBox(power_image, label1, power_middle,label2 );
          }
          GridPane tempPane = new GridPane();
-         option.setMaxWidth(tempPane.getWidth() / 3);
-         option.setMaxHeight(tempPane.getHeight() / 3);
          tempPane.add(option,0,0);
 
          tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
