@@ -145,6 +145,7 @@ public class GameController implements Initializable, Serializable {
                      borderPane.setBottom(factionsView);
                      borderPane.setPadding(new Insets(0,0,50,0));
                      displayPlayerTurn(playerViewList);
+                     showTown(terrains, map);
 //                     ImageView imview = new ImageView();
 //                     imview.setImage(new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg"));
 //                     imview.setFitHeight(150);
@@ -261,12 +262,14 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void terraformClicked() {
       ActionController.terraform(playerList, roundController.getCurrentPlayerId(), terrains, map, actions, cardsAndTiles,religionArr);
+
    }
 
    @FXML
    public void upgradeStructureClicked() {
 
       ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(), terrains, map, actions, cardsAndTiles, religionArr);
+
 //      ThreadB b = new ThreadB();
 //      b.start();
 //      synchronized (b) {
@@ -967,6 +970,18 @@ public class GameController implements Initializable, Serializable {
    public CardsAndTiles getCardsAndTiles() {
 
       return cardsAndTiles;
+   }
+
+   public void showTown(Button[][] terrains, Map map)
+
+   {
+      for (int i = 0; i < 9; i++) {
+         for (int j = 0; j < 13; j++) {
+            if( terrains[i][j] != null && map.spaces[i][j].isMarked())
+               terrains[i][j].getStyleClass().add("townShadow");
+         }
+      }
+
    }
 
 
