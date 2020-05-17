@@ -5,7 +5,7 @@
 <?import javafx.scene.text.*?>
 
 <Pane id="vbox" maxHeight="1080.0" maxWidth="1920.0" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../../CSS/MainMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
-<VBox layoutX="32.0" layoutY="317.0" prefHeight="472.0" prefWidth="771.0">
+<VBox layoutX="75.0" layoutY="395.0" prefHeight="472.0" prefWidth="771.0">
 
         <children>
 
