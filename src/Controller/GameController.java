@@ -22,6 +22,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -34,6 +35,8 @@ public class GameController implements Initializable, Serializable {
    final int COLUMN_NUMBER = 13;
 
    private int selection = -1;
+   public FileManager fm = new FileManager();
+   public File save = fm.createSave("15");
 
    @FXML
    Pane mapPane;
@@ -78,7 +81,7 @@ public class GameController implements Initializable, Serializable {
    ArrayList<PlayerView> playerViewList;
    Button[][] terrains;
    Button[] actions;
-   Map map;
+   public Map map;
    Religion[] religionArr;
    Player[] playerList;
    CardsAndTiles cardsAndTiles;
@@ -184,26 +187,24 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void saveGameClicked() throws IOException {
-      FileManager fm = new FileManager("12");
-      fm.saveGame(this, roundController);
+      fm.saveGame(this, roundController,save);
       System.out.println("saved");
    }
 
    @FXML
    public void loadGameClicked() throws IOException
    {
-      FileManager fm = new FileManager("12");
-      fm.loadGame();
-      //
-      this.map = fm.getGameController().map;
-      this.religionArr = fm.getGameController().religionArr;
-      this.playerList = fm.getGameController().playerList;
-      this.cardsAndTiles = fm.getGameController().cardsAndTiles;
-      this.cardsAndTilesController = fm.getGameController().cardsAndTilesController;
-      this.playerHandler = fm.getGameController().playerHandler;
-      this.currentPlayer = fm.getGameController().currentPlayer;
 
-      this.roundController = fm.getRoundController();
+         this.map = fm.loadGame(save, this).map;
+         System.out.println(map.spaces[3][2].getType());
+         this.religionArr = fm.loadGame(save, this).religionArr;
+         this.playerList = fm.loadGame(save, this).playerList;
+         System.out.println(playerList[0].getGoldNum());
+         this.cardsAndTiles = fm.loadGame(save, this).cardsAndTiles;
+         this.cardsAndTilesController = fm.loadGame(save, this).cardsAndTilesController;
+         this.playerHandler = fm.loadGame(save, this).playerHandler;
+         this.currentPlayer = fm.loadGame(save, this).currentPlayer;
+         this.roundController = fm.loadGame(save, this).roundController;
    }
    @FXML
    public void skipTurnClicked() {
@@ -1042,6 +1043,8 @@ public class GameController implements Initializable, Serializable {
       return currentPlayer;
    }
 
+   public RoundController getRoundController() {return roundController;}
+
    public void setMap(Map map) {
       this.map = map;
    }
@@ -1065,5 +1068,9 @@ public class GameController implements Initializable, Serializable {
    public void setCurrentPlayer(Player p1) {
       this.currentPlayer = p1;
    }
+
+   public void setRoundController(RoundController r1){this.roundController = r1;}
+
+
 
 }

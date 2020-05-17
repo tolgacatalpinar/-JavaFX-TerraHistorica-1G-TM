@@ -13,22 +13,19 @@ import java.io.FileNotFoundException;  // Import this class to handle errors
 
 
 public class FileManager {
-    private File fileName;
-    private GameController gameController;
-    private RoundController roundController;
 
-    public FileManager(String gameId) throws IOException {
-        fileName = createSave(gameId);
+    public FileManager() throws IOException {
+        System.out.println("constructor");
     }
 
-    public static File createSave(String gameId) throws IOException  {
+    public  File createSave(String gameId) throws IOException  {
         File save = new File( gameId + ".txt");
         save.createNewFile();
         return save;
     }
 
 
-    public void saveGame(GameController game, RoundController rounds) throws IOException   {
+    public  void saveGame(GameController game, RoundController rounds, File fileName) throws IOException   {
         FileOutputStream f = new FileOutputStream(fileName);
         ObjectOutputStream o = new ObjectOutputStream(f);
         o.writeObject(game.getMap());
@@ -37,25 +34,28 @@ public class FileManager {
         o.writeObject(game.getReligionArr());
         o.writeObject(game.getPlayerHandler());
         o.writeObject(game.getCurrentPlayer());
-        o.writeObject(rounds);
+        o.writeObject(game.getRoundController());
         o.close();
         f.close();
     }
 
-    public void loadGame( ) throws IOException{
+    public static GameController loadGame(File fileName, GameController gameController) throws IOException{
         try {
            //File save = new File( "12.txt");
             FileInputStream fi = new FileInputStream(fileName);
             ObjectInputStream oi = new ObjectInputStream(fi);
-            this.gameController.setMap((Map) oi.readObject());
-            this.gameController.setPlayerList((Player[]) oi.readObject());
-            this.gameController.setCardsAndTiles((CardsAndTiles) oi.readObject());
-            this.gameController.setReligionArr((Religion[]) oi.readObject());
-            this.gameController.setPlayerHandler((PlayerHandler) oi.readObject());
-            this.gameController.setCurrentPlayer((Player) oi.readObject());
-            this.roundController = (RoundController) oi.readObject();
+
+             gameController.setMap((Map)oi.readObject());
+             gameController.setPlayerList((Player[]) oi.readObject());
+             gameController.setCardsAndTiles((CardsAndTiles) oi.readObject());
+             gameController.setReligionArr((Religion[]) oi.readObject());
+             gameController.setPlayerHandler((PlayerHandler) oi.readObject());
+             gameController.setCurrentPlayer((Player) oi.readObject());
+             gameController.setRoundController((RoundController) oi.readObject());
+
             oi.close();
             fi.close();
+            return gameController;
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
@@ -65,13 +65,6 @@ public class FileManager {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }
-
-    public GameController getGameController() {
-        return gameController;
-    }
-
-    public RoundController getRoundController() {
-        return roundController;
+        return null;
     }
 }
