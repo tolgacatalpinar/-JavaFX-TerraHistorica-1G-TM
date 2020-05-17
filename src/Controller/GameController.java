@@ -173,7 +173,7 @@ public class GameController implements Initializable, Serializable {
       // don't let thread prevent JVM shutdown
       thread.setDaemon(true);
       thread.start();
-      TerrainController.setButtonClickForInitialDwellings(terrains,map,skipTurn,currentPlayer,roundController);
+      setButtonClickForInitialDwellings();
 
    }
 
@@ -221,7 +221,7 @@ public class GameController implements Initializable, Serializable {
          System.out.println("current dwelling: " + currentPlayer.getDwellingNum());
          if (currentPlayer.getDwellingNum() < currentPlayer.getFaction().startingDwellingNum) {
             loadInitialMap();
-            TerrainController.setButtonClickForInitialDwellings(terrains,map,skipTurn,currentPlayer,roundController);
+            setButtonClickForInitialDwellings();
          }
          System.out.println("Current player is now: " + playerList[roundController.getCurrentPlayerId()].getNickName());
          System.out.println("--------------------------------------------------");
@@ -271,7 +271,6 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void upgradeSpadeClicked() {
-
       ActionController.showUpdateSpadeDialogs(playerList, roundController.getCurrentPlayerId(), actions);
    }
 
@@ -398,7 +397,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void specialActionClicked() {
-      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId());
+      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId(),map,terrains,skipTurn,roundController);
    }
 
    public void createSpaces() {
@@ -536,6 +535,34 @@ public class GameController implements Initializable, Serializable {
     * TODO
     * TAŞINACAK
     */
+   public  void setButtonClickForInitialDwellings() {
+      for (int i = 0; i < ROW_NUMBER; i++) {
+         for (int j = 0; j < COLUMN_NUMBER; j++) {
+            final int row = i;
+            final int col = j;
+            if (terrains[i][j] != null) {
+               terrains[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                  @Override
+                  public void handle(MouseEvent event) {
+                     skipTurn.setDisable(false);
+                     map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
+                     playerHandler.buildInitialDwelling(playerList[roundController.getCurrentPlayerId()]);
+                     map.spaces[row][col].setPlayer(playerList[roundController.getCurrentPlayerId()]);
+                     TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
+                     map.spaces[row][col].setStructure("Dwelling");
+                     for (int i = 0; i < ROW_NUMBER; i++) {
+                        for (int j = 0; j < COLUMN_NUMBER; j++) {
+                           if (terrains[i][j] != null)
+                              terrains[i][j].setDisable(true);
+                        }
+                     }
+                  }
+               });
+            }
+         }
+      }
+   }
+
 
    /**
     * TODO

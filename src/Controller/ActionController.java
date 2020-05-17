@@ -2,6 +2,7 @@ package Controller;
 
 import Model.*;
 import Model.CardsAndTiles.CardsAndTiles;
+import Model.FactionSubclasses.*;
 import Model.Map;
 import View.ActionsViews.SpecialActionView;
 import javafx.event.Event;
@@ -15,6 +16,8 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
@@ -422,16 +425,12 @@ public class ActionController implements Serializable {
                if(returnCase == 1){
                   Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                   for(int i = 0; i < adjacentPlayers.size(); i++) {
-
                      alert.setTitle("Offer for " + adjacentPlayers.get(i).getNickName());
                      alert.setHeaderText("Do you want to spend victory points to get power?");
                      alert.setContentText("Cost will be here");
                      Optional<ButtonType> result = alert.showAndWait();
                      if (((Optional) result).get() == ButtonType.OK) {
                         playerHandler.acceptPowerFromAdjacentOpponent(3, adjacentPlayers.get(i));
-                        playerArr[curPlayerId].getSpecialActionToken().setStrongholdAbility(true);
-                        System.out.println(playerArr[curPlayerId].getFaction().freeDwellingOnSpecialAction);
-                        playerArr[curPlayerId].getFaction().afterStronghold();
                      } else {
                         // ... user chose CANCEL or closed the dialog
                      }
@@ -439,6 +438,8 @@ public class ActionController implements Serializable {
                   disableActions(actions);
                   TerrainController.upgradeToStronghold(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                   space.setStructure("Stronghold");
+                  playerArr[curPlayerId].getSpecialActionToken().setStrongholdAbility(true);
+
                   int townScore = map.calculateTownScore(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
                   if(townScore >= playerArr[curPlayerId].getTownPowerValue()){
                      playerHandler.townFound(playerArr[curPlayerId]);
@@ -495,8 +496,8 @@ public class ActionController implements Serializable {
 
    }
 
-   public static void upgradeToSanctuary(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions,int x, int y) {
-      PlayerHandler playerHandler = new PlayerHandler();
+      public static void upgradeToSanctuary(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions,int x, int y) {
+         PlayerHandler playerHandler = new PlayerHandler();
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
 
@@ -601,12 +602,54 @@ public class ActionController implements Serializable {
    public void skipTurn(int curPlayerId, Player[] playerArr){
 
    }
+   public static void strongholdAbility(Button[][] terrains, Map map, Button skipturn, Player current, RoundController roundController) throws IOException {
+      if(current.getFaction() instanceof MorganLeFay){
+         TerrainController.setButtonClickForInitialDwellings(terrains,map,skipturn,current,roundController);
+      }
+      else if(current.getFaction() instanceof AliesterCrowley){
+
+      }
+      else if(current.getFaction() instanceof AmerigoVespucci){
+
+      }
+      else if(current.getFaction() instanceof Buddha){
+
+      }
+      else if(current.getFaction() instanceof DariusTheGreat){
+
+      }
+      else if(current.getFaction() instanceof ErikTheRed){
+
+      }
+      else if(current.getFaction() instanceof Gilgamesh){
+
+      }
+      else if(current.getFaction() instanceof HelenOfTroy){
+
+      }
+      else if(current.getFaction() instanceof HusseinTheTeaMaker){
+
+      }
+      else if(current.getFaction() instanceof MarieCurie){
+
+      }
+      else if(current.getFaction() instanceof Ramesses){
+
+      }
+      else if(current.getFaction() instanceof StPatrick){
+
+      }
+      else if(current.getFaction() instanceof VladTheImpaler){
+
+      }
+
+   }
 
 
    /**TODO
     * TAŞINACAK
     */
-   public static void showSpeacialActions(Player[] playerList,Religion[] religions,int currentPlayerId) {
+   public static void showSpeacialActions(Player[] playerList,Religion[] religions,int currentPlayerId,Map map,Button[][] terrains,Button skipturn,RoundController roundController) {
       VBox wholeFavor = new VBox();
       HBox firstRow = new HBox();
       HBox secondRow = new HBox();
@@ -617,6 +660,13 @@ public class ActionController implements Serializable {
       Player currentPlayer = playerList[currentPlayerId];
       special1.getChildren().add(new SpecialActionView("Spade Action"));
       final int[] choice = {0};
+      final Stage dialog = new Stage();
+
+      Scene dialogScene = new Scene(wholeFavor, 1100, 600);
+      dialog.setScene(dialogScene);
+      dialog.setTitle("Special Actions");
+      dialog.setResizable(false);
+      dialog.initModality(Modality.APPLICATION_MODAL);
       special1.setOnMouseClicked(new EventHandler<Event>() {
          @Override
          public void handle(Event event) {
@@ -664,7 +714,6 @@ public class ActionController implements Serializable {
                System.out.println("Stronghold Ability");
                choice[0] = 3;
                System.out.println(choice[0]);
-
                event.consume();
             } else {
                Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -709,6 +758,11 @@ public class ActionController implements Serializable {
                event.consume();
             } else if (choice[0] == 3) {
                currentPlayer.getSpecialActionToken().isStrongholdAbility = false;
+               try {
+                  strongholdAbility(terrains,map,skipturn,playerList[currentPlayerId],roundController);
+               } catch (IOException e) {
+                  e.printStackTrace();
+               }
                event.consume();
             } else if (choice[0] == 4) {
                currentPlayer.getSpecialActionToken().isFactionAbility = false;
@@ -720,8 +774,10 @@ public class ActionController implements Serializable {
                alert.setHeaderText("You cannot do this action!!");
                alert.showAndWait();
             }
+            dialog.close();
          }
       });
+
       firstRow.getChildren().addAll(special1, special2);
       secondRow.getChildren().addAll(special3, special4);
       wholeFavor.getChildren().addAll(firstRow, secondRow);
@@ -730,12 +786,7 @@ public class ActionController implements Serializable {
 
       wholeFavor.setMinHeight(800);
       wholeFavor.setMinWidth(1200);
-      final Stage dialog = new Stage();
-      dialog.initModality(Modality.APPLICATION_MODAL);
-      Scene dialogScene = new Scene(wholeFavor, 1100, 600);
-      dialog.setScene(dialogScene);
-      dialog.setTitle("Special Actions");
-      dialog.setResizable(false);
+
       wholeFavor.setBackground(new Background(new BackgroundImage(new Image("favor_tiles_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
               BackgroundSize.DEFAULT)));
       dialog.show();
