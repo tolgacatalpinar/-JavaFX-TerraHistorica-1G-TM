@@ -25,7 +25,6 @@ public class MarieCurie extends Faction { //alchemist
       spadeNeededToTerraformDesert = 2;
       tradeCoinsForVictoryPoint = true;
       tradeVictoryPointForCoin = true;
-      getVictoryPointsAfterTown = 12;
       sorcerersStone = true;
   }
 

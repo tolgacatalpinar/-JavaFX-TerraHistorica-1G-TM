@@ -33,7 +33,6 @@ public class AliesterCrowley extends Faction {
     }
 
     public void afterStronghold() {
-        giveWorkersForPriest = true;
         increaseShippingAfterStronghold = true;
     }
 }

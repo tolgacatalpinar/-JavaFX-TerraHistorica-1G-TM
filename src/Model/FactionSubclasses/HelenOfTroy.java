@@ -28,6 +28,5 @@ public class HelenOfTroy extends Faction { // auren
 
     public void afterStronghold() {
         advanceOnCultTrackValue = 2;
-        gainFavorTileAfterStronghold = true;
     }
 }
