@@ -624,6 +624,7 @@ public class ActionController implements Serializable {
                         TerrainController.disableButtonClicks(terrains);
                         TerrainController.enableTerrains(terrains, map);
                         disableActions(actions);
+                        current.setDwellingNum(current.getDwellingNum()+1);
                      }
                   });
                }
