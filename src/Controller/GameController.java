@@ -140,7 +140,12 @@ public class GameController implements Initializable, Serializable {
                      factionsView.getChildren().addAll(playerViewList);
                      //displayPlayerTurn(playerViewList);
                      factionsView.setPadding(new Insets(0, 0, 0, 100));
+                     //factionsView.setStyle("fx-margin-bottom: 150;");
+//                     VBox.setMargin(factionsView, new Insets(0,0,1500,0));
+                     //factionsView.setMargin(,);
+
                      borderPane.setBottom(factionsView);
+                     borderPane.setPadding(new Insets(0,0,50,0));
                      displayPlayerTurn(playerViewList);
 //                     ImageView imview = new ImageView();
 //                     imview.setImage(new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg"));
@@ -956,6 +961,8 @@ public class GameController implements Initializable, Serializable {
       return cardsAndTiles;
    }
 
+
+
    public Map getMap() {
       return map;
    }
@@ -999,5 +1006,7 @@ public class GameController implements Initializable, Serializable {
    public void setCurrentPlayer(Player p1) {
       this.currentPlayer = p1;
    }
+
+
 
 }

@@ -25,61 +25,75 @@ public class PlayerView extends BorderPane {
    ImageView imageView;
    String playerName;
    Player player;
-   final int IMAGE_SIZE = 30;
+   final int IMAGE_SIZE = 20;
 
    public PlayerView(Player player) {
-      this.setBackground(new Background(new BackgroundFill(Color.DARKBLUE, new CornerRadii(0), Insets.EMPTY)));
+
+      Image imProfile = new Image(getClass().getResourceAsStream("/Images/a.png"));
+//      ImageView imView = new ImageView(imProfile);
+//      imView.setFitWidth(50);
+
+      BackgroundImage bgImg = new BackgroundImage( imProfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(100,100,true,true,false, true));
+
+      Background bg = new Background(bgImg);
+
+      this.setBackground(bg);
+
       playerName = player.getNickName();
+
       this.player = player;
+
       Faction faction = player.getFaction();
+
       imageView = new ImageView();
-      if (faction instanceof AliesterCrowley) {
-         Image image = new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg");
-         addImage(image);
-      } else if (faction instanceof AmerigoVespucci) {
-         Image image = new Image("file:src/Images/FactionImages/Image_AmerigoVespucci.jpeg");
-         addImage(image);
-      } else if (faction instanceof Buddha) {
-         Image image = new Image("file:src/Images/FactionImages/Image_Buddha.jpeg");
-         addImage(image);
-      } else if (faction instanceof DariusTheGreat) {
-         Image image = new Image("file:src/Images/FactionImages/Image_DariusTheGreat.jpeg");
-         addImage(image);
-      } else if (faction instanceof ErikTheRed) {
-         Image image = new Image("file:src/Images/FactionImages/Image_ErikTheRed.jpeg");
-         addImage(image);
-      } else if (faction instanceof Gilgamesh) {
-         Image image = new Image("file:src/Images/FactionImages/Image_Gilgamesh.jpeg");
-         addImage(image);
-      } else if (faction instanceof HelenOfTroy) {
-         Image image = new Image("file:src/Images/FactionImages/Image_HelenOfTroy.jpeg");
-         addImage(image);
-      } else if (faction instanceof HusseinTheTeaMaker) {
-         Image image = new Image("file:src/Images/FactionImages/Image_HusseinTheTeaMaker.jpeg");
-         addImage(image);
-      } else if (faction instanceof LeonardoDaVinci) {
-         Image image = new Image("file:src/Images/FactionImages/Image_LeonardoDaVinci.jpeg");
-         addImage(image);
-      } else if (faction instanceof MarieCurie) {
-         Image image = new Image("file:src/Images/FactionImages/Image_MarieCurie.jpeg");
-         addImage(image);
-      } else if (faction instanceof MorganLeFay) {
-         Image image = new Image("file:src/Images/FactionImages/Image_MorganLeFay.jpeg");
-         addImage(image);
-      } else if (faction instanceof Ramesses) {
-         Image image = new Image("file:src/Images/FactionImages/Image_Ramesses.jpeg");
-         addImage(image);
-      } else if (faction instanceof StPatrick) {
-         Image image = new Image("file:src/Images/FactionImages/Image_StPatrick.jpeg");
-         addImage(image);
-      } else if (faction instanceof VladTheImpaler) {
-         Image image = new Image("file:src/Images/FactionImages/Image_VladTheImpaler.jpeg");
-         addImage(image);
-      }
+
+//      if (faction instanceof AliesterCrowley) {
+//         Image image = new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg");
+//         addImage(image);
+//      } else if (faction instanceof AmerigoVespucci) {
+//         Image image = new Image("file:src/Images/FactionImages/Image_AmerigoVespucci.jpeg");
+//         addImage(image);
+//      } else if (faction instanceof Buddha) {
+//         Image image = new Image("file:src/Images/FactionImages/Image_Buddha.jpeg");
+//         addImage(image);
+//      } else if (faction instanceof DariusTheGreat) {
+//         Image image = new Image("file:src/Images/FactionImages/Image_DariusTheGreat.jpeg");
+//         addImage(image);
+//      } else if (faction instanceof ErikTheRed) {
+//         Image image = new Image("file:src/Images/FactionImages/Image_ErikTheRed.jpeg");
+//         addImage(image);
+//      } else if (faction instanceof Gilgamesh) {
+//         Image image = new Image("file:src/Images/FactionImages/Image_Gilgamesh.jpeg");
+//         addImage(image);
+//      } else if (faction instanceof HelenOfTroy) {
+//         Image image = new Image("file:src/Images/FactionImages/Image_HelenOfTroy.jpeg");
+//         addImage(image);
+//      } else if (faction instanceof HusseinTheTeaMaker) {
+//         Image image = new Image("file:src/Images/FactionImages/Image_HusseinTheTeaMaker.jpeg");
+//         addImage(image);
+//      } else if (faction instanceof LeonardoDaVinci) {
+//         Image image = new Image("file:src/Images/FactionImages/Image_LeonardoDaVinci.jpeg");
+//         addImage(image);
+//      } else if (faction instanceof MarieCurie) {
+//         Image image = new Image("file:src/Images/FactionImages/Image_MarieCurie.jpeg");
+//         addImage(image);
+//      } else if (faction instanceof MorganLeFay) {
+//         Image image = new Image("file:src/Images/FactionImages/Image_MorganLeFay.jpeg");
+//         addImage(image);
+//      } else if (faction instanceof Ramesses) {
+//         Image image = new Image("file:src/Images/FactionImages/Image_Ramesses.jpeg");
+//         addImage(image);
+//      } else if (faction instanceof StPatrick) {
+//         Image image = new Image("file:src/Images/FactionImages/Image_StPatrick.jpeg");
+//         addImage(image);
+//      } else if (faction instanceof VladTheImpaler) {
+//         Image image = new Image("file:src/Images/FactionImages/Image_VladTheImpaler.jpeg");
+//         addImage(image);
+//      }
       //addIncomes();
       //addResources();
       addAllResources();
-      this.setPadding(new Insets(20, 50, 20, 0));
+      this.setPadding(new Insets(20, 50, 0, 0));
    }
 
    public void addImage(Image image) {
@@ -93,6 +107,7 @@ public class PlayerView extends BorderPane {
    }
    public void addAllResources()
    {
+
       VBox resources = new VBox();
       ResourceLabel playerName = new ResourceLabel(this.playerName);
       playerName.setTextFill(Color.WHITE);
@@ -106,10 +121,10 @@ public class PlayerView extends BorderPane {
 //      HBox cult = getSingleResourceView(new Image("gold.png"), player.getC(), player.getGoldIncome());
 //      HBox power = getSingleResourceView(new Image("gold.png"), player.getPower(), player.getGoldIncome());
 
-
       resources.getChildren().addAll(gold, priest, worker, power, victory, spade);
-      resources.setPadding( new Insets(10, 0, 0, 10));
+      resources.setPadding( new Insets(10, 0, 0, 150));
       setRight(resources);
+
    }
    public HBox getSingleResourceView( Image image, int number1)
    {
