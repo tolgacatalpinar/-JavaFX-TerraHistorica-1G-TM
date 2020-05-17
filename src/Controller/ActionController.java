@@ -165,8 +165,9 @@ public class ActionController implements Serializable {
                         TerrainController.buildDwelling(terrain, selectedChoice);
                         space.setOccupied(true);
                         space.setStructure("Dwelling");
-                        map.isTown(space, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                         int townScore = map.calculateTownScore2(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
+                        if(townScore >= playerArr[curPlayerId].getTownPowerValue())
+                           playerHandler.townFound(playerArr[curPlayerId]);
                         System.out.println("Town score is *************"+ townScore);
                      }else if( returnCase == -1){
                         System.out.println("Not enough resources");
@@ -276,8 +277,9 @@ public class ActionController implements Serializable {
                TerrainController.upgradeToTradingPost(terrain, playerArr[currentPlayerId].getFaction().TERRAIN_TILE);
                space.setStructure("Trading Post");
                stage.close();
-               map.isTown(space, playerArr[currentPlayerId].getFaction().TERRAIN_TILE);
                int townScore = map.calculateTownScore2(x,y, playerArr[currentPlayerId].getFaction().TERRAIN_TILE, playerArr[currentPlayerId].getTownPowerValue());
+               if(townScore >= playerArr[currentPlayerId].getTownPowerValue())
+                  playerHandler.townFound(playerArr[currentPlayerId]);
                System.out.println("Town score is *************"+ townScore);
                actiondone = true;
             }else if (returnCase == -1){
@@ -342,9 +344,10 @@ public class ActionController implements Serializable {
                   CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
                   cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
                   space.setStructure("Temple");
-                  map.isTown(space, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                   stage.close();
                   int townScore = map.calculateTownScore2(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
+                  if(townScore >= playerArr[curPlayerId].getTownPowerValue())
+                     playerHandler.townFound(playerArr[curPlayerId]);
                   System.out.println("Town score is *************"+ townScore);
                   actiondone = true;
                }else if (returnCase == -1){
@@ -367,8 +370,9 @@ public class ActionController implements Serializable {
                   disableActions(actions);
                   TerrainController.upgradeToStronghold(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                   space.setStructure("Stronghold");
-                  map.isTown(space, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                   int townScore = map.calculateTownScore2(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
+                  if(townScore >= playerArr[curPlayerId].getTownPowerValue())
+                     playerHandler.townFound(playerArr[curPlayerId]);
                   System.out.println("Town score is *************"+ townScore);
                }else if (returnCase == -1){
                   System.out.println("Not enough resources");
@@ -446,8 +450,9 @@ public class ActionController implements Serializable {
                CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
                cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
                space.setStructure("Sanctuary");
-               map.isTown(space, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                int townScore = map.calculateTownScore2(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
+               if(townScore >= playerArr[curPlayerId].getTownPowerValue())
+                  playerHandler.townFound(playerArr[curPlayerId]);
                System.out.println("Town score is *************"+ townScore);
             }else if (returnCase == -1){
                System.out.println("Not enough resources");
@@ -508,10 +513,6 @@ public class ActionController implements Serializable {
    public void skipTurn(int curPlayerId, Player[] playerArr){
 
    }
-
-
-
-
 
 
    /**TODO

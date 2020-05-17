@@ -4,6 +4,7 @@ import Controller.GameController;
 import Model.CardsAndTiles.*;
 import Model.GameHandler;
 import Model.Player;
+import Model.PlayerHandler;
 import Model.Religion;
 import View.CardsAndTilesViews.BonusCardView;
 import View.CardsAndTilesViews.FavorTileView;
@@ -377,8 +378,8 @@ public class CardsAndTilesController {
                         int chosen = getSelectionTown();
                         System.out.println();
                         int[] returnInfo;
+                        cardsAndTiles.playerChooseTownTile(cardsAndTiles.townTiles.get(selectionTown),current);
                         if(cardsAndTiles.townTiles.get(selectionTown).getIslamPoint() != 0){
-                            cardsAndTiles.playerChooseTownTile(cardsAndTiles.townTiles.get(selectionTown),current);
                             System.out.println("Selected " + chosen);
                             for(int i = 0; i < 4;i++){
                                 returnInfo=religions[i].updateReligion(cardsAndTiles.townTiles.get(selectionTown).getIslamPoint(),current.getPlayerId(),current.getKey());

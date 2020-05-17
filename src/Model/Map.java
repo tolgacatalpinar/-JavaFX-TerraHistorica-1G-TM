@@ -364,22 +364,6 @@ public class Map implements Serializable {
 
    }
 
-   public boolean isTown(Space space1, String playerColor) {
-      int num = calculateTownScore(space1, playerColor,0);
-      System.out.println(num);
-      System.out.println("Town score is  " + num);
-      if (num <= 6) {
-         System.out.println("Town değil");
-         visited.clear();
-         return true;
-      } else {
-         System.out.println("Town oldu!");
-         visited.clear();
-         return false;
-      }
-   }
-
-
    public void transformTerrain(Space original, String newType) {
       original.setType(newType);
    }
