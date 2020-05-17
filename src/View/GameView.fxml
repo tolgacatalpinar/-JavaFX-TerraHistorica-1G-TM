@@ -4,11 +4,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<?import javafx.scene.media.MediaPlayer?>
-<?import javafx.scene.media.Media?>
-<?import javafx.scene.media.MediaView?>
+<BorderPane fx:id="borderPane" prefHeight="720.0" prefWidth="1280.0" styleClass="paneBackground" stylesheets="@../CSS/styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GameController">
 
-<BorderPane fx:id="borderPane" prefHeight="1080.0" prefWidth="1920.0" styleClass="paneBackground" stylesheets="@../CSS/styles.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GameController">
     <top>
         <HBox alignment="CENTER">
             <Button fx:id="religions" onMouseClicked="#religionsClicked"  prefHeight="50" prefWidth="250" style="-fx-background-color: transparent;" text="Religions" textFill="WHITE">
