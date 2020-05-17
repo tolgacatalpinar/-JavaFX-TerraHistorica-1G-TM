@@ -28,15 +28,14 @@ import java.util.ArrayList;
 
 public class CardsAndTilesController {
     private  int selectionBonus = -1;
-
+    private  int selectionFavorTile = -1;
     public  int getSelectionFavorTile() {
         return selectionFavorTile;
     }
 
     public  void setSelectionFavorTile(int selectionFavorTile) {this.selectionFavorTile = selectionFavorTile;
     }
-
-    private  int selectionFavorTile = -1;
+    private int selectionTown = -1;
     public void showBonusCardsTable(CardsAndTiles cardsAndTiles,Player current,boolean check)
     {
         selectionBonus = -1;
@@ -296,9 +295,17 @@ public class CardsAndTilesController {
 
     }
 
-    public void showTownTilesTable(CardsAndTiles cardsAndTiles,boolean check) {
+    public int getSelectionTown() {
+        return selectionTown;
+    }
 
-        setSelectionFavorTile(-1);
+    public void setSelectionTown(int selectionTown) {
+        this.selectionTown = selectionTown;
+    }
+
+    public void showTownTilesTable(CardsAndTiles cardsAndTiles, Player current, Religion[] religions, boolean check) {
+
+        setSelectionTown(-1);
         ArrayList<TownTile> townTiles = cardsAndTiles.getTownTiles();
         BorderPane border = new BorderPane();
         GridPane gridPane = new GridPane();
@@ -314,7 +321,7 @@ public class CardsAndTilesController {
         Scene dialogScene = new Scene(border, 1100, 600);
         dialog.setResizable(false);
         dialog.setScene(dialogScene);
-        dialog.setTitle("Favor Tiles");
+        dialog.setTitle("Town Tiles");
 
         for (int i = 0; i < townTiles.size(); i++) {
             GridPane tempPane = new GridPane();
@@ -335,16 +342,16 @@ public class CardsAndTilesController {
             tempPane.setOnMouseExited(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    if (selectionFavorTile != finalI)
+                    if (selectionTown != finalI)
                         tempPane.setEffect(null);
                 }
             });
             tempPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    setSelectionFavorTile(finalI);
+                    setSelectionTown(finalI);
                     for (int i = 0; i < townTiles.size(); i++) {
-                        if (i != getSelectionFavorTile())
+                        if (i != getSelectionTown())
                             gridPane.getChildren().get(i).setEffect(null);
                     }
                 }
@@ -367,8 +374,33 @@ public class CardsAndTilesController {
                 select.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
-                        int chosen = getSelectionFavorTile();
-                        System.out.println("Selected " + chosen);
+                        int chosen = getSelectionTown();
+                        int[] returnInfo;
+                        if(cardsAndTiles.townTiles.get(selectionTown).getIslamPoint() != 0){
+                            cardsAndTiles.playerChooseTownTile(cardsAndTiles.townTiles.get(selectionTown),current);
+                            System.out.println("Selected " + chosen);
+                            for(int i = 0; i < 4;i++){
+                                returnInfo=religions[i].updateReligion(cardsAndTiles.townTiles.get(selectionTown).getIslamPoint(),current.getPlayerId(),current.getKey());
+                                if(returnInfo[1] == 4) {
+                                    System.out.println("Cannot advance more on this religion");
+                                }
+                                else if( returnInfo[1] == 1) {
+                                    System.out.println("Since someone used key, you can't reach end"); // Can be replaced with a GUI message
+                                }
+                                else if( returnInfo[1] == 2) {
+                                    System.out.println("Since there is no key end pos is stuck on 9"); // Can be replaced with a GUI message
+                                }
+                                else if ( returnInfo[1] == 3) {
+                                    current.setKey(current.getKey()-1);
+                                }
+                                if(returnInfo[2] > 0 ) {
+                                    current.addPowerToBowl(returnInfo[0]);
+                                }
+                                religions[i].updateRoundBasedPositions(returnInfo[2], current.getPlayerId());
+                            }
+
+                        }
+
                         dialog.close();
                     }
                 });
