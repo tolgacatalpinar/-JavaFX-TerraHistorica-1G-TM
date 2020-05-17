@@ -342,9 +342,14 @@ public class GameController implements Initializable, Serializable {
                            "\nFor Chris: " +  "1. PLAYERS " + scoresReligion[1].get(0)+ " 2. PLAYERS " + scoresReligion[1].get(1) +" 3. PLAYERS" + scoresReligion[1].get(2) +
                            "\nFor Juda: " +  "1. PLAYERS " + scoresReligion[2].get(0)+ " 2. PLAYERS " + scoresReligion[2].get(1) +" 3. PLAYERS" + scoresReligion[2].get(2) +
                            "\nFor Hindu: " +  "1. PLAYERS " + scoresReligion[3].get(0)+ " 2. PLAYERS " + scoresReligion[3].get(1) +" 3. PLAYERS" + scoresReligion[3].get(2));
+      int[] playerBonuses = map.getLongestPathValues(playerList);
+      for(int i = 0; i< playerBonuses.length; i++){
+         System.out.println("For player "+ i + "score is "+ playerBonuses[i]);
+      }
       alert.showAndWait();
       //FOR LONGEST PATH
-      ArrayList<Integer>[] scoresLongestPath = map.calculatePathScores(playerList, map);
+      ArrayList<Integer>[] scoresLongestPath = map.calculatePathScores(playerList);
+
 
    }
 
