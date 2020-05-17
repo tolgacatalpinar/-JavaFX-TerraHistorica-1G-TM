@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Map;
+import Model.Player;
+import Model.PlayerHandler;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -110,7 +112,35 @@ public class TerrainController implements Serializable {
          button.setStyle("-fx-background-image: url('/swampWithTemple.png');");
 
    }
+   public static void setButtonClickForInitialDwellings(Button[][] terrains, Map map, Button skipTurn, Player current, RoundController roundController) {
+      PlayerHandler playerHandler = new PlayerHandler();
+      for (int i = 0; i < ROW_NUMBER; i++) {
+         for (int j = 0; j < COLUMN_NUMBER; j++) {
+            final int row = i;
+            final int col = j;
+            if (terrains[i][j] != null) {
+               terrains[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                  @Override
+                  public void handle(MouseEvent event) {
+                     skipTurn.setDisable(false);
+                     map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
+                     playerHandler.buildInitialDwelling(current);
+                     map.spaces[row][col].setPlayer(current);
 
+                     TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
+                     map.spaces[row][col].setStructure("Dwelling");
+                     for (int i = 0; i < ROW_NUMBER; i++) {
+                        for (int j = 0; j < COLUMN_NUMBER; j++) {
+                           if (terrains[i][j] != null)
+                              terrains[i][j].setDisable(true);
+                        }
+                     }
+                  }
+               });
+            }
+         }
+      }
+   }
    public static void upgradeToSanctuary(Button button, String color)
    {
       if(color.equals("Lakes"))

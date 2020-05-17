@@ -430,6 +430,8 @@ public class ActionController implements Serializable {
                      if (((Optional) result).get() == ButtonType.OK) {
                         playerHandler.acceptPowerFromAdjacentOpponent(3, adjacentPlayers.get(i));
                         playerArr[curPlayerId].getSpecialActionToken().setStrongholdAbility(true);
+                        System.out.println(playerArr[curPlayerId].getFaction().freeDwellingOnSpecialAction);
+                        playerArr[curPlayerId].getFaction().afterStronghold();
                      } else {
                         // ... user chose CANCEL or closed the dialog
                      }
