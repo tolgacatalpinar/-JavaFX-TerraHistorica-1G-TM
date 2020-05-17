@@ -4,17 +4,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox id="vbox" prefHeight="1080" prefWidth="1920" stylesheets="@../../CSS/MainMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
-    <Pane prefHeight="2000.0" prefWidth="200.0">
+<Pane id="vbox" maxHeight="1080.0" maxWidth="1920.0" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../../CSS/MainMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+<VBox layoutX="32.0" layoutY="317.0" prefHeight="472.0" prefWidth="771.0">
+
         <children>
 
-            <Button id="createGameButton" fx:id="createGameButton" layoutX="17.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#createGameButtonClicked" prefHeight="97.0" prefWidth="436.0" text="Create Game" textFill="WHITE">
+            <Button id="createGameButton" fx:id="createGameButton" layoutX="3.0" layoutY="183.0" mnemonicParsing="false" onMouseClicked="#createGameButtonClicked" prefHeight="98.0" prefWidth="316.0" text="Create Game" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="40.0" />
                 </font>
             </Button>
 
-            <Button id="loadGameButton" fx:id="loadGameButton" layoutX="40.0" layoutY="494.0" mnemonicParsing="false" onMouseClicked="#loadGameButtonClicked" prefHeight="73.0" prefWidth="411.0" text="Load Game" textFill="WHITE">
+            <Button id="loadGameButton" fx:id="loadGameButton" layoutX="40.0" layoutY="494.0" mnemonicParsing="false" onMouseClicked="#loadGameButtonClicked" prefHeight="80.0" prefWidth="319.0" text="Load Game" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="40.0" />
                 </font>
@@ -45,6 +46,7 @@
             </Button>
 
 
-        </children></Pane>
+        </children>
 
 </VBox>
+</Pane>
