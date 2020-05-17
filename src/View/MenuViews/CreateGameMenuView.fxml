@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox id="vbox" prefHeight="1080" prefWidth="1920" stylesheets="@../../CSS/HelpMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CreateGameMenuController">
+<VBox id="vbox" prefHeight="720" prefWidth="1280" stylesheets="@../../CSS/HelpMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CreateGameMenuController">
     <Pane prefHeight="2000.0" prefWidth="200.0">
         <children>
 
