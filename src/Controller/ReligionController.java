@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.GameHandler;
 import Model.Player;
 import Model.PlayerHandler;
 import Model.Religion;

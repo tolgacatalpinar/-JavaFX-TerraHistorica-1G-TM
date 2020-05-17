@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.GameHandler;
 import Model.Player;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
