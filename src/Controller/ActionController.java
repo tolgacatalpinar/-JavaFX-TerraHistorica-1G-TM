@@ -181,6 +181,7 @@ public class ActionController implements Serializable {
                            }
                         }
                         TerrainController.buildDwelling(terrain, selectedChoice);
+                        space.setPlayer(playerArr[curPlayerId]);
                         space.setOccupied(true);
                         space.setStructure("Dwelling");
                         int townScore = map.calculateTownScore(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
