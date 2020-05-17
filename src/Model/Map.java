@@ -522,6 +522,7 @@ public class Map implements Serializable {
             break;
       }
    }
+
    public ArrayList<Integer>[] calculatePathScores(Player[] playerList, Map map){
       int[] scoresPath = getLongestPathValues(playerList, map);
       ArrayList<Integer>[] playerTable = new ArrayList[3];

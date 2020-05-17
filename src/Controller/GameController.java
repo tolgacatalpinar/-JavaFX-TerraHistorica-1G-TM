@@ -345,7 +345,6 @@ public class GameController implements Initializable, Serializable {
       alert.showAndWait();
       //FOR LONGEST PATH
       ArrayList<Integer>[] scoresLongestPath = map.calculatePathScores(playerList, map);
-
    }
 
 
