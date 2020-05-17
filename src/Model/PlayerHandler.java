@@ -101,7 +101,7 @@ public class PlayerHandler implements Serializable{
                     if(player.isSanctuaryStrongholdScoringTile()) {
                         player.setVictoryPointNum(player.getVictoryPointNum() + 5);
                     }
-                    return 1;
+                    return player.getFaction().favorTilesAfterBuildingTemple;
                 }
                 else {
                     return -1; //Not enough resources

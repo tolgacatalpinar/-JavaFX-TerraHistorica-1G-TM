@@ -160,8 +160,21 @@ public class ActionController implements Serializable {
                yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                   @Override
                   public void handle(MouseEvent event) {
+                     ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
                      int returnCase =  playerHandler.buildStructure(playerArr[curPlayerId],"Dwelling",false);
                      if( returnCase == 1) {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        for(int i = 0; i < adjacentPlayers.size(); i++) {
+                           alert.setTitle("Offer for " + adjacentPlayers.get(i).getNickName());
+                           alert.setHeaderText("Do you want to spend victory points to get power?");
+                           alert.setContentText("Cost will be here");
+                           Optional<ButtonType> result = alert.showAndWait();
+                           if (((Optional) result).get() == ButtonType.OK) {
+                              playerHandler.acceptPowerFromAdjacentOpponent(1, adjacentPlayers.get(i));
+                           } else {
+                              // ... user chose CANCEL or closed the dialog
+                           }
+                        }
                         TerrainController.buildDwelling(terrain, selectedChoice);
                         space.setOccupied(true);
                         space.setStructure("Dwelling");
@@ -272,10 +285,25 @@ public class ActionController implements Serializable {
             System.out.println(adjacentPlayers.size());
             int returnCase = playerHandler.buildStructure(playerArr[currentPlayerId], "TradingPost", adjacentPlayers.size() != 0);
             /**
-             * TODO
              * YANDAKİ UŞAKLARA SOR
              */
+
             if(returnCase == 1){
+               Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+               for(int i = 0; i < adjacentPlayers.size(); i++) {
+                  if(adjacentPlayers.get(i) != null) {
+                     alert.setTitle("Offer for " + adjacentPlayers.get(i).getNickName());
+                     alert.setHeaderText("Do you want to spend victory points to get power?");
+                     alert.setContentText("Cost will be here");
+                     Optional<ButtonType> result = alert.showAndWait();
+                     if (((Optional) result).get() == ButtonType.OK) {
+                        playerHandler.acceptPowerFromAdjacentOpponent(2, adjacentPlayers.get(i));
+                     } else {
+                        // ... user chose CANCEL or closed the dialog
+                     }
+                  }
+
+               }
                disableActions(actions);
                TerrainController.upgradeToTradingPost(terrain, playerArr[currentPlayerId].getFaction().TERRAIN_TILE);
                space.setStructure("Trading Post");
@@ -339,22 +367,35 @@ public class ActionController implements Serializable {
          public void handle(MouseEvent event) {
             if( templeButton.isSelected() && !strongholdButton.isSelected())
             {
+               ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
                int returnCase = playerHandler.buildStructure(playerArr[curPlayerId], "Temple", false);
                /**
                 * TODO
                 * YANDAKİ UŞAKLARA SOR
                 */
-               if(returnCase == 1){
+               if(returnCase > 0){
+                  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                  for(int i = 0; i < adjacentPlayers.size(); i++) {
+                     alert.setTitle("Offer for " + adjacentPlayers.get(i).getNickName());
+                     alert.setHeaderText("Do you want to spend victory points to get power?");
+                     alert.setContentText("Cost will be here");
+                     Optional<ButtonType> result = alert.showAndWait();
+                     if (((Optional) result).get() == ButtonType.OK) {
+                        playerHandler.acceptPowerFromAdjacentOpponent(3, adjacentPlayers.get(i));
+                     } else {
+                        // ... user chose CANCEL or closed the dialog
+                     }
+                  }
                   canChooseFavorTile = true;
                   disableActions(actions);
                   TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
-                  System.out.println("Town power value is " + playerArr[curPlayerId].getTownPowerValue());
                   CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
-                  cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
+                  for(int i = 0; i < returnCase; i++) {
+                     cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
+                  }
                   space.setStructure("Temple");
                   stage.close();
                   int townScore = map.calculateTownScore(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
-                  System.out.println("Town power value is " + playerArr[curPlayerId].getTownPowerValue());
                   if(townScore >= playerArr[curPlayerId].getTownPowerValue()){
                      playerHandler.townFound(playerArr[curPlayerId]);
                      cardsAndTilesController.showTownTilesTable(cardsAndTiles, playerArr[curPlayerId],religions,true);
@@ -372,12 +413,27 @@ public class ActionController implements Serializable {
             }
             else if(!templeButton.isSelected() && strongholdButton.isSelected())
             {
+               ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
                int returnCase = playerHandler.buildStructure(playerArr[curPlayerId], "Stronghold", false);
                /**
                 * TODO
                 * YANDAKİ UŞAKLARA SOR
                 */
                if(returnCase == 1){
+                  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                  for(int i = 0; i < adjacentPlayers.size(); i++) {
+
+                     alert.setTitle("Offer for " + adjacentPlayers.get(i).getNickName());
+                     alert.setHeaderText("Do you want to spend victory points to get power?");
+                     alert.setContentText("Cost will be here");
+                     Optional<ButtonType> result = alert.showAndWait();
+                     if (((Optional) result).get() == ButtonType.OK) {
+                        playerHandler.acceptPowerFromAdjacentOpponent(3, adjacentPlayers.get(i));
+                        playerArr[curPlayerId].getSpecialActionToken().setStrongholdAbility(true);
+                     } else {
+                        // ... user chose CANCEL or closed the dialog
+                     }
+                  }
                   disableActions(actions);
                   TerrainController.upgradeToStronghold(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                   space.setStructure("Stronghold");
@@ -452,17 +508,31 @@ public class ActionController implements Serializable {
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
-
-            int returnCase = playerHandler.buildStructure(playerArr[curPlayerId], "Stronghold", false);
+            ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
+            int returnCase = playerHandler.buildStructure(playerArr[curPlayerId], "Sanctuary", false);
             /**
              * TODO
              * YANDAKİ UŞAKLARA SOR
              */
-            if(returnCase == 1){
+            if(returnCase > 0){
+               Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+               for(int i = 0; i < adjacentPlayers.size(); i++) {
+                  alert.setTitle("Offer for " + adjacentPlayers.get(i).getNickName());
+                  alert.setHeaderText("Do you want to spend victory points to get power?");
+                  alert.setContentText("Cost will be here");
+                  Optional<ButtonType> result = alert.showAndWait();
+                  if (((Optional) result).get() == ButtonType.OK) {
+                     playerHandler.acceptPowerFromAdjacentOpponent(4, adjacentPlayers.get(i));
+                  } else {
+                     // ... user chose CANCEL or closed the dialog
+                  }
+               }
                disableActions(actions);
                TerrainController.upgradeToSanctuary(terrain,playerArr[curPlayerId].getFaction().TERRAIN_TILE);
                CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
-               cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
+               for(int i = 0; i < returnCase; i++) {
+                  cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
+               }
                space.setStructure("Sanctuary");
                int townScore = map.calculateTownScore(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
                if(townScore >= playerArr[curPlayerId].getTownPowerValue()){
@@ -762,6 +832,7 @@ public class ActionController implements Serializable {
       for(int i = 0; i < actions.length; i++)
          actions[i].setDisable(true);
    }
+
 
 
 }

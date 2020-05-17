@@ -1,23 +1,17 @@
 package Controller;
 
-import Controller.GameController;
 import Model.CardsAndTiles.*;
 import Model.Player;
-import Model.PlayerHandler;
 import Model.Religion;
 import View.CardsAndTilesViews.BonusCardView;
 import View.CardsAndTilesViews.FavorTileView;
 import View.CardsAndTilesViews.ScoringTileView;
 import View.CardsAndTilesViews.TownTileView;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
