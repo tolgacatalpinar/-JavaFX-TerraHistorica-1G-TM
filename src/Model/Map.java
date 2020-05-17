@@ -519,6 +519,7 @@ public class Map implements Serializable {
 //            }
 //         }
 //      }
+
       Space[] riversViaShipping = getOneLevelDistantRivers(riversAroundSpace);
       for (Space riverViaShipping : riversViaShipping) {
          Space[] accessableTerrains = getAdjacentNonRivers(riverViaShipping);
@@ -527,11 +528,10 @@ public class Map implements Serializable {
                reachableTerrains.add(terrain);
          }
       }
-
    }
+
    private void addEnabledTerrainsOnlyOneLevelShipping(Space space, ArrayList<Space> reachableTerrains) {
       Space[] riversAroundSpace = getAdjacentRivers(space);
-
       for (Space riverAroundSpace : riversAroundSpace) {
          Space[] accessableTerrains = getAdjacentNonRivers(riverAroundSpace);
          for (Space terrain : accessableTerrains) {
@@ -539,8 +539,9 @@ public class Map implements Serializable {
                reachableTerrains.add(terrain);
          }
       }
-
    }
+
+
 
    public void getShippingEnabledTerrains(int shipping, Space space, ArrayList<Space> reachableTerrains) {
       switch (shipping)
@@ -565,5 +566,4 @@ public class Map implements Serializable {
             break;
       }
    }
-
 }

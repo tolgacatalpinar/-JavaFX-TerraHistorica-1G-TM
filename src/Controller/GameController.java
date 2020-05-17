@@ -243,6 +243,9 @@ public class GameController implements Initializable, Serializable {
             religion.resetRoundBasedPosition();
          }
       }
+
+      System.out.println("Victory Point = " + engineerStrongholdAbility());
+
    }
 
    @FXML
@@ -271,7 +274,6 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void upgradeSpadeClicked() {
-
       ActionController.showUpdateSpadeDialogs(playerList, roundController.getCurrentPlayerId(), actions);
    }
 
@@ -398,7 +400,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void specialActionClicked() {
-      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId());
+      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId(),map,terrains,skipTurn,roundController);
    }
 
    public void createSpaces() {
@@ -536,7 +538,7 @@ public class GameController implements Initializable, Serializable {
     * TODO
     * TAŞINACAK
     */
-   public void setButtonClickForInitialDwellings() {
+   public  void setButtonClickForInitialDwellings() {
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
             final int row = i;
@@ -549,7 +551,6 @@ public class GameController implements Initializable, Serializable {
                      map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
                      playerHandler.buildInitialDwelling(playerList[roundController.getCurrentPlayerId()]);
                      map.spaces[row][col].setPlayer(playerList[roundController.getCurrentPlayerId()]);
-
                      TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
                      map.spaces[row][col].setStructure("Dwelling");
                      for (int i = 0; i < ROW_NUMBER; i++) {
@@ -564,6 +565,7 @@ public class GameController implements Initializable, Serializable {
          }
       }
    }
+
 
    /**
     * TODO
@@ -1000,6 +1002,24 @@ public class GameController implements Initializable, Serializable {
 
    }
 
+   public int engineerStrongholdAbility() {
+      int counter = 0;
+      for (int i = 0; i < ROW_NUMBER; i++) {
+         for (int j = 0; j < COLUMN_NUMBER; j++) {
+            if (map.spaces[i][j] != null) {
+               if (map.spaces[i][j].getType().equals("Mountains") && map.spaces[i][j].getBridgeConnection()) {
+                  ArrayList<Space> bridgables = map.bridgeables(map.spaces[i][j]);
+                  for (int k = 0; k < bridgables.size(); k++)
+                     if (bridgables.get(k).getBridgeConnection() && bridgables.get(k).getBridgeType().equals("Mountains") && bridgables.get(k).isOccupied()) {
+                        counter++;
+                     }
+               }
+            }
+         }
+      }
+      return 3*(counter/2);
+   }
+
 
 
    public Map getMap() {
@@ -1045,7 +1065,5 @@ public class GameController implements Initializable, Serializable {
    public void setCurrentPlayer(Player p1) {
       this.currentPlayer = p1;
    }
-
-
 
 }

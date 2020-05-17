@@ -36,6 +36,7 @@ public class LeonardoDaVinci extends Faction { //Engineer
   }
 
    public void afterStronghold() {
-      victoryPointForEachConnectingBridges = 3;
+
+      hasBridgeAbility = true;
   }
 }

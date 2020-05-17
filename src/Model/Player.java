@@ -489,6 +489,9 @@ public class Player implements Serializable {
    }
 
    public void setFreeSpade(int freeSpade) {
+      if( getFreeSpade() < freeSpade) {
+         addVictoryPoints((freeSpade-this.freeSpade)*getFaction().additionalVictoryPointForEachSpade);
+      }
       this.freeSpade = freeSpade;
    }
 

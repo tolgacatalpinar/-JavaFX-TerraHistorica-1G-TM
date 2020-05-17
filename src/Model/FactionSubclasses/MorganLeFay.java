@@ -1,5 +1,6 @@
 package Model.FactionSubclasses;
 
+import Controller.ActionController;
 import Model.Faction;
 
 public class MorganLeFay extends Faction { //witch
@@ -24,6 +25,6 @@ public class MorganLeFay extends Faction { //witch
   }
 
     public void afterStronghold() {
-        freeDwellingOnSpecialAction = true;
+
     }
 }
