@@ -97,7 +97,7 @@ public class GameController implements Initializable, Serializable {
 
 
    public GameController() throws IOException {
-      SoundController.playGameMusic(40);
+      SoundController.playGameMusic(30);
    }
 
 

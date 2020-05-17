@@ -140,7 +140,7 @@ public class MainMenuController   implements Initializable, Serializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-       SoundController.playIntroMusic(10);
+       SoundController.playIntroMusic(5);
     }
 
 
