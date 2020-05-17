@@ -20,6 +20,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
 //        String path = "song.mp3";
 //
 //        //Instantiating Media class
@@ -32,7 +33,7 @@ public class Main extends Application {
 //        mediaPlayer.setAutoPlay(true);
 //        primaryStage.setTitle("Playing Audio");
 //        primaryStage.show();
-
+//
 //        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 //        int screenHeight = screenSize.height;
 //        int screenWidth = screenSize.width;
@@ -42,7 +43,7 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("MenuViews/MainMenuView.fxml"));
         primaryStage.setTitle("Terra Historica");
-        primaryStage.setScene(new Scene(root, 800 , 600));
+        primaryStage.setScene(new Scene(root, 1080 , 1920));
         primaryStage.setMaximized(true);
         primaryStage.setResizable(false);
 //        primaryStage.setScene(new Scene(root, screenWidth, screenHeight));
