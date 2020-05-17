@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
@@ -322,9 +323,15 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void scoreTableClicked() {
       ReligionController religionController = new ReligionController();
-      religionController.calculateReligionScores(religionArr, playerList);
-      //cardsAndTilesController.showScoringTilesTable(cardsAndTiles);
-
+      //RAGGED ARRAYİN ANNESİ AĞLADI ALTAYA SELAM OLSUN
+      ArrayList<ArrayList<Integer>>[] scores = religionController.calculateReligionScores(religionArr, playerList);
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("Scores Of Religion");
+      alert.setContentText("For Islam: " + "1. PLAYERS " + scores[0].get(0)+ " 2. PLAYERS " + scores[0].get(1) +" 3. PLAYERS" + scores[0].get(2) +
+                           "\nFor Chris: " +  "1. PLAYERS " + scores[1].get(0)+ " 2. PLAYERS " + scores[1].get(1) +" 3. PLAYERS" + scores[1].get(2) +
+                           "\nFor Juda: " +  "1. PLAYERS " + scores[2].get(0)+ " 2. PLAYERS " + scores[2].get(1) +" 3. PLAYERS" + scores[2].get(2) +
+                           "\nFor Hindu: " +  "1. PLAYERS " + scores[3].get(0)+ " 2. PLAYERS " + scores[3].get(1) +" 3. PLAYERS" + scores[3].get(2));
+      alert.showAndWait();
    }
 
 
@@ -342,136 +349,10 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void exchangeResourcesClicked() {
-
-      BorderPane border = new BorderPane();
-      BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-      border.setBackground(new Background(bg));
-      GridPane gridPane = new GridPane();
-      gridPane.setHgap(10);
-      gridPane.setVgap(10);
-      Button select = new Button("Select");
-      select.setMaxHeight(100);
-      select.setMinWidth(100);
-      BorderPane border_bottom = new BorderPane();
-      border.setBottom(border_bottom);
-      border_bottom.setCenter(select);
-
-      for (int i = 0; i < 6; i++) {
-         ImageView power_middle = new ImageView("arrow.png");
-         ImageView power_image = new ImageView("power.png");
-         ImageView priest = new ImageView("priest.png");
-         ImageView worker =  new ImageView("worker.png");
-         ImageView gold = new ImageView("gold.png");
-         Label label1 = new Label("\n3");
-         label1.setTextFill(Color.WHITE);
-         Label label2 = new Label("\n2");
-         label2.setTextFill(Color.WHITE);
-         label1.setFont(new Font("Stencil", 40));
-         label2.setFont(new Font("Stencil", 40));
-         label1.setOpacity(0.6);
-         label2.setOpacity(0.6);
-         power_middle.setFitHeight(150);
-         power_middle.setFitWidth(150);
-         priest.setFitWidth(150);
-         priest.setFitHeight(150);
-         worker.setFitWidth(150);
-         worker.setFitHeight(150);
-         gold.setFitWidth(140);
-         gold.setFitHeight(140);
-         power_image.setFitWidth(150);
-         power_image.setFitHeight(150);
-         HBox option;
-         if(i == 0){
-            label1.setText("\n5");
-            label2.setText("\n1");
-            option = new HBox(power_image, label1, power_middle, priest,label2 );
-         }else if (i == 1) {
-            label1.setText("\n1");
-            label2.setText("\n1");
-            option = new HBox(priest, label1, power_middle, worker,label2 );
-         }else if (i == 2) {
-            label1.setText("\n3");
-            label2.setText("\n1");
-            option = new HBox(power_image, label1 , power_middle, worker, label2 );
-         }else if (i == 3) {
-            label1.setText("\n1");
-            label2.setText("\n1");
-            option = new HBox(worker, label1, power_middle, gold , label2);
-         }else if (i == 4) {
-            label1.setText("\n1");
-            label2.setText("\n1");
-            option = new HBox(power_image, label1, power_middle,gold, label2);
-         }else {
-            label1.setText("\nBOWL 2");
-            label2.setText("\nBOWL 3");
-
-            option = new HBox(power_image, label1, power_middle,label2 );
-         }
-         GridPane tempPane = new GridPane();
-         option.setMaxWidth(tempPane.getWidth() / 3);
-         option.setMaxHeight(tempPane.getHeight() / 3);
-         tempPane.add(option,0,0);
-
-         tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               DropShadow borderGlow = new DropShadow();
-               borderGlow.setColor(Color.ORANGE);
-               borderGlow.setOffsetX(0f);
-               borderGlow.setOffsetY(0f);
-               borderGlow.setWidth(50);
-               borderGlow.setHeight(50);
-               tempPane.setEffect(borderGlow);
-            }
-         });
-         int finalI = i;
-         tempPane.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               if (selection != finalI)
-                  tempPane.setEffect(null);
-
-            }
-         });
-
-         tempPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               setSelection(finalI);
-               for (int i = 0; i < 6; i++) {
-                  if (i != getSelection())
-                     gridPane.getChildren().get(i).setEffect(null);
-               }
-            }
-         });
-         gridPane.add(tempPane, i % 2, i / 2);
-      }
-
-      border.setCenter(gridPane);
-      final Stage dialog = new Stage();
-      dialog.initModality(Modality.APPLICATION_MODAL);
-      Scene dialogScene = new Scene(border, 1100, 600);
-      dialog.setScene(dialogScene);
-      dialog.setTitle("Power Action");
-      dialog.setResizable(false);
-
-      select.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-         @Override
-         public void handle(MouseEvent event) {
-            playerList[roundController.currentPlayerId].setBowlThreePower(12); //TODO
-            int chosen = getSelection();
-            System.out.println("Selection: " + chosen);
-            setSelection(chosen);
-            playerHandler.exchangeResources(playerList[roundController.getCurrentPlayerId()], chosen);
-            dialog.close();
-         }
-      });
-      //update(gridPane,status);
-      //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
-      dialog.showAndWait();
-
+      showExchangeResources(playerList[roundController.currentPlayerId]);
    }
+
+
 
    @FXML
    public void favorTilesClicked() {
@@ -930,7 +811,135 @@ public class GameController implements Initializable, Serializable {
       //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
       dialog.show();
    }
+   private void showExchangeResources(Player currentPlayer) {
+      BorderPane border = new BorderPane();
+      BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+      border.setBackground(new Background(bg));
+      GridPane gridPane = new GridPane();
+      gridPane.setHgap(10);
+      gridPane.setVgap(10);
+      Button select = new Button("Select");
+      select.setMaxHeight(100);
+      select.setMinWidth(100);
+      BorderPane border_bottom = new BorderPane();
+      border.setBottom(border_bottom);
+      border_bottom.setCenter(select);
 
+      for (int i = 0; i < 6; i++) {
+         ImageView power_middle = new ImageView("arrow.png");
+         ImageView power_image = new ImageView("power.png");
+         ImageView priest = new ImageView("priest.png");
+         ImageView worker =  new ImageView("worker.png");
+         ImageView gold = new ImageView("gold.png");
+         Label label1 = new Label("\n3");
+         label1.setTextFill(Color.WHITE);
+         Label label2 = new Label("\n2");
+         label2.setTextFill(Color.WHITE);
+         label1.setFont(new Font("Stencil", 40));
+         label2.setFont(new Font("Stencil", 40));
+         label1.setOpacity(0.6);
+         label2.setOpacity(0.6);
+         power_middle.setFitHeight(150);
+         power_middle.setFitWidth(150);
+         priest.setFitWidth(150);
+         priest.setFitHeight(150);
+         worker.setFitWidth(150);
+         worker.setFitHeight(150);
+         gold.setFitWidth(140);
+         gold.setFitHeight(140);
+         power_image.setFitWidth(150);
+         power_image.setFitHeight(150);
+         HBox option;
+         if(i == 0){
+            label1.setText("\n5");
+            label2.setText("\n1");
+            option = new HBox(power_image, label1, power_middle, priest,label2 );
+         }else if (i == 1) {
+            label1.setText("\n1");
+            label2.setText("\n1");
+            option = new HBox(priest, label1, power_middle, worker,label2 );
+         }else if (i == 2) {
+            label1.setText("\n3");
+            label2.setText("\n1");
+            option = new HBox(power_image, label1 , power_middle, worker, label2 );
+         }else if (i == 3) {
+            label1.setText("\n1");
+            label2.setText("\n1");
+            option = new HBox(worker, label1, power_middle, gold , label2);
+         }else if (i == 4) {
+            label1.setText("\n1");
+            label2.setText("\n1");
+            option = new HBox(power_image, label1, power_middle,gold, label2);
+         }else {
+            label1.setText("\nBOWL 2");
+            label2.setText("\nBOWL 3");
+
+            option = new HBox(power_image, label1, power_middle,label2 );
+         }
+         GridPane tempPane = new GridPane();
+         option.setMaxWidth(tempPane.getWidth() / 3);
+         option.setMaxHeight(tempPane.getHeight() / 3);
+         tempPane.add(option,0,0);
+
+         tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+               DropShadow borderGlow = new DropShadow();
+               borderGlow.setColor(Color.ORANGE);
+               borderGlow.setOffsetX(0f);
+               borderGlow.setOffsetY(0f);
+               borderGlow.setWidth(50);
+               borderGlow.setHeight(50);
+               tempPane.setEffect(borderGlow);
+            }
+         });
+         int finalI = i;
+         tempPane.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+               if (selection != finalI)
+                  tempPane.setEffect(null);
+
+            }
+         });
+
+         tempPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+               setSelection(finalI);
+               for (int i = 0; i < 6; i++) {
+                  if (i != getSelection())
+                     gridPane.getChildren().get(i).setEffect(null);
+               }
+            }
+         });
+         gridPane.add(tempPane, i % 2, i / 2);
+      }
+
+      border.setCenter(gridPane);
+      final Stage dialog = new Stage();
+      dialog.initModality(Modality.APPLICATION_MODAL);
+      Scene dialogScene = new Scene(border, 1100, 600);
+      dialog.setScene(dialogScene);
+      dialog.setTitle("Power Action");
+      dialog.setResizable(false);
+
+      select.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+         @Override
+         public void handle(MouseEvent event) {
+            playerList[roundController.currentPlayerId].setBowlThreePower(12); //TODO
+            int chosen = getSelection();
+            System.out.println("Selection: " + chosen);
+            setSelection(chosen);
+            playerHandler.exchangeResources(playerList[roundController.getCurrentPlayerId()], chosen);
+            dialog.close();
+         }
+      });
+      //update(gridPane,status);
+      //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
+      dialog.showAndWait();
+   }
    public int getSelection() {
       return selection;
    }
