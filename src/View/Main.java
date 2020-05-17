@@ -42,8 +42,9 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("MenuViews/MainMenuView.fxml"));
         primaryStage.setTitle("Terra Historica");
-        primaryStage.setScene(new Scene(root, 1280, 720));
-        primaryStage.setResizable(true);
+        primaryStage.setScene(new Scene(root, 800 , 600));
+        primaryStage.setMaximized(true);
+        primaryStage.setResizable(false);
 //        primaryStage.setScene(new Scene(root, screenWidth, screenHeight));
 //        primaryStage.setResizable(true);
 //        primaryStage.setX(primaryScreenBounds.getMinX());
