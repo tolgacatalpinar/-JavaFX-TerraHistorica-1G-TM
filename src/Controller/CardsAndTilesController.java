@@ -2,7 +2,6 @@ package Controller;
 
 import Controller.GameController;
 import Model.CardsAndTiles.*;
-import Model.GameHandler;
 import Model.Player;
 import Model.PlayerHandler;
 import Model.Religion;

@@ -71,29 +71,29 @@ public class CardsAndTiles implements Serializable {
      * @param favorTiles is favor tiles arraylist.
      */
     public static void createFavorTile(ArrayList<FavorTile> favorTiles){
-        favorTiles.add(new FavorTile(1,3,0,0,0,0,0,0,0,0,
+        favorTiles.add(new FavorTile(1,3,0,0,0,7,0,0,0,0,
                 false,false,false,false,false));
-        favorTiles.add(new FavorTile(1,0,3,0,0,0,0,0,0,0,
+        favorTiles.add(new FavorTile(1,0,3,0,0,7,0,0,0,0,
                 false,false,false,false,false));
-        favorTiles.add(new FavorTile(1,0,0,3,0,0,0,0,0,0,
+        favorTiles.add(new FavorTile(1,0,0,3,0,7,0,0,0,0,
                 false,false,false,false,false));
-        favorTiles.add(new FavorTile(1,0,0,0,3,0,0,0,0,0,
+        favorTiles.add(new FavorTile(1,0,0,0,3,7,0,0,0,0,
                 false,false,false,false,false));
         favorTiles.add(new FavorTile(3,0,0,2,0,6,0,0,0,0,
                 false,true,false,false,false));
-        favorTiles.add(new FavorTile(3,2,0,0,0,0,0,0,0,0,
+        favorTiles.add(new FavorTile(3,2,0,0,0,7,0,0,0,0,
                 true,false,false,false,false));
-        favorTiles.add(new FavorTile(3,0,2,0,0,0,4,0,0,0,
+        favorTiles.add(new FavorTile(3,0,2,0,0,7,4,0,0,0,
                 false,false,false,false,false));
-        favorTiles.add(new FavorTile(3,0,0,0,2,0,1,1,0,0,
+        favorTiles.add(new FavorTile(3,0,0,0,2,7,1,1,0,0,
                 false,false,false,false,false));
-        favorTiles.add(new FavorTile(3,0,0,1,0,0,0,0,3,0,
+        favorTiles.add(new FavorTile(3,0,0,1,0,7,0,0,3,0,
                 false,false,false,false,false));
-        favorTiles.add(new FavorTile(3,1,0,0,0,0,0,0,0,3,
+        favorTiles.add(new FavorTile(3,1,0,0,0,7,0,0,0,3,
                 false,false,true,false,false));
-        favorTiles.add(new FavorTile(3,0,1,0,0,0,0,0,0,0,
+        favorTiles.add(new FavorTile(3,0,1,0,0,7,0,0,0,0,
                 false,false,false,false,true));
-        favorTiles.add(new FavorTile(3,0,0,0,1,0,0,0,0,2,
+        favorTiles.add(new FavorTile(3,0,0,0,1,7,0,0,0,2,
                 false,false,false,true,false));
     }
 

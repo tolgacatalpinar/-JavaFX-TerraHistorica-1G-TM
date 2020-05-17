@@ -742,44 +742,6 @@ public class ActionController implements Serializable {
 
    }
 
-   /**TODO
-    * RAPORDA YOK
-    */
-   public static void buildBridge(GameHandler gameHandler, Button[][] terrains, Map map){
-
-      for (int i = 0; i < ROW_NUMBER; i++) {
-         for (int j = 0; j < COLUMN_NUMBER; j++) {
-            if (terrains[i][j] != null)
-                  terrains[i][j].setDisable(true);
-         }
-      }
-      for (int i = 0; i < ROW_NUMBER; i++) {
-         for (int j = 0; j < COLUMN_NUMBER; j++) {
-            if (terrains[i][j] != null && map.spaces[i][j] != null) {
-               if (j < 12 && j > 1 && i < 8 && map.spaces[i + 1][j].getType().equals("River") && map.spaces[i + 1][j - 1].getType().equals("River")) {
-                  if (!map.spaces[i][j].getType().equals("River")) {
-                     //terrains[i][j].setDisable(false);
-                  }
-               }
-               else if (j < 12 && j > 1 && i < 8 &&  map.spaces[i+1][j].getType().equals("River") &&  map.spaces[i][j-1].getType().equals("River") ) {
-                  if (!map.spaces[i][j].getType().equals("River")) {
-                     //terrains[i][j].setDisable(false);
-                  }
-               }
-
-               else if (j < 12  && i < 8  &&  map.spaces[i][j+1].getType().equals("River") && map.spaces[i+1][j+1].getType().equals("River")) {
-                  if (!map.spaces[i][j].getType().equals("River")) {
-                     //terrains[i][j].setDisable(false);
-                  }
-               }
-            }
-         }
-      }
-
-
-
-   }
-
    public static void disableActions(Button[] actions){
       for(int i = 0; i < actions.length; i++)
          actions[i].setDisable(true);
