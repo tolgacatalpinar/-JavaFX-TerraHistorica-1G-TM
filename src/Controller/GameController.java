@@ -262,7 +262,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void terraformClicked() {
-      ActionController.terraform(playerList, roundController.getCurrentPlayerId(), terrains, map, actions);
+      ActionController.terraform(playerList, roundController.getCurrentPlayerId(), terrains, map, actions, cardsAndTiles,religionArr);
    }
 
    @FXML
