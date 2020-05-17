@@ -297,7 +297,7 @@ public class Map implements Serializable {
 
    public int getLongestPathHelper(int x, int y, String playerColor, ArrayList<Space> traversed){
       Space space1 = this.spaces[x][y];
-      if(space1.getType() == "River" || space1.getType() == "Empty" || x-1 < 0 || y-1 < 0 || x > ROW_NUMBER-1 || y > COLUMN_NUMBER-1 ||space1.isMarkedForScore() ||!space1.isOccupied()|| space1.getType() != playerColor ){
+      if(space1.getType() == "River" || space1.getType() == "Empty" || x-1 < 0 || y-1 < 0 || x > ROW_NUMBER || y > COLUMN_NUMBER ||space1.isMarkedForScore() ||!space1.isOccupied()|| space1.getType() != playerColor ){
          return 0;
       }else{
          space1.setMarkedForScore(true);

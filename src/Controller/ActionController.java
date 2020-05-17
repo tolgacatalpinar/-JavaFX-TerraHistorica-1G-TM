@@ -389,13 +389,11 @@ public class ActionController implements Serializable {
                   canChooseFavorTile = true;
                   disableActions(actions);
                   TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
-                  System.out.println("Town power value is " + playerArr[curPlayerId].getTownPowerValue());
                   CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
                   cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
                   space.setStructure("Temple");
                   stage.close();
                   int townScore = map.calculateTownScore(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
-                  System.out.println("Town power value is " + playerArr[curPlayerId].getTownPowerValue());
                   if(townScore >= playerArr[curPlayerId].getTownPowerValue()){
                      playerHandler.townFound(playerArr[curPlayerId]);
                      cardsAndTilesController.showTownTilesTable(cardsAndTiles, playerArr[curPlayerId],religions,true);
