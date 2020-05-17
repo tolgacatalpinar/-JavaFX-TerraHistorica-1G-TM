@@ -86,7 +86,12 @@
                     <Font name="Book Antiqua" size="18.0" />
                 </font>
             </Button>
-            <Button fx:id="saveGome" layoutX="10.0" layoutY="496.0" onMouseClicked="#saveGameClicked" prefHeight="50" prefWidth="200" text="Save Game" textFill="WHITE">
+            <Button fx:id="saveGame" layoutX="10.0" layoutY="496.0" onMouseClicked="#saveGameClicked" prefHeight="50" prefWidth="200" text="Save Game" textFill="WHITE">
+                <font>
+                    <Font name="Book Antiqua" size="18.0" />
+                </font>
+            </Button>
+            <Button fx:id="loadGame" layoutX="10.0" layoutY="496.0" onMouseClicked="#loadGameClicked" prefHeight="50" prefWidth="200" text="Load Game" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="18.0" />
                 </font>

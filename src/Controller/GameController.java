@@ -184,12 +184,27 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void saveGameClicked() throws IOException {
-      System.out.println("Save Game Clicked");
       FileManager fm = new FileManager("12");
       fm.saveGame(this, roundController);
       System.out.println("saved");
    }
 
+   @FXML
+   public void loadGameClicked() throws IOException
+   {
+      FileManager fm = new FileManager("12");
+      fm.loadGame();
+      //
+      this.map = fm.getGameController().map;
+      this.religionArr = fm.getGameController().religionArr;
+      this.playerList = fm.getGameController().playerList;
+      this.cardsAndTiles = fm.getGameController().cardsAndTiles;
+      this.cardsAndTilesController = fm.getGameController().cardsAndTilesController;
+      this.playerHandler = fm.getGameController().playerHandler;
+      this.currentPlayer = fm.getGameController().currentPlayer;
+
+      this.roundController = fm.getRoundController();
+   }
    @FXML
    public void skipTurnClicked() {
       disableButtonClicks();
