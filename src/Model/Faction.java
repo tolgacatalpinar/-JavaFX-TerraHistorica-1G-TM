@@ -91,6 +91,7 @@ public class Faction implements Serializable {
     public boolean skipTileWhenCalculatingLongestPath;
     public int getVictoryPointsAfterTown = 0;
     public boolean sorcerersStone = false;
+    public boolean hasBridgeAbility = false;
 
     public void afterStronghold() {
 
