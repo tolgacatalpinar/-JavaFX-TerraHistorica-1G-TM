@@ -124,7 +124,7 @@ public class TerrainController implements Serializable {
                   public void handle(MouseEvent event) {
                      skipTurn.setDisable(false);
                      map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
-                     playerHandler.buildInitialDwelling(current);
+                     //playerHandler.buildInitialDwelling(current);
                      map.spaces[row][col].setPlayer(current);
 
                      TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
@@ -272,6 +272,8 @@ public class TerrainController implements Serializable {
                                        System.out.println("x1: " + x1 + "y1: "  + y1 + "\nx2: " + x2 + "y2: " + y2);
                                        map.spaces[finalK][finalL].setBridgeConnection(true);
                                        map.spaces[finalK][finalL].setBridgeType(type);
+                                       map.spaces[finalI][finalJ].setBridgeConnection(true);
+                                       map.spaces[finalI][finalJ].setBridgeType(type);
                                        for(int i = 0; i < actions.length; i++)
                                           actions[i].setDisable(true);
                                     }
