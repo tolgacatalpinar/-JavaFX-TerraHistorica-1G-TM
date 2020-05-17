@@ -4,49 +4,51 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane id="vbox" maxHeight="1080.0" maxWidth="1920.0" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../../CSS/MainMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
-<VBox layoutX="75.0" layoutY="395.0" prefHeight="472.0" prefWidth="771.0">
+<Pane id="vbox" maxHeight="720.0" maxWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../CSS/MainMenuComponents.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
 
-        <children>
+        <VBox layoutX="14.0" layoutY="276.0" maxHeight="800" maxWidth="400" minHeight="482.0" minWidth="284.0" prefHeight="491.0" prefWidth="305.0">
 
-            <Button id="createGameButton" fx:id="createGameButton" layoutX="3.0" layoutY="183.0" mnemonicParsing="false" onMouseClicked="#createGameButtonClicked" prefHeight="98.0" prefWidth="316.0" text="Create Game" textFill="WHITE">
-                <font>
-                    <Font name="Book Antiqua" size="40.0" />
-                </font>
-            </Button>
+            <children>
 
-            <Button id="loadGameButton" fx:id="loadGameButton" layoutX="40.0" layoutY="494.0" mnemonicParsing="false" onMouseClicked="#loadGameButtonClicked" prefHeight="80.0" prefWidth="319.0" text="Load Game" textFill="WHITE">
-                <font>
-                    <Font name="Book Antiqua" size="40.0" />
-                </font>
-            </Button>
+                <Button id="createGameButton" fx:id="createGameButton" mnemonicParsing="false" onMouseClicked="#createGameButtonClicked" prefHeight="68.0" prefWidth="306.0" text="Create Game" textFill="WHITE">
+                    <font>
+                        <Font name="Book Antiqua" size="29.0" />
+                    </font>
+                </Button>
 
-            <Button id="settingsButton" fx:id="settingsButton" layoutX="69.0" layoutY="596.0" mnemonicParsing="false" onMouseClicked="#settingsButtonClicked" prefHeight="73.0" prefWidth="331.0" text="Settings" textFill="WHITE">
-                <font>
-                    <Font name="Book Antiqua" size="40.0" />
-                </font>
-            </Button>
+                <Button id="loadGameButton" fx:id="loadGameButton" mnemonicParsing="false" onMouseClicked="#loadGameButtonClicked" prefHeight="53.0" prefWidth="306.0" text="Load Game" textFill="WHITE">
+                    <font>
+                        <Font name="Book Antiqua" size="29.0" />
+                    </font>
+                </Button>
 
-            <Button id="helpButton" fx:id="helpButton" layoutX="78.0" layoutY="721.0" mnemonicParsing="false" onMouseClicked="#helpButtonClicked" prefHeight="59.0" prefWidth="312.0" text="Help" textFill="WHITE">
-                <font>
-                    <Font name="Book Antiqua" size="40.0" />
-                </font>
-            </Button>
+                <Button id="settingsButton" fx:id="settingsButton" mnemonicParsing="false" onMouseClicked="#settingsButtonClicked" prefHeight="73.0" prefWidth="331.0" text="Settings" textFill="WHITE">
+                    <font>
+                        <Font name="Book Antiqua" size="29.0" />
+                    </font>
+                </Button>
 
-            <Button id="creditsButton" fx:id="creditsButton" layoutX="78.0" layoutY="849.0" mnemonicParsing="false" onMouseClicked="#creditsButtonClicked" prefHeight="50.0" prefWidth="312.0" text="Credits" textFill="WHITE">
-                <font>
-                    <Font name="Book Antiqua" size="40.0" />
-                </font>
-            </Button>
+                <Button id="helpButton" fx:id="helpButton" mnemonicParsing="false" onMouseClicked="#helpButtonClicked" prefHeight="59.0" prefWidth="312.0" text="Help" textFill="WHITE">
+                    <font>
+                        <Font name="Book Antiqua" size="29.0" />
+                    </font>
+                </Button>
 
-            <Button id="exitButton" fx:id="exitButton" layoutX="78.0" layoutY="956.0" mnemonicParsing="false" onMouseClicked="#exitButtonClicked" prefHeight="73.0" prefWidth="312.0" text="Exit" textFill="WHITE">
-                <font>
-                    <Font name="Book Antiqua" size="40.0" />
-                </font>
-            </Button>
+                <Button id="creditsButton" fx:id="creditsButton" mnemonicParsing="false" onMouseClicked="#creditsButtonClicked" prefHeight="50.0" prefWidth="312.0" text="Credits" textFill="WHITE">
+                    <font>
+                        <Font name="Book Antiqua" size="29.0" />
+                    </font>
+                </Button>
+
+                <Button id="exitButton" fx:id="exitButton" mnemonicParsing="false" onMouseClicked="#exitButtonClicked" prefHeight="73.0" prefWidth="312.0" text="Exit" textFill="WHITE">
+                    <font>
+                        <Font name="Book Antiqua" size="29.0" />
+                    </font>
+                </Button>
 
 
-        </children>
+            </children>
 
-</VBox>
+        </VBox>
+
 </Pane>

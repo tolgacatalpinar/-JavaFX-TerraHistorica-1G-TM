@@ -145,11 +145,12 @@ public class GameController implements Initializable, Serializable {
                      }
                      factionsView.getChildren().addAll(playerViewList);
                      //displayPlayerTurn(playerViewList);
-                     factionsView.setPadding(new Insets(0, 0, 0, 100));
+                     factionsView.setPadding(new Insets(0, 0, 0, 20));
                      //factionsView.setStyle("fx-margin-bottom: 150;");
 //                     VBox.setMargin(factionsView, new Insets(0,0,1500,0));
                      //factionsView.setMargin(,);
 
+                     factionsView.setMaxWidth(200);
                      borderPane.setBottom(factionsView);
                      borderPane.setPadding(new Insets(0,0,50,0));
                      displayPlayerTurn(playerViewList);
