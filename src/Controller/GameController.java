@@ -160,7 +160,7 @@ public class GameController implements Initializable, Serializable {
 
             while (true) {
                try {
-                  Thread.sleep(500);
+                  Thread.sleep(700);
                } catch (InterruptedException ex) {
                }
 

@@ -4,6 +4,8 @@ import Model.*;
 import Model.CardsAndTiles.CardsAndTiles;
 import Model.Map;
 import View.ActionsViews.SpecialActionView;
+import View.DialogueImageButton;
+import View.DialogueView;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -136,7 +138,7 @@ public class ActionController implements Serializable {
       whole.getChildren().addAll(prompt, choiceBlock);
       pane.setCenter(whole);
       pane.setPadding(new Insets(50, 50, 0, 0));
-      final Stage terraformStage = DialogueController.getStage("Terraform Action", pane, new Image("favor_tiles_background.jpg"));
+      final Stage terraformStage = DialogueView.getStage("Terraform Action", pane, new Image("favor_tiles_background.jpg"));
       transformButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
@@ -152,12 +154,12 @@ public class ActionController implements Serializable {
             }
             terraformStage.close();
             if (selectedChoice.equals(playerArr[curPlayerId].getFaction().TERRAIN_TILE) && flag) {
-               Button yesButton = new Button("Yes");
-               Button noButton = new Button("No");
-               BorderPane pane = DialogueController.getDwellingUpgradePromptPane(playerArr, curPlayerId, "Do you want to build a dwelling into that terrain? The cost will be: ", yesButton, noButton);
-               Stage dwellingChoiceStage = DialogueController.getStage("Do you want to build dwelling?", pane, new Image("favor_tiles_background.jpg"));
+               DialogueImageButton dwellingButton = new DialogueImageButton("dialogueDwelling.png");
+               DialogueImageButton emptyTerrainButton = new DialogueImageButton("dialogueEmptyTerrain.jpg");
+               VBox pane = DialogueView.getDwellingUpgradePromptPane(playerArr, curPlayerId, dwellingButton, emptyTerrainButton);
+               Stage dwellingChoiceStage = DialogueView.getStage("Do you want to build dwelling?", pane, new Image("dialogueBackground.jpg"));
                dwellingChoiceStage.show();
-               yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+               dwellingButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                   @Override
                   public void handle(MouseEvent event) {
                      ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
@@ -193,7 +195,7 @@ public class ActionController implements Serializable {
                   }
 
                });
-               noButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+               emptyTerrainButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                   @Override
                   public void handle(MouseEvent event) {
                      dwellingChoiceStage.close();
@@ -273,10 +275,10 @@ public class ActionController implements Serializable {
 
    public static void upgradeToTradingPost(Player[] playerArr, int currentPlayerId, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions,CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
       PlayerHandler playerHandler = new PlayerHandler();
-      Button yesButton = new Button("Yes");
-      Button noButton = new Button("No");
-      BorderPane pane = DialogueController.getDwellingUpgradePromptPane(playerArr,currentPlayerId, "Do you want to upgrade this Dwelling to a Trading Post?", yesButton, noButton);
-      Stage stage = DialogueController.getStage("Upgrade dwelling", pane, new Image("favor_tiles_background.jpg"));
+      Button yesButton = new Button();
+      Button noButton = new Button();
+      VBox pane = DialogueView.getDwellingUpgradePromptPane(playerArr,currentPlayerId, yesButton, noButton);
+      Stage stage = DialogueView.getStage("Upgrade dwelling", pane, new Image("favor_tiles_background.jpg"));
       stage.show();
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
@@ -359,8 +361,8 @@ public class ActionController implements Serializable {
       Button noButton = new Button("No");
       RadioButton templeButton = new RadioButton("Temple");
       RadioButton strongholdButton = new RadioButton("Stronghold");
-      BorderPane pane = DialogueController.getTradingPostUpgradePromptPane(playerArr,curPlayerId, "Do you want to upgrade this Trading Post to a Temple\n at the expense of: ", "Do you want to upgrade this Trading Post to a Stronghold\n at the expense of: ", yesButton, noButton, templeButton, strongholdButton);
-      Stage stage = DialogueController.getStage("Upgrade Trading Post", pane, new Image("favor_tiles_background.jpg"));
+      BorderPane pane = DialogueView.getTradingPostUpgradePromptPane(playerArr,curPlayerId, "Do you want to upgrade this Trading Post to a Temple\n at the expense of: ", "Do you want to upgrade this Trading Post to a Stronghold\n at the expense of: ", yesButton, noButton, templeButton, strongholdButton);
+      Stage stage = DialogueView.getStage("Upgrade Trading Post", pane, new Image("favor_tiles_background.jpg"));
 
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
@@ -502,8 +504,8 @@ public class ActionController implements Serializable {
        * TODO
        * DIKKATTTT
        */
-      BorderPane pane = DialogueController.getTempleUpgradePromptPane(playerArr,curPlayerId, "Do you want to upgrade this Temple to a Sanctuary\n at the expense of: ", yesButton, noButton);
-      Stage stage = DialogueController.getStage("Upgrade Temple", pane, new Image("favor_tiles_background.jpg"));
+      BorderPane pane = DialogueView.getTempleUpgradePromptPane(playerArr,curPlayerId, "Do you want to upgrade this Temple to a Sanctuary\n at the expense of: ", yesButton, noButton);
+      Stage stage = DialogueView.getStage("Upgrade Temple", pane, new Image("favor_tiles_background.jpg"));
       stage.show();
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
