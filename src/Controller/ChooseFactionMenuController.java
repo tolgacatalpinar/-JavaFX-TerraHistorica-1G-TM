@@ -95,7 +95,8 @@ public class ChooseFactionMenuController  implements Initializable, Serializable
         stage.setScene(scene);
 
 
-
+        stage.setX(0);
+        stage.setY(0);
         stage.show();
 
 

@@ -3,6 +3,7 @@ package Model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Map implements Serializable {
    public Space[][] spaces;
@@ -273,6 +274,57 @@ public class Map implements Serializable {
       }
    }
 
+   public int calculateLongestHelper(int x, int y, String playerColor, ArrayList<Space> traversed){
+      Space space1 = this.spaces[x][y];
+      if(space1.getType() == "River" || space1.getType() == "Empty" || x-1 < 0 || y-1 < 0 || x > ROW_NUMBER-1 || y > COLUMN_NUMBER-1 ||space1.isMarkedForScore() ||!space1.isOccupied()|| space1.getType() != playerColor ){
+         return 0;
+      }else{
+         space1.setMarkedForScore(true);
+         System.out.println("X is "+ x + " Y is "+ y + "Player color is" + playerColor);
+         traversed.add(spaces[x][y]);
+         if (x %2 == 0){
+            return (
+                    calculateLongestHelper(x-1, y-1, playerColor, traversed )
+                            + calculateLongestHelper(x-1, y, playerColor, traversed)
+                            + calculateLongestHelper(x+1, y, playerColor, traversed)
+                            +calculateLongestHelper(x, y+1, playerColor,traversed )
+                            + calculateLongestHelper(x, y-1, playerColor, traversed)
+                            + calculateLongestHelper(x+1, y-1, playerColor,traversed )
+            );
+
+         }else{
+            return (calculateLongestHelper(x-1, y, playerColor, traversed)
+                    + calculateLongestHelper(x+1, y, playerColor, traversed)
+                    +calculateLongestHelper(x, y+1, playerColor, traversed)
+                    + calculateLongestHelper(x, y-1, playerColor, traversed)
+                    +calculateLongestHelper(x-1, y+1, playerColor, traversed)
+                    + calculateLongestHelper(x+1, y, playerColor, traversed));
+         }
+      }
+   }
+   public int[] calculateLongestConnection(Player[] players, Map map) {
+      int[] playerScores = new int[players.length];
+      for (int player_index = 0; player_index < players.length; player_index++) {
+         ArrayList<Space> playerTerrains = new ArrayList<Space>();
+         for (int i = 0; i < 9; i++) { //row
+            for (int j = 0; j < 13; j++) {
+               if (map.spaces[i][j].getType().equals(players[player_index].getFaction().TERRAIN_TILE)) {
+                  playerTerrains.add(map.spaces[i][j]);
+               }
+            }
+         }
+         int max = -1;
+         for (int k = 0; k < playerTerrains.size(); k++) {
+            ArrayList<Space> traversed = new ArrayList<Space>();
+            calculateLongestHelper(playerTerrains.get(k).getX(), playerTerrains.get(k).getY(), players[player_index].getFaction().TERRAIN_TILE, traversed);
+            if (max < traversed.size()) {
+               max = traversed.size();
+            }
+         }
+         playerScores[player_index] = max;
+      }
+      return playerScores;
+   }
    public int calculateTownScore(int x1, int y1, String playerColor , int townThreshold){
       ArrayList<Space> traversed = new ArrayList<Space>();
       calculateTownScoreHelper(x1,y1, playerColor, traversed);
