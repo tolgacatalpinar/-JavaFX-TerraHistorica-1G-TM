@@ -280,65 +280,16 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void terraformClicked() {
-      ActionController.terraform(playerList, roundController.getCurrentPlayerId(), terrains, map, actions, cardsAndTiles,religionArr);
+      ActionController.terraform(playerList[roundController.currentPlayerId], terrains, map, actions, cardsAndTiles,religionArr);
 
    }
 
    @FXML
    public void upgradeStructureClicked() {
 
-      ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(), terrains, map, actions, cardsAndTiles, religionArr);
-
-//      ThreadB b = new ThreadB();
-//      b.start();
-//      synchronized (b) {
-//         try {
-//            System.out.println("Waiting for b to complete...");
-//            b.wait();
-//         } catch (InterruptedException e) {
-//            e.printStackTrace();
-//         }
-//         ActionController.actiondone = false;
-//         System.out.println(ActionController.canChooseFavorTile);
-//      }
+      ActionController.upgradeStructure(playerList[roundController.getCurrentPlayerId()] , terrains, map, actions, cardsAndTiles, religionArr);
 
    }
-//      System.out.println(shouldChooseFavorTile);
-//      if(shouldChooseFavorTile){
-//         System.out.println("GİRDİİİĞ");
-//         CardsAndTilesController.showFavorTilesTable(cardsAndTiles,playerList[roundController.getCurrentPlayerId()],religionArr);
-//      }
-   //System.out.println("SAAAAAAAAAAAA");
-//      try{
-//         while (!ActionController.actionDone) {
-//            Thread.sleep(500);
-//         }
-//      }catch (InterruptedException ie){
-//
-//      }
-//      if(ActionController.actionDone){
-//         if(ActionController.favorTile)
-//         System.out.println("GİRDİİİĞ");
-//         CardsAndTilesController.showFavorTilesTable(cardsAndTiles,playerList[roundController.getCurrentPlayerId()],religionArr);
-//      }
-//      ActionController.actionDone = false;
-//      ActionController.favorTile = false;
-
-   //   class ThreadB extends Thread {
-//      int total;
-//
-//      @Override
-//      public void run() {
-//         synchronized (this) {
-//
-//            while (!ActionController.actiondone)
-//                 ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(), terrains, map, actions);
-//
-//            notify();
-//
-//         }
-//      }
-//   }
    @FXML
    public void religionsClicked() {
       ReligionController religionController = new ReligionController();
@@ -394,10 +345,6 @@ public class GameController implements Initializable, Serializable {
 
    }
 
-   //TODO
-   public void skipTurn() {
-
-   }
 
    @FXML
    public void specialActionClicked() {
@@ -498,7 +445,7 @@ public class GameController implements Initializable, Serializable {
 
    }
 
-   public void loadCardsAndTiles(int totalPlayerNumber) {
+   public void loadCardsAndTiles() {
       cardsAndTiles = new CardsAndTiles(playerList.length, playerList);
       cardsAndTilesController = new CardsAndTilesController();
       cardsAndTiles.returnScoringTile(0, 1, playerList,religionArr);
@@ -822,9 +769,7 @@ public class GameController implements Initializable, Serializable {
                      TerrainController.buildBridge(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map, mapPane, actions);
                      System.out.println("Köprü kuruldu");
                   }
-                  //ELSE PROMPT NOT ENOUGH RESOURCES
                }
-               //ELSE PROMPT NO BRIDGABLE TERRAINS
             } else if (getSelection() == 4) {
                if (playerHandler.usePowerAction(4, currentPlayer)) {
                   disableActions();
@@ -846,8 +791,7 @@ public class GameController implements Initializable, Serializable {
             }
          }
       });
-      //update(gridPane,status);
-      //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
+
       dialog.show();
    }
    private void showExchangeResources(Player currentPlayer) {
@@ -973,8 +917,6 @@ public class GameController implements Initializable, Serializable {
             dialog.close();
          }
       });
-      //update(gridPane,status);
-      //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
       dialog.showAndWait();
    }
    public int getSelection() {

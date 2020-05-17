@@ -81,7 +81,7 @@ public class ChooseFactionMenuController  implements Initializable, Serializable
         gameController.loadPlayers(factions, playerNames,totalPlayerNumber);
         gameController.loadInitialMap();
         gameController.loadReligion(totalPlayerNumber);
-        gameController.loadCardsAndTiles(totalPlayerNumber);
+        gameController.loadCardsAndTiles();
 
 
 
