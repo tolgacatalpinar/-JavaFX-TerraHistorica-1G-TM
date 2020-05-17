@@ -2,7 +2,6 @@ package Controller;
 
 import Model.Player;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

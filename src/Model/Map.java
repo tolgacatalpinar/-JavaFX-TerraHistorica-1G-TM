@@ -3,12 +3,9 @@ package Model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Map implements Serializable {
    public Space[][] spaces;
-   public static int townScore = 0; // bu variable'ı şimdilik istown çalışsın diye ekledim. Belki durur ama oo olması icin buradan kaldırıp
-   // player classına da ekleyebiliriz, is town'a da parameter olarak player objesi alırız, öyle de is görür.
    public ArrayList<Space> visited = new ArrayList<Space>(); //
    final int ROW_NUMBER = 9;
    final int COLUMN_NUMBER = 13;
@@ -566,28 +563,5 @@ public class Map implements Serializable {
             break;
       }
    }
-   public ArrayList<Integer>[] calculatePathScores(Player[] playerList, Map map){
-      int[] scoresPath = getLongestPathValues(playerList, map);
-      ArrayList<Integer>[] playerTable = new ArrayList[3];
-      playerTable[0] = (new ArrayList<Integer>());
-      playerTable[2] = (new ArrayList<Integer>());
-      playerTable[1] = (new ArrayList<Integer>());
-      int count = 0;
-      while(count < 3) {
-         int maxValue = 0;
-         for(int j = 0; j < scoresPath.length; j++) {
-            if(scoresPath[j] > maxValue) {
-               maxValue = scoresPath[j];
-            }
-         }
-         for(int k = 0; k < scoresPath.length; k++) {
-            if( scoresPath[k] == maxValue) {
-               playerTable[count].add(k);
-               scoresPath[k] = -1;
-            }
-         }
-         count++;
-      }
-      return playerTable;
-   }
+
 }
