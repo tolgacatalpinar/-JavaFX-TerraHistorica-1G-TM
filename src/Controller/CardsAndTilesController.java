@@ -375,6 +375,7 @@ public class CardsAndTilesController {
                     @Override
                     public void handle(MouseEvent event) {
                         int chosen = getSelectionTown();
+                        System.out.println();
                         int[] returnInfo;
                         if(cardsAndTiles.townTiles.get(selectionTown).getIslamPoint() != 0){
                             cardsAndTiles.playerChooseTownTile(cardsAndTiles.townTiles.get(selectionTown),current);

@@ -11,6 +11,9 @@ public class Space implements Serializable{
     private Space[] bridgeList; // this array holds the other space that can be reached from this space; thanks to bridge(if exists)
     private Boolean hasBridge;
 
+
+
+    private boolean marked;
     private Structure structure;
     private Player player;
         
@@ -21,6 +24,7 @@ public class Space implements Serializable{
         bridgability = false;
         bridgeConnection = false;
         bridgeType = "";
+        marked = false;
     }
 
     public String getBridgeType(){
@@ -46,7 +50,13 @@ public class Space implements Serializable{
     public void setBridgeConnection(boolean bridgeConnection){
         this.bridgeConnection = bridgeConnection;
     }
+    public boolean isMarked() {
+        return marked;
+    }
 
+    public void setMarked(boolean marked) {
+        this.marked = marked;
+    }
 
 
     public void setPlayer(Player player) {

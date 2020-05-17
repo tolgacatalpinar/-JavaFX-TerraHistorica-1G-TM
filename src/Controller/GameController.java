@@ -762,6 +762,8 @@ public class GameController implements Initializable, Serializable {
          @Override
          public void handle(MouseEvent event) {
             playerList[roundController.currentPlayerId].setBowlThreePower(12);
+            playerList[roundController.currentPlayerId].setWorkerNum(1000);
+            playerList[roundController.currentPlayerId].setGoldNum(1000);
             int chosen = getSelection();
             System.out.println("Selection: " + chosen);
             setSelection(chosen);

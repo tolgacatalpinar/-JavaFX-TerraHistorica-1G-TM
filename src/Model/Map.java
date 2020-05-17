@@ -242,7 +242,53 @@ public class Map implements Serializable {
       }
       return bridgeables;
    }
+   public int calculateTownScore2Helper(int x, int y, String playerColor, ArrayList<Space> traversed){
+         Space space1 = this.spaces[x][y];
+         //x-1 > 0 || y-1 > 0 || x+1< ROW_NUMBER || y+1 < COLUMN_NUMBER
+      if(space1.getType() == "River" || space1.getType() == "Empty" || space1.isMarked() ||!space1.isOccupied()|| space1.getType() != playerColor ){
+         return 0;
+      }else{
+         space1.setMarked(true);
+         System.out.println("X is "+ x + " Y is "+ y + "Player color is" + playerColor);
+         traversed.add(spaces[x][y]);
+         if (x %2 == 0){
+            return (
+                    calculateTownScore2Helper(x-1, y-1, playerColor, traversed )
+                    + calculateTownScore2Helper(x-1, y, playerColor, traversed)
+                    + calculateTownScore2Helper(x+1, y, playerColor, traversed)
+                    +calculateTownScore2Helper(x, y+1, playerColor,traversed )
+                    + calculateTownScore2Helper(x, y-1, playerColor, traversed)
+                    + calculateTownScore2Helper(x+1, y-1, playerColor,traversed )
+                   );
 
+         }else{
+            return (calculateTownScore2Helper(x-1, y, playerColor, traversed)
+                    + calculateTownScore2Helper(x+1, y, playerColor, traversed)
+                    +calculateTownScore2Helper(x, y+1, playerColor, traversed)
+                    + calculateTownScore2Helper(x, y-1, playerColor, traversed)
+                    +calculateTownScore2Helper(x-1, y+1, playerColor, traversed)
+                    + calculateTownScore2Helper(x+1, y, playerColor, traversed));
+
+         }
+
+      }
+   }
+   public int calculateTownScore2(int x1, int y1, String playerColor , int townThreshold){
+      ArrayList<Space> traversed = new ArrayList<Space>();
+      calculateTownScore2Helper(x1,y1, playerColor, traversed);
+      int calculated = 0;
+      for (int i = 0; i< traversed.size(); i++){
+         calculated += traversed.get(i).getStructure().getBuildingScore();
+      }
+      if (calculated < townThreshold){
+         for (int i = 0; i< traversed.size(); i++){
+            traversed.get(i).setMarked(false);
+         }
+      }else{
+         System.out.println("Town founded");
+      }
+      return  calculated;
+   }
 
    public int calculateTownScore(Space space1, String playerColor, int townScore) {
       Space[] adjacents = getAdjacentSpaces(space1);
