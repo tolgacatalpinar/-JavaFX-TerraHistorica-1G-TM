@@ -12,6 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.Serializable;
@@ -42,6 +45,11 @@ public class DialogueView implements  Serializable{
       // Styling buttons
 
       Label prompt = new Label("Do you want to build a dwelling?");
+      prompt.setTextFill(Color.ORANGE);
+      prompt.getStyleClass().add("textShadow");
+      prompt.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+      prompt.setPadding(new Insets(0, 0, 20, 100));
+
       ImageView goldIm = new ImageView(new Image("gold.png"));
       goldIm.setFitHeight(30);
       goldIm.setFitWidth(30);
@@ -77,7 +85,7 @@ public class DialogueView implements  Serializable{
       requiredResourcesForDwelling.getChildren().addAll(goldIm, goldLabel, workerIm, workerLabel);
       VBox dwellingBox = new VBox();
       dwellingBox.getChildren().addAll(dwellingButton, requiredResourcesForDwelling);
-      dwellingBox.setSpacing(50);
+      dwellingBox.setSpacing(30);
 
       // Empty Terrain
       HBox requiredResourcesForEmptyTerrain = new HBox();
@@ -85,7 +93,7 @@ public class DialogueView implements  Serializable{
       requiredResourcesForEmptyTerrain.getChildren().addAll(goldIm2, emptyGold, workerIm2, emptyWorker);
       VBox emptyTerrainBox = new VBox();
       emptyTerrainBox.getChildren().addAll(emptyTerrainButton, requiredResourcesForEmptyTerrain);
-      emptyTerrainBox.setSpacing(50);
+      emptyTerrainBox.setSpacing(30);
 
       HBox buttons = new HBox();
       buttons.getChildren().addAll(emptyTerrainBox, dwellingBox);
