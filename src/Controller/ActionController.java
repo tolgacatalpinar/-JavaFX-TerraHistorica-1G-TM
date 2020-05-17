@@ -602,9 +602,29 @@ public class ActionController implements Serializable {
    public void skipTurn(int curPlayerId, Player[] playerArr){
 
    }
-   public static void strongholdAbility(Button[][] terrains, Map map, Button skipturn, Player current, RoundController roundController) throws IOException {
+   public static void strongholdAbility(Button[][] terrains, Map map, Button[] actions, Player current) throws IOException {
       if(current.getFaction() instanceof MorganLeFay){
-         TerrainController.setButtonClickForInitialDwellings(terrains,map,skipturn,current,roundController);
+         TerrainController.disableTerrains(terrains,map);
+         for(int i = 0; i < ROW_NUMBER; i++)
+            for(int j = 0; j < COLUMN_NUMBER; j++)
+               if(map.spaces[i][j] != null && !map.spaces[i][j].isOccupied() && map.spaces[i][j].getType().equals(current.getFaction().TERRAIN_TILE)) {
+                  terrains[i][j].setDisable(false);
+                  int finalI = i;
+                  int finalJ = j;
+                  terrains[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                     @Override
+                     public void handle(MouseEvent event) {
+                        map.spaces[finalI][finalJ].setStructure("Dwelling");
+                        TerrainController.buildDwelling(terrains[finalI][finalJ], current.getFaction().TERRAIN_TILE);
+                        map.spaces[finalI][finalJ].setOccupied(true);
+                        map.spaces[finalI][finalJ].setStructure("Dwelling");
+                        TerrainController.disableButtonClicks(terrains);
+                        TerrainController.enableTerrains(terrains, map);
+                        disableActions(actions);
+                     }
+                  });
+               }
+
       }
       else if(current.getFaction() instanceof AliesterCrowley){
 
@@ -649,7 +669,7 @@ public class ActionController implements Serializable {
    /**TODO
     * TAŞINACAK
     */
-   public static void showSpeacialActions(Player[] playerList,Religion[] religions,int currentPlayerId,Map map,Button[][] terrains,Button skipturn,RoundController roundController) {
+   public static void showSpeacialActions(Player[] playerList,Religion[] religions,int currentPlayerId,Map map,Button[][] terrains,Button[] actions,RoundController roundController) {
       VBox wholeFavor = new VBox();
       HBox firstRow = new HBox();
       HBox secondRow = new HBox();
@@ -759,7 +779,7 @@ public class ActionController implements Serializable {
             } else if (choice[0] == 3) {
                currentPlayer.getSpecialActionToken().isStrongholdAbility = false;
                try {
-                  strongholdAbility(terrains,map,skipturn,playerList[currentPlayerId],roundController);
+                  strongholdAbility(terrains,map,actions,playerList[currentPlayerId]);
                } catch (IOException e) {
                   e.printStackTrace();
                }
