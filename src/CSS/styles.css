@@ -1,3 +1,6 @@
+.test{
+    -fx-background-color: #D5563B;
+}
 .button {
     -fx-background-color: transparent;
 }

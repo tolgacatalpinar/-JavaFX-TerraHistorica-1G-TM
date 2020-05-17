@@ -29,15 +29,22 @@ public class PlayerView extends BorderPane {
 
    public PlayerView(Player player) {
 
-      Image imProfile = new Image(getClass().getResourceAsStream("/Images/a.png"));
+      //Image imProfile = new Image(getClass().getResourceAsStream("/Images/a.png"));
 //      ImageView imView = new ImageView(imProfile);
 //      imView.setFitWidth(50);
 
-      BackgroundImage bgImg = new BackgroundImage( imProfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(100,100,true,true,false, true));
+      //BackgroundImage bgImg = new BackgroundImage( imProfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(100,100,true,true,false, true));
 
-      Background bg = new Background(bgImg);
+      //Background bg = new Background(bgImg);
+      getStyleClass().add("test");
 
-      this.setBackground(bg);
+      //this.setStyle("-fx-background-color: RED");
+
+      //this.setBackground(bg);
+//      Color color = Color.RED;
+//      ImageView im = new ImageView(Color.RED)
+//      Background bg = new Background( new BackgroundFill(color, null, null ));
+//      this.setBackground(bg);
 
       playerName = player.getNickName();
 
@@ -47,53 +54,53 @@ public class PlayerView extends BorderPane {
 
       imageView = new ImageView();
 
-//      if (faction instanceof AliesterCrowley) {
-//         Image image = new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg");
-//         addImage(image);
-//      } else if (faction instanceof AmerigoVespucci) {
-//         Image image = new Image("file:src/Images/FactionImages/Image_AmerigoVespucci.jpeg");
-//         addImage(image);
-//      } else if (faction instanceof Buddha) {
-//         Image image = new Image("file:src/Images/FactionImages/Image_Buddha.jpeg");
-//         addImage(image);
-//      } else if (faction instanceof DariusTheGreat) {
-//         Image image = new Image("file:src/Images/FactionImages/Image_DariusTheGreat.jpeg");
-//         addImage(image);
-//      } else if (faction instanceof ErikTheRed) {
-//         Image image = new Image("file:src/Images/FactionImages/Image_ErikTheRed.jpeg");
-//         addImage(image);
-//      } else if (faction instanceof Gilgamesh) {
-//         Image image = new Image("file:src/Images/FactionImages/Image_Gilgamesh.jpeg");
-//         addImage(image);
-//      } else if (faction instanceof HelenOfTroy) {
-//         Image image = new Image("file:src/Images/FactionImages/Image_HelenOfTroy.jpeg");
-//         addImage(image);
-//      } else if (faction instanceof HusseinTheTeaMaker) {
-//         Image image = new Image("file:src/Images/FactionImages/Image_HusseinTheTeaMaker.jpeg");
-//         addImage(image);
-//      } else if (faction instanceof LeonardoDaVinci) {
-//         Image image = new Image("file:src/Images/FactionImages/Image_LeonardoDaVinci.jpeg");
-//         addImage(image);
-//      } else if (faction instanceof MarieCurie) {
-//         Image image = new Image("file:src/Images/FactionImages/Image_MarieCurie.jpeg");
-//         addImage(image);
-//      } else if (faction instanceof MorganLeFay) {
-//         Image image = new Image("file:src/Images/FactionImages/Image_MorganLeFay.jpeg");
-//         addImage(image);
-//      } else if (faction instanceof Ramesses) {
-//         Image image = new Image("file:src/Images/FactionImages/Image_Ramesses.jpeg");
-//         addImage(image);
-//      } else if (faction instanceof StPatrick) {
-//         Image image = new Image("file:src/Images/FactionImages/Image_StPatrick.jpeg");
-//         addImage(image);
-//      } else if (faction instanceof VladTheImpaler) {
-//         Image image = new Image("file:src/Images/FactionImages/Image_VladTheImpaler.jpeg");
-//         addImage(image);
-//      }
+      if (faction instanceof AliesterCrowley) {
+         Image image = new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg");
+         addImage(image);
+      } else if (faction instanceof AmerigoVespucci) {
+         Image image = new Image("file:src/Images/FactionImages/Image_AmerigoVespucci.jpeg");
+         addImage(image);
+      } else if (faction instanceof Buddha) {
+         Image image = new Image("file:src/Images/FactionImages/Image_Buddha.jpeg");
+         addImage(image);
+      } else if (faction instanceof DariusTheGreat) {
+         Image image = new Image("file:src/Images/FactionImages/Image_DariusTheGreat.jpeg");
+         addImage(image);
+      } else if (faction instanceof ErikTheRed) {
+         Image image = new Image("file:src/Images/FactionImages/Image_ErikTheRed.jpeg");
+         addImage(image);
+      } else if (faction instanceof Gilgamesh) {
+         Image image = new Image("file:src/Images/FactionImages/Image_Gilgamesh.jpeg");
+         addImage(image);
+      } else if (faction instanceof HelenOfTroy) {
+         Image image = new Image("file:src/Images/FactionImages/Image_HelenOfTroy.jpeg");
+         addImage(image);
+      } else if (faction instanceof HusseinTheTeaMaker) {
+         Image image = new Image("file:src/Images/FactionImages/Image_HusseinTheTeaMaker.jpeg");
+         addImage(image);
+      } else if (faction instanceof LeonardoDaVinci) {
+         Image image = new Image("file:src/Images/FactionImages/Image_LeonardoDaVinci.jpeg");
+         addImage(image);
+      } else if (faction instanceof MarieCurie) {
+         Image image = new Image("file:src/Images/FactionImages/Image_MarieCurie.jpeg");
+         addImage(image);
+      } else if (faction instanceof MorganLeFay) {
+         Image image = new Image("file:src/Images/FactionImages/Image_MorganLeFay.jpeg");
+         addImage(image);
+      } else if (faction instanceof Ramesses) {
+         Image image = new Image("file:src/Images/FactionImages/Image_Ramesses.jpeg");
+         addImage(image);
+      } else if (faction instanceof StPatrick) {
+         Image image = new Image("file:src/Images/FactionImages/Image_StPatrick.jpeg");
+         addImage(image);
+      } else if (faction instanceof VladTheImpaler) {
+         Image image = new Image("file:src/Images/FactionImages/Image_VladTheImpaler.jpeg");
+         addImage(image);
+      }
       //addIncomes();
       //addResources();
       addAllResources();
-      this.setPadding(new Insets(20, 50, 0, 0));
+      this.setPadding(new Insets(0, 50, 0, 0));
    }
 
    public void addImage(Image image) {
@@ -122,7 +129,7 @@ public class PlayerView extends BorderPane {
 //      HBox power = getSingleResourceView(new Image("gold.png"), player.getPower(), player.getGoldIncome());
 
       resources.getChildren().addAll(gold, priest, worker, power, victory, spade);
-      resources.setPadding( new Insets(10, 0, 0, 150));
+      resources.setPadding( new Insets(10, 0, 0, 20));
       setRight(resources);
 
    }
