@@ -205,6 +205,7 @@ public class GameController implements Initializable, Serializable {
          this.playerHandler = fm.loadGame(save, this).playerHandler;
          this.currentPlayer = fm.loadGame(save, this).currentPlayer;
          this.roundController = fm.loadGame(save, this).roundController;
+    //     this.loadInitialMap();
    }
    @FXML
    public void skipTurnClicked() {
@@ -220,7 +221,7 @@ public class GameController implements Initializable, Serializable {
             roundController.setCurrentPlayerId(0);
          currentPlayer = playerList[roundController.getCurrentPlayerId()];
          System.out.println("current dwelling: " + currentPlayer.getDwellingNum());
-         if (currentPlayer.getDwellingNum() < currentPlayer.getFaction().startingDwellingNum) {
+         if (currentPlayer.getBuildingNumber() < currentPlayer.getFaction().startingDwellingNum) {
             loadInitialMap();
             setButtonClickForInitialDwellings();
          }
@@ -1025,6 +1026,10 @@ public class GameController implements Initializable, Serializable {
 
    public Map getMap() {
       return map;
+   }
+
+   public ArrayList<PlayerView> getPlayerViewList() {
+      return playerViewList;
    }
 
    public Player[] getPlayerList() {

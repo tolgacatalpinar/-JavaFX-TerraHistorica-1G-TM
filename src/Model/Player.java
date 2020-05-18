@@ -229,6 +229,7 @@ public class Player implements Serializable {
    }
 
 
+
    public int getNumOfFavorTile() {
       return numOfFavorTile;
    }
@@ -355,6 +356,8 @@ public class Player implements Serializable {
    public int getShipLevel() {
       return shipLevel;
    }
+
+   public int getBuildingNumber(){return (this.dwellingNum + this.templeNum + this.strongholdNum + this.tradingPostNum + this.templeNum + this.sanctuaryNum);}
 
 
    public int getReligionTrackInventory() {
