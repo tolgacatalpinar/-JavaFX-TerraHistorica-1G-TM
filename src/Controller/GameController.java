@@ -5,6 +5,7 @@ import Model.CardsAndTiles.CardsAndTiles;
 import View.*;
 import View.ActionsViews.ExchangeResourcesView;
 import View.ActionsViews.PowerActionView;
+import View.DialogueViews.DialogueView;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,6 +14,9 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
@@ -164,7 +168,6 @@ public class GameController implements Initializable, Serializable {
                   }
                   else if(playerList != null)
                   {
-                     //System.out.println("else is in");
                      for( int i = 0; i < playerViewList.size(); i ++)
                      {
                         playerViewList.get(i).updateView(playerList[i]);
@@ -173,7 +176,6 @@ public class GameController implements Initializable, Serializable {
                      showTown(terrains, map);
                   }
 
-                   System.out.println("Spade level is " + playerList[roundController.getCurrentPlayerId()].getSpadeLevel());
                }
             };
 
@@ -462,7 +464,8 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void townTilesClicked() throws IOException {
-      cardsAndTilesController.showTownTilesTable(cardsAndTiles,playerList[roundController.currentPlayerId],religionArr,false);
+      //todo
+      cardsAndTilesController.showTownTilesTable(cardsAndTiles,playerList[roundController.currentPlayerId],religionArr,true);
    }
 
    @FXML
@@ -764,6 +767,9 @@ public class GameController implements Initializable, Serializable {
 
          @Override
          public void handle(MouseEvent event) {
+            playerList[roundController.currentPlayerId].setBowlThreePower(12);
+            playerList[roundController.currentPlayerId].setWorkerNum(1000);
+            playerList[roundController.currentPlayerId].setGoldNum(1000);
             int chosen = powerActionView.getSelection();
             System.out.println("Selection: " + chosen);
             powerActionView.setSelection(chosen);
@@ -780,9 +786,11 @@ public class GameController implements Initializable, Serializable {
                }
                if(checkBridgability) {
                   if (playerHandler.usePowerAction(0, currentPlayer)) {
+                     System.out.println("Girdi");
                      TerrainController.disableTerrains(terrains,map);
                      TerrainController.buildBridge(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map, mapPane, actions);
                      disableActions();
+                     System.out.println("Köprü kuruldu");
                   }
                }
             } else if (powerActionView.getSelection() == 4) {
@@ -801,6 +809,7 @@ public class GameController implements Initializable, Serializable {
                }
             } else {
                if (playerHandler.usePowerAction(powerActionView.getSelection(), currentPlayer)) {
+                  System.out.println("Köprü kuruldu");
                }
             }
          }
@@ -873,12 +882,30 @@ public class GameController implements Initializable, Serializable {
       dialog.setScene(dialogScene);
       dialog.setTitle("Score Table");
       dialog.setResizable(false);
-      if(roundController.isOver())
-      {
-         System.out.println("girdi");
-         dialog.setOnCloseRequest(e-> Platform.exit());
+
+      if(roundController.isOver()) {
+
+          DialogueView view = new DialogueView();
+          BorderPane winnerPane = new BorderPane();
+          int winnerId = playerHandler.getWinner(playerList, religionScores, pathScores);
+          Image image = emptyPane.getImage(playerList[winnerId]);
+          Stage winnerStage = view.getStage("WINNER!",winnerPane , image);
+          System.out.println("Winner player is: " + playerList[winnerId].getNickName());
+          winnerStage.setAlwaysOnTop(true);
+          winnerStage.setHeight(800);
+          winnerStage.setWidth(550);
+          winnerStage.show();
+          winnerStage.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
+              if (KeyCode.ESCAPE == event.getCode()) {
+                  if(winnerStage.isShowing())
+                      winnerStage.close();
+              }
+          });
+          dialog.showAndWait();
+          dialog.setOnCloseRequest(e-> Platform.exit());
+
       }
-      dialog.showAndWait();
+
    }
 
 
