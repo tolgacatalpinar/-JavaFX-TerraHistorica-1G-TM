@@ -43,9 +43,19 @@ public class DialogueView implements  Serializable{
               BackgroundSize.DEFAULT)));
       return dialog;
    }
-   public static VBox getDwellingUpgradePromptPane(Player current, Button dwellingButton, Button emptyTerrainButton)
+   public static VBox getDwellingUpgradePromptPane(Player player, Button discardButton, Button tradingPostButton)
    {
-      Player player = current;
+      int leftGold = 0;
+      int rightGold = player.getFaction().DWELLING_GOLD_COST;
+      int leftWorker = 0;
+      int rightWorker = player.getFaction().DWELLING_WORKER_COST;
+      Insets promptInsets = new Insets(0, 0, 20, 100);
+      String promptText = "Do you want to upgrade dwelling to trading post?";
+      DialoguePane dwellingOrEmptyTerrainDialogue = new DialoguePane(discardButton, tradingPostButton, promptText, promptInsets, leftGold, rightGold, leftWorker, rightWorker);
+      return dwellingOrEmptyTerrainDialogue;
+   }
+   public static VBox getDwellingAfterTerraformPromptPane(Player player, Button dwellingButton, Button emptyTerrainButton)
+   {
       int leftGold = 0;
       int rightGold = player.getFaction().DWELLING_GOLD_COST;
       int leftWorker = 0;
@@ -55,9 +65,8 @@ public class DialogueView implements  Serializable{
       DialoguePane dwellingOrEmptyTerrainDialogue = new DialoguePane(emptyTerrainButton, dwellingButton, promptText, promptInsets, leftGold, rightGold, leftWorker, rightWorker);
       return dwellingOrEmptyTerrainDialogue;
    }
-   public static VBox getTradingPostUpgradePromptPane(Player current, Button templeButton, Button strongholdButton)
+   public static VBox getTradingPostUpgradePromptPane(Player player, Button templeButton, Button strongholdButton)
    {
-      Player player = current;
       int leftGold = player.getFaction().TEMPLE_GOLD_COST;
       int rightGold = player.getFaction().STRONGHOLD_GOLD_COST;
       int leftWorker = player.getFaction().TEMPLE_WORKER_COST;
@@ -67,71 +76,27 @@ public class DialogueView implements  Serializable{
       DialoguePane templeOrStrongholdDialogue = new DialoguePane(templeButton, strongholdButton, promptText, promptInsets, leftGold, rightGold, leftWorker, rightWorker);
       return templeOrStrongholdDialogue;
 
-
-//      Label templePrompt = new Label(templePromptMessage);
-//      ImageView goldImTemple = new ImageView(new Image("gold.png"));
-//      goldImTemple.setFitHeight(30);
-//      goldImTemple.setFitWidth(30);
-//      Label goldLabelTemple = new Label("" + playerArr[curPlayerId].getFaction().TEMPLE_GOLD_COST);
-//      ImageView workerImTemple = new ImageView(new Image("gold.png"));
-//      workerImTemple.setFitHeight(30);
-//      workerImTemple.setFitWidth(30);
-//      Label workerLabelTemple = new Label("" + playerArr[curPlayerId].getFaction().TEMPLE_WORKER_COST);
-//
-//      ImageView goldImStrong = new ImageView(new Image("gold.png"));
-//      goldImStrong.setFitHeight(30);
-//      goldImStrong.setFitWidth(30);
-//      ImageView workerImStrong = new ImageView(new Image("gold.png"));
-//      workerImStrong.setFitHeight(30);
-//      workerImStrong.setFitWidth(30);
-//
-//      Label strongholdPrompt = new Label(strongholdPromptMessage);
-//      Label goldLabelStronghold = new Label("" + playerArr[curPlayerId].getFaction().STRONGHOLD_GOLD_COST);
-//      Label workerLabelStronghold = new Label("" + playerArr[curPlayerId].getFaction().STRONGHOLD_WORKER_COST);
-//
-//      HBox buttons = new HBox();
-//      buttons.getChildren().addAll(yesButton, noButton);
-//
-//      HBox requiredResourcesTemple = new HBox();
-//      requiredResourcesTemple.getChildren().addAll(goldImTemple, goldLabelTemple, workerImTemple, workerLabelTemple);
-//
-//      HBox requiredResourcesStronghold = new HBox();
-//      requiredResourcesStronghold.getChildren().addAll(goldImStrong, goldLabelStronghold, workerImStrong, workerLabelStronghold);
-//
-//      VBox whole = new VBox();
-//      whole.getChildren().addAll(templePrompt, requiredResourcesTemple, strongholdPrompt, requiredResourcesStronghold, buttons);
-//      BorderPane pane = new BorderPane();
-//      pane.setCenter(whole);
-//      HBox selectionBox = new HBox();
-//      templeButton.setDisable(false);
-//      selectionBox.getChildren().addAll( templeButton, strongholdButton);
-//      pane.setBottom(selectionBox);
-//      pane.setPadding(new Insets(50, 50, 50, 0));
-//
-//      return pane;
    }
-   public static BorderPane getTempleUpgradePromptPane(Player current, String promptMessage, Button yesButton, Button noButton)
+   public static VBox getTempleUpgradePromptPane(Player player, Button discardButton, Button sanctuaryButton)
    {
-      Label prompt = new Label(promptMessage);
-      ImageView goldIm = new ImageView(new Image("gold.png"));
-      goldIm.setFitHeight(30);
-      goldIm.setFitWidth(30);
-      Label goldLabel = new Label("" + current.getFaction().TEMPLE_GOLD_COST);
-      ImageView workerIm = new ImageView(new Image("gold.png"));
-      workerIm.setFitHeight(30);
-      workerIm.setFitWidth(30);
-      Label workerLabel = new Label("" + current.getFaction().TEMPLE_WORKER_COST);
-
-      HBox requiredResources = new HBox();
-      HBox buttons = new HBox();
-      buttons.getChildren().addAll(yesButton, noButton);
-      requiredResources.getChildren().addAll(goldIm, goldLabel, workerIm, workerLabel);
-      VBox whole = new VBox();
-      whole.getChildren().addAll(prompt, requiredResources, buttons);
-      BorderPane pane = new BorderPane();
-      pane.setCenter(whole);
-      pane.setPadding(new Insets(50, 50, 0, 0));
-
-      return pane;
+      int leftGold = player.getFaction().TEMPLE_GOLD_COST;
+      int rightGold = player.getFaction().STRONGHOLD_GOLD_COST;
+      int leftWorker = player.getFaction().TEMPLE_WORKER_COST;
+      int rightWorker = player.getFaction().STRONGHOLD_WORKER_COST;
+      Insets promptInsets = new Insets(0, 0, 20, 90);
+      String promptText = "Do you want to upgrade temple to sanctuary";
+      DialoguePane templeOrStrongholdDialogue = new DialoguePane(discardButton, sanctuaryButton, promptText, promptInsets, leftGold, rightGold, leftWorker, rightWorker);
+      return templeOrStrongholdDialogue;
+   }
+   public static VBox getUpgradeShippingPromptPane(Player player, Button discardButton, Button shippingButton)
+   {
+      int leftGold = 0;
+      int rightGold = player.getFaction().SHIPPING_GOLD_COST;
+      int leftPriest = 0;
+      int rightPriest = player.getFaction().SHIPPING_PRIEST_COST;
+      Insets promptInsets = new Insets(0, 0, 20, 90);
+      String promptText = "Do you want to upgrade your shipping?";
+      VBox shippingDialoguePane = DialoguePane.getShippingDialoguePane(discardButton, shippingButton, promptText, promptInsets, leftGold, rightGold, leftPriest, rightPriest);
+      return shippingDialoguePane;
    }
 }
