@@ -124,7 +124,7 @@ public class TerrainController implements Serializable {
                   public void handle(MouseEvent event) {
                      skipTurn.setDisable(false);
                      map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
-                     playerHandler.buildInitialDwelling(current);
+                     //playerHandler.buildInitialDwelling(current);
                      map.spaces[row][col].setPlayer(current);
 
                      TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());

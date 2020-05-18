@@ -79,6 +79,7 @@ public class PlayerHandler implements Serializable{
                     player.setTradingPostNum(player.getTradingPostNum() - 1);
                     player.setStrongholdNum(player.getStrongholdNum() + 1);
                     player.getFaction().afterStronghold(); //Not implemented yet
+                    player.addPowerToBowl(player.getFaction().getPowerAfterStronghold);
                     if( player.isSanctuaryStrongholdScoringTile()) {
                         player.setVictoryPointNum(player.getVictoryPointNum() + 5);
                     }

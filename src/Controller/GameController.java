@@ -181,11 +181,6 @@ public class GameController implements Initializable, Serializable {
    }
 
    @FXML
-   public void chooseAction(int choice) {
-
-   }
-
-   @FXML
    public void saveGameClicked() throws IOException {
       fm.saveGame(this, roundController,save);
       System.out.println("saved");
@@ -281,65 +276,16 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void terraformClicked() {
-      ActionController.terraform(playerList, roundController.getCurrentPlayerId(), terrains, map, actions, cardsAndTiles,religionArr);
+      ActionController.terraform(playerList[roundController.currentPlayerId], terrains, map, actions, cardsAndTiles,religionArr);
 
    }
 
    @FXML
    public void upgradeStructureClicked() {
 
-      ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(), terrains, map, actions, cardsAndTiles, religionArr);
-
-//      ThreadB b = new ThreadB();
-//      b.start();
-//      synchronized (b) {
-//         try {
-//            System.out.println("Waiting for b to complete...");
-//            b.wait();
-//         } catch (InterruptedException e) {
-//            e.printStackTrace();
-//         }
-//         ActionController.actiondone = false;
-//         System.out.println(ActionController.canChooseFavorTile);
-//      }
+      ActionController.upgradeStructure(playerList[roundController.getCurrentPlayerId()] , terrains, map, actions, cardsAndTiles, religionArr);
 
    }
-//      System.out.println(shouldChooseFavorTile);
-//      if(shouldChooseFavorTile){
-//         System.out.println("GİRDİİİĞ");
-//         CardsAndTilesController.showFavorTilesTable(cardsAndTiles,playerList[roundController.getCurrentPlayerId()],religionArr);
-//      }
-   //System.out.println("SAAAAAAAAAAAA");
-//      try{
-//         while (!ActionController.actionDone) {
-//            Thread.sleep(500);
-//         }
-//      }catch (InterruptedException ie){
-//
-//      }
-//      if(ActionController.actionDone){
-//         if(ActionController.favorTile)
-//         System.out.println("GİRDİİİĞ");
-//         CardsAndTilesController.showFavorTilesTable(cardsAndTiles,playerList[roundController.getCurrentPlayerId()],religionArr);
-//      }
-//      ActionController.actionDone = false;
-//      ActionController.favorTile = false;
-
-   //   class ThreadB extends Thread {
-//      int total;
-//
-//      @Override
-//      public void run() {
-//         synchronized (this) {
-//
-//            while (!ActionController.actiondone)
-//                 ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(), terrains, map, actions);
-//
-//            notify();
-//
-//         }
-//      }
-//   }
    @FXML
    public void religionsClicked() {
       ReligionController religionController = new ReligionController();
@@ -351,21 +297,11 @@ public class GameController implements Initializable, Serializable {
       ReligionController religionController = new ReligionController();
       //FOR RELIGION
       ArrayList<ArrayList<Integer>>[] scoresReligion = religionController.calculateReligionScores(religionArr, playerList);
-      Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Scores Of Religion");
-      alert.setContentText("For Islam: " + "1. PLAYERS " + scoresReligion[0].get(0)+ " 2. PLAYERS " + scoresReligion[0].get(1) +" 3. PLAYERS" + scoresReligion[0].get(2) +
-                           "\nFor Chris: " +  "1. PLAYERS " + scoresReligion[1].get(0)+ " 2. PLAYERS " + scoresReligion[1].get(1) +" 3. PLAYERS" + scoresReligion[1].get(2) +
-                           "\nFor Juda: " +  "1. PLAYERS " + scoresReligion[2].get(0)+ " 2. PLAYERS " + scoresReligion[2].get(1) +" 3. PLAYERS" + scoresReligion[2].get(2) +
-                           "\nFor Hindu: " +  "1. PLAYERS " + scoresReligion[3].get(0)+ " 2. PLAYERS " + scoresReligion[3].get(1) +" 3. PLAYERS" + scoresReligion[3].get(2));
-      int[] playerBonuses = map.getLongestPathValues(playerList);
-      for(int i = 0; i< playerBonuses.length; i++){
-         System.out.println("For player "+ i + "score is "+ playerBonuses[i]);
-      }
-      alert.showAndWait();
       //FOR LONGEST PATH
       ArrayList<Integer>[] scoresLongestPath = map.calculatePathScores(playerList);
+      showScoreTable(scoresReligion,scoresLongestPath);
 
-
+      //Calculate victory points for the winner in last round
    }
 
 
@@ -395,14 +331,10 @@ public class GameController implements Initializable, Serializable {
 
    }
 
-   //TODO
-   public void skipTurn() {
-
-   }
 
    @FXML
    public void specialActionClicked() {
-      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId(),map,terrains,skipTurn,roundController);
+      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId(),map,terrains,actions,roundController);
    }
 
    public void createSpaces() {
@@ -499,7 +431,7 @@ public class GameController implements Initializable, Serializable {
 
    }
 
-   public void loadCardsAndTiles(int totalPlayerNumber) {
+   public void loadCardsAndTiles() {
       cardsAndTiles = new CardsAndTiles(playerList.length, playerList);
       cardsAndTilesController = new CardsAndTilesController();
       cardsAndTiles.returnScoringTile(0, 1, playerList,religionArr);
@@ -823,9 +755,7 @@ public class GameController implements Initializable, Serializable {
                      TerrainController.buildBridge(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map, mapPane, actions);
                      System.out.println("Köprü kuruldu");
                   }
-                  //ELSE PROMPT NOT ENOUGH RESOURCES
                }
-               //ELSE PROMPT NO BRIDGABLE TERRAINS
             } else if (getSelection() == 4) {
                if (playerHandler.usePowerAction(4, currentPlayer)) {
                   disableActions();
@@ -847,8 +777,7 @@ public class GameController implements Initializable, Serializable {
             }
          }
       });
-      //update(gridPane,status);
-      //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
+
       dialog.show();
    }
    private void showExchangeResources(Player currentPlayer) {
@@ -974,8 +903,6 @@ public class GameController implements Initializable, Serializable {
             dialog.close();
          }
       });
-      //update(gridPane,status);
-      //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
       dialog.showAndWait();
    }
    public int getSelection() {
@@ -1022,7 +949,19 @@ public class GameController implements Initializable, Serializable {
       return 3*(counter/2);
    }
 
+   public void showScoreTable(ArrayList<ArrayList<Integer>>[] religionScores,ArrayList<Integer>[] pathScores) {
+      Pane emptyPane = new Pane();
+      final Stage dialog = new Stage();
+      dialog.initModality(Modality.APPLICATION_MODAL);
+      Scene dialogScene = new Scene(emptyPane, 1100, 600);
+      dialog.setScene(dialogScene);
+      dialog.setTitle("Score Table");
+      dialog.setResizable(false);
+      emptyPane.setBackground(new Background( new BackgroundImage( new Image("score_table_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+              BackgroundSize.DEFAULT)));
 
+      dialog.show();
+   }
 
    public Map getMap() {
       return map;
