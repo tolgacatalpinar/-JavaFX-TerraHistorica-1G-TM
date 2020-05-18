@@ -7,24 +7,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
-
-import static java.util.Objects.requireNonNull;
 import java.io.Serializable;
 public class MainMenuController   implements Initializable, Serializable {
     @FXML
@@ -78,7 +69,7 @@ public class MainMenuController   implements Initializable, Serializable {
 
     public static void openWebpage(String urlString) {
         try {
-            Desktop.getDesktop().browse(new URL(urlString).toURI());
+            //Desktop.getDesktop().browse(new URL(urlString).toURI());
         } catch (Exception e) {
             e.printStackTrace();
         }

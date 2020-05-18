@@ -4,30 +4,14 @@ import Model.FactionSubclasses.*;
 import Model.Player;
 import Model.PlayerHandler;
 import Model.Religion;
-import Model.ReligionSubclasses.Christianity;
-import Model.ReligionSubclasses.Hinduism;
-import Model.ReligionSubclasses.Islam;
-import Model.ReligionSubclasses.Jewish;
-import View.ScoreTableView;
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
 import javafx.scene.effect.Effect;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
@@ -40,8 +24,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.Serializable;
 import java.util.*;
-import java.util.stream.IntStream;
-
 public class ReligionController implements Serializable{
     @FXML
     private ChoiceBox<String> choiceBox;
@@ -200,25 +182,18 @@ public class ReligionController implements Serializable{
             disableButtons(religon_buttons);
             update(gridPane);
         }
-
         religon_buttons.setMinSize(150,600);
         border.setRight(religon_buttons);
-
         BackgroundImage bg = new BackgroundImage( new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         border.setBackground(new Background(bg));
-       //border.setPrefHeight(800);
-        //border.setPrefWidth(1200);
         final Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         Scene dialogScene = new Scene(border, 1100, 600);
         dialog.setScene(dialogScene);
         dialog.setTitle("Religion");
         dialog.setResizable(false);
-        //update(gridPane,status);
-        //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
         dialog.show();
-
     }
     public void showChoices(Player[] playerArr, Religion[] religionArr, int currentPlayer)
     {
@@ -236,17 +211,14 @@ public class ReligionController implements Serializable{
         BackgroundImage place_priest_bg = new BackgroundImage( new Image("place_priest.jpg",300.0,300.0,true,true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         place_priest.setBackground(new Background(place_priest_bg));
-
         gridPane.add(add_order,1,1);
         gridPane.add(place_priest,2,1);
         add_order.setPrefSize(300, 300);
         place_priest.setPrefSize(300, 300);
-
         BackgroundImage bg = new BackgroundImage( new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         border.setBackground(new Background(bg));
         final Stage dialog = new Stage();
-
         dialog.initModality(Modality.APPLICATION_MODAL);
         Scene dialogScene = new Scene(border, 600, 300);
         dialog.setScene(dialogScene);
@@ -268,8 +240,6 @@ public class ReligionController implements Serializable{
             }
         });
         dialog.show();
-
-
     }
 
     /**
@@ -430,14 +400,12 @@ public class ReligionController implements Serializable{
     public Node getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
         Node result = null;
         ObservableList<Node> childrens = gridPane.getChildren();
-
         for (Node node : childrens) {
             if(gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
                 result = node;
                 break;
             }
         }
-
         return result;
     }
     public void disableButtons(GridPane buttons_grid){
@@ -451,16 +419,8 @@ public class ReligionController implements Serializable{
             });
         }
     }
-
-    /**
-     *
-     *
-     *
-     */
     public ArrayList<ArrayList<Integer>>[] calculateReligionScores(Religion[] religions,Player[] playerList) {
-
         ArrayList<ArrayList<Integer>>[] realResult = new ArrayList[religions.length];
-
         for(int i = 0; i < religions.length; i++) {
             int [] playerPositions = religions[i].getPlayerPositions();
             ArrayList<ArrayList<Integer>> result = new ArrayList<>();

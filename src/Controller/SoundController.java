@@ -4,7 +4,6 @@ import javafx.scene.Group;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-
 import java.io.File;
 
 public class SoundController {

@@ -21,7 +21,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -29,17 +28,12 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.io.Serializable;
 public class GameController implements Initializable, Serializable {
-
    final int ROW_NUMBER = 9;
-
    final int COLUMN_NUMBER = 13;
-
    private int selection = -1;
    private String gameId = "15";
    //public FileManager fm = new FileManager();
-
    //public File save = fm.createSave("15");
-
    @FXML
    Pane mapPane;
    @FXML
@@ -79,7 +73,6 @@ public class GameController implements Initializable, Serializable {
    @FXML
    Button upgradeSpade;
 
-
    ArrayList<PlayerView> playerViewList;
    public Button[][] terrains;
    Button[] actions;
@@ -92,17 +85,12 @@ public class GameController implements Initializable, Serializable {
    PlayerHandler playerHandler;
    Player currentPlayer;
    boolean isPlayerViewListCreated = false;
-
-
    public GameController() throws IOException {
 
    }
 
-
    @Override
    public void initialize(URL url, ResourceBundle resourceBundle) {
-      //SoundController.playGameMusic(30);
-
       actions = new Button[]{specialActions, terraform, upgradeShipping, upgradeStruct, sendPriest, powerActions, upgradeSpade, passRound};
       System.out.println("Initialize is called");
       int index = 0;
@@ -119,11 +107,8 @@ public class GameController implements Initializable, Serializable {
             terrains[row][col] = (Button) mapPane.getChildren().get(index);
          index++;
       }
-
       createSpaces();
-      //testText.setText(playerList[0].getNickName());
       Thread thread = new Thread(new Runnable() {
-
          @Override
          public void run() {
             Runnable updater = new Runnable() {
@@ -144,26 +129,12 @@ public class GameController implements Initializable, Serializable {
                         }
                      }
                      factionsView.getChildren().addAll(playerViewList);
-                     //displayPlayerTurn(playerViewList);
                      factionsView.setPadding(new Insets(0, 0, 0, 20));
-                     //factionsView.setStyle("fx-margin-bottom: 150;");
-//                     VBox.setMargin(factionsView, new Insets(0,0,1500,0));
-                     //factionsView.setMargin(,);
-
                      factionsView.setMaxWidth(200);
                      borderPane.setBottom(factionsView);
                      borderPane.setPadding(new Insets(0,0,50,0));
                      displayPlayerTurn(playerViewList);
                      showTown(terrains, map);
-
-//                     if(playerList[roundController.currentPlayerId].isRoundPassed()){
-//                        disableActions();
-//                     }
-//                     ImageView imview = new ImageView();
-//                     imview.setImage(new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg"));
-//                     imview.setFitHeight(150);
-//                     imview.setFitWidth(50);
-//                     borderPane.setBottom(imview);
                      isPlayerViewListCreated = true;
                   }
                   else if(playerList != null)
@@ -184,12 +155,10 @@ public class GameController implements Initializable, Serializable {
                   Thread.sleep(1000);
                } catch (InterruptedException ex) {
                }
-
                // UI update is run on the Application thread
                Platform.runLater(updater);
             }
          }
-
       });
       // don't let thread prevent JVM shutdown
       thread.setDaemon(true);
@@ -197,24 +166,17 @@ public class GameController implements Initializable, Serializable {
       setButtonClickForInitialDwellings();
 
    }
-
    @FXML
    public void saveGameClicked() throws IOException {
        File save = FileManager.createSave(gameId);
        FileManager.saveGame(this, roundController,save);
        System.out.println("saved");
    }
-
-
-
-
-
    @FXML
    public void loadGameClicked() throws IOException
    {
           updateMap(this.terrains,this.map);
    }
-
    public void updateMap(Button[][] terrains, Map map){
       System.out.println("alasa");
       int index = 0;
@@ -335,9 +297,6 @@ public class GameController implements Initializable, Serializable {
 
    }
 
-
-
-
    @FXML
    public void skipTurnClicked() {
       TerrainController.disableButtonClicks(terrains);
@@ -363,8 +322,6 @@ public class GameController implements Initializable, Serializable {
          roundController.endTurn(playerList);
       }
    }
-
-
 
 
    @FXML
@@ -393,43 +350,28 @@ public class GameController implements Initializable, Serializable {
       }
    }
 
-
-
-
-
    @FXML
    public void bonusCardsClicked() {
       cardsAndTilesController.showBonusCardsTable(cardsAndTiles, currentPlayer,false);
    }
 
-
-
-
-
    @FXML
    public void upgradeShippingClicked() {
       ActionController.showUpdateShippingDialogs(playerList[roundController.getCurrentPlayerId()], actions);
    }
-
    @FXML
    public void sendPriestClicked() {
       ReligionController religionController = new ReligionController();
       religionController.showChoices(playerList, religionArr, roundController.getCurrentPlayerId());
-
    }
-
    @FXML
    public void powerActionClicked() {
       showPowerActions(playerList[roundController.currentPlayerId]);
-
-
    }
-
    @FXML
    public void upgradeSpadeClicked() {
       ActionController.showUpdateSpadeDialogs(playerList[roundController.getCurrentPlayerId()], actions);
    }
-
    @FXML
    public void terraformClicked() {
       ActionController.terraform(playerList[roundController.currentPlayerId], terrains, map, actions, cardsAndTiles,religionArr);
@@ -458,10 +400,7 @@ public class GameController implements Initializable, Serializable {
       System.out.println();
       showScoreTable(scoresReligion,scoresLongestPath);
       //Calculate victory points for the winner in last round
-
    }
-
-
    @FXML
    public void townTilesClicked() throws IOException {
       //todo
@@ -479,15 +418,10 @@ public class GameController implements Initializable, Serializable {
       showExchangeResources();
    }
 
-
-
    @FXML
    public void favorTilesClicked() {
-
       cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], religionArr,false);
-
    }
-
 
    @FXML
    public void specialActionClicked() {
@@ -629,10 +563,7 @@ public class GameController implements Initializable, Serializable {
          }
    }
 
-   /**
-    * TODO
-    * TAŞINACAK
-    */
+
    public  void setButtonClickForInitialDwellings() {
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
@@ -685,11 +616,6 @@ public class GameController implements Initializable, Serializable {
       skipTurn.setDisable(false);
    }
 
-   /**
-    * TODO
-    * TAŞINACAK
-    */
-
    public void displayPlayerTurn(ArrayList<PlayerView> playerViewList) {
 
       for (PlayerView playerView : playerViewList) {
@@ -725,20 +651,15 @@ public class GameController implements Initializable, Serializable {
    }
 
    public void showPowerActions(Player currentPlayer) {
-
       PowerActionView powerActionView = new PowerActionView();
       Button select = powerActionView.getSelectButton();
-
-
       final Stage dialog = new Stage();
       dialog.initModality(Modality.APPLICATION_MODAL);
       Scene dialogScene = new Scene(powerActionView, 1100, 600);
       dialog.setScene(dialogScene);
       dialog.setTitle("Power Action");
       dialog.setResizable(false);
-
       select.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
          @Override
          public void handle(MouseEvent event) {
             int chosen = powerActionView.getSelection();
@@ -810,11 +731,6 @@ public class GameController implements Initializable, Serializable {
       dialog.showAndWait();
    }
 
-
-   public CardsAndTiles getCardsAndTiles() {
-      return cardsAndTiles;
-   }
-
    public void showTown(Button[][] terrains, Map map)
 
    {
@@ -826,7 +742,6 @@ public class GameController implements Initializable, Serializable {
       }
 
    }
-
    public int engineerStrongholdAbility() {
       int counter = 0;
       for (int i = 0; i < ROW_NUMBER; i++) {
@@ -886,16 +801,9 @@ public class GameController implements Initializable, Serializable {
    public Map getMap() {
       return map;
    }
-
-
-
-
-   public ArrayList<PlayerView> getPlayerViewList() {
-      return playerViewList;
-   }
-
-
-
+    public CardsAndTiles getCardsAndTiles() {
+        return cardsAndTiles;
+    }
 
    public Player[] getPlayerList() {
       return playerList;
@@ -904,7 +812,6 @@ public class GameController implements Initializable, Serializable {
    public Religion[] getReligionArr() {
       return religionArr;
    }
-
    public PlayerHandler getPlayerHandler() {
       return playerHandler;
    }
@@ -922,7 +829,6 @@ public class GameController implements Initializable, Serializable {
    public void setPlayerList(Player[] playerList) {
       this.playerList = playerList;
    }
-
    public void setCardsAndTiles(CardsAndTiles cat) {
       this.cardsAndTiles = cat;
    }

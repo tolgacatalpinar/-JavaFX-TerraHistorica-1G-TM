@@ -20,26 +20,6 @@ public class RoundController implements  Serializable{
         passRoundPlayerList = new Player[playerCount];
     }
 
-    public int getCurrentPlayerId(){
-        return currentPlayerId;
-    }
-
-    public int getCurrentRound(){
-        return currentRound;
-    }
-
-    public void setCurrentRound(int currentRound) {
-        this.currentRound = currentRound;
-    }
-
-    public void setCurrentPlayerId(int currentPlayerId){
-        this.currentPlayerId = currentPlayerId;
-    }
-
-    public void setPlayerCount(int playerCount){
-        this.playerCount = playerCount;
-    }
-
     /**
      * Will be called after ending a turn
      */
@@ -84,10 +64,6 @@ public class RoundController implements  Serializable{
         }
     }
 
-    public boolean isOver(){
-        return isOver;
-    }
-
     public void passRound(Player[] playerList) {
         System.out.println(playerList[currentPlayerId]);
         playerHandler.passRound(playerList[currentPlayerId]);
@@ -98,29 +74,18 @@ public class RoundController implements  Serializable{
         }else
             endTurn(playerList);
     }
-
+    public boolean isOver(){
+        return isOver;
+    }
     public boolean isRoundOver() {
         return lastPassedIndex == playerCount;
     }
-
-    /**
-     * This method is to check every time after a player
-     * builds an initial dwelling and ends his/her turn
-     *
-     * @return  false if initial dwelling part continues
-     *          true if it is over, now round is 1
-     */
-    public boolean isRoundZeroOver(Player[] playerList) {
-
-        for(int i = 0; i < playerCount;i++) {
-            if(playerList[i].getStartingDwellingNum() > playerList[i].getDwellingNum()) {
-                return false;
-            }
-        }
-        currentRound++;
-        return true;
+    public int getCurrentPlayerId(){
+        return currentPlayerId;
     }
-
+    public int getCurrentRound(){
+        return currentRound;
+    }
     public int getMAX_ROUND() {
         return MAX_ROUND;
     }
