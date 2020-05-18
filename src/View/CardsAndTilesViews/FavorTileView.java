@@ -3,6 +3,7 @@ package View.CardsAndTilesViews;
 import Model.CardsAndTiles.FavorTile;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -18,22 +19,36 @@ public class FavorTileView extends VBox {
       this.card = new CardView();
       addPlayerSlots();
       addReligionToView();
-      if( this.favorTile.getPowerBonus() > 0)
-         add( new Label("Power: " + this.favorTile.getPowerBonus()));
-      if(this.favorTile.getWorkerBonus() > 0)
-         add( new Label("Worker: " + this.favorTile.getWorkerBonus()));
-      if(this.favorTile.getGoldBonus() > 0)
-         add( new Label("Gold: " + this.favorTile.getGoldBonus()));
-      if(this.favorTile.isSpecialCult())
-         add( new Label("Spec. Cult"));
-      if(this.favorTile.isTradingHouse())
+      if( this.favorTile.getPowerBonus() > 0) {
+         ImageView powerIm = new ImageView( new Image("power.png"));
+         Label powerLabel = new Label("" + this.favorTile.getPowerBonus());
+         addResourceBox(powerIm, powerLabel);
+      }
+      if(this.favorTile.getWorkerBonus() > 0) {
+         ImageView powerIm = new ImageView( new Image("worker.png"));
+         Label powerLabel = new Label("" + this.favorTile.getWorkerBonus());
+         addResourceBox(powerIm, powerLabel);
+      }
+      if(this.favorTile.getGoldBonus() > 0) {
+         ImageView powerIm = new ImageView( new Image("gold.png"));
+         Label powerLabel = new Label("" + this.favorTile.getGoldBonus());
+         addResourceBox(powerIm, powerLabel);
+      }
+      if(this.favorTile.isSpecialCult()) {
+         add(new Label("Spec. Cult"));
+      }
+      if(this.favorTile.isTradingHouse()) {
          add(new Label("Trade - Vict: " + this.favorTile.getVictoryPoint()));
-      if(this.favorTile.isDwellingBonus())
-         add( new Label("Dwel - Vict: " + this.favorTile.getVictoryPoint()));
-      if(this.favorTile.isTownBonus())
-         add( new Label("Town bon."));
-      if (this.favorTile.isPassingBonusForTradingHouse())
-         add(new Label("Pass Trading Bonus" ));
+      }
+      if(this.favorTile.isDwellingBonus()) {
+         add(new Label("Dwel - Vict: " + this.favorTile.getVictoryPoint()));
+      }
+      if(this.favorTile.isTownBonus()) {
+         add(new Label("Town bon."));
+      }
+      if (this.favorTile.isPassingBonusForTradingHouse()) {
+         add(new Label("Pass Trading Bonus"));
+      }
       getChildren().add(card);
    }
    public void addReligionToView()
@@ -41,19 +56,27 @@ public class FavorTileView extends VBox {
       VBox religionBox = null;
       if(favorTile.getIslamBonus() > 0)
       {
-         religionBox = religionBlock("Islam: ", favorTile.getIslamBonus());
+         ImageView powerIm = new ImageView( new Image("islam_symbol.png"));
+         Label powerLabel = new Label("" + this.favorTile.getIslamBonus());
+         addResourceBox(powerIm, powerLabel);
       }
       else if(favorTile.getChristianityBonus() > 0)
       {
-         religionBox = religionBlock("Christ: ", favorTile.getChristianityBonus());
+         ImageView powerIm = new ImageView( new Image("chris_symbol.png"));
+         Label powerLabel = new Label("" + this.favorTile.getChristianityBonus());
+         addResourceBox(powerIm, powerLabel);
       }
       else if(favorTile.getHinduismBonus() > 0)
       {
-         religionBox = religionBlock("Hinduism: ", favorTile.getHinduismBonus());
+         ImageView powerIm = new ImageView( new Image("hinduism.png"));
+         Label powerLabel = new Label("" + this.favorTile.getHinduismBonus());
+         addResourceBox(powerIm, powerLabel);
       }
       else if( favorTile.getJewBonus() > 0)
       {
-         religionBox = religionBlock("Jew: ", favorTile.getJewBonus());
+         ImageView powerIm = new ImageView( new Image("judaism_symbol.png"));
+         Label powerLabel = new Label("" + this.favorTile.getJewBonus());
+         addResourceBox(powerIm, powerLabel);
       }
       if(religionBox != null)
          add(religionBox);
