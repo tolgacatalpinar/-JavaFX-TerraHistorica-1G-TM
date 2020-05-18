@@ -27,8 +27,6 @@ public class CardView extends VBox {
    private void defaultConfigure() {
       setMinHeight(DEFAULT_MIN_HEIGHT);
       setMinWidth(DEFAULT_MIN_WIDTH);
-
-      // Spacing between cards
       VBox.setMargin(this, new Insets(DEFAULT_MARGIN_TOP, DEFAULT_MARGIN_RIGHT, DEFAULT_MARGIN_BOTTOM, DEFAULT_MARGIN_LEFT));
       setSpacing(DEFAULT_SPACING);
       setStyle("-fx-border-color: red;\n" +
@@ -37,7 +35,6 @@ public class CardView extends VBox {
               "-fx-border-style: solid;\n");
       setBackground(new Background( new BackgroundImage( new Image("card_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
               BackgroundSize.DEFAULT)));
-      //setBackground( new Background( new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
    }
 
    public void add(Node pane,int index)
@@ -71,36 +68,8 @@ public class CardView extends VBox {
       setMinHeight(height);
       setMinWidth(width);
    }
-   public void setMargin(Insets insets)
-   {
-      VBox.setMargin(this, insets);
-   }
-
-   public int getDEFAULT_MIN_HEIGHT() {
-      return DEFAULT_MIN_HEIGHT;
-   }
-
    public int getDEFAULT_MIN_WIDTH() {
       return DEFAULT_MIN_WIDTH;
    }
 
-   public int getDEFAULT_MARGIN_TOP() {
-      return DEFAULT_MARGIN_TOP;
-   }
-
-   public int getDEFAULT_MARGIN_RIGHT() {
-      return DEFAULT_MARGIN_RIGHT;
-   }
-
-   public int getDEFAULT_MARGIN_BOTTOM() {
-      return DEFAULT_MARGIN_BOTTOM;
-   }
-
-   public int getDEFAULT_MARGIN_LEFT() {
-      return DEFAULT_MARGIN_LEFT;
-   }
-
-   public int getDEFAULT_SPACING() {
-      return DEFAULT_SPACING;
-   }
 }

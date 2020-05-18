@@ -24,10 +24,6 @@ public class DialogueView implements  Serializable{
 
    private static int STAGE_WIDTH = 1300;
    private static int STAGE_HEIGHT = 700;
-//   alert.setTitle("Special Action Error");
-//                    alert.setContentText("You have not special faction ability");
-//                    alert.setHeaderText("You cannot do this action!!")
-
 
    public static Stage getStage(String title, Parent component, Image backgroundImage)
    {

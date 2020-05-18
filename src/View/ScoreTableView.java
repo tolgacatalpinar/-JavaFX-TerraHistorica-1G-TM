@@ -98,8 +98,6 @@ import java.util.ArrayList;
 
                 allTable.getChildren().add(tempBox);
             }
-
-
             Label emptyLabel2 = new Label("\t");
             allTable.getChildren().add(emptyLabel2);
             Label label4 = new Label("\n   18\n\n");
@@ -162,21 +160,6 @@ import java.util.ArrayList;
             ranking2.setStyle("-fx-background-color: rgba(29,80,107,0.36);");
             this.setCenter(allTable);
         }
-
-
-        public void showWinner(Player winner) {
-
-
-
-
-        }
-
-
-
-
-
-
-
 
         public Image getImage(Player player){
             Image image = null;
