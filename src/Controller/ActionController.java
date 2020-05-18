@@ -932,4 +932,9 @@ public class ActionController implements Serializable {
          actions[i].setDisable(true);
    }
 
+   public static void enableActions(Button[] actions){
+      for(int i = 0; i < actions.length; i++)
+         actions[i].setDisable(false);
+   }
+
 }
