@@ -12,7 +12,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
 
-public class PlayerView extends BorderPane {
+import java.io.Serializable;
+
+public class PlayerView extends BorderPane  {
    class ResourceLabel extends Label
    {
       public ResourceLabel(String label)

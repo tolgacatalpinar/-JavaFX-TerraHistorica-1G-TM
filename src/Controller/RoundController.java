@@ -7,6 +7,7 @@ public class RoundController implements  Serializable{
     int currentPlayerId = 0;
     int playerCount = 0;
     int currentRound = 0;
+    boolean isOver = false;
     final int MAX_ROUND = 6;
     PlayerHandler playerHandler;
     int lastPassedIndex = 0;
@@ -75,9 +76,15 @@ public class RoundController implements  Serializable{
         currentPlayerId = 0;
         currentRound++;
         System.out.println("Round is : "+ currentRound);
-        if(currentRound > MAX_ROUND) {
+        if(currentRound >= MAX_ROUND) {
             System.out.println("GAME OVER");
+            isOver = true;
+         //   System.exit(1);
         }
+    }
+
+    public boolean isOver(){
+        return isOver;
     }
 
     public void passRound(Player[] playerList) {
@@ -113,5 +120,7 @@ public class RoundController implements  Serializable{
         return true;
     }
 
-
+    public int getMAX_ROUND() {
+        return MAX_ROUND;
+    }
 }

@@ -2,7 +2,10 @@ package Controller;
 
 import Model.*;
 import Model.CardsAndTiles.CardsAndTiles;
+import Model.FactionSubclasses.*;
 import View.*;
+import View.ActionsViews.ExchangeResourcesView;
+import View.ActionsViews.PowerActionView;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -150,6 +153,10 @@ public class GameController implements Initializable, Serializable {
                      borderPane.setPadding(new Insets(0,0,50,0));
                      displayPlayerTurn(playerViewList);
                      showTown(terrains, map);
+
+//                     if(playerList[roundController.currentPlayerId].isRoundPassed()){
+//                        disableActions();
+//                     }
 //                     ImageView imview = new ImageView();
 //                     imview.setImage(new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg"));
 //                     imview.setFitHeight(150);
@@ -181,11 +188,6 @@ public class GameController implements Initializable, Serializable {
    }
 
    @FXML
-   public void chooseAction(int choice) {
-
-   }
-
-   @FXML
    public void saveGameClicked() throws IOException {
       fm.saveGame(this, roundController,save);
       System.out.println("saved");
@@ -194,7 +196,6 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void loadGameClicked() throws IOException
    {
-
          this.map = fm.loadGame(save, this).map;
          System.out.println(map.spaces[3][2].getType());
          this.religionArr = fm.loadGame(save, this).religionArr;
@@ -205,6 +206,7 @@ public class GameController implements Initializable, Serializable {
          this.playerHandler = fm.loadGame(save, this).playerHandler;
          this.currentPlayer = fm.loadGame(save, this).currentPlayer;
          this.roundController = fm.loadGame(save, this).roundController;
+    //     this.loadInitialMap();
    }
    @FXML
    public void skipTurnClicked() {
@@ -214,15 +216,16 @@ public class GameController implements Initializable, Serializable {
       if (roundController.currentRound == 0) {
          System.out.println("Current player was: " + playerList[roundController.getCurrentPlayerId()].getNickName());
          System.out.println(roundController.getCurrentPlayerId());
-         if ((roundController.getCurrentPlayerId() + 1) < playerList.length && playerList[roundController.getCurrentPlayerId() + 1] != null)
-            roundController.setCurrentPlayerId(roundController.currentPlayerId + 1);
-         else
-            roundController.setCurrentPlayerId(0);
+         roundController.endTurn(playerList);
          currentPlayer = playerList[roundController.getCurrentPlayerId()];
-         System.out.println("current dwelling: " + currentPlayer.getDwellingNum());
-         if (currentPlayer.getDwellingNum() < currentPlayer.getFaction().startingDwellingNum) {
+         if (currentPlayer.getBuildingNumber() < currentPlayer.getFaction().startingDwellingNum) {
             loadInitialMap();
             setButtonClickForInitialDwellings();
+         }else{
+            disableActions();
+            passRound.setDisable(false);
+            skipTurn.setDisable(true);
+
          }
          System.out.println("Current player is now: " + playerList[roundController.getCurrentPlayerId()].getNickName());
          System.out.println("--------------------------------------------------");
@@ -233,20 +236,29 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void passRoundClicked() {
-      cardsAndTilesController.showBonusCardsTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()],true);
-      int round1 = roundController.getCurrentRound();
-      roundController.passRound(playerList);
-      int round2 = roundController.getCurrentRound();
-      cardsAndTiles.returnScoringTile(round1, round2, playerList,religionArr);
-      //Reset advancement on religion for this round
-      if(round2 != round1){
-         for (Religion religion : religionArr) {
-            religion.resetRoundBasedPosition();
-         }
+
+      if(roundController.getCurrentRound() + 1 != roundController.getMAX_ROUND()) {
+         cardsAndTilesController.showBonusCardsTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], true);
       }
+         int round1 = roundController.getCurrentRound();
+         roundController.passRound(playerList);
+      if (roundController.getCurrentRound() > 0 ){
+            enableActions();
+      }
+         int round2 = roundController.getCurrentRound();
+         cardsAndTiles.returnScoringTile(round1, round2, playerList, religionArr);
+         //Reset advancement on religion for this round
+         if (round2 != round1) {
+            for (Religion religion : religionArr) {
+               religion.resetRoundBasedPosition();
+            }
+         }
 
       System.out.println("Victory Point = " + engineerStrongholdAbility());
-
+      if(roundController.isOver){
+         this.scoreTableClicked();
+         System.out.println("girdii");
+      }
    }
 
    @FXML
@@ -256,7 +268,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void upgradeShippingClicked() {
-      ActionController.showUpdateShippingDialogs(playerList, roundController.getCurrentPlayerId(), actions);
+      ActionController.showUpdateShippingDialogs(playerList[roundController.getCurrentPlayerId()], actions);
    }
 
    @FXML
@@ -275,70 +287,21 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void upgradeSpadeClicked() {
-      ActionController.showUpdateSpadeDialogs(playerList, roundController.getCurrentPlayerId(), actions);
+      ActionController.showUpdateSpadeDialogs(playerList[roundController.getCurrentPlayerId()], actions);
    }
 
    @FXML
    public void terraformClicked() {
-      ActionController.terraform(playerList, roundController.getCurrentPlayerId(), terrains, map, actions, cardsAndTiles,religionArr);
+      ActionController.terraform(playerList[roundController.currentPlayerId], terrains, map, actions, cardsAndTiles,religionArr);
 
    }
 
    @FXML
    public void upgradeStructureClicked() {
 
-      ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(), terrains, map, actions, cardsAndTiles, religionArr);
-
-//      ThreadB b = new ThreadB();
-//      b.start();
-//      synchronized (b) {
-//         try {
-//            System.out.println("Waiting for b to complete...");
-//            b.wait();
-//         } catch (InterruptedException e) {
-//            e.printStackTrace();
-//         }
-//         ActionController.actiondone = false;
-//         System.out.println(ActionController.canChooseFavorTile);
-//      }
+      ActionController.upgradeStructure(playerList[roundController.getCurrentPlayerId()] , terrains, map, actions, cardsAndTiles, religionArr);
 
    }
-//      System.out.println(shouldChooseFavorTile);
-//      if(shouldChooseFavorTile){
-//         System.out.println("GİRDİİİĞ");
-//         CardsAndTilesController.showFavorTilesTable(cardsAndTiles,playerList[roundController.getCurrentPlayerId()],religionArr);
-//      }
-   //System.out.println("SAAAAAAAAAAAA");
-//      try{
-//         while (!ActionController.actionDone) {
-//            Thread.sleep(500);
-//         }
-//      }catch (InterruptedException ie){
-//
-//      }
-//      if(ActionController.actionDone){
-//         if(ActionController.favorTile)
-//         System.out.println("GİRDİİİĞ");
-//         CardsAndTilesController.showFavorTilesTable(cardsAndTiles,playerList[roundController.getCurrentPlayerId()],religionArr);
-//      }
-//      ActionController.actionDone = false;
-//      ActionController.favorTile = false;
-
-   //   class ThreadB extends Thread {
-//      int total;
-//
-//      @Override
-//      public void run() {
-//         synchronized (this) {
-//
-//            while (!ActionController.actiondone)
-//                 ActionController.upgradeStructure(playerList, roundController.getCurrentPlayerId(), terrains, map, actions);
-//
-//            notify();
-//
-//         }
-//      }
-//   }
    @FXML
    public void religionsClicked() {
       ReligionController religionController = new ReligionController();
@@ -350,20 +313,11 @@ public class GameController implements Initializable, Serializable {
       ReligionController religionController = new ReligionController();
       //FOR RELIGION
       ArrayList<ArrayList<Integer>>[] scoresReligion = religionController.calculateReligionScores(religionArr, playerList);
-      Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Scores Of Religion");
-      alert.setContentText("For Islam: " + "1. PLAYERS " + scoresReligion[0].get(0)+ " 2. PLAYERS " + scoresReligion[0].get(1) +" 3. PLAYERS" + scoresReligion[0].get(2) +
-                           "\nFor Chris: " +  "1. PLAYERS " + scoresReligion[1].get(0)+ " 2. PLAYERS " + scoresReligion[1].get(1) +" 3. PLAYERS" + scoresReligion[1].get(2) +
-                           "\nFor Juda: " +  "1. PLAYERS " + scoresReligion[2].get(0)+ " 2. PLAYERS " + scoresReligion[2].get(1) +" 3. PLAYERS" + scoresReligion[2].get(2) +
-                           "\nFor Hindu: " +  "1. PLAYERS " + scoresReligion[3].get(0)+ " 2. PLAYERS " + scoresReligion[3].get(1) +" 3. PLAYERS" + scoresReligion[3].get(2));
-      int[] playerBonuses = map.getLongestPathValues(playerList);
-      for(int i = 0; i< playerBonuses.length; i++){
-         System.out.println("For player "+ i + "score is "+ playerBonuses[i]);
-      }
-      alert.showAndWait();
       //FOR LONGEST PATH
       ArrayList<Integer>[] scoresLongestPath = map.calculatePathScores(playerList);
-
+      System.out.println();
+      showScoreTable(scoresReligion,scoresLongestPath);
+      //Calculate victory points for the winner in last round
 
    }
 
@@ -382,7 +336,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void exchangeResourcesClicked() {
-      showExchangeResources(playerList[roundController.currentPlayerId]);
+      showExchangeResources();
    }
 
 
@@ -394,14 +348,10 @@ public class GameController implements Initializable, Serializable {
 
    }
 
-   //TODO
-   public void skipTurn() {
-
-   }
 
    @FXML
    public void specialActionClicked() {
-      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId(),map,terrains,skipTurn,roundController);
+      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId(),map, mapPane, terrains,actions);
    }
 
    public void createSpaces() {
@@ -498,7 +448,7 @@ public class GameController implements Initializable, Serializable {
 
    }
 
-   public void loadCardsAndTiles(int totalPlayerNumber) {
+   public void loadCardsAndTiles() {
       cardsAndTiles = new CardsAndTiles(playerList.length, playerList);
       cardsAndTilesController = new CardsAndTilesController();
       cardsAndTiles.returnScoringTile(0, 1, playerList,religionArr);
@@ -644,9 +594,9 @@ public class GameController implements Initializable, Serializable {
     */
    public void displayPlayerTurn(ArrayList<PlayerView> playerViewList) {
 
-      for (PlayerView playerView : playerViewList) {
-         playerView.setStyle("");
-      }
+//      for (PlayerView playerView : playerViewList) {
+//         playerView.setStyle("");
+//      }
 
       switch (playerList[roundController.getCurrentPlayerId()].getFaction().TERRAIN_TILE) {
          case "Wasteland":
@@ -672,124 +622,19 @@ public class GameController implements Initializable, Serializable {
             break;
       }
 
+
+
    }
 
-   /**
-    * TODO
-    * TAŞINACAK HERHALDE BU DA
-    *
-    * @param
-    */
    public void showPowerActions(Player currentPlayer) {
 
-      BorderPane border = new BorderPane();
-      BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-      border.setBackground(new Background(bg));
-      GridPane gridPane = new GridPane();
-      gridPane.setHgap(10);
-      gridPane.setVgap(10);
-      Button select = new Button("Select");
-      select.setMaxHeight(100);
-      select.setMinWidth(100);
-      BorderPane border_bottom = new BorderPane();
-      border.setBottom(border_bottom);
-      border_bottom.setCenter(select);
+      PowerActionView powerActionView = new PowerActionView();
+      Button select = powerActionView.getSelectButton();
 
-      for (int i = 0; i < 6; i++) {
-         ImageView power_middle = new ImageView("arrow.png");
-         ImageView power_image = new ImageView("power.png");
-         ImageView bridge = new ImageView("bridge.png");
-         ImageView priest = new ImageView("priest.png");
-         ImageView worker =  new ImageView("worker.png");
-         ImageView gold = new ImageView("gold.png");
-         ImageView spade =  new ImageView("spade.png");
-         Label label1 = new Label("\n3");
-         label1.setTextFill(Color.WHITE);
-         Label label2 = new Label("\n2");
-         label2.setTextFill(Color.WHITE);
-         label1.setFont(new Font("Stencil", 40));
-         label2.setFont(new Font("Stencil", 40));
-         label1.setOpacity(0.6);
-         label2.setOpacity(0.6);
-         power_middle.setFitHeight(150);
-         power_middle.setFitWidth(150);
-         priest.setFitWidth(150);
-         priest.setFitHeight(150);
-         worker.setFitWidth(150);
-         worker.setFitHeight(150);
-         gold.setFitWidth(150);
-         gold.setFitHeight(150);
-         spade.setFitWidth(150);
-         spade.setFitHeight(150);
-         power_image.setFitWidth(150);
-         power_image.setFitHeight(150);
-         bridge.setFitHeight(150);
-         bridge.setFitWidth(150);
-         HBox option;
-         if(i == 0){
-              label2.setText("\n1");
-              option = new HBox(power_image, label1, power_middle, bridge,label2 );
-         }else if (i == 1) {
-               label2.setText("\n1");
-               option = new HBox(power_image, label1, power_middle, priest,label2 );
-         }else if (i == 2) {
-            label1.setText("\n4");
-            option = new HBox(power_image, label1 , power_middle, worker, label2 );
-         }else if (i == 3) {
-            label1.setText("\n4");
-            label2.setText("\n7");
-            option = new HBox(power_image, label1, power_middle,gold , label2);
-         }else if (i == 4) {
-             label1.setText("\n4");
-             label2.setText("\n1");
-             option = new HBox(power_image, label1, power_middle,spade, label2);
-         }else {
-            label1.setText("\n6");
-            option = new HBox(power_image, label1, power_middle, spade,label2 );
-         }
-         GridPane tempPane = new GridPane();
-         option.setMaxWidth(tempPane.getWidth() / 3);
-         option.setMaxHeight(tempPane.getHeight() / 3);
-         tempPane.add(option,0,0);
-         tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               DropShadow borderGlow = new DropShadow();
-               borderGlow.setColor(Color.ORANGE);
-               borderGlow.setOffsetX(0f);
-               borderGlow.setOffsetY(0f);
-               borderGlow.setWidth(50);
-               borderGlow.setHeight(50);
-               tempPane.setEffect(borderGlow);
-            }
-         });
-         int finalI = i;
-         tempPane.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               if (selection != finalI)
-                  tempPane.setEffect(null);
 
-            }
-         });
-
-         tempPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               setSelection(finalI);
-               for (int i = 0; i < 6; i++) {
-                  if (i != getSelection())
-                     gridPane.getChildren().get(i).setEffect(null);
-               }
-            }
-         });
-         gridPane.add(tempPane, i % 2, i / 2);
-      }
-
-      border.setCenter(gridPane);
       final Stage dialog = new Stage();
       dialog.initModality(Modality.APPLICATION_MODAL);
-      Scene dialogScene = new Scene(border, 1100, 600);
+      Scene dialogScene = new Scene(powerActionView, 1100, 600);
       dialog.setScene(dialogScene);
       dialog.setTitle("Power Action");
       dialog.setResizable(false);
@@ -801,11 +646,11 @@ public class GameController implements Initializable, Serializable {
             playerList[roundController.currentPlayerId].setBowlThreePower(12);
             playerList[roundController.currentPlayerId].setWorkerNum(1000);
             playerList[roundController.currentPlayerId].setGoldNum(1000);
-            int chosen = getSelection();
+            int chosen = powerActionView.getSelection();
             System.out.println("Selection: " + chosen);
-            setSelection(chosen);
+            powerActionView.setSelection(chosen);
             dialog.close();
-            if (getSelection() == 0) {
+            if (powerActionView.getSelection() == 0) {
                boolean checkBridgability = false;
                for(int i = 0; i < ROW_NUMBER; i++) {
                   for (int j = 0; j < COLUMN_NUMBER; j++) {
@@ -820,17 +665,16 @@ public class GameController implements Initializable, Serializable {
                      System.out.println("Girdi");
                      disableAllTerrains();
                      TerrainController.buildBridge(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map, mapPane, actions);
+                     disableActions();
                      System.out.println("Köprü kuruldu");
                   }
-                  //ELSE PROMPT NOT ENOUGH RESOURCES
                }
-               //ELSE PROMPT NO BRIDGABLE TERRAINS
-            } else if (getSelection() == 4) {
+            } else if (powerActionView.getSelection() == 4) {
                if (playerHandler.usePowerAction(4, currentPlayer)) {
                   disableActions();
                   terraform.setDisable(false);
                }
-            } else if (getSelection() == 5) {
+            } else if (powerActionView.getSelection() == 5) {
                if (playerHandler.usePowerAction(5, currentPlayer)) {
                   disableActions();
                   terraform.setDisable(false);
@@ -840,154 +684,39 @@ public class GameController implements Initializable, Serializable {
                   }
                }
             } else {
-               if (playerHandler.usePowerAction(getSelection(), currentPlayer)) {
+               if (playerHandler.usePowerAction(powerActionView.getSelection(), currentPlayer)) {
                   System.out.println("Köprü kuruldu");
                }
             }
          }
       });
-      //update(gridPane,status);
-      //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
       dialog.show();
    }
-   private void showExchangeResources(Player currentPlayer) {
-      BorderPane border = new BorderPane();
-      BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-      border.setBackground(new Background(bg));
-      GridPane gridPane = new GridPane();
-      gridPane.setHgap(10);
-      gridPane.setVgap(10);
-      Button select = new Button("Select");
-      select.setMaxHeight(100);
-      select.setMinWidth(100);
-      BorderPane border_bottom = new BorderPane();
-      border.setBottom(border_bottom);
-      border_bottom.setCenter(select);
+   private void showExchangeResources() {
 
-      for (int i = 0; i < 6; i++) {
-         ImageView power_middle = new ImageView("arrow.png");
-         ImageView power_image = new ImageView("power.png");
-         ImageView priest = new ImageView("priest.png");
-         ImageView worker =  new ImageView("worker.png");
-         ImageView gold = new ImageView("gold.png");
-         Label label1 = new Label("\n3");
-         label1.setTextFill(Color.WHITE);
-         Label label2 = new Label("\n2");
-         label2.setTextFill(Color.WHITE);
-         label1.setFont(new Font("Stencil", 40));
-         label2.setFont(new Font("Stencil", 40));
-         label1.setOpacity(0.6);
-         label2.setOpacity(0.6);
-         power_middle.setFitHeight(150);
-         power_middle.setFitWidth(150);
-         priest.setFitWidth(150);
-         priest.setFitHeight(150);
-         worker.setFitWidth(150);
-         worker.setFitHeight(150);
-         gold.setFitWidth(140);
-         gold.setFitHeight(140);
-         power_image.setFitWidth(150);
-         power_image.setFitHeight(150);
-         HBox option;
-         if(i == 0){
-            label1.setText("\n5");
-            label2.setText("\n1");
-            option = new HBox(power_image, label1, power_middle, priest,label2 );
-         }else if (i == 1) {
-            label1.setText("\n1");
-            label2.setText("\n1");
-            option = new HBox(priest, label1, power_middle, worker,label2 );
-         }else if (i == 2) {
-            label1.setText("\n3");
-            label2.setText("\n1");
-            option = new HBox(power_image, label1 , power_middle, worker, label2 );
-         }else if (i == 3) {
-            label1.setText("\n1");
-            label2.setText("\n1");
-            option = new HBox(worker, label1, power_middle, gold , label2);
-         }else if (i == 4) {
-            label1.setText("\n1");
-            label2.setText("\n1");
-            option = new HBox(power_image, label1, power_middle,gold, label2);
-         }else {
-            label1.setText("\nBOWL 2");
-            label2.setText("\nBOWL 3");
-
-            option = new HBox(power_image, label1, power_middle,label2 );
-         }
-         GridPane tempPane = new GridPane();
-         tempPane.add(option,0,0);
-
-         tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               DropShadow borderGlow = new DropShadow();
-               borderGlow.setColor(Color.ORANGE);
-               borderGlow.setOffsetX(0f);
-               borderGlow.setOffsetY(0f);
-               borderGlow.setWidth(50);
-               borderGlow.setHeight(50);
-               tempPane.setEffect(borderGlow);
-            }
-         });
-         int finalI = i;
-         tempPane.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               if (selection != finalI)
-                  tempPane.setEffect(null);
-
-            }
-         });
-
-         tempPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               setSelection(finalI);
-               for (int i = 0; i < 6; i++) {
-                  if (i != getSelection())
-                     gridPane.getChildren().get(i).setEffect(null);
-               }
-            }
-         });
-         gridPane.add(tempPane, i % 2, i / 2);
-      }
-
-      border.setCenter(gridPane);
+      ExchangeResourcesView exchangeResourcesView = new ExchangeResourcesView();
+      Button select = exchangeResourcesView.getSelectButton();
       final Stage dialog = new Stage();
       dialog.initModality(Modality.APPLICATION_MODAL);
-      Scene dialogScene = new Scene(border, 1100, 600);
+      Scene dialogScene = new Scene(exchangeResourcesView, 1100, 600);
       dialog.setScene(dialogScene);
       dialog.setTitle("Power Action");
       dialog.setResizable(false);
-
       select.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
          @Override
          public void handle(MouseEvent event) {
-            playerList[roundController.currentPlayerId].setBowlThreePower(12); //TODO
-            int chosen = getSelection();
+            int chosen = exchangeResourcesView.getSelection();
             System.out.println("Selection: " + chosen);
-            setSelection(chosen);
+            exchangeResourcesView.setSelection(chosen);
             playerHandler.exchangeResources(playerList[roundController.getCurrentPlayerId()], chosen);
             dialog.close();
          }
       });
-      //update(gridPane,status);
-      //Find religion to add as size (y coordinate)%(1/4 of anchor pane's size) to replace choice box.
       dialog.showAndWait();
-   }
-   public int getSelection() {
-      return selection;
-   }
-
-   private void setSelection(int selection) {
-      this.selection = selection;
    }
 
 
    public CardsAndTiles getCardsAndTiles() {
-
       return cardsAndTiles;
    }
 
@@ -1021,10 +750,190 @@ public class GameController implements Initializable, Serializable {
       return 3*(counter/2);
    }
 
+   public void showScoreTable(ArrayList<ArrayList<Integer>>[] religionScores,ArrayList<Integer>[] pathScores) {
+      BorderPane emptyPane = new BorderPane();
+      final Stage dialog = new Stage();
+      dialog.initModality(Modality.APPLICATION_MODAL);
+      Scene dialogScene = new Scene(emptyPane, 1100, 600);
+      dialog.setScene(dialogScene);
+      dialog.setTitle("Score Table");
+      dialog.setResizable(false);
+      emptyPane.setBackground(new Background( new BackgroundImage( new Image("score_table_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+              BackgroundSize.DEFAULT)));
 
 
+      VBox connection = new VBox();
+      ImageView vic_p1 = new ImageView("victory_point.png");
+      ImageView vic_p2 = new ImageView("victory_point.png");
+      Label label1 = new Label("\n    8\n\n");
+      ImageView sep_line = new ImageView("seperate_line.png");
+      sep_line.setFitWidth(140);
+      sep_line.setFitHeight(30);
+      Label label2 = new Label("\n    4\n\n");
+      ImageView sep_line2 = new ImageView("seperate_line.png");
+      sep_line2.setFitWidth(140);
+      sep_line2.setFitHeight(30);
+      Label label3 = new Label("\n    2\n");
+      label1.setFont(new Font("Stencil", emptyPane.getHeight()/17));
+      label2.setFont(new Font("Stencil", emptyPane.getHeight()/17));
+      label3.setFont(new Font("Stencil", emptyPane.getHeight()/17));
+      vic_p1.setFitWidth(emptyPane.getWidth()/8);
+      vic_p1.setFitHeight(emptyPane.getHeight()/5);
+      vic_p2.setFitWidth(emptyPane.getWidth()/8);
+      vic_p2.setFitHeight(emptyPane.getHeight()/5);
+      VBox ranking1 = new VBox(vic_p2, label1 ,sep_line, label2,sep_line2, label3 );
+      ranking1.setStyle("-fx-background-color: rgba(133,88,23,0.43);");
+      HBox allTable = new HBox();
+      allTable.getChildren().add(ranking1);
+      for (int i = 0; i< 4;i++){
+         VBox tempBox = new VBox();
+         tempBox.setPrefHeight(500);
+         tempBox.setCenterShape(true);
+         ImageView religion_image;
+         if (i == 0){
+            religion_image = new ImageView("islam_symbol.png");
+         }else if (i == 1){
+            religion_image = new ImageView("chris_symbol.png");
+         }else if (i == 2){
+            religion_image = new ImageView("judaism_symbol.png");
+         }else{
+            religion_image = new ImageView("hinduism.png");
+         }
+         religion_image.setFitWidth(emptyPane.getWidth()/8);
+         religion_image.setFitHeight(emptyPane.getHeight()/5);
+         tempBox.getChildren().add(religion_image);
+
+         for (int j = 0; j < 3; j++){
+            HBox tempHBox = new HBox();
+            if(j>0 && religionScores[i].get(j).size() > 0) {
+               ImageView sep_line4 = new ImageView("seperate_line.png");
+               sep_line4.setFitWidth(140);
+               sep_line4.setFitHeight(50);
+               tempBox.getChildren().add(sep_line4);
+            }
+            double align = religionScores[i].get(j).size();
+            for(int shaped = 1; shaped < religionScores[i].get(j).size();shaped++) {
+               Label label = new Label("\n");
+               tempBox.getChildren().add(label);
+               align = religionScores[i].get(j).size()/1.7;
+            }
+            for(int k = 0; k < religionScores[i].get(j).size(); k++){
+               int player_id = religionScores[i].get(j).get(k);
+               ImageView player_images = new ImageView(getImage(playerList[player_id]));
+               if(religionScores[i].get(j).size() == 1){
+                  System.out.println("giiiiii");
+                  Label label = new Label("\t");
+                  tempHBox.getChildren().add(label);
+               }
+               player_images.setFitHeight(emptyPane.getHeight()/(5*align));
+               player_images.setFitWidth(emptyPane.getWidth()/(13*align));
+               tempHBox.setFillHeight(true);
+               tempHBox.getChildren().add(player_images);
+            }
+            tempBox.getChildren().add(tempHBox);
+            tempBox.setStyle("-fx-background-color: rgba(133,88,23,0.43);");
+         }
+
+         allTable.getChildren().add(tempBox);
+      }
+      Label label4 = new Label("\n   18\n\n");
+      Label label5 = new Label("\n   12\n\n");
+      Label label6 = new Label("\n    6");
+      label4.setFont(new Font("Stencil", emptyPane.getHeight()/17));
+      label5.setFont(new Font("Stencil", emptyPane.getHeight()/17));
+      label6.setFont(new Font("Stencil", emptyPane.getHeight()/17));
+      ImageView sep_line6 = new ImageView("seperate_line.png");
+      sep_line6.setFitWidth(140);
+      sep_line6.setFitHeight(30);
+      ImageView sep_line7 = new ImageView("seperate_line.png");
+      sep_line7.setFitWidth(140);
+      sep_line7.setFitHeight(30);
+      VBox ranking2 = new VBox(vic_p1, label4 , sep_line6, label5, sep_line7, label6 );
+      allTable.getChildren().add(ranking2);
+      ImageView con_image = new ImageView("hiclipart.com (1).png");
+      con_image.setFitWidth(emptyPane.getWidth()/8);
+      con_image.setFitHeight(emptyPane.getHeight()/5);
+      connection.getChildren().add(con_image);
+      for (int j = 0; j < 3; j++){
+         HBox tempHBox = new HBox();
+         if(j>0 && pathScores[j].size() > 0) {
+            ImageView sep_line8 = new ImageView("seperate_line.png");
+            sep_line8.setFitWidth(140);
+            sep_line8.setFitHeight(60);
+            connection.getChildren().add(sep_line8);
+         }
+         double align = pathScores[j].size();
+         for(int shaped = 1; shaped < pathScores[j].size();shaped++) {
+            Label label = new Label("\n");
+            connection.getChildren().add(label);
+            align = pathScores[j].size()/1.7;
+         }
+         for(int k = 0; k < pathScores[j].size(); k++){
+            int player_id = pathScores[j].get(k);
+            ImageView player_images = new ImageView(getImage(playerList[player_id]));
+            if(pathScores[j].size() == 1){
+               System.out.println("giiiiii");
+               Label label = new Label("\t");
+               tempHBox.getChildren().add(label);
+            }
+            player_images.setFitHeight(emptyPane.getHeight()/(5*align));
+            player_images.setFitWidth(emptyPane.getWidth()/(13*align));
+            tempHBox.getChildren().add(player_images);
+         }
+
+         connection.getChildren().add(tempHBox);
+         connection.setStyle("-fx-background-color: rgba(29,80,107,0.36);");
+      }
+      allTable.getChildren().add(connection);
+      ranking2.setStyle("-fx-background-color: rgba(29,80,107,0.36);");
+      emptyPane.setCenter(allTable);
+      dialog.show();
+
+      if(roundController.isOver())
+      {
+         System.out.println("girdi");
+         dialog.setOnCloseRequest(e->Platform.exit());
+      }
+   }
+   public Image getImage(Player player){
+      Image image = null;
+      if (player.getFaction() instanceof AliesterCrowley) {
+         image = new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg");
+      } else if (player.getFaction() instanceof AmerigoVespucci) {
+         image = new Image("file:src/Images/FactionImages/Image_AmerigoVespucci.jpeg");
+      } else if (player.getFaction() instanceof Buddha) {
+         image = new Image("file:src/Images/FactionImages/Image_Buddha.jpeg");
+      } else if (player.getFaction() instanceof DariusTheGreat) {
+         image = new Image("file:src/Images/FactionImages/Image_DariusTheGreat.jpeg");
+      } else if (player.getFaction() instanceof ErikTheRed) {
+         image = new Image("file:src/Images/FactionImages/Image_ErikTheRed.jpeg");
+      } else if (player.getFaction() instanceof Gilgamesh) {
+         image = new Image("file:src/Images/FactionImages/Image_Gilgamesh.jpeg");
+      } else if (player.getFaction() instanceof HelenOfTroy) {
+         image = new Image("file:src/Images/FactionImages/Image_HelenOfTroy.jpeg");
+      } else if (player.getFaction() instanceof HusseinTheTeaMaker) {
+         image = new Image("file:src/Images/FactionImages/Image_HusseinTheTeaMaker.jpeg");
+      } else if (player.getFaction() instanceof LeonardoDaVinci) {
+         image = new Image("file:src/Images/FactionImages/Image_LeonardoDaVinci.jpeg");
+      } else if (player.getFaction() instanceof MarieCurie) {
+         image = new Image("file:src/Images/FactionImages/Image_MarieCurie.jpeg");
+      } else if (player.getFaction() instanceof MorganLeFay) {
+         image = new Image("file:src/Images/FactionImages/Image_MorganLeFay.jpeg");
+      } else if (player.getFaction() instanceof Ramesses) {
+         image = new Image("file:src/Images/FactionImages/Image_Ramesses.jpeg");
+      } else if (player.getFaction() instanceof StPatrick) {
+         image = new Image("file:src/Images/FactionImages/Image_StPatrick.jpeg");
+      } else if (player.getFaction() instanceof VladTheImpaler) {
+         image = new Image("file:src/Images/FactionImages/Image_VladTheImpaler.jpeg");
+      }
+      return image;
+   }
    public Map getMap() {
       return map;
+   }
+
+   public ArrayList<PlayerView> getPlayerViewList() {
+      return playerViewList;
    }
 
    public Player[] getPlayerList() {
@@ -1070,7 +979,6 @@ public class GameController implements Initializable, Serializable {
    }
 
    public void setRoundController(RoundController r1){this.roundController = r1;}
-
 
 
 }

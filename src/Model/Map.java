@@ -298,10 +298,12 @@ public class Map implements Serializable {
    }
 
    public int getLongestPathHelper(int x, int y, String playerColor, ArrayList<Space> traversed){
-      Space space1 = this.spaces[x][y];
-      if(space1.getType() == "River" || space1.getType() == "Empty" || x-1 < 0 || y-1 < 0 || x > ROW_NUMBER -1 || y > COLUMN_NUMBER-1 ||space1.isMarkedForScore() ||!space1.isOccupied()|| space1.getType() != playerColor ){
+
+      if(x-1 < 0 || y-1 < 0 || x > ROW_NUMBER-1 || y > COLUMN_NUMBER-1||spaces[x][y].getType() == "River" || spaces[x][y].getType() == "Empty"  || spaces[x][y].isMarked() ||
+              !spaces[x][y].isOccupied()|| spaces[x][y].getType() != playerColor ){
          return 0;
       }else{
+         Space space1 = this.spaces[x][y];
          space1.setMarkedForScore(true);
          System.out.println("X is "+ x + " Y is "+ y + "Player color is" + playerColor);
          traversed.add(spaces[x][y]);
@@ -442,7 +444,6 @@ public class Map implements Serializable {
                return true;
             }
          }
-
          Space[] bridgeList = space1.getBridgeList();
          return bridgeList[0].getType().equals(playerColor) && !(bridgeList[0].isOccupied());
       }

@@ -229,6 +229,7 @@ public class Player implements Serializable {
    }
 
 
+
    public int getNumOfFavorTile() {
       return numOfFavorTile;
    }
@@ -355,6 +356,8 @@ public class Player implements Serializable {
    public int getShipLevel() {
       return shipLevel;
    }
+
+   public int getBuildingNumber(){return (this.dwellingNum + this.templeNum + this.strongholdNum + this.tradingPostNum + this.templeNum + this.sanctuaryNum);}
 
 
    public int getReligionTrackInventory() {
@@ -491,6 +494,7 @@ public class Player implements Serializable {
    public void setFreeSpade(int freeSpade) {
       if( getFreeSpade() < freeSpade) {
          addVictoryPoints((freeSpade-this.freeSpade)*getFaction().additionalVictoryPointForEachSpade);
+         addPowerToBowl((freeSpade-this.freeSpade)*getFaction().gainPowerForEachSpade);
       }
       this.freeSpade = freeSpade;
    }

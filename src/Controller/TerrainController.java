@@ -112,6 +112,35 @@ public class TerrainController implements Serializable {
          button.setStyle("-fx-background-image: url('/swampWithTemple.png');");
 
    }
+   public static void setButtonClickForInitialDwellings(Button[][] terrains, Map map, Button skipTurn, Player current, RoundController roundController) {
+      PlayerHandler playerHandler = new PlayerHandler();
+      for (int i = 0; i < ROW_NUMBER; i++) {
+         for (int j = 0; j < COLUMN_NUMBER; j++) {
+            final int row = i;
+            final int col = j;
+            if (terrains[i][j] != null) {
+               terrains[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                  @Override
+                  public void handle(MouseEvent event) {
+                     skipTurn.setDisable(false);
+                     map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
+                     //playerHandler.buildInitialDwelling(current);
+                     map.spaces[row][col].setPlayer(current);
+
+                     TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
+                     map.spaces[row][col].setStructure("Dwelling");
+                     for (int i = 0; i < ROW_NUMBER; i++) {
+                        for (int j = 0; j < COLUMN_NUMBER; j++) {
+                           if (terrains[i][j] != null)
+                              terrains[i][j].setDisable(true);
+                        }
+                     }
+                  }
+               });
+            }
+         }
+      }
+   }
    public static void upgradeToSanctuary(Button button, String color)
    {
       if(color.equals("Lakes"))
@@ -173,6 +202,7 @@ public class TerrainController implements Serializable {
    }
 
    public static void buildBridge(String type, Button[][] terrains, Map map, Pane mapPane, Button[] actions) {
+      disableTerrains(terrains, map);
       for(int i = 0; i < ROW_NUMBER; i++){
          for( int j = 0; j < COLUMN_NUMBER; j++){
             if(terrains[i][j] != null && map.spaces[i][j] != null)
@@ -238,13 +268,12 @@ public class TerrainController implements Serializable {
                                           imView.getTransforms().addAll(translate);
                                        }
 
-
-
                                        System.out.println("x1: " + x1 + "y1: "  + y1 + "\nx2: " + x2 + "y2: " + y2);
                                        map.spaces[finalK][finalL].setBridgeConnection(true);
                                        map.spaces[finalK][finalL].setBridgeType(type);
                                        map.spaces[finalI][finalJ].setBridgeConnection(true);
                                        map.spaces[finalI][finalJ].setBridgeType(type);
+
                                        for(int i = 0; i < actions.length; i++)
                                           actions[i].setDisable(true);
                                     }

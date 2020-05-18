@@ -65,33 +65,34 @@ public class Faction implements Serializable {
     public int spadeNeededToTerraformDesert = 0;
     public int freeSpadesToTerraformIntoHome;
     public int priestNeededToSkipTile;
-    public boolean freeTerraFormOnSpecialAction;
-    public boolean gainFavorTileAfterStronghold;
-    public boolean gainActionTokenAfterStronghold;
     public int advanceOnCultTrackValue;
-    public boolean payNoCostForDwelling;
     public boolean tradeVictoryPointForCoin;
     public boolean tradeCoinsForVictoryPoint;
     public int getPowerAfterStronghold;
-    public int gainPowerForEachSpade;
     public int getAdditionalVictoryPointsAfterTown = 0;
     public boolean moveOnCultIfTradeAccepted = false;
     public boolean payPriestWhenTransform;
-    public boolean giveWorkersForPriest;
-    public int additionalVictoryPointForEachSpade = 0;
-    public int getVictoryPointsAfterStronghold;
+    public int getVictoryPointsAfterStronghold = 0;
     public int workerCostOfBridge;
-    public int victoryPointForEachConnectingBridges = 0;
-    public boolean increaseShippingAfterStronghold = false;
     public boolean hasShipping = true;
-    public int foundingTownWorkerBonus = 0;
     public boolean actionToken_dwelling_to_trading = false;
     public boolean freeDwellingOnSpecialAction = false;
+    public int additionalVictoryPointForEachSpade = 0;
     public int additionalVictoryPointForEachSkipTile = 0;
     public boolean skipTileWhenCalculatingLongestPath;
-    public int getVictoryPointsAfterTown = 0;
+
+    //Stronghold variables
+    public int gainPowerForEachSpade = 0;
+    public boolean increaseShippingAfterStronghold = false;
+    public boolean gainActionTokenAfterStronghold;
+
+
+    //Faction ability variables
+    public int victoryPointForEachConnectingBridges = 0;
+    public int foundingTownWorkerBonus = 0;
     public boolean sorcerersStone = false;
     public boolean hasBridgeAbility = false;
+
 
     public void afterStronghold() {
 
