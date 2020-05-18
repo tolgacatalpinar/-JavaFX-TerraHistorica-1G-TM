@@ -14,16 +14,10 @@ public class SpecialActionView extends VBox {
     public SpecialActionView( String title)
     {
         card = new CardView();
-
         card.addPlayerSlots(1);
         add( new Label(title));
-
-
-        //card.addPlayerToSlot(0, new ImageView( new Image("Image_Gilgamesh.jpeg")));
         getChildren().add(card);
-
     }
-
     public void add(Node node)
     {
         if( node instanceof Label)
@@ -31,9 +25,5 @@ public class SpecialActionView extends VBox {
             ((Label)node).setTextFill(Color.WHITE);
         }
         card.getChildren().add(node);
-    }
-    public void addPlayerToSlot(ImageView playerView)
-    {
-        card.addPlayerToSlot(0, playerView);
     }
 }

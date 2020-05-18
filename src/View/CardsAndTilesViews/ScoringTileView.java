@@ -12,12 +12,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class ScoringTileView extends VBox {
-
-
-
     ScoringTile scoringTile;
     CardView card;
-
     public ScoringTileView( ScoringTile scoringTile,int index)
     {
         this.scoringTile = scoringTile;
@@ -33,7 +29,6 @@ public class ScoringTileView extends VBox {
             add( new Label("Gain "+  + this.scoringTile.getVictoryBonus()+ " Victory Points per founded town"));
         if(this.scoringTile.isRequiredSpade() )
             add( new Label("Gain "+  + this.scoringTile.getVictoryBonus()+ " Victory Points per upgraded spade"));
-
         if(this.scoringTile.isRequiredIslam())
             add( new Label("Required Islam Point(s): " + this.scoringTile.getRequiredIslam()));
         if(this.scoringTile.isRequiredBudism())
@@ -42,8 +37,6 @@ public class ScoringTileView extends VBox {
             add( new Label("Required Christianity Point(s): " + this.scoringTile.getRequiredChrist()));
         if(this.scoringTile.isRequiredJudaism())
             add( new Label("Required Judaism Point(s): " + this.scoringTile.getRequiredJudaism()));
-
-
         if( this.scoringTile.getPowerBonus() > 0)
             add( new Label("Power Bonus you will gain: " + this.scoringTile.getPowerBonus()));
         if(this.scoringTile.getWorkerBonus() > 0)

@@ -17,19 +17,4 @@ public class DialogueImageButton extends Button {
               .then("-fx-effect: dropshadow( gaussian , rgba(255,255,255,255) , 30,0.5,0,1 );")
               .otherwise(""));
    }
-
-
-
-   public void setWidth(int width) {
-      this.width = width;
-      setPrefWidth(width);
-      setMinWidth(width);
-   }
-
-
-   public void setHeight(int height) {
-      this.height = height;
-      setPrefHeight(height);
-      setMinHeight(height);
-   }
 }

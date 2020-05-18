@@ -101,7 +101,6 @@ public class ActionController implements Serializable {
       choices.add("Plains");
       choices.remove(space.getType());
       PlayerHandler playerHandler = new PlayerHandler();
-
       Label prompt = new Label("Please choose the terrain to be transformed into.");
       Label promptChoice = new Label("Terrain type: ");
       ChoiceBox choiceBox = new ChoiceBox();
@@ -110,7 +109,6 @@ public class ActionController implements Serializable {
       BorderPane pane = new BorderPane();
       HBox choiceBlock = new HBox();
       Button transformButton = new Button("Transform");
-
       choiceBlock.getChildren().addAll(promptChoice, choiceBox, transformButton);
       VBox whole = new VBox();
       whole.getChildren().addAll(prompt, choiceBlock);
@@ -192,7 +190,6 @@ public class ActionController implements Serializable {
 
    public  static void upgradeStructure(Player current,Button[][] terrains, Map map, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions) {
       TerrainController.disableTerrains(terrains, map);
-
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
             if (terrains[i][j] != null)
@@ -209,7 +206,6 @@ public class ActionController implements Serializable {
                            upgradeToStrongholdOrTemple(current, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ], actions, cardsAndTiles, religions, finalI, finalJ);
                         else if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Temple"))
                            upgradeToSanctuary(current, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ], actions, cardsAndTiles, religions, finalI, finalJ);
-
                      }
                   });
                }
@@ -374,13 +370,9 @@ public class ActionController implements Serializable {
             stage.close();
          }
       });
-
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
       stage.showAndWait();
-
-
-
    }
 
    public static void upgradeToSanctuary(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions,int x, int y) {
@@ -388,11 +380,7 @@ public class ActionController implements Serializable {
       DialogueImageButton discardButton = new DialogueImageButton("dialogueDiscardDoor.png");
       DialogueImageButton sanctuaryButton = new DialogueImageButton("dialogueSanctuary.jpg");
       VBox pane = DialogueView.getTempleUpgradePromptPane(current, discardButton, sanctuaryButton);
-
       Stage stage = DialogueView.getStage("Upgrade Temple", pane, new Image("dialogueBackground.jpg"));
-
-
-
       stage.show();
       discardButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
@@ -440,7 +428,6 @@ public class ActionController implements Serializable {
       });
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
-
    }
 
    public static void strongholdAbility(Button[][] terrains, Map map, Button[] actions, Player current) {
@@ -463,18 +450,11 @@ public class ActionController implements Serializable {
                         TerrainController.enableTerrains(terrains, map);
                         disableActions(actions);
                         current.setDwellingNum(current.getDwellingNum()+1);
-
                      }
                   });
                }
-
       }
-
-
-
-
    }
-
 
    public static void showSpeacialActions(Player[] playerList,Religion[] religions,int currentPlayerId,Map map, Pane mapPane, Button[][] terrains,Button[] actions) {
       ReligionController religionController = new ReligionController();
@@ -489,7 +469,6 @@ public class ActionController implements Serializable {
       special1.getChildren().add(new SpecialActionView("Spade Action"));
       final int[] choice = {0};
       final Stage dialog = new Stage();
-
       Scene dialogScene = new Scene(wholeFavor, 1100, 600);
       dialog.setScene(dialogScene);
       dialog.setTitle("Special Actions");
@@ -559,9 +538,6 @@ public class ActionController implements Serializable {
                System.out.println("Faction Ability");
                choice[0] = 4;
                System.out.println(choice[0]);
-
-
-
                event.consume();
             } else {
                Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -581,6 +557,7 @@ public class ActionController implements Serializable {
          public void handle(Event event) {
             if (choice[0] == 1) {
                currentPlayer.getSpecialActionToken().isSpade = false;
+               //TODO
                //CAN BURAYA TERRAFORM YAPTIRALIM ABİ
 
                event.consume();
@@ -624,12 +601,9 @@ public class ActionController implements Serializable {
    }
 
    private static void factionAbility(Player current, Map map, Pane mapPane, Button[][] terrains, Button[] actions) {
-
-
       if(current.getFaction() instanceof DariusTheGreat){
 
       }
-
       else if(current.getFaction() instanceof  LeonardoDaVinci) {
 
          if(current.getWorkerNum() >= 2){
@@ -655,7 +629,6 @@ public class ActionController implements Serializable {
          }
 
       }
-
       else if(current.getFaction() instanceof MarieCurie) {
          BorderPane border = new BorderPane();
          BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -754,7 +727,6 @@ public class ActionController implements Serializable {
          dialog.show();
 
       }
-
    }
 
 
@@ -822,11 +794,7 @@ public class ActionController implements Serializable {
       } else {
          // ... user chose CANCEL or closed the dialog
       }
-
-
-
    }
-
    public static void disableActions(Button[] actions){
       for(int i = 0; i < actions.length; i++)
          actions[i].setDisable(true);

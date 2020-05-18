@@ -28,7 +28,6 @@ public class ExchangeResourcesView extends BorderPane{
         BorderPane border_bottom = new BorderPane();
         this.setBottom(border_bottom);
         border_bottom.setCenter(select);
-
         for (int i = 0; i < 6; i++) {
             ImageView power_middle = new ImageView("arrow.png");
             ImageView power_image = new ImageView("power.png");
@@ -82,7 +81,6 @@ public class ExchangeResourcesView extends BorderPane{
             }
             GridPane tempPane = new GridPane();
             tempPane.add(option,0,0);
-
             tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -101,10 +99,8 @@ public class ExchangeResourcesView extends BorderPane{
                 public void handle(MouseEvent event) {
                     if (selection != finalI)
                         tempPane.setEffect(null);
-
                 }
             });
-
             tempPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -125,7 +121,6 @@ public class ExchangeResourcesView extends BorderPane{
     public Button getSelectButton(){
         return this.select;
     }
-
     public void setSelection(int selection) {
         this.selection = selection;
     }
