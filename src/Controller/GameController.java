@@ -92,6 +92,7 @@ public class GameController implements Initializable, Serializable {
    RoundController roundController;
    PlayerHandler playerHandler;
    Player currentPlayer;
+   boolean isPlayerViewListCreated = false;
 
 
    public GameController() throws IOException {
@@ -131,7 +132,9 @@ public class GameController implements Initializable, Serializable {
                @Override
                public void run() {
 
-                  if (playerList != null) {
+
+                  if (playerList != null && !isPlayerViewListCreated) {
+                     System.out.println("if is in");
                      HBox factionsView = new HBox(5);
 
                      playerViewList = new ArrayList<>();
@@ -162,7 +165,17 @@ public class GameController implements Initializable, Serializable {
 //                     imview.setFitHeight(150);
 //                     imview.setFitWidth(50);
 //                     borderPane.setBottom(imview);
-
+                     isPlayerViewListCreated = true;
+                  }
+                  else if(playerList != null)
+                  {
+                     System.out.println("else is in");
+                     for( int i = 0; i < playerViewList.size(); i ++)
+                     {
+                        playerViewList.get(i).updateView(playerList[i]);
+                     }
+                     displayPlayerTurn(playerViewList);
+                     showTown(terrains, map);
                   }
 
                }
@@ -170,7 +183,7 @@ public class GameController implements Initializable, Serializable {
 
             while (true) {
                try {
-                  Thread.sleep(700);
+                  Thread.sleep(500);
                } catch (InterruptedException ex) {
                }
 
@@ -573,9 +586,9 @@ public class GameController implements Initializable, Serializable {
     */
    public void displayPlayerTurn(ArrayList<PlayerView> playerViewList) {
 
-//      for (PlayerView playerView : playerViewList) {
-//         playerView.setStyle("");
-//      }
+      for (PlayerView playerView : playerViewList) {
+         playerView.setStyle("");
+      }
 
       switch (playerList[roundController.getCurrentPlayerId()].getFaction().TERRAIN_TILE) {
          case "Wasteland":
