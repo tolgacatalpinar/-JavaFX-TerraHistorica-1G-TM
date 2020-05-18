@@ -96,8 +96,7 @@ public class GameController implements Initializable, Serializable {
 
    @Override
    public void initialize(URL url, ResourceBundle resourceBundle) {
-      //SoundController.playGameMusic(30);
-
+       //SoundController.playGameMusic(30);
       actions = new Button[]{specialActions, terraform, upgradeShipping, upgradeStruct, sendPriest, powerActions, upgradeSpade, passRound};
       System.out.println("Initialize is called");
       int index = 0;
@@ -114,9 +113,7 @@ public class GameController implements Initializable, Serializable {
             terrains[row][col] = (Button) mapPane.getChildren().get(index);
          index++;
       }
-
       createSpaces();
-      //testText.setText(playerList[0].getNickName());
       Thread thread = new Thread(new Runnable() {
 
          @Override
@@ -139,26 +136,12 @@ public class GameController implements Initializable, Serializable {
                         }
                      }
                      factionsView.getChildren().addAll(playerViewList);
-                     //displayPlayerTurn(playerViewList);
                      factionsView.setPadding(new Insets(0, 0, 0, 20));
-                     //factionsView.setStyle("fx-margin-bottom: 150;");
-//                     VBox.setMargin(factionsView, new Insets(0,0,1500,0));
-                     //factionsView.setMargin(,);
-
                      factionsView.setMaxWidth(200);
                      borderPane.setBottom(factionsView);
                      borderPane.setPadding(new Insets(0,0,50,0));
                      displayPlayerTurn(playerViewList);
                      showTown(terrains, map);
-
-//                     if(playerList[roundController.currentPlayerId].isRoundPassed()){
-//                        disableActions();
-//                     }
-//                     ImageView imview = new ImageView();
-//                     imview.setImage(new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg"));
-//                     imview.setFitHeight(150);
-//                     imview.setFitWidth(50);
-//                     borderPane.setBottom(imview);
                      isPlayerViewListCreated = true;
                   }
                   else if(playerList != null)
@@ -192,17 +175,12 @@ public class GameController implements Initializable, Serializable {
       setButtonClickForInitialDwellings();
 
    }
-
    @FXML
    public void saveGameClicked() throws IOException {
        File save = FileManager.createSave(gameId);
        FileManager.saveGame(this, roundController,save);
        System.out.println("saved");
    }
-
-
-
-
 
    @FXML
    public void loadGameClicked() throws IOException
@@ -330,9 +308,6 @@ public class GameController implements Initializable, Serializable {
 
    }
 
-
-
-
    @FXML
    public void skipTurnClicked() {
       TerrainController.disableButtonClicks(terrains);
@@ -359,12 +334,8 @@ public class GameController implements Initializable, Serializable {
       }
    }
 
-
-
-
    @FXML
    public void passRoundClicked() {
-
       if(roundController.getCurrentRound() + 1 != roundController.getMAX_ROUND()) {
          cardsAndTilesController.showBonusCardsTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], true);
       }
@@ -388,19 +359,10 @@ public class GameController implements Initializable, Serializable {
       }
    }
 
-
-
-
-
    @FXML
    public void bonusCardsClicked() {
       cardsAndTilesController.showBonusCardsTable(cardsAndTiles, currentPlayer,false);
    }
-
-
-
-
-
    @FXML
    public void upgradeShippingClicked() {
       ActionController.showUpdateShippingDialogs(playerList[roundController.getCurrentPlayerId()], actions);
@@ -410,14 +372,11 @@ public class GameController implements Initializable, Serializable {
    public void sendPriestClicked() {
       ReligionController religionController = new ReligionController();
       religionController.showChoices(playerList, religionArr, roundController.getCurrentPlayerId());
-
    }
 
    @FXML
    public void powerActionClicked() {
       showPowerActions(playerList[roundController.currentPlayerId]);
-
-
    }
 
    @FXML
@@ -428,14 +387,11 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void terraformClicked() {
       ActionController.terraform(playerList[roundController.currentPlayerId], terrains, map, actions, cardsAndTiles,religionArr);
-
    }
 
    @FXML
    public void upgradeStructureClicked() {
-
       ActionController.upgradeStructure(playerList[roundController.getCurrentPlayerId()] , terrains, map, actions, cardsAndTiles, religionArr);
-
    }
    @FXML
    public void religionsClicked() {
@@ -453,7 +409,6 @@ public class GameController implements Initializable, Serializable {
       System.out.println();
       showScoreTable(scoresReligion,scoresLongestPath);
       //Calculate victory points for the winner in last round
-
    }
 
    @FXML
@@ -463,7 +418,6 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void scoringTilesClicked() {
-
       cardsAndTilesController.showScoringTilesTable(cardsAndTiles);
    }
 
@@ -476,11 +430,8 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void favorTilesClicked() {
-
       cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], religionArr,false);
-
    }
-
 
    @FXML
    public void specialActionClicked() {
@@ -650,11 +601,6 @@ public class GameController implements Initializable, Serializable {
       }
    }
 
-
-   /**
-    * TODO
-    * TAŞINACAK
-    */
    public void disableButtonClicks() {
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
@@ -664,15 +610,7 @@ public class GameController implements Initializable, Serializable {
       }
    }
 
-   /**
-    * TODO
-    * TAŞINACAK
-    */
 
-   /**
-    * TODO
-    * TAŞINACAK
-    */
    public void disableActions() {
       terraform.setDisable(true);
       upgradeShipping.setDisable(true);
@@ -848,9 +786,7 @@ public class GameController implements Initializable, Serializable {
       dialog.setScene(dialogScene);
       dialog.setTitle("Score Table");
       dialog.setResizable(false);
-
       if(roundController.isOver()) {
-
           DialogueView view = new DialogueView();
           BorderPane winnerPane = new BorderPane();
           int winnerId = playerHandler.getWinner(playerList, religionScores, pathScores);
@@ -869,11 +805,8 @@ public class GameController implements Initializable, Serializable {
           });
           dialog.showAndWait();
           dialog.setOnCloseRequest(e-> Platform.exit());
-
       }
-
    }
-
    public Map getMap() {
       return map;
    }
