@@ -18,14 +18,14 @@ public class FileManager {
         System.out.println("constructor");
     }
 
-    public  File createSave(String gameId) throws IOException  {
+    public  static File createSave(String gameId) throws IOException  {
         File save = new File( gameId + ".txt");
         save.createNewFile();
         return save;
     }
 
 
-    public  void saveGame(GameController game, RoundController rounds, File fileName) throws IOException   {
+    public  static void saveGame(GameController game, RoundController rounds, File fileName) throws IOException   {
         FileOutputStream f = new FileOutputStream(fileName);
         ObjectOutputStream o = new ObjectOutputStream(f);
         o.writeObject(game.getMap());
