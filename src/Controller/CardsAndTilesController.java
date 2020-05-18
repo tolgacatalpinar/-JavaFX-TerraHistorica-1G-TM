@@ -247,20 +247,7 @@ public class CardsAndTilesController {
         return getSelectionFavorTile();
 
     }
-    public void showScoreTable()
-    {
-        Pane emptyPane = new Pane();
 
-        final Stage dialog = new Stage();
-        dialog.initModality(Modality.APPLICATION_MODAL);
-        Scene dialogScene = new Scene(emptyPane, 1100, 600);
-        dialog.setScene(dialogScene);
-        dialog.setTitle("Town Tiles");
-        dialog.setResizable(false);
-        emptyPane.setBackground(new Background( new BackgroundImage( new Image("score_table_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT)));
-        dialog.show();
-    }
     public void showScoringTilesTable(CardsAndTiles cardsAndTiles)
     {
 
