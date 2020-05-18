@@ -923,7 +923,6 @@ public class GameController implements Initializable, Serializable {
 
 
    public CardsAndTiles getCardsAndTiles() {
-
       return cardsAndTiles;
    }
 
@@ -961,33 +960,41 @@ public class GameController implements Initializable, Serializable {
       BorderPane emptyPane = new BorderPane();
       final Stage dialog = new Stage();
       dialog.initModality(Modality.APPLICATION_MODAL);
-      Scene dialogScene = new Scene(emptyPane, 1200, 800);
+      Scene dialogScene = new Scene(emptyPane, 1200, 600);
       dialog.setScene(dialogScene);
       dialog.setTitle("Score Table");
       dialog.setResizable(false);
-      emptyPane.setBackground(new Background( new BackgroundImage( new Image("score_table_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+      emptyPane.setBackground(new Background( new BackgroundImage( new Image("score_table_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
               BackgroundSize.DEFAULT)));
 
 
       VBox connection = new VBox();
       ImageView vic_p1 = new ImageView("victory_point.png");
       ImageView vic_p2 = new ImageView("victory_point.png");
-
-      Label label1 = new Label("8");
-      Label label2 = new Label("4");
-      Label label3 = new Label("2");
-      label1.setFont(new Font("Stencil", emptyPane.getHeight()/10));
-      label2.setFont(new Font("Stencil", emptyPane.getHeight()/10));
-      label3.setFont(new Font("Stencil", emptyPane.getHeight()/10));
-      vic_p1.setFitWidth(emptyPane.getWidth()/10);
-      vic_p1.setFitHeight(emptyPane.getHeight()/8);
-      vic_p2.setFitWidth(emptyPane.getWidth()/10);
-      vic_p2.setFitHeight(emptyPane.getHeight()/8);
-      VBox ranking1 = new VBox(vic_p2, label1 , label2, label3 );
+      Label label1 = new Label("\n    8\n\n");
+      ImageView sep_line = new ImageView("seperate_line.png");
+      sep_line.setFitWidth(140);
+      sep_line.setFitHeight(30);
+      Label label2 = new Label("\n    4\n\n");
+      ImageView sep_line2 = new ImageView("seperate_line.png");
+      sep_line2.setFitWidth(140);
+      sep_line2.setFitHeight(30);
+      Label label3 = new Label("\n    2\n");
+      label1.setFont(new Font("Stencil", emptyPane.getHeight()/17));
+      label2.setFont(new Font("Stencil", emptyPane.getHeight()/17));
+      label3.setFont(new Font("Stencil", emptyPane.getHeight()/17));
+      vic_p1.setFitWidth(emptyPane.getWidth()/8);
+      vic_p1.setFitHeight(emptyPane.getHeight()/5);
+      vic_p2.setFitWidth(emptyPane.getWidth()/8);
+      vic_p2.setFitHeight(emptyPane.getHeight()/5);
+      VBox ranking1 = new VBox(vic_p2, label1 ,sep_line, label2,sep_line2, label3 );
+      ranking1.getStyleClass().add("wasteland");
       HBox allTable = new HBox();
       allTable.getChildren().add(ranking1);
       for (int i = 0; i< 4;i++){
          VBox tempBox = new VBox();
+         tempBox.setPrefHeight(500);
+         tempBox.setCenterShape(true);
          ImageView religion_image;
          if (i == 0){
             religion_image = new ImageView("islam_symbol.png");
@@ -1001,40 +1008,86 @@ public class GameController implements Initializable, Serializable {
          religion_image.setFitWidth(emptyPane.getWidth()/8);
          religion_image.setFitHeight(emptyPane.getHeight()/5);
          tempBox.getChildren().add(religion_image);
+
          for (int j = 0; j < 3; j++){
             HBox tempHBox = new HBox();
+            if(j>0 && religionScores[i].get(j).size() > 0) {
+               ImageView sep_line4 = new ImageView("seperate_line.png");
+               sep_line4.setFitWidth(140);
+               sep_line4.setFitHeight(50);
+               tempBox.getChildren().add(sep_line4);
+            }
+            double align = religionScores[i].get(j).size();
+            for(int shaped = 1; shaped < religionScores[i].get(j).size();shaped++) {
+               Label label = new Label("\n");
+               tempBox.getChildren().add(label);
+               align = religionScores[i].get(j).size()/1.7;
+            }
             for(int k = 0; k < religionScores[i].get(j).size(); k++){
                int player_id = religionScores[i].get(j).get(k);
                ImageView player_images = new ImageView(getImage(playerList[player_id]));
-               player_images.setFitHeight(emptyPane.getHeight()/(5));
-               player_images.setFitWidth(emptyPane.getWidth()/(10));
+               if(religionScores[i].get(j).size() == 1){
+                  System.out.println("giiiiii");
+                  Label label = new Label("\t");
+                  tempHBox.getChildren().add(label);
+               }
+               player_images.setFitHeight(emptyPane.getHeight()/(5*align));
+               player_images.setFitWidth(emptyPane.getWidth()/(13*align));
+               tempHBox.setFillHeight(true);
                tempHBox.getChildren().add(player_images);
             }
+            tempHBox.getStyleClass().add("wasteland");
             tempBox.getChildren().add(tempHBox);
+
          }
+
          allTable.getChildren().add(tempBox);
       }
-      Label label4 = new Label("18");
-      Label label5 = new Label("12");
-      Label label6 = new Label("6");
-      label4.setFont(new Font("Stencil", emptyPane.getHeight()/10));
-      label5.setFont(new Font("Stencil", emptyPane.getHeight()/10));
-      label6.setFont(new Font("Stencil", emptyPane.getHeight()/10));
-      VBox ranking2 = new VBox(vic_p1, label4 , label5, label6 );
+      Label label4 = new Label("\n   18\n\n");
+      Label label5 = new Label("\n   12\n\n");
+      Label label6 = new Label("\n    6");
+      label4.setFont(new Font("Stencil", emptyPane.getHeight()/17));
+      label5.setFont(new Font("Stencil", emptyPane.getHeight()/17));
+      label6.setFont(new Font("Stencil", emptyPane.getHeight()/17));
+      ImageView sep_line6 = new ImageView("seperate_line.png");
+      sep_line6.setFitWidth(140);
+      sep_line6.setFitHeight(30);
+      ImageView sep_line7 = new ImageView("seperate_line.png");
+      sep_line7.setFitWidth(140);
+      sep_line7.setFitHeight(30);
+      VBox ranking2 = new VBox(vic_p1, label4 , sep_line6, label5, sep_line7, label6 );
       allTable.getChildren().add(ranking2);
-      ImageView con_image = new ImageView("connection.png");
+      ImageView con_image = new ImageView("hiclipart.com (1).png");
       con_image.setFitWidth(emptyPane.getWidth()/8);
       con_image.setFitHeight(emptyPane.getHeight()/5);
       connection.getChildren().add(con_image);
       for (int j = 0; j < 3; j++){
          HBox tempHBox = new HBox();
+         if(j>0 && pathScores[j].size() > 0) {
+            ImageView sep_line8 = new ImageView("seperate_line.png");
+            sep_line8.setFitWidth(140);
+            sep_line8.setFitHeight(60);
+            connection.getChildren().add(sep_line8);
+         }
+         double align = pathScores[j].size();
+         for(int shaped = 1; shaped < pathScores[j].size();shaped++) {
+            Label label = new Label("\n");
+            connection.getChildren().add(label);
+            align = pathScores[j].size()/1.7;
+         }
          for(int k = 0; k < pathScores[j].size(); k++){
             int player_id = pathScores[j].get(k);
             ImageView player_images = new ImageView(getImage(playerList[player_id]));
-            player_images.setFitHeight(emptyPane.getHeight()/(5));
-            player_images.setFitWidth(emptyPane.getWidth()/(10));
+            if(pathScores[j].size() == 1){
+               System.out.println("giiiiii");
+               Label label = new Label("\t");
+               tempHBox.getChildren().add(label);
+            }
+            player_images.setFitHeight(emptyPane.getHeight()/(5*align));
+            player_images.setFitWidth(emptyPane.getWidth()/(13*align));
             tempHBox.getChildren().add(player_images);
          }
+
          connection.getChildren().add(tempHBox);
       }
       allTable.getChildren().add(connection);
