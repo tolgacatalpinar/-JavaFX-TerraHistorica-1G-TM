@@ -149,6 +149,9 @@ public class ActionController implements Serializable {
                space.setType(selectedChoice);
             }else{
                flag = false;
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Not enough resources!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
                System.out.println("No enough resources");
             }
             terraformStage.close();
@@ -188,9 +191,16 @@ public class ActionController implements Serializable {
                         }
                         System.out.println("Town score is *************"+ townScore);
                      }else if( returnCase == -1){
+                        Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Not enough resources!"));
+                        errorStage.show();
+                        DialogueView.delayErrorMessage(errorStage);
                         System.out.println("Not enough resources");
-                     }else
+                     }else {
+                        Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Max number of this kind of building is reached!"));
+                        errorStage.show();
+                        DialogueView.delayErrorMessage(errorStage);
                         System.out.println("Max reached");
+                     }
                      dwellingChoiceStage.close();
                   }
 
@@ -322,11 +332,18 @@ public class ActionController implements Serializable {
                System.out.println("Town score is *************"+ townScore);
                actiondone = true;
             }else if (returnCase == -1){
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Not enough resoruces!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
                System.out.println("Not enough resources");
                stage.close();
                actiondone = true;
             }else
-               System.out.println("Max reached");
+            {
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Max number of this kind of building is reached!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
+            }
             stage.close();
             actiondone = true;
 
@@ -390,11 +407,18 @@ public class ActionController implements Serializable {
                System.out.println("Town score is *************"+ townScore);
                actiondone = true;
             }else if (returnCase == -1){
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Not enough resources!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
                System.out.println("Not enough resources");
                stage.close();
                actiondone = true;
             }else
-               System.out.println("Max reached");
+            {
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Max number of this kind of building is reached!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
+            }
             stage.close();
             actiondone = true;
          }
@@ -497,7 +521,7 @@ public class ActionController implements Serializable {
 //      Stage stage = DialogueView.getStage("Upgrade Temple", pane, new Image("town_tiles_background.jpg"));
 
       stage.show();
-      discardButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+      sanctuaryButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
             ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
@@ -539,7 +563,7 @@ public class ActionController implements Serializable {
             stage.close();
          }
       });
-      sanctuaryButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+      discardButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
             stage.close();
@@ -629,11 +653,14 @@ public class ActionController implements Serializable {
                System.out.println(choice[0]);
                event.consume();
             } else {
-               Alert alert = new Alert(Alert.AlertType.INFORMATION);
-               alert.setTitle("Special Action Error");
-               alert.setContentText("You have not special spade action");
-               alert.setHeaderText("You cannot do this action");
-               alert.showAndWait();
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("You have not special spade action!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
+//               Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//               alert.setTitle("Special Action Error");
+//               alert.setContentText("You have not special spade action");
+//               alert.setHeaderText("You cannot do this action");
+//               alert.showAndWait();
             }
          }
       });
@@ -649,11 +676,14 @@ public class ActionController implements Serializable {
                religionController.showReligion(playerList,2,religions,currentPlayerId, true);
                event.consume();
             } else {
-               Alert alert = new Alert(Alert.AlertType.INFORMATION);
-               alert.setTitle("Special Action Error");
-               alert.setHeaderText("You cannot do this action");
-               alert.setContentText("You have not special cult action");
-               alert.showAndWait();
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("You have not special cult action!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
+//               Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//               alert.setTitle("Special Action Error");
+//               alert.setHeaderText("You cannot do this action");
+//               alert.setContentText("You have not special cult action");
+//               alert.showAndWait();
 
             }
          }
@@ -669,11 +699,14 @@ public class ActionController implements Serializable {
                System.out.println(choice[0]);
                event.consume();
             } else {
-               Alert alert = new Alert(Alert.AlertType.INFORMATION);
-               alert.setTitle("Special Action Error");
-               alert.setContentText("You have not special stronghold ability");
-               alert.setHeaderText("You cannot do this action");
-               alert.showAndWait();
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("You have not special stronghold ability!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
+//               Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//               alert.setTitle("Special Action Error");
+//               alert.setContentText("You have not special stronghold ability");
+//               alert.setHeaderText("You cannot do this action");
+//               alert.showAndWait();
             }
          }
       });
@@ -690,11 +723,14 @@ public class ActionController implements Serializable {
 
                event.consume();
             } else {
-               Alert alert = new Alert(Alert.AlertType.INFORMATION);
-               alert.setTitle("Special Action Error");
-               alert.setContentText("You have not special faction ability");
-               alert.setHeaderText("You cannot do this action!!");
-               alert.showAndWait();
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("You have not special faction ability!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
+//               Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//               alert.setTitle("Special Action Error");
+//               alert.setContentText("You have not special faction ability");
+//               alert.setHeaderText("You cannot do this action!!");
+//               alert.showAndWait();
             }
          }
       });
@@ -717,16 +753,18 @@ public class ActionController implements Serializable {
                strongholdAbility(terrains,map,actions,playerList[currentPlayerId]);
                event.consume();
             } else if (choice[0] == 4) {
-               System.out.println("geldimm");
                currentPlayer.getSpecialActionToken().isFactionAbility = true;
                factionAbility(playerList[currentPlayerId], map, mapPane, terrains, actions);
                event.consume();
             } else {
-               Alert alert = new Alert(Alert.AlertType.INFORMATION);
-               alert.setTitle("Special Action Error");
-               alert.setContentText("You have not special faction ability");
-               alert.setHeaderText("You cannot do this action!!");
-               alert.showAndWait();
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("You have no special faction ability!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
+//               Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//               alert.setTitle("Special Action Error");
+//               alert.setContentText("You have not special faction ability");
+//               alert.setHeaderText("You cannot do this action!!");
+               //alert.showAndWait();
             }
 
             dialog.close();

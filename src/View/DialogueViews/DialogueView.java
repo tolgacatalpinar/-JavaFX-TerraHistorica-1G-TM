@@ -128,7 +128,7 @@ public class DialogueView implements  Serializable{
       int leftPriest = 0;
       int rightPriest = player.getFaction().SHIPPING_PRIEST_COST;
       Insets promptInsets = new Insets(0, 0, 20, 90);
-      String promptText = "Do you want to upgrade your shipping?";
+      String promptText = "Do you want to upgrade your spade level?";
       VBox shippingDialoguePane = DialoguePane.getSpadeDialoguePane(discardButton, spadeButton, promptText, promptInsets, leftGold, rightGold, leftPriest, rightPriest, leftWorker, rightWorker);
       return shippingDialoguePane;
    }
