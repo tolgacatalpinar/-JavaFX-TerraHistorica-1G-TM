@@ -210,15 +210,16 @@ public class GameController implements Initializable, Serializable {
       if (roundController.currentRound == 0) {
          System.out.println("Current player was: " + playerList[roundController.getCurrentPlayerId()].getNickName());
          System.out.println(roundController.getCurrentPlayerId());
-         if ((roundController.getCurrentPlayerId() + 1) < playerList.length && playerList[roundController.getCurrentPlayerId() + 1] != null)
-            roundController.setCurrentPlayerId(roundController.currentPlayerId + 1);
-         else
-            roundController.setCurrentPlayerId(0);
+         roundController.endTurn(playerList);
          currentPlayer = playerList[roundController.getCurrentPlayerId()];
-         System.out.println("current dwelling: " + currentPlayer.getDwellingNum());
          if (currentPlayer.getBuildingNumber() < currentPlayer.getFaction().startingDwellingNum) {
             loadInitialMap();
             setButtonClickForInitialDwellings();
+         }else{
+            disableActions();
+            passRound.setDisable(false);
+            skipTurn.setDisable(true);
+
          }
          System.out.println("Current player is now: " + playerList[roundController.getCurrentPlayerId()].getNickName());
          System.out.println("--------------------------------------------------");
@@ -235,6 +236,9 @@ public class GameController implements Initializable, Serializable {
       }
          int round1 = roundController.getCurrentRound();
          roundController.passRound(playerList);
+      if (roundController.getCurrentRound() > 0 ){
+            enableActions();
+      }
          int round2 = roundController.getCurrentRound();
          cardsAndTiles.returnScoringTile(round1, round2, playerList, religionArr);
          //Reset advancement on religion for this round
@@ -249,7 +253,6 @@ public class GameController implements Initializable, Serializable {
          this.scoreTableClicked();
          System.out.println("girdii");
       }
-
    }
 
    @FXML

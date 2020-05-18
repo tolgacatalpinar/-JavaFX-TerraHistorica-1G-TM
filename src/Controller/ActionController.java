@@ -653,7 +653,7 @@ public class ActionController implements Serializable {
                event.consume();
             } else if (choice[0] == 4) {
                System.out.println("geldimm");
-               currentPlayer.getSpecialActionToken().isFactionAbility = false;
+               currentPlayer.getSpecialActionToken().isFactionAbility = true;
                factionAbility(playerList[currentPlayerId]);
                event.consume();
             } else {
@@ -663,6 +663,7 @@ public class ActionController implements Serializable {
                alert.setHeaderText("You cannot do this action!!");
                alert.showAndWait();
             }
+
             dialog.close();
          }
       });
@@ -755,7 +756,7 @@ public class ActionController implements Serializable {
             @Override
             public void handle(MouseEvent event) {
                selection = finalI;
-               for (int i = 0; i < 6; i++) {
+               for (int i = 0; i < 2; i++) {
                   if (i != selection)
                      gridPane.getChildren().get(i).setEffect(null);
                }
