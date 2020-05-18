@@ -229,19 +229,26 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void passRoundClicked() {
-      cardsAndTilesController.showBonusCardsTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()],true);
-      int round1 = roundController.getCurrentRound();
-      roundController.passRound(playerList);
-      int round2 = roundController.getCurrentRound();
-      cardsAndTiles.returnScoringTile(round1, round2, playerList,religionArr);
-      //Reset advancement on religion for this round
-      if(round2 != round1){
-         for (Religion religion : religionArr) {
-            religion.resetRoundBasedPosition();
-         }
+
+      if(roundController.getCurrentRound() + 1 != roundController.getMAX_ROUND()) {
+         cardsAndTilesController.showBonusCardsTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], true);
       }
+         int round1 = roundController.getCurrentRound();
+         roundController.passRound(playerList);
+         int round2 = roundController.getCurrentRound();
+         cardsAndTiles.returnScoringTile(round1, round2, playerList, religionArr);
+         //Reset advancement on religion for this round
+         if (round2 != round1) {
+            for (Religion religion : religionArr) {
+               religion.resetRoundBasedPosition();
+            }
+         }
 
       System.out.println("Victory Point = " + engineerStrongholdAbility());
+      if(roundController.isOver){
+         this.scoreTableClicked();
+         System.out.println("girdii");
+      }
 
    }
 
@@ -961,6 +968,12 @@ public class GameController implements Initializable, Serializable {
               BackgroundSize.DEFAULT)));
 
       dialog.show();
+
+      if(roundController.isOver())
+      {
+         System.out.println("girdi");
+         dialog.setOnCloseRequest(e->Platform.exit());
+      }
    }
 
    public Map getMap() {
