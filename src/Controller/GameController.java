@@ -174,7 +174,9 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void loadGameClicked() throws IOException
    {
-          updateMap(this.terrains,this.map);
+
+       updateMap(this.terrains,this.map);
+
    }
    public void updateMap(Button[][] terrains, Map map){
       System.out.println("alasa");
