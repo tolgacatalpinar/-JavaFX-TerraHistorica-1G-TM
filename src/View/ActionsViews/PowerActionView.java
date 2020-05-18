@@ -17,7 +17,6 @@ import javafx.scene.text.Font;
 public class PowerActionView extends BorderPane {
     private int  selection = -1;
     Button select = new Button("Select");
-
     public PowerActionView(){
         BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         this.setBackground(new Background(bg));
@@ -103,10 +102,8 @@ public class PowerActionView extends BorderPane {
                 public void handle(MouseEvent event) {
                     if (selection != finalI)
                         tempPane.setEffect(null);
-
                 }
             });
-
             tempPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -119,10 +116,7 @@ public class PowerActionView extends BorderPane {
             });
             gridPane.add(tempPane, i % 2, i / 2);
         }
-
         this.setCenter(gridPane);
-
-
     }
     public int getSelection() {
         return selection;

@@ -18,12 +18,10 @@ public class CardView extends VBox {
    private final int DEFAULT_SPACING = 5;
    private final int DEFAULT_PLAYER_SLOT_RADIUS = 40;
    private VBox playerSlots;
-
    public CardView()
    {
       defaultConfigure();
    }
-
    private void defaultConfigure() {
       setMinHeight(DEFAULT_MIN_HEIGHT);
       setMinWidth(DEFAULT_MIN_WIDTH);
@@ -36,7 +34,6 @@ public class CardView extends VBox {
       setBackground(new Background( new BackgroundImage( new Image("card_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
               BackgroundSize.DEFAULT)));
    }
-
    public void add(Node pane,int index)
    {
       getChildren().add(index,pane);
