@@ -1,7 +1,6 @@
 package Model;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
 
 public class Map implements Serializable {
@@ -9,7 +8,6 @@ public class Map implements Serializable {
    public ArrayList<Space> visited = new ArrayList<Space>(); //
    final int ROW_NUMBER = 9;
    final int COLUMN_NUMBER = 13;
-   public CoordinateTuple bridgeCoordinates;
 
    public Map() {
       spaces = new Space[9][13];
@@ -33,11 +31,7 @@ public class Map implements Serializable {
             space = new Space("River");
          }
          spaces[i / 13][i % 13] = space;
-
-
       }
-
-
    }
 
    public Map(Space[][] spaces) {

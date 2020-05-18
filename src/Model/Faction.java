@@ -1,7 +1,6 @@
 package Model;
 import java.io.Serializable;
 public class Faction implements Serializable {
-
     public String TERRAIN_TILE;
     public int MAX_BRIDGE = 3;
     public int MAX_SHIPPING = 3;
@@ -29,8 +28,6 @@ public class Faction implements Serializable {
     public int[] SHIPPING_UPGRADE_VICTORY_POINTS = {2,3,4,0};
     public int STRONGHOLD_WORKER_COST = 4;
     public int STRONGHOLD_GOLD_COST = 6;
-    //public int STRONGHOLD_POWER_INCOME = 2;
-    //public int STRONGHOLD_PRIEST_INCOME = 1;
     public int MAX_DWELLING = 7;
     public int MAX_TRADING_POST = 4;
     public int MAX_TEMPLE = 2;
@@ -80,20 +77,15 @@ public class Faction implements Serializable {
     public int additionalVictoryPointForEachSpade = 0;
     public int additionalVictoryPointForEachSkipTile = 0;
     public boolean skipTileWhenCalculatingLongestPath;
-
     //Stronghold variables
     public int gainPowerForEachSpade = 0;
     public boolean increaseShippingAfterStronghold = false;
     public boolean gainActionTokenAfterStronghold;
-
-
     //Faction ability variables
     public int victoryPointForEachConnectingBridges = 0;
     public int foundingTownWorkerBonus = 0;
     public boolean sorcerersStone = false;
     public boolean hasBridgeAbility = false;
-
-
     public void afterStronghold() {
 
     }
