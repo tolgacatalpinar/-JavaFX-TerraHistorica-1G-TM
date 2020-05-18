@@ -209,6 +209,7 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void loadGameClicked() throws IOException
    {
+
          this.map = fm.loadGame(save, this).map;
          System.out.println(map.spaces[3][2].getType());
          this.religionArr = fm.loadGame(save, this).religionArr;
@@ -220,6 +221,7 @@ public class GameController implements Initializable, Serializable {
          this.currentPlayer = fm.loadGame(save, this).currentPlayer;
          this.roundController = fm.loadGame(save, this).roundController;
     //     this.loadInitialMap();
+
    }
    @FXML
    public void skipTurnClicked() {
@@ -426,7 +428,7 @@ public class GameController implements Initializable, Serializable {
                if (j == 0 || j == 2 || j == 5 || j == 6 || j == 8 || j == 10 || j == 11)
                   spaces[i][j].setBridgability(true);
             } else if (i == 4) {
-               if (j == 4 || j == 7 || j == 10)
+               if (j == 3 || j == 4 || j == 7 || j == 10)
                   spaces[i][j].setBridgability(true);
             } else if (i == 5) {
                if (j == 0 || j == 1 || j == 4 || j == 5)
