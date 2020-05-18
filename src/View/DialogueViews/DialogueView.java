@@ -17,6 +17,8 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.Serializable;
 public class DialogueView implements  Serializable{
 
@@ -30,6 +32,7 @@ public class DialogueView implements  Serializable{
    public static Stage getStage(String title, Parent component, Image backgroundImage)
    {
       final Stage dialog = new Stage();
+      dialog.initStyle(StageStyle.UNDECORATED);
       dialog.initModality(Modality.APPLICATION_MODAL);
       Scene dialogScene = new Scene(component, STAGE_WIDTH, STAGE_HEIGHT);
       dialog.setScene(dialogScene);
@@ -40,9 +43,9 @@ public class DialogueView implements  Serializable{
               BackgroundSize.DEFAULT)));
       return dialog;
    }
-   public static VBox getDwellingUpgradePromptPane(Player[] playerArr, int curPlayerId, Button dwellingButton, Button emptyTerrainButton)
+   public static VBox getDwellingUpgradePromptPane(Player current, Button dwellingButton, Button emptyTerrainButton)
    {
-      Player player = playerArr[curPlayerId];
+      Player player = current;
       int leftGold = 0;
       int rightGold = player.getFaction().DWELLING_GOLD_COST;
       int leftWorker = 0;
@@ -52,9 +55,9 @@ public class DialogueView implements  Serializable{
       DialoguePane dwellingOrEmptyTerrainDialogue = new DialoguePane(emptyTerrainButton, dwellingButton, promptText, promptInsets, leftGold, rightGold, leftWorker, rightWorker);
       return dwellingOrEmptyTerrainDialogue;
    }
-   public static VBox getTradingPostUpgradePromptPane(Player[] playerArr,int curPlayerId, Button templeButton, Button strongholdButton)
+   public static VBox getTradingPostUpgradePromptPane(Player current, Button templeButton, Button strongholdButton)
    {
-      Player player = playerArr[curPlayerId];
+      Player player = current;
       int leftGold = player.getFaction().TEMPLE_GOLD_COST;
       int rightGold = player.getFaction().STRONGHOLD_GOLD_COST;
       int leftWorker = player.getFaction().TEMPLE_WORKER_COST;
@@ -107,17 +110,17 @@ public class DialogueView implements  Serializable{
 //
 //      return pane;
    }
-   public static BorderPane getTempleUpgradePromptPane(Player[] playerArr, int curPlayerId, String promptMessage, Button yesButton, Button noButton)
+   public static BorderPane getTempleUpgradePromptPane(Player current, String promptMessage, Button yesButton, Button noButton)
    {
       Label prompt = new Label(promptMessage);
       ImageView goldIm = new ImageView(new Image("gold.png"));
       goldIm.setFitHeight(30);
       goldIm.setFitWidth(30);
-      Label goldLabel = new Label("" + playerArr[curPlayerId].getFaction().TEMPLE_GOLD_COST);
+      Label goldLabel = new Label("" + current.getFaction().TEMPLE_GOLD_COST);
       ImageView workerIm = new ImageView(new Image("gold.png"));
       workerIm.setFitHeight(30);
       workerIm.setFitWidth(30);
-      Label workerLabel = new Label("" + playerArr[curPlayerId].getFaction().TEMPLE_WORKER_COST);
+      Label workerLabel = new Label("" + current.getFaction().TEMPLE_WORKER_COST);
 
       HBox requiredResources = new HBox();
       HBox buttons = new HBox();
