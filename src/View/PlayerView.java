@@ -15,6 +15,21 @@ import javafx.scene.shape.Box;
 import java.io.Serializable;
 
 public class PlayerView extends BorderPane  {
+//   int goldNumber;
+//   int goldIncome;
+//   int priestNumber;
+//   int priestIncome;
+//   int workerNumber;
+//   int workerIncome;
+//   int powerNumberBowl1;
+//   int powerNumberBowl2;
+//   int powerNumberBowl3;
+//   int powerIncome;
+//   int victoryPoint;
+//   int spadeLevel;
+//   int spadeRequired;
+//   int shipping;
+
    class ResourceLabel extends Label
    {
       public ResourceLabel(String label)
@@ -118,6 +133,31 @@ public class PlayerView extends BorderPane  {
       //addResources();
       addAllResources();
       this.setPadding(new Insets(0, 20, 0, 0));
+   }
+
+   public void updateView(Player player)
+   {
+      VBox resources = new VBox();
+      ResourceLabel playerName = new ResourceLabel(this.playerName);
+      playerName.setTextFill(Color.WHITE);
+      playerName.setPadding(new Insets(0, 0, 3, 0));
+      HBox gold = getSingleResourceView(new Image("gold.png"), player.getGoldNum(), player.getGoldIncome());
+      HBox priest = getSingleResourceView(new Image("priest.png"), player.getPriestNum(), player.getPriestNum());
+      HBox worker = getSingleResourceView(new Image("worker.png"), player.getWorkerNum(), player.getWorkerIncome());
+      HBox power = getSingleResourceView(new Image("power.png"), player.getBowlOnePower(), player.getBowlTwoPower(), player.getBowlThreePower(), player.getPowerIncome());
+      HBox victory = getSingleResourceView(new Image("victory_point.png"), player.getVictoryPointNum());
+      HBox spade = getSingleResourceView(new Image("spade.png"), player.getFreeSpade(), player.getTerraformWorkerCost());
+//      HBox cult = getSingleResourceView(new Image("gold.png"), player.getC(), player.getGoldIncome());
+//      HBox power = getSingleResourceView(new Image("gold.png"), player.getPower(), player.getGoldIncome());
+
+      HBox shipping = getSingleResourceView(new Image("shipping.png"), player.getShipLevel());
+
+
+      resources.getChildren().addAll(gold, priest, worker, power, victory, spade, shipping);
+      resources.setPadding( new Insets(10, 0, 0, 20));
+      setRight(null);
+      setRight(resources);
+
    }
 
    public void addImage(Image image) {

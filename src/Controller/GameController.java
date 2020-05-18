@@ -2,7 +2,6 @@ package Controller;
 
 import Model.*;
 import Model.CardsAndTiles.CardsAndTiles;
-import Model.FactionSubclasses.*;
 import View.*;
 import View.ActionsViews.ExchangeResourcesView;
 import View.ActionsViews.PowerActionView;
@@ -12,16 +11,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -92,6 +85,7 @@ public class GameController implements Initializable, Serializable {
    RoundController roundController;
    PlayerHandler playerHandler;
    Player currentPlayer;
+   boolean isPlayerViewListCreated = false;
 
 
    public GameController() throws IOException {
@@ -131,7 +125,9 @@ public class GameController implements Initializable, Serializable {
                @Override
                public void run() {
 
-                  if (playerList != null) {
+
+                  if (playerList != null && !isPlayerViewListCreated) {
+                     System.out.println("if is in");
                      HBox factionsView = new HBox(5);
 
                      playerViewList = new ArrayList<>();
@@ -162,7 +158,17 @@ public class GameController implements Initializable, Serializable {
 //                     imview.setFitHeight(150);
 //                     imview.setFitWidth(50);
 //                     borderPane.setBottom(imview);
-
+                     isPlayerViewListCreated = true;
+                  }
+                  else if(playerList != null)
+                  {
+                     System.out.println("else is in");
+                     for( int i = 0; i < playerViewList.size(); i ++)
+                     {
+                        playerViewList.get(i).updateView(playerList[i]);
+                     }
+                     displayPlayerTurn(playerViewList);
+                     showTown(terrains, map);
                   }
 
                }
@@ -170,7 +176,7 @@ public class GameController implements Initializable, Serializable {
 
             while (true) {
                try {
-                  Thread.sleep(700);
+                  Thread.sleep(500);
                } catch (InterruptedException ex) {
                }
 
@@ -192,6 +198,10 @@ public class GameController implements Initializable, Serializable {
       fm.saveGame(this, roundController,save);
       System.out.println("saved");
    }
+
+
+
+
 
    @FXML
    public void loadGameClicked() throws IOException
@@ -354,10 +364,14 @@ public class GameController implements Initializable, Serializable {
       }
 
    }
+
+
+
+
    @FXML
    public void skipTurnClicked() {
       disableButtonClicks();
-      enableTerrains();
+      TerrainController.enableTerrains(terrains,map);
       enableActions();
       if (roundController.currentRound == 0) {
          System.out.println("Current player was: " + playerList[roundController.getCurrentPlayerId()].getNickName());
@@ -379,6 +393,9 @@ public class GameController implements Initializable, Serializable {
          roundController.endTurn(playerList);
       }
    }
+
+
+
 
    @FXML
    public void passRoundClicked() {
@@ -403,14 +420,21 @@ public class GameController implements Initializable, Serializable {
       System.out.println("Victory Point = " + engineerStrongholdAbility());
       if(roundController.isOver){
          this.scoreTableClicked();
-         System.out.println("girdii");
       }
    }
+
+
+
+
 
    @FXML
    public void bonusCardsClicked() {
       cardsAndTilesController.showBonusCardsTable(cardsAndTiles, currentPlayer,false);
    }
+
+
+
+
 
    @FXML
    public void upgradeShippingClicked() {
@@ -559,7 +583,7 @@ public class GameController implements Initializable, Serializable {
                if (j == 0 || j == 2 || j == 5 || j == 6 || j == 8 || j == 10 || j == 11)
                   spaces[i][j].setBridgability(true);
             } else if (i == 4) {
-               if (j == 4 || j == 7 || j == 10)
+               if (j == 3 || j == 4 || j == 7 || j == 10)
                   spaces[i][j].setBridgability(true);
             } else if (i == 5) {
                if (j == 0 || j == 1 || j == 4 || j == 5)
@@ -621,7 +645,7 @@ public class GameController implements Initializable, Serializable {
    public void loadInitialMap() {
 
       disableActions();
-      disableAllTerrains();
+      TerrainController.disableTerrains(terrains,map);
       for (int i = 0; i < 9; i++)
          for (int j = 0; j < 13; j++) {
             if (map.spaces[i][j].getType().equals(playerList[roundController.getCurrentPlayerId()].getFaction().TERRAIN_TILE)) {
@@ -681,27 +705,6 @@ public class GameController implements Initializable, Serializable {
     * TODO
     * TAŞINACAK
     */
-   public void enableTerrains() {
-      for (int i = 0; i < ROW_NUMBER; i++) {
-         for (int j = 0; j < COLUMN_NUMBER; j++) {
-            if (terrains[i][j] != null && map.spaces[i][j].getType() != "River")
-               terrains[i][j].setDisable(false);
-         }
-      }
-   }
-
-   /**
-    * TODO
-    * TAŞINACAK
-    */
-   public void disableAllTerrains() {
-      for (int i = 0; i < ROW_NUMBER; i++) {
-         for (int j = 0; j < COLUMN_NUMBER; j++) {
-            if (terrains[i][j] != null)
-               terrains[i][j].setDisable(true);
-         }
-      }
-   }
 
    /**
     * TODO
@@ -738,11 +741,12 @@ public class GameController implements Initializable, Serializable {
     * TODO
     * TAŞINACAK
     */
+
    public void displayPlayerTurn(ArrayList<PlayerView> playerViewList) {
 
-//      for (PlayerView playerView : playerViewList) {
-//         playerView.setStyle("");
-//      }
+      for (PlayerView playerView : playerViewList) {
+         playerView.setStyle("");
+      }
 
       switch (playerList[roundController.getCurrentPlayerId()].getFaction().TERRAIN_TILE) {
          case "Wasteland":
@@ -809,7 +813,7 @@ public class GameController implements Initializable, Serializable {
                if(checkBridgability) {
                   if (playerHandler.usePowerAction(0, currentPlayer)) {
                      System.out.println("Girdi");
-                     disableAllTerrains();
+                     TerrainController.disableTerrains(terrains,map);
                      TerrainController.buildBridge(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map, mapPane, actions);
                      disableActions();
                      System.out.println("Köprü kuruldu");
@@ -863,7 +867,6 @@ public class GameController implements Initializable, Serializable {
 
 
    public CardsAndTiles getCardsAndTiles() {
-
       return cardsAndTiles;
    }
 
@@ -898,137 +901,37 @@ public class GameController implements Initializable, Serializable {
    }
 
    public void showScoreTable(ArrayList<ArrayList<Integer>>[] religionScores,ArrayList<Integer>[] pathScores) {
-      BorderPane emptyPane = new BorderPane();
+      ScoreTableView emptyPane = new ScoreTableView(religionScores, pathScores, playerList);
       final Stage dialog = new Stage();
       dialog.initModality(Modality.APPLICATION_MODAL);
-      Scene dialogScene = new Scene(emptyPane, 1200, 800);
+      Scene dialogScene = new Scene(emptyPane, 1200, 600);
       dialog.setScene(dialogScene);
       dialog.setTitle("Score Table");
       dialog.setResizable(false);
-      emptyPane.setBackground(new Background( new BackgroundImage( new Image("score_table_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-              BackgroundSize.DEFAULT)));
-
-
-      VBox connection = new VBox();
-      ImageView vic_p1 = new ImageView("victory_point.png");
-      ImageView vic_p2 = new ImageView("victory_point.png");
-
-      Label label1 = new Label("8");
-      Label label2 = new Label("4");
-      Label label3 = new Label("2");
-      label1.setFont(new Font("Stencil", emptyPane.getHeight()/10));
-      label2.setFont(new Font("Stencil", emptyPane.getHeight()/10));
-      label3.setFont(new Font("Stencil", emptyPane.getHeight()/10));
-      vic_p1.setFitWidth(emptyPane.getWidth()/10);
-      vic_p1.setFitHeight(emptyPane.getHeight()/8);
-      vic_p2.setFitWidth(emptyPane.getWidth()/10);
-      vic_p2.setFitHeight(emptyPane.getHeight()/8);
-      VBox ranking1 = new VBox(vic_p2, label1 , label2, label3 );
-      HBox allTable = new HBox();
-      allTable.getChildren().add(ranking1);
-      for (int i = 0; i< 4;i++){
-         VBox tempBox = new VBox();
-         ImageView religion_image;
-         if (i == 0){
-            religion_image = new ImageView("islam_symbol.png");
-         }else if (i == 1){
-            religion_image = new ImageView("chris_symbol.png");
-         }else if (i == 2){
-            religion_image = new ImageView("judaism_symbol.png");
-         }else{
-            religion_image = new ImageView("hinduism.png");
-         }
-         religion_image.setFitWidth(emptyPane.getWidth()/8);
-         religion_image.setFitHeight(emptyPane.getHeight()/5);
-         tempBox.getChildren().add(religion_image);
-         for (int j = 0; j < 3; j++){
-            HBox tempHBox = new HBox();
-            for(int k = 0; k < religionScores[i].get(j).size(); k++){
-               int player_id = religionScores[i].get(j).get(k);
-               ImageView player_images = new ImageView(getImage(playerList[player_id]));
-               player_images.setFitHeight(emptyPane.getHeight()/(5));
-               player_images.setFitWidth(emptyPane.getWidth()/(10));
-               tempHBox.getChildren().add(player_images);
-            }
-            tempBox.getChildren().add(tempHBox);
-         }
-         allTable.getChildren().add(tempBox);
-      }
-      Label label4 = new Label("18");
-      Label label5 = new Label("12");
-      Label label6 = new Label("6");
-      label4.setFont(new Font("Stencil", emptyPane.getHeight()/10));
-      label5.setFont(new Font("Stencil", emptyPane.getHeight()/10));
-      label6.setFont(new Font("Stencil", emptyPane.getHeight()/10));
-      VBox ranking2 = new VBox(vic_p1, label4 , label5, label6 );
-      allTable.getChildren().add(ranking2);
-      ImageView con_image = new ImageView("connection.png");
-      con_image.setFitWidth(emptyPane.getWidth()/8);
-      con_image.setFitHeight(emptyPane.getHeight()/5);
-      connection.getChildren().add(con_image);
-      for (int j = 0; j < 3; j++){
-         HBox tempHBox = new HBox();
-         for(int k = 0; k < pathScores[j].size(); k++){
-            int player_id = pathScores[j].get(k);
-            ImageView player_images = new ImageView(getImage(playerList[player_id]));
-            player_images.setFitHeight(emptyPane.getHeight()/(5));
-            player_images.setFitWidth(emptyPane.getWidth()/(10));
-            tempHBox.getChildren().add(player_images);
-         }
-         connection.getChildren().add(tempHBox);
-      }
-      allTable.getChildren().add(connection);
-      allTable.setSpacing(10);
-
-      emptyPane.setCenter(allTable);
-      dialog.show();
-
       if(roundController.isOver())
       {
          System.out.println("girdi");
-         dialog.setOnCloseRequest(e->Platform.exit());
+         dialog.setOnCloseRequest(e-> Platform.exit());
       }
+      dialog.showAndWait();
    }
-   public Image getImage(Player player){
-      Image image = null;
-      if (player.getFaction() instanceof AliesterCrowley) {
-         image = new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg");
-      } else if (player.getFaction() instanceof AmerigoVespucci) {
-         image = new Image("file:src/Images/FactionImages/Image_AmerigoVespucci.jpeg");
-      } else if (player.getFaction() instanceof Buddha) {
-         image = new Image("file:src/Images/FactionImages/Image_Buddha.jpeg");
-      } else if (player.getFaction() instanceof DariusTheGreat) {
-         image = new Image("file:src/Images/FactionImages/Image_DariusTheGreat.jpeg");
-      } else if (player.getFaction() instanceof ErikTheRed) {
-         image = new Image("file:src/Images/FactionImages/Image_ErikTheRed.jpeg");
-      } else if (player.getFaction() instanceof Gilgamesh) {
-         image = new Image("file:src/Images/FactionImages/Image_Gilgamesh.jpeg");
-      } else if (player.getFaction() instanceof HelenOfTroy) {
-         image = new Image("file:src/Images/FactionImages/Image_HelenOfTroy.jpeg");
-      } else if (player.getFaction() instanceof HusseinTheTeaMaker) {
-         image = new Image("file:src/Images/FactionImages/Image_HusseinTheTeaMaker.jpeg");
-      } else if (player.getFaction() instanceof LeonardoDaVinci) {
-         image = new Image("file:src/Images/FactionImages/Image_LeonardoDaVinci.jpeg");
-      } else if (player.getFaction() instanceof MarieCurie) {
-         image = new Image("file:src/Images/FactionImages/Image_MarieCurie.jpeg");
-      } else if (player.getFaction() instanceof MorganLeFay) {
-         image = new Image("file:src/Images/FactionImages/Image_MorganLeFay.jpeg");
-      } else if (player.getFaction() instanceof Ramesses) {
-         image = new Image("file:src/Images/FactionImages/Image_Ramesses.jpeg");
-      } else if (player.getFaction() instanceof StPatrick) {
-         image = new Image("file:src/Images/FactionImages/Image_StPatrick.jpeg");
-      } else if (player.getFaction() instanceof VladTheImpaler) {
-         image = new Image("file:src/Images/FactionImages/Image_VladTheImpaler.jpeg");
-      }
-      return image;
-   }
+
+
+
+
    public Map getMap() {
       return map;
    }
 
+
+
+
    public ArrayList<PlayerView> getPlayerViewList() {
       return playerViewList;
    }
+
+
+
 
    public Player[] getPlayerList() {
       return playerList;
