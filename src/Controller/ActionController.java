@@ -138,7 +138,10 @@ public class ActionController implements Serializable {
       whole.getChildren().addAll(prompt, choiceBlock);
       pane.setCenter(whole);
       pane.setPadding(new Insets(50, 50, 0, 0));
-      final Stage terraformStage = DialogueView.getStage("Terraform Action", pane, new Image("favor_tiles_background.jpg"));
+//      whole.setBackground(new Background( new BackgroundImage( new Image("the_background_5.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+//              new BackgroundSize(1.0, 1.0, true, true, false, false))));
+      final Stage terraformStage = DialogueView.getStage("Terraform Action", pane, new Image("town_tiles_background.jpg"));
+
       transformButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
@@ -159,6 +162,8 @@ public class ActionController implements Serializable {
                VBox pane = DialogueView.getDwellingUpgradePromptPane(current, dwellingButton, emptyTerrainButton);
                Stage dwellingChoiceStage = DialogueView.getStage("Do you want to build dwelling?", pane, new Image("dialogueBackground.jpg"));
                dwellingChoiceStage.show();
+               DropShadow borderGlow = new DropShadow();
+               borderGlow.setColor(Color.ORANGE);
                dwellingButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                   @Override
                   public void handle(MouseEvent event) {
@@ -248,7 +253,7 @@ public class ActionController implements Serializable {
       Button yesButton = new Button();
       Button noButton = new Button();
       VBox pane = DialogueView.getDwellingUpgradePromptPane(current, yesButton, noButton);
-      Stage stage = DialogueView.getStage("Upgrade dwelling", pane, new Image("favor_tiles_background.jpg"));
+      Stage stage = DialogueView.getStage("Upgrade dwelling", pane, new Image("town_tiles_background.jpg"));
       stage.show();
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
@@ -317,7 +322,9 @@ public class ActionController implements Serializable {
       RadioButton templeButton = new RadioButton("Temple");
       RadioButton strongholdButton = new RadioButton("Stronghold");
       BorderPane pane = DialogueView.getTradingPostUpgradePromptPane(current, "Do you want to upgrade this Trading Post to a Temple\n at the expense of: ", "Do you want to upgrade this Trading Post to a Stronghold\n at the expense of: ", yesButton, noButton, templeButton, strongholdButton);
-      Stage stage = DialogueView.getStage("Upgrade Trading Post", pane, new Image("favor_tiles_background.jpg"));
+      DropShadow borderGlow = new DropShadow();
+      borderGlow.setColor(Color.ORANGE);
+      Stage stage = DialogueView.getStage("Upgrade Trading Post", pane, new Image("town_tiles_background.jpg"));
 
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
@@ -433,7 +440,10 @@ public class ActionController implements Serializable {
        * DIKKATTTT
        */
       BorderPane pane = DialogueView.getTempleUpgradePromptPane(current, "Do you want to upgrade this Temple to a Sanctuary\n at the expense of: ", yesButton, noButton);
-      Stage stage = DialogueView.getStage("Upgrade Temple", pane, new Image("favor_tiles_background.jpg"));
+         DropShadow borderGlow = new DropShadow();
+         borderGlow.setColor(Color.ORANGE);
+      Stage stage = DialogueView.getStage("Upgrade Temple", pane, new Image("town_tiles_background.jpg"));
+
       stage.show();
       yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
@@ -676,8 +686,8 @@ public class ActionController implements Serializable {
       wholeFavor.setMinHeight(800);
       wholeFavor.setMinWidth(1200);
 
-      wholeFavor.setBackground(new Background(new BackgroundImage(new Image("favor_tiles_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-              BackgroundSize.DEFAULT)));
+      wholeFavor.setBackground(new Background(new BackgroundImage(new Image("the_background_4.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+              new BackgroundSize(1.0, 1.0, true, true, false, false))));
       dialog.show();
    }
 

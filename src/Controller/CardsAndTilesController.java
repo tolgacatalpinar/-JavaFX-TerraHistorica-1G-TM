@@ -47,8 +47,8 @@ public class CardsAndTilesController {
         dialog.initModality(Modality.APPLICATION_MODAL);
         Scene dialogScene = new Scene(border, 1100, 600);
         dialog.setResizable(false);
-        border.setBackground(new Background( new BackgroundImage( new Image("bonus_cards_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT)));
+        border.setBackground(new Background( new BackgroundImage( new Image("the_background_1.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                new BackgroundSize(1.0, 1.0, true, true, false, false))));
         dialog.setScene(dialogScene);
         dialog.setTitle("Bonus Cards ");
 
@@ -143,8 +143,8 @@ public class CardsAndTilesController {
         dialog.setResizable(false);
         dialog.setScene(dialogScene);
         dialog.setTitle("Favor Tiles");
-        border.setBackground(new Background( new BackgroundImage( new Image("favor_tiles_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT)));
+        border.setBackground(new Background( new BackgroundImage( new Image("the_background_8.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                new BackgroundSize(1.0, 1.0, true, true, false, false))));
 
         for (int i = 0; i < favorTiles.size(); i++) {
             GridPane tempPane = new GridPane();
@@ -261,8 +261,8 @@ public class CardsAndTilesController {
         dialog.initModality(Modality.APPLICATION_MODAL);
         Scene dialogScene = new Scene(border, 1100, 600);
         dialog.setResizable(false);
-        border.setBackground(new Background( new BackgroundImage( new Image("scoring_tiles_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT)));
+        border.setBackground(new Background( new BackgroundImage( new Image("the_background_3.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                new BackgroundSize(1.0, 1.0, true, true, false, false))));
         dialog.setScene(dialogScene);
         dialog.setTitle("Scoring Tile");
         dialog.show();
@@ -396,8 +396,8 @@ public class CardsAndTilesController {
             dialog.setScene(dialogScene);
             dialog.setTitle("Town Tiles");
             dialog.setResizable(false);
-            border.setBackground(new Background(new BackgroundImage(new Image("town_tiles_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                    BackgroundSize.DEFAULT)));
+            border.setBackground(new Background(new BackgroundImage(new Image("the_background_9.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                    new BackgroundSize(1.0, 1.0, true, true, false, false))));
             dialog.show();
         }
     }
