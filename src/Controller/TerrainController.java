@@ -202,6 +202,7 @@ public class TerrainController implements Serializable {
    }
 
    public static void buildBridge(String type, Button[][] terrains, Map map, Pane mapPane, Button[] actions) {
+      disableTerrains(terrains, map);
       for(int i = 0; i < ROW_NUMBER; i++){
          for( int j = 0; j < COLUMN_NUMBER; j++){
             if(terrains[i][j] != null && map.spaces[i][j] != null)
@@ -267,13 +268,12 @@ public class TerrainController implements Serializable {
                                           imView.getTransforms().addAll(translate);
                                        }
 
-
-
                                        System.out.println("x1: " + x1 + "y1: "  + y1 + "\nx2: " + x2 + "y2: " + y2);
                                        map.spaces[finalK][finalL].setBridgeConnection(true);
                                        map.spaces[finalK][finalL].setBridgeType(type);
                                        map.spaces[finalI][finalJ].setBridgeConnection(true);
                                        map.spaces[finalI][finalJ].setBridgeType(type);
+
                                        for(int i = 0; i < actions.length; i++)
                                           actions[i].setDisable(true);
                                     }
