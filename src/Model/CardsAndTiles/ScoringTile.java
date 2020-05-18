@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.io.Serializable;
 public class ScoringTile implements Serializable{
 
-    //Every player can take this tile there is no current number of player.
     private ArrayList<Integer> playerId;
     private int requiredIslam; //water
     private int requiredBudism; //fire
@@ -79,9 +78,6 @@ public class ScoringTile implements Serializable{
         playerId = new ArrayList<>();
     }
 
-    public ArrayList<Integer> getPlayerId() {
-        return playerId;
-    }
 
     public int getRequiredIslam() {
         return requiredIslam;
@@ -157,9 +153,5 @@ public class ScoringTile implements Serializable{
 
     public boolean isRequiredTown() {
         return isRequiredTown;
-    }
-
-    public void setPlayerId(ArrayList<Integer> playerId) {
-        this.playerId = playerId;
     }
 }

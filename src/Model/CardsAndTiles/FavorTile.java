@@ -126,8 +126,5 @@ public class FavorTile implements Serializable{
         return isPassingBonusForTradingHouse;
     }
 
-    public void setPlayerIds(ArrayList playerIds) {
-        this.playerIds = playerIds;
-    }
 
 }

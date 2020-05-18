@@ -1,17 +1,13 @@
 package Controller;
 
 import Model.Map;
-import Model.Player;
-import Model.PlayerHandler;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.transform.Translate;
-
 import java.io.Serializable;
 public class TerrainController implements Serializable {
 
@@ -112,35 +108,6 @@ public class TerrainController implements Serializable {
          button.setStyle("-fx-background-image: url('/swampWithTemple.png');");
 
    }
-   public static void setButtonClickForInitialDwellings(Button[][] terrains, Map map, Button skipTurn, Player current, RoundController roundController) {
-      PlayerHandler playerHandler = new PlayerHandler();
-      for (int i = 0; i < ROW_NUMBER; i++) {
-         for (int j = 0; j < COLUMN_NUMBER; j++) {
-            final int row = i;
-            final int col = j;
-            if (terrains[i][j] != null) {
-               terrains[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
-                  @Override
-                  public void handle(MouseEvent event) {
-                     skipTurn.setDisable(false);
-                     map.buildDwelling(map.spaces[row][col], map.spaces[row][col].getType(), true);
-                     //playerHandler.buildInitialDwelling(current);
-                     map.spaces[row][col].setPlayer(current);
-
-                     TerrainController.buildDwelling(terrains[row][col], map.spaces[row][col].getType());
-                     map.spaces[row][col].setStructure("Dwelling");
-                     for (int i = 0; i < ROW_NUMBER; i++) {
-                        for (int j = 0; j < COLUMN_NUMBER; j++) {
-                           if (terrains[i][j] != null)
-                              terrains[i][j].setDisable(true);
-                        }
-                     }
-                  }
-               });
-            }
-         }
-      }
-   }
    public static void upgradeToSanctuary(Button button, String color)
    {
       if(color.equals("Lakes"))
@@ -160,7 +127,6 @@ public class TerrainController implements Serializable {
 
    }
    public static void showTown(Button[][] terrains, Map map)
-
    {
       for (int i = 0; i < 9; i++) {
          for (int j = 0; j < 13; j++) {
@@ -170,8 +136,6 @@ public class TerrainController implements Serializable {
       }
 
    }
-
-
    public static void enableTerrains(Button[][] terrains, Map map)
    {
       for (int i = 0; i < 9; i++) {
@@ -181,8 +145,6 @@ public class TerrainController implements Serializable {
          }
       }
    }
-
-
    public static void disableTerrains(Button[][] terrains, Map map)
    {
       for (int i = 0; i < 9; i++) {
@@ -192,7 +154,6 @@ public class TerrainController implements Serializable {
          }
       }
    }
-
    public static void disableButtonClicks(Button[][] terrains){
       for (int i = 0; i < 9; i++) {
          for (int j = 0; j < 13; j++) {
@@ -201,7 +162,6 @@ public class TerrainController implements Serializable {
          }
       }
    }
-
    public static void buildBridge(String type, Button[][] terrains, Map map, Pane mapPane, Button[] actions) {
       disableTerrains(terrains, map);
       for(int i = 0; i < ROW_NUMBER; i++){
@@ -237,7 +197,6 @@ public class TerrainController implements Serializable {
                                        }
                                        double x = (x1 + x2)/2;
                                        double y = (y1 + y2)/2;
-
                                        if(Math.abs(x1- x2) < 5){
                                           Image imProfile = new Image(getClass().getResourceAsStream("/Images/bridgeLittle.png"));
                                           ImageView imView = new ImageView(imProfile);
@@ -248,7 +207,6 @@ public class TerrainController implements Serializable {
                                           imView.getTransforms().addAll(translate);
 
                                        }
-
                                        else if((x2- x1 > 5 && y2 - y1 > 5) || (x1- x2 > 5 && y1 - y2 > 5)){
                                           Image imProfile = new Image(getClass().getResourceAsStream("/Images/bridgeMinus60.png"));
                                           ImageView imView = new ImageView(imProfile);
@@ -258,7 +216,6 @@ public class TerrainController implements Serializable {
                                           mapPane.getChildren().add(imView);
                                           imView.getTransforms().addAll(translate);
                                        }
-
                                        else if((x2- x1 > 5 && y1 - y2 > 5) || (x1- x2 > 5 && y2 - y1 > 5)){
                                           Image imProfile = new Image(getClass().getResourceAsStream("/Images/bridgePlus60.png"));
                                           ImageView imView = new ImageView(imProfile);
@@ -268,7 +225,6 @@ public class TerrainController implements Serializable {
                                           mapPane.getChildren().add(imView);
                                           imView.getTransforms().addAll(translate);
                                        }
-
                                        System.out.println("x1: " + x1 + "y1: "  + y1 + "\nx2: " + x2 + "y2: " + y2);
                                        map.spaces[finalK][finalL].setBridgeConnection(true);
                                        map.spaces[finalK][finalL].setBridgeType(type);

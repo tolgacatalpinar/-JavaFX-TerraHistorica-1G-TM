@@ -2,7 +2,6 @@ package Model.CardsAndTiles;
 
 import Model.Player;
 import Model.Religion;
-
 import java.util.ArrayList;
 import java.io.Serializable;
 public class CardsAndTiles implements Serializable {
@@ -165,20 +164,6 @@ public class CardsAndTiles implements Serializable {
         return temp;
     }
 
-    private ArrayList<Integer> playerId;
-    private int requiredIslam; //water
-    private int requiredBudism; //fire
-    private int requiredChrist; //Air
-    private int requiredJudaism; //earth
-    private int priestBonus;
-    private int powerBonus;
-    private int workerBonus;
-    private int victoryBonus;
-    private int spadeBonus;
-    private int goldBonus;
-
-
-
     public void playerChoseBonusCard(BonusCard bonusCard, Player player) {
         if (bonusCard.isPlayerOcupied()) {
             System.err.println(" Please choose different Bonus Card \n" +
@@ -289,9 +274,6 @@ public class CardsAndTiles implements Serializable {
 
         }
     }
-
-
-
 
    public ArrayList<TownTile> getTownTiles() {
       return townTiles;
