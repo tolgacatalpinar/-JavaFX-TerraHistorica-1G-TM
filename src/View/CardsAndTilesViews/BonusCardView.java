@@ -1,6 +1,7 @@
 package View.CardsAndTilesViews;
 
 import Model.CardsAndTiles.BonusCard;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -82,6 +83,7 @@ public class BonusCardView extends VBox {
    public void addResourceBox(ImageView imageView, Label label)
    {
       HBox powerBox = new HBox();
+      powerBox.setAlignment(Pos.CENTER);
       styleLabel( label);
       styleImageView(imageView);
       powerBox.getChildren().addAll(imageView, label);
