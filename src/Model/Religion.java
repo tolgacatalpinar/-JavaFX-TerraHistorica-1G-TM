@@ -24,8 +24,6 @@ public class Religion implements Serializable{
         setupReligion(playerCount,initial_religion_points);
         roundBasedPosition = new int[playerCount];
     }
-
-
     private void setupReligion(int playerCount, int[] initial_religion_points){
         powerAwardPositions = new int[MAX_LENGTH+1];
         for (int i = 0; i < playerPositions.length ; i++){
@@ -101,7 +99,6 @@ public class Religion implements Serializable{
     public int[] placePriest(int player_id,int key) {
         return updateReligion(1, player_id, key);
     }
-
     public  int[] addOrderOfReligion(int player_id, int key){
         int[] returnInfo = {-1,-1,-1};
 
@@ -124,19 +121,10 @@ public class Religion implements Serializable{
         }else
             System.out.println("ORDER IS FULL");
         return returnInfo; // Error value which indicates there is no empty place
-        //// these -1's can represent error messages or throw exceptions
     }
     public int[] getPlayerPositions()
     {
        return playerPositions;
-    }
-
-    public int getOrderOfCult_3() {
-        return orderOfCult_3;
-    }
-
-    public int getOrderOfCult_2_1() {
-        return orderOfCult_2_1;
     }
     public void updateRoundBasedPositions(int amount, int playerIndex){
         roundBasedPosition[playerIndex] += amount;
@@ -144,18 +132,9 @@ public class Religion implements Serializable{
     public void resetRoundBasedPosition(){
         Arrays.fill(roundBasedPosition, 0);
     }
-    public int getOrderOfCult_2_2() {
-        return orderOfCult_2_2;
-    }
-
-    public int getOrderOfCult_2_3() {
-        return orderOfCult_2_3;
-    }
-
     public int[] getRoundBasedPosition() {
         return roundBasedPosition;
     }
-
     public void setRoundBasedPosition(int[] roundBasedPosition) {
         this.roundBasedPosition = roundBasedPosition;
     }

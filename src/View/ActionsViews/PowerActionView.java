@@ -1,8 +1,5 @@
 package View.ActionsViews;
 
-import Controller.TerrainController;
-import Model.Map;
-import Model.Player;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

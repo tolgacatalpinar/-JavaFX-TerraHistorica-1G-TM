@@ -1,14 +1,11 @@
 package View.CardsAndTilesViews;
 
-import Model.CardsAndTiles.BonusCard;
 import Model.CardsAndTiles.TownTile;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Box;
 
 public class TownTileView extends VBox {
     TownTile townTile;

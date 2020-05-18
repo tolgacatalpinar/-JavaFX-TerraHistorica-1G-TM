@@ -2,7 +2,6 @@ package View;
 
 import Model.FactionSubclasses.*;
 import Model.Player;
-import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

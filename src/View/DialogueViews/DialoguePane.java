@@ -1,6 +1,5 @@
 package View.DialogueViews;
 
-import Model.Player;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

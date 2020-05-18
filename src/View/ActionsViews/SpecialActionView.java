@@ -1,10 +1,8 @@
 package View.ActionsViews;
 
-import Model.CardsAndTiles.BonusCard;
 import View.CardsAndTilesViews.CardView;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
