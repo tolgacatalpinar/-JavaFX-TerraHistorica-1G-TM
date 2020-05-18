@@ -85,6 +85,7 @@ public class GameController implements Initializable, Serializable {
    RoundController roundController;
    PlayerHandler playerHandler;
    Player currentPlayer;
+   boolean isPlayerViewListCreated = false;
 
 
    public GameController() throws IOException {
@@ -124,7 +125,9 @@ public class GameController implements Initializable, Serializable {
                @Override
                public void run() {
 
-                  if (playerList != null) {
+
+                  if (playerList != null && !isPlayerViewListCreated) {
+                     System.out.println("if is in");
                      HBox factionsView = new HBox(5);
 
                      playerViewList = new ArrayList<>();
@@ -155,7 +158,17 @@ public class GameController implements Initializable, Serializable {
 //                     imview.setFitHeight(150);
 //                     imview.setFitWidth(50);
 //                     borderPane.setBottom(imview);
-
+                     isPlayerViewListCreated = true;
+                  }
+                  else if(playerList != null)
+                  {
+                     System.out.println("else is in");
+                     for( int i = 0; i < playerViewList.size(); i ++)
+                     {
+                        playerViewList.get(i).updateView(playerList[i]);
+                     }
+                     displayPlayerTurn(playerViewList);
+                     showTown(terrains, map);
                   }
 
                }
@@ -163,7 +176,7 @@ public class GameController implements Initializable, Serializable {
 
             while (true) {
                try {
-                  Thread.sleep(700);
+                  Thread.sleep(500);
                } catch (InterruptedException ex) {
                }
 
@@ -193,6 +206,7 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void loadGameClicked() throws IOException
    {
+
          this.map = fm.loadGame(save, this).map;
          System.out.println(map.spaces[3][2].getType());
          this.religionArr = fm.loadGame(save, this).religionArr;
@@ -204,6 +218,7 @@ public class GameController implements Initializable, Serializable {
          this.currentPlayer = fm.loadGame(save, this).currentPlayer;
          this.roundController = fm.loadGame(save, this).roundController;
     //     this.loadInitialMap();
+
    }
 
 
@@ -424,7 +439,7 @@ public class GameController implements Initializable, Serializable {
                if (j == 0 || j == 2 || j == 5 || j == 6 || j == 8 || j == 10 || j == 11)
                   spaces[i][j].setBridgability(true);
             } else if (i == 4) {
-               if (j == 4 || j == 7 || j == 10)
+               if (j == 3 || j == 4 || j == 7 || j == 10)
                   spaces[i][j].setBridgability(true);
             } else if (i == 5) {
                if (j == 0 || j == 1 || j == 4 || j == 5)
@@ -585,9 +600,9 @@ public class GameController implements Initializable, Serializable {
 
    public void displayPlayerTurn(ArrayList<PlayerView> playerViewList) {
 
-//      for (PlayerView playerView : playerViewList) {
-//         playerView.setStyle("");
-//      }
+      for (PlayerView playerView : playerViewList) {
+         playerView.setStyle("");
+      }
 
       switch (playerList[roundController.getCurrentPlayerId()].getFaction().TERRAIN_TILE) {
          case "Wasteland":
