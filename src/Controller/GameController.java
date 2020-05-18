@@ -4,6 +4,7 @@ import Model.*;
 import Model.CardsAndTiles.CardsAndTiles;
 import Model.FactionSubclasses.*;
 import View.*;
+import View.ActionsViews.PowerActionView;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -632,114 +633,13 @@ public class GameController implements Initializable, Serializable {
     */
    public void showPowerActions(Player currentPlayer) {
 
-      BorderPane border = new BorderPane();
-      BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0, true, true, false, false));
-      border.setBackground(new Background(bg));
-      GridPane gridPane = new GridPane();
-      gridPane.setHgap(10);
-      gridPane.setVgap(10);
-      Button select = new Button("Select");
-      select.setMaxHeight(100);
-      select.setMinWidth(100);
-      BorderPane border_bottom = new BorderPane();
-      border.setBottom(border_bottom);
-      border_bottom.setCenter(select);
+      PowerActionView powerActionView = new PowerActionView();
+      Button select = powerActionView.getSelectButton();
 
-      for (int i = 0; i < 6; i++) {
-         ImageView power_middle = new ImageView("arrow.png");
-         ImageView power_image = new ImageView("power.png");
-         ImageView bridge = new ImageView("bridge.png");
-         ImageView priest = new ImageView("priest.png");
-         ImageView worker =  new ImageView("worker.png");
-         ImageView gold = new ImageView("gold.png");
-         ImageView spade =  new ImageView("spade.png");
-         Label label1 = new Label("\n3");
-         label1.setTextFill(Color.WHITE);
-         Label label2 = new Label("\n2");
-         label2.setTextFill(Color.WHITE);
-         label1.setFont(new Font("Stencil", 40));
-         label2.setFont(new Font("Stencil", 40));
-         label1.setOpacity(0.6);
-         label2.setOpacity(0.6);
-         power_middle.setFitHeight(150);
-         power_middle.setFitWidth(150);
-         priest.setFitWidth(150);
-         priest.setFitHeight(150);
-         worker.setFitWidth(150);
-         worker.setFitHeight(150);
-         gold.setFitWidth(150);
-         gold.setFitHeight(150);
-         spade.setFitWidth(150);
-         spade.setFitHeight(150);
-         power_image.setFitWidth(150);
-         power_image.setFitHeight(150);
-         bridge.setFitHeight(150);
-         bridge.setFitWidth(150);
-         HBox option;
-         if(i == 0){
-              label2.setText("\n1");
-              option = new HBox(power_image, label1, power_middle, bridge,label2 );
-         }else if (i == 1) {
-               label2.setText("\n1");
-               option = new HBox(power_image, label1, power_middle, priest,label2 );
-         }else if (i == 2) {
-            label1.setText("\n4");
-            option = new HBox(power_image, label1 , power_middle, worker, label2 );
-         }else if (i == 3) {
-            label1.setText("\n4");
-            label2.setText("\n7");
-            option = new HBox(power_image, label1, power_middle,gold , label2);
-         }else if (i == 4) {
-             label1.setText("\n4");
-             label2.setText("\n1");
-             option = new HBox(power_image, label1, power_middle,spade, label2);
-         }else {
-            label1.setText("\n6");
-            option = new HBox(power_image, label1, power_middle, spade,label2 );
-         }
-         GridPane tempPane = new GridPane();
-         option.setMaxWidth(tempPane.getWidth() / 3);
-         option.setMaxHeight(tempPane.getHeight() / 3);
-         tempPane.add(option,0,0);
-         tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               DropShadow borderGlow = new DropShadow();
-               borderGlow.setColor(Color.ORANGE);
-               borderGlow.setOffsetX(0f);
-               borderGlow.setOffsetY(0f);
-               borderGlow.setWidth(50);
-               borderGlow.setHeight(50);
-               tempPane.setEffect(borderGlow);
-            }
-         });
-         int finalI = i;
-         tempPane.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               if (selection != finalI)
-                  tempPane.setEffect(null);
 
-            }
-         });
-
-         tempPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               setSelection(finalI);
-               for (int i = 0; i < 6; i++) {
-                  if (i != getSelection())
-                     gridPane.getChildren().get(i).setEffect(null);
-               }
-            }
-         });
-         gridPane.add(tempPane, i % 2, i / 2);
-      }
-
-      border.setCenter(gridPane);
       final Stage dialog = new Stage();
       dialog.initModality(Modality.APPLICATION_MODAL);
-      Scene dialogScene = new Scene(border, 1100, 600);
+      Scene dialogScene = new Scene(powerActionView, 1100, 600);
       dialog.setScene(dialogScene);
       dialog.setTitle("Power Action");
       dialog.setResizable(false);
@@ -800,7 +700,7 @@ public class GameController implements Initializable, Serializable {
    }
    private void showExchangeResources(Player currentPlayer) {
       BorderPane border = new BorderPane();
-      BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,   new BackgroundSize(1.0, 1.0, true, true, false, false));
+      BackgroundImage bg = new BackgroundImage(new Image("the_background_6.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,   new BackgroundSize(1.0, 1.0, true, true, false, false));
       border.setBackground(new Background(bg));
       GridPane gridPane = new GridPane();
       gridPane.setHgap(10);
@@ -906,7 +806,7 @@ public class GameController implements Initializable, Serializable {
       dialog.initModality(Modality.APPLICATION_MODAL);
       Scene dialogScene = new Scene(border, 1100, 600);
       dialog.setScene(dialogScene);
-      dialog.setTitle("Exchange Resources");
+      dialog.setTitle("Power Action");
       dialog.setResizable(false);
 
       select.setOnMouseClicked(new EventHandler<MouseEvent>() {
