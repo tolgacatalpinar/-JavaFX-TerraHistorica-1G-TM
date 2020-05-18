@@ -340,7 +340,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void skipTurnClicked() {
-      disableButtonClicks();
+      TerrainController.disableButtonClicks(terrains);
       TerrainController.enableTerrains(terrains,map);
       enableActions();
       if (roundController.currentRound == 0) {
@@ -662,28 +662,6 @@ public class GameController implements Initializable, Serializable {
    }
 
 
-   /**
-    * TODO
-    * TAŞINACAK
-    */
-   public void disableButtonClicks() {
-      for (int i = 0; i < ROW_NUMBER; i++) {
-         for (int j = 0; j < COLUMN_NUMBER; j++) {
-            if (terrains[i][j] != null)
-               terrains[i][j].setOnMouseClicked(null);
-         }
-      }
-   }
-
-   /**
-    * TODO
-    * TAŞINACAK
-    */
-
-   /**
-    * TODO
-    * TAŞINACAK
-    */
    public void disableActions() {
       terraform.setDisable(true);
       upgradeShipping.setDisable(true);
@@ -695,10 +673,6 @@ public class GameController implements Initializable, Serializable {
       passRound.setDisable(true);
    }
 
-   /**
-    * TODO
-    * TAŞINACAK
-    */
    public void enableActions() {
       terraform.setDisable(false);
       upgradeShipping.setDisable(false);
@@ -767,9 +741,6 @@ public class GameController implements Initializable, Serializable {
 
          @Override
          public void handle(MouseEvent event) {
-            playerList[roundController.currentPlayerId].setBowlThreePower(12);
-            playerList[roundController.currentPlayerId].setWorkerNum(1000);
-            playerList[roundController.currentPlayerId].setGoldNum(1000);
             int chosen = powerActionView.getSelection();
             System.out.println("Selection: " + chosen);
             powerActionView.setSelection(chosen);
