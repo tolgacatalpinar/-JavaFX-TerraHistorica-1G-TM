@@ -754,7 +754,7 @@ public class GameController implements Initializable, Serializable {
       BorderPane emptyPane = new BorderPane();
       final Stage dialog = new Stage();
       dialog.initModality(Modality.APPLICATION_MODAL);
-      Scene dialogScene = new Scene(emptyPane, 1200, 600);
+      Scene dialogScene = new Scene(emptyPane, 1100, 600);
       dialog.setScene(dialogScene);
       dialog.setTitle("Score Table");
       dialog.setResizable(false);
@@ -782,7 +782,7 @@ public class GameController implements Initializable, Serializable {
       vic_p2.setFitWidth(emptyPane.getWidth()/8);
       vic_p2.setFitHeight(emptyPane.getHeight()/5);
       VBox ranking1 = new VBox(vic_p2, label1 ,sep_line, label2,sep_line2, label3 );
-      ranking1.getStyleClass().add("wasteland");
+      ranking1.setStyle("-fx-background-color: rgba(133,88,23,0.43);");
       HBox allTable = new HBox();
       allTable.getChildren().add(ranking1);
       for (int i = 0; i< 4;i++){
@@ -830,9 +830,8 @@ public class GameController implements Initializable, Serializable {
                tempHBox.setFillHeight(true);
                tempHBox.getChildren().add(player_images);
             }
-            tempHBox.getStyleClass().add("wasteland");
             tempBox.getChildren().add(tempHBox);
-
+            tempBox.setStyle("-fx-background-color: rgba(133,88,23,0.43);");
          }
 
          allTable.getChildren().add(tempBox);
@@ -883,10 +882,10 @@ public class GameController implements Initializable, Serializable {
          }
 
          connection.getChildren().add(tempHBox);
+         connection.setStyle("-fx-background-color: rgba(29,80,107,0.36);");
       }
       allTable.getChildren().add(connection);
-      allTable.setSpacing(10);
-
+      ranking2.setStyle("-fx-background-color: rgba(29,80,107,0.36);");
       emptyPane.setCenter(allTable);
       dialog.show();
 
