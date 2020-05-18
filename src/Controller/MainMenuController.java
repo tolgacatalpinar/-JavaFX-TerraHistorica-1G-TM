@@ -117,6 +117,7 @@ public class MainMenuController   implements Initializable, Serializable {
         Map map = game.getMap();
         game = FileManager.loadGame(save,game);
         game.updateMap(terrains, map);
+        game.loadCardsAndTiles();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setMaximized(true);

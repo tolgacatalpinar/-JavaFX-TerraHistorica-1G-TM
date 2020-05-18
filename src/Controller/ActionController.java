@@ -602,7 +602,7 @@ public class ActionController implements Serializable {
    /**TODO
     * TAŞINACAK
     */
-   public static void showSpeacialActions(Player[] playerList,Religion[] religions,int currentPlayerId,Map map, Pane mapPane, Button[][] terrains,Button[] actions) {
+   public static void showSpeacialActions(Player[] playerList,Religion[] religions,int currentPlayerId,Map map, Pane mapPane, Button[][] terrains,Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religion) {
       VBox wholeFavor = new VBox();
       HBox firstRow = new HBox();
       HBox secondRow = new HBox();
@@ -627,7 +627,6 @@ public class ActionController implements Serializable {
                System.out.println("Spade Action");
                choice[0] = 1;
                System.out.println(choice[0]);
-
                event.consume();
             } else {
                Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -708,7 +707,7 @@ public class ActionController implements Serializable {
          public void handle(Event event) {
             if (choice[0] == 1) {
                currentPlayer.getSpecialActionToken().isSpade = false;
-               currentPlayer.setFreeSpade(currentPlayer.getFreeSpade() + 1);
+               terraform(currentPlayer, terrains, map, actions, cardsAndTiles, religions);
                event.consume();
             } else if (choice[0] == 2) {
                currentPlayer.getSpecialActionToken().isCultTack = false;

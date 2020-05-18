@@ -174,7 +174,9 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void loadGameClicked() throws IOException
    {
-          updateMap(this.terrains,this.map);
+
+       updateMap(this.terrains,this.map);
+
    }
    public void updateMap(Button[][] terrains, Map map){
       System.out.println("alasa");
@@ -423,7 +425,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void specialActionClicked() {
-      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId(),map, mapPane, terrains,actions);
+      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId(),map, mapPane, terrains,actions, cardsAndTiles, religionArr);
    }
 
    public void createSpaces() {
@@ -779,6 +781,7 @@ public class GameController implements Initializable, Serializable {
           winnerStage.setHeight(800);
           winnerStage.setWidth(550);
           winnerStage.show();
+          dialog.setOnCloseRequest(e-> Platform.exit());
           winnerStage.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
               if (KeyCode.ESCAPE == event.getCode()) {
                   if(winnerStage.isShowing())
@@ -786,7 +789,7 @@ public class GameController implements Initializable, Serializable {
               }
           });
           dialog.showAndWait();
-          dialog.setOnCloseRequest(e-> Platform.exit());
+
 
       }
        dialog.showAndWait();
