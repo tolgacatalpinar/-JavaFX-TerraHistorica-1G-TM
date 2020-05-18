@@ -4,6 +4,7 @@ import Model.*;
 import Model.CardsAndTiles.CardsAndTiles;
 import Model.FactionSubclasses.*;
 import View.*;
+import View.ActionsViews.ExchangeResourcesView;
 import View.ActionsViews.PowerActionView;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -335,7 +336,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void exchangeResourcesClicked() {
-      showExchangeResources(playerList[roundController.currentPlayerId]);
+      showExchangeResources();
    }
 
 
@@ -625,12 +626,6 @@ public class GameController implements Initializable, Serializable {
 
    }
 
-   /**
-    * TODO
-    * TAŞINACAK HERHALDE BU DA
-    *
-    * @param
-    */
    public void showPowerActions(Player currentPlayer) {
 
       PowerActionView powerActionView = new PowerActionView();
@@ -651,11 +646,11 @@ public class GameController implements Initializable, Serializable {
             playerList[roundController.currentPlayerId].setBowlThreePower(12);
             playerList[roundController.currentPlayerId].setWorkerNum(1000);
             playerList[roundController.currentPlayerId].setGoldNum(1000);
-            int chosen = getSelection();
+            int chosen = powerActionView.getSelection();
             System.out.println("Selection: " + chosen);
-            setSelection(chosen);
+            powerActionView.setSelection(chosen);
             dialog.close();
-            if (getSelection() == 0) {
+            if (powerActionView.getSelection() == 0) {
                boolean checkBridgability = false;
                for(int i = 0; i < ROW_NUMBER; i++) {
                   for (int j = 0; j < COLUMN_NUMBER; j++) {
@@ -674,12 +669,12 @@ public class GameController implements Initializable, Serializable {
                      System.out.println("Köprü kuruldu");
                   }
                }
-            } else if (getSelection() == 4) {
+            } else if (powerActionView.getSelection() == 4) {
                if (playerHandler.usePowerAction(4, currentPlayer)) {
                   disableActions();
                   terraform.setDisable(false);
                }
-            } else if (getSelection() == 5) {
+            } else if (powerActionView.getSelection() == 5) {
                if (playerHandler.usePowerAction(5, currentPlayer)) {
                   disableActions();
                   terraform.setDisable(false);
@@ -689,146 +684,35 @@ public class GameController implements Initializable, Serializable {
                   }
                }
             } else {
-               if (playerHandler.usePowerAction(getSelection(), currentPlayer)) {
+               if (playerHandler.usePowerAction(powerActionView.getSelection(), currentPlayer)) {
                   System.out.println("Köprü kuruldu");
                }
             }
          }
       });
-
       dialog.show();
    }
-   private void showExchangeResources(Player currentPlayer) {
-      BorderPane border = new BorderPane();
-      BackgroundImage bg = new BackgroundImage(new Image("the_background_6.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,   new BackgroundSize(1.0, 1.0, true, true, false, false));
-      border.setBackground(new Background(bg));
-      GridPane gridPane = new GridPane();
-      gridPane.setHgap(10);
-      gridPane.setVgap(10);
-      Button select = new Button("Select");
-      select.setMaxHeight(100);
-      select.setMinWidth(100);
-      BorderPane border_bottom = new BorderPane();
-      border.setBottom(border_bottom);
-      border_bottom.setCenter(select);
+   private void showExchangeResources() {
 
-      for (int i = 0; i < 6; i++) {
-         ImageView power_middle = new ImageView("arrow.png");
-         ImageView power_image = new ImageView("power.png");
-         ImageView priest = new ImageView("priest.png");
-         ImageView worker =  new ImageView("worker.png");
-         ImageView gold = new ImageView("gold.png");
-         Label label1 = new Label("\n3");
-         label1.setTextFill(Color.WHITE);
-         Label label2 = new Label("\n2");
-         label2.setTextFill(Color.WHITE);
-         label1.setFont(new Font("Stencil", 40));
-         label2.setFont(new Font("Stencil", 40));
-         label1.setOpacity(0.6);
-         label2.setOpacity(0.6);
-         power_middle.setFitHeight(150);
-         power_middle.setFitWidth(150);
-         priest.setFitWidth(150);
-         priest.setFitHeight(150);
-         worker.setFitWidth(150);
-         worker.setFitHeight(150);
-         gold.setFitWidth(140);
-         gold.setFitHeight(140);
-         power_image.setFitWidth(150);
-         power_image.setFitHeight(150);
-         HBox option;
-         if(i == 0){
-            label1.setText("\n5");
-            label2.setText("\n1");
-            option = new HBox(power_image, label1, power_middle, priest,label2 );
-         }else if (i == 1) {
-            label1.setText("\n1");
-            label2.setText("\n1");
-            option = new HBox(priest, label1, power_middle, worker,label2 );
-         }else if (i == 2) {
-            label1.setText("\n3");
-            label2.setText("\n1");
-            option = new HBox(power_image, label1 , power_middle, worker, label2 );
-         }else if (i == 3) {
-            label1.setText("\n1");
-            label2.setText("\n1");
-            option = new HBox(worker, label1, power_middle, gold , label2);
-         }else if (i == 4) {
-            label1.setText("\n1");
-            label2.setText("\n1");
-            option = new HBox(power_image, label1, power_middle,gold, label2);
-         }else {
-            label1.setText("\nBOWL 2");
-            label2.setText("\nBOWL 3");
-
-            option = new HBox(power_image, label1, power_middle,label2 );
-         }
-         GridPane tempPane = new GridPane();
-         tempPane.add(option,0,0);
-
-         tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               DropShadow borderGlow = new DropShadow();
-               borderGlow.setColor(Color.ORANGE);
-               borderGlow.setOffsetX(0f);
-               borderGlow.setOffsetY(0f);
-               borderGlow.setWidth(50);
-               borderGlow.setHeight(50);
-               tempPane.setEffect(borderGlow);
-            }
-         });
-         int finalI = i;
-         tempPane.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               if (selection != finalI)
-                  tempPane.setEffect(null);
-
-            }
-         });
-
-         tempPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               setSelection(finalI);
-               for (int i = 0; i < 6; i++) {
-                  if (i != getSelection())
-                     gridPane.getChildren().get(i).setEffect(null);
-               }
-            }
-         });
-         gridPane.add(tempPane, i % 2, i / 2);
-      }
-
-      border.setCenter(gridPane);
+      ExchangeResourcesView exchangeResourcesView = new ExchangeResourcesView();
+      Button select = exchangeResourcesView.getSelectButton();
       final Stage dialog = new Stage();
       dialog.initModality(Modality.APPLICATION_MODAL);
-      Scene dialogScene = new Scene(border, 1100, 600);
+      Scene dialogScene = new Scene(exchangeResourcesView, 1100, 600);
       dialog.setScene(dialogScene);
       dialog.setTitle("Power Action");
       dialog.setResizable(false);
-
       select.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
          @Override
          public void handle(MouseEvent event) {
-            playerList[roundController.currentPlayerId].setBowlThreePower(12); //TODO
-            int chosen = getSelection();
+            int chosen = exchangeResourcesView.getSelection();
             System.out.println("Selection: " + chosen);
-            setSelection(chosen);
+            exchangeResourcesView.setSelection(chosen);
             playerHandler.exchangeResources(playerList[roundController.getCurrentPlayerId()], chosen);
             dialog.close();
          }
       });
       dialog.showAndWait();
-   }
-   public int getSelection() {
-      return selection;
-   }
-
-   private void setSelection(int selection) {
-      this.selection = selection;
    }
 
 

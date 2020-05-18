@@ -1,9 +1,7 @@
 package View.ActionsViews;
 
-import Controller.TerrainController;
-import Model.Map;
-import Model.Player;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
@@ -13,13 +11,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
-public class PowerActionView extends BorderPane {
+public class ExchangeResourcesView extends BorderPane{
     private int  selection = -1;
-    Button select = new Button("Select");
-
-    public PowerActionView(){
-        BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+    private Button select = new Button("Select");
+    public ExchangeResourcesView(){
+        BackgroundImage bg = new BackgroundImage(new Image("the_background_6.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,   new BackgroundSize(1.0, 1.0, true, true, false, false));
         this.setBackground(new Background(bg));
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
@@ -29,14 +28,13 @@ public class PowerActionView extends BorderPane {
         BorderPane border_bottom = new BorderPane();
         this.setBottom(border_bottom);
         border_bottom.setCenter(select);
+
         for (int i = 0; i < 6; i++) {
             ImageView power_middle = new ImageView("arrow.png");
             ImageView power_image = new ImageView("power.png");
-            ImageView bridge = new ImageView("bridge.png");
             ImageView priest = new ImageView("priest.png");
             ImageView worker =  new ImageView("worker.png");
             ImageView gold = new ImageView("gold.png");
-            ImageView spade =  new ImageView("spade.png");
             Label label1 = new Label("\n3");
             label1.setTextFill(Color.WHITE);
             Label label2 = new Label("\n2");
@@ -51,40 +49,40 @@ public class PowerActionView extends BorderPane {
             priest.setFitHeight(150);
             worker.setFitWidth(150);
             worker.setFitHeight(150);
-            gold.setFitWidth(150);
-            gold.setFitHeight(150);
-            spade.setFitWidth(150);
-            spade.setFitHeight(150);
+            gold.setFitWidth(140);
+            gold.setFitHeight(140);
             power_image.setFitWidth(150);
             power_image.setFitHeight(150);
-            bridge.setFitHeight(150);
-            bridge.setFitWidth(150);
             HBox option;
             if(i == 0){
-                label2.setText("\n1");
-                option = new HBox(power_image, label1, power_middle, bridge,label2 );
-            }else if (i == 1) {
+                label1.setText("\n5");
                 label2.setText("\n1");
                 option = new HBox(power_image, label1, power_middle, priest,label2 );
+            }else if (i == 1) {
+                label1.setText("\n1");
+                label2.setText("\n1");
+                option = new HBox(priest, label1, power_middle, worker,label2 );
             }else if (i == 2) {
-                label1.setText("\n4");
+                label1.setText("\n3");
+                label2.setText("\n1");
                 option = new HBox(power_image, label1 , power_middle, worker, label2 );
             }else if (i == 3) {
-                label1.setText("\n4");
-                label2.setText("\n7");
-                option = new HBox(power_image, label1, power_middle,gold , label2);
-            }else if (i == 4) {
-                label1.setText("\n4");
+                label1.setText("\n1");
                 label2.setText("\n1");
-                option = new HBox(power_image, label1, power_middle,spade, label2);
+                option = new HBox(worker, label1, power_middle, gold , label2);
+            }else if (i == 4) {
+                label1.setText("\n1");
+                label2.setText("\n1");
+                option = new HBox(power_image, label1, power_middle,gold, label2);
             }else {
-                label1.setText("\n6");
-                option = new HBox(power_image, label1, power_middle, spade,label2 );
+                label1.setText("\nBOWL 2");
+                label2.setText("\nBOWL 3");
+
+                option = new HBox(power_image, label1, power_middle,label2 );
             }
             GridPane tempPane = new GridPane();
-            option.setMaxWidth(tempPane.getWidth() / 3);
-            option.setMaxHeight(tempPane.getHeight() / 3);
             tempPane.add(option,0,0);
+
             tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -119,10 +117,7 @@ public class PowerActionView extends BorderPane {
             });
             gridPane.add(tempPane, i % 2, i / 2);
         }
-
         this.setCenter(gridPane);
-
-
     }
     public int getSelection() {
         return selection;
@@ -130,9 +125,8 @@ public class PowerActionView extends BorderPane {
     public Button getSelectButton(){
         return this.select;
     }
+
     public void setSelection(int selection) {
         this.selection = selection;
     }
-
-
 }
