@@ -18,7 +18,7 @@ public class ExchangeResourcesView extends BorderPane{
     private int  selection = -1;
     private Button select = new Button("Select");
     public ExchangeResourcesView(){
-        BackgroundImage bg = new BackgroundImage(new Image("the_background_6.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,   new BackgroundSize(1.0, 1.0, true, true, false, false));
+        BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,   new BackgroundSize(1.0, 1.0, true, true, false, false));
         this.setBackground(new Background(bg));
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
