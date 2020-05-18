@@ -5,8 +5,8 @@ import Model.CardsAndTiles.CardsAndTiles;
 import Model.FactionSubclasses.*;
 import Model.Map;
 import View.ActionsViews.SpecialActionView;
-import View.DialogueImageButton;
-import View.DialogueView;
+import View.DialogueViews.DialogueImageButton;
+import View.DialogueViews.DialogueView;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -361,112 +361,107 @@ public class ActionController implements Serializable {
 
    public static void upgradeToStrongholdOrTemple(Player[] playerArr, int curPlayerId, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
       PlayerHandler playerHandler = new PlayerHandler();
-      Button yesButton = new Button("Yes");
-      Button noButton = new Button("No");
-      RadioButton templeButton = new RadioButton("Temple");
-      RadioButton strongholdButton = new RadioButton("Stronghold");
-      BorderPane pane = DialogueView.getTradingPostUpgradePromptPane(playerArr,curPlayerId, "Do you want to upgrade this Trading Post to a Temple\n at the expense of: ", "Do you want to upgrade this Trading Post to a Stronghold\n at the expense of: ", yesButton, noButton, templeButton, strongholdButton);
+      Button templeButton = new Button();
+      Button strongholdButton = new Button();
+      VBox pane = DialogueView.getTradingPostUpgradePromptPane(playerArr,curPlayerId, templeButton, strongholdButton);
       Stage stage = DialogueView.getStage("Upgrade Trading Post", pane, new Image("favor_tiles_background.jpg"));
 
-      yesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+      templeButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
-            if( templeButton.isSelected() && !strongholdButton.isSelected())
-            {
-               ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
-               int returnCase = playerHandler.buildStructure(playerArr[curPlayerId], "Temple", false);
-               /**
-                * TODO
-                * YANDAKİ UŞAKLARA SOR
-                */
-               if(returnCase > 0){
-                  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                  for(int i = 0; i < adjacentPlayers.size(); i++) {
-                     alert.setTitle("Offer for " + adjacentPlayers.get(i).getNickName());
-                     alert.setHeaderText("Do you want to spend victory points to get power?");
-                     alert.setContentText("Cost will be here");
-                     Optional<ButtonType> result = alert.showAndWait();
-                     if (((Optional) result).get() == ButtonType.OK) {
-                        playerHandler.acceptPowerFromAdjacentOpponent(3, adjacentPlayers.get(i));
-                     } else {
-                        // ... user chose CANCEL or closed the dialog
-                     }
+            ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
+            int returnCase = playerHandler.buildStructure(playerArr[curPlayerId], "Temple", false);
+            /**
+             * TODO
+             * YANDAKİ UŞAKLARA SOR
+             */
+            if(returnCase > 0){
+               Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+               for(int i = 0; i < adjacentPlayers.size(); i++) {
+                  alert.setTitle("Offer for " + adjacentPlayers.get(i).getNickName());
+                  alert.setHeaderText("Do you want to spend victory points to get power?");
+                  alert.setContentText("Cost will be here");
+                  Optional<ButtonType> result = alert.showAndWait();
+                  if (((Optional) result).get() == ButtonType.OK) {
+                     playerHandler.acceptPowerFromAdjacentOpponent(3, adjacentPlayers.get(i));
+                  } else {
+                     // ... user chose CANCEL or closed the dialog
                   }
-                  canChooseFavorTile = true;
-                  disableActions(actions);
-                  TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
+               }
+               canChooseFavorTile = true;
+               disableActions(actions);
+               TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
+               CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
+               for(int i = 0; i < returnCase; i++) {
+                  cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
+               }
+               space.setStructure("Temple");
+               stage.close();
+               int townScore = map.calculateTownScore(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
+               if(townScore >= playerArr[curPlayerId].getTownPowerValue()){
+                  playerHandler.townFound(playerArr[curPlayerId]);
+                  cardsAndTilesController.showTownTilesTable(cardsAndTiles, playerArr[curPlayerId],religions,true);
+               }
+               System.out.println("Town score is *************"+ townScore);
+               actiondone = true;
+            }else if (returnCase == -1){
+               System.out.println("Not enough resources");
+               stage.close();
+               actiondone = true;
+            }else
+               System.out.println("Max reached");
+            stage.close();
+            actiondone = true;
+         }
+      });
+      strongholdButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         @Override
+         public void handle(MouseEvent event) {
+            ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
+            int returnCase = playerHandler.buildStructure(playerArr[curPlayerId], "Stronghold", false);
+            /**
+             * TODO
+             * YANDAKİ UŞAKLARA SOR
+             */
+            if(returnCase == 1){
+               Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+               for(int i = 0; i < adjacentPlayers.size(); i++) {
+                  alert.setTitle("Offer for " + adjacentPlayers.get(i).getNickName());
+                  alert.setHeaderText("Do you want to spend victory points to get power?");
+                  alert.setContentText("Cost will be here");
+                  Optional<ButtonType> result = alert.showAndWait();
+                  if (((Optional) result).get() == ButtonType.OK) {
+                     playerHandler.acceptPowerFromAdjacentOpponent(3, adjacentPlayers.get(i));
+                  } else {
+                     // ... user chose CANCEL or closed the dialog
+                  }
+               }
+               disableActions(actions);
+               TerrainController.upgradeToStronghold(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
+               space.setStructure("Stronghold");
+               playerArr[curPlayerId].getSpecialActionToken().setStrongholdAbility(true);
+
+               int townScore = map.calculateTownScore(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
+               if(townScore >= playerArr[curPlayerId].getTownPowerValue()){
+                  playerHandler.townFound(playerArr[curPlayerId]);
                   CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
-                  for(int i = 0; i < returnCase; i++) {
-                     cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerArr[curPlayerId], religions,true);
-                  }
-                  space.setStructure("Temple");
-                  stage.close();
-                  int townScore = map.calculateTownScore(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
-                  if(townScore >= playerArr[curPlayerId].getTownPowerValue()){
-                     playerHandler.townFound(playerArr[curPlayerId]);
-                     cardsAndTilesController.showTownTilesTable(cardsAndTiles, playerArr[curPlayerId],religions,true);
-                  }
-                  System.out.println("Town score is *************"+ townScore);
-                  actiondone = true;
-               }else if (returnCase == -1){
-                  System.out.println("Not enough resources");
-                  stage.close();
-                  actiondone = true;
-               }else
-                  System.out.println("Max reached");
-               stage.close();
-
-            }
-            else if(!templeButton.isSelected() && strongholdButton.isSelected())
-            {
-               ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
-               int returnCase = playerHandler.buildStructure(playerArr[curPlayerId], "Stronghold", false);
-               /**
-                * TODO
-                * YANDAKİ UŞAKLARA SOR
-                */
-               if(returnCase == 1){
-                  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                  for(int i = 0; i < adjacentPlayers.size(); i++) {
-                     alert.setTitle("Offer for " + adjacentPlayers.get(i).getNickName());
-                     alert.setHeaderText("Do you want to spend victory points to get power?");
-                     alert.setContentText("Cost will be here");
-                     Optional<ButtonType> result = alert.showAndWait();
-                     if (((Optional) result).get() == ButtonType.OK) {
-                        playerHandler.acceptPowerFromAdjacentOpponent(3, adjacentPlayers.get(i));
-                     } else {
-                        // ... user chose CANCEL or closed the dialog
-                     }
-                  }
-                  disableActions(actions);
-                  TerrainController.upgradeToStronghold(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
-                  space.setStructure("Stronghold");
-                  playerArr[curPlayerId].getSpecialActionToken().setStrongholdAbility(true);
-
-                  int townScore = map.calculateTownScore(x,y, playerArr[curPlayerId].getFaction().TERRAIN_TILE, playerArr[curPlayerId].getTownPowerValue());
-                  if(townScore >= playerArr[curPlayerId].getTownPowerValue()){
-                     playerHandler.townFound(playerArr[curPlayerId]);
-                     CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
-                     cardsAndTilesController.showTownTilesTable(cardsAndTiles, playerArr[curPlayerId],religions,true);
-                  }
-                  System.out.println("Town score is *************"+ townScore);
-               }else if (returnCase == -1){
-                  System.out.println("Not enough resources");
-               }else
-                  System.out.println("Max reached");
-               stage.close();
-            }
+                  cardsAndTilesController.showTownTilesTable(cardsAndTiles, playerArr[curPlayerId],religions,true);
+               }
+               System.out.println("Town score is *************"+ townScore);
+            }else if (returnCase == -1){
+               System.out.println("Not enough resources");
+            }else
+               System.out.println("Max reached");
             stage.close();
-            actiondone = true;
          }
       });
-      noButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-         @Override
-         public void handle(MouseEvent event) {
-            stage.close();
-            actiondone = true;
-         }
-      });
+//      noButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//         @Override
+//         public void handle(MouseEvent event) {
+//            stage.close();
+//            actiondone = true;
+//         }
+//      });
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
       stage.showAndWait();
@@ -607,7 +602,7 @@ public class ActionController implements Serializable {
    }
    public static void strongholdAbility(Button[][] terrains, Map map, Button skipturn, Player current, RoundController roundController) throws IOException {
       if(current.getFaction() instanceof MorganLeFay){
-         TerrainController.setButtonClickForInitialDwellings(terrains,map,skipturn,current,roundController);
+         //TerrainController.setButtonClickForInitialDwellings(terrains,map,skipturn,current,roundController);
       }
       else if(current.getFaction() instanceof AliesterCrowley){
 
