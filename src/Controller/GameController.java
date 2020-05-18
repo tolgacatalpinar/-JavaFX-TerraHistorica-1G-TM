@@ -198,6 +198,7 @@ public class GameController implements Initializable, Serializable {
    {
          this.map = fm.loadGame(save, this).map;
          System.out.println(map.spaces[3][2].getType());
+        // System.out.println(map.spaces[3][2].getStructure().getBuilding());
          this.religionArr = fm.loadGame(save, this).religionArr;
          this.playerList = fm.loadGame(save, this).playerList;
          System.out.println(playerList[0].getGoldNum());
@@ -207,6 +208,151 @@ public class GameController implements Initializable, Serializable {
          this.currentPlayer = fm.loadGame(save, this).currentPlayer;
          this.roundController = fm.loadGame(save, this).roundController;
     //     this.loadInitialMap();
+          updateMap(this.terrains,this.map);
+   }
+
+   public void updateMap(Button[][] terrains, Map map){
+      System.out.println("alasa");
+      int index = 0;
+      for (int i = 0; i < ROW_NUMBER * COLUMN_NUMBER; i++) {
+         int row = i / 13;
+         int col = i % 13;
+         if (map.spaces[row][col].getType().equals("Lakes") && map.spaces[row][col] != null)
+         {
+             if(map.spaces[row][col].getStructure() != null) {
+                 if (map.spaces[row][col].getStructure().getBuilding().equals("Dwelling"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/lakesWithDwelling.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Trading Post"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/lakesWithTradingPost.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Sanctuary"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/lakesWithSanctuary.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Temple"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/lakesWithTemple.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Stronghold"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/lakesWithStronghold.png');");
+             }
+            else
+               terrains[row][col].setStyle("-fx-background-image: url('/lakes.png');");
+
+         }
+
+          else if (map.spaces[row][col].getType().equals("Mountains") && map.spaces[row][col] != null)
+          {
+              if(map.spaces[row][col].getStructure() != null) {
+                  if (map.spaces[row][col].getStructure().getBuilding().equals("Dwelling"))
+                      terrains[row][col].setStyle("-fx-background-image: url('/mountainsWithDwelling.png');");
+                  else if (map.spaces[row][col].getStructure().getBuilding().equals("Trading Post"))
+                      terrains[row][col].setStyle("-fx-background-image: url('/mountainsWithTradingPost.png');");
+                  else if (map.spaces[row][col].getStructure().getBuilding().equals("Sanctuary"))
+                      terrains[row][col].setStyle("-fx-background-image: url('/mountainsWithSanctuary.png');");
+                  else if (map.spaces[row][col].getStructure().getBuilding().equals("Temple"))
+                      terrains[row][col].setStyle("-fx-background-image: url('/mountainsWithTemple.png');");
+                  else if (map.spaces[row][col].getStructure().getBuilding().equals("Stronghold"))
+                      terrains[row][col].setStyle("-fx-background-image: url('/mountainsWithStronghold.png');");
+              }
+              else
+                  terrains[row][col].setStyle("-fx-background-image: url('/mountains.png');");
+
+          }
+
+         else if (map.spaces[row][col].getType().equals("Wasteland") && map.spaces[row][col] != null)
+         {
+             if(map.spaces[row][col].getStructure() != null) {
+                 if (map.spaces[row][col].getStructure().getBuilding().equals("Dwelling"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/wastelandWithDwelling.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Trading Post"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/wastelandWithTradingPost.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Sanctuary"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/wastelandWithSanctuary.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Temple"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/wastelandWithTemple.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Stronghold"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/wastelandWithStronghold.png');");
+             }
+             else
+                 terrains[row][col].setStyle("-fx-background-image: url('/wasteland.png');");
+
+         }
+
+         else if (map.spaces[row][col].getType().equals("Swamp") && map.spaces[row][col] != null)
+         {
+             if(map.spaces[row][col].getStructure() != null) {
+                 if (map.spaces[row][col].getStructure().getBuilding().equals("Dwelling"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/swampWithDwelling.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Trading Post"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/swampWithTradingPost.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Sanctuary"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/swampWithSanctuary.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Temple"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/swampWithTemple.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Stronghold"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/swampWithStronghold.png');");
+             }
+             else
+                 terrains[row][col].setStyle("-fx-background-image: url('/swamp.png');");
+
+         }
+
+         else if (map.spaces[row][col].getType().equals("Desert") && map.spaces[row][col] != null)
+         {
+             if(map.spaces[row][col].getStructure() != null) {
+                 if (map.spaces[row][col].getStructure().getBuilding().equals("Dwelling"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/desertWithDwelling.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Trading Post"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/desertWithTradingPost.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Sanctuary"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/desertWithSanctuary.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Temple"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/desertWithTemple.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Stronghold"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/desertWithStronghold.png');");
+             }
+             else
+                 terrains[row][col].setStyle("-fx-background-image: url('/desert.png');");
+
+         }
+
+         else if (map.spaces[row][col].getType().equals("Forest") && map.spaces[row][col] != null)
+         {
+             if(map.spaces[row][col].getStructure() != null) {
+                 if (map.spaces[row][col].getStructure().getBuilding().equals("Dwelling"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/forestWithDwelling.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Trading Post"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/forestWithTradingPost.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Sanctuary"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/forestWithSanctuary.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Temple"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/forestWithTemple.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Stronghold"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/forestWithStronghold.png');");
+             }
+             else
+                 terrains[row][col].setStyle("-fx-background-image: url('/forest.png');");
+
+         }
+
+         else if (map.spaces[row][col].getType().equals("Plains") && map.spaces[row][col] != null)
+         {
+             if(map.spaces[row][col].getStructure() != null) {
+                 if (map.spaces[row][col].getStructure().getBuilding().equals("Dwelling"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/plainsWithDwelling.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Trading Post"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/plainsWithTradingPost.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Sanctuary"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/plainsWithSanctuary.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Temple"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/plainsWithTemple.png');");
+                 else if (map.spaces[row][col].getStructure().getBuilding().equals("Stronghold"))
+                     terrains[row][col].setStyle("-fx-background-image: url('/plainsWithStronghold.png');");
+             }
+             else
+                 terrains[row][col].setStyle("-fx-background-image: url('/plains.png');");
+
+         }
+
+
+      }
+
    }
    @FXML
    public void skipTurnClicked() {
