@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.FileManager;
+import Model.Map;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +16,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.application.Platform;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -25,6 +28,9 @@ public class MainMenuController   implements Initializable, Serializable {
 
     @FXML
     Button createGameButton, loadGameButton, settingsButton, helpButton, creditsButton, exitButton, helpLink;
+
+    @FXML
+    Pane mapPane;
 
 
 
@@ -137,8 +143,43 @@ public class MainMenuController   implements Initializable, Serializable {
     }
 
     @FXML
-    public void loadGameClicked(MouseEvent event){
+    public void loadGameClicked(MouseEvent event)throws IOException{
+
+        Stage stage;
+        stage = (Stage) loadGameButton.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/GameView.fxml"));
+        Parent root = loader.load();
+
         System.out.println("Load Game Button Clicked!");
+        File save = new File("15.txt");
+        GameController game = loader.getController();
+        Button [][] terrains = new Button[9][13];
+
+        int index = 0;
+        for (int i = 0; i < 117; i++) {
+
+            int row = i / 13;
+            int col = i % 13;
+            terrains[row][col] = new Button();
+        }
+
+        Map map = game.getMap();
+        game = FileManager.loadGame(save,game);
+
+       //  game.loadOldPlayers(game.playerList);
+        game.updateMap(terrains, map);
+       //  game.loadReligion(game.playerList.length);
+       // game.loadCardsAndTiles();
+
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+
+        stage.setMaximized(true);
+        stage.setX(0);
+        stage.setY(0);
+        stage.show();
+        game.loadGameClicked();
     }
 
     @Override
