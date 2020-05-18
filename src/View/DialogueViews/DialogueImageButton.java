@@ -1,4 +1,4 @@
-package View;
+package View.DialogueViews;
 
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Button;
