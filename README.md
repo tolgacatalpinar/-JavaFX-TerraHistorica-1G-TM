@@ -43,3 +43,5 @@ Some additional features that have been thought during implementing the game to 
 [Analysis Report Iteration 2](https://docs.google.com/document/d/1yS_1PWC3E8liQXxbqfNrKEgh7Oa--h_jFwt3IG-bKFs/edit?usp=sharing)
 
 [Design Report Iteration 2](https://docs.google.com/document/d/1q9f_IcGX8TzTHBoyWyiIsKbN44584RC97QD28WBag2s/edit?usp=sharing)
+
+[Final Report](https://docs.google.com/document/d/1K8Ah3n7htXb6h4t24dg9PhvGDfLhAAgCP5gSGtNU_SE/edit?usp=sharing)
