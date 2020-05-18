@@ -56,7 +56,6 @@ public class ChooseFactionMenuController  implements Initializable, Serializable
         player3Name = player3;
         player4Name = player4;
         player5Name = player5;
-
         playerNames.add(player1);
         playerNames.add(player2);
         playerNames.add(player3);
@@ -66,11 +65,7 @@ public class ChooseFactionMenuController  implements Initializable, Serializable
 
     @FXML
     public void startGameButtonClicked( MouseEvent event) throws IOException {
-
-
         Stage stage;
-
-
         stage = (Stage) startButton.getScene().getWindow();
 
 

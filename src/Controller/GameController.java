@@ -189,7 +189,6 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void loadGameClicked() throws IOException
    {
-
          this.map = fm.loadGame(save, this).map;
          System.out.println(map.spaces[3][2].getType());
          this.religionArr = fm.loadGame(save, this).religionArr;
