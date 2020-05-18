@@ -71,6 +71,7 @@ public class RoundController implements  Serializable{
         System.out.println("Round Over");
         for(int i = 0; i < playerCount; i++){
             playerHandler.updateResources(playerList[i]);
+            System.out.println("\t"+playerList[i].getPriestNum());
             playerList[i].setRoundPassed(false);
         }
         currentPlayerId = 0;

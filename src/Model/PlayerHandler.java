@@ -1,7 +1,6 @@
 package Model;
-
-import Model.StructureSubclasses.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class PlayerHandler implements Serializable{
 
@@ -131,8 +130,6 @@ public class PlayerHandler implements Serializable{
         return -2; //Wrong string
     }
 
-
-
     public void acceptPowerFromAdjacentOpponent(int powerVal, Player player) {
         player.setVictoryPointNum(player.getVictoryPointNum() - (powerVal - 1));
         player.addPowerToBowl(powerVal);
@@ -209,7 +206,6 @@ public class PlayerHandler implements Serializable{
         }
 
     }
-
     public int upgradeShippingLevel(Player player) {
        if(player.getFaction().hasShipping) {
            if(player.getShipLevel()< player.getFaction().MAX_SHIPPING) {
@@ -234,43 +230,6 @@ public class PlayerHandler implements Serializable{
        }
 
     }
-
-//   public static void returnBonusCard(Player player) {
-//      //Collect bonus points
-//      if (player.isRoundPassed()) {
-//         if (player.isHavingDwellingBonus()) {
-//            player.addVictoryPoints( player.getDwellingNum());
-//         }
-//         if (player.isHavingTradingPostBonus()) {
-//            player.addVictoryPoints(player.getTradingPostNum() * 2);
-//         }
-//         if (player.isHavingSanctuaryBonus()) {
-//            player.addVictoryPoints(player.getStrongholdNum() * 4);
-//            player.addVictoryPoints(player.getSanctuaryNum() * 4);
-//         }
-//         player.setHavingSanctuary( false);
-//         player.setHavingDwellingBonus( false);
-//         player.setHavingTradeHouse( false);
-//      }
-//   }
-
-//   public void getBonusFromFavorTile(Player player) {
-//      if (player.isRoundPassed() && player.isPassingTradingPostBonus()) {
-//         if (player.getTradingPostNum() == 1) {
-//            player.addVictoryPoints(2);
-//         }
-//         if (player.getTradingPostNum() == 2) {
-//            player.addVictoryPoints(3);
-//         }
-//         if (player.getTradingPostNum() == 3) {
-//            player.addVictoryPoints(3);
-//         }
-//         if (player.getTradingPostNum() == 4) {
-//            player.addVictoryPoints(4);
-//         }
-//      }
-//   }
-
     public boolean exchangeResources(Player player, int exchangeId) {
 
        if(exchangeId == 0) { //5 power for 1 priest
@@ -349,6 +308,42 @@ public class PlayerHandler implements Serializable{
         if(player.isTownScoringTile()) {
             player.addVictoryPoints(5);
         }
+    }
+
+    public int getWinner(Player[] playerList, ArrayList<ArrayList<Integer>>[] religionScores, ArrayList<Integer>[] pathScores) {
+        int[] playerVictoryPoints = new int[playerList.length];
+        for(int i = 0; i < playerList.length; i++) {
+            playerVictoryPoints[i] = playerList[i].getVictoryPointNum();
+        }
+        for (int i = 0; i< 4;i++){
+            int countReligion = 8;
+            for (int j = 0; j < 3; j++){
+
+                for(int shaped = 1; shaped < religionScores[i].get(j).size();shaped++) {
+                }
+                for(int k = 0; k < religionScores[i].get(j).size(); k++){
+                    int player_id = religionScores[i].get(j).get(k);
+                    playerVictoryPoints[player_id] += (int)(countReligion/(j+1));
+                    countReligion /= 2;
+                }
+            }
+
+        }
+        int count = 18;
+        for (int j = 0; j < 3; j++){
+            for(int k = 0; k < pathScores[j].size(); k++){
+                int player_id = pathScores[j].get(k);
+                playerVictoryPoints[player_id] += (int)(count*(j+1)/pathScores[j].size());
+                count = count/3;
+            }
+        }
+        //Calculate victory points
+        int winnerId = 0;
+        for(int i = 0; i < playerList.length;i++) {
+            if(playerVictoryPoints[i] > winnerId)
+                winnerId = i;
+        }
+        return winnerId;
     }
 
 }

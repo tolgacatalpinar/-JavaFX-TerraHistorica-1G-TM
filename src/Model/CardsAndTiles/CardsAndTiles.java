@@ -2,7 +2,6 @@ package Model.CardsAndTiles;
 
 import Model.Player;
 import Model.Religion;
-
 import java.util.ArrayList;
 import java.io.Serializable;
 public class CardsAndTiles implements Serializable {
@@ -165,20 +164,6 @@ public class CardsAndTiles implements Serializable {
         return temp;
     }
 
-    private ArrayList<Integer> playerId;
-    private int requiredIslam; //water
-    private int requiredBudism; //fire
-    private int requiredChrist; //Air
-    private int requiredJudaism; //earth
-    private int priestBonus;
-    private int powerBonus;
-    private int workerBonus;
-    private int victoryBonus;
-    private int spadeBonus;
-    private int goldBonus;
-
-
-
     public void playerChoseBonusCard(BonusCard bonusCard, Player player) {
         if (bonusCard.isPlayerOcupied()) {
             System.err.println(" Please choose different Bonus Card \n" +
@@ -194,9 +179,13 @@ public class CardsAndTiles implements Serializable {
                 player.setShipLevel(player.getShipLevel() - selectedBonusCards.get(previousCardId).getShippingRange());
                 player.getSpecialActionToken().isCultTack = false;
                 player.getSpecialActionToken().isSpade = false;
+                if(selectedBonusCards.get(previousCardId).isSpacialSpade())
+                    player.setFreeSpade(player.getFreeSpade() -1);
             }
             bonusCard.setPlayerOcupied(true);
             bonusCard.setPlayerId(playerId);
+            if(bonusCard.isSpacialSpade())
+                player.setFreeSpade(player.getFreeSpade() + 1);
             player.setGoldNum(player.getGoldNum() + bonusCard.getGoldBonus());
             player.setWorkerNum(player.getWorkerNum() + bonusCard.getWorkerBonus());
             player.addPowerToBowl(bonusCard.getPowerBonus());
@@ -224,14 +213,14 @@ public class CardsAndTiles implements Serializable {
                 playerList[i].setSanctuaryStrongholdScoringTile (currentScoringTile.isStrongHoldBonus());
                 playerList[i].setSpadeScoringTile (currentScoringTile.isRequiredSpade());
                 playerList[i].setTownScoringTile (currentScoringTile.isRequiredTown());
-                if(currentScoringTile.isRequiredIslam() && currentScoringTile.getRequiredIslam() >= religionArr[0].getRoundBasedPosition()[i] ){
+                if(currentScoringTile.isRequiredIslam() && currentScoringTile.getRequiredIslam() <= religionArr[0].getRoundBasedPosition()[i] ){
                     helperReturnScoring(playerList[i],currentScoringTile);
-                }else if(currentScoringTile.isRequiredChrist() && currentScoringTile.getRequiredChrist() >= religionArr[1].getRoundBasedPosition()[i]){
+                }else if(currentScoringTile.isRequiredChrist() && currentScoringTile.getRequiredChrist() <= religionArr[1].getRoundBasedPosition()[i]){
                     helperReturnScoring(playerList[i],currentScoringTile);
-                }else if(currentScoringTile.isRequiredBudism() && currentScoringTile.getRequiredBudism() >=religionArr[3].getRoundBasedPosition()[i] ){
+                }else if(currentScoringTile.isRequiredBudism() && currentScoringTile.getRequiredBudism() <=religionArr[3].getRoundBasedPosition()[i] ){
                     helperReturnScoring(playerList[i],currentScoringTile);
                 }
-                else if(currentScoringTile.isRequiredJudaism() && currentScoringTile.getRequiredJudaism() >=religionArr[2].getRoundBasedPosition()[i] ){
+                else if(currentScoringTile.isRequiredJudaism() && currentScoringTile.getRequiredJudaism() <=religionArr[2].getRoundBasedPosition()[i] ){
                     helperReturnScoring(playerList[i],currentScoringTile);
 
                 }
@@ -285,9 +274,6 @@ public class CardsAndTiles implements Serializable {
 
         }
     }
-
-
-
 
    public ArrayList<TownTile> getTownTiles() {
       return townTiles;

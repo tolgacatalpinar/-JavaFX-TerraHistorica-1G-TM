@@ -1,12 +1,6 @@
 package Model;
-
-import Model.StructureSubclasses.Stronghold;
-
-import java.security.PublicKey;
 import java.io.Serializable;
-
 public class Player implements Serializable {
-
    String nickName;
    Faction faction;
    SpecialActionToken specialActionToken;
@@ -22,8 +16,6 @@ public class Player implements Serializable {
    private int workerIncome;
    private int priestIncome;
    private int startingDwellingNum;
-
-
    private int priestOnBank = 7; // Not exactly know what it is
    private int key;
    private int bridgeNum;
@@ -39,24 +31,19 @@ public class Player implements Serializable {
    private int goldIncome;
    private int cultBonusIncome;
    private int numOfFavorTile;
-
    private int terraformWorkerCost;
    private boolean roundPassed;
-
    //Favor Tile bonus variables
    private boolean isTradingPostFavorTile; //When upgrading a Dwelling to a Trading house, immediately get 3 additional Victory points.
    private boolean isDwellingFavorTile; //From now on, when passing (see Action #8, page 14), get 2/3/3/4 Victory points for 1/2/3/4 of your Trading houses on the Game board.
    private boolean isPassingFavorTile; //When building a Dwelling, immediately get 2 additional Victory points.
-
    //Scoring Tile Bonus Variables
    private boolean isDwellingScoringTile;
    private boolean isTradingPostScoringTile;
    private boolean isSanctuaryStrongholdScoringTile; //Fena isim oldu ha
    private boolean isSpadeScoringTile;
    private boolean isTownScoringTile;
-
    private int townPowerValue;
-
    public Player(Faction faction, String nickName, int playerId) {
       this.nickName = nickName;
       this.playerId = playerId;
@@ -96,11 +83,6 @@ public class Player implements Serializable {
       setSanctuaryStrongholdScoringTile(false);
       setSpadeScoringTile(false);
    }
-
-   public Faction getFaction() {
-      return faction;
-   }
-
    public boolean addPowerToBowl(int powerGain) {
       for (int i = 0; i < powerGain; i++) {
          if (bowlOnePower > 0) {
@@ -228,12 +210,6 @@ public class Player implements Serializable {
       return false;
    }
 
-
-
-   public int getNumOfFavorTile() {
-      return numOfFavorTile;
-   }
-
    public void setNumOfFavorTile(int numOfFavorTile) {
       this.numOfFavorTile = numOfFavorTile;
    }
@@ -352,21 +328,11 @@ public class Player implements Serializable {
    public void setSpadeLevel(int spadeLevel) {
       this.spadeLevel = spadeLevel;
    }
-
    public int getShipLevel() {
       return shipLevel;
    }
 
    public int getBuildingNumber(){return (this.dwellingNum + this.templeNum + this.strongholdNum + this.tradingPostNum + this.templeNum + this.sanctuaryNum);}
-
-
-   public int getReligionTrackInventory() {
-      return religionTrackInventory;
-   }
-
-   public void setReligionTrackInventory(int religionTrackInventory) {
-      this.religionTrackInventory = religionTrackInventory;
-   }
 
    public String getNickName() {
       return nickName;
@@ -388,22 +354,8 @@ public class Player implements Serializable {
       return specialActionToken;
    }
 
-   public void setSpecialActionToken(SpecialActionToken specialActionToken) {
-      this.specialActionToken = specialActionToken;
-   }
-
-
    public int getPlayerId() {
       return playerId;
-   }
-
-
-   public int getCultBonusIncome() {
-      return cultBonusIncome;
-   }
-
-   public void setCultBonusIncome(int cultBonusIncome) {
-      this.cultBonusIncome = cultBonusIncome;
    }
 
    public int getInitialIslam() {
@@ -437,7 +389,6 @@ public class Player implements Serializable {
    public void setRoundPassed(boolean b) {
       roundPassed = b;
    }
-
 
    public void setStartingDwellingNum(int startingDwellingNum) {
       this.startingDwellingNum = startingDwellingNum;
@@ -498,7 +449,6 @@ public class Player implements Serializable {
       }
       this.freeSpade = freeSpade;
    }
-
    public boolean isTradingPostFavorTile() {
       return isTradingPostFavorTile;
    }
@@ -538,19 +488,15 @@ public class Player implements Serializable {
    public void setTradingPostScoringTile(boolean tradingPostScoringTile) {
       isTradingPostScoringTile = tradingPostScoringTile;
    }
-
    public boolean isSanctuaryStrongholdScoringTile() {
       return isSanctuaryStrongholdScoringTile;
    }
-
    public void setSanctuaryStrongholdScoringTile(boolean sanctuaryStrongholdScoringTile) {
       isSanctuaryStrongholdScoringTile = sanctuaryStrongholdScoringTile;
    }
-
-
-
-
-
+   public Faction getFaction() {
+      return faction;
+   }
    public void setSpadeScoringTile(boolean spadeScoringTile) {
       isSpadeScoringTile = spadeScoringTile;
    }
@@ -563,7 +509,6 @@ public class Player implements Serializable {
 
       isTownScoringTile = townScoringTile;
    }
-
    public void setPriestOnBank(int priestOnBank) {
       this.priestOnBank = priestOnBank;
    }

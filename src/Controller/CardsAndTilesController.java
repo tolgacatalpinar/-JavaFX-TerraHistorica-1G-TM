@@ -23,12 +23,6 @@ import java.util.ArrayList;
 public class CardsAndTilesController {
     private  int selectionBonus = -1;
     private  int selectionFavorTile = -1;
-    public  int getSelectionFavorTile() {
-        return selectionFavorTile;
-    }
-
-    public  void setSelectionFavorTile(int selectionFavorTile) {this.selectionFavorTile = selectionFavorTile;
-    }
     private int selectionTown = -1;
     public void showBonusCardsTable(CardsAndTiles cardsAndTiles,Player current,boolean check)
     {
@@ -38,10 +32,8 @@ public class CardsAndTilesController {
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
         gridPane.setVgap(10);
-
         BorderPane border_bottom = new BorderPane();
         border.setBottom(border_bottom);
-
         final Stage dialog = new Stage();
         border.setCenter(gridPane);
         dialog.initModality(Modality.APPLICATION_MODAL);
@@ -51,7 +43,6 @@ public class CardsAndTilesController {
                 new BackgroundSize(1.0, 1.0, true, true, false, false))));
         dialog.setScene(dialogScene);
         dialog.setTitle("Bonus Cards ");
-
         for (int i = 0; i < bonusCards.size(); i++) {
             GridPane tempPane = new GridPane();
             tempPane.getChildren().add(new BonusCardView(bonusCards.get(i)));
@@ -112,17 +103,7 @@ public class CardsAndTilesController {
                 }
             });
         }
-
-
         dialog.show();
-
-
-    }
-    public  int getSelectionBonus() {
-        return selectionBonus;
-    }
-    public  void setSelectionBonus(int i) {
-        selectionBonus = i;
     }
     public  int showFavorTilesTable(CardsAndTiles cardsAndTiles, Player current, Religion[] religions,boolean check)
     {
@@ -242,15 +223,11 @@ public class CardsAndTilesController {
                 }
             });
         }
-
         dialog.showAndWait();
         return getSelectionFavorTile();
-
     }
-
     public void showScoringTilesTable(CardsAndTiles cardsAndTiles)
     {
-
         ArrayList<ScoringTile> scoringTiles = cardsAndTiles.getSelectedScoringTiles();
         BorderPane border = new BorderPane();
         GridPane gridPane = new GridPane();
@@ -272,30 +249,16 @@ public class CardsAndTilesController {
             gridPane.add(tempPane, i % 2, i / 2);
         }
         dialog.show();
-
-
     }
-
-    public int getSelectionTown() {
-        return selectionTown;
-    }
-
-    public void setSelectionTown(int selectionTown) {
-        this.selectionTown = selectionTown;
-    }
-
     public void showTownTilesTable(CardsAndTiles cardsAndTiles, Player current, Religion[] religions, boolean check) {
-
         setSelectionTown(-1);
         ArrayList<TownTile> townTiles = cardsAndTiles.getTownTiles();
         BorderPane border = new BorderPane();
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
         gridPane.setVgap(10);
-
         BorderPane border_bottom = new BorderPane();
         border.setBottom(border_bottom);
-
         final Stage dialog = new Stage();
         border.setCenter(gridPane);
         dialog.initModality(Modality.APPLICATION_MODAL);
@@ -303,7 +266,6 @@ public class CardsAndTilesController {
         dialog.setResizable(false);
         dialog.setScene(dialogScene);
         dialog.setTitle("Town Tiles");
-
         for (int i = 0; i < townTiles.size(); i++) {
             GridPane tempPane = new GridPane();
             tempPane.getChildren().add(new TownTileView(townTiles.get(i)));
@@ -387,11 +349,6 @@ public class CardsAndTilesController {
                     }
                 });
             }
-            else{
-
-            }
-
-
             gridPane.add(tempPane, i % 4, i / 4);
             dialog.setScene(dialogScene);
             dialog.setTitle("Town Tiles");
@@ -401,4 +358,20 @@ public class CardsAndTilesController {
             dialog.show();
         }
     }
+    public int getSelectionTown() {
+        return selectionTown;
+    }
+    public void setSelectionTown(int selectionTown) {
+        this.selectionTown = selectionTown;
+    }
+    public  int getSelectionBonus() {
+        return selectionBonus;
+    }
+    public  void setSelectionBonus(int i) {
+        selectionBonus = i;
+    }
+    public  int getSelectionFavorTile() {
+        return selectionFavorTile;
+    }
+    public  void setSelectionFavorTile(int selectionFavorTile) {this.selectionFavorTile = selectionFavorTile;}
 }

@@ -99,10 +99,6 @@ public class BonusCard implements Serializable{
         return playerOcupied;
     }
 
-    public void setNotTakenBonus(int notTakenBonus) {
-        this.notTakenBonus = notTakenBonus;
-    }
-
     public void setPlayerId(int playerId) {
         this.playerId = playerId;
     }

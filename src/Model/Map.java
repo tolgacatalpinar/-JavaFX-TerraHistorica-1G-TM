@@ -1,7 +1,6 @@
 package Model;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
 
 public class Map implements Serializable {
@@ -9,7 +8,6 @@ public class Map implements Serializable {
    public ArrayList<Space> visited = new ArrayList<Space>(); //
    final int ROW_NUMBER = 9;
    final int COLUMN_NUMBER = 13;
-   public CoordinateTuple bridgeCoordinates;
 
    public Map() {
       spaces = new Space[9][13];
@@ -33,20 +31,13 @@ public class Map implements Serializable {
             space = new Space("River");
          }
          spaces[i / 13][i % 13] = space;
-
-
       }
-
-
    }
 
    public Map(Space[][] spaces) {
       this.spaces = spaces;
    }
 
-   public void setSpaces(Space[][] spaces) {
-      this.spaces = spaces;
-   }
 
    public int getRow(Space space1) {
       int row = -1;
@@ -86,10 +77,8 @@ public class Map implements Serializable {
       }
    }
 
-
    public boolean isDirectAdjacent(Space space1, Space space2) {
       // We did not control if one of the spaces is river, because even one of them is river this info can be useful.
-
       int row1 = getRow(space1);
       int row2 = getRow(space2);
       int col1 = getColumn(space1);
@@ -127,21 +116,7 @@ public class Map implements Serializable {
          }
       }
 
-
       return adjacents;
-   }
-
-//   public boolean isUndirectAdjacent(Space space1, Space space2, int shippingLevel) {
-//      boolean result;
-//      result = isReachable(space1, space2, shippingLevel, 0, false, null);
-//      visited.clear();
-//      return result;
-//   }
-
-   public boolean isReachable(Space space1, Space space2, int shippingLevel) {
-
-
-      return false;
    }
 
    public Space[] getAdjacentRivers(Space space1) {
@@ -387,44 +362,7 @@ public class Map implements Serializable {
       return  calculated;
    }
 
-   public void transformTerrain(Space original, String newType) {
-      original.setType(newType);
-   }
 
-   public boolean upgradeStructure(Space space1, String playerColor, String structure) {
-      if (canBuild(space1, playerColor)) {
-         if (space1.getStructure().getBuilding().equals("Dwelling") && structure.equals("TradingPost")) {
-            space1.setStructure("TradingPost");
-            return true;
-         }
-         if (space1.getStructure().getBuilding().equals("TradingPost") && structure.equals("Temple")) {
-            space1.setStructure("Temple");
-            return true;
-         }
-         if (space1.getStructure().getBuilding().equals("Temple") && structure.equals(("Sanctuary"))) {
-            space1.setStructure("Sanctuary");
-            return true;
-         }
-         if (space1.getStructure().getBuilding().equals("TradingPost") && structure.equals(("Stronghold"))) {
-            space1.setStructure("Stronghold");
-            return true;
-         }
-      }
-
-      return false;
-   }
-
-
-   //   public ArrayList<Space> adjacentPlayer(Space space1, String playerColor) {
-//      Space[] adjacents = adjacencyList(space1);
-//      ArrayList<Space> list = new ArrayList<>();
-//      for (Space adjacent : adjacents) {
-//         if (!(adjacent.getColor().equals(playerColor)) && adjacent.isOccupied()) {
-//            list.add(adjacent);
-//         }
-//      }
-//      return list;
-//   }
    public ArrayList<Player> adjacentPlayers(Space space1, String playerColor) {
       Space[] adjacents = getAdjacentSpaces(space1);
       ArrayList<Player> list = new ArrayList<>();
@@ -502,25 +440,6 @@ public class Map implements Serializable {
    }
    private void addEnabledTerrainsOnlyTwoLevelShipping(Space space, ArrayList<Space> reachableTerrains) {
       Space[] riversAroundSpace = getAdjacentRivers(space);
-//      Space[] riversViaShipping = new Space[6];
-//
-//      for (Space riverAroundSpace : riversAroundSpace) {
-//         Space[] adjacentRivers = getAdjacentRivers(riverAroundSpace);
-//         for (int i = 0; i < adjacentRivers.length; i++) {
-//            boolean doesExist = false;
-//            for (int j = 0; j < riversAroundSpace.length; j++) {
-//               if (adjacentRivers[i] != null && riversAroundSpace[j] != null && riversAroundSpace[j].equals(adjacentRivers[i]))
-//                  doesExist = true;
-//            }
-//            if (!doesExist) {
-//               int index = 0;
-//               while (riversViaShipping[index] != null)
-//                  index++;
-//               riversViaShipping[index] = adjacentRivers[i];
-//            }
-//         }
-//      }
-
       Space[] riversViaShipping = getOneLevelDistantRivers(riversAroundSpace);
       for (Space riverViaShipping : riversViaShipping) {
          Space[] accessableTerrains = getAdjacentNonRivers(riverViaShipping);
@@ -541,8 +460,6 @@ public class Map implements Serializable {
          }
       }
    }
-
-
 
    public void getShippingEnabledTerrains(int shipping, Space space, ArrayList<Space> reachableTerrains) {
       switch (shipping)

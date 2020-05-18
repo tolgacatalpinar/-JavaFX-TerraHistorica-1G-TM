@@ -40,9 +40,6 @@ public class TownTile implements Serializable {
         this.occupied = false;
     }
 
-    public int getPlayerId() {
-        return playerId;
-    }
 
     public int getPowerBonus() {
         return powerBonus;
@@ -60,16 +57,8 @@ public class TownTile implements Serializable {
         return christianityPoint;
     }
 
-    public int getHinduismPoint() {
-        return hinduismPoint;
-    }
-
     public int getIslamPoint() {
         return islamPoint;
-    }
-
-    public int getJewishPoint() {
-        return jewishPoint;
     }
 
     public int getWorkerBonus() {

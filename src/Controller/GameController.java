@@ -5,6 +5,7 @@ import Model.CardsAndTiles.CardsAndTiles;
 import View.*;
 import View.ActionsViews.ExchangeResourcesView;
 import View.ActionsViews.PowerActionView;
+import View.DialogueViews.DialogueView;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,6 +14,9 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
@@ -335,7 +339,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void skipTurnClicked() {
-      disableButtonClicks();
+      TerrainController.disableButtonClicks(terrains);
       TerrainController.enableTerrains(terrains,map);
       enableActions();
       if (roundController.currentRound == 0) {
@@ -656,28 +660,6 @@ public class GameController implements Initializable, Serializable {
    }
 
 
-   /**
-    * TODO
-    * TAŞINACAK
-    */
-   public void disableButtonClicks() {
-      for (int i = 0; i < ROW_NUMBER; i++) {
-         for (int j = 0; j < COLUMN_NUMBER; j++) {
-            if (terrains[i][j] != null)
-               terrains[i][j].setOnMouseClicked(null);
-         }
-      }
-   }
-
-   /**
-    * TODO
-    * TAŞINACAK
-    */
-
-   /**
-    * TODO
-    * TAŞINACAK
-    */
    public void disableActions() {
       terraform.setDisable(true);
       upgradeShipping.setDisable(true);
@@ -689,10 +671,6 @@ public class GameController implements Initializable, Serializable {
       passRound.setDisable(true);
    }
 
-   /**
-    * TODO
-    * TAŞINACAK
-    */
    public void enableActions() {
       terraform.setDisable(false);
       upgradeShipping.setDisable(false);
@@ -761,9 +739,6 @@ public class GameController implements Initializable, Serializable {
 
          @Override
          public void handle(MouseEvent event) {
-            playerList[roundController.currentPlayerId].setBowlThreePower(12);
-            playerList[roundController.currentPlayerId].setWorkerNum(1000);
-            playerList[roundController.currentPlayerId].setGoldNum(1000);
             int chosen = powerActionView.getSelection();
             System.out.println("Selection: " + chosen);
             powerActionView.setSelection(chosen);
@@ -876,12 +851,31 @@ public class GameController implements Initializable, Serializable {
       dialog.setScene(dialogScene);
       dialog.setTitle("Score Table");
       dialog.setResizable(false);
-      if(roundController.isOver())
-      {
-         System.out.println("girdi");
-         dialog.setOnCloseRequest(e-> Platform.exit());
+
+      if(roundController.isOver()) {
+
+          DialogueView view = new DialogueView();
+          BorderPane winnerPane = new BorderPane();
+          int winnerId = playerHandler.getWinner(playerList, religionScores, pathScores);
+          Image image = emptyPane.getImage(playerList[winnerId]);
+          Stage winnerStage = view.getStage("WINNER!",winnerPane , image);
+          System.out.println("Winner player is: " + playerList[winnerId].getNickName());
+          winnerStage.setAlwaysOnTop(true);
+          winnerStage.setHeight(800);
+          winnerStage.setWidth(550);
+          winnerStage.show();
+          winnerStage.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
+              if (KeyCode.ESCAPE == event.getCode()) {
+                  if(winnerStage.isShowing())
+                      winnerStage.close();
+              }
+          });
+          dialog.showAndWait();
+          dialog.setOnCloseRequest(e-> Platform.exit());
+
       }
-      dialog.showAndWait();
+       dialog.showAndWait();
+
    }
 
 

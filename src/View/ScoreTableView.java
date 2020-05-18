@@ -2,7 +2,6 @@ package View;
 
 import Model.FactionSubclasses.*;
 import Model.Player;
-import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -44,6 +43,8 @@ import java.util.ArrayList;
             Label emptyLabel1 = new Label("\t");
             allTable.getChildren().add(emptyLabel1);
             allTable.getChildren().add(ranking1);
+
+
             for (int i = 0; i< 4;i++){
                 VBox tempBox = new VBox();
                 tempBox.setPrefHeight(500);
@@ -61,6 +62,7 @@ import java.util.ArrayList;
                 religion_image.setFitWidth(this.getWidth()/8);
                 religion_image.setFitHeight(this.getHeight()/5);
                 tempBox.getChildren().add(religion_image);
+                int countReligion = 8;
 
                 for (int j = 0; j < 3; j++){
                     HBox tempHBox = new HBox();
@@ -79,6 +81,7 @@ import java.util.ArrayList;
                     for(int k = 0; k < religionScores[i].get(j).size(); k++){
                         int player_id = religionScores[i].get(j).get(k);
                         ImageView player_images = new ImageView(getImage(playerList[player_id]));
+                        countReligion /= 2;
                         if(religionScores[i].get(j).size() == 1){
                             Label label = new Label("\t");
                             tempHBox.getChildren().add(label);
@@ -114,6 +117,7 @@ import java.util.ArrayList;
             con_image.setFitWidth(this.getWidth()/8);
             con_image.setFitHeight(this.getHeight()/5);
             connection.getChildren().add(con_image);
+            int count = 18;
             for (int j = 0; j < 3; j++){
 
                 HBox tempHBox = new HBox();
@@ -136,7 +140,7 @@ import java.util.ArrayList;
                 for(int k = 0; k < pathScores[j].size(); k++){
                     int player_id = pathScores[j].get(k);
                     ImageView player_images = new ImageView(getImage(playerList[player_id]));
-
+                    count = count/3;
                     if(pathScores[j].size() == 1){
                         Label label = new Label("\t");
                         tempHBox.getChildren().add(label);
@@ -154,10 +158,7 @@ import java.util.ArrayList;
             allTable.getChildren().add(connection);
             ranking2.setStyle("-fx-background-color: rgba(29,80,107,0.36);");
             this.setCenter(allTable);
-
-
         }
-
 
         public Image getImage(Player player){
             Image image = null;
@@ -216,5 +217,5 @@ import java.util.ArrayList;
 
 
 
-        
+
     }

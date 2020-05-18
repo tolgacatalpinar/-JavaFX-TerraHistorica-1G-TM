@@ -1,59 +1,47 @@
 package View.CardsAndTilesViews;
 
 import Model.CardsAndTiles.ScoringTile;
-import Model.CardsAndTiles.TownTile;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class ScoringTileView extends VBox {
-
-
-
     ScoringTile scoringTile;
     CardView card;
-
     public ScoringTileView( ScoringTile scoringTile,int index)
     {
         this.scoringTile = scoringTile;
         card = new CardView();
             add(new Label(""+(index + 1) + "\n"));
         if(this.scoringTile.isDwellingBonus() )
-            add( new Label("Dwel - Vict: " + this.scoringTile.getVictoryBonus()));
+            add( new Label("Gain "+  + this.scoringTile.getVictoryBonus()+ " Victory Points per Dwelling"));
         if(this.scoringTile.isTradingHouseBonus() )
-            add( new Label("Trade- Vict: " + this.scoringTile.getVictoryBonus()));
+            add( new Label("Gain "+  + this.scoringTile.getVictoryBonus()+ " Victory Points per Trading Post"));
         if(this.scoringTile.isStrongHoldBonus() )
-            add( new Label("Strong-Sanct - Vict: " + this.scoringTile.getVictoryBonus()));
+            add( new Label("Gain "+  + this.scoringTile.getVictoryBonus()+ " Victory Points per Stronghold or Sanctuary"));
         if(this.scoringTile.isRequiredTown() )
-            add( new Label("Town B: " + this.scoringTile.getVictoryBonus()));
+            add( new Label("Gain "+  + this.scoringTile.getVictoryBonus()+ " Victory Points per founded town"));
         if(this.scoringTile.isRequiredSpade() )
-            add( new Label("Spade B: " + this.scoringTile.getVictoryBonus()));
-
+            add( new Label("Gain "+  + this.scoringTile.getVictoryBonus()+ " Victory Points per upgraded spade"));
         if(this.scoringTile.isRequiredIslam())
-            add( new Label("Req Islam P: " + this.scoringTile.getRequiredIslam()));
+            add( new Label("Required Islam Point(s): " + this.scoringTile.getRequiredIslam()));
         if(this.scoringTile.isRequiredBudism())
-            add( new Label("Req Hinduism P: " + this.scoringTile.getRequiredBudism()));
+            add( new Label("Required Buddhism Point(s): " + this.scoringTile.getRequiredBudism()));
         if(this.scoringTile.isRequiredChrist())
-            add( new Label("Req Christ P: " + this.scoringTile.getRequiredChrist()));
+            add( new Label("Required Christianity Point(s): " + this.scoringTile.getRequiredChrist()));
         if(this.scoringTile.isRequiredJudaism())
-            add( new Label("Req Judaism P: " + this.scoringTile.getRequiredJudaism()));
-
-
+            add( new Label("Required Judaism Point(s): " + this.scoringTile.getRequiredJudaism()));
         if( this.scoringTile.getPowerBonus() > 0)
-            add( new Label("Power: " + this.scoringTile.getPowerBonus()));
+            add( new Label("Power Bonus you will gain: " + this.scoringTile.getPowerBonus()));
         if(this.scoringTile.getWorkerBonus() > 0)
-            add( new Label("Worker: " + this.scoringTile.getWorkerBonus()));
+            add( new Label("Worker Bonus you will gain: " + this.scoringTile.getWorkerBonus()));
         if(this.scoringTile.getPriestBonus() > 0)
-            add( new Label("Priest: " + this.scoringTile.getPriestBonus()));
+            add( new Label("Priest Bonus you will gain: " + this.scoringTile.getPriestBonus()));
         if(this.scoringTile.getGoldBonus() > 0)
-            add( new Label("Gold: " + this.scoringTile.getGoldBonus()));
+            add( new Label("Gold Bonus you will gain: " + this.scoringTile.getGoldBonus()));
         if(this.scoringTile.getSpadeBonus() > 0)
-            add( new Label("Spade B"));
+            add( new Label("Spade you will gain:"));
         getChildren().add(card);
     }
     public void add( Node node)

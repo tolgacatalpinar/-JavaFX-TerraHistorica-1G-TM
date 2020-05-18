@@ -1,11 +1,8 @@
 package View.CardsAndTilesViews;
 
 import Model.CardsAndTiles.FavorTile;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -18,14 +15,8 @@ public class FavorTileView extends VBox {
    {
       this.favorTile = favorTile;
       this.card = new CardView();
-      // This must be the first line to be called !! - addPlayerSlots()
       addPlayerSlots();
-      // To test...
-      //card.addPlayerToSlot(0, new ImageView( new Image("Image_Gilgamesh.jpeg")));
-
       addReligionToView();
-
-
       if( this.favorTile.getPowerBonus() > 0)
          add( new Label("Power: " + this.favorTile.getPowerBonus()));
       if(this.favorTile.getWorkerBonus() > 0)
@@ -42,13 +33,7 @@ public class FavorTileView extends VBox {
          add( new Label("Town bon."));
       if (this.favorTile.isPassingBonusForTradingHouse())
          add(new Label("Pass Trading Bonus" ));
-
-
       getChildren().add(card);
-
-
-
-
    }
    public void addReligionToView()
    {
@@ -97,9 +82,5 @@ public class FavorTileView extends VBox {
       {
          card.addPlayerSlots(3);
       }
-   }
-   public void addPlayerToSlot(ImageView playerView)
-   {
-      card.addPlayerToSlot(0, playerView);
    }
 }
