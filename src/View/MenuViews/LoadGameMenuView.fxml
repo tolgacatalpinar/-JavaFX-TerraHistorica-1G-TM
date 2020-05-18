@@ -45,7 +45,23 @@
                 </font>
             </Button>
 
+            <Button id="loadGame1" fx:id="loadGame1" layoutX="597.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#loadGameClicked" prefHeight="73.0" prefWidth="312.0" text="Load Game 1" textFill="WHITE">
+                <font>
+                    <Font name="Book Antiqua" size="29.0" />
+                </font>
+            </Button>
 
+            <Button id="loadGame2" fx:id="loadGame2" layoutX="597.0" layoutY="302.0" mnemonicParsing="false" onMouseClicked="#loadGameClicked" prefHeight="73.0" prefWidth="312.0" text="Load Game 2" textFill="WHITE">
+                <font>
+                    <Font name="Book Antiqua" size="29.0" />
+                </font>
+            </Button>
+
+            <Button id="loadGame3" fx:id="loadGame3" layoutX="603.0" layoutY="402.0" mnemonicParsing="false" onMouseClicked="#loadGameClicked" prefHeight="73.0" prefWidth="312.0" text="Load Game 3" textFill="WHITE">
+                <font>
+                    <Font name="Book Antiqua" size="29.0" />
+                </font>
+            </Button>
 
 
         </children></Pane>

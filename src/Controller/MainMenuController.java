@@ -136,6 +136,11 @@ public class MainMenuController   implements Initializable, Serializable {
         System.exit(0);
     }
 
+    @FXML
+    public void loadGameClicked(MouseEvent event){
+        System.out.println("Load Game Button Clicked!");
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

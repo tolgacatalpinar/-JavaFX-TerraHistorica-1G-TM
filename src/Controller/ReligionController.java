@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.FactionSubclasses.*;
 import Model.Player;
 import Model.PlayerHandler;
 import Model.Religion;
@@ -7,6 +8,7 @@ import Model.ReligionSubclasses.Christianity;
 import Model.ReligionSubclasses.Hinduism;
 import Model.ReligionSubclasses.Islam;
 import Model.ReligionSubclasses.Jewish;
+import View.ScoreTableView;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -53,7 +55,7 @@ public class ReligionController implements Serializable{
     private int playerCount;
     private Religion[] religions;
     private PlayerHandler playerHandler = new PlayerHandler();
-    Color[] colors = new Color[5];
+    String[] colors = new String[5];
 
     /**
      * Status paramater 0 -> Just show board religion
@@ -65,23 +67,7 @@ public class ReligionController implements Serializable{
     {
 
         for (int i = 0; i< playerArr.length; i++ ) {
-            String color = playerArr[i].getFaction().TERRAIN_TILE;
-            if(color == "Mountain"){
-                colors[i] = Color.GRAY;
-            }else if(color == "Swamp"){
-                colors[i] = Color.BLACK;
-            } else if(color == "Wasteland"){
-            colors[i] = Color.RED;
-            }else if(color == "Lakes"){
-                colors[i] = Color.BLUE;
-            } else if(color == "Forest"){
-                colors[i] = Color.GREEN;
-            }else if(color == "Desert"){
-                colors[i] = Color.YELLOW;
-            } else if(color == "Plains"){
-                colors[i] = Color.BROWN;
-            }else
-                colors[i] = Color.CYAN;
+            colors[i] = getImage(playerArr[i]);
         }
         this.religions = religions;
         playerCount = playerArr.length;
@@ -368,12 +354,26 @@ public class ReligionController implements Serializable{
                     text.setFont(new Font("Stencil", 20));
                     text.setTextFill(Color.LIGHTGREY);
                     if(j == 3 || j == 6 || j== 9 || j==11){
-                        ImageView powerImage = new ImageView("islam_symbol.png");
+                        ImageView powerImage = new ImageView("power.png");
                         powerImage.setFitHeight(100);
                         powerImage.setFitWidth(10);
                         gridPane.add(powerImage,j,i);
                     }
                     gridPane.add(text, j,i);
+                }
+                else if (j == 0){
+                    for (int y = 0; y < 4; y++){
+                        Label label = new Label();
+                        final Effect glow = new Glow(100.0);
+                        label.setEffect(glow);
+                        label.setFont(new Font("Stencil", 20));
+                        label.setTextFill(Color.LIGHTGREY);
+                        if (y == 0)
+                            label.setText("    3");
+                        else
+                            label.setText("    2");
+                        ((GridPane)(gridPane.getChildren().get(27*i))).add(label,y%2,y/2);
+                    }
                 }
             }
         }
@@ -383,14 +383,21 @@ public class ReligionController implements Serializable{
                int position = religions[i].getPlayerPositions()[j];
                GridPane newPane = (GridPane)getNodeByRowColumnIndex(i,position+1,gridPane);
                Pane playerPane = (Pane) getNodeByRowColumnIndex(j/2,j%2,newPane);
-               playerPane.setBackground(new Background(new BackgroundFill(colors[j], CornerRadii.EMPTY, Insets.EMPTY)));
+               ImageView player_image = new ImageView(colors[j]);
+               player_image.setFitWidth(50);
+               player_image.setFitHeight(72.5);
+               playerPane.getChildren().add(player_image);
                System.out.println("Positions: " + (position+1) + " and " + i);
            }
        }
        for(int k = 0; k < 4; k++){
            for (int i = 0; i < 4; i++) {
                Pane orderPane = new Pane();
-               orderPane.setBackground(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
+               ImageView order_image = new ImageView("priest.png");
+               order_image.setFitWidth(50);
+               order_image.setFitHeight(65);
+               orderPane.getChildren().add(order_image);
+
                if (religions[k].isOccupied(i)) {
                    GridPane orderGridPane = (GridPane) gridPane.getChildren().get(27*k);
                    BackgroundImage myBI;
@@ -398,18 +405,15 @@ public class ReligionController implements Serializable{
                         myBI= new BackgroundImage(new Image("chris_starting.png",80,140,false,true),
                                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                                BackgroundSize.DEFAULT);
-                       //then you set to your node
                    }else if(k == 0){
                         myBI= new BackgroundImage(new Image("plsolsun.png",80,140,false,true),
                                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                                BackgroundSize.DEFAULT);
-                       //then you set to your node
 
                    }else if( k == 3){
                         myBI= new BackgroundImage(new Image("hindu_starting.png",80,140,false,true),
                                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                                BackgroundSize.DEFAULT);
-                       //then you set to your node
                    }else{
                         myBI= new BackgroundImage(new Image("juda_starting.png",80,140,false,true),
                                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
@@ -484,6 +488,39 @@ public class ReligionController implements Serializable{
             realResult[i] = result;
         }
         return realResult;
+    }
+    public String getImage(Player player){
+        String image = null;
+        if (player.getFaction() instanceof AliesterCrowley) {
+           return  "file:src/Images/FactionImages/Image_AleisterCrowley.jpeg";
+        } else if (player.getFaction() instanceof AmerigoVespucci) {
+           return "file:src/Images/FactionImages/Image_AmerigoVespucci.jpeg";
+        } else if (player.getFaction() instanceof Buddha) {
+           return "file:src/Images/FactionImages/Image_Buddha.jpeg";
+        } else if (player.getFaction() instanceof DariusTheGreat) {
+           return "file:src/Images/FactionImages/Image_DariusTheGreat.jpeg";
+        } else if (player.getFaction() instanceof ErikTheRed) {
+            return "file:src/Images/FactionImages/Image_ErikTheRed.jpeg";
+        } else if (player.getFaction() instanceof Gilgamesh) {
+            return "file:src/Images/FactionImages/Image_Gilgamesh.jpeg";
+        } else if (player.getFaction() instanceof HelenOfTroy) {
+            return "file:src/Images/FactionImages/Image_HelenOfTroy.jpeg";
+        } else if (player.getFaction() instanceof HusseinTheTeaMaker) {
+            return "file:src/Images/FactionImages/Image_HusseinTheTeaMaker.jpeg";
+        } else if (player.getFaction() instanceof LeonardoDaVinci) {
+            return "file:src/Images/FactionImages/Image_LeonardoDaVinci.jpeg";
+        } else if (player.getFaction() instanceof MarieCurie) {
+            return "file:src/Images/FactionImages/Image_MarieCurie.jpeg";
+        } else if (player.getFaction() instanceof MorganLeFay) {
+           return "file:src/Images/FactionImages/Image_MorganLeFay.jpeg";
+        } else if (player.getFaction() instanceof Ramesses) {
+            return "file:src/Images/FactionImages/Image_Ramesses.jpeg";
+        } else if (player.getFaction() instanceof StPatrick) {
+           return "file:src/Images/FactionImages/Image_StPatrick.jpeg";
+        } else if (player.getFaction() instanceof VladTheImpaler) {
+           return "file:src/Images/FactionImages/Image_VladTheImpaler.jpeg";
+        }
+        return image;
     }
 
 }
