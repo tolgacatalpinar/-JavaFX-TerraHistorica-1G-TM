@@ -19,7 +19,6 @@ import java.util.ArrayList;
             this.setBackground(new Background( new BackgroundImage( new Image("score_table_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                     BackgroundSize.DEFAULT)));
 
-
             VBox connection = new VBox();
             ImageView vic_p1 = new ImageView("victory_point.png");
             ImageView vic_p2 = new ImageView("victory_point.png");
@@ -194,4 +193,28 @@ import java.util.ArrayList;
 
             return image;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     }

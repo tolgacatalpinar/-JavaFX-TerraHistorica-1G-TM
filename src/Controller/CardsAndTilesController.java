@@ -139,7 +139,7 @@ public class CardsAndTilesController {
         final Stage dialog = new Stage();
         border.setCenter(gridPane);
         dialog.initModality(Modality.APPLICATION_MODAL);
-        Scene dialogScene = new Scene(border, 1100, 600);
+        Scene dialogScene = new Scene(border, 1100, 700);
         dialog.setResizable(false);
         dialog.setScene(dialogScene);
         dialog.setTitle("Favor Tiles");
