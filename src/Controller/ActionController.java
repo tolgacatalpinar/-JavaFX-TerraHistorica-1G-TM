@@ -6,6 +6,7 @@ import Model.FactionSubclasses.*;
 import Model.Map;
 import View.ActionsViews.SpecialActionView;
 import View.DialogueViews.DialogueImageButton;
+import View.DialogueViews.DialoguePane;
 import View.DialogueViews.DialogueView;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -112,41 +113,45 @@ public class ActionController implements Serializable {
     *
     */
    public static void terraformAction(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions,CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
-      List<String> choices = new ArrayList<>();
-      choices.add("Wasteland");
-      choices.add("Forest");
-      choices.add("Lakes");
-      choices.add("Desert");
-      choices.add("Mountains");
-      choices.add("Swamp");
-      choices.add("Plains");
-      choices.remove(space.getType());
+
       PlayerHandler playerHandler = new PlayerHandler();
-
-      Label prompt = new Label("Please choose the terrain to be transformed into.");
-      Label promptChoice = new Label("Terrain type: ");
-      ChoiceBox choiceBox = new ChoiceBox();
-      choiceBox.getItems().addAll(choices);
-      choiceBox.setValue(current.getFaction().TERRAIN_TILE);
-      BorderPane pane = new BorderPane();
-      HBox choiceBlock = new HBox();
-      Button transformButton = new Button("Transform");
-
-      choiceBlock.getChildren().addAll(promptChoice, choiceBox, transformButton);
-      VBox whole = new VBox();
-      whole.getChildren().addAll(prompt, choiceBlock);
-      pane.setCenter(whole);
-      pane.setPadding(new Insets(50, 50, 0, 0));
-      final Stage terraformStage = DialogueView.getStage("Terraform Action", pane, new Image("favor_tiles_background.jpg"));
-      transformButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+      DialogueImageButton discardButton = new DialogueImageButton("dialogueDiscardDoor.png");
+      DialogueImageButton desertButton = new DialogueImageButton("desert.png");
+      DialogueImageButton forestButton = new DialogueImageButton("forest.png");
+      DialogueImageButton lakesButton = new DialogueImageButton("lakes.png");
+      DialogueImageButton mountainsButton = new DialogueImageButton("mountains.png");
+      DialogueImageButton plainsButton = new DialogueImageButton("plains.png");
+      DialogueImageButton swampButton = new DialogueImageButton("swamp.png");
+      DialogueImageButton wastelandButton = new DialogueImageButton("wasteland.png");
+      // Styling buttons
+      desertButton.setPrefWidth(80);
+      forestButton.setPrefWidth(80);
+      lakesButton.setPrefWidth(80);
+      mountainsButton.setPrefWidth(80);
+      plainsButton.setPrefWidth(80);
+      swampButton.setPrefWidth(80);
+      wastelandButton.setPrefWidth(80);
+      //
+      String prompt = "Select a terrain to do terraform";
+      Insets insets = new Insets(0, 0, 50, 100);
+      VBox pane = DialoguePane.getTerraformDialoguePane(discardButton, desertButton, forestButton, lakesButton, mountainsButton, plainsButton, swampButton, wastelandButton, prompt, insets);
+      final Stage terraformStage = DialogueView.getStage("Terraform Action", pane, new Image("dialogueBackground.png"));
+      terraformStage.show();
+      discardButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
-            String selectedChoice = (String) choiceBox.getValue();
+            terraformStage.close();
+         }
+      });
+      desertButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         @Override
+         public void handle(MouseEvent event) {
+            String terrainType = "Desert";
             boolean flag = true;
             if (playerHandler.terraform(current,space.getType())){
                disableActions(actions);
-               TerrainController.terraform(terrain, selectedChoice);
-               space.setType(selectedChoice);
+               TerrainController.terraform(terrain, terrainType);
+               space.setType(terrainType);
             }else{
                flag = false;
                Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Not enough resources!"));
@@ -155,64 +160,148 @@ public class ActionController implements Serializable {
                System.out.println("No enough resources");
             }
             terraformStage.close();
-            if (selectedChoice.equals(current.getFaction().TERRAIN_TILE) && flag) {
-               DialogueImageButton dwellingButton = new DialogueImageButton("dialogueDwelling.png");
-               DialogueImageButton emptyTerrainButton = new DialogueImageButton("dialogueEmptyTerrain.png");
-               VBox pane = DialogueView.getDwellingAfterTerraformPromptPane(current, dwellingButton, emptyTerrainButton);
-               Stage dwellingChoiceStage = DialogueView.getStage("Do you want to build dwelling?", pane, new Image("dialogueBackground.png"));
-               dwellingChoiceStage.show();
-               dwellingButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                  @Override
-                  public void handle(MouseEvent event) {
-                     ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
-                     int returnCase =  playerHandler.buildStructure(current,"Dwelling",false);
-                     if( returnCase == 1) {
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        for(int i = 0; i < adjacentPlayers.size(); i++) {
-                           alert.setTitle("Offer for " + adjacentPlayers.get(i).getNickName());
-                           alert.setHeaderText("Do you want to spend victory points to get power?");
-                           alert.setContentText("Cost will be here");
-                           Optional<ButtonType> result = alert.showAndWait();
-                           if (((Optional) result).get() == ButtonType.OK) {
-                              playerHandler.acceptPowerFromAdjacentOpponent(1, adjacentPlayers.get(i));
-                           } else {
-                              // ... user chose CANCEL or closed the dialog
-                           }
-                        }
-                        TerrainController.buildDwelling(terrain, selectedChoice);
-                        space.setPlayer(current);
-                        space.setOccupied(true);
-                        space.setStructure("Dwelling");
-                        int townScore = map.calculateTownScore(x,y, current.getFaction().TERRAIN_TILE, current.getTownPowerValue());
-                        if(townScore >= current.getTownPowerValue()){
-                           playerHandler.townFound(current);
-                           CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
-                           cardsAndTilesController.showTownTilesTable(cardsAndTiles, current,religions,true);
-                        }
-                        System.out.println("Town score is *************"+ townScore);
-                     }else if( returnCase == -1){
-                        Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Not enough resources!"));
-                        errorStage.show();
-                        DialogueView.delayErrorMessage(errorStage);
-                        System.out.println("Not enough resources");
-                     }else {
-                        Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Max number of this kind of building is reached!"));
-                        errorStage.show();
-                        DialogueView.delayErrorMessage(errorStage);
-                        System.out.println("Max reached");
-                     }
-                     dwellingChoiceStage.close();
-                  }
-
-               });
-               emptyTerrainButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                  @Override
-                  public void handle(MouseEvent event) {
-                     dwellingChoiceStage.close();
-                  }
-               });
-
+            if (terrainType.equals(current.getFaction().TERRAIN_TILE) && flag) {
+               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y);
             }
+            terraformStage.close();
+         }
+      });
+      forestButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         @Override
+         public void handle(MouseEvent event) {
+            String terrainType = "Forest";
+            boolean flag = true;
+            if (playerHandler.terraform(current,space.getType())){
+               disableActions(actions);
+               TerrainController.terraform(terrain, terrainType);
+               space.setType(terrainType);
+            }else{
+               flag = false;
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Not enough resources!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
+               System.out.println("No enough resources");
+            }
+            terraformStage.close();
+            if (terrainType.equals(current.getFaction().TERRAIN_TILE) && flag) {
+               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y);
+            }
+            terraformStage.close();
+         }
+      });
+      lakesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         @Override
+         public void handle(MouseEvent event) {
+            String terrainType = "Lakes";
+            boolean flag = true;
+            if (playerHandler.terraform(current,space.getType())){
+               disableActions(actions);
+               TerrainController.terraform(terrain, terrainType);
+               space.setType(terrainType);
+            }else{
+               flag = false;
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Not enough resources!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
+               System.out.println("No enough resources");
+            }
+            terraformStage.close();
+            if (terrainType.equals(current.getFaction().TERRAIN_TILE) && flag) {
+               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y);
+            }
+            terraformStage.close();
+         }
+      });
+      mountainsButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         @Override
+         public void handle(MouseEvent event) {
+            String terrainType = "Mountains";
+            boolean flag = true;
+            if (playerHandler.terraform(current,space.getType())){
+               disableActions(actions);
+               TerrainController.terraform(terrain, terrainType);
+               space.setType(terrainType);
+            }else{
+               flag = false;
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Not enough resources!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
+               System.out.println("No enough resources");
+            }
+            terraformStage.close();
+            if (terrainType.equals(current.getFaction().TERRAIN_TILE) && flag) {
+               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y);
+            }
+            terraformStage.close();
+         }
+      });
+      plainsButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         @Override
+         public void handle(MouseEvent event) {
+            String terrainType = "Plains";
+            boolean flag = true;
+            if (playerHandler.terraform(current,space.getType())){
+               disableActions(actions);
+               TerrainController.terraform(terrain, terrainType);
+               space.setType(terrainType);
+            }else{
+               flag = false;
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Not enough resources!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
+               System.out.println("No enough resources");
+            }
+            terraformStage.close();
+            if (terrainType.equals(current.getFaction().TERRAIN_TILE) && flag) {
+               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y);
+            }
+            terraformStage.close();
+         }
+      });
+      swampButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         @Override
+         public void handle(MouseEvent event) {
+            String terrainType = "Swamp";
+            boolean flag = true;
+            if (playerHandler.terraform(current,space.getType())){
+               disableActions(actions);
+               TerrainController.terraform(terrain, terrainType);
+               space.setType(terrainType);
+            }else{
+               flag = false;
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Not enough resources!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
+               System.out.println("No enough resources");
+            }
+            terraformStage.close();
+            if (terrainType.equals(current.getFaction().TERRAIN_TILE) && flag) {
+               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y);
+            }
+            terraformStage.close();
+         }
+      });
+      wastelandButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         @Override
+         public void handle(MouseEvent event) {
+            String terrainType = "Wasteland";
+            boolean flag = true;
+            if (playerHandler.terraform(current,space.getType())){
+               disableActions(actions);
+               TerrainController.terraform(terrain, terrainType);
+               space.setType(terrainType);
+            }else{
+               flag = false;
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Not enough resources!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
+               System.out.println("No enough resources");
+            }
+            terraformStage.close();
+            if (terrainType.equals(current.getFaction().TERRAIN_TILE) && flag) {
+               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y);
+            }
+            terraformStage.close();
          }
       });
       terraformStage.show();
@@ -249,6 +338,65 @@ public class ActionController implements Serializable {
 //        }
 //        Controller.TerrainController.enableTerrains(terrains, map);
 //        Controller.TerrainController.disableButtonClicks(terrains);
+   }
+   public static void askBuildDwelling(Player current, Button terrain, Map map, Space space, String terrainType,CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y )
+   {
+      PlayerHandler playerHandler = new PlayerHandler();
+      DialogueImageButton dwellingButton = new DialogueImageButton("dialogueDwelling.png");
+      DialogueImageButton emptyTerrainButton = new DialogueImageButton("dialogueEmptyTerrain.png");
+      VBox pane = DialogueView.getDwellingAfterTerraformPromptPane(current, dwellingButton, emptyTerrainButton);
+      Stage dwellingChoiceStage = DialogueView.getStage("Do you want to build dwelling?", pane, new Image("dialogueBackground.png"));
+      dwellingChoiceStage.show();
+      dwellingButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         @Override
+         public void handle(MouseEvent event) {
+            ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
+            int returnCase =  playerHandler.buildStructure(current,"Dwelling",false);
+            if( returnCase == 1) {
+               Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+               for(int i = 0; i < adjacentPlayers.size(); i++) {
+                  alert.setTitle("Offer for " + adjacentPlayers.get(i).getNickName());
+                  alert.setHeaderText("Do you want to spend victory points to get power?");
+                  alert.setContentText("Cost will be here");
+                  Optional<ButtonType> result = alert.showAndWait();
+                  if (((Optional) result).get() == ButtonType.OK) {
+                     playerHandler.acceptPowerFromAdjacentOpponent(1, adjacentPlayers.get(i));
+                  } else {
+                     // ... user chose CANCEL or closed the dialog
+                  }
+               }
+               TerrainController.buildDwelling(terrain, terrainType);
+               space.setPlayer(current);
+               space.setOccupied(true);
+               space.setStructure("Dwelling");
+               int townScore = map.calculateTownScore(x,y, current.getFaction().TERRAIN_TILE, current.getTownPowerValue());
+               if(townScore >= current.getTownPowerValue()){
+                  playerHandler.townFound(current);
+                  CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
+                  cardsAndTilesController.showTownTilesTable(cardsAndTiles, current,religions,true);
+               }
+               System.out.println("Town score is *************"+ townScore);
+            }else if( returnCase == -1){
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Not enough resources!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
+               System.out.println("Not enough resources");
+            }else {
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Max number of this kind of building is reached!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
+               System.out.println("Max reached");
+            }
+            dwellingChoiceStage.close();
+         }
+
+      });
+      emptyTerrainButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         @Override
+         public void handle(MouseEvent event) {
+            dwellingChoiceStage.close();
+         }
+      });
    }
 
    public  static void upgradeStructure(Player current,Button[][] terrains, Map map, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions) {

@@ -132,6 +132,7 @@ public class DialogueView implements  Serializable{
       VBox shippingDialoguePane = DialoguePane.getSpadeDialoguePane(discardButton, spadeButton, promptText, promptInsets, leftGold, rightGold, leftPriest, rightPriest, leftWorker, rightWorker);
       return shippingDialoguePane;
    }
+
    public static VBox getErrorMessage(String error)
    {
       Label errorLabel = new Label(error);
@@ -148,4 +149,5 @@ public class DialogueView implements  Serializable{
       delay.setOnFinished( event -> stage.close() );
       delay.play();
    }
+
 }

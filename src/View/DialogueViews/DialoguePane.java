@@ -1,6 +1,7 @@
 package View.DialogueViews;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -221,6 +222,26 @@ public class DialoguePane extends VBox {
       whole.getChildren().addAll(prompt, boxes);
 
       whole.setPadding(new Insets(50, 0, 0, 300));
+      return whole;
+   }
+   public static VBox getTerraformDialoguePane(Button discard, Button button1, Button button2, Button button3, Button button4, Button button5, Button button6, Button button7, String promptText, Insets promptInsets)
+   {
+      // Prompt
+      Label prompt = new Label(promptText);
+      prompt.setTextFill(Color.ORANGE);
+      prompt.getStyleClass().add("textShadow");
+      prompt.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+      prompt.setPadding(promptInsets);
+
+
+      HBox box = new HBox();
+      box.getChildren().addAll(discard, button1, button2, button3, button4, button5, button6, button7);
+      box.setSpacing(30);
+
+      VBox whole = new VBox();
+      whole.getChildren().addAll(prompt, box);
+
+      whole.setAlignment(Pos.CENTER);
       return whole;
    }
 }
