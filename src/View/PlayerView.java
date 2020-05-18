@@ -3,16 +3,12 @@ package View;
 import Model.Faction;
 import Model.FactionSubclasses.*;
 import Model.Player;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Box;
-
-import java.io.Serializable;
 
 public class PlayerView extends BorderPane  {
    class ResourceLabel extends Label
