@@ -1028,5 +1028,4 @@ public class GameController implements Initializable, Serializable {
    public void setRoundController(RoundController r1){this.roundController = r1;}
 
 
-
 }

@@ -11,7 +11,7 @@ public class SpecialActionToken implements Serializable {
         this.isSpade = false;
         this.isCultTack = false;
         this.isStrongholdAbility = false;
-        this.isFactionAbility = false;
+        this.isFactionAbility = true;
     }
 
     public boolean isSpade() {

@@ -12,9 +12,12 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -106,9 +109,6 @@ public class ActionController implements Serializable {
 
    /**
     * BUNU TAŞIYALIM
-    *
-    *
-    *
     *
     */
    public static void terraformAction(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions,CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
@@ -209,8 +209,6 @@ public class ActionController implements Serializable {
       terraformStage.show();
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
-
-
    }
 
    public  static void upgradeStructure(Player current,Button[][] terrains, Map map, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions) {
@@ -310,8 +308,6 @@ public class ActionController implements Serializable {
       });
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
-
-
    }
 
    public static void upgradeToStrongholdOrTemple(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
@@ -425,9 +421,6 @@ public class ActionController implements Serializable {
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
       stage.showAndWait();
-
-
-
    }
 
       public static void upgradeToSanctuary(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions,int x, int y) {
@@ -495,34 +488,6 @@ public class ActionController implements Serializable {
 
    }
 
-   //TODO
-   public void  upgradeShipping(int curPlayerId,Player[] playerArr){
-
-   }
-   //TODO
-   public void sendPriest(Player[] playerArr, int curPlayerId){
-
-   }
-   //TODO
-   public void usePowerAction(int curPlayerId, Player[] playerArr){
-
-   }
-   //TODO
-   public void useSpecialAction(int curPlayerId, Player[] playerArr){
-
-   }
-   //TODO
-   public void exchangeResources(int curPlayerId, Player[] playerArr){
-
-   }
-   //TODO
-   public static void upgradeSpadeLevel(int curPlayerId, Player[] playerArr){
-
-   }
-   //TODO
-   public void skipTurn(int curPlayerId, Player[] playerArr){
-
-   }
    public static void strongholdAbility(Button[][] terrains, Map map, Button[] actions, Player current) {
       if(current.getFaction() instanceof MorganLeFay){
          TerrainController.disableTerrains(terrains,map);
@@ -551,12 +516,7 @@ public class ActionController implements Serializable {
       else if(current.getFaction() instanceof AliesterCrowley){
 
       }
-      else if(current.getFaction() instanceof AmerigoVespucci){
 
-      }
-      else if(current.getFaction() instanceof Buddha){
-
-      }
       else if(current.getFaction() instanceof DariusTheGreat){
 
       }
@@ -566,22 +526,10 @@ public class ActionController implements Serializable {
       else if(current.getFaction() instanceof Gilgamesh){
 
       }
-      else if(current.getFaction() instanceof HelenOfTroy){
-
-      }
       else if(current.getFaction() instanceof HusseinTheTeaMaker){
 
       }
       else if(current.getFaction() instanceof MarieCurie){
-
-      }
-      else if(current.getFaction() instanceof Ramesses){
-
-      }
-      else if(current.getFaction() instanceof StPatrick){
-
-      }
-      else if(current.getFaction() instanceof VladTheImpaler){
 
       }
 
@@ -688,6 +636,7 @@ public class ActionController implements Serializable {
       Button apply = new Button();
       apply.setText("Apply");
       apply.setFont(Font.font(20));
+      System.out.println(choice[0]);
       apply.setOnMouseClicked(new EventHandler<Event>() {
          @Override
          public void handle(Event event) {
@@ -703,7 +652,9 @@ public class ActionController implements Serializable {
                strongholdAbility(terrains,map,actions,playerList[currentPlayerId]);
                event.consume();
             } else if (choice[0] == 4) {
+               System.out.println("geldimm");
                currentPlayer.getSpecialActionToken().isFactionAbility = false;
+               factionAbility(playerList[currentPlayerId]);
                event.consume();
             } else {
                Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -728,6 +679,114 @@ public class ActionController implements Serializable {
       wholeFavor.setBackground(new Background(new BackgroundImage(new Image("favor_tiles_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
               BackgroundSize.DEFAULT)));
       dialog.show();
+   }
+
+   private static void factionAbility(Player current) {
+
+
+      if(current.getFaction() instanceof DariusTheGreat){
+
+      }
+
+      else if(current.getFaction() instanceof MarieCurie) {
+         BorderPane border = new BorderPane();
+         BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+         border.setBackground(new Background(bg));
+         GridPane gridPane = new GridPane();
+         gridPane.setHgap(10);
+         gridPane.setVgap(10);
+         Button select = new Button("Select");
+         select.setMaxHeight(100);
+         select.setMinWidth(100);
+         BorderPane border_bottom = new BorderPane();
+         border.setBottom(border_bottom);
+         border_bottom.setCenter(select);
+
+         ImageView power_middle = new ImageView("arrow.png");
+         ImageView gold = new ImageView("gold.png");
+         ImageView victory_point = new ImageView("victory_point.png");
+         Label label1 = new Label("\n1");
+         label1.setTextFill(Color.WHITE);
+         Label label2 = new Label("\n1");
+         label2.setTextFill(Color.WHITE);
+         label1.setFont(new Font("Stencil", 40));
+         label2.setFont(new Font("Stencil", 40));
+         label1.setOpacity(0.6);
+         label2.setOpacity(0.6);
+         power_middle.setFitHeight(150);
+         power_middle.setFitWidth(150);
+         gold.setFitWidth(150);
+         gold.setFitHeight(150);
+         HBox option;
+         for(int i = 0;i < 2; i++) {
+         if (i == 0) {
+            label2.setText("\n1");
+            option = new HBox(victory_point, label1, power_middle, gold, label2);
+         } else {
+            label1.setText("\n2");
+            option = new HBox(gold, label1, power_middle, victory_point, label2);
+         }
+         GridPane tempPane = new GridPane();
+         option.setMaxWidth(tempPane.getWidth() / 3);
+         option.setMaxHeight(tempPane.getHeight() / 3);
+         tempPane.add(option, 0, 0);
+         tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+               DropShadow borderGlow = new DropShadow();
+               borderGlow.setColor(Color.ORANGE);
+               borderGlow.setOffsetX(0f);
+               borderGlow.setOffsetY(0f);
+               borderGlow.setWidth(50);
+               borderGlow.setHeight(50);
+               tempPane.setEffect(borderGlow);
+            }
+         });
+         int finalI = i;
+         tempPane.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+               if (selection != finalI)
+                  tempPane.setEffect(null);
+            }
+         });
+
+         tempPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+               selection = finalI;
+               for (int i = 0; i < 6; i++) {
+                  if (i != selection)
+                     gridPane.getChildren().get(i).setEffect(null);
+               }
+            }
+         });
+         gridPane.add(tempPane, i % 2, i / 2);
+      }
+         border.setCenter(gridPane);
+         final Stage dialog = new Stage();
+         dialog.initModality(Modality.APPLICATION_MODAL);
+         Scene dialogScene = new Scene(border, 1100, 600);
+         dialog.setScene(dialogScene);
+         dialog.setTitle("Faction Ability");
+         dialog.setResizable(false);
+
+         select.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+               int chosen = selection;
+               System.out.println("Selection: " + chosen);
+               dialog.close();
+               if (selection == 0) {
+                  System.out.println("2 coin for 1 vp");
+               }
+            }
+         });
+         dialog.show();
+
+      }
+
    }
 
    /**TODO
@@ -821,7 +880,5 @@ public class ActionController implements Serializable {
       for(int i = 0; i < actions.length; i++)
          actions[i].setDisable(true);
    }
-
-
 
 }
