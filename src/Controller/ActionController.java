@@ -518,6 +518,7 @@ public class ActionController implements Serializable {
                         TerrainController.enableTerrains(terrains, map);
                         disableActions(actions);
                         current.setDwellingNum(current.getDwellingNum()+1);
+
                      }
                   });
                }
@@ -549,7 +550,7 @@ public class ActionController implements Serializable {
    /**TODO
     * TAŞINACAK
     */
-   public static void showSpeacialActions(Player[] playerList,Religion[] religions,int currentPlayerId,Map map,Button[][] terrains,Button[] actions) {
+   public static void showSpeacialActions(Player[] playerList,Religion[] religions,int currentPlayerId,Map map, Pane mapPane, Button[][] terrains,Button[] actions) {
       VBox wholeFavor = new VBox();
       HBox firstRow = new HBox();
       HBox secondRow = new HBox();
@@ -602,6 +603,7 @@ public class ActionController implements Serializable {
                alert.setHeaderText("You cannot do this action");
                alert.setContentText("You have not special cult action");
                alert.showAndWait();
+
             }
          }
       });
@@ -633,6 +635,8 @@ public class ActionController implements Serializable {
                choice[0] = 4;
                System.out.println(choice[0]);
 
+
+
                event.consume();
             } else {
                Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -663,8 +667,8 @@ public class ActionController implements Serializable {
                event.consume();
             } else if (choice[0] == 4) {
                System.out.println("geldimm");
-               currentPlayer.getSpecialActionToken().isFactionAbility = false;
-               factionAbility(playerList[currentPlayerId]);
+               currentPlayer.getSpecialActionToken().isFactionAbility = true;
+               factionAbility(playerList[currentPlayerId], map, mapPane, terrains, actions);
                event.consume();
             } else {
                Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -673,6 +677,7 @@ public class ActionController implements Serializable {
                alert.setHeaderText("You cannot do this action!!");
                alert.showAndWait();
             }
+
             dialog.close();
          }
       });
@@ -684,6 +689,7 @@ public class ActionController implements Serializable {
       wholeFavor.setPadding(new Insets(100, 0, 0, 50));
 
       wholeFavor.setMinHeight(800);
+
       wholeFavor.setMinWidth(1200);
 
       wholeFavor.setBackground(new Background(new BackgroundImage(new Image("the_background_4.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
@@ -691,10 +697,55 @@ public class ActionController implements Serializable {
       dialog.show();
    }
 
-   private static void factionAbility(Player current) {
+   private static void factionAbility(Player current, Map map, Pane mapPane, Button[][] terrains, Button[] actions) {
 
 
       if(current.getFaction() instanceof DariusTheGreat){
+
+      }
+
+      else if(current.getFaction() instanceof  LeonardoDaVinci) {
+
+         if(current.getWorkerNum() >= 2){
+
+            boolean checkBridgability = false;
+            for(int i = 0; i < ROW_NUMBER; i++) {
+               for (int j = 0; j < COLUMN_NUMBER; j++) {
+                  if (map.spaces[i][j].getType().equals(current.getFaction().TERRAIN_TILE) && map.spaces[i][j].getBridgability() && !map.spaces[i][j].getBridgeConnection() && map.spaces[i][j].isOccupied()) {
+                     System.out.println("lala");
+                     checkBridgability = true;
+                  }
+               }
+            }
+
+            if(checkBridgability) {
+
+                  System.out.println("Girdi");
+                  TerrainController.buildBridge(current.getFaction().TERRAIN_TILE, terrains, map, mapPane, actions);
+                  System.out.println("Köprü kuruldu");
+                  current.setWorkerNum(current.getWorkerNum() - 2);
+
+            }
+         }
+
+
+//         boolean checkBridgability = false;
+//         for(int i = 0; i < ROW_NUMBER; i++) {
+//            for (int j = 0; j < COLUMN_NUMBER; j++) {
+//               if (map.spaces[i][j].getType().equals(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE) && map.spaces[i][j].getBridgability() && !map.spaces[i][j].getBridgeConnection() && map.spaces[i][j].isOccupied()) {
+//                  System.out.println("lala");
+//                  checkBridgability = true;
+//               }
+//            }
+//         }
+//         if(checkBridgability) {
+//            if (playerHandler.usePowerAction(0, currentPlayer)) {
+//               System.out.println("Girdi");
+//               disableAllTerrains();
+//               TerrainController.buildBridge(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map, mapPane, actions);
+//               System.out.println("Köprü kuruldu");
+//            }
+//         }
 
       }
 
@@ -765,7 +816,7 @@ public class ActionController implements Serializable {
             @Override
             public void handle(MouseEvent event) {
                selection = finalI;
-               for (int i = 0; i < 6; i++) {
+               for (int i = 0; i < 2; i++) {
                   if (i != selection)
                      gridPane.getChildren().get(i).setEffect(null);
                }
@@ -889,6 +940,11 @@ public class ActionController implements Serializable {
    public static void disableActions(Button[] actions){
       for(int i = 0; i < actions.length; i++)
          actions[i].setDisable(true);
+   }
+
+   public static void enableActions(Button[] actions){
+      for(int i = 0; i < actions.length; i++)
+         actions[i].setDisable(false);
    }
 
 }
