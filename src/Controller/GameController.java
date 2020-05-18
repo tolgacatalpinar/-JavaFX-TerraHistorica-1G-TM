@@ -2,6 +2,7 @@ package Controller;
 
 import Model.*;
 import Model.CardsAndTiles.CardsAndTiles;
+import Model.FactionSubclasses.*;
 import View.*;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -305,9 +306,10 @@ public class GameController implements Initializable, Serializable {
       ArrayList<ArrayList<Integer>>[] scoresReligion = religionController.calculateReligionScores(religionArr, playerList);
       //FOR LONGEST PATH
       ArrayList<Integer>[] scoresLongestPath = map.calculatePathScores(playerList);
+      System.out.println();
       showScoreTable(scoresReligion,scoresLongestPath);
-
       //Calculate victory points for the winner in last round
+
    }
 
 
@@ -956,16 +958,89 @@ public class GameController implements Initializable, Serializable {
    }
 
    public void showScoreTable(ArrayList<ArrayList<Integer>>[] religionScores,ArrayList<Integer>[] pathScores) {
-      Pane emptyPane = new Pane();
+      BorderPane emptyPane = new BorderPane();
       final Stage dialog = new Stage();
       dialog.initModality(Modality.APPLICATION_MODAL);
-      Scene dialogScene = new Scene(emptyPane, 1100, 600);
+      Scene dialogScene = new Scene(emptyPane, 1200, 800);
       dialog.setScene(dialogScene);
       dialog.setTitle("Score Table");
       dialog.setResizable(false);
       emptyPane.setBackground(new Background( new BackgroundImage( new Image("score_table_background.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
               BackgroundSize.DEFAULT)));
 
+
+      VBox connection = new VBox();
+      ImageView vic_p1 = new ImageView("victory_point.png");
+      ImageView vic_p2 = new ImageView("victory_point.png");
+
+      Label label1 = new Label("8");
+      Label label2 = new Label("4");
+      Label label3 = new Label("2");
+      label1.setFont(new Font("Stencil", emptyPane.getHeight()/10));
+      label2.setFont(new Font("Stencil", emptyPane.getHeight()/10));
+      label3.setFont(new Font("Stencil", emptyPane.getHeight()/10));
+      vic_p1.setFitWidth(emptyPane.getWidth()/10);
+      vic_p1.setFitHeight(emptyPane.getHeight()/8);
+      vic_p2.setFitWidth(emptyPane.getWidth()/10);
+      vic_p2.setFitHeight(emptyPane.getHeight()/8);
+      VBox ranking1 = new VBox(vic_p2, label1 , label2, label3 );
+      HBox allTable = new HBox();
+      allTable.getChildren().add(ranking1);
+      for (int i = 0; i< 4;i++){
+         VBox tempBox = new VBox();
+         ImageView religion_image;
+         if (i == 0){
+            religion_image = new ImageView("islam_symbol.png");
+         }else if (i == 1){
+            religion_image = new ImageView("chris_symbol.png");
+         }else if (i == 2){
+            religion_image = new ImageView("judaism_symbol.png");
+         }else{
+            religion_image = new ImageView("hinduism.png");
+         }
+         religion_image.setFitWidth(emptyPane.getWidth()/8);
+         religion_image.setFitHeight(emptyPane.getHeight()/5);
+         tempBox.getChildren().add(religion_image);
+         for (int j = 0; j < 3; j++){
+            HBox tempHBox = new HBox();
+            for(int k = 0; k < religionScores[i].get(j).size(); k++){
+               int player_id = religionScores[i].get(j).get(k);
+               ImageView player_images = new ImageView(getImage(playerList[player_id]));
+               player_images.setFitHeight(emptyPane.getHeight()/(5));
+               player_images.setFitWidth(emptyPane.getWidth()/(10));
+               tempHBox.getChildren().add(player_images);
+            }
+            tempBox.getChildren().add(tempHBox);
+         }
+         allTable.getChildren().add(tempBox);
+      }
+      Label label4 = new Label("18");
+      Label label5 = new Label("12");
+      Label label6 = new Label("6");
+      label4.setFont(new Font("Stencil", emptyPane.getHeight()/10));
+      label5.setFont(new Font("Stencil", emptyPane.getHeight()/10));
+      label6.setFont(new Font("Stencil", emptyPane.getHeight()/10));
+      VBox ranking2 = new VBox(vic_p1, label4 , label5, label6 );
+      allTable.getChildren().add(ranking2);
+      ImageView con_image = new ImageView("connection.png");
+      con_image.setFitWidth(emptyPane.getWidth()/8);
+      con_image.setFitHeight(emptyPane.getHeight()/5);
+      connection.getChildren().add(con_image);
+      for (int j = 0; j < 3; j++){
+         HBox tempHBox = new HBox();
+         for(int k = 0; k < pathScores[j].size(); k++){
+            int player_id = pathScores[j].get(k);
+            ImageView player_images = new ImageView(getImage(playerList[player_id]));
+            player_images.setFitHeight(emptyPane.getHeight()/(5));
+            player_images.setFitWidth(emptyPane.getWidth()/(10));
+            tempHBox.getChildren().add(player_images);
+         }
+         connection.getChildren().add(tempHBox);
+      }
+      allTable.getChildren().add(connection);
+      allTable.setSpacing(10);
+
+      emptyPane.setCenter(allTable);
       dialog.show();
 
       if(roundController.isOver())
@@ -974,7 +1049,39 @@ public class GameController implements Initializable, Serializable {
          dialog.setOnCloseRequest(e->Platform.exit());
       }
    }
-
+   public Image getImage(Player player){
+      Image image = null;
+      if (player.getFaction() instanceof AliesterCrowley) {
+         image = new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg");
+      } else if (player.getFaction() instanceof AmerigoVespucci) {
+         image = new Image("file:src/Images/FactionImages/Image_AmerigoVespucci.jpeg");
+      } else if (player.getFaction() instanceof Buddha) {
+         image = new Image("file:src/Images/FactionImages/Image_Buddha.jpeg");
+      } else if (player.getFaction() instanceof DariusTheGreat) {
+         image = new Image("file:src/Images/FactionImages/Image_DariusTheGreat.jpeg");
+      } else if (player.getFaction() instanceof ErikTheRed) {
+         image = new Image("file:src/Images/FactionImages/Image_ErikTheRed.jpeg");
+      } else if (player.getFaction() instanceof Gilgamesh) {
+         image = new Image("file:src/Images/FactionImages/Image_Gilgamesh.jpeg");
+      } else if (player.getFaction() instanceof HelenOfTroy) {
+         image = new Image("file:src/Images/FactionImages/Image_HelenOfTroy.jpeg");
+      } else if (player.getFaction() instanceof HusseinTheTeaMaker) {
+         image = new Image("file:src/Images/FactionImages/Image_HusseinTheTeaMaker.jpeg");
+      } else if (player.getFaction() instanceof LeonardoDaVinci) {
+         image = new Image("file:src/Images/FactionImages/Image_LeonardoDaVinci.jpeg");
+      } else if (player.getFaction() instanceof MarieCurie) {
+         image = new Image("file:src/Images/FactionImages/Image_MarieCurie.jpeg");
+      } else if (player.getFaction() instanceof MorganLeFay) {
+         image = new Image("file:src/Images/FactionImages/Image_MorganLeFay.jpeg");
+      } else if (player.getFaction() instanceof Ramesses) {
+         image = new Image("file:src/Images/FactionImages/Image_Ramesses.jpeg");
+      } else if (player.getFaction() instanceof StPatrick) {
+         image = new Image("file:src/Images/FactionImages/Image_StPatrick.jpeg");
+      } else if (player.getFaction() instanceof VladTheImpaler) {
+         image = new Image("file:src/Images/FactionImages/Image_VladTheImpaler.jpeg");
+      }
+      return image;
+   }
    public Map getMap() {
       return map;
    }
