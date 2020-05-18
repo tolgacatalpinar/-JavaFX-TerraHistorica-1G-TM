@@ -3,6 +3,8 @@ package View.CardsAndTilesViews;
 import Model.CardsAndTiles.ScoringTile;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -52,4 +54,21 @@ public class ScoringTileView extends VBox {
        }
        card.add(node);
     }
+   public void styleLabel(Label label)
+   {
+      label.setTextFill(Color.WHITE);
+   }
+   public void styleImageView(ImageView imageView)
+   {
+      imageView.setFitHeight(30);
+      imageView.setFitWidth(30);
+   }
+   public void addResourceBox(ImageView imageView, Label label)
+   {
+      HBox powerBox = new HBox();
+      styleLabel( label);
+      styleImageView(imageView);
+      powerBox.getChildren().addAll(imageView, label);
+      add(powerBox);
+   }
 }
