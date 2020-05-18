@@ -159,17 +159,18 @@ public class TerrainController implements Serializable {
          button.setStyle("-fx-background-image: url('/swampWithSanctuary.png');");
 
    }
-
    public static void showTown(Button[][] terrains, Map map)
+
    {
       for (int i = 0; i < 9; i++) {
          for (int j = 0; j < 13; j++) {
-            if(map.spaces[i][j].isMarked()) {
-               terrains[i][j].getStyleClass().add("-fx-effect: dropshadow( gaussian , rgba(255,255,255,255) , 30,0.5,0,1 );");
-            }
+            if( terrains[i][j] != null && map.spaces[i][j].isMarked())
+               terrains[i][j].getStyleClass().add("townShadow");
          }
       }
+
    }
+
 
    public static void enableTerrains(Button[][] terrains, Map map)
    {
