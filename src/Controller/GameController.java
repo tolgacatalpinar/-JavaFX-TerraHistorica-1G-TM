@@ -118,7 +118,6 @@ public class GameController implements Initializable, Serializable {
 
 
                   if (playerList != null && !isPlayerViewListCreated) {
-                     System.out.println("if is in");
                      HBox factionsView = new HBox(5);
 
                      playerViewList = new ArrayList<>();
@@ -380,7 +379,6 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void upgradeStructureClicked() {
-
       ActionController.upgradeStructure(playerList[roundController.getCurrentPlayerId()] , terrains, map, actions, cardsAndTiles, religionArr);
 
    }

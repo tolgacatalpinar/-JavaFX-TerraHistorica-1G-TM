@@ -6,7 +6,10 @@
 .textShadow{
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 10, 1, 1);
 }
-
+.errorText{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 10, 1, 1);
+    -fx-font-size: 50;
+}
 .wasteland{
     -fx-background-color: rgba(136, 0, 18, 0.56);
 }

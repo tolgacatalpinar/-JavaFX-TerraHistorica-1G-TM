@@ -48,12 +48,15 @@ public class ActionController implements Serializable {
                   adj = map.getAdjacentNonRivers(map.spaces[i][j]);
                   ArrayList<Space> reachableTerrains = new ArrayList<>();
                   map.getShippingEnabledTerrains(current.getShipLevel(), map.spaces[i][j], reachableTerrains);
-                  for (int k = 0; k < adj.length; k++) {
-                     if (!reachableTerrains.contains(adj[k])) {
+                  for( int k = 0; k < adj.length; k ++)
+                  {
+                     if( !reachableTerrains.contains(adj[k]))
+                     {
                         reachableTerrains.add(adj[k]);
                      }
                   }
-                  for (int k = 0; k < reachableTerrains.size(); k++) {
+                  for( int k = 0; k < reachableTerrains.size(); k ++)
+                  {
                      if (reachableTerrains.get(k) != null && terrains[map.getRow(reachableTerrains.get(k))][map.getColumn(reachableTerrains.get(k))] != null && !map.spaces[map.getRow(reachableTerrains.get(k))][map.getColumn(reachableTerrains.get(k))].getType().equals("River") && !map.spaces[map.getRow(reachableTerrains.get(k))][map.getColumn(reachableTerrains.get(k))].isOccupied() && terrains[map.getRow(reachableTerrains.get(k))][map.getColumn(reachableTerrains.get(k))].isDisable()) {
                         terrains[map.getRow(reachableTerrains.get(k))][map.getColumn(reachableTerrains.get(k))].setDisable(false);
                         ArrayList<Space> finalAdj = reachableTerrains;
@@ -61,14 +64,27 @@ public class ActionController implements Serializable {
                         terrains[map.getRow(reachableTerrains.get(k))][map.getColumn(reachableTerrains.get(k))].setOnMouseClicked(new EventHandler<MouseEvent>() {
                            @Override
                            public void handle(MouseEvent event) {
-                              terraformAction(current, terrains, terrains[map.getRow(finalAdj.get(finalK))][map.getColumn(finalAdj.get(finalK))], map, map.spaces[map.getRow(finalAdj.get(finalK))][map.getColumn(finalAdj.get(finalK))], actions, cardsAndTiles, religions, map.getRow(finalAdj.get(finalK)), map.getColumn(finalAdj.get(finalK)));
+                              terraformAction(current, terrains, terrains[map.getRow(finalAdj.get(finalK))][map.getColumn(finalAdj.get(finalK))], map, map.spaces[map.getRow(finalAdj.get(finalK))][map.getColumn(finalAdj.get(finalK))], actions,cardsAndTiles,religions,map.getRow(finalAdj.get(finalK)),map.getColumn(finalAdj.get(finalK)));
                            }
                         });
                      }
 
 
                   }
-
+                  ///////////////////////////////////////
+//                  for (int k = 0; k < adj.length; k++) {
+//                     if (adj[k] != null && terrains[map.getRow(adj[k])][map.getColumn(adj[k])] != null && !map.spaces[map.getRow(adj[k])][map.getColumn(adj[k])].getType().equals("River") && !map.spaces[map.getRow(adj[k])][map.getColumn(adj[k])].isOccupied() && terrains[map.getRow(adj[k])][map.getColumn(adj[k])].isDisable()) {
+//                        terrains[map.getRow(adj[k])][map.getColumn(adj[k])].setDisable(false);
+//                        Space[] finalAdj = adj;
+//                        int finalK = k;
+//                        terrains[map.getRow(adj[k])][map.getColumn(adj[k])].setOnMouseClicked(new EventHandler<MouseEvent>() {
+//                           @Override
+//                           public void handle(MouseEvent event) {
+//                              terraformAction(playerArr, curPlayerId, terrains, terrains[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], map, map.spaces[map.getRow(finalAdj[finalK])][map.getColumn(finalAdj[finalK])], actions);
+//                           }
+//                        });
+//                     }
+//                  }
                }
          }
          for (int k = 0; k < ROW_NUMBER; k++) {
@@ -81,7 +97,7 @@ public class ActionController implements Serializable {
                      terrains[k][l].setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
-                           terraformAction(current, terrains, terrains[finalK][finalL], map, map.spaces[finalK][finalL], actions, cardsAndTiles, religions, finalK, finalL);
+                           terraformAction(current, terrains, terrains[finalK][finalL], map, map.spaces[finalK][finalL], actions,cardsAndTiles,religions ,finalK, finalL);
                         }
                      });
                   }
@@ -90,6 +106,11 @@ public class ActionController implements Serializable {
          }
       }
    }
+
+   /**
+    * BUNU TAŞIYALIM
+    *
+    */
    public static void terraformAction(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions,CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
       List<String> choices = new ArrayList<>();
       choices.add("Wasteland");
@@ -101,6 +122,7 @@ public class ActionController implements Serializable {
       choices.add("Plains");
       choices.remove(space.getType());
       PlayerHandler playerHandler = new PlayerHandler();
+
       Label prompt = new Label("Please choose the terrain to be transformed into.");
       Label promptChoice = new Label("Terrain type: ");
       ChoiceBox choiceBox = new ChoiceBox();
@@ -109,6 +131,7 @@ public class ActionController implements Serializable {
       BorderPane pane = new BorderPane();
       HBox choiceBlock = new HBox();
       Button transformButton = new Button("Transform");
+
       choiceBlock.getChildren().addAll(promptChoice, choiceBox, transformButton);
       VBox whole = new VBox();
       whole.getChildren().addAll(prompt, choiceBlock);
@@ -131,9 +154,9 @@ public class ActionController implements Serializable {
             terraformStage.close();
             if (selectedChoice.equals(current.getFaction().TERRAIN_TILE) && flag) {
                DialogueImageButton dwellingButton = new DialogueImageButton("dialogueDwelling.png");
-               DialogueImageButton emptyTerrainButton = new DialogueImageButton("dialogueEmptyTerrain.jpg");
+               DialogueImageButton emptyTerrainButton = new DialogueImageButton("dialogueEmptyTerrain.png");
                VBox pane = DialogueView.getDwellingAfterTerraformPromptPane(current, dwellingButton, emptyTerrainButton);
-               Stage dwellingChoiceStage = DialogueView.getStage("Do you want to build dwelling?", pane, new Image("dialogueBackground.jpg"));
+               Stage dwellingChoiceStage = DialogueView.getStage("Do you want to build dwelling?", pane, new Image("dialogueBackground.png"));
                dwellingChoiceStage.show();
                dwellingButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                   @Override
@@ -186,10 +209,41 @@ public class ActionController implements Serializable {
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
 
+
+//        ChoiceDialog<String> dialog = new ChoiceDialog<>(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE, choices);
+//        dialog.setTitle("Terraform");
+//        dialog.setHeaderText("Choose a Terrain Tile");
+//        dialog.setContentText("Terrain Tile: " );
+//        Optional<String> result = dialog.showAndWait();
+//        if(result.isPresent()) {
+//            Controller.TerrainController.terraform(terrain, result.get());
+//            space.setType(result.get());
+//
+//            //Asks if the player wants to build dwelling after terraforming
+//            if (result.get().equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE)) {
+//                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//                alert.setTitle("Build Dwelling");
+//                alert.setHeaderText("Do you want to build a dwelling?");
+//                alert.setContentText("Cost will be here");
+//
+//                Optional<ButtonType> dwellingCheck = alert.showAndWait();
+//                if (dwellingCheck.get() == ButtonType.OK) {
+//                    Controller.TerrainController.buildDwelling(terrain, result.get());
+//                    space.setOccupied(true);
+//                    space.setStructure("Dwelling");
+//
+//                } else {
+//                    // ... user chose CANCEL or closed the dialog
+//                }
+//            }
+//        }
+//        Controller.TerrainController.enableTerrains(terrains, map);
+//        Controller.TerrainController.disableButtonClicks(terrains);
    }
 
    public  static void upgradeStructure(Player current,Button[][] terrains, Map map, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions) {
       TerrainController.disableTerrains(terrains, map);
+
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
             if (terrains[i][j] != null)
@@ -200,12 +254,18 @@ public class ActionController implements Serializable {
                   terrains[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
                      @Override
                      public void handle(MouseEvent event) {
+                        /**
+                         * TODO
+                         * LOGİC DEĞİŞİTOR
+                         */
+                        //gameHandler.upgradeStructure(map.spaces[finalI][finalJ], map.spaces[finalI][finalJ].getStructure().getBuilding())
                         if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Dwelling"))
                            upgradeToTradingPost(current, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ],actions,cardsAndTiles,religions,finalI, finalJ);
                         else if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Trading Post"))
                            upgradeToStrongholdOrTemple(current, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ], actions, cardsAndTiles, religions, finalI, finalJ);
                         else if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Temple"))
                            upgradeToSanctuary(current, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ], actions, cardsAndTiles, religions, finalI, finalJ);
+
                      }
                   });
                }
@@ -216,10 +276,10 @@ public class ActionController implements Serializable {
    public static void upgradeToTradingPost(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions,CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
       PlayerHandler playerHandler = new PlayerHandler();
       DialogueImageButton discardButton = new DialogueImageButton("dialogueDiscardDoor.png");
-      DialogueImageButton tradingPostButton = new DialogueImageButton("dialogueTradingPost.jpg");
+      DialogueImageButton tradingPostButton = new DialogueImageButton("dialogueTradingPost.png");
       VBox pane = DialogueView.getDwellingUpgradePromptPane(current, discardButton, tradingPostButton);
 
-      Stage stage = DialogueView.getStage("Upgrade Dwelling", pane, new Image("dialogueBackground.jpg"));
+      Stage stage = DialogueView.getStage("Upgrade Dwelling", pane, new Image("dialogueBackground.png"));
 
       stage.show();
       tradingPostButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -228,6 +288,10 @@ public class ActionController implements Serializable {
             ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
             System.out.println(adjacentPlayers.size());
             int returnCase = playerHandler.buildStructure(current, "TradingPost", adjacentPlayers.size() != 0);
+            /**
+             * YANDAKİ UŞAKLARA SOR
+             */
+
             if(returnCase == 1){
                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                for(int i = 0; i < adjacentPlayers.size(); i++) {
@@ -280,11 +344,11 @@ public class ActionController implements Serializable {
 
    public static void upgradeToStrongholdOrTemple(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
       PlayerHandler playerHandler = new PlayerHandler();
-      DialogueImageButton templeButton = new DialogueImageButton("dialogueTemple.jpg");
-      DialogueImageButton strongholdButton = new DialogueImageButton("dialogueStronghold.jpg");
+      DialogueImageButton templeButton = new DialogueImageButton("dialogueTemple.png");
+      DialogueImageButton strongholdButton = new DialogueImageButton("dialogueStronghold.png");
       VBox pane = DialogueView.getTradingPostUpgradePromptPane(current, templeButton, strongholdButton);
 
-      Stage stage = DialogueView.getStage("Upgrade Trading Post", pane, new Image("dialogueBackground.jpg"));
+      Stage stage = DialogueView.getStage("Upgrade Trading Post", pane, new Image("dialogueBackground.png"));
 
 
       templeButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -292,7 +356,10 @@ public class ActionController implements Serializable {
          public void handle(MouseEvent event) {
             ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
             int returnCase = playerHandler.buildStructure(current, "Temple", false);
-
+            /**
+             * TODO
+             * YANDAKİ UŞAKLARA SOR
+             */
             if(returnCase > 0){
                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                for(int i = 0; i < adjacentPlayers.size(); i++) {
@@ -337,7 +404,10 @@ public class ActionController implements Serializable {
          public void handle(MouseEvent event) {
             ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
             int returnCase = playerHandler.buildStructure(current, "Stronghold", false);
-
+            /**
+             * TODO
+             * YANDAKİ UŞAKLARA SOR
+             */
             if(returnCase == 1){
                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                for(int i = 0; i < adjacentPlayers.size(); i++) {
@@ -370,23 +440,72 @@ public class ActionController implements Serializable {
             stage.close();
          }
       });
+//      noButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//         @Override
+//         public void handle(MouseEvent event) {
+//            stage.close();
+//            actiondone = true;
+//         }
+//      });
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
       stage.showAndWait();
+
+
+//      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//      alert.setTitle("Upgrade Structure");
+//      alert.setHeaderText("Do you want to upgrade this Trading Post to a Stronghold or Temple?");
+//      alert.setContentText("Cost will be here");
+//
+//      ButtonType stronghold = new ButtonType("Stronghold");
+//      ButtonType temple = new ButtonType("Temple");
+//      ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+//
+//      alert.getButtonTypes().setAll(stronghold, temple, buttonTypeCancel);
+//
+//      Optional<ButtonType> result = alert.showAndWait();
+//      if (result.get() == stronghold) {
+//         Controller.TerrainController.upgradeToStronghold(terrain, current.getFaction().TERRAIN_TILE);
+//         space.setStructure("Stronghold");
+//      } else if (result.get() == temple) {
+//         Controller.TerrainController.upgradeToTemple(terrain, current.getFaction().TERRAIN_TILE);
+//         space.setStructure("Temple");
+//      } else {
+//         // ... user chose CANCEL or closed the dialog
+//      }
+//
+//      Controller.TerrainController.enableTerrains(terrains, map);
+//      Controller.TerrainController.disableButtonClicks(terrains);
+
    }
 
    public static void upgradeToSanctuary(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions,int x, int y) {
       PlayerHandler playerHandler = new PlayerHandler();
       DialogueImageButton discardButton = new DialogueImageButton("dialogueDiscardDoor.png");
-      DialogueImageButton sanctuaryButton = new DialogueImageButton("dialogueSanctuary.jpg");
+      DialogueImageButton sanctuaryButton = new DialogueImageButton("dialogueSanctuary.png");
       VBox pane = DialogueView.getTempleUpgradePromptPane(current, discardButton, sanctuaryButton);
-      Stage stage = DialogueView.getStage("Upgrade Temple", pane, new Image("dialogueBackground.jpg"));
+
+      Stage stage = DialogueView.getStage("Upgrade Temple", pane, new Image("dialogueBackground.png"));
+
+      /**
+       * TODO
+       * DIKKATTTT
+       */
+//      BorderPane pane = DialogueView.getTempleUpgradePromptPane(current, "Do you want to upgrade this Temple to a Sanctuary\n at the expense of: ", yesButton, noButton);
+//      DropShadow borderGlow = new DropShadow();
+//      borderGlow.setColor(Color.ORANGE);
+//      Stage stage = DialogueView.getStage("Upgrade Temple", pane, new Image("town_tiles_background.jpg"));
+
       stage.show();
       discardButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
             ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
             int returnCase = playerHandler.buildStructure(current, "Sanctuary", false);
+            /**
+             * TODO
+             * YANDAKİ UŞAKLARA SOR
+             */
             if(returnCase > 0){
                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                for(int i = 0; i < adjacentPlayers.size(); i++) {
@@ -428,6 +547,7 @@ public class ActionController implements Serializable {
       });
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
+
    }
 
    public static void strongholdAbility(Button[][] terrains, Map map, Button[] actions, Player current) {
@@ -450,14 +570,39 @@ public class ActionController implements Serializable {
                         TerrainController.enableTerrains(terrains, map);
                         disableActions(actions);
                         current.setDwellingNum(current.getDwellingNum()+1);
+
                      }
                   });
                }
+
       }
+      else if(current.getFaction() instanceof AliesterCrowley){
+
+      }
+
+      else if(current.getFaction() instanceof DariusTheGreat){
+
+      }
+      else if(current.getFaction() instanceof ErikTheRed){
+
+      }
+      else if(current.getFaction() instanceof Gilgamesh){
+
+      }
+      else if(current.getFaction() instanceof HusseinTheTeaMaker){
+
+      }
+      else if(current.getFaction() instanceof MarieCurie){
+
+      }
+
    }
 
+
+   /**TODO
+    * TAŞINACAK
+    */
    public static void showSpeacialActions(Player[] playerList,Religion[] religions,int currentPlayerId,Map map, Pane mapPane, Button[][] terrains,Button[] actions) {
-      ReligionController religionController = new ReligionController();
       VBox wholeFavor = new VBox();
       HBox firstRow = new HBox();
       HBox secondRow = new HBox();
@@ -469,6 +614,7 @@ public class ActionController implements Serializable {
       special1.getChildren().add(new SpecialActionView("Spade Action"));
       final int[] choice = {0};
       final Stage dialog = new Stage();
+
       Scene dialogScene = new Scene(wholeFavor, 1100, 600);
       dialog.setScene(dialogScene);
       dialog.setTitle("Special Actions");
@@ -496,10 +642,12 @@ public class ActionController implements Serializable {
       special2.setOnMouseClicked(new EventHandler<Event>() {
          @Override
          public void handle(Event event) {
+            ReligionController religionController = new ReligionController();
             if (currentPlayer.getSpecialActionToken().isCultTack) {
                System.out.println("Cult Action");
                choice[0] = 2;
                System.out.println(choice[0]);
+               religionController.showReligion(playerList,2,religions,currentPlayerId, true);
                event.consume();
             } else {
                Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -538,6 +686,9 @@ public class ActionController implements Serializable {
                System.out.println("Faction Ability");
                choice[0] = 4;
                System.out.println(choice[0]);
+
+
+
                event.consume();
             } else {
                Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -557,19 +708,17 @@ public class ActionController implements Serializable {
          public void handle(Event event) {
             if (choice[0] == 1) {
                currentPlayer.getSpecialActionToken().isSpade = false;
-               //TODO
-               //CAN BURAYA TERRAFORM YAPTIRALIM ABİ
-
+               currentPlayer.setFreeSpade(currentPlayer.getFreeSpade() + 1);
                event.consume();
             } else if (choice[0] == 2) {
                currentPlayer.getSpecialActionToken().isCultTack = false;
-               religionController.showReligion(playerList,2,religions,currentPlayerId, true);
                event.consume();
             } else if (choice[0] == 3) {
                currentPlayer.getSpecialActionToken().isStrongholdAbility = false;
                strongholdAbility(terrains,map,actions,playerList[currentPlayerId]);
                event.consume();
             } else if (choice[0] == 4) {
+               System.out.println("geldimm");
                currentPlayer.getSpecialActionToken().isFactionAbility = true;
                factionAbility(playerList[currentPlayerId], map, mapPane, terrains, actions);
                event.consume();
@@ -601,9 +750,12 @@ public class ActionController implements Serializable {
    }
 
    private static void factionAbility(Player current, Map map, Pane mapPane, Button[][] terrains, Button[] actions) {
+
+
       if(current.getFaction() instanceof DariusTheGreat){
 
       }
+
       else if(current.getFaction() instanceof  LeonardoDaVinci) {
 
          if(current.getWorkerNum() >= 2){
@@ -628,7 +780,27 @@ public class ActionController implements Serializable {
             }
          }
 
+
+//         boolean checkBridgability = false;
+//         for(int i = 0; i < ROW_NUMBER; i++) {
+//            for (int j = 0; j < COLUMN_NUMBER; j++) {
+//               if (map.spaces[i][j].getType().equals(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE) && map.spaces[i][j].getBridgability() && !map.spaces[i][j].getBridgeConnection() && map.spaces[i][j].isOccupied()) {
+//                  System.out.println("lala");
+//                  checkBridgability = true;
+//               }
+//            }
+//         }
+//         if(checkBridgability) {
+//            if (playerHandler.usePowerAction(0, currentPlayer)) {
+//               System.out.println("Girdi");
+//               disableAllTerrains();
+//               TerrainController.buildBridge(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map, mapPane, actions);
+//               System.out.println("Köprü kuruldu");
+//            }
+//         }
+
       }
+
       else if(current.getFaction() instanceof MarieCurie) {
          BorderPane border = new BorderPane();
          BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -727,17 +899,21 @@ public class ActionController implements Serializable {
          dialog.show();
 
       }
+
    }
 
-
+   /**TODO
+    * TAŞINACAK
+    * @param
+    */
    public static void showUpdateShippingDialogs(Player player , Button[] actions) {
 
       PlayerHandler playerHandler = new PlayerHandler();
       DialogueImageButton discardButton = new DialogueImageButton("dialogueDiscardDoor.png");
-      DialogueImageButton shippingButton = new DialogueImageButton("dialogueShipping.jpg");
+      DialogueImageButton shippingButton = new DialogueImageButton("dialogueShipping.png");
       VBox pane = DialogueView.getUpgradeShippingPromptPane(player, discardButton, shippingButton);
 
-      Stage stage = DialogueView.getStage("Upgrade Shipping", pane, new Image("dialogueBackground.jpg"));
+      Stage stage = DialogueView.getStage("Upgrade Shipping", pane, new Image("dialogueBackground.png"));
       stage.show();
       shippingButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
@@ -745,8 +921,25 @@ public class ActionController implements Serializable {
             int returnCase = playerHandler.upgradeShippingLevel(player);
             if (returnCase == 1) {
                disableActions(actions);
+//               alert.setHeaderText("Upgraded successfully \n");
+//               alert.setContentText("");
+            } else if (returnCase == -1) {
+//               alert.setHeaderText("No enough resources");
+//               alert.setContentText("You have no required cost, priest, worker \n" +
+//                       "GOLD COST : " + goldCost + "\n" +
+//                       "PRIEST COST : " + priestCost + "\n");
+            } else if (returnCase == -2){
+//               alert.setHeaderText("You have no ability to ship");
+//               alert.setContentText("");
+            }
+            else{
+//               alert.setHeaderText("You have max shipping level");
+//               alert.setContentText("");
             }
             stage.close();
+            Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr!"));
+            errorStage.show();
+            DialogueView.delayErrorMessage(errorStage);
          }
       });
 
@@ -759,42 +952,50 @@ public class ActionController implements Serializable {
    }
 
 
+   /**TODO
+    * TAŞINACAK
+    *
+    */
    public static void showUpdateSpadeDialogs(Player player, Button[] actions) {
       PlayerHandler playerHandler = new PlayerHandler();
-      int priestCost = player.getFaction().SPADE_PRIEST_COST;
-      int goldCost = player.getFaction().SPADE_GOLD_COST;
-      int workerCost = player.getFaction().SPADE_WORKER_COST;
-      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-      alert.setTitle("Upgrade Spade");
-      alert.setHeaderText("GOLD COST : " + goldCost + "\n" +
-              "PRIEST COST : " + priestCost + "\n" +
-              "WORKER COST : " + workerCost);
-      alert.setContentText("Do you want to update your spade level \n" +
-              "Current Level : " + player.getSpadeLevel() + "\n"
-      );
-      Optional<ButtonType> result = alert.showAndWait();
-      if (result.get() == ButtonType.OK) {
-         alert.setTitle("Update Spade level");
-         int returnCase = playerHandler.upgradeSpadeLevel(player);
-         if (returnCase == 1){
-            disableActions(actions);
-            alert.setHeaderText("Upgraded successfully \n");
-            alert.setContentText("");
-         }else if (returnCase == -1) {
-            alert.setHeaderText("No enough resources");
-            alert.setContentText("You have no required cost, priest, worker \n" +
-                    "GOLD COST : " + goldCost + "\n" +
-                    "PRIEST COST : " + priestCost + "\n" +
-                    "WORKER COST : " + workerCost);
-         }else{
-            alert.setHeaderText("You have max spade level");
-            alert.setContentText("");
+
+      DialogueImageButton discardButton = new DialogueImageButton("dialogueDiscardDoor.png");
+      DialogueImageButton shippingButton = new DialogueImageButton("dialogueSpade.png");
+      VBox pane = DialogueView.getUpgradeSpadePromptPane(player, discardButton, shippingButton);
+
+      Stage stage = DialogueView.getStage("Upgrade Spade", pane, new Image("dialogueBackground.png"));
+      stage.show();
+      shippingButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         @Override
+         public void handle(MouseEvent event) {
+            int returnCase = playerHandler.upgradeSpadeLevel(player);
+            if (returnCase == 1){
+               disableActions(actions);
+//               alert.setHeaderText("Upgraded successfully \n");
+//               alert.setContentText("");
+            }else if (returnCase == -1) {
+//               alert.setHeaderText("No enough resources");
+//               alert.setContentText("You have no required cost, priest, worker \n" +
+//                       "GOLD COST : " + goldCost + "\n" +
+//                       "PRIEST COST : " + priestCost + "\n" +
+//                       "WORKER COST : " + workerCost);
+            }else{
+//               alert.setHeaderText("You have max spade level");
+//               alert.setContentText("");
+            }
+            stage.close();
          }
-         alert.showAndWait();
-      } else {
-         // ... user chose CANCEL or closed the dialog
-      }
+      });
+      discardButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         @Override
+         public void handle(MouseEvent event) {
+            stage.close();
+         }
+      });
+
+
    }
+
    public static void disableActions(Button[] actions){
       for(int i = 0; i < actions.length; i++)
          actions[i].setDisable(true);
