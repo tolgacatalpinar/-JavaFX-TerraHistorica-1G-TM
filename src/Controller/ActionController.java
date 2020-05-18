@@ -213,35 +213,6 @@ public class ActionController implements Serializable {
       TerrainController.disableButtonClicks(terrains);
 
 
-//        ChoiceDialog<String> dialog = new ChoiceDialog<>(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE, choices);
-//        dialog.setTitle("Terraform");
-//        dialog.setHeaderText("Choose a Terrain Tile");
-//        dialog.setContentText("Terrain Tile: " );
-//        Optional<String> result = dialog.showAndWait();
-//        if(result.isPresent()) {
-//            Controller.TerrainController.terraform(terrain, result.get());
-//            space.setType(result.get());
-//
-//            //Asks if the player wants to build dwelling after terraforming
-//            if (result.get().equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE)) {
-//                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//                alert.setTitle("Build Dwelling");
-//                alert.setHeaderText("Do you want to build a dwelling?");
-//                alert.setContentText("Cost will be here");
-//
-//                Optional<ButtonType> dwellingCheck = alert.showAndWait();
-//                if (dwellingCheck.get() == ButtonType.OK) {
-//                    Controller.TerrainController.buildDwelling(terrain, result.get());
-//                    space.setOccupied(true);
-//                    space.setStructure("Dwelling");
-//
-//                } else {
-//                    // ... user chose CANCEL or closed the dialog
-//                }
-//            }
-//        }
-//        Controller.TerrainController.enableTerrains(terrains, map);
-//        Controller.TerrainController.disableButtonClicks(terrains);
    }
 
    public  static void upgradeStructure(Player current,Button[][] terrains, Map map, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions) {
@@ -342,20 +313,7 @@ public class ActionController implements Serializable {
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
 
-//      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//      alert.setTitle("Upgrade Structure");
-//      alert.setHeaderText("Do you want to upgrade this Dwelling to a Trading Post?");
-//      alert.setContentText("Cost will be here");
-//
-//      Optional<ButtonType> result = alert.showAndWait();
-//      if (((Optional) result).get() == ButtonType.OK) {
-//         Controller.TerrainController.upgradeToTradingPost(terrain, playerArr[currentPlayerId].getFaction().TERRAIN_TILE);
-//         space.setStructure("Trading Post");
-//      } else {
-//         // ... user chose CANCEL or closed the dialog
-//      }
-//      Controller.TerrainController.enableTerrains(terrains, map);
-//      Controller.TerrainController.disableButtonClicks(terrains);
+
    }
 
    public static void upgradeToStrongholdOrTemple(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
@@ -471,30 +429,6 @@ public class ActionController implements Serializable {
       stage.showAndWait();
 
 
-//      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//      alert.setTitle("Upgrade Structure");
-//      alert.setHeaderText("Do you want to upgrade this Trading Post to a Stronghold or Temple?");
-//      alert.setContentText("Cost will be here");
-//
-//      ButtonType stronghold = new ButtonType("Stronghold");
-//      ButtonType temple = new ButtonType("Temple");
-//      ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-//
-//      alert.getButtonTypes().setAll(stronghold, temple, buttonTypeCancel);
-//
-//      Optional<ButtonType> result = alert.showAndWait();
-//      if (result.get() == stronghold) {
-//         Controller.TerrainController.upgradeToStronghold(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
-//         space.setStructure("Stronghold");
-//      } else if (result.get() == temple) {
-//         Controller.TerrainController.upgradeToTemple(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
-//         space.setStructure("Temple");
-//      } else {
-//         // ... user chose CANCEL or closed the dialog
-//      }
-//
-//      Controller.TerrainController.enableTerrains(terrains, map);
-//      Controller.TerrainController.disableButtonClicks(terrains);
 
    }
 
@@ -560,20 +494,7 @@ public class ActionController implements Serializable {
       });
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
-//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//      alert.setTitle("Upgrade Structure");
-//      alert.setHeaderText("Do you want to upgrade this Temple to a Sanctuary?");
-//      alert.setContentText("Cost will be here");
-//
-//      Optional<ButtonType> result = alert.showAndWait();
-//      if (((Optional) result).get() == ButtonType.OK) {
-//         Controller.TerrainController.upgradeToSanctuary(terrain, playerArr[curPlayerId].getFaction().TERRAIN_TILE);
-//         space.setStructure("Sanctuary");
-//      } else {
-//         // ... user chose CANCEL or closed the dialog
-//      }
-//      Controller.TerrainController.enableTerrains(terrains, map);
-//      Controller.TerrainController.disableButtonClicks(terrains);
+
    }
 
    //TODO
@@ -604,7 +525,7 @@ public class ActionController implements Serializable {
    public void skipTurn(int curPlayerId, Player[] playerArr){
 
    }
-   public static void strongholdAbility(Button[][] terrains, Map map, Button[] actions, Player current) throws IOException {
+   public static void strongholdAbility(Button[][] terrains, Map map, Button[] actions, Player current) {
       if(current.getFaction() instanceof MorganLeFay){
          TerrainController.disableTerrains(terrains,map);
          for(int i = 0; i < ROW_NUMBER; i++)
@@ -672,7 +593,7 @@ public class ActionController implements Serializable {
    /**TODO
     * TAŞINACAK
     */
-   public static void showSpeacialActions(Player[] playerList,Religion[] religions,int currentPlayerId,Map map,Button[][] terrains,Button[] actions,RoundController roundController) {
+   public static void showSpeacialActions(Player[] playerList,Religion[] religions,int currentPlayerId,Map map,Button[][] terrains,Button[] actions) {
       VBox wholeFavor = new VBox();
       HBox firstRow = new HBox();
       HBox secondRow = new HBox();
@@ -781,11 +702,7 @@ public class ActionController implements Serializable {
                event.consume();
             } else if (choice[0] == 3) {
                currentPlayer.getSpecialActionToken().isStrongholdAbility = false;
-               try {
-                  strongholdAbility(terrains,map,actions,playerList[currentPlayerId]);
-               } catch (IOException e) {
-                  e.printStackTrace();
-               }
+               strongholdAbility(terrains,map,actions,playerList[currentPlayerId]);
                event.consume();
             } else if (choice[0] == 4) {
                currentPlayer.getSpecialActionToken().isFactionAbility = false;
@@ -819,9 +736,8 @@ public class ActionController implements Serializable {
     * TAŞINACAK
     * @param
     */
-   public static void showUpdateShippingDialogs(Player[] playerList, int currentPlayerId , Button[] actions) {
+   public static void showUpdateShippingDialogs(Player player , Button[] actions) {
       PlayerHandler playerHandler = new PlayerHandler();
-      Player player = playerList[currentPlayerId];
       int priestCost = player.getFaction().SHIPPING_PRIEST_COST;
       int goldCost = player.getFaction().SHIPPING_GOLD_COST;
          Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -863,9 +779,8 @@ public class ActionController implements Serializable {
     * TAŞINACAK
     *
     */
-   public static void showUpdateSpadeDialogs(Player[] playerList, int currentPlayerId, Button[] actions) {
+   public static void showUpdateSpadeDialogs(Player player, Button[] actions) {
       PlayerHandler playerHandler = new PlayerHandler();
-      Player player = playerList[currentPlayerId];
       int priestCost = player.getFaction().SPADE_PRIEST_COST;
       int goldCost = player.getFaction().SPADE_GOLD_COST;
       int workerCost = player.getFaction().SPADE_WORKER_COST;

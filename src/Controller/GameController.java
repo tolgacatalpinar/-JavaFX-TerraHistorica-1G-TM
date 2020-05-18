@@ -259,7 +259,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void upgradeShippingClicked() {
-      ActionController.showUpdateShippingDialogs(playerList, roundController.getCurrentPlayerId(), actions);
+      ActionController.showUpdateShippingDialogs(playerList[roundController.getCurrentPlayerId()], actions);
    }
 
    @FXML
@@ -278,7 +278,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void upgradeSpadeClicked() {
-      ActionController.showUpdateSpadeDialogs(playerList, roundController.getCurrentPlayerId(), actions);
+      ActionController.showUpdateSpadeDialogs(playerList[roundController.getCurrentPlayerId()], actions);
    }
 
    @FXML
@@ -341,7 +341,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void specialActionClicked() {
-      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId(),map,terrains,actions,roundController);
+      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId(),map,terrains,actions);
    }
 
    public void createSpaces() {
