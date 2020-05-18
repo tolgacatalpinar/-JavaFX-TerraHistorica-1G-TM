@@ -876,6 +876,7 @@ public class GameController implements Initializable, Serializable {
           dialog.setOnCloseRequest(e-> Platform.exit());
 
       }
+       dialog.showAndWait();
 
    }
 
