@@ -774,6 +774,8 @@ public class ActionController implements Serializable {
          label2.setFont(new Font("Stencil", 40));
          label1.setOpacity(0.6);
          label2.setOpacity(0.6);
+         victory_point.setFitHeight(150);
+         victory_point.setFitWidth(150);
          power_middle.setFitHeight(150);
          power_middle.setFitWidth(150);
          gold.setFitWidth(150);
@@ -827,7 +829,7 @@ public class ActionController implements Serializable {
          border.setCenter(gridPane);
          final Stage dialog = new Stage();
          dialog.initModality(Modality.APPLICATION_MODAL);
-         Scene dialogScene = new Scene(border, 1100, 600);
+         Scene dialogScene = new Scene(border, 1000, 200);
          dialog.setScene(dialogScene);
          dialog.setTitle("Faction Ability");
          dialog.setResizable(false);
@@ -840,7 +842,12 @@ public class ActionController implements Serializable {
                System.out.println("Selection: " + chosen);
                dialog.close();
                if (selection == 0) {
-                  System.out.println("2 coin for 1 vp");
+                  if(current.spendFromResources(0,2,0))
+                     current.addVictoryPoints(1);
+               }
+               else if(selection ==1) {
+                  current.setVictoryPointNum(current.getVictoryPointNum() - 1);
+                  current.setGoldNum(current.getGoldNum() + 1);
                }
             }
          });
