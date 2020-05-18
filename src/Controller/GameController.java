@@ -78,8 +78,6 @@ public class GameController implements Initializable, Serializable {
    Button powerActions;
    @FXML
    Button upgradeSpade;
-
-
    ArrayList<PlayerView> playerViewList;
    public Button[][] terrains;
    Button[] actions;
@@ -92,12 +90,9 @@ public class GameController implements Initializable, Serializable {
    PlayerHandler playerHandler;
    Player currentPlayer;
    boolean isPlayerViewListCreated = false;
-
-
    public GameController() throws IOException {
 
    }
-
 
    @Override
    public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -461,10 +456,8 @@ public class GameController implements Initializable, Serializable {
 
    }
 
-
    @FXML
    public void townTilesClicked() throws IOException {
-      //todo
       cardsAndTilesController.showTownTilesTable(cardsAndTiles,playerList[roundController.currentPlayerId],religionArr,true);
    }
 
@@ -629,10 +622,6 @@ public class GameController implements Initializable, Serializable {
          }
    }
 
-   /**
-    * TODO
-    * TAŞINACAK
-    */
    public  void setButtonClickForInitialDwellings() {
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
@@ -662,10 +651,6 @@ public class GameController implements Initializable, Serializable {
    }
 
 
-   /**
-    * TODO
-    * TAŞINACAK
-    */
    public void disableButtonClicks() {
       for (int i = 0; i < ROW_NUMBER; i++) {
          for (int j = 0; j < COLUMN_NUMBER; j++) {
@@ -675,15 +660,6 @@ public class GameController implements Initializable, Serializable {
       }
    }
 
-   /**
-    * TODO
-    * TAŞINACAK
-    */
-
-   /**
-    * TODO
-    * TAŞINACAK
-    */
    public void disableActions() {
       terraform.setDisable(true);
       upgradeShipping.setDisable(true);
@@ -695,10 +671,6 @@ public class GameController implements Initializable, Serializable {
       passRound.setDisable(true);
    }
 
-   /**
-    * TODO
-    * TAŞINACAK
-    */
    public void enableActions() {
       terraform.setDisable(false);
       upgradeShipping.setDisable(false);
@@ -710,11 +682,6 @@ public class GameController implements Initializable, Serializable {
       passRound.setDisable(false);
       skipTurn.setDisable(false);
    }
-
-   /**
-    * TODO
-    * TAŞINACAK
-    */
 
    public void displayPlayerTurn(ArrayList<PlayerView> playerViewList) {
 
@@ -745,26 +712,18 @@ public class GameController implements Initializable, Serializable {
             playerViewList.get(roundController.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(152, 93, 27, 1), 10,0.5,0,1 );");
             break;
       }
-
-
-
    }
 
    public void showPowerActions(Player currentPlayer) {
-
       PowerActionView powerActionView = new PowerActionView();
       Button select = powerActionView.getSelectButton();
-
-
       final Stage dialog = new Stage();
       dialog.initModality(Modality.APPLICATION_MODAL);
       Scene dialogScene = new Scene(powerActionView, 1100, 600);
       dialog.setScene(dialogScene);
       dialog.setTitle("Power Action");
       dialog.setResizable(false);
-
       select.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
          @Override
          public void handle(MouseEvent event) {
             playerList[roundController.currentPlayerId].setBowlThreePower(12);
@@ -840,9 +799,6 @@ public class GameController implements Initializable, Serializable {
    }
 
 
-   public CardsAndTiles getCardsAndTiles() {
-      return cardsAndTiles;
-   }
 
    public void showTown(Button[][] terrains, Map map)
 
@@ -908,66 +864,45 @@ public class GameController implements Initializable, Serializable {
 
    }
 
-
-
-
    public Map getMap() {
       return map;
    }
-
-
-
-
+   public CardsAndTiles getCardsAndTiles() {
+        return cardsAndTiles;
+    }
    public ArrayList<PlayerView> getPlayerViewList() {
       return playerViewList;
    }
-
-
-
-
    public Player[] getPlayerList() {
       return playerList;
    }
-
    public Religion[] getReligionArr() {
       return religionArr;
    }
-
    public PlayerHandler getPlayerHandler() {
       return playerHandler;
    }
-
    public Player getCurrentPlayer() {
       return currentPlayer;
    }
-
    public RoundController getRoundController() {return roundController;}
-
    public void setMap(Map map) {
       this.map = map;
    }
-
    public void setPlayerList(Player[] playerList) {
       this.playerList = playerList;
    }
-
    public void setCardsAndTiles(CardsAndTiles cat) {
       this.cardsAndTiles = cat;
    }
-
    public void setReligionArr(Religion[] religions) {
       this.religionArr = religions;
    }
-
    public void setPlayerHandler(PlayerHandler ph) {
       this.playerHandler = ph;
    }
-
    public void setCurrentPlayer(Player p1) {
       this.currentPlayer = p1;
    }
-
    public void setRoundController(RoundController r1){this.roundController = r1;}
-
-
 }

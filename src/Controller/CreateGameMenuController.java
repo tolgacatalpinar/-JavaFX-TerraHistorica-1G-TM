@@ -20,18 +20,11 @@ public class CreateGameMenuController extends MainMenuController implements Init
 
     @FXML
     TextField player1, player2, player3, player4, player5;
-
     @FXML
     ChoiceBox<String> playerCount;
-
     @FXML
     Button playButton;
-
     String playerCountString;
-
-
-
-
 
     @FXML
     public void playButtonClicked( MouseEvent event) throws IOException {
@@ -53,15 +46,8 @@ public class CreateGameMenuController extends MainMenuController implements Init
 
     }
 
-
-
-
-
     @FXML
     public void playerCountIsSelected(ActionEvent event){
-
-
-
 
         playerCountString = playerCount.getSelectionModel().getSelectedItem();
 
@@ -89,16 +75,9 @@ public class CreateGameMenuController extends MainMenuController implements Init
 
 
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-
     }
-
-
-
 
 
 }

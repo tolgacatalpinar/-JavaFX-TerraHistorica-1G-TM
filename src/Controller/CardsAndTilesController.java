@@ -26,7 +26,6 @@ public class CardsAndTilesController {
     public  int getSelectionFavorTile() {
         return selectionFavorTile;
     }
-
     public  void setSelectionFavorTile(int selectionFavorTile) {this.selectionFavorTile = selectionFavorTile;
     }
     private int selectionTown = -1;
