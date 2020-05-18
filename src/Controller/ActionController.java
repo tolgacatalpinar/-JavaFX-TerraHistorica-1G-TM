@@ -241,6 +241,9 @@ public class ActionController implements Serializable {
 //        Controller.TerrainController.disableButtonClicks(terrains);
    }
 
+
+
+
    public  static void upgradeStructure(Player current,Button[][] terrains, Map map, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions) {
       TerrainController.disableTerrains(terrains, map);
 
@@ -273,6 +276,9 @@ public class ActionController implements Serializable {
       }
    }
 
+
+
+
    public static void upgradeToTradingPost(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions,CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
       PlayerHandler playerHandler = new PlayerHandler();
       Button yesButton = new Button();
@@ -286,9 +292,8 @@ public class ActionController implements Serializable {
             ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
             System.out.println(adjacentPlayers.size());
             int returnCase = playerHandler.buildStructure(current, "TradingPost", adjacentPlayers.size() != 0);
-            /**
-             * YANDAKİ UŞAKLARA SOR
-             */
+
+
 
             if(returnCase == 1){
                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -315,9 +320,7 @@ public class ActionController implements Serializable {
                   playerHandler.townFound(current);
                   CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
                   cardsAndTilesController.showTownTilesTable(cardsAndTiles, current,religions,true);
-
                }
-               System.out.println("Town score is *************"+ townScore);
                actiondone = true;
             }else if (returnCase == -1){
                System.out.println("Not enough resources");
@@ -330,6 +333,7 @@ public class ActionController implements Serializable {
 
          }
       });
+
       noButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
          public void handle(MouseEvent event) {
@@ -339,6 +343,9 @@ public class ActionController implements Serializable {
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
    }
+
+
+
 
    public static void upgradeToStrongholdOrTemple(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
       PlayerHandler playerHandler = new PlayerHandler();
@@ -354,10 +361,7 @@ public class ActionController implements Serializable {
          public void handle(MouseEvent event) {
             ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
             int returnCase = playerHandler.buildStructure(current, "Temple", false);
-            /**
-             * TODO
-             * YANDAKİ UŞAKLARA SOR
-             */
+
             if(returnCase > 0){
                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                for(int i = 0; i < adjacentPlayers.size(); i++) {
@@ -402,10 +406,8 @@ public class ActionController implements Serializable {
          public void handle(MouseEvent event) {
             ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
             int returnCase = playerHandler.buildStructure(current, "Stronghold", false);
-            /**
-             * TODO
-             * YANDAKİ UŞAKLARA SOR
-             */
+
+
             if(returnCase == 1){
                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                for(int i = 0; i < adjacentPlayers.size(); i++) {
@@ -438,39 +440,12 @@ public class ActionController implements Serializable {
             stage.close();
          }
       });
-//      noButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//         @Override
-//         public void handle(MouseEvent event) {
-//            stage.close();
-//            actiondone = true;
-//         }
-//      });
+
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
       stage.showAndWait();
 
 
-//      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//      alert.setTitle("Upgrade Structure");
-//      alert.setHeaderText("Do you want to upgrade this Trading Post to a Stronghold or Temple?");
-//      alert.setContentText("Cost will be here");
-//
-//      ButtonType stronghold = new ButtonType("Stronghold");
-//      ButtonType temple = new ButtonType("Temple");
-//      ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-//
-//      alert.getButtonTypes().setAll(stronghold, temple, buttonTypeCancel);
-//
-//      Optional<ButtonType> result = alert.showAndWait();
-//      if (result.get() == stronghold) {
-//         Controller.TerrainController.upgradeToStronghold(terrain, current.getFaction().TERRAIN_TILE);
-//         space.setStructure("Stronghold");
-//      } else if (result.get() == temple) {
-//         Controller.TerrainController.upgradeToTemple(terrain, current.getFaction().TERRAIN_TILE);
-//         space.setStructure("Temple");
-//      } else {
-//         // ... user chose CANCEL or closed the dialog
-//      }
 //
 //      Controller.TerrainController.enableTerrains(terrains, map);
 //      Controller.TerrainController.disableButtonClicks(terrains);
@@ -482,10 +457,11 @@ public class ActionController implements Serializable {
       Button yesButton = new Button("Yes");
       Button noButton = new Button("No");
 
-      /**
-       * TODO
-       * DIKKATTTT
-       */
+
+
+
+
+
       BorderPane pane = DialogueView.getTempleUpgradePromptPane(current, "Do you want to upgrade this Temple to a Sanctuary\n at the expense of: ", yesButton, noButton);
       DropShadow borderGlow = new DropShadow();
       borderGlow.setColor(Color.ORANGE);
@@ -545,6 +521,8 @@ public class ActionController implements Serializable {
 
    }
 
+
+
    public static void strongholdAbility(Button[][] terrains, Map map, Button[] actions, Player current) {
       if(current.getFaction() instanceof MorganLeFay){
          TerrainController.disableTerrains(terrains,map);
@@ -587,9 +565,6 @@ public class ActionController implements Serializable {
       else if(current.getFaction() instanceof HusseinTheTeaMaker){
 
       }
-      else if(current.getFaction() instanceof MarieCurie){
-
-      }
 
    }
 
@@ -627,13 +602,14 @@ public class ActionController implements Serializable {
             } else {
                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                alert.setTitle("Special Action Error");
-               alert.setContentText("You have not special spade action");
+               alert.setContentText("You do not have special spade action");
                alert.setHeaderText("You cannot do this action");
                alert.showAndWait();
             }
          }
       });
       special2.getChildren().add(new SpecialActionView("Cult Action"));
+
       special2.setOnMouseClicked(new EventHandler<Event>() {
          @Override
          public void handle(Event event) {
@@ -656,6 +632,7 @@ public class ActionController implements Serializable {
       });
 
       special3.getChildren().add(new SpecialActionView("Stronghold Ability"));
+
       special3.setOnMouseClicked(new EventHandler<Event>() {
          @Override
          public void handle(Event event) {
@@ -682,8 +659,6 @@ public class ActionController implements Serializable {
                choice[0] = 4;
                System.out.println(choice[0]);
 
-
-
                event.consume();
             } else {
                Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -694,6 +669,8 @@ public class ActionController implements Serializable {
             }
          }
       });
+
+
       Button apply = new Button();
       apply.setText("Apply");
       apply.setFont(Font.font(20));
@@ -720,11 +697,10 @@ public class ActionController implements Serializable {
             } else {
                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                alert.setTitle("Special Action Error");
-               alert.setContentText("You have not special faction ability");
+               alert.setContentText("You do not have special faction ability");
                alert.setHeaderText("You cannot do this action!!");
                alert.showAndWait();
             }
-
             dialog.close();
          }
       });
@@ -742,7 +718,10 @@ public class ActionController implements Serializable {
       wholeFavor.setBackground(new Background(new BackgroundImage(new Image("the_background_4.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
               new BackgroundSize(1.0, 1.0, true, true, false, false))));
       dialog.show();
+
    }
+
+
 
    private static void factionAbility(Player current, Map map, Pane mapPane, Button[][] terrains, Button[] actions) {
 
@@ -776,25 +755,10 @@ public class ActionController implements Serializable {
          }
 
 
-//         boolean checkBridgability = false;
-//         for(int i = 0; i < ROW_NUMBER; i++) {
-//            for (int j = 0; j < COLUMN_NUMBER; j++) {
-//               if (map.spaces[i][j].getType().equals(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE) && map.spaces[i][j].getBridgability() && !map.spaces[i][j].getBridgeConnection() && map.spaces[i][j].isOccupied()) {
-//                  System.out.println("lala");
-//                  checkBridgability = true;
-//               }
-//            }
-//         }
-//         if(checkBridgability) {
-//            if (playerHandler.usePowerAction(0, currentPlayer)) {
-//               System.out.println("Girdi");
-//               disableAllTerrains();
-//               TerrainController.buildBridge(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map, mapPane, actions);
-//               System.out.println("Köprü kuruldu");
-//            }
-//         }
+
 
       }
+
 
       else if(current.getFaction() instanceof MarieCurie) {
          BorderPane border = new BorderPane();
@@ -887,20 +851,27 @@ public class ActionController implements Serializable {
                System.out.println("Selection: " + chosen);
                dialog.close();
                if (selection == 0) {
-                  System.out.println("2 coin for 1 vp");
+                  if(current.spendFromResources(0,2,0))
+                     current.addVictoryPoints(1);
+               }
+               else if(selection ==1) {
+                  current.setVictoryPointNum(current.getVictoryPointNum() - 1);
+                  current.setGoldNum(current.getGoldNum() + 1);
                }
             }
          });
+
+
          dialog.show();
 
       }
 
    }
 
-   /**TODO
-    * TAŞINACAK
-    * @param
-    */
+
+
+
+
    public static void showUpdateShippingDialogs(Player player , Button[] actions) {
       PlayerHandler playerHandler = new PlayerHandler();
       int priestCost = player.getFaction().SHIPPING_PRIEST_COST;
@@ -909,7 +880,7 @@ public class ActionController implements Serializable {
       alert.setTitle("Upgrade Shipping");
       alert.setHeaderText("GOLD COST : " + goldCost + "\n" +
               "PRIEST COST : " + priestCost);
-      alert.setContentText("Do you wan to update your shipping level \n" +
+      alert.setContentText("Do you want to update your shipping level \n" +
               "Current Level : " + player.getShipLevel() + "\n" +
               "New Level : " + (player.getShipLevel() + 1));
       Optional<ButtonType> result = alert.showAndWait();
@@ -938,6 +909,8 @@ public class ActionController implements Serializable {
          // ... user chose CANCEL or closed the dialog
       }
    }
+
+
 
 
    /**TODO

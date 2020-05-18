@@ -547,9 +547,9 @@ public class Player implements Serializable {
       isSanctuaryStrongholdScoringTile = sanctuaryStrongholdScoringTile;
    }
 
-   public boolean isSpadeScoringTile() {
-      return isSpadeScoringTile;
-   }
+
+
+
 
    public void setSpadeScoringTile(boolean spadeScoringTile) {
       isSpadeScoringTile = spadeScoringTile;

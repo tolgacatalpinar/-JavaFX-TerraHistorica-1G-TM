@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
     public class ScoreTableView extends BorderPane {
 
+
         public ScoreTableView(ArrayList<ArrayList<Integer>>[] religionScores, ArrayList<Integer>[] pathScores, Player[] playerList){
             this.setWidth(1200);
             this.setHeight(600);
@@ -41,6 +42,8 @@ import java.util.ArrayList;
             VBox ranking1 = new VBox(vic_p2, label1 ,sep_line, label2,sep_line2, label3 );
             ranking1.setStyle("-fx-background-color: rgba(133,88,23,0.43);");
             HBox allTable = new HBox();
+            Label emptyLabel1 = new Label("\t");
+            allTable.getChildren().add(emptyLabel1);
             allTable.getChildren().add(ranking1);
             for (int i = 0; i< 4;i++){
                 VBox tempBox = new VBox();
@@ -78,7 +81,6 @@ import java.util.ArrayList;
                         int player_id = religionScores[i].get(j).get(k);
                         ImageView player_images = new ImageView(getImage(playerList[player_id]));
                         if(religionScores[i].get(j).size() == 1){
-                            System.out.println("giiiiii");
                             Label label = new Label("\t");
                             tempHBox.getChildren().add(label);
                         }
@@ -93,6 +95,8 @@ import java.util.ArrayList;
 
                 allTable.getChildren().add(tempBox);
             }
+            Label emptyLabel2 = new Label("\t");
+            allTable.getChildren().add(emptyLabel2);
             Label label4 = new Label("\n   18\n\n");
             Label label5 = new Label("\n   12\n\n");
             Label label6 = new Label("\n    6");
@@ -112,27 +116,33 @@ import java.util.ArrayList;
             con_image.setFitHeight(this.getHeight()/5);
             connection.getChildren().add(con_image);
             for (int j = 0; j < 3; j++){
+
                 HBox tempHBox = new HBox();
+
                 if(j>0 && pathScores[j].size() > 0) {
                     ImageView sep_line8 = new ImageView("seperate_line.png");
                     sep_line8.setFitWidth(140);
                     sep_line8.setFitHeight(60);
                     connection.getChildren().add(sep_line8);
                 }
+
                 double align = pathScores[j].size();
+
                 for(int shaped = 1; shaped < pathScores[j].size();shaped++) {
                     Label label = new Label("\n");
                     connection.getChildren().add(label);
                     align = pathScores[j].size()/1.7;
                 }
+
                 for(int k = 0; k < pathScores[j].size(); k++){
                     int player_id = pathScores[j].get(k);
                     ImageView player_images = new ImageView(getImage(playerList[player_id]));
+
                     if(pathScores[j].size() == 1){
-                        System.out.println("giiiiii");
                         Label label = new Label("\t");
                         tempHBox.getChildren().add(label);
                     }
+
                     player_images.setFitHeight(this.getHeight()/(5*align));
                     player_images.setFitWidth(this.getWidth()/(13*align));
                     tempHBox.getChildren().add(player_images);
@@ -141,12 +151,15 @@ import java.util.ArrayList;
                 connection.getChildren().add(tempHBox);
                 connection.setStyle("-fx-background-color: rgba(29,80,107,0.36);");
             }
+
             allTable.getChildren().add(connection);
             ranking2.setStyle("-fx-background-color: rgba(29,80,107,0.36);");
             this.setCenter(allTable);
 
 
         }
+
+
         public Image getImage(Player player){
             Image image = null;
             if (player.getFaction() instanceof AliesterCrowley) {
@@ -178,6 +191,7 @@ import java.util.ArrayList;
             } else if (player.getFaction() instanceof VladTheImpaler) {
                 image = new Image("file:src/Images/FactionImages/Image_VladTheImpaler.jpeg");
             }
+
             return image;
         }
     }

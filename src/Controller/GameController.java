@@ -2,7 +2,6 @@ package Controller;
 
 import Model.*;
 import Model.CardsAndTiles.CardsAndTiles;
-import Model.FactionSubclasses.*;
 import View.*;
 import View.ActionsViews.ExchangeResourcesView;
 import View.ActionsViews.PowerActionView;
@@ -12,16 +11,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -193,6 +186,10 @@ public class GameController implements Initializable, Serializable {
       System.out.println("saved");
    }
 
+
+
+
+
    @FXML
    public void loadGameClicked() throws IOException
    {
@@ -208,6 +205,10 @@ public class GameController implements Initializable, Serializable {
          this.roundController = fm.loadGame(save, this).roundController;
     //     this.loadInitialMap();
    }
+
+
+
+
    @FXML
    public void skipTurnClicked() {
       disableButtonClicks();
@@ -234,6 +235,9 @@ public class GameController implements Initializable, Serializable {
       }
    }
 
+
+
+
    @FXML
    public void passRoundClicked() {
 
@@ -257,14 +261,21 @@ public class GameController implements Initializable, Serializable {
       System.out.println("Victory Point = " + engineerStrongholdAbility());
       if(roundController.isOver){
          this.scoreTableClicked();
-         System.out.println("girdii");
       }
    }
+
+
+
+
 
    @FXML
    public void bonusCardsClicked() {
       cardsAndTilesController.showBonusCardsTable(cardsAndTiles, currentPlayer,false);
    }
+
+
+
+
 
    @FXML
    public void upgradeShippingClicked() {
@@ -571,6 +582,7 @@ public class GameController implements Initializable, Serializable {
     * TODO
     * TAŞINACAK
     */
+
    public void displayPlayerTurn(ArrayList<PlayerView> playerViewList) {
 
 //      for (PlayerView playerView : playerViewList) {
@@ -745,13 +757,22 @@ public class GameController implements Initializable, Serializable {
       dialog.showAndWait();
    }
 
+
+
+
    public Map getMap() {
       return map;
    }
 
+
+
+
    public ArrayList<PlayerView> getPlayerViewList() {
       return playerViewList;
    }
+
+
+
 
    public Player[] getPlayerList() {
       return playerList;
