@@ -924,22 +924,29 @@ public class ActionController implements Serializable {
 //               alert.setHeaderText("Upgraded successfully \n");
 //               alert.setContentText("");
             } else if (returnCase == -1) {
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Not enough resources!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
 //               alert.setHeaderText("No enough resources");
 //               alert.setContentText("You have no required cost, priest, worker \n" +
 //                       "GOLD COST : " + goldCost + "\n" +
 //                       "PRIEST COST : " + priestCost + "\n");
             } else if (returnCase == -2){
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("You have no such ability!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
 //               alert.setHeaderText("You have no ability to ship");
 //               alert.setContentText("");
             }
             else{
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("You have max shipping level already!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
 //               alert.setHeaderText("You have max shipping level");
 //               alert.setContentText("");
             }
             stage.close();
-            Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr!"));
-            errorStage.show();
-            DialogueView.delayErrorMessage(errorStage);
+
          }
       });
 
@@ -974,12 +981,18 @@ public class ActionController implements Serializable {
 //               alert.setHeaderText("Upgraded successfully \n");
 //               alert.setContentText("");
             }else if (returnCase == -1) {
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Not enough resources!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
 //               alert.setHeaderText("No enough resources");
 //               alert.setContentText("You have no required cost, priest, worker \n" +
 //                       "GOLD COST : " + goldCost + "\n" +
 //                       "PRIEST COST : " + priestCost + "\n" +
 //                       "WORKER COST : " + workerCost);
             }else{
+               Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("You have max spade level already!"));
+               errorStage.show();
+               DialogueView.delayErrorMessage(errorStage);
 //               alert.setHeaderText("You have max spade level");
 //               alert.setContentText("");
             }

@@ -132,7 +132,7 @@
                 </font>
             </Text>
 
-            <Button id="backButton" fx:id="backButton" layoutX="-37.0" layoutY="664.0" mnemonicParsing="false" onMouseClicked="#backButtonClicked" prefHeight="56.0" prefWidth="354.0" text="Back to Main Menu" textFill="WHITE">
+            <Button id="backButton" fx:id="backButton" layoutX="-37.0" layoutY="664.0" mnemonicParsing="false" onMouseClicked="#backButtonClicked" prefHeight="56.0" prefWidth="354.0" text="Back to View.Main Menu" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="29.0" />
                 </font>
