@@ -24,16 +24,32 @@ public class TownTileView extends VBox {
            Label powerLabel = new Label("" + this.townTile.getPowerBonus());
            addResourceBox(powerIm, powerLabel);
         }
-        if(this.townTile.getWorkerBonus() > 0)
-            add( new Label("Worker : " + this.townTile.getWorkerBonus()));
-        if(this.townTile.getPriestBonus() > 0)
-            add( new Label("Priest : " + this.townTile.getPriestBonus()));
-        if(this.townTile.getGoldBonus() > 0)
-            add( new Label("Gold : " + this.townTile.getGoldBonus()));
-        if(this.townTile.getVictoryBonus() > 0)
-            add( new Label("Victory Points : " + this.townTile.getVictoryBonus()));
-       if(this.townTile.getChristianityPoint() > 0)
-          add( new Label("All Religions: +" + this.townTile.getChristianityPoint()));
+        if(this.townTile.getWorkerBonus() > 0) {
+            ImageView powerIm = new ImageView( new Image("worker.png"));
+            Label powerLabel = new Label("" + this.townTile.getWorkerBonus());
+            addResourceBox(powerIm, powerLabel);
+        }
+        if(this.townTile.getPriestBonus() > 0) {
+            ImageView powerIm = new ImageView( new Image("priest.png"));
+            Label powerLabel = new Label("" + this.townTile.getPriestBonus());
+            addResourceBox(powerIm, powerLabel);
+        }
+        if(this.townTile.getGoldBonus() > 0) {
+            ImageView powerIm = new ImageView( new Image("gold.png"));
+            Label powerLabel = new Label("" + this.townTile.getGoldBonus());
+            addResourceBox(powerIm, powerLabel);
+        }
+        if(this.townTile.getVictoryBonus() > 0) {
+            ImageView powerIm = new ImageView( new Image("victory_point.png"));
+            Label powerLabel = new Label("" + this.townTile.getVictoryBonus());
+            addResourceBox(powerIm, powerLabel);
+        }
+       if(this.townTile.getChristianityPoint() > 0) {
+
+           ImageView powerIm = new ImageView( new Image("chris_symbol.png"));
+           Label powerLabel = new Label("" + this.townTile.getChristianityPoint());
+           addResourceBox(powerIm, powerLabel);
+       }
         getChildren().add(card);
     }
     public void add(Node node)
