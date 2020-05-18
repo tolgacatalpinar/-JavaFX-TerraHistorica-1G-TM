@@ -423,7 +423,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void specialActionClicked() {
-      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId(),map, mapPane, terrains,actions);
+      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId(),map, mapPane, terrains,actions, cardsAndTiles, religionArr);
    }
 
    public void createSpaces() {
