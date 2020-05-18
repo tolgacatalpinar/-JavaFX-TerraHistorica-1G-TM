@@ -633,7 +633,7 @@ public class GameController implements Initializable, Serializable {
    public void showPowerActions(Player currentPlayer) {
 
       BorderPane border = new BorderPane();
-      BackgroundImage bg = new BackgroundImage(new Image("the_background_10.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0, true, true, false, false));
+      BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0, true, true, false, false));
       border.setBackground(new Background(bg));
       GridPane gridPane = new GridPane();
       gridPane.setHgap(10);
@@ -800,7 +800,7 @@ public class GameController implements Initializable, Serializable {
    }
    private void showExchangeResources(Player currentPlayer) {
       BorderPane border = new BorderPane();
-      BackgroundImage bg = new BackgroundImage(new Image("the_background_6.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,   new BackgroundSize(1.0, 1.0, true, true, false, false));
+      BackgroundImage bg = new BackgroundImage(new Image("religion_bg.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,   new BackgroundSize(1.0, 1.0, true, true, false, false));
       border.setBackground(new Background(bg));
       GridPane gridPane = new GridPane();
       gridPane.setHgap(10);
@@ -906,7 +906,7 @@ public class GameController implements Initializable, Serializable {
       dialog.initModality(Modality.APPLICATION_MODAL);
       Scene dialogScene = new Scene(border, 1100, 600);
       dialog.setScene(dialogScene);
-      dialog.setTitle("Power Action");
+      dialog.setTitle("Exchange Resources");
       dialog.setResizable(false);
 
       select.setOnMouseClicked(new EventHandler<MouseEvent>() {
