@@ -164,7 +164,7 @@ public class GameController implements Initializable, Serializable {
                   }
                   else if(playerList != null)
                   {
-                     System.out.println("else is in");
+                     //System.out.println("else is in");
                      for( int i = 0; i < playerViewList.size(); i ++)
                      {
                         playerViewList.get(i).updateView(playerList[i]);
@@ -173,6 +173,7 @@ public class GameController implements Initializable, Serializable {
                      showTown(terrains, map);
                   }
 
+                   System.out.println("Spade level is " + playerList[roundController.getCurrentPlayerId()].getSpadeLevel());
                }
             };
 
@@ -461,8 +462,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void townTilesClicked() throws IOException {
-      //todo
-      cardsAndTilesController.showTownTilesTable(cardsAndTiles,playerList[roundController.currentPlayerId],religionArr,true);
+      cardsAndTilesController.showTownTilesTable(cardsAndTiles,playerList[roundController.currentPlayerId],religionArr,false);
    }
 
    @FXML
@@ -764,9 +764,6 @@ public class GameController implements Initializable, Serializable {
 
          @Override
          public void handle(MouseEvent event) {
-            playerList[roundController.currentPlayerId].setBowlThreePower(12);
-            playerList[roundController.currentPlayerId].setWorkerNum(1000);
-            playerList[roundController.currentPlayerId].setGoldNum(1000);
             int chosen = powerActionView.getSelection();
             System.out.println("Selection: " + chosen);
             powerActionView.setSelection(chosen);
@@ -783,11 +780,9 @@ public class GameController implements Initializable, Serializable {
                }
                if(checkBridgability) {
                   if (playerHandler.usePowerAction(0, currentPlayer)) {
-                     System.out.println("Girdi");
                      TerrainController.disableTerrains(terrains,map);
                      TerrainController.buildBridge(playerList[roundController.currentPlayerId].getFaction().TERRAIN_TILE, terrains, map, mapPane, actions);
                      disableActions();
-                     System.out.println("Köprü kuruldu");
                   }
                }
             } else if (powerActionView.getSelection() == 4) {
@@ -806,7 +801,6 @@ public class GameController implements Initializable, Serializable {
                }
             } else {
                if (playerHandler.usePowerAction(powerActionView.getSelection(), currentPlayer)) {
-                  System.out.println("Köprü kuruldu");
                }
             }
          }

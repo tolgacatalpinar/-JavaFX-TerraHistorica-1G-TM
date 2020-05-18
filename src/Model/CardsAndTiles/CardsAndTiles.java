@@ -194,9 +194,13 @@ public class CardsAndTiles implements Serializable {
                 player.setShipLevel(player.getShipLevel() - selectedBonusCards.get(previousCardId).getShippingRange());
                 player.getSpecialActionToken().isCultTack = false;
                 player.getSpecialActionToken().isSpade = false;
+                if(selectedBonusCards.get(previousCardId).isSpacialSpade())
+                    player.setFreeSpade(player.getFreeSpade() -1);
             }
             bonusCard.setPlayerOcupied(true);
             bonusCard.setPlayerId(playerId);
+            if(bonusCard.isSpacialSpade())
+                player.setFreeSpade(player.getFreeSpade() + 1);
             player.setGoldNum(player.getGoldNum() + bonusCard.getGoldBonus());
             player.setWorkerNum(player.getWorkerNum() + bonusCard.getWorkerBonus());
             player.addPowerToBowl(bonusCard.getPowerBonus());
@@ -224,14 +228,14 @@ public class CardsAndTiles implements Serializable {
                 playerList[i].setSanctuaryStrongholdScoringTile (currentScoringTile.isStrongHoldBonus());
                 playerList[i].setSpadeScoringTile (currentScoringTile.isRequiredSpade());
                 playerList[i].setTownScoringTile (currentScoringTile.isRequiredTown());
-                if(currentScoringTile.isRequiredIslam() && currentScoringTile.getRequiredIslam() >= religionArr[0].getRoundBasedPosition()[i] ){
+                if(currentScoringTile.isRequiredIslam() && currentScoringTile.getRequiredIslam() <= religionArr[0].getRoundBasedPosition()[i] ){
                     helperReturnScoring(playerList[i],currentScoringTile);
-                }else if(currentScoringTile.isRequiredChrist() && currentScoringTile.getRequiredChrist() >= religionArr[1].getRoundBasedPosition()[i]){
+                }else if(currentScoringTile.isRequiredChrist() && currentScoringTile.getRequiredChrist() <= religionArr[1].getRoundBasedPosition()[i]){
                     helperReturnScoring(playerList[i],currentScoringTile);
-                }else if(currentScoringTile.isRequiredBudism() && currentScoringTile.getRequiredBudism() >=religionArr[3].getRoundBasedPosition()[i] ){
+                }else if(currentScoringTile.isRequiredBudism() && currentScoringTile.getRequiredBudism() <=religionArr[3].getRoundBasedPosition()[i] ){
                     helperReturnScoring(playerList[i],currentScoringTile);
                 }
-                else if(currentScoringTile.isRequiredJudaism() && currentScoringTile.getRequiredJudaism() >=religionArr[2].getRoundBasedPosition()[i] ){
+                else if(currentScoringTile.isRequiredJudaism() && currentScoringTile.getRequiredJudaism() <=religionArr[2].getRoundBasedPosition()[i] ){
                     helperReturnScoring(playerList[i],currentScoringTile);
 
                 }

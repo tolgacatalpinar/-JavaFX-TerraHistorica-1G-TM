@@ -502,10 +502,6 @@ public class ActionController implements Serializable {
          public void handle(MouseEvent event) {
             ArrayList<Player> adjacentPlayers = map.adjacentPlayers(space,space.getType());
             int returnCase = playerHandler.buildStructure(current, "Sanctuary", false);
-            /**
-             * TODO
-             * YANDAKİ UŞAKLARA SOR
-             */
             if(returnCase > 0){
                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                for(int i = 0; i < adjacentPlayers.size(); i++) {
@@ -603,6 +599,7 @@ public class ActionController implements Serializable {
     * TAŞINACAK
     */
    public static void showSpeacialActions(Player[] playerList,Religion[] religions,int currentPlayerId,Map map, Pane mapPane, Button[][] terrains,Button[] actions) {
+      ReligionController religionController = new ReligionController();
       VBox wholeFavor = new VBox();
       HBox firstRow = new HBox();
       HBox secondRow = new HBox();
@@ -642,12 +639,10 @@ public class ActionController implements Serializable {
       special2.setOnMouseClicked(new EventHandler<Event>() {
          @Override
          public void handle(Event event) {
-            ReligionController religionController = new ReligionController();
             if (currentPlayer.getSpecialActionToken().isCultTack) {
                System.out.println("Cult Action");
                choice[0] = 2;
                System.out.println(choice[0]);
-               religionController.showReligion(playerList,2,religions,currentPlayerId, true);
                event.consume();
             } else {
                Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -708,17 +703,18 @@ public class ActionController implements Serializable {
          public void handle(Event event) {
             if (choice[0] == 1) {
                currentPlayer.getSpecialActionToken().isSpade = false;
-               currentPlayer.setFreeSpade(currentPlayer.getFreeSpade() + 1);
+               //CAN BURAYA TERRAFORM YAPTIRALIM ABİ
+
                event.consume();
             } else if (choice[0] == 2) {
                currentPlayer.getSpecialActionToken().isCultTack = false;
+               religionController.showReligion(playerList,2,religions,currentPlayerId, true);
                event.consume();
             } else if (choice[0] == 3) {
                currentPlayer.getSpecialActionToken().isStrongholdAbility = false;
                strongholdAbility(terrains,map,actions,playerList[currentPlayerId]);
                event.consume();
             } else if (choice[0] == 4) {
-               System.out.println("geldimm");
                currentPlayer.getSpecialActionToken().isFactionAbility = true;
                factionAbility(playerList[currentPlayerId], map, mapPane, terrains, actions);
                event.consume();
