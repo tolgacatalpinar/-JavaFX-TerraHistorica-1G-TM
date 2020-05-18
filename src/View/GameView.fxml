@@ -91,7 +91,7 @@
                     <Font name="Book Antiqua" size="18.0" />
                 </font>
             </Button>
-            <Button fx:id="loadGame" layoutX="10.0" layoutY="496.0" onMouseClicked="#loadGameClicked" prefHeight="50" prefWidth="200" text="Load Game" textFill="WHITE">
+            <Button fx:id="loadGame" layoutX="10.0" layoutY="496.0" onMouseClicked="#loadGameClicked" opacity="0" prefHeight="50" prefWidth="200" text="Load Game" textFill="WHITE">
                 <font>
                     <Font name="Book Antiqua" size="18.0" />
                 </font>
