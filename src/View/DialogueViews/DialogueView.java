@@ -1,8 +1,14 @@
 package View.DialogueViews;
 
 import Model.Player;
+import javafx.animation.PauseTransition;
+import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,6 +24,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.io.Serializable;
 public class DialogueView implements  Serializable{
@@ -43,6 +50,19 @@ public class DialogueView implements  Serializable{
               BackgroundSize.DEFAULT)));
       return dialog;
    }
+   public static Stage getStage(Parent component)
+   {
+      final Stage dialog = new Stage();
+      dialog.initStyle(StageStyle.UNDECORATED);
+      dialog.initModality(Modality.APPLICATION_MODAL);
+      Scene dialogScene = new Scene(component, 400, 100);
+      dialog.setScene(dialogScene);
+      dialog.setResizable(false);
+      ((Pane)component).setBackground(new Background( new BackgroundImage( new Image("dialogueBackground.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+              BackgroundSize.DEFAULT)));
+      return dialog;
+   }
+
    public static VBox getDwellingUpgradePromptPane(Player player, Button discardButton, Button tradingPostButton)
    {
       int leftGold = 0;
@@ -98,5 +118,34 @@ public class DialogueView implements  Serializable{
       String promptText = "Do you want to upgrade your shipping?";
       VBox shippingDialoguePane = DialoguePane.getShippingDialoguePane(discardButton, shippingButton, promptText, promptInsets, leftGold, rightGold, leftPriest, rightPriest);
       return shippingDialoguePane;
+   }
+   public static VBox getUpgradeSpadePromptPane(Player player, Button discardButton, Button spadeButton)
+   {
+      int leftGold = 0;
+      int rightGold = player.getFaction().SHIPPING_GOLD_COST;
+      int leftWorker = 0;
+      int rightWorker = player.getFaction().SPADE_WORKER_COST;
+      int leftPriest = 0;
+      int rightPriest = player.getFaction().SHIPPING_PRIEST_COST;
+      Insets promptInsets = new Insets(0, 0, 20, 90);
+      String promptText = "Do you want to upgrade your shipping?";
+      VBox shippingDialoguePane = DialoguePane.getSpadeDialoguePane(discardButton, spadeButton, promptText, promptInsets, leftGold, rightGold, leftPriest, rightPriest, leftWorker, rightWorker);
+      return shippingDialoguePane;
+   }
+   public static VBox getErrorMessage(String error)
+   {
+      Label errorLabel = new Label(error);
+      errorLabel.setTextFill(Color.WHITE);
+      errorLabel.getStyleClass().add("errorText");
+      VBox box = new VBox();
+      box.getChildren().add(errorLabel);
+      box.setAlignment(Pos.CENTER);
+      return box;
+   }
+   public static void delayErrorMessage(Stage stage)
+   {
+      PauseTransition delay = new PauseTransition(Duration.seconds(3));
+      delay.setOnFinished( event -> stage.close() );
+      delay.play();
    }
 }

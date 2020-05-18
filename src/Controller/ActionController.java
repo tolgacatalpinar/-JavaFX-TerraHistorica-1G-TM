@@ -154,9 +154,9 @@ public class ActionController implements Serializable {
             terraformStage.close();
             if (selectedChoice.equals(current.getFaction().TERRAIN_TILE) && flag) {
                DialogueImageButton dwellingButton = new DialogueImageButton("dialogueDwelling.png");
-               DialogueImageButton emptyTerrainButton = new DialogueImageButton("dialogueEmptyTerrain.jpg");
+               DialogueImageButton emptyTerrainButton = new DialogueImageButton("dialogueEmptyTerrain.png");
                VBox pane = DialogueView.getDwellingAfterTerraformPromptPane(current, dwellingButton, emptyTerrainButton);
-               Stage dwellingChoiceStage = DialogueView.getStage("Do you want to build dwelling?", pane, new Image("dialogueBackground.jpg"));
+               Stage dwellingChoiceStage = DialogueView.getStage("Do you want to build dwelling?", pane, new Image("dialogueBackground.png"));
                dwellingChoiceStage.show();
                dwellingButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                   @Override
@@ -276,10 +276,10 @@ public class ActionController implements Serializable {
    public static void upgradeToTradingPost(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions,CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
       PlayerHandler playerHandler = new PlayerHandler();
       DialogueImageButton discardButton = new DialogueImageButton("dialogueDiscardDoor.png");
-      DialogueImageButton tradingPostButton = new DialogueImageButton("dialogueTradingPost.jpg");
+      DialogueImageButton tradingPostButton = new DialogueImageButton("dialogueTradingPost.png");
       VBox pane = DialogueView.getDwellingUpgradePromptPane(current, discardButton, tradingPostButton);
 
-      Stage stage = DialogueView.getStage("Upgrade Dwelling", pane, new Image("dialogueBackground.jpg"));
+      Stage stage = DialogueView.getStage("Upgrade Dwelling", pane, new Image("dialogueBackground.png"));
 
       stage.show();
       tradingPostButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -344,11 +344,11 @@ public class ActionController implements Serializable {
 
    public static void upgradeToStrongholdOrTemple(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
       PlayerHandler playerHandler = new PlayerHandler();
-      DialogueImageButton templeButton = new DialogueImageButton("dialogueTemple.jpg");
-      DialogueImageButton strongholdButton = new DialogueImageButton("dialogueStronghold.jpg");
+      DialogueImageButton templeButton = new DialogueImageButton("dialogueTemple.png");
+      DialogueImageButton strongholdButton = new DialogueImageButton("dialogueStronghold.png");
       VBox pane = DialogueView.getTradingPostUpgradePromptPane(current, templeButton, strongholdButton);
 
-      Stage stage = DialogueView.getStage("Upgrade Trading Post", pane, new Image("dialogueBackground.jpg"));
+      Stage stage = DialogueView.getStage("Upgrade Trading Post", pane, new Image("dialogueBackground.png"));
 
 
       templeButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -482,10 +482,10 @@ public class ActionController implements Serializable {
    public static void upgradeToSanctuary(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions,int x, int y) {
       PlayerHandler playerHandler = new PlayerHandler();
       DialogueImageButton discardButton = new DialogueImageButton("dialogueDiscardDoor.png");
-      DialogueImageButton sanctuaryButton = new DialogueImageButton("dialogueSanctuary.jpg");
+      DialogueImageButton sanctuaryButton = new DialogueImageButton("dialogueSanctuary.png");
       VBox pane = DialogueView.getTempleUpgradePromptPane(current, discardButton, sanctuaryButton);
 
-      Stage stage = DialogueView.getStage("Upgrade Temple", pane, new Image("dialogueBackground.jpg"));
+      Stage stage = DialogueView.getStage("Upgrade Temple", pane, new Image("dialogueBackground.png"));
 
       /**
        * TODO
@@ -910,10 +910,10 @@ public class ActionController implements Serializable {
 
       PlayerHandler playerHandler = new PlayerHandler();
       DialogueImageButton discardButton = new DialogueImageButton("dialogueDiscardDoor.png");
-      DialogueImageButton shippingButton = new DialogueImageButton("dialogueShipping.jpg");
+      DialogueImageButton shippingButton = new DialogueImageButton("dialogueShipping.png");
       VBox pane = DialogueView.getUpgradeShippingPromptPane(player, discardButton, shippingButton);
 
-      Stage stage = DialogueView.getStage("Upgrade Shipping", pane, new Image("dialogueBackground.jpg"));
+      Stage stage = DialogueView.getStage("Upgrade Shipping", pane, new Image("dialogueBackground.png"));
       stage.show();
       shippingButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
          @Override
@@ -937,6 +937,9 @@ public class ActionController implements Serializable {
 //               alert.setContentText("");
             }
             stage.close();
+            Stage errorStage = DialogueView.getStage(DialogueView.getErrorMessage("Errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr!"));
+            errorStage.show();
+            DialogueView.delayErrorMessage(errorStage);
          }
       });
 
@@ -955,40 +958,40 @@ public class ActionController implements Serializable {
     */
    public static void showUpdateSpadeDialogs(Player player, Button[] actions) {
       PlayerHandler playerHandler = new PlayerHandler();
-      int priestCost = player.getFaction().SPADE_PRIEST_COST;
-      int goldCost = player.getFaction().SPADE_GOLD_COST;
-      int workerCost = player.getFaction().SPADE_WORKER_COST;
-      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-      alert.setTitle("Upgrade Spade");
-      alert.setHeaderText("GOLD COST : " + goldCost + "\n" +
-              "PRIEST COST : " + priestCost + "\n" +
-              "WORKER COST : " + workerCost);
-      alert.setContentText("Do you want to update your spade level \n" +
-              "Current Level : " + player.getSpadeLevel() + "\n"
-      );
-      Optional<ButtonType> result = alert.showAndWait();
-      if (result.get() == ButtonType.OK) {
-         alert.setTitle("Update Spade level");
-         int returnCase = playerHandler.upgradeSpadeLevel(player);
-         if (returnCase == 1){
-            disableActions(actions);
-            alert.setHeaderText("Upgraded successfully \n");
-            alert.setContentText("");
-         }else if (returnCase == -1) {
-            alert.setHeaderText("No enough resources");
-            alert.setContentText("You have no required cost, priest, worker \n" +
-                    "GOLD COST : " + goldCost + "\n" +
-                    "PRIEST COST : " + priestCost + "\n" +
-                    "WORKER COST : " + workerCost);
-         }else{
-            alert.setHeaderText("You have max spade level");
-            alert.setContentText("");
-         }
-         alert.showAndWait();
-      } else {
-         // ... user chose CANCEL or closed the dialog
-      }
 
+      DialogueImageButton discardButton = new DialogueImageButton("dialogueDiscardDoor.png");
+      DialogueImageButton shippingButton = new DialogueImageButton("dialogueSpade.png");
+      VBox pane = DialogueView.getUpgradeSpadePromptPane(player, discardButton, shippingButton);
+
+      Stage stage = DialogueView.getStage("Upgrade Spade", pane, new Image("dialogueBackground.png"));
+      stage.show();
+      shippingButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         @Override
+         public void handle(MouseEvent event) {
+            int returnCase = playerHandler.upgradeSpadeLevel(player);
+            if (returnCase == 1){
+               disableActions(actions);
+//               alert.setHeaderText("Upgraded successfully \n");
+//               alert.setContentText("");
+            }else if (returnCase == -1) {
+//               alert.setHeaderText("No enough resources");
+//               alert.setContentText("You have no required cost, priest, worker \n" +
+//                       "GOLD COST : " + goldCost + "\n" +
+//                       "PRIEST COST : " + priestCost + "\n" +
+//                       "WORKER COST : " + workerCost);
+            }else{
+//               alert.setHeaderText("You have max spade level");
+//               alert.setContentText("");
+            }
+            stage.close();
+         }
+      });
+      discardButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         @Override
+         public void handle(MouseEvent event) {
+            stage.close();
+         }
+      });
 
 
    }
