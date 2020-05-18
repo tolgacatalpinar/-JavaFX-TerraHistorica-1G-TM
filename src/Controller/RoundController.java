@@ -8,7 +8,7 @@ public class RoundController implements  Serializable{
     int playerCount = 0;
     int currentRound = 0;
     boolean isOver = false;
-    final int MAX_ROUND = 2;
+    final int MAX_ROUND = 6;
     PlayerHandler playerHandler;
     int lastPassedIndex = 0;
     Player[] passRoundPlayerList;
