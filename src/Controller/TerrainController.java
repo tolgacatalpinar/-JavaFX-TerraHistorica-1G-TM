@@ -202,6 +202,7 @@ public class TerrainController implements Serializable {
    }
 
    public static void buildBridge(String type, Button[][] terrains, Map map, Pane mapPane, Button[] actions) {
+      disableTerrains(terrains, map);
       for(int i = 0; i < ROW_NUMBER; i++){
          for( int j = 0; j < COLUMN_NUMBER; j++){
             if(terrains[i][j] != null && map.spaces[i][j] != null)

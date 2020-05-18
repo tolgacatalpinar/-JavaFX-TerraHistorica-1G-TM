@@ -151,6 +151,10 @@ public class GameController implements Initializable, Serializable {
                      borderPane.setPadding(new Insets(0,0,50,0));
                      displayPlayerTurn(playerViewList);
                      showTown(terrains, map);
+
+//                     if(playerList[roundController.currentPlayerId].isRoundPassed()){
+//                        disableActions();
+//                     }
 //                     ImageView imview = new ImageView();
 //                     imview.setImage(new Image("file:src/Images/FactionImages/Image_AleisterCrowley.jpeg"));
 //                     imview.setFitHeight(150);
@@ -345,7 +349,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void specialActionClicked() {
-      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId(),map,terrains,actions);
+      ActionController.showSpeacialActions( playerList, religionArr, roundController.getCurrentPlayerId(),map, mapPane, terrains,actions);
    }
 
    public void createSpaces() {
@@ -588,9 +592,9 @@ public class GameController implements Initializable, Serializable {
     */
    public void displayPlayerTurn(ArrayList<PlayerView> playerViewList) {
 
-      for (PlayerView playerView : playerViewList) {
-         playerView.setStyle("");
-      }
+//      for (PlayerView playerView : playerViewList) {
+//         playerView.setStyle("");
+//      }
 
       switch (playerList[roundController.getCurrentPlayerId()].getFaction().TERRAIN_TILE) {
          case "Wasteland":
@@ -615,6 +619,8 @@ public class GameController implements Initializable, Serializable {
             playerViewList.get(roundController.getCurrentPlayerId()).setStyle("-fx-effect: dropshadow( gaussian , rgba(152, 93, 27, 1), 10,0.5,0,1 );");
             break;
       }
+
+
 
    }
 
