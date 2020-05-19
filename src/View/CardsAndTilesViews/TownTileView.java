@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 
 public class TownTileView extends VBox {
     TownTile townTile;
-    CardView card;
+    public CardView card;
 
 
     public TownTileView( TownTile townTile)

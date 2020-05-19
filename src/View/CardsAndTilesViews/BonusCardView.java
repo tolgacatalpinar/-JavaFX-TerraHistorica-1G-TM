@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 
 public class BonusCardView extends VBox {
     BonusCard bonusCard;
-    CardView card;
+    public CardView card;
     public BonusCardView( BonusCard bonusCard)
     {
         this.bonusCard = bonusCard;

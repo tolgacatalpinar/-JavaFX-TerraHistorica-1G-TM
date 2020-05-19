@@ -329,7 +329,7 @@ public class GameController implements Initializable, Serializable {
    public void passRoundClicked() {
 
       if(roundController.getCurrentRound() + 1 != roundController.getMAX_ROUND()) {
-         cardsAndTilesController.showBonusCardsTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], true);
+         cardsAndTilesController.showBonusCardsTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], true,playerList);
       }
          int round1 = roundController.getCurrentRound();
          roundController.passRound(playerList);
@@ -353,7 +353,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void bonusCardsClicked() {
-      cardsAndTilesController.showBonusCardsTable(cardsAndTiles, currentPlayer,false);
+      cardsAndTilesController.showBonusCardsTable(cardsAndTiles, currentPlayer,false,playerList);
    }
 
    @FXML
@@ -375,7 +375,7 @@ public class GameController implements Initializable, Serializable {
    }
    @FXML
    public void terraformClicked() {
-      ActionController.terraform(playerList[roundController.currentPlayerId], terrains, map, actions, cardsAndTiles,religionArr);
+      ActionController.terraform(playerList[roundController.currentPlayerId], terrains, map, actions, cardsAndTiles,religionArr,playerList);
 
    }
 
@@ -404,7 +404,7 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void townTilesClicked() throws IOException {
       //todo
-      cardsAndTilesController.showTownTilesTable(cardsAndTiles,playerList[roundController.currentPlayerId],religionArr,true);
+      cardsAndTilesController.showTownTilesTable(cardsAndTiles,playerList[roundController.currentPlayerId],religionArr,false,playerList);
    }
 
    @FXML
