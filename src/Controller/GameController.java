@@ -332,7 +332,7 @@ public class GameController implements Initializable, Serializable {
    public void passRoundClicked() {
 
       if(roundController.getCurrentRound() + 1 != roundController.getMAX_ROUND()) {
-         cardsAndTilesController.showBonusCardsTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], true,playerList);
+         cardsAndTilesController.showBonusCardsTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], true);
       }
          int round1 = roundController.getCurrentRound();
          roundController.passRound(playerList);
@@ -356,7 +356,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void bonusCardsClicked() {
-      cardsAndTilesController.showBonusCardsTable(cardsAndTiles, currentPlayer,false,playerList);
+      cardsAndTilesController.showBonusCardsTable(cardsAndTiles, currentPlayer,false);
    }
 
    @FXML
@@ -378,13 +378,13 @@ public class GameController implements Initializable, Serializable {
    }
    @FXML
    public void terraformClicked() {
-      ActionController.terraform(playerList[roundController.currentPlayerId], terrains, map, actions, cardsAndTiles,religionArr,playerList);
+      ActionController.terraform(playerList[roundController.currentPlayerId], terrains, map, actions, cardsAndTiles,religionArr);
 
    }
 
    @FXML
    public void upgradeStructureClicked() {
-      ActionController.upgradeStructure(playerList[roundController.getCurrentPlayerId()] , terrains, map, actions, cardsAndTiles, religionArr,playerList);
+      ActionController.upgradeStructure(playerList[roundController.getCurrentPlayerId()] , terrains, map, actions, cardsAndTiles, religionArr);
 
    }
    @FXML
@@ -407,7 +407,7 @@ public class GameController implements Initializable, Serializable {
    @FXML
    public void townTilesClicked() throws IOException {
       //todo
-      cardsAndTilesController.showTownTilesTable(cardsAndTiles,playerList[roundController.currentPlayerId],religionArr,false,playerList);
+      cardsAndTilesController.showTownTilesTable(cardsAndTiles,playerList[roundController.currentPlayerId],religionArr,false);
    }
 
    @FXML
@@ -423,7 +423,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void favorTilesClicked() {
-      cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], religionArr,false,playerList);
+      cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], religionArr,false);
    }
 
    @FXML

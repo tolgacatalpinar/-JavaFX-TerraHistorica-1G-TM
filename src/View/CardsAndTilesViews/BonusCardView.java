@@ -68,6 +68,7 @@ public class BonusCardView extends VBox {
        if( node instanceof Label)
        {
           ((Label)node).setTextFill(Color.WHITE);
+          ((Label) node).setAlignment(Pos.CENTER);
        }
        card.getChildren().add(node);
     }
