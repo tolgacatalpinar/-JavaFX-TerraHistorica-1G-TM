@@ -58,6 +58,7 @@ public class TownTileView extends VBox {
        if( node instanceof Label)
        {
           ((Label)node).setTextFill(Color.WHITE);
+          ((Label) node).setAlignment(Pos.CENTER);
        }
        card.add( node);
     }
