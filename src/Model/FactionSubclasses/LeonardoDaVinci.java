@@ -12,8 +12,10 @@ public class LeonardoDaVinci extends Faction { //Engineer
       TERRAIN_TILE = "Mountains";
       INITIAL_WORKER = 2;
       INITIAL_GOLD = 10;
+
       INITIAL_BOWL_ONE_POWER = 3;
       INITIAL_BOWL_TWO_POWER = 9;
+     //INITIAL_BOWL_TWO_POWER = 100;
       INITIAL_VICTORY_POINT = 16;
       INITIAL_WORKER_INCOME = 0;
       DWELLING_GOLD_COST = 1;

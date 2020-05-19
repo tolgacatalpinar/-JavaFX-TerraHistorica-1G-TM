@@ -99,10 +99,10 @@ public class DialogueView implements  Serializable{
    }
    public static VBox getTempleUpgradePromptPane(Player player, Button discardButton, Button sanctuaryButton)
    {
-      int leftGold = player.getFaction().TEMPLE_GOLD_COST;
-      int rightGold = player.getFaction().STRONGHOLD_GOLD_COST;
-      int leftWorker = player.getFaction().TEMPLE_WORKER_COST;
-      int rightWorker = player.getFaction().STRONGHOLD_WORKER_COST;
+      int leftGold = 0;
+      int rightGold = player.getFaction().SANCTUARY_GOLD_COST;
+      int leftWorker = 0;
+      int rightWorker = player.getFaction().SANCTUARY_WORKER_COST;
       Insets promptInsets = new Insets(0, 0, 20, 90);
       String promptText = "Do you want to upgrade temple to sanctuary";
       DialoguePane templeOrStrongholdDialogue = new DialoguePane(discardButton, sanctuaryButton, promptText, promptInsets, leftGold, rightGold, leftWorker, rightWorker);
