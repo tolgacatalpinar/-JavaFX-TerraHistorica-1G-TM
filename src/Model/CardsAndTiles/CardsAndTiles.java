@@ -2,6 +2,7 @@ package Model.CardsAndTiles;
 
 import Model.Player;
 import Model.Religion;
+
 import java.util.ArrayList;
 import java.io.Serializable;
 public class CardsAndTiles implements Serializable {
@@ -274,6 +275,9 @@ public class CardsAndTiles implements Serializable {
 
         }
     }
+
+
+
 
    public ArrayList<TownTile> getTownTiles() {
       return townTiles;

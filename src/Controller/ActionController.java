@@ -251,7 +251,7 @@ public class ActionController implements Serializable {
 //        Controller.TerrainController.disableButtonClicks(terrains);
    }
 
-   public  static void upgradeStructure(Player current,Button[][] terrains, Map map, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions) {
+   public  static void upgradeStructure(Player current,Button[][] terrains, Map map, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions,Player[] arr) {
       TerrainController.disableTerrains(terrains, map);
 
       for (int i = 0; i < ROW_NUMBER; i++) {
@@ -272,9 +272,9 @@ public class ActionController implements Serializable {
                         if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Dwelling"))
                            upgradeToTradingPost(current, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ],actions,cardsAndTiles,religions,finalI, finalJ);
                         else if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Trading Post"))
-                           upgradeToStrongholdOrTemple(current, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ], actions, cardsAndTiles, religions, finalI, finalJ);
+                           upgradeToStrongholdOrTemple(current, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ], actions, cardsAndTiles, religions, finalI, finalJ,arr);
                         else if (map.spaces[finalI][finalJ].getStructure().getBuilding().equals("Temple"))
-                           upgradeToSanctuary(current, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ], actions, cardsAndTiles, religions, finalI, finalJ);
+                           upgradeToSanctuary(current, terrains, terrains[finalI][finalJ], map, map.spaces[finalI][finalJ], actions, cardsAndTiles, religions, finalI, finalJ,arr);
 
                      }
                   });
@@ -359,7 +359,7 @@ public class ActionController implements Serializable {
       TerrainController.disableButtonClicks(terrains);
    }
 
-   public static void upgradeToStrongholdOrTemple(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
+   public static void upgradeToStrongholdOrTemple(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y,Player[] arr) {
       PlayerHandler playerHandler = new PlayerHandler();
       DialogueImageButton templeButton = new DialogueImageButton("dialogueTemple.png");
       DialogueImageButton strongholdButton = new DialogueImageButton("dialogueStronghold.png");
@@ -395,7 +395,7 @@ public class ActionController implements Serializable {
                TerrainController.upgradeToTemple(terrain, current.getFaction().TERRAIN_TILE);
                CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
                for(int i = 0; i < returnCase; i++) {
-                  cardsAndTilesController.showFavorTilesTable(cardsAndTiles, current, religions,true);
+                  cardsAndTilesController.showFavorTilesTable(cardsAndTiles, current, religions,true,arr);
                }
                space.setStructure("Temple");
                stage.close();
@@ -503,7 +503,7 @@ public class ActionController implements Serializable {
 
    }
 
-   public static void upgradeToSanctuary(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions,int x, int y) {
+   public static void upgradeToSanctuary(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions,int x, int y,Player[] arr) {
       PlayerHandler playerHandler = new PlayerHandler();
       DialogueImageButton discardButton = new DialogueImageButton("dialogueDiscardDoor.png");
       DialogueImageButton sanctuaryButton = new DialogueImageButton("dialogueSanctuary.png");
@@ -547,7 +547,7 @@ public class ActionController implements Serializable {
                TerrainController.upgradeToSanctuary(terrain,current.getFaction().TERRAIN_TILE);
                CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
                for(int i = 0; i < returnCase; i++) {
-                  cardsAndTilesController.showFavorTilesTable(cardsAndTiles, current, religions,true);
+                  cardsAndTilesController.showFavorTilesTable(cardsAndTiles, current, religions,true,arr);
                }
                space.setStructure("Sanctuary");
                int townScore = map.calculateTownScore(x,y, current.getFaction().TERRAIN_TILE, current.getTownPowerValue());

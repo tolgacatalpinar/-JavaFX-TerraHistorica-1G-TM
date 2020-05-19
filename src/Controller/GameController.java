@@ -381,7 +381,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void upgradeStructureClicked() {
-      ActionController.upgradeStructure(playerList[roundController.getCurrentPlayerId()] , terrains, map, actions, cardsAndTiles, religionArr);
+      ActionController.upgradeStructure(playerList[roundController.getCurrentPlayerId()] , terrains, map, actions, cardsAndTiles, religionArr,playerList);
 
    }
    @FXML
@@ -420,7 +420,7 @@ public class GameController implements Initializable, Serializable {
 
    @FXML
    public void favorTilesClicked() {
-      cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], religionArr,false);
+      cardsAndTilesController.showFavorTilesTable(cardsAndTiles, playerList[roundController.getCurrentPlayerId()], religionArr,false,playerList);
    }
 
    @FXML

@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -104,7 +105,7 @@ public class CardsAndTilesController {
         }
         dialog.show();
     }
-    public  int showFavorTilesTable(CardsAndTiles cardsAndTiles, Player current, Religion[] religions,boolean check)
+    public  int showFavorTilesTable(CardsAndTiles cardsAndTiles, Player current, Religion[] religions,boolean check,Player[] arr)
     {
         setSelectionFavorTile(-1);
         ArrayList<FavorTile> favorTiles = cardsAndTiles.getFavorTiles();
@@ -129,6 +130,15 @@ public class CardsAndTilesController {
         for (int i = 0; i < favorTiles.size(); i++) {
             GridPane tempPane = new GridPane();
             tempPane.getChildren().add(new FavorTileView(favorTiles.get(i)));
+            ReligionController religionController = new ReligionController();
+            if(favorTiles.get(i).getPlayerIds() != null){
+                for(int j = 0; j < favorTiles.get(i).getPlayerIds().size();i++){
+                    String image_url = religionController.getImage(arr[favorTiles.get(i).getPlayerIds().get(j)]);
+                    ImageView player_image = new ImageView(image_url);
+                    ((FavorTileView) tempPane.getChildren().get(0)).card.addPlayerToSlot(0,player_image);
+                }
+            }
+
             tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
