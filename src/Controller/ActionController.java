@@ -112,7 +112,7 @@ public class ActionController implements Serializable {
     * BUNU TAŞIYALIM
     *
     */
-   public static void terraformAction(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions,CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y) {
+   public static void terraformAction(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions,CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y,Player[] arr) {
 
       PlayerHandler playerHandler = new PlayerHandler();
       DialogueImageButton discardButton = new DialogueImageButton("dialogueDiscardDoor.png");
@@ -161,7 +161,7 @@ public class ActionController implements Serializable {
             }
             terraformStage.close();
             if (terrainType.equals(current.getFaction().TERRAIN_TILE) && flag) {
-               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y);
+               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y,arr);
             }
             terraformStage.close();
          }
@@ -184,7 +184,7 @@ public class ActionController implements Serializable {
             }
             terraformStage.close();
             if (terrainType.equals(current.getFaction().TERRAIN_TILE) && flag) {
-               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y);
+               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y,arr);
             }
             terraformStage.close();
          }
@@ -207,7 +207,7 @@ public class ActionController implements Serializable {
             }
             terraformStage.close();
             if (terrainType.equals(current.getFaction().TERRAIN_TILE) && flag) {
-               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y);
+               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y,arr);
             }
             terraformStage.close();
          }
@@ -230,7 +230,7 @@ public class ActionController implements Serializable {
             }
             terraformStage.close();
             if (terrainType.equals(current.getFaction().TERRAIN_TILE) && flag) {
-               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y);
+               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y,arr);
             }
             terraformStage.close();
          }
@@ -253,7 +253,7 @@ public class ActionController implements Serializable {
             }
             terraformStage.close();
             if (terrainType.equals(current.getFaction().TERRAIN_TILE) && flag) {
-               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y);
+               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y,arr);
             }
             terraformStage.close();
          }
@@ -276,7 +276,7 @@ public class ActionController implements Serializable {
             }
             terraformStage.close();
             if (terrainType.equals(current.getFaction().TERRAIN_TILE) && flag) {
-               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y);
+               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y,arr);
             }
             terraformStage.close();
          }
@@ -299,7 +299,7 @@ public class ActionController implements Serializable {
             }
             terraformStage.close();
             if (terrainType.equals(current.getFaction().TERRAIN_TILE) && flag) {
-               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y);
+               askBuildDwelling(current, terrain, map, space, terrainType ,cardsAndTiles, religions, x, y,arr);
             }
             terraformStage.close();
          }
@@ -308,38 +308,8 @@ public class ActionController implements Serializable {
       TerrainController.enableTerrains(terrains, map);
       TerrainController.disableButtonClicks(terrains);
 
-
-//        ChoiceDialog<String> dialog = new ChoiceDialog<>(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE, choices);
-//        dialog.setTitle("Terraform");
-//        dialog.setHeaderText("Choose a Terrain Tile");
-//        dialog.setContentText("Terrain Tile: " );
-//        Optional<String> result = dialog.showAndWait();
-//        if(result.isPresent()) {
-//            Controller.TerrainController.terraform(terrain, result.get());
-//            space.setType(result.get());
-//
-//            //Asks if the player wants to build dwelling after terraforming
-//            if (result.get().equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE)) {
-//                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//                alert.setTitle("Build Dwelling");
-//                alert.setHeaderText("Do you want to build a dwelling?");
-//                alert.setContentText("Cost will be here");
-//
-//                Optional<ButtonType> dwellingCheck = alert.showAndWait();
-//                if (dwellingCheck.get() == ButtonType.OK) {
-//                    Controller.TerrainController.buildDwelling(terrain, result.get());
-//                    space.setOccupied(true);
-//                    space.setStructure("Dwelling");
-//
-//                } else {
-//                    // ... user chose CANCEL or closed the dialog
-//                }
-//            }
-//        }
-//        Controller.TerrainController.enableTerrains(terrains, map);
-//        Controller.TerrainController.disableButtonClicks(terrains);
    }
-   public static void askBuildDwelling(Player current, Button terrain, Map map, Space space, String terrainType,CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y )
+   public static void askBuildDwelling(Player current, Button terrain, Map map, Space space, String terrainType,CardsAndTiles cardsAndTiles, Religion[] religions, int x, int y,Player[] arr )
    {
       PlayerHandler playerHandler = new PlayerHandler();
       DialogueImageButton dwellingButton = new DialogueImageButton("dialogueDwelling.png");
@@ -373,7 +343,7 @@ public class ActionController implements Serializable {
                if(townScore >= current.getTownPowerValue()){
                   playerHandler.townFound(current);
                   CardsAndTilesController cardsAndTilesController = new CardsAndTilesController();
-                  cardsAndTilesController.showTownTilesTable(cardsAndTiles, current,religions,true);
+                  cardsAndTilesController.showTownTilesTable(cardsAndTiles, current,religions,true,arr);
                }
                System.out.println("Town score is *************"+ townScore);
             }else if( returnCase == -1){
@@ -397,40 +367,7 @@ public class ActionController implements Serializable {
             dwellingChoiceStage.close();
          }
       });
-      terraformStage.show();
-      TerrainController.enableTerrains(terrains, map);
-      TerrainController.disableButtonClicks(terrains);
 
-
-//        ChoiceDialog<String> dialog = new ChoiceDialog<>(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE, choices);
-//        dialog.setTitle("Terraform");
-//        dialog.setHeaderText("Choose a Terrain Tile");
-//        dialog.setContentText("Terrain Tile: " );
-//        Optional<String> result = dialog.showAndWait();
-//        if(result.isPresent()) {
-//            Controller.TerrainController.terraform(terrain, result.get());
-//            space.setType(result.get());
-//
-//            //Asks if the player wants to build dwelling after terraforming
-//            if (result.get().equals(gameHandler.getPlayerList()[gameHandler.getCurrentPlayerId()].getFaction().TERRAIN_TILE)) {
-//                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//                alert.setTitle("Build Dwelling");
-//                alert.setHeaderText("Do you want to build a dwelling?");
-//                alert.setContentText("Cost will be here");
-//
-//                Optional<ButtonType> dwellingCheck = alert.showAndWait();
-//                if (dwellingCheck.get() == ButtonType.OK) {
-//                    Controller.TerrainController.buildDwelling(terrain, result.get());
-//                    space.setOccupied(true);
-//                    space.setStructure("Dwelling");
-//
-//                } else {
-//                    // ... user chose CANCEL or closed the dialog
-//                }
-//            }
-//        }
-//        Controller.TerrainController.enableTerrains(terrains, map);
-//        Controller.TerrainController.disableButtonClicks(terrains);
    }
 
    public  static void upgradeStructure(Player current,Button[][] terrains, Map map, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions,Player[] arr) {
@@ -685,7 +622,7 @@ public class ActionController implements Serializable {
 
    }
 
-   public static void upgradeToSanctuary(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions,int x, int y) {
+   public static void upgradeToSanctuary(Player current, Button[][] terrains, Button terrain, Map map, Space space, Button[] actions, CardsAndTiles cardsAndTiles, Religion[] religions,int x, int y,Player[] arr) {
       PlayerHandler playerHandler = new PlayerHandler();
       DialogueImageButton discardButton = new DialogueImageButton("dialogueDiscardDoor.png");
       DialogueImageButton sanctuaryButton = new DialogueImageButton("dialogueSanctuary.png");
