@@ -40,6 +40,9 @@ public class TownTile implements Serializable {
         this.occupied = false;
     }
 
+    public int getPlayerId() {
+        return playerId;
+    }
 
     public int getPowerBonus() {
         return powerBonus;

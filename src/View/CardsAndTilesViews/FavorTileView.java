@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
 public class FavorTileView extends VBox {
 
    FavorTile favorTile;
-   CardView card;
+   public CardView card;
 
    public FavorTileView( FavorTile favorTile)
    {

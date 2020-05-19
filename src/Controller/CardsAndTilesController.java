@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -23,7 +24,7 @@ public class CardsAndTilesController {
     private  int selectionBonus = -1;
     private  int selectionFavorTile = -1;
     private int selectionTown = -1;
-    public void showBonusCardsTable(CardsAndTiles cardsAndTiles,Player current,boolean check)
+    public void showBonusCardsTable(CardsAndTiles cardsAndTiles,Player current,boolean check, Player[] arr)
     {
         selectionBonus = -1;
         ArrayList<BonusCard> bonusCards = cardsAndTiles.getSelectedBonusCards();
@@ -45,6 +46,12 @@ public class CardsAndTilesController {
         for (int i = 0; i < bonusCards.size(); i++) {
             GridPane tempPane = new GridPane();
             tempPane.getChildren().add(new BonusCardView(bonusCards.get(i)));
+            ReligionController religionController = new ReligionController();
+            if(bonusCards.get(i).getPlayerId() >= 0){
+                String image_url = religionController.getImage(arr[bonusCards.get(i).getPlayerId()]);
+                ImageView player_image = new ImageView(image_url);
+                ((BonusCardView) tempPane.getChildren().get(0)).card.addPlayerToSlot(0,player_image);
+            }
             tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -104,7 +111,7 @@ public class CardsAndTilesController {
         }
         dialog.show();
     }
-    public  int showFavorTilesTable(CardsAndTiles cardsAndTiles, Player current, Religion[] religions,boolean check)
+    public  int showFavorTilesTable(CardsAndTiles cardsAndTiles, Player current, Religion[] religions,boolean check,Player[] arr)
     {
         setSelectionFavorTile(-1);
         ArrayList<FavorTile> favorTiles = cardsAndTiles.getFavorTiles();
@@ -129,6 +136,15 @@ public class CardsAndTilesController {
         for (int i = 0; i < favorTiles.size(); i++) {
             GridPane tempPane = new GridPane();
             tempPane.getChildren().add(new FavorTileView(favorTiles.get(i)));
+            ReligionController religionController = new ReligionController();
+            if(favorTiles.get(i).getPlayerIds() != null){
+                for(int j = 0; j < favorTiles.get(i).getPlayerIds().size();j++){
+                    String image_url = religionController.getImage(arr[favorTiles.get(i).getPlayerIds().get(j)]);
+                    ImageView player_image = new ImageView(image_url);
+                    ((FavorTileView) tempPane.getChildren().get(0)).card.addPlayerToSlot(j,player_image);
+                }
+            }
+
             tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -249,7 +265,7 @@ public class CardsAndTilesController {
         }
         dialog.show();
     }
-    public void showTownTilesTable(CardsAndTiles cardsAndTiles, Player current, Religion[] religions, boolean check) {
+    public void showTownTilesTable(CardsAndTiles cardsAndTiles, Player current, Religion[] religions, boolean check,Player[] arr) {
         setSelectionTown(-1);
         ArrayList<TownTile> townTiles = cardsAndTiles.getTownTiles();
         BorderPane border = new BorderPane();
@@ -268,6 +284,12 @@ public class CardsAndTilesController {
         for (int i = 0; i < townTiles.size(); i++) {
             GridPane tempPane = new GridPane();
             tempPane.getChildren().add(new TownTileView(townTiles.get(i)));
+            ReligionController religionController = new ReligionController();
+            if(townTiles.get(i).getPlayerId() >= 0){
+                String image_url = religionController.getImage(arr[townTiles.get(i).getPlayerId()]);
+                ImageView player_image = new ImageView(image_url);
+                ((TownTileView) tempPane.getChildren().get(0)).card.addPlayerToSlot(0,player_image);
+            }
             tempPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
