@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.CardsAndTiles.CardsAndTiles;
 import Model.FileManager;
 import Model.Map;
 import javafx.fxml.FXML;
@@ -118,6 +119,9 @@ public class MainMenuController   implements Initializable, Serializable {
         game = FileManager.loadGame(save,game);
         game.updateMap(terrains, map);
         game.loadCardsAndTiles();
+//        game.loadOldCardsAndTiles();
+//        CardsAndTiles cat = game.getCardsAndTiles();
+//        game.setCardsAndTiles(cat);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setMaximized(true);

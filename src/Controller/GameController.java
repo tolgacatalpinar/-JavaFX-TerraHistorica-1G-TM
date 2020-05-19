@@ -34,6 +34,7 @@ public class GameController implements Initializable, Serializable {
    private String gameId = "15";
    //public FileManager fm = new FileManager();
    //public File save = fm.createSave("15");
+   File save = new File("15.txt");
    @FXML
    Pane mapPane;
    @FXML
@@ -176,6 +177,8 @@ public class GameController implements Initializable, Serializable {
    {
 
        updateMap(this.terrains,this.map);
+       FileManager.loadGame(save,this);
+
 
    }
    public void updateMap(Button[][] terrains, Map map){
@@ -520,17 +523,13 @@ public class GameController implements Initializable, Serializable {
       roundController = new RoundController(playerList);
    }
 
-   public void loadOldPlayers(Player[] players){
-       this.playerList = players;
-       playerHandler = new PlayerHandler();
-       roundController = new RoundController(playerList);
-   }
 
    public void loadCardsAndTiles() {
       cardsAndTiles = new CardsAndTiles(playerList.length, playerList);
       cardsAndTilesController = new CardsAndTilesController();
       cardsAndTiles.returnScoringTile(0, 1, playerList,religionArr);
    }
+
 
    public void loadReligion(int totalPlayerNumber) {
       religionArr = new Religion[4];
